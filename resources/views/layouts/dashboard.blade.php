@@ -211,12 +211,13 @@
                     <!-- /.dropdown-alerts -->
                 </li>
                 <!-- /.dropdown -->
+                @if( null !== Auth::user() )
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> {{ Auth::user()->username }} ({{ Auth::user()->rol->ROLE_rol }})</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> {{ Auth::user()->username }}</a>
                         </li>
                         <li><a href="{{ url('password/reset') }}"><i class="fa fa-key fa-fw"></i> Cambiar contraseña</a>
                         </li>
@@ -227,6 +228,7 @@
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
+                @endif
             </ul>
             <!-- /.navbar-top-links -->
 

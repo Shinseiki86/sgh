@@ -1,51 +1,100 @@
 <?php
 	
 use Illuminate\Database\Seeder;
+use SGH\User;
+use SGH\Role;
+use SGH\Permission;
 
 	class UsersTableSeeder extends Seeder {
 
 		public function run() {
 
             $pass = '123456';
+            $date = \Carbon\Carbon::now()->toDateTimeString();
             //$faker = Faker\Factory::create('es_ES');
 
+            $this->command->info('--- Creación de Roles');
+
+                $rolOwner = new Role();
+                $rolOwner->name         = 'owner';
+                $rolOwner->display_name = 'Project Owner'; // optional
+                $rolOwner->description  = 'User is the owner of a given project'; // optional
+                $rolOwner->save();
+
+                $rolAdmin = new Role();
+                $rolAdmin->name         = 'admin';
+                $rolAdmin->display_name = 'Administrador'; // optional
+                $rolAdmin->description  = 'User is allowed to manage and edit other users'; // optional
+                $rolAdmin->save();
+
+                $rolEditor = new Role();
+                $rolEditor->name         = 'editor';
+                $rolEditor->display_name = 'Editor'; // optional
+                $rolEditor->description  = 'Usuario con permisos para editar contenido.'; // optional
+                $rolEditor->save();
+
+            $this->command->info('--- Fin Creación de Roles');
+
+            $this->command->info('--- Creación de Permisos');
+
+                $crearUsuario = new Permission();
+                $crearUsuario->name         = 'crear-usuario';
+                $crearUsuario->display_name = 'Crear usuarios'; // optional
+                $crearUsuario->description  = 'Crear nuevos usuarios en el sistema.'; // optional
+                $crearUsuario->save();
+
+                $editarUsuario = new Permission();
+                $editarUsuario->name         = 'editar-usuario';
+                $editarUsuario->display_name = 'Editar usuarios'; // optional
+                $editarUsuario->description  = 'Editar usuarios existentes en el sistema.'; // optional
+                $editarUsuario->save();
+
+                $rolAdmin->attachPermissions([$crearUsuario, $editarUsuario]);
+                // equivalent to $rolAdmin->perms()->sync( [$crearUsuario->id, $editarUsuario->id] );
+
+            $this->command->info('--- Fin Creación de Permisos');
+
             $this->command->info('--- Creación de Usuarios prueba');
-            //Admin
-            \DB::table('USERS')->insert( array(
-                'name' => 'Admin',
-                'username' => 'admin',
-                'email' => 'admin@example.com',
-                'password'  => \Hash::make($pass),
-                'ROLE_id' => SGH\Rol::where('ROLE_rol','admin')->get()->first()->ROLE_id,
-                'USER_creadopor' => 'SYSTEM',
-                'USER_fechacreado' => \Carbon\Carbon::now()->toDateTimeString(),
-            ));
 
-            //Editores
-            \DB::table('USERS')->insert( array(
-                'name' => 'Editor 1 de prueba',
-                'username' => 'editor1',
-                'email' => 'editor1@example.com',
-                'password'  => \Hash::make($pass),
-                'ROLE_id' => SGH\Rol::where('ROLE_rol','editor')->get()->first()->ROLE_id,
-                'USER_creadopor' => 'admin',
-                'USER_fechacreado' => \Carbon\Carbon::now()->toDateTimeString(),
-            ));
-            \DB::table('USERS')->insert( array(
-                'name' => 'Editor 2 de prueba',
-                'username' => 'editor2',
-                'email' => 'editor2@example.com',
-                'password'  => \Hash::make($pass),
-                'ROLE_id' => SGH\Rol::where('ROLE_rol','editor')->get()->first()->ROLE_id,
-                'USER_creadopor' => 'admin',
-                'USER_fechacreado' => \Carbon\Carbon::now()->toDateTimeString(),
-            ));
+                //Admin
+                $admin = User::create( [
+                    'name' => 'Administrador',
+                    'username' => 'admin',
+                    'email' => 'admin@example.com',
+                    'password'  => \Hash::make($pass)
+                ]);
+                // role attach alias
+                $admin->attachRole($rolAdmin); // parameter can be an Role object, array, or id
+                // or eloquent's original technique
+                //$admin->roles()->attach($rolAdmin->id); // id only
 
+                //Editores
+                $editor1 = User::create( [
+                    'name' => 'Editor 1 de prueba',
+                    'username' => 'editor1',
+                    'email' => 'editor1@example.com',
+                    'password'  => \Hash::make($pass)
+                ]);
+                $editor1->attachRole($admin);
 
-            //5 usuarios faker
-            //$USERS = factory(SGH\User::class)->times(5)->create();
+                $editor2 = User::create( [
+                    'name' => 'Editor 2 de prueba',
+                    'username' => 'editor2',
+                    'email' => 'editor2@example.com',
+                    'password'  => \Hash::make($pass)
+                ]);
+                $editor2->attachRole($admin);
+
+                //5 usuarios faker
+                //$USERS = factory(SGH\User::class)->times(5)->create();
 
             $this->command->info('--- Fin Creación de Usuarios prueba');
+
+
+
+
+
+
 		}
 
 

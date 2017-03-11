@@ -3,21 +3,23 @@
 namespace SGH;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
+	use EntrustUserTrait;
+	//use SoftDeletes;
 
 	//Nombre de la tabla en la base de datos
 	protected $table = 'USERS';
     protected $primaryKey = 'USER_id';
 
 	//Traza: Nombre de campos en la tabla para auditoría de cambios
-	const CREATED_AT = 'USER_fechacreado';
-	const UPDATED_AT = 'USER_fechamodificado';
-	use SoftDeletes;
-	const DELETED_AT = 'USER_fechaeliminado';
-	protected $dates = ['USER_fechacreado', 'USER_fechamodificado', 'USER_fechaeliminado'];
+	const CREATED_AT = 'created_at';
+	const UPDATED_AT = 'modified_at';
+	const DELETED_AT = 'deleted_at';
+	protected $dates = ['created_at', 'modified_at', 'deleted_at'];
 
 
 	/**
@@ -30,8 +32,6 @@ class User extends Authenticatable
 		'username',
 		'email',
 		'password',
-		'ROLE_id',
-		'USER_creadopor'
 	];
 
 	/**
@@ -44,43 +44,28 @@ class User extends Authenticatable
 		'remember_token',
 	];
 
-	public function rol()
-	{
-		$foreingKey = 'ROLE_id';
-		return $this->belongsTo(Rol::class, $foreingKey);
+	//establecemos las relaciones con el modelo Role, ya que un usuario puede tener varios roles
+	//y un rol lo pueden tener varios usuarios
+	public function roles(){
+		return $this->belongsToMany(Role::class);
 	}
 
+    /**
+     * Perform the actual delete query on this model instance.
+     * 
+     * @return void
+     */
+    protected function runSoftDelete()
+    {
+        $query = $this->newQuery()->where($this->getKeyName(), $this->getKey());
 
-	/*
-	 * Docentes que tiene asignado un usuario
-	 */
-	public function docentes()
-	{
-		$foreingKey = 'USER_id_estudiante';
-		$otherKey   = 'USER_id_docente';
-		return $this->belongsToMany(User::class, 'ESTUDIANTESDOCENTES', $foreingKey,  $otherKey);
-	}
-	
-	/*
-	 * Estudiantes que un usuario docente tiene easignados
-	 */
-	public function estudiantes()
-	{
-		$foreingKey = 'USER_id_docente';
-		$otherKey   = 'USER_id_estudiante';
-		return $this->belongsToMany(User::class, 'ESTUDIANTESDOCENTES', $foreingKey,  $otherKey);
-	}
+        $this->{$this->getDeletedAtColumn()} = $time = $this->freshTimestamp();
 
-	public function personaGeneral()
-	{
-		$foreingKey = 'USER_id';
-		return $this->hasOne(Academusoft\PersonaGeneral::class, $foreingKey);
-	}
-	
-	//Scope Retorna sólo los usuarios con rol docente
-	public function scopeAllDocentes($query)
-	{
-		$query = $query->where('ROLE_id', Rol::DOCENTE);
-		return $query;
-	}
+        $query->update([
+           $this->getDeletedAtColumn() => $this->fromDateTime($time),
+           'deleted_by' => auth()->user()->username
+        	//'deleted_by' => (\Auth::id()) ?: null
+        ]);
+    }
+
 }

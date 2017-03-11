@@ -48,7 +48,9 @@ class AuthController extends Controller
 	public function __construct()
 	{
 
-		//Lista de acciones que no requieren autenticación
+        $this->middleware('guest', ['except' => 'logout']);
+
+		/*//Lista de acciones que no requieren autenticación
 		$arrActionsLogin = [
 			'logout',
 			'login',
@@ -66,30 +68,13 @@ class AuthController extends Controller
 			'showRegistrationForm',
 			'getRegister',
 			'postRegister',
-			'generarPlantilla',
-			'CreateUsersFromFile',
 		];
-
 
 		//Requiere que el usuario inicie sesión, excepto en la vista logout.
 		$this->middleware($this->guestMiddleware(),
 			['except' => array_collapse([$arrActionsLogin, $arrActionsAdmin])]
-		);
+		);*/
 
-		if(Route::currentRouteAction() !== null){//Compatibilidad con el comando "php artisan route:list", ya que ingresa como guest y la ruta es nula.		
-			$action = Route::currentRouteAction();
-			$role = isset(auth()->user()->rol->ROLE_rol) ? auth()->user()->rol->ROLE_rol : 'user';
-
-			
-			if(in_array(explode("@", $action)[1], $arrActionsAdmin))//Si la acción del controlador se encuentra en la lista de acciones de admin...
-			{
-				if( ! in_array($role , ['admin']))//Si el rol no es admin, se niega el acceso.
-				{
-					//Session::flash('error', '¡Usuario no tiene permisos!');
-					abort(403, '¡Usuario no tiene permisos!.');
-				}
-			}
-		}
 	}
 
 	/**
@@ -105,7 +90,6 @@ class AuthController extends Controller
 			'username' => 'required|max:15|unique:USERS',
 			'email' => 'required|email|max:255|unique:USERS',
 			'password' => 'required|min:6|confirmed',
-			'ROLE_id' => 'required',
 		]);
 	}
 
@@ -122,18 +106,11 @@ class AuthController extends Controller
 		}
 
 		//Se crea un array con los roles disponibles
-		$arrRoles = model_to_array(Rol::class, 'ROLE_descripcion');
-
-		//Se crea una colección con los posibles docentes.
-		$docentes = User::orderBy('USER_id')
-						->where('ROLE_id',3) //3 es el ID del rol docente
-						->select('USER_id', 'name')
-						->get();
-		//Se crea un array con los docentes disponibles
-		$allDocentes = model_to_array($docentes, 'name');
+		//$arrRoles = model_to_array(Rol::class, 'ROLE_descripcion');
+$arrRoles = null;
 
 		// Muestra el formulario de creación y los array para los 'select'
-		return view('auth.register', compact('arrRoles', 'allDocentes'));
+		return view('auth.register', compact('arrRoles'));
 	}
 
 	/**
@@ -155,10 +132,6 @@ class AuthController extends Controller
 		//Auth::guard($this->getGuard())->login($this->create($request->all()));
 		$usuario = $this->create($request->all());
 
-		//Relacionando docentes con el usuario
-		$idsDocentes = is_array(Input::get('idsDocentes')) ? Input::get('idsDocentes') : [];
-		$usuario->docentes()->sync($idsDocentes);
-
 		Session::flash('message', 'Usuario '.$usuario->username.' creado exitosamente!');
 		return redirect('usuarios');
 	}
@@ -176,8 +149,7 @@ class AuthController extends Controller
 			'username' => strtolower($data['username']),
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
-			'ROLE_id' => $data['ROLE_id'],
-			'USER_creadopor' => auth()->user()->username,
+			'created_by' => auth()->user()->username,
 		]);
 	}
 
@@ -236,52 +208,35 @@ class AuthController extends Controller
 		// Se obtiene el registro
 		$usuario = User::findOrFail($USER_id);
 
-		//Se crea una colección con los posibles roles.
-		$roles = Rol::orderBy('ROLE_id')
-						->select('ROLE_id', 'ROLE_descripcion')
-						->get();
 
-		//Array con los docentes asociados al usuario.
-		$idsDocentes = $usuario->docentes()->getRelatedIds()->toArray();
-
-		//Se crea una colección con los posibles docentes.
-		$allDocentes = User::orderBy('USER_id')
-						->where('ROLE_id',3) //3 es el ID del rol docente
-						->select('USER_id', 'name')
-						->get();
+		$roles = null;
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('auth/edit', compact('usuario', 'roles', 'idsDocentes',  'allDocentes'));
+		return view('auth/edit', compact('usuario', 'roles'));
 	}
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $USER_id
+	 * @param  User|int  $usuario
 	 * @return Response
 	 */
-	public function update($USER_id)
+	public function update($usuario)
 	{
 		//Validación de datos
 		$this->validate(request(), [
 			'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:USERS,email,'.$USER_id.',USER_id',
-			'ROLE_id' => 'required',
+			'email' => 'required|email|max:255|unique:USERS,email,'.$USER_id.',id',
 		]);
 
-		// Valida si $ENCU_id es un objeto Encuesta o el id de una encuesta
-		$usuario = isset($USER_id->USER_id) ? $USER_id : User::findOrFail($USER_id);
+		// Valida si $usuario es un objeto User o el id
+		$usuario = isset($usuario->USER_id) ? $usuario : User::findOrFail($usuario);
 
 		$usuario->name = Input::get('name');
 		$usuario->email = Input::get('email');
-		$usuario->ROLE_id = Input::get('ROLE_id'); //Relación con Rol
-		$usuario->USER_modificadopor = auth()->user()->username;
+		$usuario->modified_at = auth()->user()->username;
 		//Se guarda modelo
 		$usuario->save();
-
-		//Relacionando docentes con el usuario //request()->get('docentes')
-		$idsDocentes = is_array(Input::get('idsDocentes')) ? Input::get('idsDocentes') : [];
-		$usuario->docentes()->sync($idsDocentes);
 
 		// redirecciona al index de controlador
 		Session::flash('message', 'Usuario '.$usuario->username.' modificado exitosamente!');
@@ -291,30 +246,23 @@ class AuthController extends Controller
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $USER_id
+	 * @param  User|int  $usuario
 	 * @return Response
 	 */
-	public function destroy($USER_id)
+	public function destroy($usuario)
 	{
-		$usuario = User::findOrFail($USER_id);
+		// Valida si $usuario es un objeto User o el id
+		$usuario = isset($usuario->USER_id) ? $usuario : User::findOrFail($usuario);
 
 		//Si el usuario fue creado por SYSTEM, no se puede borrar.
-		if($usuario->USER_creadopor == 'SYSTEM'){
+		if($usuario->created_by == 'SYSTEM'){
 			Session::flash('error-modal', '¡Usuario '.$usuario->username.' no se puede borrar!');
 		} else {
-
-			if($usuario->personaGeneral)
-				$usuario->personaGeneral->delete();
-			
-			$usuario->USER_eliminadopor = auth()->user()->username;
-			$usuario->save();
 			$usuario->delete();
-			
 			Session::flash('warning', ['¡Usuario '.$usuario->username.' borrado!']);
 		}
 
 		return redirect('usuarios');
 	}
-
 
 }

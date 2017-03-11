@@ -32,25 +32,21 @@ class CreateUsersTable extends Migration
 				->comment('Almacena un token para autenticar el usuario automáticamente si se activó el check \"Recordarme\" al iniciar sesión. Mas información: https://laravel.com/docs/5.2/authentication#remembering-users');
 
 			//Traza
-			$table->string('USER_creadopor')
+			$table->string('created_by')
 				->comment('Usuario que creó el registro en la tabla');
-			$table->timestamp('USER_fechacreado')
+			$table->timestamp('created_at')
 				->comment('Fecha en que se creó el registro en la tabla.');
-			$table->string('USER_modificadopor')->nullable()
+
+			$table->string('modified_by')->nullable()
 				->comment('Usuario que realizó la última modificación del registro en la tabla.');
-			$table->timestamp('USER_fechamodificado')->nullable()
+			$table->timestamp('modified_at')->nullable()
 				->comment('Fecha de la última modificación del registro en la tabla.');
-			$table->string('USER_eliminadopor')->nullable()
+
+			$table->string('deleted_by')->nullable()
 				->comment('Usuario que eliminó el registro en la tabla.');
-			$table->timestamp('USER_fechaeliminado')->nullable()
+			$table->timestamp('deleted_at')->nullable()
 				->comment('Fecha en que se eliminó el registro en la tabla.');
 
-			//Relaciones
-			$table->foreign('ROLE_id')
-				->references('ROLE_id')
-				->on('ROLES')
-				->onDelete('cascade')
-				->onUpdate('cascade');
 		});
 
 		if(env('DB_CONNECTION') == 'pgsql')

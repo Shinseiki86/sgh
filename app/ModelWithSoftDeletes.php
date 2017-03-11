@@ -20,14 +20,12 @@ class ModelWithSoftDeletes extends Model
 
         $this->{$this->getDeletedAtColumn()} = $time = $this->freshTimestamp();
 
-        $deleted_by = strtoupper(substr($this::CREATED_AT, 0, 4)).'_eliminadopor';
-
         $query->update([
            $this->getDeletedAtColumn() => $this->fromDateTime($time),
-           $deleted_by => auth()->user()->username
+           'deleted_by' => auth()->user()->username
+            //'deleted_by' => (\Auth::id()) ?: null
         ]);
 
-        //$deleted_by => (\Auth::id()) ?: null
     }
 
 }
