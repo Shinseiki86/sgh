@@ -1,5 +1,12 @@
-@extends ('layouts.dashboard')
+@extends('layouts.sbadmin')
 @section('page_heading','Charts')
+
+@section('scripts')
+	{{-- Html::script('assets/scripts/chart.js/Chart.bundle.min.v2.4.0.js') !!--}}
+	{!! Html::script('assets/scripts/chart.js/Chart.v1.0.2.js') !!}
+	{!! Html::script('assets/scripts/chart.js/exampleCharts.js') !!}
+@stop
+
 @section('section')
 <div class="col-sm-12">	
 	<div class="row">

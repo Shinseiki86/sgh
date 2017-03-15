@@ -1,4 +1,4 @@
-@extends ('layouts.dashboard')
+@extends('layouts.sbadmin')
 
 @section('page_title')	Progressbar @stop
 @section('page_heading','Progressbar')

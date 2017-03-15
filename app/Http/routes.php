@@ -18,8 +18,8 @@ Route::resource('usuarios', 'Auth\AuthController');
 //Route::resource('roles', 'Auth\RolController');
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
-
-Route::group(['prefix' => '', 'middleware' => ['role:admin']], function() {
+//['middleware' => ['auth', 'permission:admin']]
+Route::group(['prefix' => '', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::get('/home', 'SBAdminController@home');
 	Route::get('/', 'SBAdminController@home');
 	Route::get('/charts', 'SBAdminController@mcharts');

@@ -12,11 +12,19 @@
 	<meta content="" name="description"/>
 	<meta content="" name="author"/>
 
-	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
+	{!! Html::style('assets/stylesheets/styles.css') !!}
 	@yield('head')
 </head>
 <body>
 	@yield('body')
-	<script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
+
+	{!! Html::script('assets/scripts/frontend.js') !!}
+	@yield('scripts')
+
+	<footer class="footer navbar-default navbar-fixed-bottom">
+		<div class="text-right" style="color: #606060;padding-right:20px;">
+			<small>Powered by <i>diheke</i></small>
+		</div>
+	</footer>
 </body>
 </html>

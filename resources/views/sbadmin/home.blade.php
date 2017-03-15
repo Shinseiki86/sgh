@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.sbadmin')
 @section('page_heading','Dashboard')
 @section('section')
            

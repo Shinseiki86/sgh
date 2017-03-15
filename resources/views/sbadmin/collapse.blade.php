@@ -1,4 +1,4 @@
-@extends ('layouts.dashboard')
+@extends('layouts.sbadmin')
 
 @section('page_title')	Collapse @endsection
 @section ('page_heading', 'Collapse')
