@@ -23,6 +23,7 @@ class CreateTableCnos extends Migration
         $commentTabla = 'CNOS (clasificación nacional de ocupaciones del SENA).';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
+            
             $table->unsignedInteger('CNOS_ID')->primary()
                 ->comment('Valor autonumérico, llave primaria de la tabla CNOS.');
 

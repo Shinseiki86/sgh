@@ -13,6 +13,8 @@ class CreateTableEmpleadores extends Migration
      *
      * @return void
      */
+    
+
     public function up()
     {
         $commentTabla = 'EMPLEADORES: contiene los empleadores de la organización (empresas)';
