@@ -18,12 +18,12 @@ class CreateTableProspecto extends Migration
         $commentTabla = 'PROSPECTOS: contiene los datos basicos de hojas de vida de los empleados';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('PROS_ID')->primary()
-                ->comment('Valor autonumérico, llave primaria de la tabla departamentos.');
 
-            $table->integer('PROS_CEDULA', 15)
-                ->unique()
-                ->comment('documento de identificación de la persona');
+            $table->unsignedInteger('PROS_ID')->primary()
+                ->comment('id de la persona llave primaria de la tabla prospectos.');
+
+            $table->unsignedInteger('PROS_CEDULA')->unique()
+                ->comment('id de la persona llave primaria de la tabla prospectos.');
 
             $table->date('PROS_FECHAEXPEDICION')
                 ->comment('fecha de expedición del documento de identificación de la persona');
@@ -42,17 +42,17 @@ class CreateTableProspecto extends Migration
                 ->nullable()
                 ->comment('segundo apellido de la persona');
 
-            $table->string('PROS_SEXO', 1   )
+            $table->string('PROS_SEXO', 1)
                 ->comment('sexo de la persona');
 
             $table->string('PROS_DIRECCION', 100)
                 ->comment('dirección de domicilio de la persona');
 
-            $table->integer('PROS_TELEFONO', 10)
+            $table->string('PROS_TELEFONO', 10)
                 ->nullable()
                 ->comment('numero de telefono de domicilio de la persona');
 
-            $table->integer('PROS_CELULAR', 15)
+            $table->string('PROS_CELULAR', 15)
                 ->nullable()
                 ->comment('numero de celular de la persona');
 

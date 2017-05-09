@@ -27,10 +27,9 @@ class CreateTableCentrocostos extends Migration
                 ->comment('codigo del centro de costos');
 
             $table->string('CECO_DESCRIPCION', 300)
-                ->unique()
                 ->comment('descripción de la gerencia, ej: gerencia de ventas, gerencia de mercadeo');
 
-            $table->integer('GERE_ID')->unsigned()
+            $table->unsignedInteger('GERE_ID')
                 ->comment('relacion a la tabla gerencias');;
 
             $table->string('CECO_OBSERVACIONES', 300)

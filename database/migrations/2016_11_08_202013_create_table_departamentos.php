@@ -21,7 +21,7 @@ class CreateTableDepartamentos extends Migration
             $table->unsignedInteger('DEPA_ID')->primary()
                 ->comment('Valor autonumérico, llave primaria de la tabla departamentos.');
 
-            $table->integer('DEPA_CODIGO', 5)
+            $table->unsignedInteger('DEPA_CODIGO')
                 ->comment('codigo del departamento de acuerdo a clasificación DANE');
 
             $table->string('DEPA_DESCRIPCION', 300)

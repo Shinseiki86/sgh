@@ -21,7 +21,7 @@ class CreateTableCiudades extends Migration
             $table->unsignedInteger('CIUD_ID')->primary()
                 ->comment('Valor autonumérico, llave primaria de la tabla departamentos.');
 
-            $table->integer('CIUD_CODIGO', 5)
+            $table->unsignedInteger('CIUD_CODIGO')
                 ->comment('codigo del departamento de acuerdo a clasificación DANE');
 
             $table->integer('DEPA_ID')->unsigned();

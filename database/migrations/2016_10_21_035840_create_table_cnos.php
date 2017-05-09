@@ -27,7 +27,7 @@ class CreateTableCnos extends Migration
             $table->unsignedInteger('CNOS_ID')->primary()
                 ->comment('Valor autonumérico, llave primaria de la tabla CNOS.');
 
-            $table->integer('CNOS_CODIGO', 5)
+            $table->string('CNOS_CODIGO', 5)
                 ->comment('codigo de clasificación Ej: 1-directivos, 2-ejecutivos, 3-operativos');
 
 
