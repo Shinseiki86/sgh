@@ -18,7 +18,7 @@ class CreateTableDepartamentos extends Migration
         $commentTabla = 'DEPARTAMENTOS: contiene los departamentos del territorio nacional';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('DEPA_ID')->primary()
+            $table->increments('DEPA_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla departamentos.');
 
             $table->unsignedInteger('DEPA_CODIGO')

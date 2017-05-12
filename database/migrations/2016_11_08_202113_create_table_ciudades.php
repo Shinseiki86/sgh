@@ -18,13 +18,13 @@ class CreateTableCiudades extends Migration
         $commentTabla = 'CIUDRTAMENTOS: contiene los departamentos del territorio nacional';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('CIUD_ID')->primary()
+            $table->increments('CIUD_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla departamentos.');
 
             $table->unsignedInteger('CIUD_CODIGO')
                 ->comment('codigo del departamento de acuerdo a clasificación DANE');
 
-            $table->integer('DEPA_ID')->unsigned();
+            $table->unsignedInteger('DEPA_ID');
 
             $table->string('CIUD_DESCRIPCION', 300)
                 ->comment('descripcion del motivo de retiro');

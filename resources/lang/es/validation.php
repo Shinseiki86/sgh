@@ -141,25 +141,17 @@ return [
         'subject'               => 'asunto',
         'message'               => 'mensaje',
 
-        'ENCU_titulo'           => 'Título',
-        'ENCU_descripcion'      => 'Descripción',
-        'ENCU_fechavigencia'    => 'Fecha de Vigencia de la encuesta',
-
-        'PREG_titulo'           => 'Título',
-        'PREG_texto'            => 'Formulación',
-
-        'TIPR_id'               => 'Tipo de pregunta',
-        'TIPR_descripcion'      => 'Descripción',
-
-        'ESEN_id'               => 'Estado de encuesta',
-        'ESEN_descripcion'      => 'Descripción',
-
         'rol'                   => 'rol',
         'ROLE_id'               => 'ID rol',
         'ROLE_rol'              => 'Identificador interno',
         'ROLE_descripcion'      => 'Descripción',
 
+        'DEPA_ID'               => 'ID departamento',
+        'DEPA_CODIGO'           => 'Código departamento',
+        'DEPA_DESCRIPCION'      => 'Descripción',
 
+        'CIUD_CODIGO'           => 'Código ciudad',
+        'CIUD_DESCRIPCION'      => 'Descripción',
     ],
 
 ];

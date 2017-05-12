@@ -342,7 +342,9 @@
                 </div>
                 <!-- /.col-lg-12 -->
            </div>
-			<div class="row">  
+			<div class="row">
+
+                @include('widgets/flash-alert')
 				@yield('section')
 
             </div>

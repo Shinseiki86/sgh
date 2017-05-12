@@ -19,6 +19,7 @@ Route::resource('usuarios', 'Auth\AuthController');
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 //['middleware' => ['auth', 'permission:admin']]
+
 Route::group(['prefix' => '', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::get('/home', 'SBAdminController@home');
 	Route::get('/', 'SBAdminController@home');
@@ -34,3 +35,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth', 'role:admin']], function(
 	Route::get('/documentation', 'SBAdminController@documentation');
 });
 
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
+	Route::resource('departamentos', 'DepartamentoController');
+	Route::resource('ciudades', 'CiudadController');
+});
