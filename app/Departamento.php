@@ -2,10 +2,13 @@
 
 namespace SGH;
 
+use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Departamento extends ModelWithSoftDeletes
 {
+	use Sortable;
+
 	//Nombre de la tabla en la base de datos
 	protected $table = 'DEPARTAMENTOS';
     protected $primaryKey = 'DEPA_ID';
@@ -20,6 +23,17 @@ class Departamento extends ModelWithSoftDeletes
 		'DEPA_CODIGO',
 		'DEPA_DESCRIPCION',
 	];
+
+	public $sortable = [
+		'DEPA_CODIGO',
+		'DEPA_DESCRIPCION',
+	];
+
+    public function countCiudadesSortable($query, $direction)
+    {
+        return $query->withCount('ciudades')
+                    ->orderBy('ciudades_count', $direction);
+    }
 
 	public function ciudades()
 	{

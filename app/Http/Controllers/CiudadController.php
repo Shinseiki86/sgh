@@ -28,8 +28,8 @@ class CiudadController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'DEPA_CODIGO' => ['required', 'numeric'],
-			'DEPA_DESCRIPCION' => ['required', 'max:300'],
+			'CIUD_CODIGO' => ['required', 'numeric'],
+			'CIUD_DESCRIPCION' => ['required', 'max:300'],
 		]);
 
 		if ($validator->fails())
@@ -47,9 +47,9 @@ class CiudadController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$departamentos = Departamento::orderBy('DEPA_ID')->get();
+		$ciudades = Ciudad::sortable('CIUD_CODIGO')->paginate(10);
 		//Se carga la vista y se pasan los registros
-		return view('departamentos/index', compact('departamentos'));
+		return view('admin/ciudades/index', compact('ciudades'));
 	}
 
 	/**
@@ -59,7 +59,10 @@ class CiudadController extends Controller
 	 */
 	public function create()
 	{
-		return view('departamentos/create');
+		//Se crea un array con los departamentos disponibles
+		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_DESCRIPCION');
+
+		return view('admin/ciudades/create', compact('arrDepartamentos'));
 	}
 
 	/**
@@ -75,37 +78,40 @@ class CiudadController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$departamento = Departamento::create($request->all());
+		$ciudad = Ciudad::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Departamento '.$departamento->DEPA_ID.' creado exitosamente.', 'success' );
-		return redirect()->to('departamentos');
+		flash_alert( 'Ciudad '.$ciudad->CIUD_ID.' creado exitosamente.', 'success' );
+		return redirect()->route('admin.ciudades.index');
 	}
 
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $DEPA_ID
+	 * @param  int  $CIUD_ID
 	 * @return Response
 	 */
-	public function edit($DEPA_ID)
+	public function edit($CIUD_ID)
 	{
 		// Se obtiene el registro
-		$departamento = Departamento::findOrFail($DEPA_ID);
+		$ciudad = Ciudad::findOrFail($CIUD_ID);
+
+		//Se crea un array con los departamentos disponibles
+		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('departamentos/edit', compact('departamento'));
+		return view('admin/ciudades/edit', compact('ciudad', 'arrDepartamentos'));
 	}
 
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $DEPA_ID
+	 * @param  int  $CIUD_ID
 	 * @return Response
 	 */
-	public function update($DEPA_ID)
+	public function update($CIUD_ID)
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
@@ -113,34 +119,34 @@ class CiudadController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$departamento = Departamento::findOrFail($DEPA_ID);
+		$ciudad = Ciudad::findOrFail($CIUD_ID);
 		//y se actualiza con los datos recibidos.
-		$departamento->update($request->all());
+		$ciudad->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Departamento '.$departamento->DEPA_ID.' modificado exitosamente.', 'success' );
-		return redirect()->to('departamentos');
+		flash_alert( 'Ciudad '.$ciudad->CIUD_ID.' modificado exitosamente.', 'success' );
+		return redirect()->route('admin.ciudades.index');
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $DEPA_ID
+	 * @param  int  $CIUD_ID
 	 * @return Response
 	 */
-	public function destroy($DEPA_ID, $showMsg=True)
+	public function destroy($CIUD_ID, $showMsg=True)
 	{
-		$departamento = Departamento::findOrFail($DEPA_ID);
+		$ciudad = Ciudad::findOrFail($CIUD_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($departamento->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Departamento '.$departamento->DEPA_ID.' no se puede borrar.', 'danger' );
+		if($ciudad->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Ciudad '.$ciudad->CIUD_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$departamento->delete();
-				flash_alert( 'Departamento '.$departamento->DEPA_ID.' eliminado exitosamente.', 'success' );
+			$ciudad->delete();
+				flash_alert( 'Ciudad '.$ciudad->CIUD_ID.' eliminado exitosamente.', 'success' );
 		}
 
-		return redirect()->to('departamentos');
+		return redirect()->route('admin.ciudades.index');
 	}
 
 

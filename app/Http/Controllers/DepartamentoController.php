@@ -46,9 +46,9 @@ class DepartamentoController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$departamentos = Departamento::orderBy('DEPA_ID')->get();
+		$departamentos = Departamento::sortable('DEPA_CODIGO')->paginate();
 		//Se carga la vista y se pasan los registros
-		return view('departamentos/index', compact('departamentos'));
+		return view('admin/departamentos/index', compact('departamentos'));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class DepartamentoController extends Controller
 	 */
 	public function create()
 	{
-		return view('departamentos/create');
+		return view('admin/departamentos/create');
 	}
 
 	/**
@@ -94,7 +94,7 @@ class DepartamentoController extends Controller
 		$departamento = Departamento::findOrFail($DEPA_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('departamentos/edit', compact('departamento'));
+		return view('admin/departamentos/edit', compact('departamento'));
 	}
 
 

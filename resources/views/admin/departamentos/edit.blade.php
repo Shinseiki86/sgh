@@ -1,10 +1,10 @@
-@extends('layouts.sbadmin')
+@extends('layouts.admin')
 
-@section('page_heading', 'Nuevo Departamento')
+@section('page_heading', 'Actualizar Departamento '.$departamento->DEPA_ID)
 
 @section('section')
-	
-	{{ Form::open(['route' => 'admin.departamentos.store', 'class' => 'form-horizontal']) }}
+
+	{{ Form::model($departamento, ['action' => ['DepartamentoController@update', $departamento->DEPA_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('DEPA_CODIGO') ? ' has-error' : '' }}">
 			{{ Form::label('DEPA_CODIGO', 'Código',  [ 'class' => 'col-md-4 control-label' ]) }}
@@ -29,7 +29,7 @@
 				@endif
 			</div>
 		</div>
-		
+
 		<!-- Botones -->
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4 text-right">
