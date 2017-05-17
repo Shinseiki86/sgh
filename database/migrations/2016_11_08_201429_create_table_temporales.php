@@ -18,7 +18,7 @@ class CreateTableTemporales extends Migration
         $commentTabla = 'TEMPORALES: contiene los empleadores de la organización de forma tercerizada (empresas temporales)';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('TEMP_ID')->primary()
+            $table->increments('TEMP_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla empleadores.');
 
             $table->string('TEMP_RAZONSOCIAL', 300)

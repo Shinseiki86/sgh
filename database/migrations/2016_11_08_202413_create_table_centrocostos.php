@@ -19,7 +19,7 @@ class CreateTableCentrocostos extends Migration
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
-            $table->unsignedInteger('CECO_ID')->primary()
+            $table->increments('CECO_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla centro de costos.');
 
             $table->string('CECO_CODIGO', 50)

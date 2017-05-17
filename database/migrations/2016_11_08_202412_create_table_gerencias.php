@@ -19,7 +19,7 @@ class CreateTableGerencias extends Migration
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
-            $table->unsignedInteger('GERE_ID')->primary()
+            $table->increments('GERE_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla gerencias.');
 
             $table->string('GERE_DESCRIPCION', 100)

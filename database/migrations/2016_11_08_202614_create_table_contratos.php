@@ -19,7 +19,7 @@ class CreateTableContratos extends Migration
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
 
-            $table->unsignedInteger('CONT_ID')->primary()
+            $table->increments('CONT_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla contratos.');
 
             $table->integer('PROS_ID')->unsigned()

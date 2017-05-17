@@ -18,7 +18,7 @@ class CreateTableMotivosretiros extends Migration
         $commentTabla = 'MOTIVOS DE RETIRO: contiene los motivos de retiro existentes de acuerdo a la ley vigente';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('MORE_ID')->primary()
+            $table->increments('MORE_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla motivos de retiro.');
 
             $table->string('MORE_DESCRIPCION', 300)

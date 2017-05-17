@@ -102,7 +102,7 @@
                         </li>
 
                         <li >
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Admin<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Parametros Geograficos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*admin/ciudades') ? 'class=active' : '') }}>
                                 <a href="{{ url ('admin/ciudades') }}"><i class="fa fa-building-o fa-fw"></i> Ciudades</a>
@@ -110,6 +110,28 @@
                                 <li {{ (Request::is('*admin/departamentos') ? 'class=active' : '') }}>
                                 <a href="{{ url ('admin/departamentos') }}"><i class="fa fa-globe fa-fw"></i> Departamentos</a>
                                 </li>
+                            </ul>
+                        </li>
+
+                        <li >
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Parametros Hojas de Vida<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li {{ (Request::is('*admin/cnos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/cnos') }}"><i class="fa fa-building-o fa-fw"></i> Clasificación de ocupaciones</a>
+
+                                </li>
+                                <li {{ (Request::is('*admin/cargos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/cargos') }}"><i class="fa fa-globe fa-fw"></i> Cargos</a>
+                                </li>
+
+                                <li {{ (Request::is('*admin/tiposcontratos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/tiposcontratos') }}"><i class="fa fa-globe fa-fw"></i> Tipos de contratos</a>
+                                </li>
+
+                                 <li {{ (Request::is('*admin/temporales') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/temporales') }}"><i class="fa fa-globe fa-fw"></i> Empresas temporales</a>
+                                </li>
+
                             </ul>
                         </li>
 

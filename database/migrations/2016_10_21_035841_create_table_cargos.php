@@ -18,15 +18,15 @@ class CreateTableCargos extends Migration
         $commentTabla = 'CARGOS: contiene los cargos desempeñados en la organización.';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('CARG_ID')->primary()
+            $table->increments('CARG_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla CARGO.');
 
-            $table->string('CARGO_DESCRIPCION', 100)
+            $table->string('CARG_DESCRIPCION', 100)
                 ->comment('descripción del cargo Ej: operario, gerente administrativo');
 
             $table->integer('CNOS_ID')->unsigned();
 
-            $table->string('CARGO_OBSERVACIONES', 300)
+            $table->string('CARG_OBSERVACIONES', 300)
                 ->comment('observaciones del cargo')->nullable();
             
             //Traza

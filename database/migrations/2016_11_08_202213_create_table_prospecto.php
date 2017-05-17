@@ -19,7 +19,7 @@ class CreateTableProspecto extends Migration
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
 
-            $table->unsignedInteger('PROS_ID')->primary()
+            $table->increments('PROS_ID')
                 ->comment('id de la persona llave primaria de la tabla prospectos.');
 
             $table->unsignedInteger('PROS_CEDULA')->unique()

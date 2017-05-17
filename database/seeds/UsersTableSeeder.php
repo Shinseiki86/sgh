@@ -9,7 +9,7 @@ use SGH\Permission;
 
 		public function run() {
 
-            $pass = 'admin';
+            $pass = '123';
             $date = \Carbon\Carbon::now()->toDateTimeString();
             //$faker = Faker\Factory::create('es_ES');
 

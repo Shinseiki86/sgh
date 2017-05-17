@@ -18,7 +18,7 @@ class CreateTableEstadoscontrato extends Migration
         $commentTabla = 'ESTADOS DE CONTRATOS: contiene la información de estados de contratos existentes. Ej: activo, retirado, vacaciones, etc.';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('ESCO_ID')->primary()
+            $table->increments('ESCO_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla estados de contratos.');
 
             $table->string('ESCO_DESCRIPCION', 100)

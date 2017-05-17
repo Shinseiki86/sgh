@@ -18,7 +18,7 @@ class CreateTableClasescontratos extends Migration
         $commentTabla = 'CLASES DE CONTRATOS: contiene las clases de contratos existentes de acuerdo a la ley vigente (fijo, indefinido, por obra o labor contratada)';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('CLCO_ID')->primary()
+            $table->increments('CLCO_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla clases de contratos.');
 
             $table->string('CLCO_DESCRIPCION', 100)

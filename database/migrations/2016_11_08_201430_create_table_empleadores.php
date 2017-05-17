@@ -20,7 +20,7 @@ class CreateTableEmpleadores extends Migration
         $commentTabla = 'EMPLEADORES: contiene los empleadores de la organización (empresas)';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('EMPL_ID')->primary()
+            $table->increments('EMPL_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla empleadores.');
 
             $table->string('EMPL_RAZONSOCIAL', 300)

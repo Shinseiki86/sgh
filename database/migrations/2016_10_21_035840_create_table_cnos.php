@@ -24,7 +24,7 @@ class CreateTableCnos extends Migration
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
-            $table->unsignedInteger('CNOS_ID')->primary()
+            $table->increments('CNOS_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla CNOS.');
 
             $table->string('CNOS_CODIGO', 5)

@@ -38,4 +38,9 @@ Route::group(['prefix' => '', 'middleware' => ['auth', 'role:admin']], function(
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::resource('departamentos', 'DepartamentoController');
 	Route::resource('ciudades', 'CiudadController');
+	Route::resource('cnos', 'CnosController');
+	Route::resource('cargos', 'CargosController');
+	Route::resource('tiposcontratos', 'TiposcontratosController');
+	Route::resource('temporales', 'TemporalesController');
+	Route::resource('empleadores', 'EmpleadoresController');
 });

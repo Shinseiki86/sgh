@@ -18,7 +18,8 @@ class CreateTableTiposempleadores extends Migration
         $commentTabla = 'TIPOS DE EMPLEADORES: contien la información de tipos de empleados existentes. Ej: directo, temporal, etc';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('TIEM_ID')->primary()
+            
+            $table->increments('TIEM_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla tipos de empleadores.');
 
             $table->string('TIEM_DESCRIPCION', 100)

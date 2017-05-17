@@ -32,7 +32,7 @@ if (! function_exists('model_to_array')) {
             $primaryKey = isset($primaryKey) ? $primaryKey : $models->first()->getKeyName();
         } else {
 
-            $class = class_exists($class) ? $class : '\\Eva360\\'.basename($class);
+            $class = class_exists($class) ? $class : '\\SGH\\'.basename($class);
             $primaryKey = isset($primaryKey) ? $primaryKey : (new $class)->getKeyName();
             $models = $class::orderBy($primaryKey)
                             ->get([ $primaryKey , $column ]);

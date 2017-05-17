@@ -18,7 +18,7 @@ class CreateTableTiposcontratos extends Migration
         $commentTabla = 'TIPOS DE CONTRATOS: contiene los tipos de contratos existentes de acuerdo a la ley vigente';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('TICO_ID')->primary()
+            $table->increments('TICO_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla TICO.');
 
             $table->string('TICO_DESCRIPCION', 100)
