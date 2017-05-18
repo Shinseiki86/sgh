@@ -3,10 +3,10 @@
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-			Empresas Temporales
+			Empleadores
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('admin.temporales.create') }}" data-tooltip="tooltip" title="Crear C.N.O">
+			<a class='btn btn-primary' role='button' href="{{ route('admin.empleadores.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -18,34 +18,34 @@
 	{{-- Paginate --}}
 	<div class="row">
 		<div id="btn-paginate" class="col-xs-12 col-md-8 col-lg-8">
-			{{ $temporales->appends(Request::all())->render() }}
+			{{ $empleadores->appends(Request::all())->render() }}
 		</div>
 		<div class="col-xs-12 col-md-4 col-lg-4 text-right">
-			{{$temporales->total()}} registros encontrados.
+			{{$empleadores->total()}} registros encontrados.
 		</div>
 	</div>
 
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th class="col-md-5">@sortablelink('TEMP_RAZONSOCIAL', 'Razón Social')</th>
-				<th class="col-md-5">@sortablelink('TEMP_NOMBRECOMERCIAL', 'Nombre Comercial')</th>
-				<th class="col-md-5">@sortablelink('TEMP_DIRECCION', 'Dirección')</th>
-				<th class="hidden-xs col-md-2">@sortablelink('TEMP_CREADOPOR', 'Creado por')</th>
+				<th class="col-md-5">@sortablelink('EMPL_RAZONSOCIAL', 'Razón Social')</th>
+				<th class="col-md-5">@sortablelink('EMPL_NOMBRECOMERCIAL', 'Nombre Comercial')</th>
+				<th class="col-md-5">@sortablelink('EMPL_DIRECCION', 'Dirección')</th>
+				<th class="hidden-xs col-md-2">@sortablelink('EMPL_CREADOPOR', 'Creado por')</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
 
 		<tbody>
-			@foreach($temporales as $temporal)
+			@foreach($empleadores as $empleador)
 			<tr>
-				<td>{{ $temporal -> TEMP_RAZONSOCIAL }}</td>
-				<td>{{ $temporal -> TEMP_NOMBRECOMERCIAL }}</td>
-				<td>{{ $temporal -> TEMP_DIRECCION }}</td>
-				<td>{{ $temporal -> TEMP_CREADOPOR }}</td>
+				<td>{{ $empleador -> EMPL_RAZONSOCIAL }}</td>
+				<td>{{ $empleador -> EMPL_NOMBRECOMERCIAL }}</td>
+				<td>{{ $empleador -> EMPL_DIRECCION }}</td>
+				<td>{{ $empleador -> EMPL_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('admin.temporales.edit', [ 'TEMP_ID' => $temporal->TEMP_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('admin.empleadores.edit', [ 'EMPL_ID' => $empleador->EMPL_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 
@@ -54,10 +54,10 @@
 						'name'=>'btn-delete',
 						'class'=>'btn btn-xs btn-danger',
 						'data-toggle'=>'modal',
-						'data-id'=> $temporal->TEMP_ID,
-						'data-modelo'=> str_upperspace(class_basename($temporal)),
-						'data-descripcion'=> $temporal->TEMP_RAZONSOCIAL,
-						'data-action'=>'temporales/'. $temporal->TEMP_ID,
+						'data-id'=> $empleador->EMPL_ID,
+						'data-modelo'=> str_upperspace(class_basename($empleador)),
+						'data-descripcion'=> $empleador->EMPL_RAZONSOCIAL,
+						'data-action'=>'empleadores/'. $empleador->EMPL_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',

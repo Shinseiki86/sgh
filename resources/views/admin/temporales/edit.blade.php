@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('page_heading', 'Actualizar Empresa Temporal '.$temporal->CNOS_ID)
+@section('page_heading', 'Actualizar Empresa Temporal '.$temporal->TEMP_ID)
 
 @section('section')
 

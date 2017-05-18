@@ -1,54 +1,54 @@
 @extends('layouts.admin')
 
-@section('page_heading', 'Nueva Empresa Temporal')
+@section('page_heading', 'Nuevo Empleador')
 
 @section('section')
 	
-	{{ Form::open(['route' => 'admin.temporales.store', 'class' => 'form-horizontal']) }}
+	{{ Form::open(['route' => 'admin.empleadores.store', 'class' => 'form-horizontal']) }}
 
-		<div class="form-group{{ $errors->has('TEMP_RAZONSOCIAL') ? ' has-error' : '' }}">
-			{{ Form::label('TEMP_RAZONSOCIAL', 'Razón Social',  [ 'class' => 'col-md-4 control-label' ]) }}
+		<div class="form-group{{ $errors->has('EMPL_RAZONSOCIAL') ? ' has-error' : '' }}">
+			{{ Form::label('EMPL_RAZONSOCIAL', 'Razón Social',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
-				{{ Form::text('TEMP_RAZONSOCIAL', old('TEMP_RAZONSOCIAL'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
-				@if ($errors->has('TEMP_RAZONSOCIAL'))
+				{{ Form::text('EMPL_RAZONSOCIAL', old('EMPL_RAZONSOCIAL'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
+				@if ($errors->has('EMPL_RAZONSOCIAL'))
 					<span class="help-block">
-						<strong>{{ $errors->first('TEMP_RAZONSOCIAL') }}</strong>
+						<strong>{{ $errors->first('EMPL_RAZONSOCIAL') }}</strong>
 					</span>
 				@endif
 			</div>
 		</div>
 
-		<div class="form-group{{ $errors->has('TEMP_NOMBRECOMERCIAL') ? ' has-error' : '' }}">
-			{{ Form::label('TEMP_NOMBRECOMERCIAL', 'Nombre Comercial',  [ 'class' => 'col-md-4 control-label' ]) }}
+		<div class="form-group{{ $errors->has('EMPL_NOMBRECOMERCIAL') ? ' has-error' : '' }}">
+			{{ Form::label('EMPL_NOMBRECOMERCIAL', 'Nombre Comercial',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
-				{{ Form::text('TEMP_NOMBRECOMERCIAL', old('TEMP_NOMBRECOMERCIAL'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
-				@if ($errors->has('TEMP_NOMBRECOMERCIAL'))
+				{{ Form::text('EMPL_NOMBRECOMERCIAL', old('EMPL_NOMBRECOMERCIAL'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
+				@if ($errors->has('EMPL_NOMBRECOMERCIAL'))
 					<span class="help-block">
-						<strong>{{ $errors->first('TEMP_NOMBRECOMERCIAL') }}</strong>
+						<strong>{{ $errors->first('EMPL_NOMBRECOMERCIAL') }}</strong>
 					</span>
 				@endif
 			</div>
 		</div>
 
-		<div class="form-group{{ $errors->has('TEMP_DIRECCION') ? ' has-error' : '' }}">
-			{{ Form::label('TEMP_DIRECCION', 'Dirección',  [ 'class' => 'col-md-4 control-label' ]) }}
+		<div class="form-group{{ $errors->has('EMPL_DIRECCION') ? ' has-error' : '' }}">
+			{{ Form::label('EMPL_DIRECCION', 'Dirección',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
-				{{ Form::text('TEMP_DIRECCION', old('TEMP_DIRECCION'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
-				@if ($errors->has('TEMP_DIRECCION'))
+				{{ Form::text('EMPL_DIRECCION', old('EMPL_DIRECCION'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
+				@if ($errors->has('EMPL_DIRECCION'))
 					<span class="help-block">
-						<strong>{{ $errors->first('TEMP_DIRECCION') }}</strong>
+						<strong>{{ $errors->first('EMPL_DIRECCION') }}</strong>
 					</span>
 				@endif
 			</div>
 		</div>
 
-		<div class="form-group{{ $errors->has('TEMP_OBSERVACIONES') ? ' has-error' : '' }}">
-			{{ Form::label('TEMP_OBSERVACIONES', 'Observaciones',  [ 'class' => 'col-md-4 control-label' ]) }}
+		<div class="form-group{{ $errors->has('EMPL_OBSERVACIONES') ? ' has-error' : '' }}">
+			{{ Form::label('EMPL_OBSERVACIONES', 'Observaciones',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
-				{{ Form::textarea('TEMP_OBSERVACIONES', old('TEMP_OBSERVACIONES'), [ 'class' => 'form-control', 'maxlength' => '300']) }}
-				@if ($errors->has('TEMP_OBSERVACIONES'))
+				{{ Form::textarea('EMPL_OBSERVACIONES', old('EMPL_OBSERVACIONES'), [ 'class' => 'form-control', 'maxlength' => '300']) }}
+				@if ($errors->has('EMPL_OBSERVACIONES'))
 					<span class="help-block">
-						<strong>{{ $errors->first('TEMP_OBSERVACIONES') }}</strong>
+						<strong>{{ $errors->first('EMPL_OBSERVACIONES') }}</strong>
 					</span>
 				@endif
 			</div>
@@ -57,7 +57,7 @@
 		<!-- Botones -->
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4 text-right">
-				<a class="btn btn-warning" role="button" href="{{ URL::to('admin/temporales/') }}" data-tooltip="tooltip" title="Regresar">
+				<a class="btn btn-warning" role="button" href="{{ URL::to('admin/empleadores/') }}" data-tooltip="tooltip" title="Regresar">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i>
 				</a>
 				{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i>', [

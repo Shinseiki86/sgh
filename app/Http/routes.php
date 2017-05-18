@@ -43,4 +43,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::resource('tiposcontratos', 'TiposcontratosController');
 	Route::resource('temporales', 'TemporalesController');
 	Route::resource('empleadores', 'EmpleadoresController');
+	Route::resource('prospectos', 'ProspectosController');
 });

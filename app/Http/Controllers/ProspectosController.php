@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Empleadore;
+use SGH\Prospecto;
 
-class EmpleadoresController extends Controller
+class ProspectosController extends Controller
 {
     //
 
@@ -30,10 +30,17 @@ class EmpleadoresController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'EMPL_RAZONSOCIAL' => ['required', 'max:300'],
-			'EMPL_NOMBRECOMERCIAL' => ['required', 'max:300'],
-			'EMPL_DIRECCION' => ['required', 'max:300'],
-			'EMPL_OBSERVACIONES' => ['required', 'max:300'],
+			'PROS_CEDULA' => ['numeric', 'required','max:10'],
+			'PROS_FECHAEXPEDICION' => ['required'],
+			'PROS_PRIMERNOMBRE' => ['required', 'max:100'],
+			'PROS_SEGUNDONOMBRE' => ['max:100'],	
+			'PROS_PRIMERAPELLIDO' => ['required', 'max:100'],
+			'PROS_SEGUNDOAPELLIDO' => ['max:100'],
+			'PROS_SEXO' => ['required', 'max:1'],
+			'PROS_DIRECCION', ['required', 'max:100'],
+			'PROS_TELEFONO', ['max:10'],
+			'PROS_CELULAR', ['max:15'],
+			'PROS_COREO', ['max:100'],
 		]);
 
 		if ($validator->fails())
@@ -51,9 +58,9 @@ class EmpleadoresController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$empleadores = Empleadore::sortable('EMPL_NOMBRECOMERCIAL')->paginate();
+		$prospectos = Prospecto::sortable('EMPL_NOMBRECOMERCIAL')->paginate();
 		//Se carga la vista y se pasan los registros
-		return view('admin/empleadores/index', compact('empleadores'));
+		return view('admin/prospectos/index', compact('prospectos'));
 	}
 
 	/**
@@ -63,7 +70,7 @@ class EmpleadoresController extends Controller
 	 */
 	public function create()
 	{
-		return view('admin/empleadores/create');
+		return view('admin/prospectos/create');
 	}
 
 	/**
@@ -79,11 +86,11 @@ class EmpleadoresController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$empleador = Empleadore::create($request->all());
+		$prospecto = Prospecto::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Empleador '.$empleador->EMPL_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('admin.empleadores.index');
+		flash_alert( 'Empleador '.$prospecto->EMPL_ID.' creado exitosamente.', 'success' );
+		return redirect()->route('admin.prospecto.index');
 	}
 
 
@@ -96,10 +103,10 @@ class EmpleadoresController extends Controller
 	public function edit($EMPL_ID)
 	{
 		// Se obtiene el registro
-		$empleador = Empleadore::findOrFail($EMPL_ID);
+		$prospecto = Prospecto::findOrFail($EMPL_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/empleadores/edit', compact('empleador'));
+		return view('admin/prospecto/edit', compact('prospecto'));
 	}
 
 
@@ -117,13 +124,13 @@ class EmpleadoresController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$empleador = Empleadore::findOrFail($EMPL_ID);
+		$prospecto = Prospecto::findOrFail($EMPL_ID);
 		//y se actualiza con los datos recibidos.
-		$empleador->update($request->all());
+		$prospecto->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Empleador '.$empleador->EMPL_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('admin.empleadores.index');
+		flash_alert( 'Empleador '.$prospecto->EMPL_ID.' modificado exitosamente.', 'success' );
+		return redirect()->route('admin.prospecto.index');
 	}
 
 	/**
@@ -134,17 +141,17 @@ class EmpleadoresController extends Controller
 	 */
 	public function destroy($EMPL_ID, $showMsg=True)
 	{
-		$empleador = Empleadore::findOrFail($EMPL_ID);
+		$prospecto = Prospecto::findOrFail($EMPL_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($empleador->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$empleador->EMPL_ID.' no se puede borrar.', 'danger' );
+		if($prospecto->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Temporale '.$prospecto->EMPL_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$empleador->delete();
-				flash_alert( 'Empleador '.$empleador->EMPL_ID.' eliminado exitosamente.', 'success' );
+			$prospecto->delete();
+				flash_alert( 'Empleador '.$prospecto->EMPL_ID.' eliminado exitosamente.', 'success' );
 		}
 
-		return redirect()->route('admin.empleadores.index');
+		return redirect()->route('admin.prospecto.index');
 	}
 	
 }

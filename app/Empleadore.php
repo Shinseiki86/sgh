@@ -5,29 +5,29 @@ namespace SGH;
 use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
-class Temporale extends ModelWithSoftDeletes
+class Empleadore extends ModelWithSoftDeletes
 {
 	use Sortable;
 	
 	//Nombre de la tabla en la base de datos
-	protected $table = 'TEMPORALES';
-	protected $primaryKey = 'TEMP_ID';
+	protected $table = 'EMPLEADORES';
+	protected $primaryKey = 'EMPL_ID';
 
 	//Traza: Nombre de campos en la tabla para auditoría de cambios
-	const CREATED_AT = 'TEMP_FECHACREADO';
-	const UPDATED_AT = 'TEMP_FECHAMODIFICADO';
-	const DELETED_AT = 'TEMP_FECHAELIMINADO';
-	protected $dates = ['TEMP_FECHACREADO', 'TEMP_FECHAMODIFICADO', 'TEMP_FECHAELIMINADO'];
+	const CREATED_AT = 'EMPL_FECHACREADO';
+	const UPDATED_AT = 'EMPL_FECHAMODIFICADO';
+	const DELETED_AT = 'EMPL_FECHAELIMINADO';
+	protected $dates = ['EMPL_FECHACREADO', 'EMPL_FECHAMODIFICADO', 'EMPL_FECHAELIMINADO'];
 
 	protected $fillable = [
-		'TEMP_RAZONSOCIAL',
-		'TEMP_NOMBRECOMERCIAL',
-		'TEMP_DIRECCION',
-		'TEMP_OBSERVACIONES',
+		'EMPL_RAZONSOCIAL',
+		'EMPL_NOMBRECOMERCIAL',
+		'EMPL_DIRECCION',
+		'EMPL_OBSERVACIONES',
 	];
 
 	public $sortable = [
-		'TEMP_RAZONSOCIAL',
+		'EMPL_RAZONSOCIAL',
 	];
 
 }

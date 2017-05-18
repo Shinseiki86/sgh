@@ -132,6 +132,14 @@
                                 <a href="{{ url ('admin/temporales') }}"><i class="fa fa-globe fa-fw"></i> Empresas temporales</a>
                                 </li>
 
+                                <li {{ (Request::is('*admin/empleadores') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/empleadores') }}"><i class="fa fa-globe fa-fw"></i> Empleadores</a>
+                                </li>
+
+                                <li {{ (Request::is('*admin/prospectos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/prospectos') }}"><i class="fa fa-globe fa-fw"></i> Datos Basicos</a>
+                                </li>
+
                             </ul>
                         </li>
 
