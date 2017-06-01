@@ -140,6 +140,10 @@
                                 <a href="{{ url ('admin/prospectos') }}"><i class="fa fa-globe fa-fw"></i> Datos Basicos</a>
                                 </li>
 
+                                <li {{ (Request::is('*admin/uploads') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/uploads') }}"><i class="fa fa-globe fa-fw"></i> Validador de TNL</a>
+                                </li>
+
                             </ul>
                         </li>
 

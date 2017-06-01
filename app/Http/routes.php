@@ -44,4 +44,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::resource('temporales', 'TemporalesController');
 	Route::resource('empleadores', 'EmpleadoresController');
 	Route::resource('prospectos', 'ProspectosController');
+
+	//upload tablas de TNL
+	//Route::get('upload', 'UploadController@index');
+	Route::post('upload', 'UploadsController@upload');
+
+	Route::resource('uploads', 'UploadsController');
+
+	Route::post('delete', 'UploadsController@delete');
 });
