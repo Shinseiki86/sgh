@@ -34,7 +34,7 @@ class Prospecto extends ModelWithSoftDeletes
 	];
 
 	public $sortable = [
-		'PROS_RAZONSOCIAL',
+		'PROS_CEDULA'
 	];
 
 }

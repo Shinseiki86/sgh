@@ -39,7 +39,6 @@
 				<th class="col-md-5">@sortablelink('PROS_TELEFONO', 'Telefono')</th>
 				<th class="col-md-5">@sortablelink('PROS_CELULAR', 'Celular')</th>
 				<th class="col-md-5">@sortablelink('PROS_COREO', 'Correo')</th>
-				<th class="hidden-xs col-md-2">@sortablelink('PROS_CREADOPOR', 'Creado por')</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -56,12 +55,11 @@
 				<td>{{ $prospecto -> PROS_SEXO }}</td>
 				<td>{{ $prospecto -> PROS_DIRECCION }}</td>
 				<td>{{ $prospecto -> PROS_TELEFONO }}</td>
-				<td>{{ $prospecto -> EMPL_RAZONSOCIAL }}</td>
 				<td>{{ $prospecto -> PROS_CELULAR }}</td>
 				<td>{{ $prospecto -> PROS_COREO }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('admin.prospectos.edit', [ 'EMPL_ID' => $prospecto->EMPL_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('admin.prospectos.edit', [ 'PROS_ID' => $prospecto->PROS_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 
@@ -70,10 +68,10 @@
 						'name'=>'btn-delete',
 						'class'=>'btn btn-xs btn-danger',
 						'data-toggle'=>'modal',
-						'data-id'=> $prospecto->EMPL_ID,
+						'data-id'=> $prospecto->PROS_ID,
 						'data-modelo'=> str_upperspace(class_basename($prospecto)),
-						'data-descripcion'=> $prospecto->EMPL_RAZONSOCIAL,
-						'data-action'=>'prospectos/'. $prospecto->EMPL_ID,
+						'data-descripcion'=> $prospecto->PROS_PRIMERNOMBRE,
+						'data-action'=>'prospectos/'. $prospecto->PROS_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',

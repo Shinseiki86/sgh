@@ -136,6 +136,22 @@
                                 <a href="{{ url ('admin/empleadores') }}"><i class="fa fa-globe fa-fw"></i> Empleadores</a>
                                 </li>
 
+                                <li {{ (Request::is('*admin/clasescontratos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/clasescontratos') }}"><i class="fa fa-globe fa-fw"></i> Clases de contratos</a>
+                                </li>
+
+                                <li {{ (Request::is('*admin/gerencias') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/gerencias') }}"><i class="fa fa-globe fa-fw"></i> Gerencias</a>
+                                </li>
+
+                                <li {{ (Request::is('*admin/centroscostos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/centroscostos') }}"><i class="fa fa-globe fa-fw"></i> Centros de costos</a>
+                                </li>
+
+                                <li {{ (Request::is('*admin/tiposempleadores') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/tiposempleadores') }}"><i class="fa fa-globe fa-fw"></i> Tipos de empleadores</a>
+                                </li>
+
                                 <li {{ (Request::is('*admin/prospectos') ? 'class=active' : '') }}>
                                 <a href="{{ url ('admin/prospectos') }}"><i class="fa fa-globe fa-fw"></i> Datos Basicos</a>
                                 </li>

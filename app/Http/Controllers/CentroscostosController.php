@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Prospecto;
+use SGH\Centroscosto;
+use SGH\Gerencia;
 
-class ProspectosController extends Controller
+class CentroscostosController extends Controller
 {
     //
 
@@ -30,17 +31,10 @@ class ProspectosController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'PROS_CEDULA' => ['numeric', 'required'],
-			'PROS_FECHAEXPEDICION' => ['required'],
-			'PROS_PRIMERNOMBRE' => ['required', 'max:100'],
-			'PROS_SEGUNDONOMBRE' => ['max:100'],	
-			'PROS_PRIMERAPELLIDO' => ['required', 'max:100'],
-			'PROS_SEGUNDOAPELLIDO' => ['max:100'],
-			'PROS_SEXO' => ['required', 'max:1'],
-			'PROS_DIRECCION', ['required', 'max:100'],
-			'PROS_TELEFONO', ['max:10', 'numeric'],
-			'PROS_CELULAR', ['max:15', 'numeric'],
-			'PROS_COREO', ['max:100'],
+			'CECO_CODIGO' => ['required', 'unique:CENTROSCOSTOS'], //forma para validar un campo unique
+			'CECO_DESCRIPCION' => ['required', 'max:100'],
+			'GERE_ID' => ['required'],
+			'CECO_OBSERVACIONES' => ['max:300'],
 		]);
 
 		if ($validator->fails())
@@ -58,9 +52,9 @@ class ProspectosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$prospectos = Prospecto::sortable('PROS_CEDULA')->paginate();
+		$centroscostos = Centroscosto::sortable('CECO_DESCRIPCION')->paginate();
 		//Se carga la vista y se pasan los registros
-		return view('admin/prospectos/index', compact('prospectos'));
+		return view('admin/centroscostos/index', compact('centroscostos'));
 	}
 
 	/**
@@ -70,7 +64,11 @@ class ProspectosController extends Controller
 	 */
 	public function create()
 	{
-		return view('admin/prospectos/create');
+		//Se crea un array con los CNOS disponibles
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
+
+		return view('admin/centroscostos/create', compact('arrGerencias'));
+		
 	}
 
 	/**
@@ -86,37 +84,40 @@ class ProspectosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$prospecto = Prospecto::create($request->all());
+		$centrocosto = Centroscosto::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Prospecto '.$prospecto->PROS_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('admin.prospectos.index');
+		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' creado exitosamente.', 'success' );
+		return redirect()->route('admin.centroscostos.index');
 	}
 
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CECO_ID
 	 * @return Response
 	 */
-	public function edit($PROS_ID)
+	public function edit($CECO_ID)
 	{
 		// Se obtiene el registro
-		$prospecto = Prospecto::findOrFail($PROS_ID);
+		$centrocosto = Centroscosto::findOrFail($CECO_ID);
+
+		//Se crea un array con los CNOS disponibles
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/prospectos/edit', compact('prospecto'));
+		return view('admin/centroscostos/edit', compact('centrocosto', 'arrGerencias'));
 	}
 
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CECO_ID
 	 * @return Response
 	 */
-	public function update($PROS_ID)
+	public function update($CECO_ID)
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
@@ -124,34 +125,34 @@ class ProspectosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$prospecto = Prospecto::findOrFail($PROS_ID);
+		$centrocosto = Centroscosto::findOrFail($CECO_ID);
 		//y se actualiza con los datos recibidos.
-		$prospecto->update($request->all());
+		$centrocosto->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Prospecto '.$prospecto->PROS_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('admin.prospectos.index');
+		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' modificado exitosamente.', 'success' );
+		return redirect()->route('admin.centroscostos.index');
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CECO_ID
 	 * @return Response
 	 */
-	public function destroy($EMPL_ID, $showMsg=True)
+	public function destroy($CECO_ID, $showMsg=True)
 	{
-		$prospecto = Prospecto::findOrFail($EMPL_ID);
+		$centrocosto = Centroscosto::findOrFail($CECO_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($prospecto->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$prospecto->EMPL_ID.' no se puede borrar.', 'danger' );
+		if($centrocosto->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Centro de costo '.$centrocosto->CECO_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$prospecto->delete();
-				flash_alert( 'Prospecto '.$prospecto->EMPL_ID.' eliminado exitosamente.', 'success' );
+			$centrocosto->delete();
+				flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' eliminado exitosamente.', 'success' );
 		}
 
-		return redirect()->route('admin.prospectos.index');
+		return redirect()->route('admin.centroscostos.index');
 	}
 	
 }

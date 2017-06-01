@@ -44,7 +44,7 @@ class UploadsController extends Controller
 		$arreglotnl = array();
 		
 		
-
+		//leer el excel y crear los registros con el Modelo
 		Excel::load($filetnl, function($reader) {
 
 			
@@ -68,6 +68,7 @@ class UploadsController extends Controller
 			}
 		});
 
+		//leer el excel y crear los registros con el Modelo
 		Excel::load($fileincap, function($reader) {
 
 			$contincap = 0;

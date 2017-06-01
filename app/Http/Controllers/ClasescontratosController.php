@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Prospecto;
+use SGH\Clasescontrato;
 
-class ProspectosController extends Controller
+class ClasescontratosController extends Controller
 {
     //
 
@@ -30,17 +30,8 @@ class ProspectosController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'PROS_CEDULA' => ['numeric', 'required'],
-			'PROS_FECHAEXPEDICION' => ['required'],
-			'PROS_PRIMERNOMBRE' => ['required', 'max:100'],
-			'PROS_SEGUNDONOMBRE' => ['max:100'],	
-			'PROS_PRIMERAPELLIDO' => ['required', 'max:100'],
-			'PROS_SEGUNDOAPELLIDO' => ['max:100'],
-			'PROS_SEXO' => ['required', 'max:1'],
-			'PROS_DIRECCION', ['required', 'max:100'],
-			'PROS_TELEFONO', ['max:10', 'numeric'],
-			'PROS_CELULAR', ['max:15', 'numeric'],
-			'PROS_COREO', ['max:100'],
+			'CLCO_DESCRIPCION' => ['required', 'max:100'],
+			'CLCO_OBSERVACIONES' => ['max:300'],
 		]);
 
 		if ($validator->fails())
@@ -58,9 +49,9 @@ class ProspectosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$prospectos = Prospecto::sortable('PROS_CEDULA')->paginate();
+		$clasescontratos = Clasescontrato::sortable('CLCO_ID')->paginate();
 		//Se carga la vista y se pasan los registros
-		return view('admin/prospectos/index', compact('prospectos'));
+		return view('admin/clasescontratos/index', compact('clasescontratos'));
 	}
 
 	/**
@@ -70,7 +61,7 @@ class ProspectosController extends Controller
 	 */
 	public function create()
 	{
-		return view('admin/prospectos/create');
+		return view('admin/clasescontratos/create');
 	}
 
 	/**
@@ -86,37 +77,37 @@ class ProspectosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$prospecto = Prospecto::create($request->all());
+		$clasecontrato = Clasescontrato::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Prospecto '.$prospecto->PROS_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('admin.prospectos.index');
+		flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' creado exitosamente.', 'success' );
+		return redirect()->route('admin.clasescontratos.index');
 	}
 
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CLCO_ID
 	 * @return Response
 	 */
-	public function edit($PROS_ID)
+	public function edit($CLCO_ID)
 	{
 		// Se obtiene el registro
-		$prospecto = Prospecto::findOrFail($PROS_ID);
+		$clasecontrato = Clasescontrato::findOrFail($CLCO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/prospectos/edit', compact('prospecto'));
+		return view('admin/clasescontratos/edit', compact('clasecontrato'));
 	}
 
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CLCO_ID
 	 * @return Response
 	 */
-	public function update($PROS_ID)
+	public function update($CLCO_ID)
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
@@ -124,34 +115,34 @@ class ProspectosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$prospecto = Prospecto::findOrFail($PROS_ID);
+		$cno = Clasescontrato::findOrFail($CLCO_ID);
 		//y se actualiza con los datos recibidos.
-		$prospecto->update($request->all());
+		$cno->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Prospecto '.$prospecto->PROS_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('admin.prospectos.index');
+		flash_alert( 'Clase de contrato '.$cno->CLCO_ID.' modificado exitosamente.', 'success' );
+		return redirect()->route('admin.clasescontratos.index');
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CLCO_ID
 	 * @return Response
 	 */
-	public function destroy($EMPL_ID, $showMsg=True)
+	public function destroy($CLCO_ID, $showMsg=True)
 	{
-		$prospecto = Prospecto::findOrFail($EMPL_ID);
+		$clasecontrato = Clasescontrato::findOrFail($CLCO_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($prospecto->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$prospecto->EMPL_ID.' no se puede borrar.', 'danger' );
+		if($clasecontrato->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Tiposcontrato '.$clasecontrato->CLCO_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$prospecto->delete();
-				flash_alert( 'Prospecto '.$prospecto->EMPL_ID.' eliminado exitosamente.', 'success' );
+			$clasecontrato->delete();
+				flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' eliminado exitosamente.', 'success' );
 		}
 
-		return redirect()->route('admin.prospectos.index');
+		return redirect()->route('admin.clasescontratos.index');
 	}
 	
 }

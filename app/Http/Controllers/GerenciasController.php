@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Prospecto;
+use SGH\Gerencia;
+use SGH\Empleadore;
 
-class ProspectosController extends Controller
+class GerenciasController extends Controller
 {
     //
 
@@ -30,17 +31,9 @@ class ProspectosController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'PROS_CEDULA' => ['numeric', 'required'],
-			'PROS_FECHAEXPEDICION' => ['required'],
-			'PROS_PRIMERNOMBRE' => ['required', 'max:100'],
-			'PROS_SEGUNDONOMBRE' => ['max:100'],	
-			'PROS_PRIMERAPELLIDO' => ['required', 'max:100'],
-			'PROS_SEGUNDOAPELLIDO' => ['max:100'],
-			'PROS_SEXO' => ['required', 'max:1'],
-			'PROS_DIRECCION', ['required', 'max:100'],
-			'PROS_TELEFONO', ['max:10', 'numeric'],
-			'PROS_CELULAR', ['max:15', 'numeric'],
-			'PROS_COREO', ['max:100'],
+			'GERE_DESCRIPCION' => ['required', 'max:100'],
+			'EMPL_ID' => ['required'],
+			'GERE_OBSERVACIONES' => ['max:300'],
 		]);
 
 		if ($validator->fails())
@@ -58,9 +51,9 @@ class ProspectosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$prospectos = Prospecto::sortable('PROS_CEDULA')->paginate();
+		$gerencias = Gerencia::sortable('GERE_DESCRIPCION')->paginate();
 		//Se carga la vista y se pasan los registros
-		return view('admin/prospectos/index', compact('prospectos'));
+		return view('admin/gerencias/index', compact('gerencias'));
 	}
 
 	/**
@@ -70,7 +63,11 @@ class ProspectosController extends Controller
 	 */
 	public function create()
 	{
-		return view('admin/prospectos/create');
+		//Se crea un array con los CNOS disponibles
+		$arrEmpleadores = model_to_array(Empleadore::class, 'EMPL_RAZONSOCIAL');
+
+		return view('admin/gerencias/create', compact('arrEmpleadores'));
+		
 	}
 
 	/**
@@ -86,37 +83,40 @@ class ProspectosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$prospecto = Prospecto::create($request->all());
+		$cargo = Gerencia::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Prospecto '.$prospecto->PROS_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('admin.prospectos.index');
+		flash_alert( 'Gerencia '.$cargo->GERE_ID.' creado exitosamente.', 'success' );
+		return redirect()->route('admin.gerencias.index');
 	}
 
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $GERE_ID
 	 * @return Response
 	 */
-	public function edit($PROS_ID)
+	public function edit($GERE_ID)
 	{
 		// Se obtiene el registro
-		$prospecto = Prospecto::findOrFail($PROS_ID);
+		$gerencia = Gerencia::findOrFail($GERE_ID);
+
+		//Se crea un array con los CNOS disponibles
+		$arrEmpleadores = model_to_array(Empleadore::class, 'EMPL_RAZONSOCIAL');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/prospectos/edit', compact('prospecto'));
+		return view('admin/gerencias/edit', compact('gerencia', 'arrEmpleadores'));
 	}
 
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $GERE_ID
 	 * @return Response
 	 */
-	public function update($PROS_ID)
+	public function update($GERE_ID)
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
@@ -124,34 +124,34 @@ class ProspectosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$prospecto = Prospecto::findOrFail($PROS_ID);
+		$cargo = Gerencia::findOrFail($GERE_ID);
 		//y se actualiza con los datos recibidos.
-		$prospecto->update($request->all());
+		$cargo->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Prospecto '.$prospecto->PROS_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('admin.prospectos.index');
+		flash_alert( 'Gerencia '.$cargo->GERE_ID.' modificado exitosamente.', 'success' );
+		return redirect()->route('admin.gerencias.index');
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $GERE_ID
 	 * @return Response
 	 */
-	public function destroy($EMPL_ID, $showMsg=True)
+	public function destroy($GERE_ID, $showMsg=True)
 	{
-		$prospecto = Prospecto::findOrFail($EMPL_ID);
+		$cargo = Gerencia::findOrFail($GERE_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($prospecto->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$prospecto->EMPL_ID.' no se puede borrar.', 'danger' );
+		if($cargo->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Gerencia '.$cargo->GERE_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$prospecto->delete();
-				flash_alert( 'Prospecto '.$prospecto->EMPL_ID.' eliminado exitosamente.', 'success' );
+			$cargo->delete();
+				flash_alert( 'Gerencia '.$cargo->GERE_ID.' eliminado exitosamente.', 'success' );
 		}
 
-		return redirect()->route('admin.prospectos.index');
+		return redirect()->route('admin.gerencias.index');
 	}
 	
 }
