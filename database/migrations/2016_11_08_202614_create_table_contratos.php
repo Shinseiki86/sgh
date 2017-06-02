@@ -25,7 +25,7 @@ class CreateTableContratos extends Migration
             $table->integer('PROS_ID')->unsigned()
                 ->comment('referencia al prospecto que tiene el contrato con la empresa');
 
-            $table->string('PROS_CASOMEDICO', 2)->nullable();
+            $table->string('CONT_CASOMEDICO', 2)->nullable();
 
             $table->integer('CARG_ID')->unsigned()
                 ->comment('referencia al cargo que tiene el colaborador en el contrato');
@@ -45,8 +45,6 @@ class CreateTableContratos extends Migration
 
             $table->integer('CONT_RODAJE')->unsigned()
                 ->comment('rodaje del colaborador en el contrato');
-
-            $table->string('CONT_TIPONOMINA', 2)->nullable();
 
             $table->integer('ESCO_ID')->unsigned()
                 ->comment('estado de contrato del colaborador');

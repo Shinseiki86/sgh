@@ -140,6 +140,10 @@
                                 <a href="{{ url ('admin/clasescontratos') }}"><i class="fa fa-globe fa-fw"></i> Clases de contratos</a>
                                 </li>
 
+                                <li {{ (Request::is('*admin/estadoscontratos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/estadoscontratos') }}"><i class="fa fa-globe fa-fw"></i> Estados de contratos</a>
+                                </li>
+
                                 <li {{ (Request::is('*admin/gerencias') ? 'class=active' : '') }}>
                                 <a href="{{ url ('admin/gerencias') }}"><i class="fa fa-globe fa-fw"></i> Gerencias</a>
                                 </li>
@@ -154,6 +158,10 @@
 
                                 <li {{ (Request::is('*admin/prospectos') ? 'class=active' : '') }}>
                                 <a href="{{ url ('admin/prospectos') }}"><i class="fa fa-globe fa-fw"></i> Datos Basicos</a>
+                                </li>
+
+                                <li {{ (Request::is('*admin/contratos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/contratos') }}"><i class="fa fa-globe fa-fw"></i> Contratos</a>
                                 </li>
 
                                 <li {{ (Request::is('*admin/uploads') ? 'class=active' : '') }}>
