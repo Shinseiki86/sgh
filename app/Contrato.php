@@ -58,7 +58,7 @@ class Contrato extends ModelWithSoftDeletes
 	public function estadocontrato()
 	{
 		$foreingKey = 'ESCO_ID';
-		return $this->belongsTo(Estadocontrato::class, $foreingKey);
+		return $this->belongsTo(Estadoscontrato::class, $foreingKey);
 	}
 
 	public function motivoretiro()
@@ -76,19 +76,19 @@ class Contrato extends ModelWithSoftDeletes
 	public function clasecontrato()
 	{
 		$foreingKey = 'CLCO_ID';
-		return $this->belongsTo(Clasecontrato::class, $foreingKey);
+		return $this->belongsTo(Clasescontrato::class, $foreingKey);
 	}
 
 	public function empleador()
 	{
 		$foreingKey = 'EMPL_ID';
-		return $this->belongsTo(Clasecontrato::class, $foreingKey);
+		return $this->belongsTo(Empleadore::class, $foreingKey);
 	}
 
 	public function tipoempleador()
 	{
 		$foreingKey = 'TIEM_ID';
-		return $this->belongsTo(Tipoempleadore::class, $foreingKey);
+		return $this->belongsTo(Tiposempleadore::class, $foreingKey);
 	}
 
 	public function centrocosto()

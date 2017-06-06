@@ -35,7 +35,6 @@ class ContratosController extends Controller
 			'CONT_CASOMEDICO' => ['required', 'max:2'],
 			'CARG_ID' => ['numeric', 'required'],
 			'CONT_FECHAINGRESO' => ['required'],
-			'CONT_FECHARETIRO' => ['required'],
 			'CONT_SALARIO' => ['numeric','required'],
 			'CONT_VARIABLE' => ['numeric'],
 			'CONT_RODAJE' => ['numeric'],
@@ -76,14 +75,37 @@ class ContratosController extends Controller
 	 */
 	public function create()
 	{
+
+		//Se crea un array con los empleadores
+		$arrEmpleadores = model_to_array(Empleadore::class, 'EMPL_RAZONSOCIAL');
+
+		//Se crea un array con los tipos de empleadores
+		$arrTiposempleadores = model_to_array(Tiposempleadore::class, 'TIEM_DESCRIPCION');
+
+		//Se crea un array con los centros de costos
+		$arrCentroscostos = model_to_array(Centroscosto::class, 'CECO_DESCRIPCION');
+
+		//Se crea un array con los estados de contrato
+		$arrEstadoscontrato = model_to_array(Estadoscontrato::class, 'ESCO_DESCRIPCION');
+
+		//Se crea un array con los tipos de contrato
+		$arrTiposcontrato = model_to_array(Tiposcontrato::class, 'TICO_DESCRIPCION');
+
+		//Se crea un array con las clases de contrato
+		$arrClasescontrato = model_to_array(Clasescontrato::class, 'CLCO_DESCRIPCION');
+
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, 'PROS_PRIMERNOMBRE');
 
 		//Se crea un array con los cargos disponibles
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
+		//Se crea un array con los motivos de retiro
+		$arrMotivosretiro = model_to_array(Motivosretiro::class, 'MORE_DESCRIPCION');
 
-		return view('admin/contratos/create' , compact('arrProspectos','arrCargos'));
+
+
+		return view('admin/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro'));
 	}
 
 	/**
@@ -99,10 +121,10 @@ class ContratosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$prospecto = Contrato::create($request->all());
+		$contrato = Contrato::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Contrato '.$prospecto->PROS_ID.' creado exitosamente.', 'success' );
+		flash_alert( 'Contrato '.$contrato->CONT_ID.' creado exitosamente.', 'success' );
 		return redirect()->route('admin.contratos.index');
 	}
 

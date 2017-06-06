@@ -49,8 +49,7 @@ class CreateTableContratos extends Migration
             $table->integer('ESCO_ID')->unsigned()
                 ->comment('estado de contrato del colaborador');
 
-            $table->integer('MORE_ID')->unsigned()
-                ->nullable()
+            $table->integer('MORE_ID')->nullable()->unsigned()
                 ->comment('motivo de retiro del contrato');
 
             $table->integer('TICO_ID')->unsigned()

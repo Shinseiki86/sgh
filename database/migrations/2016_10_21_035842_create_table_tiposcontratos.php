@@ -15,7 +15,7 @@ class CreateTableTiposcontratos extends Migration
      */
     public function up()
     {
-        $commentTabla = 'TIPOS DE CONTRATOS: contiene los tipos de contratos existentes de acuerdo a la ley vigente';
+        $commentTabla = 'TIPOS DE CONTRATOS: contiene los tipos de contratos existentes de acuerdo a la ley vigente (temporal, directo, prestacion de servicios)';
 
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('TICO_ID')

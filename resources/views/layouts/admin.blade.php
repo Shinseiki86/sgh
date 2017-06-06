@@ -144,6 +144,10 @@
                                 <a href="{{ url ('admin/estadoscontratos') }}"><i class="fa fa-globe fa-fw"></i> Estados de contratos</a>
                                 </li>
 
+                                <li {{ (Request::is('*admin/estadoscontratos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('admin/motivosretiros') }}"><i class="fa fa-globe fa-fw"></i> Motivos de retiro</a>
+                                </li>
+
                                 <li {{ (Request::is('*admin/gerencias') ? 'class=active' : '') }}>
                                 <a href="{{ url ('admin/gerencias') }}"><i class="fa fa-globe fa-fw"></i> Gerencias</a>
                                 </li>

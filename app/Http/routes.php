@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::resource('centroscostos', 'CentroscostosController');
 	Route::resource('tiposempleadores', 'TiposempleadoresController');
 	Route::resource('estadoscontratos', 'EstadoscontratosController');
+	Route::resource('motivosretiros', 'MotivosretirosController');
 	Route::resource('contratos', 'ContratosController');
 	//upload tablas de TNL
 	//Route::get('upload', 'UploadController@index');
