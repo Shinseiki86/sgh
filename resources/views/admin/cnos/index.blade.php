@@ -1,4 +1,8 @@
 @extends('layouts.admin')
+@section('title', '/ Clasif. de Ocupaciones')
+@include('datatable')
+
+
 
 @section('page_heading')
 	<div class="row">
@@ -25,7 +29,7 @@
 		</div>
 	</div>
 
-	<table class="table table-striped">
+	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
 				<th class="hidden-xs col-md-1">@sortablelink('CNOS_ID', 'ID')</th>

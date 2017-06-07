@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title', '/ Tipos empleadores')
+@include('datatable')
+
 
 @section('page_heading')
 	<div class="row">
@@ -25,7 +28,7 @@
 		</div>
 	</div>
 
-	<table class="table table-striped">
+	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
 				<th class="col-md-5">@sortablelink('TIEM_DESCRIPCION', 'Descripción')</th>
