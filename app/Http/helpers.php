@@ -12,6 +12,7 @@
 
 
 use Illuminate\Support\Arr;
+use SGH\Prospecto;
 
 
 if (! function_exists('model_to_array')) {
@@ -35,7 +36,7 @@ if (! function_exists('model_to_array')) {
             $class = class_exists($class) ? $class : '\\SGH\\'.basename($class);
             $primaryKey = isset($primaryKey) ? $primaryKey : (new $class)->getKeyName();
             $models = $class::orderBy($primaryKey)
-                            ->get([ $primaryKey , $column ]);
+            ->get([ $primaryKey , $column ]);
         }
 
         $array = [];
@@ -44,11 +45,46 @@ if (! function_exists('model_to_array')) {
                 $array,
                 $model->$primaryKey,
                 $model->$column
-            );
+                );
         }
 
         return $array;
     }
+}
+
+if (! function_exists('nombre_empleado')) {
+    /**
+     * Implode an array with the key and value pair giving
+     * a glue, a separator between pairs and the array
+     * to implode.
+     * @param string $glue The glue between key and value
+     * @param string $separator Separator between pairs
+     * @param array $array The array to implode
+     * @return string The imploded array
+     */
+    function nombre_empleado($PROS_ID) {
+        
+        $prospecto = \SGH\Prospecto::findOrFail($PROS_ID);
+        
+        $nombre = "";
+
+        if($prospecto->PROS_SEGUNDONOMBRE != null && $prospecto->PROS_SEGUNDOAPELLIDO != null){
+            $nombre = $prospecto->PROS_PRIMERNOMBRE . " " . $prospecto->PROS_SEGUNDONOMBRE . " " .
+            $prospecto->PROS_PRIMERAPELLIDO . " " . $prospecto->PROS_SEGUNDOAPELLIDO;
+        }
+        if($prospecto->PROS_SEGUNDONOMBRE != null && $prospecto->PROS_SEGUNDOAPELLIDO == null){
+            $nombre = $prospecto->PROS_PRIMERNOMBRE . " " . $prospecto->PROS_SEGUNDONOMBRE . " " .
+            $prospecto->PROS_PRIMERAPELLIDO;
+        }
+        if($prospecto->PROS_SEGUNDONOMBRE == null && $prospecto->PROS_SEGUNDOAPELLIDO != null){
+            $nombre = $prospecto->PROS_PRIMERNOMBRE . " " .
+            $prospecto->PROS_PRIMERAPELLIDO . " " . $prospecto->PROS_SEGUNDOAPELLIDO;
+        }
+        
+        return strtoupper($nombre);
+
+    }
+
 }
 
 
@@ -139,7 +175,7 @@ if (! function_exists('flash_alert')) {
         //if(session()->has('alert-'.$type)){
         //    $msg = session()->get('alert-'.$type) + [$msg];
         //} else {
-            $msg = [$msg];
+        $msg = [$msg];
         //}
         session()->flash('alert-'.$type, $msg);
     }

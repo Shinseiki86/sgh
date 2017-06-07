@@ -30,15 +30,13 @@
 			<tr>
 				<th class="col-md-5">@sortablelink('EMPL_ID', 'Empleador')</th>
 				<th class="col-md-5">@sortablelink('TIEM_ID', 'Tipo Empleador')</th>
-				<th class="col-md-5">@sortablelink('CONT_ID', 'Codigo')</th>
 				<th class="col-md-5">@sortablelink('PROS_ID', 'Cedula')</th>
-				<th class="col-md-5">@sortablelink('PROS_PRIMERNOMBRE', 'Primer Nombre')</th>
-				<th class="col-md-5">@sortablelink('PROS_PRIMERAPELLIDO', 'Primer Apellido')</th>
+				<th class="col-md-5">@sortablelink('PROS_PRIMERNOMBRE', 'Nombre')</th>
+				<th class="col-md-5">@sortablelink('CONT_SALARIO', 'Salario')</th>
 				<th class="col-md-5">@sortablelink('CONT_CARGO', 'Cargo')</th>
 				<th class="col-md-5">@sortablelink('ESCO_ID', 'Estado')</th>
 				<th class="col-md-5">@sortablelink('CONT_FECHAINGRESO', 'Fecha Ingreso')</th>
 				<th class="col-md-5">@sortablelink('CONT_FECHARETIRO', 'Fecha Retiro')</th>
-				<th class="col-md-5">@sortablelink('CONT_CASOMEDICO', 'R.M')</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -46,20 +44,18 @@
 		<tbody>
 			@foreach($contratos as $contrato)
 			<tr>
-				<td>{{ $contrato -> empleador -> EMPL_DESCRIPCION }}</td>
+				<td>{{ $contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $contrato -> tipoempleador -> TIEM_DESCRIPCION }}</td>
-				<td>{{ $contrato -> CONT_ID }}</td>
 				<td>{{ $contrato -> prospecto -> PROS_CEDULA }}</td>
-				<td>{{ $contrato -> prospecto -> PROS_PRIMERNOMBRE }}</td>
-				<td>{{ $contrato -> prospecto -> PROS_PRIMERAPELLIDO }}</td>
+				<td>{{ nombre_empleado($contrato->PROS_ID) }}</td>
+				<td>{{ number_format($contrato->CONT_SALARIO, 0) }}</td>
 				<td>{{ $contrato -> cargo -> CARG_DESCRIPCION }}</td>
-				<td>{{ $contrato -> estadocontrato -> ESCO_DESCRIPCION }}</td>
+				<td>{{ $contrato -> estadocontrato -> ESCO_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> CONT_FECHAINGRESO }}</td>
 				<td>{{ $contrato -> CONT_FECHARETIRO }}</td>
-				<td>{{ $contrato -> CONT_CASOMEDICO }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('admin.contratos.edit', [ 'PROS_ID' => $prospecto->PROS_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('admin.contratos.edit', [ 'CONT_ID' => $contrato->CONT_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 
@@ -68,10 +64,10 @@
 						'name'=>'btn-delete',
 						'class'=>'btn btn-xs btn-danger',
 						'data-toggle'=>'modal',
-						'data-id'=> $prospecto->PROS_ID,
-						'data-modelo'=> str_upperspace(class_basename($prospecto)),
-						'data-descripcion'=> $prospecto->PROS_PRIMERNOMBRE,
-						'data-action'=>'contratos/'. $prospecto->PROS_ID,
+						'data-id'=> $contrato->PROS_ID,
+						'data-modelo'=> str_upperspace(class_basename($contrato)),
+						'data-descripcion'=> $contrato->CONT_ID . " - " . nombre_empleado($contrato->PROS_ID) ,
+						'data-action'=>'contratos/'. $contrato->PROS_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',

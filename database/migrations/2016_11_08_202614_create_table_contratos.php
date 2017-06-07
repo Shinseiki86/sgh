@@ -40,10 +40,14 @@ class CreateTableContratos extends Migration
             $table->integer('CONT_SALARIO')->unsigned()
                 ->comment('asignacion salarial del colaborador en el contrato');
 
-            $table->integer('CONT_VARIABLE')->unsigned()
+            $table->integer('CONT_VARIABLE')
+                ->nullable()
+                ->unsigned()
                 ->comment('promedio salarial variable del colaborador en el contrato');
 
-            $table->integer('CONT_RODAJE')->unsigned()
+            $table->integer('CONT_RODAJE')
+                ->nullable()
+                ->unsigned()
                 ->comment('rodaje del colaborador en el contrato');
 
             $table->integer('ESCO_ID')->unsigned()

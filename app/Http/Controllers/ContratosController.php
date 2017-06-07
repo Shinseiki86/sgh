@@ -117,8 +117,17 @@ class ContratosController extends Controller
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
+
+		if(!$request->has('MORE_ID')){	$request['MORE_ID'] = null; }
+		if(!$request->has('CONT_FECHARETIRO')){	$request['CONT_FECHARETIRO'] = null; }
+		if(!$request->has('CONT_VARIABLE')){	$request['CONT_VARIABLE'] = null; }
+		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
+		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
+
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
+
+		dump($request);
 
 		//Se crea el registro.
 		$contrato = Contrato::create($request->all());
@@ -138,10 +147,37 @@ class ContratosController extends Controller
 	public function edit($PROS_ID)
 	{
 		// Se obtiene el registro
-		$prospecto = Contrato::findOrFail($PROS_ID);
+		$contrato = Contrato::findOrFail($PROS_ID);
+
+		//Se crea un array con los empleadores
+		$arrEmpleadores = model_to_array(Empleadore::class, 'EMPL_RAZONSOCIAL');
+
+		//Se crea un array con los tipos de empleadores
+		$arrTiposempleadores = model_to_array(Tiposempleadore::class, 'TIEM_DESCRIPCION');
+
+		//Se crea un array con los centros de costos
+		$arrCentroscostos = model_to_array(Centroscosto::class, 'CECO_DESCRIPCION');
+
+		//Se crea un array con los estados de contrato
+		$arrEstadoscontrato = model_to_array(Estadoscontrato::class, 'ESCO_DESCRIPCION');
+
+		//Se crea un array con los tipos de contrato
+		$arrTiposcontrato = model_to_array(Tiposcontrato::class, 'TICO_DESCRIPCION');
+
+		//Se crea un array con las clases de contrato
+		$arrClasescontrato = model_to_array(Clasescontrato::class, 'CLCO_DESCRIPCION');
+
+		//Se crea un array con los prospectos disponibles
+		$arrProspectos = model_to_array(Prospecto::class, 'PROS_PRIMERNOMBRE');
+
+		//Se crea un array con los cargos disponibles
+		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
+
+		//Se crea un array con los motivos de retiro
+		$arrMotivosretiro = model_to_array(Motivosretiro::class, 'MORE_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/contratos/edit', compact('prospecto'));
+		return view('admin/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro'));
 	}
 
 
