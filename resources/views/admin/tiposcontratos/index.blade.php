@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title', '/ Tipos contratos')
+@include('datatable')
+
 
 @section('page_heading')
 	<div class="row">
@@ -25,7 +28,7 @@
 		</div>
 	</div>
 
-	<table class="table table-striped">
+	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
 				<th class="col-md-5">@sortablelink('TICO_DESCRIPCION', 'Descripción')</th>

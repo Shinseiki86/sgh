@@ -1,4 +1,6 @@
 @extends('layouts.admin')
+@section('title', '/ TNL - Incapacidades')
+@include('datatable')
 
 @section('page_heading')
 	<div class="row">
@@ -28,7 +30,7 @@
 		</div>
 	</div>
 
-	<table class="table table-striped">
+	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
 				<th class="hidden-xs col-md-1">@sortablelink('INCA_EMPRESA', 'EMPRESA')</th>
