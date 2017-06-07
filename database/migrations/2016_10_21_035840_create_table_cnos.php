@@ -22,6 +22,7 @@ class CreateTableCnos extends Migration
     {
         $commentTabla = 'CNOS (clasificación nacional de ocupaciones del SENA).';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
             $table->increments('CNOS_ID')

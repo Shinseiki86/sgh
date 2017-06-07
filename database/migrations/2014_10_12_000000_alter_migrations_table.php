@@ -15,6 +15,8 @@ class AlterMigrationsTable extends Migration
 		$nomTabla = 'migrations';
 		$commentTabla = 'Tabla creada por Laravel para controlar versiones de la base de datos. No se recomienda eliminar ni cambiar el nombre. Mas información: https://laravel.com/docs/5.2/migrations';
 
+        echo '- Modificando tabla '.$nomTabla.'...' . PHP_EOL;
+
 		if(env('DB_CONNECTION') == 'pgsql')
 			DB::statement("COMMENT ON TABLE ".env('DB_SCHEMA').".\"".$nomTabla."\" IS '".$commentTabla."'");
 		elseif(env('DB_CONNECTION') == 'mysql')

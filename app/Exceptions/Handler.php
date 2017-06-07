@@ -46,7 +46,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        //dd($e);
+        //dump( get_class($e) );
+        //dd( $e );
         //Si está en modo depuración:
         if (!env('APP_DEBUG', false)){
             //Si la ruta no existe, mostar view 404.
@@ -56,19 +57,33 @@ class Handler extends ExceptionHandler
                 return response(view('errors.404'), 404);
             }
 
+            //Si el error es 503 y está en modo mantenimiento
+            if( $e->getStatusCode() === 503 AND env('APP_MAINTENANCE_MODE', false) ){
+                return $this->returnResponseError($e);
+            }
+
             //Si hay una excepción de los siguientes tipos...
             if($e instanceof \ErrorException OR
                 $e instanceof \BadMethodCallException OR
-                $e instanceof \SoapFault OR
                 $e instanceof \PDOException OR
                 $e instanceof \Symfony\Component\Debug\Exception\FatalErrorException
             ){// ... entonces renderizar vista para error 500
-                $errorFile = last(explode('\\', $e->getFile()));
-                $errorMsg = $errorFile.' (Línea '.$e->getLine().'): '.$e->getMessage();
-                return response(view('errors.500', compact('errorMsg')), 500);
+                return $this->returnResponseError($e);
             }
         }
+
+
         return parent::render($request, $e);
+    }
+
+    private function returnResponseError(Exception $e)
+    {
+        $errorFile = last(explode('\\', $e->getFile()));
+        $errorMsg = $errorFile.' (Línea '.$e->getLine().'): '.$e->getMessage();
+        return response(
+                    view('errors.'.$e->getStatusCode(), compact('errorMsg')),
+                    $e->getStatusCode()
+                );
     }
 }
 

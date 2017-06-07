@@ -17,6 +17,7 @@ class CreateTableCargos extends Migration
     {
         $commentTabla = 'CARGOS: contiene los cargos desempeñados en la organización.';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('CARG_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla CARGO.');

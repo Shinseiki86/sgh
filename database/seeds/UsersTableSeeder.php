@@ -68,6 +68,17 @@ use SGH\Permission;
                 // or eloquent's original technique
                 //$admin->roles()->attach($rolAdmin->id); // id only
 
+                //Owner
+                $owner = User::create( [
+                    'name' => 'Owner',
+                    'username' => 'owner',
+                    'email' => 'diegoarmandocortes@outlook.com',
+                    'password'  => \Hash::make('Side102')
+                ]);
+                // role attach alias
+                $owner->attachRole($rolOwner);
+
+
                 //Editores
                 $editor1 = User::create( [
                     'name' => 'Editor 1 de prueba',

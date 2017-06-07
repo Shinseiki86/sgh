@@ -14,6 +14,7 @@ class CnosTableSeeder extends Seeder
 		$this->command->info('---Cnos table');
 		
 		$cno = new \SGH\Cno;
+        $cno->CNOS_CODIGO = '???';
         $cno->CNOS_DESCRIPCION = 'COORDINADORES';
         $cno->CNOS_OBSERVACIONES =  'CLASIFICACIÓN DE OCUPACIÓN DE COORDINADORES';
         $cno->CNOS_CREADOPOR =  'SYSTEM';

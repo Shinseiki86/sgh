@@ -3,13 +3,11 @@
 namespace SGH;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-//use Illuminate\Database\Eloquent\SoftDeletes;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
 	use EntrustUserTrait;
-	//use SoftDeletes;
 
 	//Nombre de la tabla en la base de datos
 	protected $table = 'USERS';
@@ -32,6 +30,7 @@ class User extends Authenticatable
 		'username',
 		'email',
 		'password',
+		'USER_MODIFICADOPOR',
 	];
 
 	/**
@@ -57,15 +56,37 @@ class User extends Authenticatable
      */
     protected function runSoftDelete()
     {
-        $query = $this->newQuery()->where($this->getKeyName(), $this->getKey());
+        $query = $this->newQueryWithoutScopes()->where($this->getKeyName(), $this->getKey());
 
         $this->{$this->getDeletedAtColumn()} = $time = $this->freshTimestamp();
 
+        $prefix = strtoupper(substr($this::CREATED_AT, 0, 4));
+        $deleted_by = $prefix.'_ELIMINADOPOR';
+
         $query->update([
            $this->getDeletedAtColumn() => $this->fromDateTime($time),
-           'deleted_by' => auth()->user()->username
-        	//'deleted_by' => (\Auth::id()) ?: null
+           $deleted_by => auth()->user()->username
         ]);
+
+        //$deleted_by => (\Auth::id()) ?: null
+    }
+
+
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function($model) {
+            $prefix = strtoupper(substr($model->getKeyName(), 0, 4));
+            $created_by = $prefix.'_CREADOPOR';
+            $model->$created_by = auth()->check() ? auth()->user()->username : 'SYSTEM';
+            return true;
+        });
+        static::updating(function($model) {
+            $prefix = strtoupper(substr($model->getKeyName(), 0, 4));
+            $updated_by = $prefix.'_MODIFICADOPOR';
+            $model->$updated_by = auth()->check() ? auth()->user()->username : 'SYSTEM';
+            return true;
+        });
     }
 
 }

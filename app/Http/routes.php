@@ -36,6 +36,9 @@ Route::group(['prefix' => '', 'middleware' => ['auth', 'role:admin']], function(
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
+	Route::get('/',  function(){
+		return view('layouts/admin');
+	});
 	Route::resource('departamentos', 'DepartamentoController');
 	Route::resource('ciudades', 'CiudadController');
 	Route::resource('cnos', 'CnosController');

@@ -11,6 +11,7 @@ class EntrustSetupTables extends Migration
      */
     public function up()
     {
+        echo '- Creando tablas ENTRUST...' . PHP_EOL;
         // Create table for storing roles
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
@@ -25,7 +26,7 @@ class EntrustSetupTables extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
 
-            $table->foreign('user_id')->references('USER_id')->on('users')
+            $table->foreign('user_id')->references('USER_id')->on('USERS')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -63,6 +64,7 @@ class EntrustSetupTables extends Migration
      */
     public function down()
     {
+        echo '- Borrando tablas ENTRUST...' . PHP_EOL;
         Schema::drop('permission_role');
         Schema::drop('permissions');
         Schema::drop('role_user');
