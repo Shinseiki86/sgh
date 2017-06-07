@@ -2,12 +2,10 @@
 
 namespace SGH;
 
-use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Empleadore extends ModelWithSoftDeletes
 {
-	use Sortable;
 	
 	//Nombre de la tabla en la base de datos
 	protected $table = 'EMPLEADORES';
@@ -24,10 +22,6 @@ class Empleadore extends ModelWithSoftDeletes
 		'EMPL_NOMBRECOMERCIAL',
 		'EMPL_DIRECCION',
 		'EMPL_OBSERVACIONES',
-	];
-
-	public $sortable = [
-		'EMPL_RAZONSOCIAL',
 	];
 
 }

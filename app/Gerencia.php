@@ -2,12 +2,10 @@
 
 namespace SGH;
 
-use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Gerencia extends ModelWithSoftDeletes
 {
-	use Sortable;
 	
 	//Nombre de la tabla en la base de datos
 	protected $table = 'GERENCIAS';
@@ -25,10 +23,6 @@ class Gerencia extends ModelWithSoftDeletes
 		'GERE_OBSERVACIONES',
 	];
 
-	public $sortable = [
-		'GERE_ID',
-		'GERE_DESCRIPCION',
-	];
 
 	public function empleador()
 	{

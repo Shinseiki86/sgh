@@ -2,12 +2,10 @@
 
 namespace SGH;
 
-use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Cno extends ModelWithSoftDeletes
 {
-	use Sortable;
 	
 	//Nombre de la tabla en la base de datos
 	protected $table = 'CNOS';
@@ -23,11 +21,6 @@ class Cno extends ModelWithSoftDeletes
 		'CNOS_CODIGO',
 		'CNOS_DESCRIPCION',
 		'CNOS_OBSERVACIONES',
-	];
-
-	public $sortable = [
-		'CNOS_CODIGO',
-		'DEPA_DESCRIPCION',
 	];
 
 	public function countCargosSortable($query, $direction)

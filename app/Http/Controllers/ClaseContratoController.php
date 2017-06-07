@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Centroscosto;
-use SGH\Gerencia;
+use SGH\Clasescontrato;
 
-class CentroscostosController extends Controller
+class ClasescontratosController extends Controller
 {
     //
 
@@ -31,10 +30,8 @@ class CentroscostosController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'CECO_CODIGO' => ['required', 'unique:CENTROSCOSTOS'], //forma para validar un campo unique
-			'CECO_DESCRIPCION' => ['required', 'max:100'],
-			'GERE_ID' => ['required'],
-			'CECO_OBSERVACIONES' => ['max:300'],
+			'CLCO_DESCRIPCION' => ['required', 'max:100'],
+			'CLCO_OBSERVACIONES' => ['max:300'],
 		]);
 
 		if ($validator->fails())
@@ -52,9 +49,9 @@ class CentroscostosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$centroscostos = Centroscosto::sortable('CECO_DESCRIPCION')->paginate();
+		$clasescontratos = ClaseContrato::all();
 		//Se carga la vista y se pasan los registros
-		return view('admin/centroscostos/index', compact('centroscostos'));
+		return view('admin/clasescontratos/index', compact('clasescontratos'));
 	}
 
 	/**
@@ -64,11 +61,7 @@ class CentroscostosController extends Controller
 	 */
 	public function create()
 	{
-		//Se crea un array con los CNOS disponibles
-		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
-
-		return view('admin/centroscostos/create', compact('arrGerencias'));
-		
+		return view('admin/clasescontratos/create');
 	}
 
 	/**
@@ -84,40 +77,37 @@ class CentroscostosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$centrocosto = Centroscosto::create($request->all());
+		$clasecontrato = Clasescontrato::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('admin.centroscostos.index');
+		flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' creado exitosamente.', 'success' );
+		return redirect()->route('admin.clasescontratos.index');
 	}
 
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $CECO_ID
+	 * @param  int  $CLCO_ID
 	 * @return Response
 	 */
-	public function edit($CECO_ID)
+	public function edit($CLCO_ID)
 	{
 		// Se obtiene el registro
-		$centrocosto = Centroscosto::findOrFail($CECO_ID);
-
-		//Se crea un array con los CNOS disponibles
-		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
+		$clasecontrato = Clasescontrato::findOrFail($CLCO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/centroscostos/edit', compact('centrocosto', 'arrGerencias'));
+		return view('admin/clasescontratos/edit', compact('clasecontrato'));
 	}
 
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $CECO_ID
+	 * @param  int  $CLCO_ID
 	 * @return Response
 	 */
-	public function update($CECO_ID)
+	public function update($CLCO_ID)
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
@@ -125,34 +115,34 @@ class CentroscostosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$centrocosto = Centroscosto::findOrFail($CECO_ID);
+		$cno = Clasescontrato::findOrFail($CLCO_ID);
 		//y se actualiza con los datos recibidos.
-		$centrocosto->update($request->all());
+		$cno->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('admin.centroscostos.index');
+		flash_alert( 'Clase de contrato '.$cno->CLCO_ID.' modificado exitosamente.', 'success' );
+		return redirect()->route('admin.clasescontratos.index');
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $CECO_ID
+	 * @param  int  $CLCO_ID
 	 * @return Response
 	 */
-	public function destroy($CECO_ID, $showMsg=True)
+	public function destroy($CLCO_ID, $showMsg=True)
 	{
-		$centrocosto = Centroscosto::findOrFail($CECO_ID);
+		$clasecontrato = Clasescontrato::findOrFail($CLCO_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($centrocosto->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Centro de costo '.$centrocosto->CECO_ID.' no se puede borrar.', 'danger' );
+		if($clasecontrato->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Tiposcontrato '.$clasecontrato->CLCO_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$centrocosto->delete();
-				flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' eliminado exitosamente.', 'success' );
+			$clasecontrato->delete();
+				flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' eliminado exitosamente.', 'success' );
 		}
 
-		return redirect()->route('admin.centroscostos.index');
+		return redirect()->route('admin.clasescontratos.index');
 	}
 	
 }

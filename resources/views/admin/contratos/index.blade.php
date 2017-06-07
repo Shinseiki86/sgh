@@ -18,28 +18,18 @@
 
 @section('section')
 
-	{{-- Paginate --}}
-	<div class="row">
-		<div id="btn-paginate" class="col-xs-12 col-md-8 col-lg-8">
-			{{ $contratos->appends(Request::all())->render() }}
-		</div>
-		<div class="col-xs-12 col-md-4 col-lg-4 text-right">
-			{{$contratos->total()}} registros encontrados.
-		</div>
-	</div>
-
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">@sortablelink('EMPL_ID', 'Empleador')</th>
-				<th class="col-md-5">@sortablelink('TIEM_ID', 'Tipo Empleador')</th>
-				<th class="col-md-5">@sortablelink('PROS_ID', 'Cedula')</th>
-				<th class="col-md-5">@sortablelink('PROS_PRIMERNOMBRE', 'Nombre')</th>
-				<th class="col-md-5">@sortablelink('CONT_SALARIO', 'Salario')</th>
-				<th class="col-md-5">@sortablelink('CONT_CARGO', 'Cargo')</th>
-				<th class="col-md-5">@sortablelink('ESCO_ID', 'Estado')</th>
-				<th class="col-md-5">@sortablelink('CONT_FECHAINGRESO', 'Fecha Ingreso')</th>
-				<th class="col-md-5">@sortablelink('CONT_FECHARETIRO', 'Fecha Retiro')</th>
+				<th class="col-md-5">Empleador</th>
+				<th class="col-md-5">Tipo Empleador</th>
+				<th class="col-md-5">Cedula</th>
+				<th class="col-md-5">Nombre</th>
+				<th class="col-md-5">Salario</th>
+				<th class="col-md-5">Cargo</th>
+				<th class="col-md-5">Estado</th>
+				<th class="col-md-5">Fecha Ingreso</th>
+				<th class="col-md-5">Fecha Retiro</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>

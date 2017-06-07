@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Clasescontrato;
+use SGH\Cargo;
+use SGH\Cno;
 
-class ClasescontratosController extends Controller
+class CargosController extends Controller
 {
     //
 
@@ -30,8 +31,9 @@ class ClasescontratosController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'CLCO_DESCRIPCION' => ['required', 'max:100'],
-			'CLCO_OBSERVACIONES' => ['max:300'],
+			'CARG_DESCRIPCION' => ['required', 'max:100'],
+			'CNOS_ID' => ['required'],
+			'CARG_OBSERVACIONES' => ['max:300'],
 		]);
 
 		if ($validator->fails())
@@ -49,9 +51,9 @@ class ClasescontratosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$clasescontratos = Clasescontrato::sortable('CLCO_ID')->paginate();
+		$cargos = Cargo::all();
 		//Se carga la vista y se pasan los registros
-		return view('admin/clasescontratos/index', compact('clasescontratos'));
+		return view('admin/cargos/index', compact('cargos'));
 	}
 
 	/**
@@ -61,7 +63,11 @@ class ClasescontratosController extends Controller
 	 */
 	public function create()
 	{
-		return view('admin/clasescontratos/create');
+		//Se crea un array con los CNOS disponibles
+		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
+
+		return view('admin/cargos/create', compact('arrCnos'));
+		
 	}
 
 	/**
@@ -77,37 +83,40 @@ class ClasescontratosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$clasecontrato = Clasescontrato::create($request->all());
+		$cargo = Cargo::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('admin.clasescontratos.index');
+		flash_alert( 'Cargo '.$cargo->CARG_ID.' creado exitosamente.', 'success' );
+		return redirect()->route('admin.cargos.index');
 	}
 
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $CLCO_ID
+	 * @param  int  $CARG_ID
 	 * @return Response
 	 */
-	public function edit($CLCO_ID)
+	public function edit($CARG_ID)
 	{
 		// Se obtiene el registro
-		$clasecontrato = Clasescontrato::findOrFail($CLCO_ID);
+		$cargo = Cargo::findOrFail($CARG_ID);
+
+		//Se crea un array con los CNOS disponibles
+		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/clasescontratos/edit', compact('clasecontrato'));
+		return view('admin/cargos/edit', compact('cargo', 'arrCnos'));
 	}
 
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $CLCO_ID
+	 * @param  int  $CARG_ID
 	 * @return Response
 	 */
-	public function update($CLCO_ID)
+	public function update($CARG_ID)
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
@@ -115,34 +124,34 @@ class ClasescontratosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$cno = Clasescontrato::findOrFail($CLCO_ID);
+		$cargo = Cargo::findOrFail($CARG_ID);
 		//y se actualiza con los datos recibidos.
-		$cno->update($request->all());
+		$cargo->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Clase de contrato '.$cno->CLCO_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('admin.clasescontratos.index');
+		flash_alert( 'Cargo '.$cargo->CARG_ID.' modificado exitosamente.', 'success' );
+		return redirect()->route('admin.cargos.index');
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $CLCO_ID
+	 * @param  int  $CARG_ID
 	 * @return Response
 	 */
-	public function destroy($CLCO_ID, $showMsg=True)
+	public function destroy($CARG_ID, $showMsg=True)
 	{
-		$clasecontrato = Clasescontrato::findOrFail($CLCO_ID);
+		$cargo = Cargo::findOrFail($CARG_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($clasecontrato->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Tiposcontrato '.$clasecontrato->CLCO_ID.' no se puede borrar.', 'danger' );
+		if($cargo->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Cargo '.$cargo->CARG_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$clasecontrato->delete();
-				flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' eliminado exitosamente.', 'success' );
+			$cargo->delete();
+				flash_alert( 'Cargo '.$cargo->CARG_ID.' eliminado exitosamente.', 'success' );
 		}
 
-		return redirect()->route('admin.clasescontratos.index');
+		return redirect()->route('admin.cargos.index');
 	}
 	
 }

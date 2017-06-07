@@ -1,29 +1,23 @@
 @section('scripts')
 	<script type="text/javascript">
-		//Carga de datos a mensajes modales para eliminar y clonar registros
-		$(function () {
-			$('#pregModalDelete').on('show.bs.modal', function (event) {
+		//Carga de datos a mensajes modales para eliminar y clonar registros	
+		$('#tabla').on('click', '.btn-delete', function(event){
+			var button = $(event.currentTarget); // Button that triggered the modal
+			var modal = $('#pregModalDelete');
+			
+			var id = button.data('id'); // Se obtiene valor en data-id
+			modal.find('.id').text(id); //Se asigna en la etiqueta con clase id
 
-				tooltips = $('[data-tooltip="tooltip"]');
-				if(tooltips.length > 0)
-					tooltips.tooltip('hide');
+			var modelo = button.data('modelo');
+			modal.find('.modelo').html(modelo);
 
-				var button = $(event.relatedTarget); // Button that triggered the modal
-				var modal = $(this);
-				
-				var id = button.data('id'); // Se obtiene valor en data-id
-				modal.find('.id').text(id); //Se asigna en la etiqueta con clase id
+			var descripcion = button.data('descripcion');
+			modal.find('.descripcion').html(descripcion);
 
-				var modelo = button.data('modelo');
-				modal.find('.modelo').html(modelo);
-
-				var descripcion = button.data('descripcion');
-				modal.find('.descripcion').html(descripcion);
-
-				var urlForm = button.data('action'); // Se cambia acción del formulario.
-				$('.frmModal').attr('action', urlForm);
-			});
+			var urlForm = button.data('action'); // Se cambia acción del formulario.
+			$('.frmModal').attr('action', urlForm);
 		});
+
 	</script>
 @parent
 @endsection

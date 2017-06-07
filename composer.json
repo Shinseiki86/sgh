@@ -11,8 +11,7 @@
         "maatwebsite/excel": "^2.1",
         "barryvdh/laravel-dompdf": "^0.7.1",
         "chumper/zipper": "^1.0",
-        "zizaco/entrust": "5.2.x-dev",
-        "kyslik/column-sortable": "5.2.*"
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

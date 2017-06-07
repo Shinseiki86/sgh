@@ -47,7 +47,7 @@ class CiudadController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$ciudades = Ciudad::sortable('CIUD_CODIGO')->paginate(10);
+		$ciudades = Ciudad::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/ciudades/index', compact('ciudades'));
 	}

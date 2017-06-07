@@ -201,6 +201,9 @@
             </div>
             <!-- /#page-wrapper -->
         </div>
+           <div class="text-right" style="color: #606060;padding-right:10px;">
+                <small>Powered by <i>diheke</i></small>
+            </div>
     </div>
 @stop
 

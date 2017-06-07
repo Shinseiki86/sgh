@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Tiposcontrato;
+use SGH\TipoContrato;
 
-class TiposcontratosController extends Controller
+class TiposContratosController extends Controller
 {
     //
 
@@ -49,7 +49,7 @@ class TiposcontratosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$tiposcontratos = Tiposcontrato::sortable('TICO_CODIGO')->paginate();
+		$tiposcontratos = TipoContrato::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/tiposcontratos/index', compact('tiposcontratos'));
 	}
@@ -77,7 +77,7 @@ class TiposcontratosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$cno = Tiposcontrato::create($request->all());
+		$cno = TipoContrato::create($request->all());
 
 		// redirecciona al index de controlador
 		flash_alert( 'Tipo de contrato '.$cno->TICO_ID.' creado exitosamente.', 'success' );
@@ -94,7 +94,7 @@ class TiposcontratosController extends Controller
 	public function edit($TICO_ID)
 	{
 		// Se obtiene el registro
-		$tiposcontrato = Tiposcontrato::findOrFail($TICO_ID);
+		$tiposcontrato = TipoContrato::findOrFail($TICO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/tiposcontratos/edit', compact('tiposcontrato'));
@@ -115,7 +115,7 @@ class TiposcontratosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$cno = Tiposcontrato::findOrFail($TICO_ID);
+		$cno = TipoContrato::findOrFail($TICO_ID);
 		//y se actualiza con los datos recibidos.
 		$cno->update($request->all());
 
@@ -132,7 +132,7 @@ class TiposcontratosController extends Controller
 	 */
 	public function destroy($TICO_ID, $showMsg=True)
 	{
-		$cno = Tiposcontrato::findOrFail($TICO_ID);
+		$cno = TipoContrato::findOrFail($TICO_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($cno->TIPR_creadopor == 'SYSTEM'){

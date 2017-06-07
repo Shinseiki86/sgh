@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Cargo;
-use SGH\Cno;
+use SGH\Centroscosto;
+use SGH\Gerencia;
 
-class CargosController extends Controller
+class CentroscostosController extends Controller
 {
     //
 
@@ -31,9 +31,10 @@ class CargosController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'CARG_DESCRIPCION' => ['required', 'max:100'],
-			'CNOS_ID' => ['required'],
-			'CARG_OBSERVACIONES' => ['max:300'],
+			'CECO_CODIGO' => ['required', 'unique:CENTROSCOSTOS'], //forma para validar un campo unique
+			'CECO_DESCRIPCION' => ['required', 'max:100'],
+			'GERE_ID' => ['required'],
+			'CECO_OBSERVACIONES' => ['max:300'],
 		]);
 
 		if ($validator->fails())
@@ -51,9 +52,9 @@ class CargosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$cargos = Cargo::sortable('CARG_DESCRIPCION')->paginate();
+		$centroscostos = Centroscosto::all();
 		//Se carga la vista y se pasan los registros
-		return view('admin/cargos/index', compact('cargos'));
+		return view('admin/centroscostos/index', compact('centroscostos'));
 	}
 
 	/**
@@ -64,9 +65,9 @@ class CargosController extends Controller
 	public function create()
 	{
 		//Se crea un array con los CNOS disponibles
-		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 
-		return view('admin/cargos/create', compact('arrCnos'));
+		return view('admin/centroscostos/create', compact('arrGerencias'));
 		
 	}
 
@@ -83,40 +84,40 @@ class CargosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$cargo = Cargo::create($request->all());
+		$centrocosto = Centroscosto::create($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Cargo '.$cargo->CARG_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('admin.cargos.index');
+		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' creado exitosamente.', 'success' );
+		return redirect()->route('admin.centroscostos.index');
 	}
 
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $CARG_ID
+	 * @param  int  $CECO_ID
 	 * @return Response
 	 */
-	public function edit($CARG_ID)
+	public function edit($CECO_ID)
 	{
 		// Se obtiene el registro
-		$cargo = Cargo::findOrFail($CARG_ID);
+		$centrocosto = Centroscosto::findOrFail($CECO_ID);
 
 		//Se crea un array con los CNOS disponibles
-		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/cargos/edit', compact('cargo', 'arrCnos'));
+		return view('admin/centroscostos/edit', compact('centrocosto', 'arrGerencias'));
 	}
 
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $CARG_ID
+	 * @param  int  $CECO_ID
 	 * @return Response
 	 */
-	public function update($CARG_ID)
+	public function update($CECO_ID)
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
@@ -124,34 +125,34 @@ class CargosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$cargo = Cargo::findOrFail($CARG_ID);
+		$centrocosto = Centroscosto::findOrFail($CECO_ID);
 		//y se actualiza con los datos recibidos.
-		$cargo->update($request->all());
+		$centrocosto->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Cargo '.$cargo->CARG_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('admin.cargos.index');
+		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' modificado exitosamente.', 'success' );
+		return redirect()->route('admin.centroscostos.index');
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $CARG_ID
+	 * @param  int  $CECO_ID
 	 * @return Response
 	 */
-	public function destroy($CARG_ID, $showMsg=True)
+	public function destroy($CECO_ID, $showMsg=True)
 	{
-		$cargo = Cargo::findOrFail($CARG_ID);
+		$centrocosto = Centroscosto::findOrFail($CECO_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($cargo->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Cargo '.$cargo->CARG_ID.' no se puede borrar.', 'danger' );
+		if($centrocosto->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Centro de costo '.$centrocosto->CECO_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$cargo->delete();
-				flash_alert( 'Cargo '.$cargo->CARG_ID.' eliminado exitosamente.', 'success' );
+			$centrocosto->delete();
+				flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' eliminado exitosamente.', 'success' );
 		}
 
-		return redirect()->route('admin.cargos.index');
+		return redirect()->route('admin.centroscostos.index');
 	}
 	
 }

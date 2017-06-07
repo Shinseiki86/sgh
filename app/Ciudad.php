@@ -2,12 +2,10 @@
 
 namespace SGH;
 
-use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Ciudad extends ModelWithSoftDeletes
 {
-	use Sortable;
 	
 	//Nombre de la tabla en la base de datos
 	protected $table = 'CIUDADES';
@@ -23,11 +21,6 @@ class Ciudad extends ModelWithSoftDeletes
 		'CIUD_CODIGO',
 		'CIUD_DESCRIPCION',
 		'DEPA_ID',
-	];
-
-	public $sortable = [
-		'DEPA_CODIGO',
-		'DEPA_DESCRIPCION',
 	];
 
 	public function departamento()

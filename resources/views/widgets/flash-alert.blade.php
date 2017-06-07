@@ -84,7 +84,7 @@
 		//Se cierra la alerta a los 10 segundos.
 		setTimeout(function () {
         	$('.alert-flash').slideUp(500, function(){
-			    $(this).alert('close');
+			    //$(this).alert('close');
 			});
 		}, 10*(1000));
 

@@ -2,12 +2,10 @@
 
 namespace SGH;
 
-use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Centroscosto extends ModelWithSoftDeletes
 {
-	use Sortable;
 	
 	//Nombre de la tabla en la base de datos
 	protected $table = 'CENTROSCOSTOS';
@@ -24,11 +22,6 @@ class Centroscosto extends ModelWithSoftDeletes
 		'CECO_DESCRIPCION',
 		'GERE_ID',
 		'CECO_OBSERVACIONES',
-	];
-
-	public $sortable = [
-		'CECO_ID',
-		'CECO_DESCRIPCION',
 	];
 
 	public function gerencia()

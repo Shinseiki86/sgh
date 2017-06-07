@@ -63,7 +63,7 @@ class ContratosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$contratos = Contrato::sortable('PROS_ID')->paginate();
+		$contratos = Contrato::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/contratos/index', compact('contratos'));
 	}

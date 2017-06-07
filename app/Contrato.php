@@ -2,12 +2,10 @@
 
 namespace SGH;
 
-use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Contrato extends ModelWithSoftDeletes
 {
-	use Sortable;
 	
 	//Nombre de la tabla en la base de datos
 	protected $table = 'CONTRATOS';
@@ -36,11 +34,6 @@ class Contrato extends ModelWithSoftDeletes
 		'TIEM_ID',
 		'CECO_ID',
 		'CONT_OBSERVACIONES',
-	];
-
-	public $sortable = [
-		'PROS_ID',
-		'CONT_FECHAINGRESO'
 	];
 
 	public function prospecto()

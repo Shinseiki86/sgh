@@ -46,7 +46,7 @@ class DepartamentoController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$departamentos = Departamento::sortable('DEPA_CODIGO')->paginate();
+		$departamentos = Departamento::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/departamentos/index', compact('departamentos'));
 	}

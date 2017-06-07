@@ -2,13 +2,10 @@
 
 namespace SGH;
 
-use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Temporale extends ModelWithSoftDeletes
 {
-	use Sortable;
-	
 	//Nombre de la tabla en la base de datos
 	protected $table = 'TEMPORALES';
 	protected $primaryKey = 'TEMP_ID';
@@ -24,10 +21,6 @@ class Temporale extends ModelWithSoftDeletes
 		'TEMP_NOMBRECOMERCIAL',
 		'TEMP_DIRECCION',
 		'TEMP_OBSERVACIONES',
-	];
-
-	public $sortable = [
-		'TEMP_RAZONSOCIAL',
 	];
 
 }

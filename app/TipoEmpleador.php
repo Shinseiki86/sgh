@@ -2,12 +2,10 @@
 
 namespace SGH;
 
-use Kyslik\ColumnSortable\Sortable;
 use SGH\ModelWithSoftDeletes;
 
 class Tiposempleadore extends ModelWithSoftDeletes
 {
-	use Sortable;
 	
 	//Nombre de la tabla en la base de datos
 	protected $table = 'TIPOSEMPLEADORES';
@@ -22,10 +20,6 @@ class Tiposempleadore extends ModelWithSoftDeletes
 	protected $fillable = [
 		'TIEM_DESCRIPCION',
 		'TIEM_OBSERVACIONES',
-	];
-
-	public $sortable = [
-		'TIEM_DESCRIPCION',
 	];
 
 }

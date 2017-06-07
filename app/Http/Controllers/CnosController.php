@@ -49,7 +49,7 @@ class CnosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$cnos = Cno::sortable('CNOS_CODIGO')->paginate();
+		$cnos = Cno::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/cnos/index', compact('cnos'));
 	}

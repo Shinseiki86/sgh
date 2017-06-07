@@ -24,7 +24,7 @@
 	{{--datatable--}}
 
 	@yield('head')
-	}
+
 </head>
 <body>
 	@yield('body')
@@ -50,10 +50,5 @@
 	{{--datatable--}}
 	@yield('scripts')
 
-	<footer class="footer navbar-default navbar-fixed-bottom">
-		<div class="text-right" style="color: #606060;padding-right:10px;">
-			<small>Powered by <i>diheke</i></small>
-		</div>
-	</footer>
 </body>
 </html>
