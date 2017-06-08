@@ -147,33 +147,6 @@
 				</div>
 			</div>
 
-			<div class="form-group{{ $errors->has('CONT_FECHARETIRO') ? ' has-error' : '' }}">
-				{{ Form::label('CONT_FECHARETIRO', 'Fecha de Retiro',  [ 'class' => 'col-md-2 control-label' ]) }}
-				<div class="col-md-6">
-					{{ Form::date('CONT_FECHARETIRO', old('CONT_FECHARETIRO'), [ 'class' => 'form-control', 'maxlength' => '100' ]) }}
-					@if ($errors->has('CONT_FECHARETIRO'))
-					<span class="help-block">
-						<strong>{{ $errors->first('CONT_FECHARETIRO') }}</strong>
-					</span>
-					@endif
-				</div>
-			</div>
-
-			<div class="form-group{{ $errors->has('MORE_ID') ? ' has-error' : null }}">
-				<label for="MORE_ID" class="col-md-2 control-label">Motivo de Retiro</label>
-				<div class="col-md-6">
-					{{ Form::select('MORE_ID', [null => 'Seleccione un motivo de retiro'] + $arrMotivosretiro , old('MORE_ID'), [
-					'class' => 'form-control chosen-select'
-					]) }}
-
-					@if ($errors->has('MORE_ID'))
-					<span class="help-block">
-						<strong>{{ $errors->first('MORE_ID') }}</strong>
-					</span>
-					@endif
-				</div>
-			</div>
-
 			<div class="form-group{{ $errors->has('CONT_SALARIO') ? ' has-error' : '' }}">
 				{{ Form::label('CONT_SALARIO', 'Salario',  [ 'class' => 'col-md-2 control-label' ]) }}
 				<div class="col-md-6">
