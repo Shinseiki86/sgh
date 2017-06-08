@@ -27,7 +27,7 @@ class Gerencia extends ModelWithSoftDeletes
 	public function empleador()
 	{
 		$foreingKey = 'EMPL_ID';
-		return $this->belongsTo(Empleadore::class, $foreingKey);
+		return $this->belongsTo(Empleador::class, $foreingKey);
 	}
 
 }

@@ -22,7 +22,8 @@
 		<thead>
 			<tr>
 				<th class="col-md-5">Empleador</th>
-				<th class="col-md-5">Tipo Empleador</th>
+				<th class="col-md-5">Tipo Contrato</th>
+				<th class="col-md-5">Clase de Contrato</th>
 				<th class="col-md-5">Cedula</th>
 				<th class="col-md-5">Nombre</th>
 				<th class="col-md-5">Salario</th>
@@ -30,6 +31,13 @@
 				<th class="col-md-5">Estado</th>
 				<th class="col-md-5">Fecha Ingreso</th>
 				<th class="col-md-5">Fecha Retiro</th>
+				<th class="col-md-5">Motivo Retiro</th>
+				<th class="col-md-5">Variable</th>
+				<th class="col-md-5">Rodaje</th>
+				<th class="col-md-5">Tipo Empleador</th>
+				<th class="col-md-5">Centro Costo</th>
+				<th class="col-md-5">Caso Médico</th>
+				<th class="col-md-5">Observaciones</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -38,7 +46,8 @@
 			@foreach($contratos as $contrato)
 			<tr>
 				<td>{{ $contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
-				<td>{{ $contrato -> tipoempleador -> TIEM_DESCRIPCION }}</td>
+				<td>{{ $contrato -> tipocontrato -> TICO_DESCRIPCION }}</td>
+				<td>{{ $contrato -> clasecontrato -> CLCO_DESCRIPCION }}</td>
 				<td>{{ $contrato -> prospecto -> PROS_CEDULA }}</td>
 				<td>{{ nombre_empleado($contrato->PROS_ID) }}</td>
 				<td>{{ number_format($contrato->CONT_SALARIO, 0) }}</td>
@@ -46,6 +55,13 @@
 				<td>{{ $contrato -> estadocontrato -> ESCO_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> CONT_FECHAINGRESO }}</td>
 				<td>{{ $contrato -> CONT_FECHARETIRO }}</td>
+				<td>{{ $contrato-> motivoretiro -> MORE_DESCRIPCION or null }}</td>
+				<td>{{ $contrato -> CONT_VARIABLE }}</td>
+				<td>{{ $contrato -> CONT_RODAJE }}</td>
+				<td>{{ $contrato -> tipoempleador -> TIEM_DESCRIPCION  }}</td>
+				<td>{{ $contrato -> centrocosto -> CECO_DESCRIPCION  }}</td>
+				<td>{{ $contrato -> CONT_CASOMEDICO }}</td>
+				<td>{{ $contrato -> CONT_OBSERVACIONES }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
 					<a class="btn btn-small btn-info btn-xs" href="{{ route('admin.contratos.edit', [ 'CONT_ID' => $contrato->CONT_ID ] ) }}" data-tooltip="tooltip" title="Editar">

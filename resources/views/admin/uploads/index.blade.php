@@ -22,12 +22,8 @@
 
 	{{-- Paginate --}}
 	<div class="row">
-		<div id="btn-paginate" class="col-xs-12 col-md-8 col-lg-8">
-			{{ $incaps->appends(Request::all())->render() }}
-		</div>
-		<div class="col-xs-12 col-md-4 col-lg-4 text-right">
-			{{$incaps->total()}} registros encontrados.
-		</div>
+		
+		
 	</div>
 
 	<table class="table table-striped" id="tabla">

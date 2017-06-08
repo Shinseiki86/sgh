@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Estadoscontrato;
+use SGH\Estadocontrato;
 
 class EstadoContratoController extends Controller
 {
