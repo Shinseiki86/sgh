@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Temporale;
+use SGH\Temporal;
 
-class TemporalesController extends Controller
+class TemporalController extends Controller
 {
     //
 
@@ -51,7 +51,7 @@ class TemporalesController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$temporales = Temporale::sortable('TEMP_NOMBRECOMERCIAL')->paginate();
+		$temporales = Temporal::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/temporales/index', compact('temporales'));
 	}
@@ -79,7 +79,7 @@ class TemporalesController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$temporal = Temporale::create($request->all());
+		$temporal = Temporal::create($request->all());
 
 		// redirecciona al index de controlador
 		flash_alert( 'Temporal '.$temporal->TEMP_ID.' creada exitosamente.', 'success' );
@@ -96,7 +96,7 @@ class TemporalesController extends Controller
 	public function edit($TEMP_ID)
 	{
 		// Se obtiene el registro
-		$temporal = Temporale::findOrFail($TEMP_ID);
+		$temporal = Temporal::findOrFail($TEMP_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/temporales/edit', compact('temporal'));
@@ -117,7 +117,7 @@ class TemporalesController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$temporal = Temporale::findOrFail($TEMP_ID);
+		$temporal = Temporal::findOrFail($TEMP_ID);
 		//y se actualiza con los datos recibidos.
 		$temporal->update($request->all());
 
@@ -134,7 +134,7 @@ class TemporalesController extends Controller
 	 */
 	public function destroy($TEMP_ID, $showMsg=True)
 	{
-		$temporal = Temporale::findOrFail($TEMP_ID);
+		$temporal = Temporal::findOrFail($TEMP_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($temporal->TIPR_creadopor == 'SYSTEM'){

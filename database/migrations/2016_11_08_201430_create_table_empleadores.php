@@ -19,6 +19,7 @@ class CreateTableEmpleadores extends Migration
     {
         $commentTabla = 'EMPLEADORES: contiene los empleadores de la organización (empresas)';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('EMPL_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla empleadores.');
@@ -64,6 +65,7 @@ class CreateTableEmpleadores extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

@@ -11,7 +11,7 @@ use Illuminate\Routing\Redirector;
 
 use SGH\Prospecto;
 
-class ProspectosController extends Controller
+class ProspectoController extends Controller
 {
     //
 
@@ -58,7 +58,7 @@ class ProspectosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$prospectos = Prospecto::sortable('PROS_CEDULA')->paginate();
+		$prospectos = Prospecto::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/prospectos/index', compact('prospectos'));
 	}

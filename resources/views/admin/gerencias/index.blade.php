@@ -17,23 +17,13 @@
 
 @section('section')
 
-	{{-- Paginate --}}
-	<div class="row">
-		<div id="btn-paginate" class="col-xs-12 col-md-8 col-lg-8">
-			{{ $gerencias->appends(Request::all())->render() }}
-		</div>
-		<div class="col-xs-12 col-md-4 col-lg-4 text-right">
-			{{$gerencias->total()}} registros encontrados.
-		</div>
-	</div>
-
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">@sortablelink('EMPL_ID', 'Empresa')</th>
-				<th class="col-md-5">@sortablelink('GERE_DESCRIPCION', 'Descripción')</th>
-				<th class="col-md-5">@sortablelink('GERE_OBSERVACIONES', 'Observaciones')</th>
-				<th class="hidden-xs col-md-2">@sortablelink('GERE_CREADOPOR', 'Creado por')</th>
+				<th class="col-md-5">Empresa</th>
+				<th class="col-md-5">Descripción</th>
+				<th class="col-md-5">Observaciones</th>
+				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -53,8 +43,7 @@
 
 					<!-- carga botón de borrar -->
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'name'=>'btn-delete',
-						'class'=>'btn btn-xs btn-danger',
+						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
 						'data-id'=> $gerencia->GERE_ID,
 						'data-modelo'=> str_upperspace(class_basename($gerencia)),

@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Clasescontrato;
+use SGH\ClaseContrato;
 
-class ClasescontratosController extends Controller
+class ClaseContratoController extends Controller
 {
     //
 
@@ -77,7 +77,7 @@ class ClasescontratosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$clasecontrato = Clasescontrato::create($request->all());
+		$clasecontrato = ClaseContrato::create($request->all());
 
 		// redirecciona al index de controlador
 		flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' creado exitosamente.', 'success' );
@@ -94,7 +94,7 @@ class ClasescontratosController extends Controller
 	public function edit($CLCO_ID)
 	{
 		// Se obtiene el registro
-		$clasecontrato = Clasescontrato::findOrFail($CLCO_ID);
+		$clasecontrato = ClaseContrato::findOrFail($CLCO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/clasescontratos/edit', compact('clasecontrato'));
@@ -115,7 +115,7 @@ class ClasescontratosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$cno = Clasescontrato::findOrFail($CLCO_ID);
+		$cno = ClaseContrato::findOrFail($CLCO_ID);
 		//y se actualiza con los datos recibidos.
 		$cno->update($request->all());
 
@@ -132,7 +132,7 @@ class ClasescontratosController extends Controller
 	 */
 	public function destroy($CLCO_ID, $showMsg=True)
 	{
-		$clasecontrato = Clasescontrato::findOrFail($CLCO_ID);
+		$clasecontrato = ClaseContrato::findOrFail($CLCO_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($clasecontrato->TIPR_creadopor == 'SYSTEM'){

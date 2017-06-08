@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Tiposempleadore;
+use SGH\TipoEmpleador;
 
-class TiposempleadoresController extends Controller
+class TipoEmpleadorController extends Controller
 {
     //
 
@@ -49,7 +49,7 @@ class TiposempleadoresController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$tiposempleadores = Tiposempleadore::sortable('TIEM_CODIGO')->paginate();
+		$tiposempleadores = TipoEmpleador::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/tiposempleadores/index', compact('tiposempleadores'));
 	}
@@ -77,7 +77,7 @@ class TiposempleadoresController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$cno = Tiposempleadore::create($request->all());
+		$cno = TipoEmpleador::create($request->all());
 
 		// redirecciona al index de controlador
 		flash_alert( 'Tipo de empleador '.$cno->TIEM_ID.' creado exitosamente.', 'success' );
@@ -94,7 +94,7 @@ class TiposempleadoresController extends Controller
 	public function edit($TIEM_ID)
 	{
 		// Se obtiene el registro
-		$tipoempleador = Tiposempleadore::findOrFail($TIEM_ID);
+		$tipoempleador = TipoEmpleador::findOrFail($TIEM_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/tiposempleadores/edit', compact('tipoempleador'));
@@ -115,7 +115,7 @@ class TiposempleadoresController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$cno = Tiposempleadore::findOrFail($TIEM_ID);
+		$cno = TipoEmpleador::findOrFail($TIEM_ID);
 		//y se actualiza con los datos recibidos.
 		$cno->update($request->all());
 
@@ -132,7 +132,7 @@ class TiposempleadoresController extends Controller
 	 */
 	public function destroy($TIEM_ID, $showMsg=True)
 	{
-		$cno = Tiposempleadore::findOrFail($TIEM_ID);
+		$cno = TipoEmpleador::findOrFail($TIEM_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($cno->TIPR_creadopor == 'SYSTEM'){

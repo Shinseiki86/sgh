@@ -12,7 +12,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Contrato;
 use SGH\Cargo;
 
-class ContratosController extends Controller
+class ContratoController extends Controller
 {
     //
 
@@ -77,22 +77,22 @@ class ContratosController extends Controller
 	{
 
 		//Se crea un array con los empleadores
-		$arrEmpleadores = model_to_array(Empleadore::class, 'EMPL_RAZONSOCIAL');
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
 		//Se crea un array con los tipos de empleadores
-		$arrTiposempleadores = model_to_array(Tiposempleadore::class, 'TIEM_DESCRIPCION');
+		$arrTiposempleadores = model_to_array(TipoEmpleador::class, 'TIEM_DESCRIPCION');
 
 		//Se crea un array con los centros de costos
-		$arrCentroscostos = model_to_array(Centroscosto::class, 'CECO_DESCRIPCION');
+		$arrCentroscostos = model_to_array(CentroCosto::class, 'CECO_DESCRIPCION');
 
 		//Se crea un array con los estados de contrato
-		$arrEstadoscontrato = model_to_array(Estadoscontrato::class, 'ESCO_DESCRIPCION');
+		$arrEstadoscontrato = model_to_array(EstadoContrato::class, 'ESCO_DESCRIPCION');
 
 		//Se crea un array con los tipos de contrato
-		$arrTiposcontrato = model_to_array(Tiposcontrato::class, 'TICO_DESCRIPCION');
+		$arrTiposcontrato = model_to_array(TipoContrato::class, 'TICO_DESCRIPCION');
 
 		//Se crea un array con las clases de contrato
-		$arrClasescontrato = model_to_array(Clasescontrato::class, 'CLCO_DESCRIPCION');
+		$arrClasescontrato = model_to_array(ClaseContrato::class, 'CLCO_DESCRIPCION');
 
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, 'PROS_PRIMERNOMBRE');
@@ -101,7 +101,7 @@ class ContratosController extends Controller
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
 		//Se crea un array con los motivos de retiro
-		$arrMotivosretiro = model_to_array(Motivosretiro::class, 'MORE_DESCRIPCION');
+		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
 
 
@@ -150,22 +150,22 @@ class ContratosController extends Controller
 		$contrato = Contrato::findOrFail($PROS_ID);
 
 		//Se crea un array con los empleadores
-		$arrEmpleadores = model_to_array(Empleadore::class, 'EMPL_RAZONSOCIAL');
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
 		//Se crea un array con los tipos de empleadores
-		$arrTiposempleadores = model_to_array(Tiposempleadore::class, 'TIEM_DESCRIPCION');
+		$arrTiposempleadores = model_to_array(TipoEmpleador::class, 'TIEM_DESCRIPCION');
 
 		//Se crea un array con los centros de costos
-		$arrCentroscostos = model_to_array(Centroscosto::class, 'CECO_DESCRIPCION');
+		$arrCentroscostos = model_to_array(CentroCosto::class, 'CECO_DESCRIPCION');
 
 		//Se crea un array con los estados de contrato
-		$arrEstadoscontrato = model_to_array(Estadoscontrato::class, 'ESCO_DESCRIPCION');
+		$arrEstadoscontrato = model_to_array(EstadoContrato::class, 'ESCO_DESCRIPCION');
 
 		//Se crea un array con los tipos de contrato
-		$arrTiposcontrato = model_to_array(Tiposcontrato::class, 'TICO_DESCRIPCION');
+		$arrTiposcontrato = model_to_array(TipoContrato::class, 'TICO_DESCRIPCION');
 
 		//Se crea un array con las clases de contrato
-		$arrClasescontrato = model_to_array(Clasescontrato::class, 'CLCO_DESCRIPCION');
+		$arrClasescontrato = model_to_array(ClaseContrato::class, 'CLCO_DESCRIPCION');
 
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, 'PROS_PRIMERNOMBRE');
@@ -174,7 +174,7 @@ class ContratosController extends Controller
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
 		//Se crea un array con los motivos de retiro
-		$arrMotivosretiro = model_to_array(Motivosretiro::class, 'MORE_DESCRIPCION');
+		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro'));

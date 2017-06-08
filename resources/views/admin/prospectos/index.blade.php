@@ -17,30 +17,20 @@
 
 @section('section')
 
-	{{-- Paginate --}}
-	<div class="row">
-		<div id="btn-paginate" class="col-xs-12 col-md-8 col-lg-8">
-			{{ $prospectos->appends(Request::all())->render() }}
-		</div>
-		<div class="col-xs-12 col-md-4 col-lg-4 text-right">
-			{{$prospectos->total()}} registros encontrados.
-		</div>
-	</div>
-
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">@sortablelink('PROS_CEDULA', 'Cedula')</th>
-				<th class="col-md-5">@sortablelink('PROS_FECHAEXPEDICION', 'Fecha de Expedición CC.')</th>
-				<th class="col-md-5">@sortablelink('PROS_PRIMERNOMBRE', 'Primer Nombre')</th>
-				<th class="col-md-5">@sortablelink('PROS_SEGUNDONOMBRE', 'Segundo Nombre')</th>
-				<th class="col-md-5">@sortablelink('PROS_PRIMERAPELLIDO', 'Primer Apellido')</th>
-				<th class="col-md-5">@sortablelink('PROS_SEGUNDOAPELLIDO', 'Segundo Apellido')</th>
-				<th class="col-md-5">@sortablelink('PROS_SEXO', 'Sexo')</th>
-				<th class="col-md-5">@sortablelink('PROS_DIRECCION', 'Dirección')</th>
-				<th class="col-md-5">@sortablelink('PROS_TELEFONO', 'Telefono')</th>
-				<th class="col-md-5">@sortablelink('PROS_CELULAR', 'Celular')</th>
-				<th class="col-md-5">@sortablelink('PROS_COREO', 'Correo')</th>
+				<th class="col-md-5">Cedula</th>
+				<th class="col-md-5">Fecha de Expedición CC.</th>
+				<th class="col-md-5">Primer Nombre</th>
+				<th class="col-md-5">Segundo Nombre</th>
+				<th class="col-md-5">Primer Apellido</th>
+				<th class="col-md-5">Segundo Apellido</th>
+				<th class="col-md-5">Sexo</th>
+				<th class="col-md-5">Dirección</th>
+				<th class="col-md-5">Telefono</th>
+				<th class="col-md-5">Celular</th>
+				<th class="col-md-5">Correo</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -67,8 +57,7 @@
 
 					<!-- carga botón de borrar -->
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'name'=>'btn-delete',
-						'class'=>'btn btn-xs btn-danger',
+						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
 						'data-id'=> $prospecto->PROS_ID,
 						'data-modelo'=> str_upperspace(class_basename($prospecto)),

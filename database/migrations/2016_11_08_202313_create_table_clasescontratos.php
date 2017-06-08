@@ -17,6 +17,7 @@ class CreateTableClasescontratos extends Migration
     {
         $commentTabla = 'CLASES DE CONTRATOS: contiene las clases de contratos existentes de acuerdo a la ley vigente (fijo, indefinido, por obra o labor contratada)';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('CLCO_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla clases de contratos.');
@@ -56,6 +57,7 @@ class CreateTableClasescontratos extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

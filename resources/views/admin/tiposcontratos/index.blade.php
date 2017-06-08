@@ -42,7 +42,6 @@
 
 					<!-- carga botón de borrar -->
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'name'=>'btn-delete',
 						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
 						'data-id'=> $tiposcontrato->TICO_ID,
@@ -52,11 +51,6 @@
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',
-						/*'onclick'=>'showModalDelete('.
-										$tiposcontrato->TICO_ID.', '.
-										'"'.str_upperspace(class_basename($tiposcontrato)).'", '.
-										'"'.$tiposcontrato->TICO_DESCRIPCION.'", '.
-										'"tiposcontratos/'. $tiposcontrato->TICO_ID.'")',*/
 					])}}
 				</td>
 			</tr>

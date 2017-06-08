@@ -17,6 +17,7 @@ class CreateTableProspecto extends Migration
     {
         $commentTabla = 'PROSPECTOS: contiene los datos basicos de hojas de vida de los empleados';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
 
             $table->increments('PROS_ID')
@@ -89,6 +90,7 @@ class CreateTableProspecto extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
     

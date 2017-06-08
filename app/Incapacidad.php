@@ -4,7 +4,7 @@ namespace SGH;
 
 use SGH\ModelWithSoftDeletes;
 
-class Incapacidade extends ModelWithSoftDeletes
+class Incapacidad extends ModelWithSoftDeletes
 {
 
 	//Nombre de la tabla en la base de datos

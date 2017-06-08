@@ -11,9 +11,9 @@ class EmpleadoresTableSeeder extends Seeder
      */
     public function run()
     {
-    	$this->command->info('---Empleadores table');
+    	//$this->command->info('---Seeder Empleadores');
     	
-    	$empleador = new \SGH\Empleadore;
+    	$empleador = new \SGH\Empleador;
     	$empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL CALI S.A ESP';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOCALI';
         $empleador->EMPL_DIRECCION = 'CALLE 70 E BIS # 7-34';
@@ -21,7 +21,7 @@ class EmpleadoresTableSeeder extends Seeder
     	$empleador->EMPL_CREADOPOR =  'SYSTEM';
     	$empleador->save();
 
-    	$empleador = new \SGH\Empleadore;
+    	$empleador = new \SGH\Empleador;
     	$empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL VALLE S.A ESP';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOVALLE';
         $empleador->EMPL_DIRECCION = 'CALLE 70 E BIS # 7-34';
@@ -29,7 +29,6 @@ class EmpleadoresTableSeeder extends Seeder
     	$empleador->EMPL_CREADOPOR =  'SYSTEM';
     	$empleador->save();
 
-    	$this->command->info('---FIN EmpleadoresTableSeeder');
     }
 
 }

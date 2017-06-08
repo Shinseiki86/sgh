@@ -18,24 +18,13 @@
 
 @section('section')
 
-	{{-- Paginate --}}
-	<div class="row">
-		<div id="btn-paginate" class="col-xs-12 col-md-8 col-lg-8">
-			{{ $ciudades->appends(Request::all())->render() }}
-		</div>
-		<div class="col-xs-12 col-md-4 col-lg-4 text-right">
-			{{$ciudades->total()}} registros encontrados.
-		</div>
-	</div>
-
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="hidden-xs col-md-1">@sortablelink('CIUD_ID', 'ID')</th>
-				<th class="col-md-1">@sortablelink('CIUD_CODIGO', 'Código')</th>
-				<th class="col-md-4">@sortablelink('CIUD_DESCRIPCION', 'Descripción')</th>
-				<th class="col-md-4">@sortablelink('departamento.DEPA_DESCRIPCION', 'Departamento')</th>
-				<th class="hidden-xs col-md-2">@sortablelink('CIUD_CREADOPOR', 'Creado por')</th>
+				<th class="col-md-1">Código</th>
+				<th class="col-md-4">Descripción</th>
+				<th class="col-md-4">Departamento</th>
+				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -43,7 +32,6 @@
 		<tbody>
 			@foreach($ciudades as $ciudad)
 			<tr>
-				<td>{{ $ciudad -> CIUD_ID }}</td>
 				<td>{{ $ciudad -> CIUD_CODIGO }}</td>
 				<td>{{ $ciudad -> CIUD_DESCRIPCION }}</td>
 				<td>{{ $ciudad -> departamento -> DEPA_DESCRIPCION }}</td>
@@ -56,8 +44,7 @@
 
 					<!-- carga botón de borrar -->
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'name'=>'btn-delete',
-						'class'=>'btn btn-xs btn-danger',
+						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
 						'data-id'=> $ciudad->CIUD_ID,
 						'data-modelo'=> str_upperspace(class_basename($ciudad)),

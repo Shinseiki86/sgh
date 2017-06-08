@@ -17,6 +17,7 @@ class CreateTableCentrocostos extends Migration
     {
         $commentTabla = 'CENTROS DE COSTOS: tabla que contiene los centros de costos existentes)';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
             $table->increments('CECO_ID')
@@ -73,6 +74,7 @@ class CreateTableCentrocostos extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

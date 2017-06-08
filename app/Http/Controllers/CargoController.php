@@ -10,12 +10,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
 use SGH\Cargo;
-use SGH\Cno;
+use SGH\Cnos;
 
-class CargosController extends Controller
+class CargoController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -42,7 +40,6 @@ class CargosController extends Controller
 						->withInput()->send();
 	}
 
-
 	/**
 	 * Muestra una lista de los registros.
 	 *
@@ -64,7 +61,7 @@ class CargosController extends Controller
 	public function create()
 	{
 		//Se crea un array con los CNOS disponibles
-		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
+		$arrCnos = model_to_array(Cnos::class, 'CNOS_DESCRIPCION');
 
 		return view('admin/cargos/create', compact('arrCnos'));
 		
@@ -103,7 +100,7 @@ class CargosController extends Controller
 		$cargo = Cargo::findOrFail($CARG_ID);
 
 		//Se crea un array con los CNOS disponibles
-		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
+		$arrCnos = model_to_array(Cnos::class, 'CNOS_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/cargos/edit', compact('cargo', 'arrCnos'));

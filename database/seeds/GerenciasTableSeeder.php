@@ -11,7 +11,7 @@ class GerenciasTableSeeder extends Seeder
      */
     public function run()
 	{
-		$this->command->info('---Gerencias table');
+		//$this->command->info('---Seeder Gerencias');
 		
 		$gerencia = new \SGH\Gerencia;
         $gerencia->GERE_DESCRIPCION = 'GERENCIA DE GESTIÓN HUMANA';
@@ -27,8 +27,6 @@ class GerenciasTableSeeder extends Seeder
         $gerencia->GERE_CREADOPOR =  'SYSTEM';
         $gerencia->save();
 
-
-		$this->command->info('---FIN GerenciasTableSeeder');
 	}
 
 }

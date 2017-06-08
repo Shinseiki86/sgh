@@ -11,11 +11,11 @@ use Illuminate\Routing\Redirector;
 use Maatwebsite\Excel\Facades\Excel;
 
 use SGH\Tnl;
-use SGH\Incapacidade;
+use SGH\Incapacidad;
 use DateTime;
 use Carbon\Carbon;
 
-class UploadsController extends Controller
+class UploadController extends Controller
 {
 
 	/**
@@ -27,8 +27,8 @@ class UploadsController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$tnls = Tnl::sortable('INCA_EMPRESA')->paginate();
-		$incaps = Incapacidade::sortable('TNLA_EMPRESA')->paginate();
+		$tnls = Tnl::all();
+		$incaps = Incapacidad::all();
 
 		//Se carga la vista 
 		return view('admin/uploads/index', compact('tnls','incaps'));
@@ -76,7 +76,7 @@ class UploadsController extends Controller
 			foreach ($reader->get() as $incap) {
 				$contincap++;
 				
-				Incapacidade::create([
+				Incapacidad::create([
 					'INCA_EMPRESA' => $incap->INCA_EMPRESA,
 					'INCA_IDENTIFICACION' => $incap->INCA_IDENTIFICACION,
 					'INCA_NOMBREEMPLEADO' => $incap->INCA_NOMBREEMPLEADO,
@@ -98,7 +98,7 @@ class UploadsController extends Controller
 
 		//traer todos los registros de TNL e Incapacidades
 		$tnls = Tnl::all();
-		$incapacidades = Incapacidade::all();
+		$incapacidades = Incapacidad::all();
 
 		//declaración de arreglo que contendrá las incapacidades que también estan en TNL
 		$arrincapentnl = array();

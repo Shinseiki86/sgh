@@ -11,7 +11,7 @@ class CargosTableSeeder extends Seeder
      */
     public function run()
 	{
-		$this->command->info('---Cargos table');
+		//$this->command->info('---Seeder Cargos');
 		
 		$cargo = new \SGH\Cargo;
         $cargo->CARG_DESCRIPCION = 'COORDINADOR DE NÓMINA';
@@ -19,8 +19,5 @@ class CargosTableSeeder extends Seeder
         $cargo->CNOS_ID =  1;
         $cargo->CARG_CREADOPOR =  'SYSTEM';
         $cargo->save();
-
-
-		$this->command->info('---FIN CargosTableSeeder');
 	}
 }

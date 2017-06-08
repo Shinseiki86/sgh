@@ -33,15 +33,15 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="hidden-xs col-md-1">@sortablelink('INCA_EMPRESA', 'EMPRESA')</th>
-				<th class="col-md-1">@sortablelink('INCA_IDENTIFICACION', 'IDENTIFICACION')</th>
-				<th class="col-md-5">@sortablelink('INCA_NOMBREEMPLEADO', 'NOMBRE')</th>
-				<th class="col-md-5">@sortablelink('INCA_FECHAINICIO', 'FECHA INI')</th>
-				<th class="col-md-5">@sortablelink('INCA_TOTALDIAS', 'DÍAS')</th>
-				<th class="col-md-5">@sortablelink('INCA_FECHAFINAL', 'FECHA FIN')</th>
-				<th class="col-md-5">@sortablelink('INCA_CONTINGENCIA', 'CONTING.')</th>
-				<th class="col-md-5">@sortablelink('INCA_PRIMERDIAAT', 'PRIMER DÍA AT')</th>
-				<th class="col-md-1">@sortablelink('INCA_DOCUMENTO', 'DOCUMENTO')</th>
+				<th class="hidden-xs col-md-1">EMPRESA</th>
+				<th class="col-md-1">IDENTIFICACION</th>
+				<th class="col-md-5">NOMBRE</th>
+				<th class="col-md-5">FECHA INI</th>
+				<th class="col-md-5">DÍAS</th>
+				<th class="col-md-5">FECHA FIN</th>
+				<th class="col-md-5">CONTING.</th>
+				<th class="col-md-5">PRIMER DÍA AT</th>
+				<th class="col-md-1">DOCUMENTO</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -66,8 +66,7 @@
 
 					<!-- carga botón de borrar -->
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'name'=>'btn-delete',
-						'class'=>'btn btn-xs btn-danger',
+						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
 						'data-id'=> $incap->DEPA_ID,
 						'data-modelo'=> str_upperspace(class_basename($incap)),

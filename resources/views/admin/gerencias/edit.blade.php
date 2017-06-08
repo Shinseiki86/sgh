@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($gerencia, ['action' => ['GerenciasController@update', $gerencia->GERE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($gerencia, ['action' => ['GerenciaController@update', $gerencia->GERE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('GERE_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('GERE_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}

@@ -17,6 +17,7 @@ class CreateTableTiposempleadores extends Migration
     {
         $commentTabla = 'TIPOS DE EMPLEADORES: contien la información de tipos de empleados existentes. Ej: directo, temporal, etc';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
             $table->increments('TIEM_ID')
@@ -57,6 +58,7 @@ class CreateTableTiposempleadores extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

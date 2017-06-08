@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Motivosretiro;
+use SGH\MotivoRetiro;
 
-class MotivosretirosController extends Controller
+class MotivoRetiroController extends Controller
 {
     //
 
@@ -49,7 +49,7 @@ class MotivosretirosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$motivosretiros = Motivosretiro::sortable('MORE_CODIGO')->paginate();
+		$motivosretiros = MotivoRetiro::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/motivosretiros/index', compact('motivosretiros'));
 	}
@@ -77,7 +77,7 @@ class MotivosretirosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$motivoretiro = Motivosretiro::create($request->all());
+		$motivoretiro = MotivoRetiro::create($request->all());
 
 		// redirecciona al index de controlador
 		flash_alert( 'Motivo de retiro '.$motivoretiro->MORE_ID.' creado exitosamente.', 'success' );
@@ -94,7 +94,7 @@ class MotivosretirosController extends Controller
 	public function edit($MORE_ID)
 	{
 		// Se obtiene el registro
-		$motivoretiro = Motivosretiro::findOrFail($MORE_ID);
+		$motivoretiro = MotivoRetiro::findOrFail($MORE_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/motivosretiros/edit', compact('motivoretiro'));
@@ -115,7 +115,7 @@ class MotivosretirosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$motivoretiro = Motivosretiro::findOrFail($MORE_ID);
+		$motivoretiro = MotivoRetiro::findOrFail($MORE_ID);
 		//y se actualiza con los datos recibidos.
 		$motivoretiro->update($request->all());
 
@@ -132,7 +132,7 @@ class MotivosretirosController extends Controller
 	 */
 	public function destroy($MORE_ID, $showMsg=True)
 	{
-		$motivoretiro = Motivosretiro::findOrFail($MORE_ID);
+		$motivoretiro = MotivoRetiro::findOrFail($MORE_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($motivoretiro->TIPR_creadopor == 'SYSTEM'){

@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
 use SGH\Gerencia;
-use SGH\Empleadore;
+use SGH\Empleador;
 
-class GerenciasController extends Controller
+class GerenciaController extends Controller
 {
     //
 
@@ -51,7 +51,7 @@ class GerenciasController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$gerencias = Gerencia::sortable('GERE_DESCRIPCION')->paginate();
+		$gerencias = Gerencia::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/gerencias/index', compact('gerencias'));
 	}
@@ -64,7 +64,7 @@ class GerenciasController extends Controller
 	public function create()
 	{
 		//Se crea un array con los CNOS disponibles
-		$arrEmpleadores = model_to_array(Empleadore::class, 'EMPL_RAZONSOCIAL');
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
 		return view('admin/gerencias/create', compact('arrEmpleadores'));
 		
@@ -103,7 +103,7 @@ class GerenciasController extends Controller
 		$gerencia = Gerencia::findOrFail($GERE_ID);
 
 		//Se crea un array con los CNOS disponibles
-		$arrEmpleadores = model_to_array(Empleadore::class, 'EMPL_RAZONSOCIAL');
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/gerencias/edit', compact('gerencia', 'arrEmpleadores'));

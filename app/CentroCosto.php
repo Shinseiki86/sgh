@@ -4,7 +4,7 @@ namespace SGH;
 
 use SGH\ModelWithSoftDeletes;
 
-class Centroscosto extends ModelWithSoftDeletes
+class CentroCosto extends ModelWithSoftDeletes
 {
 	
 	//Nombre de la tabla en la base de datos

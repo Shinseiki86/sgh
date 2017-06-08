@@ -11,7 +11,7 @@ class ProspectosTableSeeder extends Seeder
      */
     public function run()
     {
-    	$this->command->info('---Prospectos table');
+    	//$this->command->info('---Seeder Prospectos');
     	
     	$prospecto = new \SGH\Prospecto;
     	$prospecto->PROS_CEDULA = 1144173746;
@@ -27,7 +27,5 @@ class ProspectosTableSeeder extends Seeder
     	$prospecto->PROS_COREO =  'rodriguez221293@outlook.com';
     	$prospecto->PROS_CREADOPOR =  'SYSTEM';
     	$prospecto->save();
-
-    	$this->command->info('---FIN ProspectosTableSeeder');
     }
 }

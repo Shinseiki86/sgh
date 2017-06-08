@@ -42,23 +42,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::resource('departamentos', 'DepartamentoController');
 	Route::resource('ciudades', 'CiudadController');
 	Route::resource('cnos', 'CnosController');
-	Route::resource('cargos', 'CargosController');
-	Route::resource('tiposcontratos', 'TiposcontratosController');
-	Route::resource('temporales', 'TemporalesController');
-	Route::resource('empleadores', 'EmpleadoresController');
-	Route::resource('prospectos', 'ProspectosController');
-	Route::resource('clasescontratos', 'ClasescontratosController');
-	Route::resource('gerencias', 'GerenciasController');
-	Route::resource('centroscostos', 'CentroscostosController');
-	Route::resource('tiposempleadores', 'TiposempleadoresController');
-	Route::resource('estadoscontratos', 'EstadoscontratosController');
-	Route::resource('motivosretiros', 'MotivosretirosController');
-	Route::resource('contratos', 'ContratosController');
+	Route::resource('cargos', 'CargoController');
+	Route::resource('tiposcontratos', 'TipoContratoController');
+	Route::resource('temporales', 'TemporalController');
+	Route::resource('empleadores', 'EmpleadorController');
+	Route::resource('prospectos', 'ProspectoController');
+	Route::resource('clasescontratos', 'ClaseContratoController');
+	Route::resource('gerencias', 'GerenciaController');
+	Route::resource('centroscostos', 'CentroCostoController');
+	Route::resource('tiposempleadores', 'TipoEmpleadorController');
+	Route::resource('estadoscontratos', 'EstadoContratoController');
+	Route::resource('motivosretiros', 'MotivoRetiroController');
+	Route::resource('contratos', 'ContratoController');
 	//upload tablas de TNL
 	//Route::get('upload', 'UploadController@index');
-	Route::post('upload', 'UploadsController@upload');
+	Route::post('upload', 'UploadController@upload');
 
-	Route::resource('uploads', 'UploadsController');
+	Route::resource('uploads', 'UploadController');
 
-	Route::post('delete', 'UploadsController@delete');
+	Route::post('delete', 'UploadController@delete');
 });

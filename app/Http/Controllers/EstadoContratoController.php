@@ -11,7 +11,7 @@ use Illuminate\Routing\Redirector;
 
 use SGH\Estadoscontrato;
 
-class EstadoscontratosController extends Controller
+class EstadoContratoController extends Controller
 {
     //
 
@@ -49,7 +49,7 @@ class EstadoscontratosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$estadoscontratos = Estadoscontrato::sortable('ESCO_CODIGO')->paginate();
+		$estadoscontratos = EstadoContrato::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/estadoscontratos/index', compact('estadoscontratos'));
 	}
@@ -77,7 +77,7 @@ class EstadoscontratosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$estadocontrato = Estadoscontrato::create($request->all());
+		$estadocontrato = EstadoContrato::create($request->all());
 
 		// redirecciona al index de controlador
 		flash_alert( 'Estado de contrato '.$estadocontrato->ESCO_ID.' creado exitosamente.', 'success' );
@@ -94,7 +94,7 @@ class EstadoscontratosController extends Controller
 	public function edit($ESCO_ID)
 	{
 		// Se obtiene el registro
-		$estadocontrato = Estadoscontrato::findOrFail($ESCO_ID);
+		$estadocontrato = EstadoContrato::findOrFail($ESCO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/estadoscontratos/edit', compact('estadocontrato'));
@@ -115,7 +115,7 @@ class EstadoscontratosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$estadocontrato = Estadoscontrato::findOrFail($ESCO_ID);
+		$estadocontrato = EstadoContrato::findOrFail($ESCO_ID);
 		//y se actualiza con los datos recibidos.
 		$estadocontrato->update($request->all());
 
@@ -132,7 +132,7 @@ class EstadoscontratosController extends Controller
 	 */
 	public function destroy($ESCO_ID, $showMsg=True)
 	{
-		$estadocontrato = Estadoscontrato::findOrFail($ESCO_ID);
+		$estadocontrato = EstadoContrato::findOrFail($ESCO_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($estadocontrato->TIPR_creadopor == 'SYSTEM'){

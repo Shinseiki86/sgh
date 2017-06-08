@@ -13,7 +13,7 @@ use SGH\Permission;
             $date = \Carbon\Carbon::now()->toDateTimeString();
             //$faker = Faker\Factory::create('es_ES');
 
-            $this->command->info('--- Creación de Roles');
+            $this->command->info('--- Seeder Creación de Roles');
 
                 $rolOwner = new Role();
                 $rolOwner->name         = 'owner';
@@ -33,9 +33,7 @@ use SGH\Permission;
                 $rolEditor->description  = 'Usuario con permisos para editar contenido.'; // optional
                 $rolEditor->save();
 
-            $this->command->info('--- Fin Creación de Roles');
-
-            $this->command->info('--- Creación de Permisos');
+            $this->command->info('--- Seeder Creación de Permisos');
 
                 $crearUsuario = new Permission();
                 $crearUsuario->name         = 'crear-usuario';
@@ -52,9 +50,8 @@ use SGH\Permission;
                 $rolAdmin->attachPermissions([$crearUsuario, $editarUsuario]);
                 // equivalent to $rolAdmin->perms()->sync( [$crearUsuario->id, $editarUsuario->id] );
 
-            $this->command->info('--- Fin Creación de Permisos');
 
-            $this->command->info('--- Creación de Usuarios prueba');
+            $this->command->info('--- Seeder Creación de Usuarios prueba');
 
                 //Admin
                 $admin = User::create( [
@@ -99,14 +96,6 @@ use SGH\Permission;
                 //5 usuarios faker
                 //$USERS = factory(SGH\User::class)->times(5)->create();
 
-            $this->command->info('--- Fin Creación de Usuarios prueba');
-
-
-
-
-
-
 		}
-
 
 	}

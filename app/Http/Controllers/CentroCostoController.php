@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Centroscosto;
+use SGH\CentroCosto;
 use SGH\Gerencia;
 
-class CentroscostosController extends Controller
+class CentroCostoController extends Controller
 {
     //
 
@@ -52,7 +52,7 @@ class CentroscostosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$centroscostos = Centroscosto::all();
+		$centroscostos = CentroCosto::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/centroscostos/index', compact('centroscostos'));
 	}
@@ -84,7 +84,7 @@ class CentroscostosController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$centrocosto = Centroscosto::create($request->all());
+		$centrocosto = CentroCosto::create($request->all());
 
 		// redirecciona al index de controlador
 		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' creado exitosamente.', 'success' );
@@ -101,7 +101,7 @@ class CentroscostosController extends Controller
 	public function edit($CECO_ID)
 	{
 		// Se obtiene el registro
-		$centrocosto = Centroscosto::findOrFail($CECO_ID);
+		$centrocosto = CentroCosto::findOrFail($CECO_ID);
 
 		//Se crea un array con los CNOS disponibles
 		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
@@ -125,7 +125,7 @@ class CentroscostosController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$centrocosto = Centroscosto::findOrFail($CECO_ID);
+		$centrocosto = CentroCosto::findOrFail($CECO_ID);
 		//y se actualiza con los datos recibidos.
 		$centrocosto->update($request->all());
 
@@ -142,7 +142,7 @@ class CentroscostosController extends Controller
 	 */
 	public function destroy($CECO_ID, $showMsg=True)
 	{
-		$centrocosto = Centroscosto::findOrFail($CECO_ID);
+		$centrocosto = CentroCosto::findOrFail($CECO_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($centrocosto->TIPR_creadopor == 'SYSTEM'){

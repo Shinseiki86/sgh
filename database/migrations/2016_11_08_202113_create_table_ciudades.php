@@ -17,6 +17,7 @@ class CreateTableCiudades extends Migration
     {
         $commentTabla = 'CIUDRTAMENTOS: contiene los departamentos del territorio nacional';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('CIUD_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla departamentos.');
@@ -65,6 +66,7 @@ class CreateTableCiudades extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

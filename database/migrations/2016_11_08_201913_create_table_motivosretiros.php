@@ -17,6 +17,7 @@ class CreateTableMotivosretiros extends Migration
     {
         $commentTabla = 'MOTIVOS DE RETIRO: contiene los motivos de retiro existentes de acuerdo a la ley vigente';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('MORE_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla motivos de retiro.');
@@ -56,6 +57,7 @@ class CreateTableMotivosretiros extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

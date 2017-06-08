@@ -18,24 +18,14 @@
 
 @section('section')
 
-	{{-- Paginate --}}
-	<div class="row">
-		<div id="btn-paginate" class="col-xs-12 col-md-8 col-lg-8">
-			{{ $centroscostos->appends(Request::all())->render() }}
-		</div>
-		<div class="col-xs-12 col-md-4 col-lg-4 text-right">
-			{{$centroscostos->total()}} registros encontrados.
-		</div>
-	</div>
-
-	<table class="table table-striped"  id="tabla">
+	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">@sortablelink('EMPL_ID', 'Empresa')</th>
-				<th class="col-md-5">@sortablelink('GERE_ID', 'Gerencia')</th>
-				<th class="col-md-5">@sortablelink('CECO_CODIGO', 'Codigo')</th>
-				<th class="col-md-5">@sortablelink('CECO_DESCRIPCION', 'Descripción')</th>
-				<th class="hidden-xs col-md-2">@sortablelink('CECO_CREADOPOR', 'Creado por')</th>
+				<th class="col-md-5">Empresa</th>
+				<th class="col-md-5">Gerencia</th>
+				<th class="col-md-5">Codigo</th>
+				<th class="col-md-5">Descripción</th>
+				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -56,8 +46,7 @@
 
 					<!-- carga botón de borrar -->
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'name'=>'btn-delete',
-						'class'=>'btn btn-xs btn-danger',
+						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
 						'data-id'=> $centrocosto->CECO_ID,
 						'data-modelo'=> str_upperspace(class_basename($centrocosto)),

@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Empleadore;
+use SGH\Empleador;
 
-class EmpleadoresController extends Controller
+class EmpleadorController extends Controller
 {
     //
 
@@ -51,7 +51,7 @@ class EmpleadoresController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$empleadores = Empleadore::sortable('EMPL_NOMBRECOMERCIAL')->paginate();
+		$empleadores = Empleador::all();
 		//Se carga la vista y se pasan los registros
 		return view('admin/empleadores/index', compact('empleadores'));
 	}
@@ -79,7 +79,7 @@ class EmpleadoresController extends Controller
 		$this->validator($request);
 
 		//Se crea el registro.
-		$empleador = Empleadore::create($request->all());
+		$empleador = Empleador::create($request->all());
 
 		// redirecciona al index de controlador
 		flash_alert( 'Empleador '.$empleador->EMPL_ID.' creado exitosamente.', 'success' );
@@ -96,7 +96,7 @@ class EmpleadoresController extends Controller
 	public function edit($EMPL_ID)
 	{
 		// Se obtiene el registro
-		$empleador = Empleadore::findOrFail($EMPL_ID);
+		$empleador = Empleador::findOrFail($EMPL_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('admin/empleadores/edit', compact('empleador'));
@@ -117,7 +117,7 @@ class EmpleadoresController extends Controller
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$empleador = Empleadore::findOrFail($EMPL_ID);
+		$empleador = Empleador::findOrFail($EMPL_ID);
 		//y se actualiza con los datos recibidos.
 		$empleador->update($request->all());
 
@@ -134,7 +134,7 @@ class EmpleadoresController extends Controller
 	 */
 	public function destroy($EMPL_ID, $showMsg=True)
 	{
-		$empleador = Empleadore::findOrFail($EMPL_ID);
+		$empleador = Empleador::findOrFail($EMPL_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($empleador->TIPR_creadopor == 'SYSTEM'){

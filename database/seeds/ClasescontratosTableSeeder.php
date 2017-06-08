@@ -11,21 +11,19 @@ class ClasescontratosTableSeeder extends Seeder
      */
     public function run()
 	{
-		$this->command->info('---Clasescontratos table');
+		//$this->command->info('---Seeder Clasescontratos');
 		
-		$clasecontrato = new \SGH\Clasescontrato;
+		$clasecontrato = new \SGH\ClaseContrato;
         $clasecontrato->CLCO_DESCRIPCION = 'TERMINO INDEFINIDO';
         $clasecontrato->CLCO_OBSERVACIONES =  'CLASE DE CONTRATO DE PRUEBA';
         $clasecontrato->CLCO_CREADOPOR =  'SYSTEM';
         $clasecontrato->save();
 
-        $clasecontrato = new \SGH\Clasescontrato;
+        $clasecontrato = new \SGH\ClaseContrato;
         $clasecontrato->CLCO_DESCRIPCION = 'TERMINO FIJO';
         $clasecontrato->CLCO_OBSERVACIONES =  'TIPO DE CONTRATO DE PRUEBA';
         $clasecontrato->CLCO_CREADOPOR =  'SYSTEM';
         $clasecontrato->save();
 
-
-		$this->command->info('---FIN ClasescontratosTableSeeder');
 	}
 }

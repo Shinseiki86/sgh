@@ -17,6 +17,7 @@ class CreateTableContratos extends Migration
     {
         $commentTabla = 'CONTRATOS: contiene la información de los contratos laborales que han tenido los colaboradores con las diferentes empresas';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
 
             $table->increments('CONT_ID')
@@ -160,6 +161,7 @@ class CreateTableContratos extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

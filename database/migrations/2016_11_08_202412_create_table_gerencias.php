@@ -17,6 +17,7 @@ class CreateTableGerencias extends Migration
     {
         $commentTabla = 'GERENCIAS: contiene las gerencias existentes de los empleadores)';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
             $table->increments('GERE_ID')
@@ -69,6 +70,7 @@ class CreateTableGerencias extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

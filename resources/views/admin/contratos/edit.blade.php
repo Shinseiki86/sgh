@@ -4,7 +4,7 @@
 
 @section('section')
 
-{{ Form::model($contrato, ['action' => ['ContratosController@update', $contrato->CONT_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+{{ Form::model($contrato, ['action' => ['ContratoController@update', $contrato->CONT_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 <div class="form-group{{ $errors->has('EMPL_ID') ? ' has-error' : '' }}">
 				<label for="EMPL_ID" class="col-md-2 control-label">Empleador</label>

@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($temporal, ['action' => ['TemporalesController@update', $temporal->TEMP_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($temporal, ['action' => ['TemporalController@update', $temporal->TEMP_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('TEMP_RAZONSOCIAL') ? ' has-error' : '' }}">
 			{{ Form::label('TEMP_RAZONSOCIAL', 'Razón Social',  [ 'class' => 'col-md-4 control-label' ]) }}

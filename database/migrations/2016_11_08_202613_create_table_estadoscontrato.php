@@ -17,6 +17,7 @@ class CreateTableEstadoscontrato extends Migration
     {
         $commentTabla = 'ESTADOS DE CONTRATOS: contiene la información de estados de contratos existentes. Ej: activo, retirado, vacaciones, etc.';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('ESCO_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla estados de contratos.');
@@ -56,6 +57,7 @@ class CreateTableEstadoscontrato extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 }

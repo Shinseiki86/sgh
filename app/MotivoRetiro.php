@@ -4,7 +4,7 @@ namespace SGH;
 
 use SGH\ModelWithSoftDeletes;
 
-class Motivosretiro extends ModelWithSoftDeletes
+class MotivoRetiro extends ModelWithSoftDeletes
 {
 	
 	//Nombre de la tabla en la base de datos

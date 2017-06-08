@@ -11,20 +11,18 @@ class TiposempleadoresTableSeeder extends Seeder
      */
     public function run()
     {
-    	$this->command->info('---TiposEmpleadores table');
+    	//$this->command->info('---Seeder TiposEmpleadores');
     	
-    	$empleador = new \SGH\Tiposempleadore;
+    	$empleador = new \SGH\TipoEmpleador;
     	$empleador->TIEM_DESCRIPCION = 'DIRECTO';
     	$empleador->TIEM_OBSERVACIONES =  'TIPO EMPLEADOR DE PRUEBA';
     	$empleador->TIEM_CREADOPOR =  'SYSTEM';
     	$empleador->save();
 
-    	$empleador = new \SGH\Tiposempleadore;
+    	$empleador = new \SGH\TipoEmpleador;
     	$empleador->TIEM_DESCRIPCION = 'TEMPORAL';
     	$empleador->TIEM_OBSERVACIONES =  'TIPO EMPLEADOR DE PRUEBA';
     	$empleador->TIEM_CREADOPOR =  'SYSTEM';
     	$empleador->save();
-
-    	$this->command->info('---FIN TiposempleadoresTableSeeder');
     }
 }

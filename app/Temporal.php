@@ -4,7 +4,7 @@ namespace SGH;
 
 use SGH\ModelWithSoftDeletes;
 
-class Temporale extends ModelWithSoftDeletes
+class Temporal extends ModelWithSoftDeletes
 {
 	//Nombre de la tabla en la base de datos
 	protected $table = 'TEMPORALES';

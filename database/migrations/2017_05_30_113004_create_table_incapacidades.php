@@ -16,6 +16,7 @@ class CreateTableIncapacidades extends Migration
     {
         $commentTabla = 'INCAPACIDADES: contiene las incapacidades de los empleados';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('INCA_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla INCAPACIDADES.');
@@ -99,6 +100,7 @@ class CreateTableIncapacidades extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 }

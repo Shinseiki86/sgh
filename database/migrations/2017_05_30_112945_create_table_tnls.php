@@ -16,6 +16,7 @@ class CreateTableTnls extends Migration
     {
         $commentTabla = 'TNLS: contiene los tiempos no laborados de los empleados';
 
+        echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->increments('TNLA_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla TNLS.');
@@ -80,6 +81,7 @@ class CreateTableTnls extends Migration
      */
     public function down()
     {
+        echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::drop($this->nomTabla);
     }
 

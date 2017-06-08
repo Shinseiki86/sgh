@@ -11,7 +11,7 @@ use Illuminate\Routing\Redirector;
 
 use SGH\TipoContrato;
 
-class TiposContratosController extends Controller
+class TipoContratoController extends Controller
 {
     //
 

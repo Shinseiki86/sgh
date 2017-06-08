@@ -11,20 +11,18 @@ class EstadoscontratosTableSeeder extends Seeder
      */
     public function run()
     {
-    	$this->command->info('---Estadoscontratos table');
+    	//$this->command->info('---Seeder Estadoscontratos');
     	
-    	$estadocontrato = new \SGH\Estadoscontrato;
+    	$estadocontrato = new \SGH\EstadoContrato;
     	$estadocontrato->ESCO_DESCRIPCION = 'ACTIVO';
     	$estadocontrato->ESCO_OBSERVACIONES =  'ESTADO CONTRATO DE PRUEBA';
     	$estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
     	$estadocontrato->save();
 
-    	$estadocontrato = new \SGH\Estadoscontrato;
+    	$estadocontrato = new \SGH\EstadoContrato;
     	$estadocontrato->ESCO_DESCRIPCION = 'RETIRADO';
     	$estadocontrato->ESCO_OBSERVACIONES =  'ESTADO CONTRATO DE PRUEBA';
     	$estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
     	$estadocontrato->save();
-
-    	$this->command->info('---FIN TiposestadocontratoesTableSeeder');
     }
 }
