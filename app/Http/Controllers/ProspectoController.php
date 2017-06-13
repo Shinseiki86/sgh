@@ -153,5 +153,5 @@ class ProspectoController extends Controller
 
 		return redirect()->route('admin.prospectos.index');
 	}
-	
+
 }
