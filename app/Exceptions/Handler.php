@@ -47,31 +47,25 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         //dump( get_class($e) );
-        //dd( $e );
-        //Si está en modo depuración:
-        if (!env('APP_DEBUG', false)){
-            //Si la ruta no existe, mostar view 404.
-            if($e instanceof \ReflectionException OR
-                $e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-            ){
-                return response(view('errors.404'), 404);
-            }
+        //Si está en modo depuración y no es una excepción de SOAP
+        if (!env('APP_DEBUG', false) and !$this->isSoapError($e)){
+                //Si la ruta no existe, mostar view 404.
+                if($e instanceof \ReflectionException OR
+                    $e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+                ){
+                    return response(view('errors.404'), 404);
+                }
 
-            //Si el error es 503 y está en modo mantenimiento
-            if( $e->getStatusCode() === 503 AND env('APP_MAINTENANCE_MODE', false) ){
-                return $this->returnResponseError($e);
-            }
-
-            //Si hay una excepción de los siguientes tipos...
-            if($e instanceof \ErrorException OR
-                $e instanceof \BadMethodCallException OR
-                $e instanceof \PDOException OR
-                $e instanceof \Symfony\Component\Debug\Exception\FatalErrorException
-            ){// ... entonces renderizar vista para error 500
-                return $this->returnResponseError($e);
-            }
+                //Si hay una excepción de los siguientes tipos...
+                if($e instanceof \ErrorException OR
+                    $e instanceof \BadMethodCallException OR
+                    $e instanceof \SoapFault OR
+                    $e instanceof \PDOException OR
+                    $e instanceof \Symfony\Component\Debug\Exception\FatalErrorException
+                ){// ... entonces renderizar vista para error 500
+                    return $this->returnResponseError($e);
+                }
         }
-
 
         return parent::render($request, $e);
     }
@@ -80,9 +74,10 @@ class Handler extends ExceptionHandler
     {
         $errorFile = last(explode('\\', $e->getFile()));
         $errorMsg = $errorFile.' (Línea '.$e->getLine().'): '.$e->getMessage();
+        $errorCode = method_exists('getStatusCode', $e) ? $e->getStatusCode() : 500;
         return response(
-                    view('errors.'.$e->getStatusCode(), compact('errorMsg')),
-                    $e->getStatusCode()
+                    view('errors.'.$errorCode, compact('errorMsg')),
+                    $errorCode
                 );
     }
 }

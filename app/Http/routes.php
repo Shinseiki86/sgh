@@ -20,7 +20,7 @@ Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 //['middleware' => ['auth', 'permission:admin']]
 
-Route::group(['prefix' => '', 'middleware' => ['auth', 'role:admin']], function() {
+Route::group(['prefix' => 'sbadmin', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::get('/home', 'SBAdminController@home');
 	Route::get('/', 'SBAdminController@home');
 	Route::get('/charts', 'SBAdminController@mcharts');
@@ -35,10 +35,10 @@ Route::group(['prefix' => '', 'middleware' => ['auth', 'role:admin']], function(
 	Route::get('/documentation', 'SBAdminController@documentation');
 });
 
+Route::get('/',  function(){
+	return view('layouts/admin');
+});
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
-	Route::get('/',  function(){
-		return view('layouts/admin');
-	});
 	Route::resource('departamentos', 'DepartamentoController');
 	Route::resource('ciudades', 'CiudadController');
 	Route::resource('cnos', 'CnosController');

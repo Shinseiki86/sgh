@@ -15,6 +15,31 @@ use Illuminate\Support\Arr;
 use SGH\Prospecto;
 
 
+if (! function_exists('expression_concat')) {
+    /**
+     * Crea un array con la llave primaria y una columna a partir de un Model.
+     * Se utiliza para contruir <select> en los views.
+     *
+     * @param  string|Model  $class
+     * @param  string  $column
+     * @param  string  $primaryKey
+     * @return array
+     */
+    function expression_concat($columns = [], $alias = 'concat')
+    {
+        $sqlIni = 'CONCAT("';
+        $sqlEnd = '") AS "'.$alias.'"';
+        $sqlColumns = null;
+        foreach ($columns as $column) {
+            $sqlColumns = !isset($sqlColumns)
+                ? $column
+                : $sqlColumns.'", \' \' , "'.$column;
+        }
+        
+        return \DB::raw($sqlIni.$sqlColumns.$sqlEnd);
+    }
+}
+
 if (! function_exists('model_to_array')) {
     /**
      * Crea un array con la llave primaria y una columna a partir de un Model.
@@ -33,22 +58,18 @@ if (! function_exists('model_to_array')) {
             $primaryKey = isset($primaryKey) ? $primaryKey : $models->first()->getKeyName();
         } else {
 
+
             $class = class_exists($class) ? $class : '\\SGH\\'.basename($class);
             $primaryKey = isset($primaryKey) ? $primaryKey : (new $class)->getKeyName();
-            $models = $class::orderBy($primaryKey)
-            ->get([ $primaryKey , $column ]);
-        }
 
-        $array = [];
-        foreach ($models as $model) {
-            $array = Arr::add(
-                $array,
-                $model->$primaryKey,
-                $model->$column
-                );
-        }
+            $query = $class::orderBy($primaryKey)->select([ $primaryKey , $column ]);
 
-        return $array;
+            //Si la columna es una expresión, se obtiene el alias de la columna
+            if($column instanceof \Illuminate\Database\Query\Expression)
+                $column = str_replace('"', '', array_last(explode(') AS ', $column->getValue())));
+
+        }
+        return $query->pluck($column, $primaryKey)->toArray();
     }
 }
 
