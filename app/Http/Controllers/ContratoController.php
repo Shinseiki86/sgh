@@ -189,20 +189,27 @@ class ContratoController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function update($PROS_ID)
+	public function update($CONT_ID)
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
+
+		if(!$request->has('MORE_ID')){	$request['MORE_ID'] = null; }
+		if(!$request->has('CONT_FECHARETIRO')){	$request['CONT_FECHARETIRO'] = null; }
+		if(!$request->has('CONT_VARIABLE')){	$request['CONT_VARIABLE'] = null; }
+		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
+		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
+
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
 
 		// Se obtiene el registro
-		$prospecto = Contrato::findOrFail($PROS_ID);
+		$contrato = Contrato::findOrFail($CONT_ID);
 		//y se actualiza con los datos recibidos.
-		$prospecto->update($request->all());
+		$contrato->update($request->all());
 
 		// redirecciona al index de controlador
-		flash_alert( 'Contrato '.$prospecto->PROS_ID.' modificado exitosamente.', 'success' );
+		flash_alert( 'Contrato '.$contrato->CONT_ID.' modificado exitosamente.', 'success' );
 		return redirect()->route('admin.contratos.index');
 	}
 
