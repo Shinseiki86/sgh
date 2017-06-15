@@ -38,7 +38,7 @@ class AuthController extends Controller
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = '/';
+	protected $redirectTo = '/admin';
 
 	/**
 	 * Create a new authentication controller instance.
@@ -107,7 +107,7 @@ class AuthController extends Controller
 
 		//Se crea un array con los roles disponibles
 		//$arrRoles = model_to_array(Rol::class, 'ROLE_descripcion');
-$arrRoles = null;
+		$arrRoles = null;
 
 		// Muestra el formulario de creación y los array para los 'select'
 		return view('auth.register', compact('arrRoles'));

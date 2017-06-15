@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.menu')
 @section('title', '/ Motivos Retiros')
 @include('datatable')
 

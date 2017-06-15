@@ -95,14 +95,18 @@ class ContratoController extends Controller
 		$arrClasescontrato = model_to_array(ClaseContrato::class, 'CLCO_DESCRIPCION');
 
 		//Se crea un array con los prospectos disponibles
-		$arrProspectos = model_to_array(Prospecto::class, 'PROS_PRIMERNOMBRE');
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+			], 'PROS_NOMBRESAPELLIDOS'));
 
 		//Se crea un array con los cargos disponibles
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
-
 
 
 		return view('admin/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro'));
@@ -127,8 +131,11 @@ class ContratoController extends Controller
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
 
+<<<<<<< HEAD
 		//dump($request);
 
+=======
+>>>>>>> 6a6d296fa518440080c2374b471fa3585fdc2c74
 		//Se crea el registro.
 		$contrato = Contrato::create($request->all());
 
