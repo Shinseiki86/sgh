@@ -131,11 +131,6 @@ class ContratoController extends Controller
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
 
-<<<<<<< HEAD
-		//dump($request);
-
-=======
->>>>>>> 6a6d296fa518440080c2374b471fa3585fdc2c74
 		//Se crea el registro.
 		$contrato = Contrato::create($request->all());
 
@@ -198,13 +193,6 @@ class ContratoController extends Controller
 	{
 		//Datos recibidos desde la vista.
 		$request = request();
-
-		if(!$request->has('MORE_ID')){	$request['MORE_ID'] = null; }
-		if(!$request->has('CONT_FECHARETIRO')){	$request['CONT_FECHARETIRO'] = null; }
-		if(!$request->has('CONT_VARIABLE')){	$request['CONT_VARIABLE'] = null; }
-		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
-		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
-
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
 
