@@ -66,13 +66,33 @@ class CreateTableTickets extends Migration
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
 
 
-            //Relación con tabla EMPLEADORES
-            $table->foreign('GERE_ID')
-                ->references('GERE_ID')
-                ->on('GERENCIAS')
+            //Relación con tabla CONTRATOS
+            $table->foreign('CONT_ID')
+                ->references('CONT_ID')
+                ->on('CONTRATOS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            //Relación con tabla ESTADOSTICKETS
+            $table->foreign('ESTI_ID')
+                ->references('ESTI_ID')
+                ->on('ESTADOSTICKETS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Relación con tabla PRIORIDADES
+            $table->foreign('PRIO_ID')
+                ->references('PRIO_ID')
+                ->on('PRIORIDADES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Relación con tabla CONTRATOS
+            $table->foreign('CATE_ID')
+                ->references('CATE_ID')
+                ->on('CATEGORIAS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
         });
         

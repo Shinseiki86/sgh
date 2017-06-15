@@ -31,7 +31,7 @@ class CreateTableCentrocostos extends Migration
                 ->comment('descripción de la gerencia, ej: gerencia de ventas, gerencia de mercadeo');
 
             $table->unsignedInteger('GERE_ID')
-                ->comment('relacion a la tabla gerencias');;
+                ->comment('relacion a la tabla gerencias');
 
             $table->string('CECO_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();
