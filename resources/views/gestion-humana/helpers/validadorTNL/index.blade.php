@@ -9,7 +9,7 @@
 		</div>
 
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('gestion-humana.uploads.create') }}" data-tooltip="tooltip" title="Nueva Validación">
+			<a class='btn btn-primary' role='button' href="{{ route('tnl.create') }}" data-tooltip="tooltip" title="Nueva Validación">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -19,12 +19,6 @@
 @endsection
 
 @section('section')
-
-	{{-- Paginate --}}
-	<div class="row">
-		
-		
-	</div>
 
 	<table class="table table-striped" id="tabla">
 		<thead>

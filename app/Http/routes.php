@@ -66,10 +66,10 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('contratos', 'ContratoController');
 		Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {
 			//upload tablas de TNL
-			//Route::get('upload', 'UploadController@index');
-			Route::post('validadorTNL/upload', 'TnlController@upload');
-			Route::get('validadorTNL', 'TnlController@index');
-			Route::post('validadorTNL/delete', 'TnlController@delete');
+			Route::get('validadorTNL', 'TnlController@index')->name('tnl.index');
+			Route::get('validadorTNL/upload', 'TnlController@create')->name('tnl.create');
+			Route::post('validadorTNL/upload', 'TnlController@store')->name('tnl.store');
+			Route::post('validadorTNL/delete', 'TnlController@delete')->name('tnl.delete');
 		});
 	});
 });

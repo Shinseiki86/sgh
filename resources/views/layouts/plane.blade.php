@@ -48,7 +48,7 @@
 		{!! Html::script('assets/scripts/datatable/responsive.bootstrap.min.js') !!}
 		{!! Html::script('assets/scripts/metisMenu.min.js') !!}
 	{{--datatable--}}
-	@yield('scripts')
 
+	@yield('scripts')
 </body>
 </html>

@@ -5,7 +5,7 @@
 @section('section')
 
 	
-	{{ Form::open(['route' => 'gestion-humana.uploads.store', 'class' => 'form-vertical', 'files'=>true]) }}
+	{{ Form::open(['route' => 'tnl.store', 'class' => 'form-vertical', 'files'=>true]) }}
 
 		<div class="text-right">
 			<a class='btn btn-info' role='button' href="{{ asset('templates/TemplateCargaTNL_INCAP.xlsx') }}" download>
@@ -27,11 +27,11 @@
 			</div>
 		</div>
 
-			<br>	
+		<br>	
 		<!-- Botones -->
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4 text-right">
-				<a class="btn btn-warning" role="button" href="{{ URL::to('gestion-humana/uploads/') }}" data-tooltip="tooltip" title="Regresar">
+				<a class="btn btn-warning" role="button" href="{{ route('tnl.index') }}" data-tooltip="tooltip" title="Regresar">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i>
 				</a>
 				{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i>', [
