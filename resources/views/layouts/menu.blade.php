@@ -101,40 +101,39 @@
                         <!-- /input-group -->
                     </li>
 
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Parametros Generales<span class="fa arrow"></span></a>
+                    <li {{ (Request::is('cnfg-*') ? 'class=active' : '') }}>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Parametros Generales<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Parametros de Contratos<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-handshake-o fa-fw"></i> Contratos<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
 
-                                    <li {{ (Request::is('*admin/cnos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/cnos') }}"><i class="fa fa-globe fa-fw"></i> Clasificación de ocupaciones</a>
-
+                                    <li {{ (Request::is('*/cnos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/cnos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Clasificación de ocupaciones</a>
                                     </li>
                                     
-                                    <li {{ (Request::is('*admin/cargos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/cargos') }}"><i class="fa fa-globe fa-fw"></i> Cargos</a>
+                                    <li {{ (Request::is('*/cargos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/cargos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Cargos</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/tiposcontratos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/tiposcontratos') }}"><i class="fa fa-globe fa-fw"></i> Tipos de contratos</a>
+                                    <li {{ (Request::is('*/tiposcontratos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/tiposcontratos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Tipos de contratos</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/temporales') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/temporales') }}"><i class="fa fa-globe fa-fw"></i> Empresas temporales</a>
+                                    <li {{ (Request::is('*/temporales') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/temporales') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Empresas temporales</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/clasescontratos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/clasescontratos') }}"><i class="fa fa-globe fa-fw"></i> Clases de contratos</a>
+                                    <li {{ (Request::is('*/clasescontratos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/clasescontratos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Clases de contratos</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/estadoscontratos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/estadoscontratos') }}"><i class="fa fa-globe fa-fw"></i> Estados de contratos</a>
+                                    <li {{ (Request::is('*/estadoscontratos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/estadoscontratos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Estados de contratos</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/motivosretiros') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/motivosretiros') }}"><i class="fa fa-globe fa-fw"></i> Motivos de retiro</a>
+                                    <li {{ (Request::is('*/motivosretiros') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/motivosretiros') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Motivos de retiro</a>
                                     </li>
 
                                 </ul>
@@ -142,63 +141,59 @@
                             </li>
 
                             <li>
-                                <a href="#">Parametros Organizacionales<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Organizacionales<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
 
-                                    <li {{ (Request::is('*admin/empleadores') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/empleadores') }}"><i class="fa fa-globe fa-fw"></i> Empleadores</a>
+                                    <li {{ (Request::is('*/empleadores') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('admin/empleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Empleadores</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/gerencias') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/gerencias') }}"><i class="fa fa-globe fa-fw"></i> Gerencias</a>
+                                    <li {{ (Request::is('*/gerencias') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('admin/gerencias') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Gerencias</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/centroscostos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/centroscostos') }}"><i class="fa fa-globe fa-fw"></i> Centros de costos</a>
+                                    <li {{ (Request::is('*/centroscostos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('admin/centroscostos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Centros de costos</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/tiposempleadores') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/tiposempleadores') }}"><i class="fa fa-globe fa-fw"></i> Tipos de empleadores</a>
+                                    <li {{ (Request::is('*/tiposempleadores') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('admin/tiposempleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Tipos de empleadores</a>
                                     </li>
 
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
 
-                            <li>
-                                <a href="#">Parametros Geográficos<span class="fa arrow"></span></a>
+                            <li {{ (Request::is('*/cnfg-geograficos/*') ? 'class=active' : '') }}>
+                                <a href="#"><i class="fa fa-globe fa-fw"></i> Geográficos<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
 
-                                    <li {{ (Request::is('*admin/departamentos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/departamentos') }}"><i class="fa fa-globe fa-fw"></i> Departamentos</a>
+                                    <li {{ (Request::is('*/departamentos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-geograficos/departamentos') }}"><i class="fa fa-building-o fa-fw"></i> Departamentos</a>
                                     </li>
 
-                                    <li {{ (Request::is('*admin/ciudades') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/ciudades') }}"><i class="fa fa-building-o fa-fw"></i> Ciudades</a>
+                                    <li {{ (Request::is('*/ciudades') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-geograficos/ciudades') }}"><i class="fa fa-building-o fa-fw"></i> Ciudades</a>
                                     </li>
 
                                     
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
-
-                            
-
-                            
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
 
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Gestión Humana<span class="fa arrow"></span></a>
+                    <li {{ (Request::is('gestion-humana/*') ? 'class=active' : '') }}>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Gestión Humana<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
-                            <li {{ (Request::is('*admin/prospectos') ? 'class=active' : '') }}>
-                                <a href="{{ url ('admin/prospectos') }}"><i class="fa fa-globe fa-fw"></i> Hoja de Vida</a>
+                            <li {{ (Request::is('*/prospectos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('gestion-humana/prospectos') }}">Hoja de Vida</a>
                             </li>
 
-                            <li {{ (Request::is('*admin/contratos') ? 'class=active' : '') }}>
-                                <a href="{{ url ('admin/contratos') }}"><i class="fa fa-globe fa-fw"></i> Gestión de Contratos</a>
+                            <li {{ (Request::is('*/contratos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('gestion-humana/contratos') }}">Gestión de Contratos</a>
                             </li>
 
                             <li>
@@ -207,8 +202,8 @@
 
 
 
-                                    <li {{ (Request::is('*admin/uploads') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/uploads') }}"><i class="fa fa-globe fa-fw"></i> Validador de TNL</a>
+                                    <li {{ (Request::is('*/uploads') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('gestion-humana/helpers/validadorTNL') }}">Validador de TNL</a>
                                     </li>
 
                                 </ul>
@@ -217,11 +212,6 @@
 
                         </ul>
                         <!-- /.nav-second-level -->
-                    </li>
-
-
-                    <li {{ (Request::is('*documentation') ? 'class=active' : '') }}>
-                        <a href="{{ url ('documentation') }}"><i class="fa fa-file-word-o fa-fw"></i> Documentation</a>
                     </li>
 
 

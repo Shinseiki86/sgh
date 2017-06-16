@@ -35,30 +35,42 @@ Route::group(['prefix' => 'sbadmin', 'middleware' => ['auth', 'role:admin']], fu
 	Route::get('/documentation', 'SBAdminController@documentation');
 });
 
-Route::get('/',  function(){
-	return view('layouts/admin');
+Route::group(['middleware' => 'auth'], function() {
+	Route::get('/',  function(){return view('layouts/menu');});
 });
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
-	Route::resource('departamentos', 'DepartamentoController');
-	Route::resource('ciudades', 'CiudadController');
-	Route::resource('cnos', 'CnosController');
-	Route::resource('cargos', 'CargoController');
-	Route::resource('tiposcontratos', 'TipoContratoController');
-	Route::resource('temporales', 'TemporalController');
-	Route::resource('empleadores', 'EmpleadorController');
-	Route::resource('prospectos', 'ProspectoController');
-	Route::resource('clasescontratos', 'ClaseContratoController');
-	Route::resource('gerencias', 'GerenciaController');
-	Route::resource('centroscostos', 'CentroCostoController');
-	Route::resource('tiposempleadores', 'TipoEmpleadorController');
-	Route::resource('estadoscontratos', 'EstadoContratoController');
-	Route::resource('motivosretiros', 'MotivoRetiroController');
-	Route::resource('contratos', 'ContratoController');
-	//upload tablas de TNL
-	//Route::get('upload', 'UploadController@index');
-	Route::post('upload', 'UploadController@upload');
 
-	Route::resource('uploads', 'UploadController');
+Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 
-	Route::post('delete', 'UploadController@delete');
+
+	Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], function() {
+		Route::resource('cnos', 'CnosController');
+		Route::resource('cargos', 'CargoController');
+		Route::resource('tiposcontratos', 'TipoContratoController');
+		Route::resource('temporales', 'TemporalController');
+		Route::resource('clasescontratos', 'ClaseContratoController');
+		Route::resource('estadoscontratos', 'EstadoContratoController');
+		Route::resource('motivosretiros', 'MotivoRetiroController');
+	});
+	Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizacionales'], function() {
+		Route::resource('empleadores', 'EmpleadorController');
+		Route::resource('gerencias', 'GerenciaController');
+		Route::resource('centroscostos', 'CentroCostoController');
+		Route::resource('tiposempleadores', 'TipoEmpleadorController');
+	});
+	Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
+		Route::resource('departamentos', 'DepartamentoController');
+		Route::resource('ciudades', 'CiudadController');
+	});
+	Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
+		Route::resource('prospectos', 'ProspectoController');
+		Route::resource('contratos', 'ContratoController');
+		Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {
+			//upload tablas de TNL
+			//Route::get('upload', 'UploadController@index');
+			Route::post('validadorTNL/upload', 'TnlController@upload');
+			Route::get('validadorTNL', 'TnlController@index');
+			Route::post('validadorTNL/delete', 'TnlController@delete');
+		});
+	});
 });
+
