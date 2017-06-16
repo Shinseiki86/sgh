@@ -27,13 +27,20 @@ if (! function_exists('expression_concat')) {
      */
     function expression_concat($columns = [], $alias = 'concat')
     {
-        $sqlIni = 'CONCAT("';
-        $sqlEnd = '") AS "'.$alias.'"';
+        if(env('DB_CONNECTION') == 'pgsql'){
+            foreach ($columns as $key => $column) {
+                $columns[$key] = '"'.$column.'"';
+            }
+            $alias = '"'.$alias.'"';
+        }
+
+        $sqlIni = 'CONCAT(';
+        $sqlEnd = ') AS '.$alias;
         $sqlColumns = null;
         foreach ($columns as $column) {
             $sqlColumns = !isset($sqlColumns)
                 ? $column
-                : $sqlColumns.'", \' \' , "'.$column;
+                : $sqlColumns.', \' \' , '.$column;
         }
         
         return \DB::raw($sqlIni.$sqlColumns.$sqlEnd);
