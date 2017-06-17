@@ -75,6 +75,16 @@ use SGH\Permission;
                 // role attach alias
                 $owner->attachRole($rolOwner);
 
+                //Owner
+                $owner = User::create( [
+                    'name' => 'Owner1',
+                    'username' => 'owner1',
+                    'email' => 'rodriguez221293@outlook.com',
+                    'password'  => \Hash::make($pass)
+                ]);
+                // role attach alias
+                $owner->attachRole($rolOwner);
+
 
                 //Editores
                 $editor1 = User::create( [
