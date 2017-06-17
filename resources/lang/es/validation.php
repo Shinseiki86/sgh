@@ -152,6 +152,12 @@ return [
 
         'CIUD_CODIGO'           => 'Código ciudad',
         'CIUD_DESCRIPCION'      => 'Descripción',
+
+        'GERE_DESCRIPCION'      => 'Descripción',
+        'GERE_OBSERVACIONES'    => 'Observaciones',
+        
+        'PROC_DESCRIPCION'      => 'Descripción',
+        'PROC_OBSERVACIONES'    => 'Observaciones',
     ],
 
 ];

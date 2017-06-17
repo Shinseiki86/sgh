@@ -2,9 +2,28 @@
 
 @section('page_heading', 'Actualizar Gerencia '.$gerencia->GERE_ID)
 
-@section('section')
+@section('head')
+	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
+@parent
+@endsection
 
-	{{ Form::model($gerencia, ['action' => ['GerenciaController@update', $gerencia->GERE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+@section('scripts')
+	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
+	<script type="text/javascript">
+		var options = {
+			disable_search_threshold: 5,
+			width: '100%',
+			placeholder_text_single: 'Seleccione una opción',
+			placeholder_text_multiple: 'Seleccione algunas opciones',
+			no_results_text: 'Ningún resultado coincide.'
+		};
+		$("#PROC_ids").val({{$PROC_ids}}).chosen(options); 
+	</script>
+@parent
+@endsection
+
+@section('section')
+	{{ Form::model($gerencia, ['action' => ['CnfgOrganizacionales\GerenciaController@update', $gerencia->GERE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('GERE_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('GERE_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}
@@ -29,6 +48,24 @@
 				@if ($errors->has('EMPL_ID'))
 					<span class="help-block">
 						<strong>{{ $errors->first('EMPL_ID') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('PROC_ids') ? ' has-error' : '' }}">
+			{{ Form::label('PROC_ids', 'Procesos', [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::select('PROC_ids', $arrProcesos , old('PROC_ids'), [
+					'id'=>'PROC_ids',
+					'name'=>'PROC_ids[]',
+					'data-placeholder'=>'Seleccione los procesos...',
+					'class' => 'form-control chosen-select',
+					'multiple'
+				]) }}
+				@if ($errors->has('PROC_ids'))
+					<span class="help-block">
+						<strong>{{ $errors->first('PROC_ids') }}</strong>
 					</span>
 				@endif
 			</div>

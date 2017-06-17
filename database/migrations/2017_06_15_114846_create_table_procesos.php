@@ -21,7 +21,7 @@ class CreateTableProcesos extends Migration
             $table->increments('PROC_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla.');
 
-            $table->string('PROC_DESCRIPCION', 300)
+            $table->string('PROC_DESCRIPCION', 100)
                 ->comment('descripción del proceso Ej: admon de personal, selección y desarrollo');
 
             $table->string('PROC_OBSERVACIONES', 300)

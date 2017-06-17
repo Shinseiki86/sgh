@@ -15,13 +15,6 @@ use SGH\Empleador;
 
 class GerenciaController extends Controller
 {
-    //
-
-    public function __construct()
-	{
-		$this->middleware('auth');
-	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -29,12 +22,13 @@ class GerenciaController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $GERE_ID = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'GERE_DESCRIPCION' => ['required', 'max:100'],
+		$validator = Validator::make($data, [
+			'GERE_DESCRIPCION' => ['required','max:100','unique:GERENCIAS,GERE_DESCRIPCION,'.$GERE_ID.',GERE_ID'],
 			'EMPL_ID' => ['required'],
 			'GERE_OBSERVACIONES' => ['max:300'],
+			'PROC_ids' => ['array'],
 		]);
 
 		if ($validator->fails())
@@ -67,8 +61,9 @@ class GerenciaController extends Controller
 		//Se crea un array con los CNOS disponibles
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		return view('cnfg-organizacionales/gerencias/create', compact('arrEmpleadores'));
-		
+		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
+
+		return view('cnfg-organizacionales/gerencias/create', compact('arrEmpleadores', 'arrProcesos'));
 	}
 
 	/**
@@ -79,15 +74,19 @@ class GerenciaController extends Controller
 	public function store()
 	{
 		//Datos recibidos desde la vista.
-		$request = request();
+		$data = request()->all();
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
+		$this->validator($data);
 
 		//Se crea el registro.
-		$cargo = Gerencia::create($request->all());
+		$gerencia = Gerencia::create($data);
+		
+		//Relación con procesos
+		$PROC_ids = isset($data['PROC_ids']) ? $data['PROC_ids'] : [];
+		$gerencia->procesos()->sync($PROC_ids, true);
 
 		// redirecciona al index de controlador
-		flash_alert( 'Gerencia '.$cargo->GERE_ID.' creado exitosamente.', 'success' );
+		flash_alert( 'Gerencia '.$gerencia->GERE_ID.' creada exitosamente.', 'success' );
 		return redirect()->route('cnfg-organizacionales.gerencias.index');
 	}
 
@@ -106,8 +105,12 @@ class GerenciaController extends Controller
 		//Se crea un array con los CNOS disponibles
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
+		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
+
+		$PROC_ids = $gerencia->procesos->pluck('PROC_ID')->toJson();
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/gerencias/edit', compact('gerencia', 'arrEmpleadores'));
+		return view('cnfg-organizacionales/gerencias/edit', compact('gerencia', 'arrEmpleadores', 'arrProcesos', 'PROC_ids'));
 	}
 
 
@@ -120,17 +123,21 @@ class GerenciaController extends Controller
 	public function update($GERE_ID)
 	{
 		//Datos recibidos desde la vista.
-		$request = request();
+		$data = request()->all();
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
+		$this->validator($data, $GERE_ID);
 
 		// Se obtiene el registro
-		$cargo = Gerencia::findOrFail($GERE_ID);
+		$gerencia = Gerencia::findOrFail($GERE_ID);
 		//y se actualiza con los datos recibidos.
-		$cargo->update($request->all());
+		$gerencia->update($data);
+
+		//Relación con procesos
+		$PROC_ids = isset($data['PROC_ids']) ? $data['PROC_ids'] : [];
+		$gerencia->procesos()->sync($PROC_ids, true);
 
 		// redirecciona al index de controlador
-		flash_alert( 'Gerencia '.$cargo->GERE_ID.' modificado exitosamente.', 'success' );
+		flash_alert( 'Gerencia '.$gerencia->GERE_ID.' modificada exitosamente.', 'success' );
 		return redirect()->route('cnfg-organizacionales.gerencias.index');
 	}
 
@@ -142,14 +149,14 @@ class GerenciaController extends Controller
 	 */
 	public function destroy($GERE_ID, $showMsg=True)
 	{
-		$cargo = Gerencia::findOrFail($GERE_ID);
+		$gerencia = Gerencia::findOrFail($GERE_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($cargo->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Gerencia '.$cargo->GERE_ID.' no se puede borrar.', 'danger' );
+		if($gerencia->TIPR_creadopor == 'SYSTEM'){
+			flash_modal( 'Gerencia '.$gerencia->GERE_ID.' no se puede borrar.', 'danger' );
 		} else {
-			$cargo->delete();
-				flash_alert( 'Gerencia '.$cargo->GERE_ID.' eliminado exitosamente.', 'success' );
+			$gerencia->delete();
+				flash_alert( 'Gerencia '.$gerencia->GERE_ID.' eliminado exitosamente.', 'success' );
 		}
 
 		return redirect()->route('cnfg-organizacionales.gerencias.index');

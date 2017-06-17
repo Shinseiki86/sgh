@@ -22,4 +22,14 @@ class Proceso extends ModelWithSoftDeletes
 		'PROC_OBSERVACIONES',
 	];
 
+	/*
+	 * Relación PROCESOS-GERENCIAS (muchos a muchos). 
+	 */
+	public function gerencias()
+	{
+		$foreingKey = 'PROC_ID';
+		$otherKey   = 'GERE_ID';
+		return $this->belongsToMany(Gerencia::class, 'GERENCIAS_PROCESOS', $foreingKey,  $otherKey);
+	}
+
 }

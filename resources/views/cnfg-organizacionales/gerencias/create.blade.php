@@ -2,6 +2,26 @@
 
 @section('page_heading', 'Nueva Gerencia')
 
+@section('head')
+	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
+@parent
+@endsection
+
+@section('scripts')
+	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
+	<script type="text/javascript">
+		var options = {
+			disable_search_threshold: 5,
+			width: '100%',
+			placeholder_text_single: 'Seleccione una opción',
+			placeholder_text_multiple: 'Seleccione algunas opciones',
+			no_results_text: 'Ningún resultado coincide.'
+		};
+		$(".chosen-select").chosen(options); 
+	</script>
+@parent
+@endsection
+
 @section('section')
 	
 	{{ Form::open(['route' => 'cnfg-organizacionales.gerencias.store', 'class' => 'form-horizontal']) }}
@@ -34,6 +54,24 @@
 			</div>
 		</div>
 
+		<div class="form-group{{ $errors->has('PROC_ids') ? ' has-error' : '' }}">
+			{{ Form::label('PROC_ids', 'Procesos', [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::select('PROC_ids', $arrProcesos , old('PROC_ids'), [
+					'id'=>'PROC_ids',
+					'name'=>'PROC_ids[]',
+					'data-placeholder'=>'Seleccione los procesos...',
+					'class' => 'form-control chosen-select',
+					'multiple'
+				]) }}
+				@if ($errors->has('PROC_ids'))
+					<span class="help-block">
+						<strong>{{ $errors->first('PROC_ids') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
 		<div class="form-group{{ $errors->has('GERE_OBSERVACIONES') ? ' has-error' : '' }}">
 			{{ Form::label('GERE_OBSERVACIONES', 'Observaciones',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
@@ -45,7 +83,7 @@
 				@endif
 			</div>
 		</div>
-		
+
 		<!-- Botones -->
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4 text-right">

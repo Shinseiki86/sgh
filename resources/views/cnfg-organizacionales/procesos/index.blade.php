@@ -1,14 +1,14 @@
 @extends('layouts.menu')
-@section('title', '/ Gerencias')
+@section('title', '/ Procesos')
 @include('datatable')
 
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-			Gerencias
+			Procesos
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('cnfg-organizacionales.gerencias.create') }}" data-tooltip="tooltip" title="Crear Gerencia">
+			<a class='btn btn-primary' role='button' href="{{ route('cnfg-organizacionales.procesos.create') }}" data-tooltip="tooltip" title="Crear Proceso">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -20,24 +20,22 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">Empresa</th>
 				<th class="col-md-5">Descripción</th>
-				<th class="col-md-5">Procesos</th>
+				<th class="col-md-5">Gerencias</th>
 				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
 
 		<tbody>
-			@foreach($gerencias as $gerencia)
+			@foreach($procesos as $proceso)
 			<tr>
-				<td>{{ $gerencia -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
-				<td>{{ $gerencia -> GERE_DESCRIPCION }}</td>
-				<td>{{ $gerencia -> procesos -> count() }}</td>
-				<td>{{ $gerencia -> GERE_CREADOPOR }}</td>
+				<td>{{ $proceso -> PROC_DESCRIPCION }}</td>
+				<td>{{ $proceso -> gerencias -> count() }}</td>
+				<td>{{ $proceso -> PROC_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-organizacionales.gerencias.edit', [ 'GERE_ID' => $gerencia->GERE_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-organizacionales.procesos.edit', [ 'PROC_ID' => $proceso->PROC_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 
@@ -45,10 +43,10 @@
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
 						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
-						'data-id'=> $gerencia->GERE_ID,
-						'data-modelo'=> str_upperspace(class_basename($gerencia)),
-						'data-descripcion'=> $gerencia->GERE_DESCRIPCION,
-						'data-action'=> 'gerencias/'.$gerencia->GERE_ID,
+						'data-id'=> $proceso->PROC_ID,
+						'data-modelo'=> str_upperspace(class_basename($proceso)),
+						'data-descripcion'=> $proceso->PROC_DESCRIPCION,
+						'data-action'=> 'procesos/'.$proceso->PROC_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',

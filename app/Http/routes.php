@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 	Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizacionales'], function() {
 		Route::resource('empleadores', 'EmpleadorController');
 		Route::resource('gerencias', 'GerenciaController');
+		Route::resource('procesos', 'ProcesoController');
 		Route::resource('centroscostos', 'CentroCostoController');
 		Route::resource('tiposempleadores', 'TipoEmpleadorController');
 	});

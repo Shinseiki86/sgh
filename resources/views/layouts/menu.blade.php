@@ -145,19 +145,23 @@
                                 <ul class="nav nav-third-level">
 
                                     <li {{ (Request::is('*/empleadores') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/empleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Empleadores</a>
+                                        <a href="{{ url ('cnfg-organizacionales/empleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Empleadores</a>
                                     </li>
 
                                     <li {{ (Request::is('*/gerencias') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/gerencias') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Gerencias</a>
+                                        <a href="{{ url ('cnfg-organizacionales/gerencias') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Gerencias</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/procesos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-organizacionales/procesos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Procesos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/centroscostos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/centroscostos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Centros de costos</a>
+                                        <a href="{{ url ('cnfg-organizacionales/centroscostos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Centros de costos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/tiposempleadores') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('admin/tiposempleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Tipos de empleadores</a>
+                                        <a href="{{ url ('cnfg-organizacionales/tiposempleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Tipos de empleadores</a>
                                     </li>
 
                                 </ul>

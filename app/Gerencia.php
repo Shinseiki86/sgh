@@ -30,4 +30,14 @@ class Gerencia extends ModelWithSoftDeletes
 		return $this->belongsTo(Empleador::class, $foreingKey);
 	}
 
+	/*
+	 * Relación PROCESOS-GERENCIAS (muchos a muchos). 
+	 */
+	public function procesos()
+	{
+		$foreingKey = 'GERE_ID';
+		$otherKey   = 'PROC_ID';
+		return $this->belongsToMany(Proceso::class, 'GERENCIAS_PROCESOS', $foreingKey,  $otherKey);
+	}
+
 }
