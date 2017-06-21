@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($motivoretiro, ['action' => ['MotivoRetiroController@update', $motivoretiro->MORE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($motivoretiro, ['action' => ['CnfgContratos\MotivoRetiroController@update', $motivoretiro->MORE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('MORE_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('MORE_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}

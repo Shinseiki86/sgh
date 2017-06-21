@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($tipoempleador, ['action' => ['TipoEmpleadorController@update', $tipoempleador->TIEM_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($tipoempleador, ['action' => ['CnfgOrganizacionales\TipoEmpleadorController@update', $tipoempleador->TIEM_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('TIEM_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('TIEM_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}

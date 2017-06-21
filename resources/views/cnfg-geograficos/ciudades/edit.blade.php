@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($ciudad, ['action' => ['CiudadController@update', $ciudad->CIUD_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($ciudad, ['action' => ['CnfgGeograficos\CiudadController@update', $ciudad->CIUD_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('CIUD_CODIGO') ? ' has-error' : '' }}">
 			{{ Form::label('CIUD_CODIGO', 'Código',  [ 'class' => 'col-md-4 control-label' ]) }}

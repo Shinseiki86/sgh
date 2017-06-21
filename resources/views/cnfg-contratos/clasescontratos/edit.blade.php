@@ -1,10 +1,10 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Tipo de contrato '.$clasecontrato->CNOS_ID)
+@section('page_heading', 'Actualizar clase de contrato '.$clasecontrato->CNOS_ID)
 
 @section('section')
 
-	{{ Form::model($clasecontrato, ['action' => ['ClaseContratoController@update', $clasecontrato->CLCO_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($clasecontrato, ['action' => ['CnfgContratos\ClaseContratoController@update', $clasecontrato->CLCO_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('CLCO_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('CLCO_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}

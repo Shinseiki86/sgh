@@ -4,7 +4,7 @@
 
 @section('section')
 
-{{ Form::model($prospecto, ['action' => ['ProspectoController@update', $prospecto->PROS_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+{{ Form::model($prospecto, ['action' => ['GestionHumana\ProspectoController@update', $prospecto->PROS_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 <div class="col-sm-17">
 	<div class="row" well>

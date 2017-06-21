@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($cargo, ['action' => ['CargoController@update', $cargo->CARG_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($cargo, ['action' => ['CnfgContratos\CargoController@update', $cargo->CARG_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('CARG_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('CARG_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}

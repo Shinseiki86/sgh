@@ -61,7 +61,7 @@ class ProspectoController extends Controller
 		//Se obtienen todos los registros.
 		$prospectos = Prospecto::all();
 		//Se carga la vista y se pasan los registros
-		return view('gestion-humana/prospectos/index', compact('prospectos'));
+		return view('gestion-humana.prospectos.index', compact('prospectos'));
 	}
 
 	/**

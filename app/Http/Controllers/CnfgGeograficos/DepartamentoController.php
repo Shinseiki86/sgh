@@ -95,7 +95,7 @@ class DepartamentoController extends Controller
 		$departamento = Departamento::findOrFail($DEPA_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('admin/departamentos/edit', compact('departamento'));
+		return view('cnfg-geograficos/departamentos/edit', compact('departamento'));
 	}
 
 

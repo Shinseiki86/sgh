@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="form-group{{ $errors->has('GERE_ids') ? ' has-error' : '' }}">
-			{{ Form::label('GERE_ids', 'Procesos', [ 'class' => 'col-md-4 control-label' ]) }}
+			{{ Form::label('GERE_ids', 'Gerencias', [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
 				{{ Form::select('GERE_ids', $arrGerencias , old('GERE_ids'), [
 					'id'=>'GERE_ids',
@@ -71,7 +71,7 @@
 		<!-- Botones -->
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4 text-right">
-				<a class="btn btn-warning" role="button" href="{{ URL::to('cnfg-organizacionales/cargos/') }}" data-tooltip="tooltip" title="Regresar">
+				<a class="btn btn-warning" role="button" href="{{ URL::to('cnfg-organizacionales/procesos/') }}" data-tooltip="tooltip" title="Regresar">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i>
 				</a>
 				{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i>', [

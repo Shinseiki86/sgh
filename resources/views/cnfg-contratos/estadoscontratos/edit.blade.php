@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($estadocontrato, ['action' => ['EstadoContratoController@update', $estadocontrato->ESCO_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($estadocontrato, ['action' => ['CnfgContratos\EstadoContratoController@update', $estadocontrato->ESCO_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('ESCO_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('ESCO_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}

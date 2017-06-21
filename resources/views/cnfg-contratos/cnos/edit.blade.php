@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($cno, ['action' => ['CnosController@update', $cno->CNOS_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($cno, ['action' => ['CnfgContratos\CnosController@update', $cno->CNOS_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('CNOS_CODIGO') ? ' has-error' : '' }}">
 			{{ Form::label('CNOS_CODIGO', 'Código',  [ 'class' => 'col-md-4 control-label' ]) }}

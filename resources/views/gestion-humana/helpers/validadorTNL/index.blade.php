@@ -49,23 +49,7 @@
 				<td>{{ $incap -> INCA_PRIMERDIAAT }}</td>
 				<td>{{ $incap -> INCA_DOCUMENTO }}</td>
 				<td>
-					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('gestion-humana.validadorTNL.edit', [ 'DEPA_ID' => $incap->DEPA_ID ] ) }}" data-tooltip="tooltip" title="Editar">
-						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-					</a>
-
-					<!-- carga botón de borrar -->
-					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'class'=>'btn btn-xs btn-danger btn-delete',
-						'data-toggle'=>'modal',
-						'data-id'=> $incap->DEPA_ID,
-						'data-modelo'=> str_upperspace(class_basename($incap)),
-						'data-descripcion'=> $incap->DEPA_DESCRIPCION,
-						'data-action'=>'incaps/'. $incap->DEPA_ID,
-						'data-target'=>'#pregModalDelete',
-						'data-tooltip'=>'tooltip',
-						'title'=>'Borrar',
-					])}}
+					
 				</td>
 			</tr>
 			@endforeach

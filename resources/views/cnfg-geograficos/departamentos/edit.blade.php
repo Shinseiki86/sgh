@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($departamento, ['action' => ['DepartamentoController@update', $departamento->DEPA_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($departamento, ['action' => ['CnfgGeograficos\DepartamentoController@update', $departamento->DEPA_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('DEPA_CODIGO') ? ' has-error' : '' }}">
 			{{ Form::label('DEPA_CODIGO', 'Código',  [ 'class' => 'col-md-4 control-label' ]) }}

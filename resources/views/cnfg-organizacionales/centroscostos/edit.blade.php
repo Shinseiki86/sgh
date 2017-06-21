@@ -4,7 +4,7 @@
 
 @section('section')
 
-	{{ Form::model($centrocosto, ['action' => ['CentroCostoController@update', $centrocosto->CECO_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($centrocosto, ['action' => ['CnfgOrganizacionales\CentroCostoController@update', $centrocosto->CECO_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('CECO_CODIGO') ? ' has-error' : '' }}">
 			{{ Form::label('CECO_CODIGO', 'Codigo',  [ 'class' => 'col-md-4 control-label' ]) }}
