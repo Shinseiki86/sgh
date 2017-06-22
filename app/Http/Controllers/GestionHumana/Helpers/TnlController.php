@@ -231,8 +231,8 @@ class TnlController extends Controller
 		//declaración de arreglo que contendrá los TNL que también estan en Incapacidades
 		$arrtnlenincap = array();
 
-		foreach ($incapacidades as $inc) {
-			foreach ($tnls as $tnl) {
+		foreach ($tnls as $tnl) {
+			foreach ($incapacidades as $inc) {
 				//$format = 'Y-m-d';
 				$diainiinca = new Carbon($inc->INCA_FECHAINICIO);
 				$diainitnl =  new Carbon($tnl->TNLA_FECHAINICIO);
@@ -302,7 +302,7 @@ class TnlController extends Controller
 				}
 
 				//si el TNL se encuentra contenido en una incapacidad
-				if(($diainitnl > $diainiinca && $diafintnl == $diafininca) && $inc->INCA_IDENTIFICACION == $tnl->TNLA_IDENTIFICACION){
+				if(($diainitnl >= $diainiinca && $diafintnl <= $diafininca) && $inc->INCA_IDENTIFICACION == $tnl->TNLA_IDENTIFICACION){
 
 					$arrtnlenincap[$cont2] = [
 
