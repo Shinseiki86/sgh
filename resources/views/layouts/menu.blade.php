@@ -214,6 +214,22 @@
                                 <!-- /.nav-third-level -->
                             </li>
 
+                            <li>
+                                <a href="#">Ticket Disciplinario<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+
+                                    <li {{ (Request::is('*/uploads') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/prioridades') }}">Prioridades</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/uploads') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/estadostickets') }}">Estados</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
+
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>

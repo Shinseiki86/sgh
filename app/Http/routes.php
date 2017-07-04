@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('estadoscontratos', 'EstadoContratoController');
 		Route::resource('motivosretiros', 'MotivoRetiroController');
 	});
+
 	Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizacionales'], function() {
 		Route::resource('empleadores', 'EmpleadorController');
 		Route::resource('gerencias', 'GerenciaController');
@@ -58,10 +59,12 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('centroscostos', 'CentroCostoController');
 		Route::resource('tiposempleadores', 'TipoEmpleadorController');
 	});
+
 	Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
 		Route::resource('departamentos', 'DepartamentoController');
 		Route::resource('ciudades', 'CiudadController');
 	});
+
 	Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
 		Route::resource('prospectos', 'ProspectoController');
 		Route::resource('contratos', 'ContratoController');
@@ -73,5 +76,11 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 			Route::post('validadorTNL/delete', 'TnlController@delete')->name('tnl.delete');
 		});
 	});
+
+	Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], function() {
+		Route::resource('prioridades', 'PrioridadController');
+		Route::resource('estadostickets', 'EstadoTicketController');
+	});
+
 });
 
