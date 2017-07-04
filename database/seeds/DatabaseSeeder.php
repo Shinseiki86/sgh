@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProcesosTableSeeder::class);
         $this->call(CentroscostosTableSeeder::class);
         $this->call(TiposempleadoresTableSeeder::class);
+        $this->call(RiesgosTableSeeder::class);
         $this->call(EstadoscontratosTableSeeder::class);
         $this->call(EstadostickectsTableSeeder::class);
         $this->call(PrioridadesTableSeeder::class);

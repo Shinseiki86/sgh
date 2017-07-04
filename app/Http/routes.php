@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('procesos', 'ProcesoController');
 		Route::resource('centroscostos', 'CentroCostoController');
 		Route::resource('tiposempleadores', 'TipoEmpleadorController');
+		Route::resource('riesgos', 'RiesgoController');
 	});
 
 	Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {

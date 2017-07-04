@@ -12,6 +12,7 @@ use Illuminate\Routing\Redirector;
 
 use SGH\Contrato;
 use SGH\Cargo;
+use SGH\Riesgo;
 
 class ContratoController extends Controller
 {
@@ -44,6 +45,7 @@ class ContratoController extends Controller
 			'TICO_ID' => ['numeric', 'required'],
 			'CLCO_ID' => ['numeric', 'required'],
 			'EMPL_ID' => ['numeric', 'required'],
+			'RIES_ID' => ['numeric', 'required'],
 			'TIEM_ID' => ['numeric', 'required'],
 			'CECO_ID' => ['numeric', 'required'],
 			'CONT_OBSERVACIONES', ['max:300'],
@@ -95,6 +97,9 @@ class ContratoController extends Controller
 		//Se crea un array con las clases de contrato
 		$arrClasescontrato = model_to_array(ClaseContrato::class, 'CLCO_DESCRIPCION');
 
+		//Se crea un array con los riesgos existentes
+		$arrRiesgos = model_to_array(Riesgo::class, 'RIES_DESCRIPCION');
+
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
 				'PROS_PRIMERNOMBRE',
@@ -110,7 +115,7 @@ class ContratoController extends Controller
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
 
-		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro'));
+		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos'));
 	}
 
 	/**
@@ -171,7 +176,12 @@ class ContratoController extends Controller
 		$arrClasescontrato = model_to_array(ClaseContrato::class, 'CLCO_DESCRIPCION');
 
 		//Se crea un array con los prospectos disponibles
-		$arrProspectos = model_to_array(Prospecto::class, 'PROS_PRIMERNOMBRE');
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+			], 'PROS_NOMBRESAPELLIDOS'));
 
 		//Se crea un array con los cargos disponibles
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
@@ -179,8 +189,11 @@ class ContratoController extends Controller
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
+		//Se crea un array con los riesgos existentes
+		$arrRiesgos = model_to_array(Riesgo::class, 'RIES_DESCRIPCION');
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro'));
+		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos'));
 	}
 
 

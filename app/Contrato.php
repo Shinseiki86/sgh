@@ -31,6 +31,7 @@ class Contrato extends ModelWithSoftDeletes
 		'TICO_ID',
 		'CLCO_ID',
 		'EMPL_ID',
+		'RIES_ID',
 		'TIEM_ID',
 		'CECO_ID',
 		'CONT_OBSERVACIONES',
@@ -76,6 +77,12 @@ class Contrato extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'EMPL_ID';
 		return $this->belongsTo(Empleador::class, $foreingKey);
+	}
+
+	public function riesgo()
+	{
+		$foreingKey = 'RIES_ID';
+		return $this->belongsTo(Riesgo::class, $foreingKey);
 	}
 
 	public function tipoempleador()

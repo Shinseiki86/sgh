@@ -164,6 +164,10 @@
                                         <a href="{{ url ('cnfg-organizacionales/tiposempleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Tipos de empleadores</a>
                                     </li>
 
+                                    <li {{ (Request::is('*/riesgos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-organizacionales/riesgos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Riesgos ARL </a>
+                                    </li>
+
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>

@@ -102,6 +102,22 @@
 				</div>
 			</div>
 
+			<div class="form-group{{ $errors->has('RIES_ID') ? ' has-error' : '' }}">
+				<label for="RIES_ID" class="col-md-2 control-label">Riesgo ARL</label>
+				<div class="col-md-6">
+					{{ Form::select('RIES_ID', [null => 'Seleccione un riesgo'] + $arrRiesgos , old('RIES_ID'), [
+					'class' => 'form-control chosen-select',
+					'required'
+					]) }}
+
+					@if ($errors->has('RIES_ID'))
+					<span class="help-block">
+						<strong>{{ $errors->first('RIES_ID') }}</strong>
+					</span>
+					@endif
+				</div>
+			</div>
+
 
 			<div class="form-group{{ $errors->has('PROS_ID') ? ' has-error' : '' }}">
 				<label for="PROS_ID" class="col-md-2 control-label">Prospecto</label>

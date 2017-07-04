@@ -4,9 +4,9 @@
 
 @section('section')
 
-{{ Form::model($contrato, ['action' => ['ContratoController@update', $contrato->CONT_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+{{ Form::model($contrato, ['action' => ['GestionHumana\ContratoController@update', $contrato->CONT_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
-<div class="form-group{{ $errors->has('EMPL_ID') ? ' has-error' : '' }}">
+			<div class="form-group{{ $errors->has('EMPL_ID') ? ' has-error' : '' }}">
 				<label for="EMPL_ID" class="col-md-2 control-label">Empleador</label>
 				<div class="col-md-6">
 					{{ Form::select('EMPL_ID', [null => 'Seleccione un empleador'] + $arrEmpleadores , old('EMPL_ID'), [
@@ -97,6 +97,22 @@
 					@if ($errors->has('CLCO_ID'))
 					<span class="help-block">
 						<strong>{{ $errors->first('CLCO_ID') }}</strong>
+					</span>
+					@endif
+				</div>
+			</div>
+
+			<div class="form-group{{ $errors->has('RIES_ID') ? ' has-error' : '' }}">
+				<label for="RIES_ID" class="col-md-2 control-label">Riesgo ARL</label>
+				<div class="col-md-6">
+					{{ Form::select('RIES_ID', [null => 'Seleccione un riesgo'] + $arrRiesgos , old('RIES_ID'), [
+					'class' => 'form-control chosen-select',
+					'required'
+					]) }}
+
+					@if ($errors->has('RIES_ID'))
+					<span class="help-block">
+						<strong>{{ $errors->first('RIES_ID') }}</strong>
 					</span>
 					@endif
 				</div>
