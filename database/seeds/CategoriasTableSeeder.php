@@ -14,6 +14,7 @@ class CategoriasTableSeeder extends Seeder
         //
         $categoria = new \SGH\Categoria;
         $categoria->CATE_DESCRIPCION = 'SOLICITUD DE DESCARGOS';
+        $categoria->PROC_ID = 1;
         $categoria->CATE_OBSERVACIONES =  'SOLICITA DESCARGOS PARA EL COLABORADOR';
         $categoria->CATE_COLOR =  'rgb(255, 0, 0)';
         $categoria->CATE_CREADOPOR =  'SYSTEM';
@@ -21,6 +22,7 @@ class CategoriasTableSeeder extends Seeder
 
         $categoria = new \SGH\Categoria;
         $categoria->CATE_DESCRIPCION = 'SOLICITUD DE LLAMADO DE ATENCION';
+        $categoria->PROC_ID = 1;
         $categoria->CATE_OBSERVACIONES =  'SOLICITA LLAMADO DE ATENCION PARA EL COLABORADOR';
         $categoria->CATE_COLOR =  'rgb(255, 102, 0)';
         $categoria->CATE_CREADOPOR =  'SYSTEM';

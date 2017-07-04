@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 	Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], function() {
 		Route::resource('prioridades', 'PrioridadController');
 		Route::resource('estadostickets', 'EstadoTicketController');
+		Route::resource('categorias', 'CategoriaController');
 	});
 
 });

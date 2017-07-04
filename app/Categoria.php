@@ -20,7 +20,17 @@ class Categoria extends ModelWithSoftDeletes
 	protected $fillable = [
 		'CATE_DESCRIPCION',
 		'CATE_COLOR',
+		'PROC_ID',
 		'CATE_OBSERVACIONES',
 	];
 
+	public function procesos()
+	{
+		$foreingKey = 'PROC_ID';
+		return $this->belongsTo(Proceso::class, $foreingKey);
+	}
+
+
 }
+
+

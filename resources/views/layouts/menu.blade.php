@@ -226,6 +226,10 @@
                                         <a href="{{ url ('cnfg-tickets/estadostickets') }}">Estados</a>
                                     </li>
 
+                                    <li {{ (Request::is('*/uploads') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/categorias') }}">Categorías</a>
+                                    </li>
+
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>

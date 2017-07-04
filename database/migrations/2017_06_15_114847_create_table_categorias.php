@@ -27,6 +27,9 @@ class CreateTableCategorias extends Migration
             $table->string('CATE_COLOR', 100)
                 ->comment('color de la categoria de ticket');
 
+            $table->unsignedInteger('PROC_ID')
+                ->comment('relacion a la tabla procesos');
+
             $table->string('CATE_OBSERVACIONES', 300)
                 ->comment('observaciones de la categoria de ticket')->nullable();
             
@@ -43,6 +46,15 @@ class CreateTableCategorias extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('CATE_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
+
+
+            //Relación con tabla EMPLEADORES
+            $table->foreign('PROC_ID')
+                ->references('PROC_ID')
+                ->on('PROCESOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
 
         });
         
