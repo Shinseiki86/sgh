@@ -33,22 +33,21 @@ class ContratoController extends Controller
 	protected function validator($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'PROS_ID' => ['numeric', 'required'],
-			'CONT_CASOMEDICO' => ['required', 'max:2'],
-			'CARG_ID' => ['numeric', 'required'],
-			'CONT_FECHAINGRESO' => ['required'],
-			'CONT_SALARIO' => ['numeric','required'],
-			'CONT_VARIABLE' => ['numeric'],
-			'CONT_RODAJE' => ['numeric'],
-			'ESCO_ID' => ['numeric', 'required'],
-			'MORE_ID' => ['numeric'],
-			'TICO_ID' => ['numeric', 'required'],
-			'CLCO_ID' => ['numeric', 'required'],
 			'EMPL_ID' => ['numeric', 'required'],
-			'RIES_ID' => ['numeric', 'required'],
 			'TIEM_ID' => ['numeric', 'required'],
 			'CECO_ID' => ['numeric', 'required'],
-			'CONT_OBSERVACIONES', ['max:300'],
+			'ESCO_ID' => ['numeric', 'required'],
+			'TICO_ID' => ['numeric', 'required'],
+			'CLCO_ID' => ['numeric', 'required'],
+			'RIES_ID' => ['numeric', 'required'],
+			'PROS_ID' => ['numeric', 'required'],
+			'CARG_ID' => ['numeric', 'required'],
+			'CONT_FECHAINGRESO' => ['date', 'required'],
+			'CONT_SALARIO'      => ['numeric','required'],
+			'CONT_VARIABLE'     => ['numeric'],
+			'CONT_RODAJE'       => ['numeric'],
+			'CONT_CASOMEDICO'   => ['required', 'max:2'],
+			'CONT_OBSERVACIONES'=> ['max:300'],
 		]);
 
 		if ($validator->fails())
@@ -136,7 +135,7 @@ class ContratoController extends Controller
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
-
+		
 		//Se crea el registro.
 		$contrato = Contrato::create($request->all());
 
@@ -152,10 +151,10 @@ class ContratoController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function edit($PROS_ID)
+	public function edit($CONT_ID)
 	{
 		// Se obtiene el registro
-		$contrato = Contrato::findOrFail($PROS_ID);
+		$contrato = Contrato::findOrFail($CONT_ID);
 
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');

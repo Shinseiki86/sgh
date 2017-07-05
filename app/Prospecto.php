@@ -28,7 +28,7 @@ class Prospecto extends ModelWithSoftDeletes
 		'PROS_DIRECCION',
 		'PROS_TELEFONO',
 		'PROS_CELULAR',
-		'PROS_COREO',
+		'PROS_CORREO',
 	];
 
 }

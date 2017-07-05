@@ -57,7 +57,7 @@ class CreateTableProspecto extends Migration
                 ->nullable()
                 ->comment('numero de celular de la persona');
 
-            $table->string('PROS_COREO', 100)
+            $table->string('PROS_CORREO', 100)
                 ->nullable()
                 ->comment('correo electronico de la persona');
             

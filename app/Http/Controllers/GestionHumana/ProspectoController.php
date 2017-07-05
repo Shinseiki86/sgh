@@ -28,20 +28,20 @@ class ProspectoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($request, $PROS_CEDULA = 0)
 	{
 		$validator = Validator::make($request->all(), [
-			'PROS_CEDULA' => ['numeric', 'required'],
+			'PROS_CEDULA'          => ['numeric', 'required', 'unique:PROSPECTOS,PROS_CEDULA,'.$PROS_CEDULA.',PROS_CEDULA'],
 			'PROS_FECHAEXPEDICION' => ['required'],
-			'PROS_PRIMERNOMBRE' => ['required', 'max:100'],
-			'PROS_SEGUNDONOMBRE' => ['max:100'],	
-			'PROS_PRIMERAPELLIDO' => ['required', 'max:100'],
+			'PROS_PRIMERNOMBRE'    => ['required', 'max:100'],
+			'PROS_SEGUNDONOMBRE'   => ['max:100'],	
+			'PROS_PRIMERAPELLIDO'  => ['required', 'max:100'],
 			'PROS_SEGUNDOAPELLIDO' => ['max:100'],
-			'PROS_SEXO' => ['required', 'max:1'],
-			'PROS_DIRECCION', ['required', 'max:100'],
-			'PROS_TELEFONO', ['max:10', 'numeric'],
-			'PROS_CELULAR', ['max:15', 'numeric'],
-			'PROS_COREO', ['max:100'],
+			'PROS_SEXO'            => ['required', 'max:1'],
+			'PROS_DIRECCION'       => ['required', 'max:100'],
+			'PROS_TELEFONO'        => ['max:10', 'numeric'],
+			'PROS_CELULAR'         => ['max:15', 'numeric'],
+			'PROS_CORREO'           => ['max:100'],
 		]);
 
 		if ($validator->fails())
@@ -122,7 +122,7 @@ class ProspectoController extends Controller
 		//Datos recibidos desde la vista.
 		$request = request();
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
+		$this->validator($request, $PROS_ID);
 
 		// Se obtiene el registro
 		$prospecto = Prospecto::findOrFail($PROS_ID);

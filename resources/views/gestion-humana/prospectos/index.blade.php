@@ -48,7 +48,7 @@
 				<td>{{ $prospecto -> PROS_DIRECCION }}</td>
 				<td>{{ $prospecto -> PROS_TELEFONO }}</td>
 				<td>{{ $prospecto -> PROS_CELULAR }}</td>
-				<td>{{ $prospecto -> PROS_COREO }}</td>
+				<td>{{ $prospecto -> PROS_CORREO }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
 					<a class="btn btn-small btn-info btn-xs" href="{{ route('gestion-humana.prospectos.edit', [ 'PROS_ID' => $prospecto->PROS_ID ] ) }}" data-tooltip="tooltip" title="Editar">

@@ -158,6 +158,8 @@ return [
         
         'PROC_DESCRIPCION'      => 'Descripción',
         'PROC_OBSERVACIONES'    => 'Observaciones',
+
+        'PROS_CEDULA'           => 'Cédula',
     ],
 
 ];

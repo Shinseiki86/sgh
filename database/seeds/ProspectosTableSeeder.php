@@ -24,7 +24,7 @@ class ProspectosTableSeeder extends Seeder
     	$prospecto->PROS_DIRECCION =  'CALLE 72K # 8 N 76';
     	$prospecto->PROS_TELEFONO =  '4059682';
     	$prospecto->PROS_CELULAR =  '3177274520';
-    	$prospecto->PROS_COREO =  'rodriguez221293@outlook.com';
+    	$prospecto->PROS_CORREO =  'rodriguez221293@outlook.com';
     	$prospecto->PROS_CREADOPOR =  'SYSTEM';
     	$prospecto->save();
     }

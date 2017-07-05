@@ -18,34 +18,18 @@ Route::resource('usuarios', 'Auth\AuthController');
 //Route::resource('roles', 'Auth\RolController');
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
-//['middleware' => ['auth', 'permission:admin']]
-
-Route::group(['prefix' => 'sbadmin', 'middleware' => ['auth', 'role:admin']], function() {
-	Route::get('/home', 'SBAdminController@home');
-	Route::get('/', 'SBAdminController@home');
-	Route::get('/charts', 'SBAdminController@mcharts');
-	Route::get('/tables', 'SBAdminController@table');
-	Route::get('/forms', 'SBAdminController@form');
-	Route::get('/buttons', 'SBAdminController@buttons');
-	Route::get('/icons', 'SBAdminController@icons');
-	Route::get('/panels', 'SBAdminController@panel');
-	Route::get('/typography', 'SBAdminController@typography');
-	Route::get('/notifications', 'SBAdminController@notifications');
-	Route::get('/blank', 'SBAdminController@blank');
-	Route::get('/documentation', 'SBAdminController@documentation');
-});
 
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/',  function(){return view('layouts/menu');});
 });
 
+//Rutas para admin y owner
 Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 
-
 	Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], function() {
-		Route::resource('cnos', 'CnosController');
-		Route::resource('cargos', 'CargoController');
-		Route::resource('tiposcontratos', 'TipoContratoController');
+		Route::resource('cnos', 'CnosController', ['parameters'=>['cnos' => 'CNOS_ID']]);
+		Route::resource('cargos', 'CargoController', ['parameters'=>['cargos' => 'CARG_ID']]);
+		Route::resource('tiposcontratos', 'TipoContratoController', ['parameters'=>['tiposcontratos' => 'TICO_ID']]);
 		Route::resource('temporales', 'TemporalController');
 		Route::resource('clasescontratos', 'ClaseContratoController');
 		Route::resource('estadoscontratos', 'EstadoContratoController');
@@ -67,8 +51,8 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 	});
 
 	Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
-		Route::resource('prospectos', 'ProspectoController');
-		Route::resource('contratos', 'ContratoController');
+		Route::resource('prospectos', 'ProspectoController', ['parameters'=>['prospectos' => 'PROS_ID']]);
+		Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
 		Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {
 			//upload tablas de TNL
 			Route::get('validadorTNL', 'TnlController@index')->name('tnl.index');
@@ -86,3 +70,18 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 
 });
 
+
+/*Route::group(['prefix' => 'sbadmin', 'middleware' => ['auth', 'role:admin']], function() {
+	Route::get('/home', 'SBAdminController@home');
+	Route::get('/', 'SBAdminController@home');
+	Route::get('/charts', 'SBAdminController@mcharts');
+	Route::get('/tables', 'SBAdminController@table');
+	Route::get('/forms', 'SBAdminController@form');
+	Route::get('/buttons', 'SBAdminController@buttons');
+	Route::get('/icons', 'SBAdminController@icons');
+	Route::get('/panels', 'SBAdminController@panel');
+	Route::get('/typography', 'SBAdminController@typography');
+	Route::get('/notifications', 'SBAdminController@notifications');
+	Route::get('/blank', 'SBAdminController@blank');
+	Route::get('/documentation', 'SBAdminController@documentation');
+});*/

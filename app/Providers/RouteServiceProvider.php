@@ -24,11 +24,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
-
+        $router->patterns([
+            'CNOS_ID'=>'[0-9]+',
+            'CARG_ID'=>'[0-9]+',
+            'TICO_ID'=>'[0-9]+',
+            'PROS_ID'=>'[0-9]+',
+            'CONT_ID'=>'[0-9]+',
+        ]);
         parent::boot($router);
     }
-
+    
     /**
      * Define the routes for the application.
      *

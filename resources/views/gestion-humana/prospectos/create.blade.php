@@ -11,7 +11,7 @@
 		<div class="col-lg-6">
 
 			<div class="form-group{{ $errors->has('PROS_CEDULA') ? ' has-error' : '' }}">
-				{{ Form::label('PROS_CEDULA', 'Cedula',  [ 'class' => 'col-md-2 control-label' ]) }}
+				{{ Form::label('PROS_CEDULA', 'Cédula',  [ 'class' => 'col-md-2 control-label' ]) }}
 				<div class="col-md-9">
 					{{ Form::text('PROS_CEDULA', old('PROS_CEDULA'), [ 'class' => 'form-control', 'maxlength' => '15', 'required', 'number' ]) }}
 					@if ($errors->has('PROS_CEDULA'))
@@ -126,13 +126,13 @@
 				</div>
 			</div>
 
-			<div class="form-group{{ $errors->has('PROS_COREO') ? ' has-error' : '' }}">
-				{{ Form::label('PROS_COREO', 'Correo',  [ 'class' => 'col-md-2 control-label' ]) }}
+			<div class="form-group{{ $errors->has('PROS_CORREO') ? ' has-error' : '' }}">
+				{{ Form::label('PROS_CORREO', 'Correo',  [ 'class' => 'col-md-2 control-label' ]) }}
 				<div class="col-md-9">
-					{{ Form::email('PROS_COREO', old('PROS_COREO'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
-					@if ($errors->has('PROS_COREO'))
+					{{ Form::email('PROS_CORREO', old('PROS_CORREO'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
+					@if ($errors->has('PROS_CORREO'))
 					<span class="help-block">
-						<strong>{{ $errors->first('PROS_COREO') }}</strong>
+						<strong>{{ $errors->first('PROS_CORREO') }}</strong>
 					</span>
 					@endif
 				</div>
