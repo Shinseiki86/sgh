@@ -4,30 +4,53 @@ namespace SGH;
 
 use SGH\ModelWithSoftDeletes;
 
-class CentroCosto extends ModelWithSoftDeletes
+class Ticket extends ModelWithSoftDeletes
 {
 	
 	//Nombre de la tabla en la base de datos
-	protected $table = 'CENTROSCOSTOS';
-	protected $primaryKey = 'CECO_ID';
+	protected $table = 'TICKETS';
+	protected $primaryKey = 'TICK_ID';
 
 	//Traza: Nombre de campos en la tabla para auditoría de cambios
-	const CREATED_AT = 'CECO_FECHACREADO';
-	const UPDATED_AT = 'CECO_FECHAMODIFICADO';
-	const DELETED_AT = 'CECO_FECHAELIMINADO';
-	protected $dates = ['CECO_FECHACREADO', 'CECO_FECHAMODIFICADO', 'CECO_FECHAELIMINADO'];
+	const CREATED_AT = 'TICK_FECHACREADO';
+	const UPDATED_AT = 'TICK_FECHAMODIFICADO';
+	const DELETED_AT = 'TICK_FECHAELIMINADO';
+	protected $dates = ['TICK_FECHACREADO', 'TICK_FECHAMODIFICADO', 'TICK_FECHAELIMINADO'];
 
 	protected $fillable = [
-		'CECO_CODIGO',
-		'CECO_DESCRIPCION',
-		'GERE_ID',
-		'CECO_OBSERVACIONES',
+		'TICK_DESCRIPCION',
+		'TICK_FECHASOLICITUD',
+		'TICK_FECHACUMPLIMIENTO',
+		'TICK_IMAGEN',
+		'TICK_ARCHIVO',
+		'CONT_ID',
+		'ESTI_ID',
+		'PRIO_ID',
+		'CATE_ID',
 	];
 
-	public function gerencia()
+	public function contrato()
 	{
-		$foreingKey = 'GERE_ID';
-		return $this->belongsTo(Gerencia::class, $foreingKey);
+		$foreingKey = 'CONT_ID';
+		return $this->belongsTo(Contrato::class, $foreingKey);
+	}
+
+	public function estadoticket()
+	{
+		$foreingKey = 'ESTI_ID';
+		return $this->belongsTo(EstadoTicket::class, $foreingKey);
+	}
+
+	public function prioridad()
+	{
+		$foreingKey = 'PRIO_ID';
+		return $this->belongsTo(Prioridad::class, $foreingKey);
+	}
+
+	public function categoria()
+	{
+		$foreingKey = 'CATE_ID';
+		return $this->belongsTo(Categoria::class, $foreingKey);
 	}
 
 }

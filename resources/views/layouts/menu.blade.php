@@ -222,16 +222,20 @@
                                 <a href="#">Ticket Disciplinario<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
 
-                                    <li {{ (Request::is('*/uploads') ? 'class=active' : '') }}>
+                                    <li {{ (Request::is('*/prioridades') ? 'class=active' : '') }}>
                                         <a href="{{ url ('cnfg-tickets/prioridades') }}">Prioridades</a>
                                     </li>
 
-                                    <li {{ (Request::is('*/uploads') ? 'class=active' : '') }}>
+                                    <li {{ (Request::is('*/estadostickets') ? 'class=active' : '') }}>
                                         <a href="{{ url ('cnfg-tickets/estadostickets') }}">Estados</a>
                                     </li>
 
-                                    <li {{ (Request::is('*/uploads') ? 'class=active' : '') }}>
+                                    <li {{ (Request::is('*/categorias') ? 'class=active' : '') }}>
                                         <a href="{{ url ('cnfg-tickets/categorias') }}">Categorías</a>
+                                    </li>
+
+                                     <li {{ (Request::is('*/tickets') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/tickets') }}">Tickets</a>
                                     </li>
 
                                 </ul>

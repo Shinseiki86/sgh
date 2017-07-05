@@ -21,6 +21,7 @@
 	{!! Html::style('assets/stylesheets/datatable/rowReorder.dataTables.min.css') !!}
 	{!! Html::style('assets/stylesheets/datatable/responsive.bootstrap.min.css') !!}
 	{!! Html::style('assets/stylesheets/metisMenu.min.css') !!}
+	{!! Html::style('assets/stylesheets/summernote.css') !!}
 	{{--datatable--}}
 
 	@yield('head')
@@ -47,6 +48,7 @@
 		{!! Html::script('assets/scripts/datatable/dataTables.rowReorder.min.js') !!}
 		{!! Html::script('assets/scripts/datatable/responsive.bootstrap.min.js') !!}
 		{!! Html::script('assets/scripts/metisMenu.min.js') !!}
+		{!! Html::script('assets/scripts/summernote.min.js') !!}
 	{{--datatable--}}
 
 	@yield('scripts')
