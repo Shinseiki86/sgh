@@ -28,10 +28,10 @@ class ProspectoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request, $PROS_CEDULA = 0)
+	protected function validator($request, $PROS_ID = 0)
 	{
 		$validator = Validator::make($request->all(), [
-			'PROS_CEDULA'          => ['numeric', 'required', 'unique:PROSPECTOS,PROS_CEDULA,'.$PROS_CEDULA.',PROS_CEDULA'],
+			'PROS_CEDULA'          => ['numeric', 'required', 'unique:PROSPECTOS,PROS_CEDULA,'.$PROS_ID.',PROS_ID'],
 			'PROS_FECHAEXPEDICION' => ['required'],
 			'PROS_PRIMERNOMBRE'    => ['required', 'max:100'],
 			'PROS_SEGUNDONOMBRE'   => ['max:100'],	

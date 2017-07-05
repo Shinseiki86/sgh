@@ -29,12 +29,12 @@ class CentroCostoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($request, $CECO_ID = 0)
 	{
 		$validator = Validator::make($request->all(), [
-			'CECO_CODIGO' => ['required', 'unique:CENTROSCOSTOS'], //forma para validar un campo unique
-			'CECO_DESCRIPCION' => ['required', 'max:100'],
-			'GERE_ID' => ['required'],
+			'CECO_CODIGO'        => ['numeric', 'required', 'unique:CENTROSCOSTOS,CECO_CODIGO,'.$CECO_ID.',CECO_ID'],//forma para validar un campo unique
+			'CECO_DESCRIPCION'   => ['required', 'max:100'],
+			'GERE_ID'            => ['required'],
 			'CECO_OBSERVACIONES' => ['max:300'],
 		]);
 
@@ -123,7 +123,7 @@ class CentroCostoController extends Controller
 		//Datos recibidos desde la vista.
 		$request = request();
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
+		$this->validator($request, $CECO_ID);
 
 		// Se obtiene el registro
 		$centrocosto = CentroCosto::findOrFail($CECO_ID);
