@@ -11,6 +11,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Ticket;
+use SGH\Prospecto;
 
 class TicketController extends Controller
 {
@@ -58,7 +59,18 @@ class TicketController extends Controller
 	 */
 	public function create()
 	{
-		$arrContratos = model_to_array(Contrato::class, 'CONT_ID');
+		$primaryKey = 'CONT_ID';
+		$column = expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+			], 'PROS_NOMBRESAPELLIDOS');
+        $columnName = 'PROS_NOMBRESAPELLIDOS';
+
+		$prospecto = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'CONTRATOS.'.$primaryKey , $column ])->get();
+		$arrContratos = $prospecto->pluck($columnName, $primaryKey)->toArray();
+		//dd($arrContratos);
 
 		$arrEstados = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
 

@@ -9,12 +9,29 @@
 
 @section('scripts')
 	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
+	<script type="text/javascript">
+
+		var options = {
+			/*
+			disable_search_threshold: 5,
+			width: '100%',
+			placeholder_text_single: 'Seleccione una opción',
+			placeholder_text_multiple: 'Seleccione algunas opciones',
+			*/
+			no_results_text: 'Ningún resultado coincide.'
+		};
+
+		//para volver los select mucho mas amigables en listas grandes de datos
+		$(".chosen-select").chosen(options); 
+
+	</script>
 @parent
 @endsection
 
 @section('section')
 	
 	{{ Form::open(['route' => 'cnfg-tickets.tickets.store', 'class' => 'form-horizontal']) }}
+
 
 		<div class="form-group{{ $errors->has('CATE_ID') ? ' has-error' : '' }}">
 			<label for="CATE_ID" class="col-md-4 control-label">Categoría</label>
@@ -75,6 +92,54 @@
 				@if ($errors->has('CONT_ID'))
 					<span class="help-block">
 						<strong>{{ $errors->first('CONT_ID') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('TICK_DESCRIPCION') ? ' has-error' : '' }}">
+			{{ Form::label('TICK_DESCRIPCION', 'Descripción de los Hechos',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::textarea('TICK_DESCRIPCION', old('TICK_DESCRIPCION'), [ 'class' => 'form-control', 'maxlength' => '3000']) }}
+				@if ($errors->has('TICK_DESCRIPCION'))
+					<span class="help-block">
+						<strong>{{ $errors->first('TICK_DESCRIPCION') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('ESTI_OBSERVACIONES') ? ' has-error' : '' }}">
+			{{ Form::label('ESTI_OBSERVACIONES', 'Descripción de los Hechos',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::textarea('ESTI_OBSERVACIONES', old('ESTI_OBSERVACIONES'), [ 'class' => 'form-control', 'maxlength' => '3000']) }}
+				@if ($errors->has('ESTI_OBSERVACIONES'))
+					<span class="help-block">
+						<strong>{{ $errors->first('ESTI_OBSERVACIONES') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('ESTI_OBSERVACIONES') ? ' has-error' : '' }}">
+			{{ Form::label('ESTI_OBSERVACIONES', 'Archivo',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::file('archivotnl', old('TICK_IMAGEN'), [ 'class' => 'form-control' ]) }}
+				@if ($errors->has('ESTI_OBSERVACIONES'))
+					<span class="help-block">
+						<strong>{{ $errors->first('ESTI_OBSERVACIONES') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('ESTI_OBSERVACIONES') ? ' has-error' : '' }}">
+			{{ Form::label('ESTI_OBSERVACIONES', 'Foto',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::file('archivotnl', old('TICK_IMAGEN'), [ 'class' => 'form-control' ]) }}
+				@if ($errors->has('ESTI_OBSERVACIONES'))
+					<span class="help-block">
+						<strong>{{ $errors->first('ESTI_OBSERVACIONES') }}</strong>
 					</span>
 				@endif
 			</div>

@@ -17,8 +17,6 @@ class Contrato extends ModelWithSoftDeletes
 	const DELETED_AT = 'CONT_FECHAELIMINADO';
 	protected $dates = ['CONT_FECHACREADO', 'CONT_FECHAMODIFICADO', 'CONT_FECHAELIMINADO'];
 
-	const CONT_ACTIVO   = 1;
-
 	protected $fillable = [
 		'PROS_ID',
 		'CONT_CASOMEDICO',

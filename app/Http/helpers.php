@@ -69,14 +69,14 @@ if (! function_exists('model_to_array')) {
             $class = class_exists($class) ? $class : '\\SGH\\'.basename($class);
             $primaryKey = isset($primaryKey) ? $primaryKey : (new $class)->getKeyName();
 
-            $query = $class::orderBy($primaryKey)->select([ $primaryKey , $column ]);
+            $models = $class::orderBy($primaryKey)->select([ $primaryKey , $column ]);
 
             //Si la columna es una expresión, se obtiene el alias de la columna
             if($column instanceof \Illuminate\Database\Query\Expression)
                 $column = str_replace('"', '', array_last(explode(') AS ', $column->getValue())));
 
         }
-        return $query->pluck($column, $primaryKey)->toArray();
+        return $models->pluck($column, $primaryKey)->toArray();
     }
 }
 

@@ -17,6 +17,8 @@ class Prospecto extends ModelWithSoftDeletes
 	const DELETED_AT = 'PROS_FECHAELIMINADO';
 	protected $dates = ['PROS_FECHACREADO', 'PROS_FECHAMODIFICADO', 'PROS_FECHAELIMINADO'];
 
+	const CONT_ACTIVO   = 1;
+
 	protected $fillable = [
 		'PROS_CEDULA',
 		'PROS_FECHAEXPEDICION',
@@ -30,5 +32,17 @@ class Prospecto extends ModelWithSoftDeletes
 		'PROS_CELULAR',
 		'PROS_CORREO',
 	];
+
+	public function scopeActivos($query)
+	{
+
+		$query = $query 
+			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
+			->where('ESCO_ID',1);
+
+
+		return $query;
+
+	}
 
 }
