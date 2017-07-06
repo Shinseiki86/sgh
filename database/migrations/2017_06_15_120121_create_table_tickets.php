@@ -25,21 +25,17 @@ class CreateTableTickets extends Migration
             $table->string('TICK_DESCRIPCION', 3000)
                 ->comment('descripción del ticket');
 
-            $table->date('TICK_FECHASOLICITUD')
+            $table->datetime('TICK_FECHASOLICITUD')
                 ->comment('fecha de solicitud de ticket');
 
-            $table->date('TICK_FECHACUMPLIMIENTO')
+            $table->datetime('TICK_FECHACUMPLIMIENTO')
+                ->nullable()
                 ->comment('fecha de cumplimiento de ticket');
-
-            $table->string('TICK_IMAGEN', 500)
-                ->comment('imagenes relacionadas con el ticket')->nullable();
 
             $table->string('TICK_ARCHIVO', 500)
                 ->comment('archivos relacionadas con el ticket')->nullable();
 
             $table->unsignedInteger('CONT_ID')
-                ->nullable()
-                ->unsigned()
                 ->comment('relacion a la tabla contratos');
 
             $table->unsignedInteger('ESTI_ID')
@@ -50,6 +46,9 @@ class CreateTableTickets extends Migration
 
             $table->unsignedInteger('CATE_ID')
                 ->comment('relacion a la tabla categorias');
+
+            $table->unsignedInteger('TIIN_ID')
+                ->comment('relacion a la tabla tipos de incidente');
             
             //Traza
             $table->string('TICK_CREADOPOR')
@@ -87,10 +86,17 @@ class CreateTableTickets extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            //Relación con tabla CONTRATOS
+            //Relación con tabla CATEGORIAS
             $table->foreign('CATE_ID')
                 ->references('CATE_ID')
                 ->on('CATEGORIAS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Relación con tabla TIPOS DE INCIDENTES
+            $table->foreign('TIIN_ID')
+                ->references('TIIN_ID')
+                ->on('TIPOSINCIDENTES')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

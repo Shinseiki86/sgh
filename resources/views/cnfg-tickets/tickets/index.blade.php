@@ -22,6 +22,7 @@
 			<tr>
 				<th class="col-md-5"> Nombre </th>
 				<th class="col-md-5"> Estado </th>
+				<th class="col-md-5"> Tipo de Incidente </th>
 				<th class="col-md-5"> Prioridad </th>
 				<th class="col-md-5"> Categoria </th>
 				<th class="col-md-5"> Fecha Solicitud </th>
@@ -34,8 +35,9 @@
 		<tbody>
 			@foreach($tickets as $ticket)
 			<tr>
-				<td>{{ $ticket -> contrato -> prospecto -> PROS_PRIMERNOMBRE }}</td>
+				<td>{{ nombre_empleado ($ticket -> contrato -> PROS_ID )}}</td>
 				<td>{{ $ticket -> estadoticket -> ESTI_DESCRIPCION }}</td>
+				<td>{{ $ticket -> tipoincidente -> TIIN_DESCRIPCION }}</td>
 				<td>{{ $ticket -> prioridad -> PRIO_DESCRIPCION }}</td>
 				<td>{{ $ticket -> categoria -> CATE_DESCRIPCION }}</td>
 				<td>{{ $ticket -> TICK_FECHASOLICITUD }}</td>

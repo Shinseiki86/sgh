@@ -30,7 +30,7 @@
 
 @section('section')
 	
-	{{ Form::open(['route' => 'cnfg-tickets.tickets.store', 'class' => 'form-horizontal']) }}
+	{{ Form::open(['route' => 'cnfg-tickets.tickets.store', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) }}
 
 
 		<div class="form-group{{ $errors->has('CATE_ID') ? ' has-error' : '' }}">
@@ -97,6 +97,22 @@
 			</div>
 		</div>
 
+		<div class="form-group{{ $errors->has('TIIN_ID') ? ' has-error' : '' }}">
+			<label for="TIIN_ID" class="col-md-4 control-label">Tipo de Incidente</label>
+			<div class="col-md-6">
+				{{ Form::select('TIIN_ID', [null => 'Seleccione un tipo de incidente'] + $arrTiposIncidentes , old('TIIN_ID'), [
+					'class' => 'form-control chosen-select',
+					'required'
+				]) }}
+
+				@if ($errors->has('TIIN_ID'))
+					<span class="help-block">
+						<strong>{{ $errors->first('TIIN_ID') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
 		<div class="form-group{{ $errors->has('TICK_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('TICK_DESCRIPCION', 'Descripción de los Hechos',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
@@ -109,37 +125,13 @@
 			</div>
 		</div>
 
-		<div class="form-group{{ $errors->has('ESTI_OBSERVACIONES') ? ' has-error' : '' }}">
-			{{ Form::label('ESTI_OBSERVACIONES', 'Descripción de los Hechos',  [ 'class' => 'col-md-4 control-label' ]) }}
+		<div class="form-group{{ $errors->has('TICK_ARCHIVO') ? ' has-error' : '' }}">
+			{{ Form::label('TICK_ARCHIVO', 'Evidencia',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
-				{{ Form::textarea('ESTI_OBSERVACIONES', old('ESTI_OBSERVACIONES'), [ 'class' => 'form-control', 'maxlength' => '3000']) }}
-				@if ($errors->has('ESTI_OBSERVACIONES'))
+				{{ Form::file('TICK_ARCHIVO', old('TICK_ARCHIVO'), [ 'class' => 'form-control' ]) }}
+				@if ($errors->has('TICK_ARCHIVO'))
 					<span class="help-block">
-						<strong>{{ $errors->first('ESTI_OBSERVACIONES') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
-
-		<div class="form-group{{ $errors->has('ESTI_OBSERVACIONES') ? ' has-error' : '' }}">
-			{{ Form::label('ESTI_OBSERVACIONES', 'Archivo',  [ 'class' => 'col-md-4 control-label' ]) }}
-			<div class="col-md-6">
-				{{ Form::file('archivotnl', old('TICK_IMAGEN'), [ 'class' => 'form-control' ]) }}
-				@if ($errors->has('ESTI_OBSERVACIONES'))
-					<span class="help-block">
-						<strong>{{ $errors->first('ESTI_OBSERVACIONES') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
-
-		<div class="form-group{{ $errors->has('ESTI_OBSERVACIONES') ? ' has-error' : '' }}">
-			{{ Form::label('ESTI_OBSERVACIONES', 'Foto',  [ 'class' => 'col-md-4 control-label' ]) }}
-			<div class="col-md-6">
-				{{ Form::file('archivotnl', old('TICK_IMAGEN'), [ 'class' => 'form-control' ]) }}
-				@if ($errors->has('ESTI_OBSERVACIONES'))
-					<span class="help-block">
-						<strong>{{ $errors->first('ESTI_OBSERVACIONES') }}</strong>
+						<strong>{{ $errors->first('TICK_ARCHIVO') }}</strong>
 					</span>
 				@endif
 			</div>
@@ -148,7 +140,7 @@
 		<!-- Botones -->
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4 text-right">
-				<a class="btn btn-warning" role="button" href="{{ URL::to('cnfg-tickets/categorias/') }}" data-tooltip="tooltip" title="Regresar">
+				<a class="btn btn-warning" role="button" href="{{ URL::to('cnfg-tickets/tickets/') }}" data-tooltip="tooltip" title="Regresar">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i>
 				</a>
 				{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i>', [

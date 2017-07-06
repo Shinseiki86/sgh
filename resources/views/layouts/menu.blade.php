@@ -234,6 +234,10 @@
                                         <a href="{{ url ('cnfg-tickets/categorias') }}">Categorías</a>
                                     </li>
 
+                                    <li {{ (Request::is('*/tiposincidentes') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/tiposincidentes') }}">Tipos de Incidentes</a>
+                                    </li>
+
                                      <li {{ (Request::is('*/tickets') ? 'class=active' : '') }}>
                                         <a href="{{ url ('cnfg-tickets/tickets') }}">Tickets</a>
                                     </li>

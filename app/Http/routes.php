@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('prioridades', 'PrioridadController');
 		Route::resource('estadostickets', 'EstadoTicketController');
 		Route::resource('categorias', 'CategoriaController');
+		Route::resource('tiposincidentes', 'TipoIncidenteController');
 		Route::resource('tickets', 'TicketController');
 	});
 

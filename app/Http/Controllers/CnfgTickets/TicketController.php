@@ -13,6 +13,8 @@ use SGH\Http\Controllers\Controller;
 use SGH\Ticket;
 use SGH\Prospecto;
 
+use Carbon\Carbon;
+
 class TicketController extends Controller
 {
 
@@ -26,16 +28,17 @@ class TicketController extends Controller
 	{
 		$validator = Validator::make($data, [
 			'TICK_DESCRIPCION' => ['required','max:3000'],
-			'TICK_FECHASOLICITUD' => ['required'],
-			'TICK_FECHACUMPLIMIENTO' => [],
-			'TICK_IMAGEN' => [],
-			'TICK_ARCHIVO' => [],
-		]);
+			'CONT_ID' => ['required'],
+			'ESTI_ID' => ['required'],
+			'PRIO_ID' => ['required'],
+			'CATE_ID' => ['required'],
+			'TIIN_ID' => ['required'],
+			]);
 
 		if ($validator->fails())
 			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
+		->withErrors($validator)
+		->withInput()->send();
 	}
 
 
@@ -61,12 +64,12 @@ class TicketController extends Controller
 	{
 		$primaryKey = 'CONT_ID';
 		$column = expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
 			], 'PROS_NOMBRESAPELLIDOS');
-        $columnName = 'PROS_NOMBRESAPELLIDOS';
+		$columnName = 'PROS_NOMBRESAPELLIDOS';
 
 		$prospecto = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'CONTRATOS.'.$primaryKey , $column ])->get();
 		$arrContratos = $prospecto->pluck($columnName, $primaryKey)->toArray();
@@ -78,7 +81,9 @@ class TicketController extends Controller
 
 		$arrCategorias = model_to_array(Categoria::class, 'CATE_DESCRIPCION');
 
-		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias'));
+		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
+
+		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes'));
 	}
 
 	/**
@@ -90,14 +95,42 @@ class TicketController extends Controller
 	{
 		//Datos recibidos desde la vista.
 		$data = request()->all();
+
+		//fecha actual
+		$fecactual = Carbon::now();
+
+		//si viene un archivo en el request
+		if(Input::hasFile('TICK_ARCHIVO')){
+			//lee el archivo
+			$file = Input::file('TICK_ARCHIVO');
+			//define el path donde lo guardará
+			$destinationPath = public_path(). '/storages/';
+			//obtiene el nombre del archivo
+			$filename = explode(".", $file->getClientOriginalName());
+			
+		}
+
+		if(!request()->has('TICK_FECHACUMPLIMIENTO')){	$data['TICK_FECHACUMPLIMIENTO'] = null; }
+
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($data);
-
 		//Se crea el registro.
-		$categoria = Categoria::create($data);
+		$ticket = Ticket::create($data);
+
+		//se actualiza el nombre del archivo concatenando el ID del registro para garantizar su unicidad
+		if($filename != null){
+			$ticket->TICK_ARCHIVO = $filename[0]. "-" . $ticket->TICK_ID . "." . $filename[1];
+			$ticket->save();
+			//mueve el archivo a la ruta indicada
+			$file->move($destinationPath, $ticket->TICK_ARCHIVO);
+		}
+		
+
+		$ticket->TICK_FECHASOLICITUD = $fecactual;
+		$ticket->save();
 
 		// redirecciona al index de controlador
-		flash_alert( 'Categoria '.$categoria->TICK_ID.' creada exitosamente.', 'success' );
+		flash_alert( 'Ticket '.$ticket->TICK_ID.' creado exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 	}
 
@@ -111,12 +144,12 @@ class TicketController extends Controller
 	public function edit($TICK_ID)
 	{
 		// Se obtiene el registro
-		$categoria = Categoria::findOrFail($TICK_ID);
+		$ticket = Ticket::findOrFail($TICK_ID);
 
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/tickets/edit', compact('categoria', 'arrProcesos'));
+		return view('cnfg-tickets/tickets/edit', compact('ticket', 'arrProcesos'));
 	}
 
 
@@ -134,12 +167,12 @@ class TicketController extends Controller
 		$this->validator($data, $TICK_ID);
 
 		// Se obtiene el registro
-		$categoria = Categoria::findOrFail($TICK_ID);
+		$ticket = Ticket::findOrFail($TICK_ID);
 		//y se actualiza con los datos recibidos.
-		$categoria->update($data);
+		$ticket->update($data);
 
 		// redirecciona al index de controlador
-		flash_alert( 'Categoria '.$categoria->TICK_ID.' modificada exitosamente.', 'success' );
+		flash_alert( 'Ticket '.$ticket->TICK_ID.' modificada exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 	}
 
@@ -151,14 +184,14 @@ class TicketController extends Controller
 	 */
 	public function destroy($TICK_ID, $showMsg=True)
 	{
-		$tickets = Categoria::findOrFail($TICK_ID);
+		$tickets = Ticket::findOrFail($TICK_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($tickets->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Categoria '.$tickets->TICK_ID.' no se puede borrar.', 'danger' );
+			flash_modal( 'Ticket '.$tickets->TICK_ID.' no se puede borrar.', 'danger' );
 		} else {
 			$tickets->delete();
-				flash_alert( 'Categoria '.$tickets->TICK_ID.' eliminado exitosamente.', 'success' );
+			flash_alert( 'Ticket '.$tickets->TICK_ID.' eliminado exitosamente.', 'success' );
 		}
 
 		return redirect()->route('cnfg-tickets.tickets.index');

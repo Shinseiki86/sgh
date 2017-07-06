@@ -11,6 +11,11 @@ alias art:cls="art clear-compiled && art cache:clear && art view:clear && art ro
 alias t="vendor/bin/phpunit"
 alias art:sch="php artisan schedule:run"
 
+alias art:cmpl="php artisan clear-compiled"
+alias comp:da="composer dump-autoload"
+alias art:opt="php artisan optimize"
+
+
 
 # Generators Package
 alias g:c="php artisan generate:controller"

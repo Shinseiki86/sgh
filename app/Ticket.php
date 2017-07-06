@@ -21,12 +21,12 @@ class Ticket extends ModelWithSoftDeletes
 		'TICK_DESCRIPCION',
 		'TICK_FECHASOLICITUD',
 		'TICK_FECHACUMPLIMIENTO',
-		'TICK_IMAGEN',
 		'TICK_ARCHIVO',
 		'CONT_ID',
 		'ESTI_ID',
 		'PRIO_ID',
 		'CATE_ID',
+		'TIIN_ID',
 	];
 
 	public function contrato()
@@ -51,6 +51,12 @@ class Ticket extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'CATE_ID';
 		return $this->belongsTo(Categoria::class, $foreingKey);
+	}
+
+	public function tipoincidente()
+	{
+		$foreingKey = 'TIIN_ID';
+		return $this->belongsTo(TipoIncidente::class, $foreingKey);
 	}
 
 }

@@ -29,5 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EstadostickectsTableSeeder::class);
         $this->call(PrioridadesTableSeeder::class);
         $this->call(CategoriasTableSeeder::class);
+        $this->call(TiposIncidentesTableSeeder::class);
+        
     }
 }
