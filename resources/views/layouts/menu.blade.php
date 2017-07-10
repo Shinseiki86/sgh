@@ -231,7 +231,15 @@
                                     </li>
 
                                     <li {{ (Request::is('*/estadostickets') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/estadostickets') }}">Estados</a>
+                                        <a href="{{ url ('cnfg-tickets/estadostickets') }}">Estados de Ticket</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/sanciones') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/sanciones') }}">Sanciones</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/estadosaprobaciones') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/estadosaprobaciones') }}">Estados de Aprobaciones</a>
                                     </li>
 
                                     <li {{ (Request::is('*/categorias') ? 'class=active' : '') }}>

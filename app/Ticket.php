@@ -24,6 +24,7 @@ class Ticket extends ModelWithSoftDeletes
 		'TICK_ARCHIVO',
 		'CONT_ID',
 		'ESTI_ID',
+		'ESAP_ID',
 		'PRIO_ID',
 		'CATE_ID',
 		'TIIN_ID',
@@ -57,6 +58,12 @@ class Ticket extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'TIIN_ID';
 		return $this->belongsTo(TipoIncidente::class, $foreingKey);
+	}
+
+	public function estadoaprobacion()
+	{
+		$foreingKey = 'ESAP_ID';
+		return $this->belongsTo(EstadoAprobacion::class, $foreingKey);
 	}
 
 }

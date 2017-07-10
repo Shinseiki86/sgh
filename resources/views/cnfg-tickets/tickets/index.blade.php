@@ -27,6 +27,7 @@
 				<th class="col-md-5"> Categoria </th>
 				<th class="col-md-5"> Fecha Solicitud </th>
 				<th class="col-md-5"> Fecha Cumplimiento </th>
+				<th class="col-md-5"> Estado Aprobación </th>
 				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
@@ -35,13 +36,14 @@
 		<tbody>
 			@foreach($tickets as $ticket)
 			<tr>
-				<td>{{ nombre_empleado ($ticket -> contrato -> PROS_ID )}}</td>
+				<td>{{ nombre_empleado ($ticket -> contrato -> PROS_ID ) . ' - ' . $ticket -> contrato -> prospecto -> PROS_CEDULA }}</td>
 				<td>{{ $ticket -> estadoticket -> ESTI_DESCRIPCION }}</td>
 				<td>{{ $ticket -> tipoincidente -> TIIN_DESCRIPCION }}</td>
 				<td>{{ $ticket -> prioridad -> PRIO_DESCRIPCION }}</td>
 				<td>{{ $ticket -> categoria -> CATE_DESCRIPCION }}</td>
 				<td>{{ $ticket -> TICK_FECHASOLICITUD }}</td>
 				<td>{{ $ticket -> TICK_FECHACUMPLIMIENTO }}</td>
+				<td>{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</td>
 				<td>{{ $ticket -> TICK_CREADOPOR }}</td>
 				<td>
 

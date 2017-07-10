@@ -68,6 +68,8 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('estadostickets', 'EstadoTicketController');
 		Route::resource('categorias', 'CategoriaController');
 		Route::resource('tiposincidentes', 'TipoIncidenteController');
+		Route::resource('estadosaprobaciones', 'EstadoAprobacionController');
+		Route::resource('sanciones', 'SancionController');
 		Route::resource('tickets', 'TicketController');
 	});
 

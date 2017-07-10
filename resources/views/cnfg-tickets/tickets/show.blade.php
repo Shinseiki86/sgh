@@ -78,6 +78,13 @@
 					</div>
 				</li>
 
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-lg-4"><strong>Estado Aprobación:</strong></div>
+						<div class="col-lg-8">{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</div>
+					</div>
+				</li>
+
 			</ul>
 		</p>
 		<!-- Botones -->

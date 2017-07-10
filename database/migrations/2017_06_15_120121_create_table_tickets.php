@@ -41,6 +41,9 @@ class CreateTableTickets extends Migration
             $table->unsignedInteger('ESTI_ID')
                 ->comment('relacion a la tabla estados tickets');
 
+            $table->unsignedInteger('ESAP_ID')
+                ->comment('relacion a la tabla estados de aprobaciones');
+
             $table->unsignedInteger('PRIO_ID')
                 ->comment('relacion a la tabla prioridades');
 
@@ -76,6 +79,13 @@ class CreateTableTickets extends Migration
             $table->foreign('ESTI_ID')
                 ->references('ESTI_ID')
                 ->on('ESTADOSTICKETS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+             //Relación con tabla ESTADOSAPROBACIONES
+            $table->foreign('ESAP_ID')
+                ->references('ESAP_ID')
+                ->on('ESTADOSAPROBACIONES')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

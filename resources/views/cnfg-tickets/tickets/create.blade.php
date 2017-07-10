@@ -3,13 +3,15 @@
 @section('page_heading', 'Gestión de Tickets')
 
 @section('head')
-	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
+{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
 @parent
 @endsection
 
 @section('scripts')
-	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
-	<script type="text/javascript">
+{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
+<script type="text/javascript">
+
+	$( document ).ready(function() {
 
 		var options = {
 			/*
@@ -20,136 +22,172 @@
 			*/
 			no_results_text: 'Ningún resultado coincide.'
 		};
-
 		//para volver los select mucho mas amigables en listas grandes de datos
-		$(".chosen-select").chosen(options); 
+		$(".chosen-select").chosen(options);
 
-	</script>
+		//variable temporal para almacenar el estado del ticket y posteriormente asignarla a un hidden
+		var tempesti = $('#TEMP_ESTADO').val();
+		//variable para almacenar el estado del ticket
+		var esti_id = $('#ESTI_ID').val(tempesti);
+
+		//variable temporal para almacenar el estado del ticket y posteriormente asignarla a un hidden
+		var tempesap = $('#TEMP_ESTADOAPROB').val();
+		//variable para almacenar el estado del ticket
+		var esap_id = $('#ESAP_ID').val(tempesap);
+
+		//alert(esti_id.val() + ' - ' + esap_id.val());
+
+	});
+
+</script>
 @parent
 @endsection
 
 @section('section')
-	
-	{{ Form::open(['route' => 'cnfg-tickets.tickets.store', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) }}
+
+{{ Form::open(['route' => 'cnfg-tickets.tickets.store', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) }}
 
 
-		<div class="form-group{{ $errors->has('CATE_ID') ? ' has-error' : '' }}">
-			<label for="CATE_ID" class="col-md-4 control-label">Categoría</label>
-			<div class="col-md-6">
-				{{ Form::select('CATE_ID', [null => 'Seleccione una categoría'] + $arrCategorias , old('CATE_ID'), [
-					'class' => 'form-control chosen-select',
-					'required'
-				]) }}
+<div class="form-group{{ $errors->has('CATE_ID') ? ' has-error' : '' }}">
+	<label for="CATE_ID" class="col-md-4 control-label">Categoría</label>
+	<div class="col-md-6">
+		{{ Form::select('CATE_ID', [null => 'Seleccione una categoría'] + $arrCategorias , old('CATE_ID'), [
+		'class' => 'form-control',
+		'required'
+		]) }}
 
-				@if ($errors->has('CATE_ID'))
-					<span class="help-block">
-						<strong>{{ $errors->first('CATE_ID') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
+		@if ($errors->has('CATE_ID'))
+		<span class="help-block">
+			<strong>{{ $errors->first('CATE_ID') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
 
-		<div class="form-group{{ $errors->has('ESTI_ID') ? ' has-error' : '' }}">
-			<label for="ESTI_ID" class="col-md-4 control-label">Estado</label>
-			<div class="col-md-6">
-				{{ Form::select('ESTI_ID', [null => 'Seleccione un estado'] + $arrEstados , old('ESTI_ID'), [
-					'class' => 'form-control chosen-select',
-					'required'
-				]) }}
+<input type="hidden" name="ESTI_ID" id="ESTI_ID">
+<input type="hidden" name="ESAP_ID" id="ESAP_ID">
 
-				@if ($errors->has('ESTI_ID'))
-					<span class="help-block">
-						<strong>{{ $errors->first('ESTI_ID') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
+<div class="form-group{{ $errors->has('TEMP_ESTADO') ? ' has-error' : '' }}">
+	<label for="TEMP_ESTADO" class="col-md-4 control-label">Estado</label>
+	<div class="col-md-6">
+		{{ Form::select('TEMP_ESTADO', [null => 'Seleccione un estado'] + $arrEstados , 1 , [
+		'class' => 'form-control',
+		'required',
+		'disabled',
+		'id' => 'TEMP_ESTADO'
+		]) }}
 
-		<div class="form-group{{ $errors->has('PRIO_ID') ? ' has-error' : '' }}">
-			<label for="PRIO_ID" class="col-md-4 control-label">Prioridad</label>
-			<div class="col-md-6">
-				{{ Form::select('PRIO_ID', [null => 'Seleccione una prioridad'] + $arrPrioridad , old('PRIO_ID'), [
-					'class' => 'form-control chosen-select',
-					'required'
-				]) }}
+		@if ($errors->has('TEMP_ESTADO'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TEMP_ESTADO') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
 
-				@if ($errors->has('PRIO_ID'))
-					<span class="help-block">
-						<strong>{{ $errors->first('PRIO_ID') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
+<div class="form-group{{ $errors->has('PRIO_ID') ? ' has-error' : '' }}">
+	<label for="PRIO_ID" class="col-md-4 control-label">Prioridad</label>
+	<div class="col-md-6">
+		{{ Form::select('PRIO_ID', [null => 'Seleccione una prioridad'] + $arrPrioridad , old('PRIO_ID'), [
+		'class' => 'form-control',
+		'required'
+		]) }}
 
-		<div class="form-group{{ $errors->has('CONT_ID') ? ' has-error' : '' }}">
-			<label for="CONT_ID" class="col-md-4 control-label">Implicado</label>
-			<div class="col-md-6">
-				{{ Form::select('CONT_ID', [null => 'Seleccione un empleado'] + $arrContratos , old('CONT_ID'), [
-					'class' => 'form-control chosen-select',
-					'required'
-				]) }}
+		@if ($errors->has('PRIO_ID'))
+		<span class="help-block">
+			<strong>{{ $errors->first('PRIO_ID') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
 
-				@if ($errors->has('CONT_ID'))
-					<span class="help-block">
-						<strong>{{ $errors->first('CONT_ID') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
+<div class="form-group{{ $errors->has('CONT_ID') ? ' has-error' : '' }}">
+	<label for="CONT_ID" class="col-md-4 control-label">Implicado</label>
+	<div class="col-md-6">
+		{{ Form::select('CONT_ID', [null => 'Seleccione un empleado'] + $arrContratos , old('CONT_ID'), [
+		'class' => 'form-control chosen-select',
+		'required'
+		]) }}
 
-		<div class="form-group{{ $errors->has('TIIN_ID') ? ' has-error' : '' }}">
-			<label for="TIIN_ID" class="col-md-4 control-label">Tipo de Incidente</label>
-			<div class="col-md-6">
-				{{ Form::select('TIIN_ID', [null => 'Seleccione un tipo de incidente'] + $arrTiposIncidentes , old('TIIN_ID'), [
-					'class' => 'form-control chosen-select',
-					'required'
-				]) }}
+		@if ($errors->has('CONT_ID'))
+		<span class="help-block">
+			<strong>{{ $errors->first('CONT_ID') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
 
-				@if ($errors->has('TIIN_ID'))
-					<span class="help-block">
-						<strong>{{ $errors->first('TIIN_ID') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
+<div class="form-group{{ $errors->has('TIIN_ID') ? ' has-error' : '' }}">
+	<label for="TIIN_ID" class="col-md-4 control-label">Tipo de Incidente</label>
+	<div class="col-md-6">
+		{{ Form::select('TIIN_ID', [null => 'Seleccione un tipo de incidente'] + $arrTiposIncidentes , old('TIIN_ID'), [
+		'class' => 'form-control',
+		'required'
+		]) }}
 
-		<div class="form-group{{ $errors->has('TICK_DESCRIPCION') ? ' has-error' : '' }}">
-			{{ Form::label('TICK_DESCRIPCION', 'Descripción de los Hechos',  [ 'class' => 'col-md-4 control-label' ]) }}
-			<div class="col-md-6">
-				{{ Form::textarea('TICK_DESCRIPCION', old('TICK_DESCRIPCION'), [ 'class' => 'form-control', 'maxlength' => '3000']) }}
-				@if ($errors->has('TICK_DESCRIPCION'))
-					<span class="help-block">
-						<strong>{{ $errors->first('TICK_DESCRIPCION') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
+		@if ($errors->has('TIIN_ID'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TIIN_ID') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
 
-		<div class="form-group{{ $errors->has('TICK_ARCHIVO') ? ' has-error' : '' }}">
-			{{ Form::label('TICK_ARCHIVO', 'Evidencia',  [ 'class' => 'col-md-4 control-label' ]) }}
-			<div class="col-md-6">
-				{{ Form::file('TICK_ARCHIVO', old('TICK_ARCHIVO'), [ 'class' => 'form-control' ]) }}
-				@if ($errors->has('TICK_ARCHIVO'))
-					<span class="help-block">
-						<strong>{{ $errors->first('TICK_ARCHIVO') }}</strong>
-					</span>
-				@endif
-			</div>
-		</div>
+<div class="form-group{{ $errors->has('TICK_DESCRIPCION') ? ' has-error' : '' }}">
+	{{ Form::label('TICK_DESCRIPCION', 'Descripción de los Hechos',  [ 'class' => 'col-md-4 control-label' ]) }}
+	<div class="col-md-6">
+		{{ Form::textarea('TICK_DESCRIPCION', old('TICK_DESCRIPCION'), [ 'class' => 'form-control', 'maxlength' => '3000']) }}
+		@if ($errors->has('TICK_DESCRIPCION'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TICK_DESCRIPCION') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
 
-		<!-- Botones -->
-		<div class="form-group">
-			<div class="col-md-6 col-md-offset-4 text-right">
-				<a class="btn btn-warning" role="button" href="{{ URL::to('cnfg-tickets/tickets/') }}" data-tooltip="tooltip" title="Regresar">
-					<i class="fa fa-arrow-left" aria-hidden="true"></i>
-				</a>
-				{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i>', [
-					'class'=>'btn btn-primary',
-					'type'=>'submit',
-					'data-tooltip'=>'tooltip',
-					'title'=>'Guardar',
-				]) }}
-			</div>
-		</div>
-	{{ Form::close() }}
+<div class="form-group{{ $errors->has('TICK_ARCHIVO') ? ' has-error' : '' }}">
+	{{ Form::label('TICK_ARCHIVO', 'Evidencia',  [ 'class' => 'col-md-4 control-label' ]) }}
+	<div class="col-md-6">
+		{{ Form::file('TICK_ARCHIVO', old('TICK_ARCHIVO'), [ 'class' => 'form-control' ]) }}
+		@if ($errors->has('TICK_ARCHIVO'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TICK_ARCHIVO') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
+
+<div class="form-group{{ $errors->has('TEMP_ESTADOAPROB') ? ' has-error' : '' }}">
+	<label for="TEMP_ESTADOAPROB" class="col-md-4 control-label">Estado de Aprobación</label>
+	<div class="col-md-6">
+		{{ Form::select('TEMP_ESTADOAPROB', [null => 'Seleccione un estado'] + $arrEstadosAprobacion , 1 , [
+		'class' => 'form-control',
+		'required',
+		'disabled',
+		'id' => 'TEMP_ESTADOAPROB'
+		]) }}
+
+		@if ($errors->has('TEMP_ESTADOAPROB'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TEMP_ESTADOAPROB') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
+
+<!-- Botones -->
+<div class="form-group">
+	<div class="col-md-6 col-md-offset-4 text-right">
+		<a class="btn btn-warning" role="button" href="{{ URL::to('cnfg-tickets/tickets/') }}" data-tooltip="tooltip" title="Regresar">
+			<i class="fa fa-arrow-left" aria-hidden="true"></i>
+		</a>
+		{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i>', [
+		'class'=>'btn btn-primary',
+		'type'=>'submit',
+		'data-tooltip'=>'tooltip',
+		'title'=>'Guardar',
+		]) }}
+	</div>
+</div>
+{{ Form::close() }}
 @endsection

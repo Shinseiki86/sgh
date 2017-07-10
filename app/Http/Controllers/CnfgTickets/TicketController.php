@@ -30,6 +30,7 @@ class TicketController extends Controller
 			'TICK_DESCRIPCION' => ['required','max:3000'],
 			'CONT_ID' => ['required'],
 			'ESTI_ID' => ['required'],
+			'ESAP_ID' => ['required'],
 			'PRIO_ID' => ['required'],
 			'CATE_ID' => ['required'],
 			'TIIN_ID' => ['required'],
@@ -76,6 +77,7 @@ class TicketController extends Controller
 			'PROS_SEGUNDONOMBRE',
 			'PROS_PRIMERAPELLIDO',
 			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA'
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
 
@@ -85,13 +87,15 @@ class TicketController extends Controller
 
 		$arrEstados = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
 
+		$arrEstadosAprobacion = model_to_array(EstadoAprobacion::class, 'ESAP_DESCRIPCION');
+
 		$arrPrioridad = model_to_array(Prioridad::class, 'PRIO_DESCRIPCION');
 
 		$arrCategorias = model_to_array(Categoria::class, 'CATE_DESCRIPCION');
 
 		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
 
-		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes'));
+		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion'));
 	}
 
 	/**
@@ -103,6 +107,8 @@ class TicketController extends Controller
 	{
 		//Datos recibidos desde la vista.
 		$data = request()->all();
+
+		//dd($data);
 
 		//fecha actual
 		$fecactual = Carbon::now();
