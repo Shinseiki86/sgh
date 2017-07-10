@@ -136,6 +136,10 @@
                                         <a href="{{ url ('cnfg-contratos/motivosretiros') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Motivos de retiro</a>
                                     </li>
 
+                                    <li {{ (Request::is('*/jefes') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/jefes') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Jefes </a>
+                                    </li>
+
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>

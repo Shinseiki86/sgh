@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('clasescontratos', 'ClaseContratoController');
 		Route::resource('estadoscontratos', 'EstadoContratoController');
 		Route::resource('motivosretiros', 'MotivoRetiroController');
+		Route::resource('jefes', 'JefeController');
 	});
 
 	Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizacionales'], function() {

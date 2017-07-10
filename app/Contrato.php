@@ -47,7 +47,7 @@ class Contrato extends ModelWithSoftDeletes
 	public function jefe()
 	{
 		$foreingKey = 'JEFE_ID';
-		return $this->belongsTo(Prospecto::class, $foreingKey);
+		return $this->belongsTo(Jefe::class, $foreingKey);
 	}
 
 	public function cargo()
