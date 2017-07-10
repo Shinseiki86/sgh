@@ -20,7 +20,7 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5"> Nombre </th>
+				<th class="col-md-5"> Implicado </th>
 				<th class="col-md-5"> Estado </th>
 				<th class="col-md-5"> Tipo de Incidente </th>
 				<th class="col-md-5"> Prioridad </th>
@@ -44,6 +44,12 @@
 				<td>{{ $ticket -> TICK_FECHACUMPLIMIENTO }}</td>
 				<td>{{ $ticket -> TICK_CREADOPOR }}</td>
 				<td>
+
+					<!-- Botón Ver (show) -->
+					<a class="btn btn-small btn-basic btn-xs" href="{{ route('cnfg-tickets.tickets.show', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Ver">
+						<i class="fa fa-eye" aria-hidden="true"></i>
+					</a>
+
 					<!-- Botón Editar (edit) -->
 					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-tickets.tickets.edit', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>

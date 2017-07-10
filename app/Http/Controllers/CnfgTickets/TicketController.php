@@ -55,6 +55,14 @@ class TicketController extends Controller
 		return view('cnfg-tickets/tickets/index', compact('tickets'));
 	}
 
+	public function show($TICK_ID)
+    {
+        // Se obtiene el registro
+        $ticket = Ticket::findOrFail($TICK_ID);
+        // Muestra la vista y pasa el registro
+        return view('cnfg-tickets/tickets/show', compact('ticket'));
+    }
+
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
 	 *

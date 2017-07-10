@@ -34,12 +34,19 @@ class Contrato extends ModelWithSoftDeletes
 		'RIES_ID',
 		'TIEM_ID',
 		'CECO_ID',
+		'JEFE_ID',
 		'CONT_OBSERVACIONES',
 	];
 
 	public function prospecto()
 	{
 		$foreingKey = 'PROS_ID';
+		return $this->belongsTo(Prospecto::class, $foreingKey);
+	}
+
+	public function jefe()
+	{
+		$foreingKey = 'JEFE_ID';
 		return $this->belongsTo(Prospecto::class, $foreingKey);
 	}
 

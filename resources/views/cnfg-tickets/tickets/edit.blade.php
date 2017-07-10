@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Proceso '.$categoria->PROC_ID)
+@section('page_heading', 'Actualizar Ticket '.$ticket->TICK_ID)
 
 @section('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
@@ -14,7 +14,7 @@
 @endsection
 
 @section('section')
-	{{ Form::model($categoria, ['action' => ['CnfgTickets\CategoriaController@update', $categoria->CATE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($ticket, ['action' => ['CnfgTickets\CategoriaController@update', $ticket->CATE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<div class="form-group{{ $errors->has('CATE_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('CATE_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}
@@ -40,17 +40,17 @@
 			</div>
 		</div>
 
-		<div class="form-group{{ $errors->has('PROC_ID') ? ' has-error' : '' }}">
-			<label for="PROC_ID" class="col-md-4 control-label">Proceso</label>
+		<div class="form-group{{ $errors->has('TICK_ID') ? ' has-error' : '' }}">
+			<label for="TICK_ID" class="col-md-4 control-label">Proceso</label>
 			<div class="col-md-6">
-				{{ Form::select('PROC_ID', [null => 'Seleccione un categoria'] + $arrProcesos , old('PROC_ID'), [
+				{{ Form::select('TICK_ID', [null => 'Seleccione un ticket'] + $arrProcesos , old('TICK_ID'), [
 					'class' => 'form-control chosen-select',
 					'required'
 				]) }}
 
-				@if ($errors->has('PROC_ID'))
+				@if ($errors->has('TICK_ID'))
 					<span class="help-block">
-						<strong>{{ $errors->first('PROC_ID') }}</strong>
+						<strong>{{ $errors->first('TICK_ID') }}</strong>
 					</span>
 				@endif
 			</div>
@@ -71,7 +71,7 @@
 		<!-- Botones -->
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4 text-right">
-				<a class="btn btn-warning" role="button" href="{{ URL::to('cnfg-tickets/categorias/') }}" data-tooltip="tooltip" title="Regresar">
+				<a class="btn btn-warning" role="button" href="{{ URL::to('cnfg-tickets/tickets/') }}" data-tooltip="tooltip" title="Regresar">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i>
 				</a>
 				{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i>', [

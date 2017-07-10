@@ -201,7 +201,7 @@
                             </li>
 
                             <li {{ (Request::is('*/contratos') ? 'class=active' : '') }}>
-                                <a href="{{ url ('gestion-humana/contratos') }}">Gestión de Contratos</a>
+                                <a href="{{ url ('gestion-humana/contratos') }}">Contratos</a>
                             </li>
 
                             <li>
