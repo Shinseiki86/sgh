@@ -1,11 +1,11 @@
 @extends('layouts.menu')
-@section('title', '/ Sanciones')
+@section('title', '/ Decisiones Administrativas')
 @include('datatable')
 
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-			Sanciones
+			Decisiones Administrativas
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
 			<a class='btn btn-primary' role='button' href="{{ route('cnfg-tickets.sanciones.create') }}" data-tooltip="tooltip" title="Crear Nuevo">

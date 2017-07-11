@@ -19,7 +19,9 @@ class Ticket extends ModelWithSoftDeletes
 
 	protected $fillable = [
 		'TICK_DESCRIPCION',
+		'TICK_OBSERVACIONES',
 		'TICK_FECHASOLICITUD',
+		'TICK_FECHAEVENTO',
 		'TICK_FECHACUMPLIMIENTO',
 		'TICK_ARCHIVO',
 		'CONT_ID',

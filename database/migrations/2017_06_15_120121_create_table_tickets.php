@@ -28,6 +28,9 @@ class CreateTableTickets extends Migration
             $table->datetime('TICK_FECHASOLICITUD')
                 ->comment('fecha de solicitud de ticket');
 
+            $table->date('TICK_FECHAEVENTO')
+                ->comment('fecha del evento');
+
             $table->datetime('TICK_FECHACUMPLIMIENTO')
                 ->nullable()
                 ->comment('fecha de cumplimiento de ticket');
@@ -60,6 +63,10 @@ class CreateTableTickets extends Migration
 
             $table->unsignedInteger('TIIN_ID')
                 ->comment('relacion a la tabla tipos de incidente');
+
+            $table->string('TICK_OBSERVACIONES', 3000)
+                ->nullable()
+                ->comment('observaciones del ticket');
             
             //Traza
             $table->string('TICK_CREADOPOR')

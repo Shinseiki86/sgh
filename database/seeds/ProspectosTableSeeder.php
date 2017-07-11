@@ -39,7 +39,7 @@ class ProspectosTableSeeder extends Seeder
         $prospecto->PROS_DIRECCION =  'CALLE 72K # 8 N 75';
         $prospecto->PROS_TELEFONO =  '4059682';
         $prospecto->PROS_CELULAR =  '3177274520';
-        $prospecto->PROS_CORREO =  'hector@outlook.com';
+        $prospecto->PROS_CORREO =  'kfrodriguez6@misena.edu.co';
         $prospecto->PROS_CREADOPOR =  'SYSTEM';
         $prospecto->save();
 
@@ -54,7 +54,7 @@ class ProspectosTableSeeder extends Seeder
         $prospecto->PROS_DIRECCION =  'CALLE 72K # 8 N 75';
         $prospecto->PROS_TELEFONO =  '4059682';
         $prospecto->PROS_CELULAR =  '3177274520';
-        $prospecto->PROS_CORREO =  'diego@outlook.com';
+        $prospecto->PROS_CORREO =  'coordinadornomina@aseoregional.com';
         $prospecto->PROS_CREADOPOR =  'SYSTEM';
         $prospecto->save();
     }

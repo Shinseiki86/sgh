@@ -34,6 +34,8 @@ class TicketController extends Controller
 			'PRIO_ID' => ['required'],
 			'CATE_ID' => ['required'],
 			'TIIN_ID' => ['required'],
+			'TICK_FECHAEVENTO' => ['required'],
+			'TICK_OBSERVACIONES' => ['max:3000'],
 			]);
 
 		if ($validator->fails())

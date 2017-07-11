@@ -133,6 +133,18 @@
 	</div>
 </div>
 
+<div class="form-group{{ $errors->has('TICK_FECHAEVENTO') ? ' has-error' : '' }}">
+{{ Form::label('TICK_FECHAEVENTO', 'Fecha del Evento',  [ 'class' => 'col-md-4 control-label' ]) }}
+	<div class="col-md-6">
+		{{ Form::date('TICK_FECHAEVENTO', old('TICK_FECHAEVENTO'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
+		@if ($errors->has('TICK_FECHAEVENTO'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TICK_FECHAEVENTO') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
+
 <div class="form-group{{ $errors->has('TICK_DESCRIPCION') ? ' has-error' : '' }}">
 	{{ Form::label('TICK_DESCRIPCION', 'Descripción de los Hechos',  [ 'class' => 'col-md-4 control-label' ]) }}
 	<div class="col-md-6">
@@ -174,6 +186,20 @@
 		@endif
 	</div>
 </div>
+
+<div class="form-group{{ $errors->has('TICK_OBSERVACIONES') ? ' has-error' : '' }}">
+	{{ Form::label('TICK_OBSERVACIONES', 'Observaciones',  [ 'class' => 'col-md-4 control-label' ]) }}
+	<div class="col-md-6">
+		{{ Form::textarea('TICK_OBSERVACIONES', old('TICK_OBSERVACIONES'), [ 'class' => 'form-control', 'maxlength' => '3000']) }}
+		@if ($errors->has('TICK_OBSERVACIONES'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TICK_OBSERVACIONES') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
+
+
 
 <!-- Botones -->
 <div class="form-group">

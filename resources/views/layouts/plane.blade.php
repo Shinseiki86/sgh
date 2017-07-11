@@ -30,6 +30,8 @@
 	@yield('body')
 
 	{!! Html::script('assets/scripts/frontend.js') !!}
+	
+	
 	{{--datatable--}}
 	{!! Html::script('assets/scripts/datatable/jquery-1.12.4.js') !!}
 	{!! Html::script('assets/scripts/datatable/jquery.dataTables.min.js') !!}

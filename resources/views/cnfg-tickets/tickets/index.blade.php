@@ -25,6 +25,7 @@
 				<th class="col-md-5"> Tipo de Incidente </th>
 				<th class="col-md-5"> Prioridad </th>
 				<th class="col-md-5"> Categoria </th>
+				<th class="col-md-5"> Fecha Evento </th>
 				<th class="col-md-5"> Fecha Solicitud </th>
 				<th class="col-md-5"> Fecha Cumplimiento </th>
 				<th class="col-md-5"> Estado Aprobación </th>
@@ -41,6 +42,7 @@
 				<td>{{ $ticket -> tipoincidente -> TIIN_DESCRIPCION }}</td>
 				<td>{{ $ticket -> prioridad -> PRIO_DESCRIPCION }}</td>
 				<td>{{ $ticket -> categoria -> CATE_DESCRIPCION }}</td>
+				<td>{{ $ticket -> TICK_FECHAEVENTO }}</td>
 				<td>{{ $ticket -> TICK_FECHASOLICITUD }}</td>
 				<td>{{ $ticket -> TICK_FECHACUMPLIMIENTO }}</td>
 				<td>{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</td>
