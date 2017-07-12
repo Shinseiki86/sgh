@@ -20,6 +20,7 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
+				<th class="col-md-5"> Empleador </th>
 				<th class="col-md-5"> Implicado </th>
 				<th class="col-md-5"> Estado </th>
 				<th class="col-md-5"> Tipo de Incidente </th>
@@ -28,7 +29,7 @@
 				<th class="col-md-5"> Fecha Evento </th>
 				<th class="col-md-5"> Fecha Solicitud </th>
 				<th class="col-md-5"> Fecha Cumplimiento </th>
-				<th class="col-md-5"> Estado Aprobación </th>
+				<!-- <th class="col-md-5"> Estado Aprobación </th> -->
 				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
@@ -37,6 +38,7 @@
 		<tbody>
 			@foreach($tickets as $ticket)
 			<tr>
+				<td>{{ $ticket -> contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ nombre_empleado ($ticket -> contrato -> PROS_ID ) . ' - ' . $ticket -> contrato -> prospecto -> PROS_CEDULA }}</td>
 				<td>{{ $ticket -> estadoticket -> ESTI_DESCRIPCION }}</td>
 				<td>{{ $ticket -> tipoincidente -> TIIN_DESCRIPCION }}</td>
@@ -45,7 +47,7 @@
 				<td>{{ $ticket -> TICK_FECHAEVENTO }}</td>
 				<td>{{ $ticket -> TICK_FECHASOLICITUD }}</td>
 				<td>{{ $ticket -> TICK_FECHACUMPLIMIENTO }}</td>
-				<td>{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</td>
+				<!-- <td>{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</td> -->
 				<td>{{ $ticket -> TICK_CREADOPOR }}</td>
 				<td>
 

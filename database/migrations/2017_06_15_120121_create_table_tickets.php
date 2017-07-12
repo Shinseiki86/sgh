@@ -31,6 +31,14 @@ class CreateTableTickets extends Migration
             $table->date('TICK_FECHAEVENTO')
                 ->comment('fecha del evento');
 
+            $table->date('TICK_FECHAAPROBACION')
+                ->nullable()
+                ->comment('fecha en que el jefe inmediato aprueba la solicitud del proceso disciplinario');
+
+            $table->date('TICK_FECHACIERE')
+                ->nullable()
+                ->comment('fecha en que se cierra el caso');
+
             $table->datetime('TICK_FECHACUMPLIMIENTO')
                 ->nullable()
                 ->comment('fecha de cumplimiento de ticket');

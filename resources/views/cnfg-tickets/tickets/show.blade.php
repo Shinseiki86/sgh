@@ -77,6 +77,13 @@
 
 				<li class="list-group-item">
 					<div class="row">
+						<div class="col-lg-4"><strong>Empleador:</strong></div>
+						<div class="col-lg-8">{{ $ticket-> contrato -> empleador -> EMPL_RAZONSOCIAL }}</div>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="row">
 						<div class="col-lg-4"><strong>Fecha Creación:</strong></div>
 						<div class="col-lg-8">{{ $ticket->TICK_FECHASOLICITUD }}</div>
 					</div>
