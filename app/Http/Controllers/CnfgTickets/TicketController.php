@@ -11,6 +11,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Ticket;
+use SGH\Mail;
 use SGH\Prospecto;
 
 use Carbon\Carbon;
@@ -145,10 +146,40 @@ class TicketController extends Controller
 		$ticket->TICK_FECHASOLICITUD = $fecactual;
 		$ticket->save();
 
+		$TICK_ID = $ticket->TICK_ID;
+		$tickets = Ticket::findOrFail($TICK_ID);
+
+		//dd($tickets);
+		$subject = "Nuevo Ticket";
+		$this->sendEmail($tickets, 'emails.info_ticket_creado', $subject);
+
 		// redirecciona al index de controlador
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' creado exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 	}
+
+	protected function sendEmail($tickets, $view, $asunto)
+    {
+    	try{
+    		\Mail::send($view, compact('tickets'), function($message) use ($asunto){
+	            //Se obtiene el usuario que creó la encuesta
+	            $user = auth()->user();
+	            //remitente
+	            $message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
+	            //asunto
+	            $message->subject($asunto);
+
+	            $emails = $user->email .",". "coordinadornomina@aseoregional.com";
+
+	            //receptor
+	            $message->to( explode(',', $emails), $user->name);
+        	});
+    	}
+    	catch(\Exception $e){
+    		flash_modal( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué creado pero no se envió notificación', 'danger' );
+    	}
+        
+    }
 
 
 	/**
@@ -212,5 +243,7 @@ class TicketController extends Controller
 
 		return redirect()->route('cnfg-tickets.tickets.index');
 	}
+
+	
 	
 }
