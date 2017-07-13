@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
 use SGH\Contrato;
+use SGH\Prospecto;
+use SGH\Jefe;
 use SGH\Cargo;
 use SGH\Riesgo;
 
@@ -41,6 +43,7 @@ class ContratoController extends Controller
 			'CLCO_ID' => ['numeric', 'required'],
 			'RIES_ID' => ['numeric', 'required'],
 			'PROS_ID' => ['numeric', 'required'],
+			//'JEFE_ID' => ['numeric'],
 			'CARG_ID' => ['numeric', 'required'],
 			'CONT_FECHAINGRESO' => ['date', 'required'],
 			'CONT_SALARIO'      => ['numeric','required'],
@@ -113,8 +116,20 @@ class ContratoController extends Controller
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
+		$primaryKey = 'JEFE_ID';
+		$column = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			], 'PROS_NOMBRESAPELLIDOS');
+		$columnName = 'PROS_NOMBRESAPELLIDOS';
 
-		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos'));
+		$jefe = Jefe::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'JEFES.'.$primaryKey , $column ])->get();
+		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
+
+
+		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrJefes'));
 	}
 
 	/**
@@ -127,11 +142,14 @@ class ContratoController extends Controller
 		//Datos recibidos desde la vista.
 		$request = request();
 
+		//dd($request);
+
 		if(!$request->has('MORE_ID')){	$request['MORE_ID'] = null; }
 		if(!$request->has('CONT_FECHARETIRO')){	$request['CONT_FECHARETIRO'] = null; }
 		if(!$request->has('CONT_VARIABLE')){	$request['CONT_VARIABLE'] = null; }
 		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
 		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
+		if(!$request->has('JEFE_ID')){	$request['JEFE_ID'] = null; }
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
@@ -191,8 +209,20 @@ class ContratoController extends Controller
 		//Se crea un array con los riesgos existentes
 		$arrRiesgos = model_to_array(Riesgo::class, 'RIES_DESCRIPCION');
 
+		$primaryKey = 'JEFE_ID';
+		$column = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			], 'PROS_NOMBRESAPELLIDOS');
+		$columnName = 'PROS_NOMBRESAPELLIDOS';
+
+		$jefe = Jefe::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'JEFES.'.$primaryKey , $column ])->get();
+		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos'));
+		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrJefes'));
 	}
 
 
@@ -212,6 +242,7 @@ class ContratoController extends Controller
 		if(!$request->has('CONT_VARIABLE')){	$request['CONT_VARIABLE'] = null; }
 		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
 		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
+		if(!$request->has('JEFE_ID')){	$request['JEFE_ID'] = null; }
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);

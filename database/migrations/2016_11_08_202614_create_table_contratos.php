@@ -26,6 +26,10 @@ class CreateTableContratos extends Migration
             $table->integer('PROS_ID')->unsigned()
                 ->comment('referencia al prospecto que tiene el contrato con la empresa');
 
+            $table->integer('JEFE_ID')->unsigned()
+                ->nullable()
+                ->comment('referencia al prospecto que es jefe del empleado');
+
             $table->string('CONT_CASOMEDICO', 2)->nullable();
 
             $table->integer('CARG_ID')->unsigned()
@@ -98,6 +102,12 @@ class CreateTableContratos extends Migration
             $table->foreign('PROS_ID')
                 ->references('PROS_ID')
                 ->on('PROSPECTOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('JEFE_ID')
+                ->references('JEFE_ID')
+                ->on('JEFES')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

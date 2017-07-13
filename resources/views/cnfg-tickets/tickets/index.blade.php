@@ -20,13 +20,16 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5"> Nombre </th>
+				<th class="col-md-5"> Empleador </th>
+				<th class="col-md-5"> Implicado </th>
 				<th class="col-md-5"> Estado </th>
 				<th class="col-md-5"> Tipo de Incidente </th>
 				<th class="col-md-5"> Prioridad </th>
 				<th class="col-md-5"> Categoria </th>
+				<th class="col-md-5"> Fecha Evento </th>
 				<th class="col-md-5"> Fecha Solicitud </th>
 				<th class="col-md-5"> Fecha Cumplimiento </th>
+				<!-- <th class="col-md-5"> Estado Aprobación </th> -->
 				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
@@ -35,15 +38,24 @@
 		<tbody>
 			@foreach($tickets as $ticket)
 			<tr>
-				<td>{{ nombre_empleado ($ticket -> contrato -> PROS_ID )}}</td>
+				<td>{{ $ticket -> contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
+				<td>{{ nombre_empleado ($ticket -> contrato -> PROS_ID ) . ' - ' . $ticket -> contrato -> prospecto -> PROS_CEDULA }}</td>
 				<td>{{ $ticket -> estadoticket -> ESTI_DESCRIPCION }}</td>
 				<td>{{ $ticket -> tipoincidente -> TIIN_DESCRIPCION }}</td>
 				<td>{{ $ticket -> prioridad -> PRIO_DESCRIPCION }}</td>
 				<td>{{ $ticket -> categoria -> CATE_DESCRIPCION }}</td>
+				<td>{{ $ticket -> TICK_FECHAEVENTO }}</td>
 				<td>{{ $ticket -> TICK_FECHASOLICITUD }}</td>
 				<td>{{ $ticket -> TICK_FECHACUMPLIMIENTO }}</td>
+				<!-- <td>{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</td> -->
 				<td>{{ $ticket -> TICK_CREADOPOR }}</td>
 				<td>
+
+					<!-- Botón Ver (show) -->
+					<a class="btn btn-small btn-basic btn-xs" href="{{ route('cnfg-tickets.tickets.show', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Ver">
+						<i class="fa fa-eye" aria-hidden="true"></i>
+					</a>
+
 					<!-- Botón Editar (edit) -->
 					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-tickets.tickets.edit', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>

@@ -11,6 +11,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Ticket;
+use SGH\Mail;
 use SGH\Prospecto;
 
 use Carbon\Carbon;
@@ -30,9 +31,12 @@ class TicketController extends Controller
 			'TICK_DESCRIPCION' => ['required','max:3000'],
 			'CONT_ID' => ['required'],
 			'ESTI_ID' => ['required'],
+			'ESAP_ID' => ['required'],
 			'PRIO_ID' => ['required'],
 			'CATE_ID' => ['required'],
 			'TIIN_ID' => ['required'],
+			'TICK_FECHAEVENTO' => ['required'],
+			'TICK_OBSERVACIONES' => ['max:3000'],
 			]);
 
 		if ($validator->fails())
@@ -55,6 +59,14 @@ class TicketController extends Controller
 		return view('cnfg-tickets/tickets/index', compact('tickets'));
 	}
 
+	public function show($TICK_ID)
+    {
+        // Se obtiene el registro
+        $ticket = Ticket::findOrFail($TICK_ID);
+        // Muestra la vista y pasa el registro
+        return view('cnfg-tickets/tickets/show', compact('ticket'));
+    }
+
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
 	 *
@@ -68,6 +80,7 @@ class TicketController extends Controller
 			'PROS_SEGUNDONOMBRE',
 			'PROS_PRIMERAPELLIDO',
 			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA'
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
 
@@ -77,13 +90,15 @@ class TicketController extends Controller
 
 		$arrEstados = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
 
+		$arrEstadosAprobacion = model_to_array(EstadoAprobacion::class, 'ESAP_DESCRIPCION');
+
 		$arrPrioridad = model_to_array(Prioridad::class, 'PRIO_DESCRIPCION');
 
 		$arrCategorias = model_to_array(Categoria::class, 'CATE_DESCRIPCION');
 
 		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
 
-		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes'));
+		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion'));
 	}
 
 	/**
@@ -95,6 +110,8 @@ class TicketController extends Controller
 	{
 		//Datos recibidos desde la vista.
 		$data = request()->all();
+
+		//dd($data);
 
 		//fecha actual
 		$fecactual = Carbon::now();
@@ -129,10 +146,40 @@ class TicketController extends Controller
 		$ticket->TICK_FECHASOLICITUD = $fecactual;
 		$ticket->save();
 
+		$TICK_ID = $ticket->TICK_ID;
+		$tickets = Ticket::findOrFail($TICK_ID);
+
+		//dd($tickets);
+		$subject = "Nuevo Ticket";
+		$this->sendEmail($tickets, 'emails.info_ticket_creado', $subject);
+
 		// redirecciona al index de controlador
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' creado exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 	}
+
+	protected function sendEmail($tickets, $view, $asunto)
+    {
+    	try{
+    		\Mail::send($view, compact('tickets'), function($message) use ($asunto){
+	            //Se obtiene el usuario que creó la encuesta
+	            $user = auth()->user();
+	            //remitente
+	            $message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
+	            //asunto
+	            $message->subject($asunto);
+
+	            $emails = $user->email .",". "coordinadornomina@aseoregional.com";
+
+	            //receptor
+	            $message->to( explode(',', $emails), $user->name);
+        	});
+    	}
+    	catch(\Exception $e){
+    		flash_modal( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué creado pero no se envió notificación', 'danger' );
+    	}
+        
+    }
 
 
 	/**
@@ -196,5 +243,7 @@ class TicketController extends Controller
 
 		return redirect()->route('cnfg-tickets.tickets.index');
 	}
+
+	
 	
 }

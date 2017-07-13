@@ -226,6 +226,22 @@
 				</div>
 			</div>
 
+			<div class="form-group{{ $errors->has('JEFE_ID') ? ' has-error' : '' }}">
+			<label for="JEFE_ID" class="col-md-2 control-label">Jefe Inmediato</label>
+			<div class="col-md-6">
+				{{ Form::select('JEFE_ID', [null => 'Seleccione un empleado'] + $arrJefes , old('JEFE_ID'), [
+				'class' => 'form-control chosen-select',
+				'required'
+				]) }}
+
+				@if ($errors->has('JEFE_ID'))
+				<span class="help-block">
+					<strong>{{ $errors->first('JEFE_ID') }}</strong>
+				</span>
+				@endif
+			</div>
+		</div>
+
 			<div class="form-group{{ $errors->has('CONT_CASOMEDICO') ? ' has-error' : '' }}">
 				{{ Form::label('CONT_CASOMEDICO', '¿R.M?',  [ 'class' => 'col-md-2 control-label' ]) }}
 				<div class="col-md-6">

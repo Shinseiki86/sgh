@@ -28,6 +28,17 @@ class CreateTableTickets extends Migration
             $table->datetime('TICK_FECHASOLICITUD')
                 ->comment('fecha de solicitud de ticket');
 
+            $table->date('TICK_FECHAEVENTO')
+                ->comment('fecha del evento');
+
+            $table->date('TICK_FECHAAPROBACION')
+                ->nullable()
+                ->comment('fecha en que el jefe inmediato aprueba la solicitud del proceso disciplinario');
+
+            $table->date('TICK_FECHACIERE')
+                ->nullable()
+                ->comment('fecha en que se cierra el caso');
+
             $table->datetime('TICK_FECHACUMPLIMIENTO')
                 ->nullable()
                 ->comment('fecha de cumplimiento de ticket');
@@ -41,6 +52,17 @@ class CreateTableTickets extends Migration
             $table->unsignedInteger('ESTI_ID')
                 ->comment('relacion a la tabla estados tickets');
 
+            $table->unsignedInteger('ESAP_ID')
+                ->comment('relacion a la tabla estados de aprobaciones');
+
+            $table->unsignedInteger('SANC_ID')
+                ->nullable()
+                ->comment('relacion a la tabla de sanciones');
+
+            $table->string('TICK_CONCLUSION', 3000)
+                ->nullable()
+                ->comment('descripción del ticket');
+
             $table->unsignedInteger('PRIO_ID')
                 ->comment('relacion a la tabla prioridades');
 
@@ -49,6 +71,10 @@ class CreateTableTickets extends Migration
 
             $table->unsignedInteger('TIIN_ID')
                 ->comment('relacion a la tabla tipos de incidente');
+
+            $table->string('TICK_OBSERVACIONES', 3000)
+                ->nullable()
+                ->comment('observaciones del ticket');
             
             //Traza
             $table->string('TICK_CREADOPOR')
@@ -76,6 +102,20 @@ class CreateTableTickets extends Migration
             $table->foreign('ESTI_ID')
                 ->references('ESTI_ID')
                 ->on('ESTADOSTICKETS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Relación con tabla ESTADOSAPROBACIONES
+            $table->foreign('ESAP_ID')
+                ->references('ESAP_ID')
+                ->on('ESTADOSAPROBACIONES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Relación con tabla SANCIONES
+            $table->foreign('SANC_ID')
+                ->references('SANC_ID')
+                ->on('SANCIONES')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

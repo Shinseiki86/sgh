@@ -152,6 +152,10 @@
                                         <a href="{{ url ('cnfg-contratos/motivosretiros') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Motivos de retiro</a>
                                     </li>
 
+                                    <li {{ (Request::is('*/jefes') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-contratos/jefes') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Jefes </a>
+                                    </li>
+
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
@@ -217,7 +221,7 @@
                             </li>
 
                             <li {{ (Request::is('*/contratos') ? 'class=active' : '') }}>
-                                <a href="{{ url ('gestion-humana/contratos') }}">Gestión de Contratos</a>
+                                <a href="{{ url ('gestion-humana/contratos') }}">Contratos</a>
                             </li>
 
                             <li>
@@ -243,7 +247,15 @@
                                     </li>
 
                                     <li {{ (Request::is('*/estadostickets') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/estadostickets') }}">Estados</a>
+                                        <a href="{{ url ('cnfg-tickets/estadostickets') }}">Estados de Ticket</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/sanciones') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/sanciones') }}">Sanciones</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/estadosaprobaciones') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/estadosaprobaciones') }}">Estados de Aprobaciones</a>
                                     </li>
 
                                     <li {{ (Request::is('*/categorias') ? 'class=active' : '') }}>
