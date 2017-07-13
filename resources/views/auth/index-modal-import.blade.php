@@ -1,7 +1,9 @@
-{{ Form::button('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Importar<span class="hidden-xs"> desde Excel</span>',[
+{{ Form::button('<i class="fa fa-file-excel-o" aria-hidden="true"></i>',[
 		'class'=>'btn btn-primary',
 		'data-toggle'=>'modal',
 		'data-target'=>'#pregModalImport',
+		'data-tooltip'=>'tooltip',
+		'title'=>'Importar desde Excel',
 ]) }}
 
 	<!-- Mensaje Modal. -->

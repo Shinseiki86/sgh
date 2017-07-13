@@ -2,7 +2,6 @@
 @section('title', '/ Contratos')
 @include('datatable')
 
-
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
@@ -39,13 +38,13 @@
 				<th class="col-md-5">Centro Costo</th>
 				<th class="col-md-5">Caso Médico</th>
 				<th class="col-md-5">Observaciones</th>
-				<th class="col-md-1"></th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 
 		<tbody>
 			@foreach($contratos as $contrato)
-			<tr>
+			<tr class="{{ ($contrato->ESCO_ID == 1) ? '' : 'danger' }}">
 				<td>{{ $contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $contrato -> tipocontrato -> TICO_DESCRIPCION }}</td>
 				<td>{{ $contrato -> clasecontrato -> CLCO_DESCRIPCION }}</td>
@@ -65,11 +64,15 @@
 				<td>{{ $contrato -> CONT_CASOMEDICO }}</td>
 				<td>{{ $contrato -> CONT_OBSERVACIONES }}</td>
 				<td>
+
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('gestion-humana.contratos.edit', [ 'CONT_ID' => $contrato->CONT_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					@if($contrato->ESCO_ID == sgh\EstadoContrato::ACTIVO)
+					<a class="btn btn-xs btn-info" href="{{ route('gestion-humana.contratos.edit', [ 'CONT_ID' => $contrato->CONT_ID ]) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
+					@endif
 
+					@if(Entrust::hasRole(['owner', 'admin']))
 					<!-- carga botón de borrar -->
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
 						'class'=>'btn btn-xs btn-danger btn-delete',
@@ -82,6 +85,15 @@
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',
 					])}}
+					@endif
+
+					<!-- Botón Cambiar estado -->
+					@if($contrato->ESCO_ID == sgh\EstadoContrato::ACTIVO)
+					<a class="btn btn-xs btn-warning" href="#" data-tooltip="tooltip" title="Cambiar estado">
+						<i class="fa fa-flag" aria-hidden="true"></i>
+					</a>
+					@endif
+
 				</td>
 			</tr>
 			@endforeach

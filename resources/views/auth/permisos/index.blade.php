@@ -1,14 +1,14 @@
 @extends('layouts.menu')
-@section('title', '/ Roles')
+@section('title', '/ Permisos')
 @include('datatable')
 
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-			Roles
+			Permisos
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ URL::to('auth/roles/create') }}" data-tooltip="tooltip" title="Crear Rol">
+			<a class='btn btn-primary' role='button' href="{{ URL::to('auth/permisos/create') }}" data-tooltip="tooltip" title="Crear Permiso">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -21,27 +21,27 @@
 		<thead>
 			<tr>
 				<th class="col-xs-1">Nombre</th>
-				<th class="col-xs-3">Display</th>
-				<th class="col-xs-3">Permisos</th>
-				<th class="hidden-xs col-sm-1">Creado</th>
-				<th class="hidden-xs col-sm-1">Modificado</th>
+				<th class="col-xs-2">Display</th>
+				<th class="hidden-xs col-sm-1">Roles</th>
+				<th class="hidden-xs col-sm-2">Creado</th>
+				<th class="hidden-xs col-sm-2">Modificado</th>
 				<th class="col-xs-1 all"></th>
 			</tr>
 		</thead>
 
 		<tbody>
 
-			@foreach($roles as $rol)
+			@foreach($permisos as $permiso)
 			<tr>
-				<td>{{ $rol -> name }}</td>
-				<td>{{ $rol -> display_name }} <i class="fa fa-question-circle" aria-hidden="true" data-tooltip="tooltip" data-container="body" title="{{ $rol -> description }}"></i></td>
-				<td>{{ $rol -> permissions ->implode('display_name', ', ') }}</td>
-				<td>{{ $rol -> created_at }}</td>
-				<td>{{ $rol -> updated_at }}</td>
+				<td>{{ $permiso -> name }}</td>
+				<td>{{ $permiso -> display_name }}</td>
+				<td>{{ $permiso -> roles -> count() }}</td>
+				<td>{{ $permiso -> created_at }}</td>
+				<td>{{ $permiso -> updated_at }}</td>
 				<td>
 
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ URL::to('auth/roles/'.$rol->id.'/edit') }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ URL::to('auth/permisos/'.$permiso->id.'/edit') }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 
@@ -49,10 +49,10 @@
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
 						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
-						'data-id'=> $rol->id,
-						'data-modelo'=> 'Rol',
-						'data-descripcion'=> $rol->display_name,
-						'data-action'=> 'roles/'.$rol->id,
+						'data-id'=> $permiso->id,
+						'data-modelo'=> 'Permiso',
+						'data-descripcion'=> $permiso->display_name,
+						'data-action'=> 'permisos/'.$permiso->id,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',
