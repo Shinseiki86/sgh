@@ -117,6 +117,33 @@ use SGH\Permission;
                 $create = $edit = $index = $delete = null;
 
 
+
+                //Contratos
+                $create = Permission::create([
+                    'name'         => 'contrato-create',
+                    'display_name' => 'Crear contratos',
+                    'description'  => 'Crear nuevos contratos',
+                ]);
+                $editUser = Permission::create([
+                    'name'         => 'contrato-edit',
+                    'display_name' => 'Editar contratos',
+                    'description'  => 'Editar contratos existentes',
+                ]);
+                $indexUser = Permission::create([
+                    'name'         => 'contrato-index',
+                    'display_name' => 'Listar contratos',
+                    'description'  => 'Listar contratos existentes',
+                ]);
+                $delUser = Permission::create([
+                    'name'         => 'contrato-delete',
+                    'display_name' => 'Borrar contratos',
+                    'description'  => 'Borrar contratos existentes',
+                ]);
+                $rolGestHum->attachPermissions([$create, $edit, $index]);
+                $rolAdmin->attachPermissions([$create, $edit, $index, $delete]);
+                $create = $edit = $index = $delete = null;
+
+
             $this->command->info('--- Seeder Creación de Usuarios prueba');
 
                 //Admin
@@ -160,8 +187,8 @@ use SGH\Permission;
 
                 $gesthum2 = User::create( [
                     'name' => 'Gestión humana 2 de prueba',
-                    'username' => 'gesthum1',
-                    'email' => 'gesthum1@example.com',
+                    'username' => 'gesthum2',
+                    'email' => 'gesthum2@example.com',
                     'password'  => \Hash::make($pass)
                 ]);
                 $gesthum2->attachRole($rolGestHum);
