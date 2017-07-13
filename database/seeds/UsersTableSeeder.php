@@ -15,40 +15,133 @@ use SGH\Permission;
 
             $this->command->info('--- Seeder Creación de Roles');
 
-                $rolOwner = new Role();
-                $rolOwner->name         = 'owner';
-                $rolOwner->display_name = 'Project Owner'; // optional
-                $rolOwner->description  = 'User is the owner of a given project'; // optional
-                $rolOwner->save();
-
-                $rolAdmin = new Role();
-                $rolAdmin->name         = 'admin';
-                $rolAdmin->display_name = 'Administrador'; // optional
-                $rolAdmin->description  = 'User is allowed to manage and edit other users'; // optional
-                $rolAdmin->save();
-
-                $rolEditor = new Role();
-                $rolEditor->name         = 'editor';
-                $rolEditor->display_name = 'Editor'; // optional
-                $rolEditor->description  = 'Usuario con permisos para editar contenido.'; // optional
-                $rolEditor->save();
+                $rolOwner = Role::create([
+                    'name'         => 'owner',
+                    'display_name' => 'Project Owner',
+                    'description'  => 'User is the owner of a given project',
+                ]);
+                $rolAdmin = Role::create([
+                    'name'         => 'admin',
+                    'display_name' => 'Administrador',
+                    'description'  => 'User is allowed to manage and edit other users',
+                ]);
+                $rolSuperOper = Role::create([
+                    'name'         => 'superoper',
+                    'display_name' => 'Supervisor Operaciones',
+                    //'description'  => 'Comentario',
+                ]);
+                $rolCoorOper = Role::create([
+                    'name'         => 'cooroper',
+                    'display_name' => 'Coordinador Operaciones',
+                    //'description'  => 'Comentario',
+                ]);
+                $rolGestHum = Role::create([
+                    'name'         => 'gesthum',
+                    'display_name' => 'Gestión Humana',
+                    //'description'  => 'Comentario',
+                ]);
+                
 
             $this->command->info('--- Seeder Creación de Permisos');
 
-                $crearUsuario = new Permission();
-                $crearUsuario->name         = 'crear-usuario';
-                $crearUsuario->display_name = 'Crear usuarios'; // optional
-                $crearUsuario->description  = 'Crear nuevos usuarios en el sistema.'; // optional
-                $crearUsuario->save();
-
-                $editarUsuario = new Permission();
-                $editarUsuario->name         = 'editar-usuario';
-                $editarUsuario->display_name = 'Editar usuarios'; // optional
-                $editarUsuario->description  = 'Editar usuarios existentes en el sistema.'; // optional
-                $editarUsuario->save();
-
-                $rolAdmin->attachPermissions([$crearUsuario, $editarUsuario]);
+                $create = Permission::create([
+                    'name'         => 'usuario-create',
+                    'display_name' => 'Crear usuarios',
+                    'description'  => 'Crear nuevos usuarios en el sistema',
+                ]);
+                $edit = Permission::create([
+                    'name'         => 'usuario-edit',
+                    'display_name' => 'Editar usuarios',
+                    'description'  => 'Editar usuarios existentes en el sistema',
+                ]);
+                $index = Permission::create([
+                    'name'         => 'usuario-index',
+                    'display_name' => 'Listar usuarios',
+                    'description'  => 'Listar usuarios existentes en el sistema',
+                ]);
+                $delete = Permission::create([
+                    'name'         => 'usuario-delete',
+                    'display_name' => 'Borrar usuarios',
+                    'description'  => 'Borrar usuarios existentes en el sistema',
+                ]);
+                $rolAdmin->attachPermissions([$create, $edit, $index, $delete]);
                 // equivalent to $rolAdmin->perms()->sync( [$crearUsuario->id, $editarUsuario->id] );
+                $create = $edit = $index = $delete = null;
+
+                $create = Permission::create([
+                    'name'         => 'cargo-create',
+                    'display_name' => 'Crear cargos',
+                    'description'  => 'Crear nuevos cargos',
+                ]);
+                $editUser = Permission::create([
+                    'name'         => 'cargo-edit',
+                    'display_name' => 'Editar cargos',
+                    'description'  => 'Editar cargos existentes',
+                ]);
+                $indexUser = Permission::create([
+                    'name'         => 'cargo-index',
+                    'display_name' => 'Listar cargos',
+                    'description'  => 'Listar cargos existentes',
+                ]);
+                $delUser = Permission::create([
+                    'name'         => 'cargo-delete',
+                    'display_name' => 'Borrar cargos',
+                    'description'  => 'Borrar cargos existentes',
+                ]);
+                $rolGestHum->attachPermissions([$create, $edit, $index]);
+                $rolAdmin->attachPermissions([$create, $edit, $index, $delete]);
+                $create = $edit = $index = $delete = null;
+
+                $create = Permission::create([
+                    'name'         => 'clasocup-create',
+                    'display_name' => 'Crear clasificaciones de ocupación',
+                    'description'  => 'Crear nuevas clasificaciones de ocupación',
+                ]);
+                $editUser = Permission::create([
+                    'name'         => 'clasocup-edit',
+                    'display_name' => 'Editar clasificaciones de ocupación',
+                    'description'  => 'Editar clasificaciones de ocupación existentes',
+                ]);
+                $indexUser = Permission::create([
+                    'name'         => 'clasocup-index',
+                    'display_name' => 'Listar clasificaciones de ocupación',
+                    'description'  => 'Listar clasificaciones de ocupación existentes',
+                ]);
+                $delUser = Permission::create([
+                    'name'         => 'clasocup-delete',
+                    'display_name' => 'Borrar clasificaciones de ocupación',
+                    'description'  => 'Borrar clasificaciones de ocupación existentes',
+                ]);
+                $rolGestHum->attachPermissions([$create, $edit, $index]);
+                $rolAdmin->attachPermissions([$create, $edit, $index, $delete]);
+                $create = $edit = $index = $delete = null;
+
+
+
+                //Contratos
+                $create = Permission::create([
+                    'name'         => 'contrato-create',
+                    'display_name' => 'Crear contratos',
+                    'description'  => 'Crear nuevos contratos',
+                ]);
+                $editUser = Permission::create([
+                    'name'         => 'contrato-edit',
+                    'display_name' => 'Editar contratos',
+                    'description'  => 'Editar contratos existentes',
+                ]);
+                $indexUser = Permission::create([
+                    'name'         => 'contrato-index',
+                    'display_name' => 'Listar contratos',
+                    'description'  => 'Listar contratos existentes',
+                ]);
+                $delUser = Permission::create([
+                    'name'         => 'contrato-delete',
+                    'display_name' => 'Borrar contratos',
+                    'description'  => 'Borrar contratos existentes',
+                ]);
+                $rolGestHum->attachPermissions([$create, $edit, $index]);
+                $rolAdmin->attachPermissions([$create, $edit, $index, $delete]);
+                $create = $edit = $index = $delete = null;
 
 
             $this->command->info('--- Seeder Creación de Usuarios prueba');
@@ -72,7 +165,6 @@ use SGH\Permission;
                     'email' => 'diegoarmandocortes@outlook.com',
                     'password'  => \Hash::make('Side102')
                 ]);
-                // role attach alias
                 $owner->attachRole($rolOwner);
 
                 //Owner
@@ -82,26 +174,24 @@ use SGH\Permission;
                     'email' => 'rodriguez221293@outlook.com',
                     'password'  => \Hash::make($pass)
                 ]);
-                // role attach alias
                 $owner->attachRole($rolOwner);
 
-
                 //Editores
-                $editor1 = User::create( [
-                    'name' => 'Editor 1 de prueba',
-                    'username' => 'editor1',
-                    'email' => 'editor1@example.com',
+                $gesthum1 = User::create( [
+                    'name' => 'Gestión humana 1 de prueba',
+                    'username' => 'gesthum1',
+                    'email' => 'gesthum1@example.com',
                     'password'  => \Hash::make($pass)
                 ]);
-                $editor1->attachRole($admin);
+                $gesthum1->attachRole($rolGestHum);
 
-                $editor2 = User::create( [
-                    'name' => 'Editor 2 de prueba',
-                    'username' => 'editor2',
-                    'email' => 'editor2@example.com',
+                $gesthum2 = User::create( [
+                    'name' => 'Gestión humana 2 de prueba',
+                    'username' => 'gesthum2',
+                    'email' => 'gesthum2@example.com',
                     'password'  => \Hash::make($pass)
                 ]);
-                $editor2->attachRole($admin);
+                $gesthum2->attachRole($rolGestHum);
 
                 //5 usuarios faker
                 //$USERS = factory(SGH\User::class)->times(5)->create();

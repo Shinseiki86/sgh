@@ -33,7 +33,7 @@
 	
 	
 	{{--datatable--}}
-	{!! Html::script('assets/scripts/datatable/jquery-1.12.4.js') !!}
+	{{-- Html::script('assets/scripts/datatable/jquery-1.12.4.js') Librería ya se encuentra cargada en frontend.js --}}
 	{!! Html::script('assets/scripts/datatable/jquery.dataTables.min.js') !!}
 		{!! Html::script('assets/scripts/datatable/dataTables.buttons.min.js') !!}
 		{!! Html::script('assets/scripts/datatable/jszip.min.js') !!}
@@ -51,6 +51,13 @@
 		{!! Html::script('assets/scripts/metisMenu.min.js') !!}
 	{{--datatable--}}
 
+		<script type="text/javascript">
+			$(function () {
+				tooltips = $('[data-tooltip="tooltip"]');
+				if(tooltips.length > 0)
+					tooltips.tooltip();
+			})
+		</script>
 	@yield('scripts')
 </body>
 </html>

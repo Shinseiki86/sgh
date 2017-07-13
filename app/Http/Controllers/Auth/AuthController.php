@@ -38,7 +38,7 @@ class AuthController extends Controller
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = '/admin';
+	protected $redirectTo = '/';
 
 	/**
 	 * Create a new authentication controller instance.
@@ -47,10 +47,7 @@ class AuthController extends Controller
 	 */
 	public function __construct()
 	{
-
-        $this->middleware('guest', ['except' => 'logout']);
-
-		/*//Lista de acciones que no requieren autenticación
+		//Lista de acciones que no requieren autenticación
 		$arrActionsLogin = [
 			'logout',
 			'login',
@@ -73,7 +70,7 @@ class AuthController extends Controller
 		//Requiere que el usuario inicie sesión, excepto en la vista logout.
 		$this->middleware($this->guestMiddleware(),
 			['except' => array_collapse([$arrActionsLogin, $arrActionsAdmin])]
-		);*/
+		);	
 
 	}
 
@@ -105,9 +102,8 @@ class AuthController extends Controller
 			return view($this->registerView);
 		}
 
-		//Se crea un array con los roles disponibles
-		//$arrRoles = model_to_array(Rol::class, 'ROLE_descripcion');
-		$arrRoles = null;
+		//Se crea un array con los Role disponibles
+		$arrRoles = model_to_array(Role::class, 'display_name');
 
 		// Muestra el formulario de creación y los array para los 'select'
 		return view('auth.register', compact('arrRoles'));
@@ -132,8 +128,12 @@ class AuthController extends Controller
 		//Auth::guard($this->getGuard())->login($this->create($request->all()));
 		$usuario = $this->create($request->all());
 
+		//Relación con roles
+		$roles_ids = Input::has('roles_ids') ? Input::get('roles_ids') : [];
+		$usuario->roles()->sync($roles_ids, true);
+
 		Session::flash('message', 'Usuario '.$usuario->username.' creado exitosamente!');
-		return redirect('usuarios');
+		return redirect()->route('auth.usuarios.index');
 	}
 
 	/**
@@ -175,27 +175,9 @@ class AuthController extends Controller
 	{
 		//Se obtienen todos los registros.
 		$usuarios = User::orderBy('USER_id')->get();
-
 		//Se carga la vista y se pasan los registros
 		return view('auth/index', compact('usuarios'));
 	}
-
-	/**
-	 * Muestra información de un registro.
-	 *
-	 * @param  int  $USER_id
-	 * @return Response
-	 */
-	public function show($USER_id)
-	{
-		// Se obtiene el registro
-		$usuario = User::findOrFail($USER_id);
-
-		// Muestra la vista y pasa el registro
-		return view('auth/show', compact('usuario'));
-	}
-
-
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -208,11 +190,12 @@ class AuthController extends Controller
 		// Se obtiene el registro
 		$usuario = User::findOrFail($USER_id);
 
-
-		$roles = null;
+		//Se crea un array con los Role disponibles
+		$arrRoles = model_to_array(Role::class, 'display_name');
+		$roles_ids = $usuario->roles->pluck('id')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('auth/edit', compact('usuario', 'roles'));
+		return view('auth/edit', compact('usuario', 'arrRoles', 'roles_ids'));
 	}
 
 	/**
@@ -223,24 +206,29 @@ class AuthController extends Controller
 	 */
 	public function update($usuario)
 	{
-		//Validación de datos
-		$this->validate(request(), [
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:USERS,email,'.$USER_id.',id',
-		]);
-
 		// Valida si $usuario es un objeto User o el id
 		$usuario = isset($usuario->USER_id) ? $usuario : User::findOrFail($usuario);
 
+		//Validación de datos
+		$this->validate(request(), [
+			'name' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:USERS,email,'.$usuario->USER_id.',USER_id',
+		]);
+
+
 		$usuario->name = Input::get('name');
 		$usuario->email = Input::get('email');
-		$usuario->modified_at = auth()->user()->username;
+		$usuario->USER_MODIFICADOPOR = auth()->user()->username;
 		//Se guarda modelo
 		$usuario->save();
 
+		//Relación con roles
+		$roles_ids = Input::has('roles_ids') ? Input::get('roles_ids') : [];
+		$usuario->roles()->sync($roles_ids, true);
+
 		// redirecciona al index de controlador
 		Session::flash('message', 'Usuario '.$usuario->username.' modificado exitosamente!');
-		return redirect('usuarios');
+		return redirect()->route('auth.usuarios.index');
 	}
 
 	/**

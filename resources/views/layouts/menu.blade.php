@@ -101,6 +101,22 @@
                         <!-- /input-group -->
                     </li>
 
+                    <li {{ (Request::is('auth*') ? 'class=active' : '') }}>
+                        <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios y roles<span class="fa arrow"></span></a>
+
+                        <ul class="nav nav-second-level">
+                            <li {{ (Request::is('*/usuarios') ? 'class=active' : '') }}>
+                                <a href="{{ url ('auth/usuarios') }}"><i class="fa fa-user fa-fw"></i> Usuarios</a>
+                            </li>
+                            <li {{ (Request::is('*/roles') ? 'class=active' : '') }}>
+                                <a href="{{ url ('auth/roles') }}"><i class="fa fa-male" aria-hidden="true"></i><i class="fa fa-female" aria-hidden="true"></i> Roles</a>
+                            </li>
+                            <li {{ (Request::is('*/permisos') ? 'class=active' : '') }}>
+                                <a href="{{ url ('auth/permisos') }}"><i class="fa fa-check" aria-hidden="true"></i> Permisos</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li {{ (Request::is('cnfg-*') ? 'class=active' : '') }}>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Parametros Generales<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">

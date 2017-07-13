@@ -22,4 +22,8 @@ class EstadoContrato extends ModelWithSoftDeletes
 		'ESCO_OBSERVACIONES',
 	];
 
+	//Constantes para referenciar los estados de un contrato
+	const ACTIVO	= 1;
+	const RETIRADO	= 2;
+
 }

@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar usuario '.$usuario->id)
+@section('page_heading', 'Actualizar Permiso '.$permiso->id)
 
 @section('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
@@ -23,44 +23,27 @@
 @endsection
 
 @section('section')
-					
-	{{ Form::model($usuario, ['action' => ['Auth\AuthController@update', $usuario->USER_id ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+	{{ Form::model($permiso, ['action' => ['Auth\PermissionController@update', $permiso->id ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
-			<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-				{{ Form::label('name', 'Nombre', [ 'class' => 'col-md-4 control-label' ]) }}
-				<div class="col-md-6">
-					{{ Form::text('name', old('name'), [ 'class' => 'form-control', 'maxlength' => '255', 'required' ]) }}
-
-					@if ($errors->has('name'))
-						<span class="help-block">
-							<strong>{{ $errors->first('name') }}</strong>
-						</span>
-					@endif
-				</div>
-			</div>
-
-		<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-			{{ Form::label('username', 'Usuario', [ 'class' => 'col-md-4 control-label' ]) }}
+		<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+			{{ Form::label('name', 'Nombre interno',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
-				{{ Form::text('username', old('username'), [ 'class' => 'form-control', 'disabled' ]) }}
-
-				@if ($errors->has('username'))
+				{{ Form::text('name', old('name'), [ 'class' => 'form-control', 'maxlength' => '15', 'required' ]) }}
+				@if ($errors->has('name'))
 					<span class="help-block">
-						<strong>{{ $errors->first('username') }}</strong>
+						<strong>{{ $errors->first('name') }}</strong>
 					</span>
 				@endif
 			</div>
 		</div>
 
-
-		<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-			{{ Form::label('email', 'E-mail', [ 'class' => 'col-md-4 control-label' ]) }}
+		<div class="form-group{{ $errors->has('display_name') ? ' has-error' : '' }}">
+			{{ Form::label('display_name', 'Nombre para mostrar',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
-				{{ Form::email('email', old('email'), [ 'class' => 'form-control', 'maxlength' => '255', 'required' ]) }}
-
-				@if ($errors->has('email'))
+				{{ Form::text('display_name', old('display_name'), [ 'class' => 'form-control', 'maxlength' => '50', 'required' ]) }}
+				@if ($errors->has('display_name'))
 					<span class="help-block">
-						<strong>{{ $errors->first('email') }}</strong>
+						<strong>{{ $errors->first('display_name') }}</strong>
 					</span>
 				@endif
 			</div>
@@ -84,10 +67,27 @@
 			</div>
 		</div>
 
+		<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+			{{ Form::label('description', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::textarea('description', old('description'), [
+					'class' => 'form-control',
+					'maxlength' => '100',
+					'size' => '20x3',
+					'style' => 'resize: vertical',
+				]) }}
+				@if ($errors->has('description'))
+					<span class="help-block">
+						<strong>{{ $errors->first('description') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
 		<!-- Botones -->
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4 text-right">
-				<a class="btn btn-warning" role="button" href="{{ URL::to('auth/usuarios') }}" data-tooltip="tooltip" title="Regresar">
+				<a class="btn btn-warning" role="button" href="{{ URL::to('auth/permisos') }}" data-tooltip="tooltip" title="Regresar">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i>
 				</a>
 				{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i>', [

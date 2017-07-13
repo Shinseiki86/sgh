@@ -14,8 +14,11 @@
 
 //Autenticación
 Route::auth();
-Route::resource('usuarios', 'Auth\AuthController');
-//Route::resource('roles', 'Auth\RolController');
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
+	Route::resource('usuarios', 'AuthController');
+	Route::resource('roles', 'RoleController');
+	Route::resource('permisos', 'PermissionController');
+});
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 
