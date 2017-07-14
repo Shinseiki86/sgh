@@ -73,17 +73,17 @@ use SGH\Permission;
                     'display_name' => 'Crear cargos',
                     'description'  => 'Crear nuevos cargos',
                 ]);
-                $editUser = Permission::create([
+                $edit = Permission::create([
                     'name'         => 'cargo-edit',
                     'display_name' => 'Editar cargos',
                     'description'  => 'Editar cargos existentes',
                 ]);
-                $indexUser = Permission::create([
+                $index = Permission::create([
                     'name'         => 'cargo-index',
                     'display_name' => 'Listar cargos',
                     'description'  => 'Listar cargos existentes',
                 ]);
-                $delUser = Permission::create([
+                $delete = Permission::create([
                     'name'         => 'cargo-delete',
                     'display_name' => 'Borrar cargos',
                     'description'  => 'Borrar cargos existentes',
@@ -97,17 +97,17 @@ use SGH\Permission;
                     'display_name' => 'Crear clasificaciones de ocupación',
                     'description'  => 'Crear nuevas clasificaciones de ocupación',
                 ]);
-                $editUser = Permission::create([
+                $edit = Permission::create([
                     'name'         => 'clasocup-edit',
                     'display_name' => 'Editar clasificaciones de ocupación',
                     'description'  => 'Editar clasificaciones de ocupación existentes',
                 ]);
-                $indexUser = Permission::create([
+                $index = Permission::create([
                     'name'         => 'clasocup-index',
                     'display_name' => 'Listar clasificaciones de ocupación',
                     'description'  => 'Listar clasificaciones de ocupación existentes',
                 ]);
-                $delUser = Permission::create([
+                $delete = Permission::create([
                     'name'         => 'clasocup-delete',
                     'display_name' => 'Borrar clasificaciones de ocupación',
                     'description'  => 'Borrar clasificaciones de ocupación existentes',
@@ -124,17 +124,17 @@ use SGH\Permission;
                     'display_name' => 'Crear contratos',
                     'description'  => 'Crear nuevos contratos',
                 ]);
-                $editUser = Permission::create([
+                $edit = Permission::create([
                     'name'         => 'contrato-edit',
                     'display_name' => 'Editar contratos',
                     'description'  => 'Editar contratos existentes',
                 ]);
-                $indexUser = Permission::create([
+                $index = Permission::create([
                     'name'         => 'contrato-index',
                     'display_name' => 'Listar contratos',
                     'description'  => 'Listar contratos existentes',
                 ]);
-                $delUser = Permission::create([
+                $delete = Permission::create([
                     'name'         => 'contrato-delete',
                     'display_name' => 'Borrar contratos',
                     'description'  => 'Borrar contratos existentes',

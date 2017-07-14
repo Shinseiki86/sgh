@@ -74,6 +74,8 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('estadosaprobaciones', 'EstadoAprobacionController');
 		Route::resource('sanciones', 'SancionController');
 		Route::resource('tickets', 'TicketController');
+		Route::get('tickets/autorizar/{TICK_ID}', 'TicketController@autorizarTicket');
+		Route::get('tickets/rechazar/{TICK_ID}', 'TicketController@rechazarTicket');
 	});
 
 });

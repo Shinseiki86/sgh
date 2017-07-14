@@ -116,6 +116,8 @@ class TicketController extends Controller
 		//fecha actual
 		$fecactual = Carbon::now();
 
+		$filename = null;
+
 		//si viene un archivo en el request
 		if(Input::hasFile('TICK_ARCHIVO')){
 			//lee el archivo
@@ -176,9 +178,43 @@ class TicketController extends Controller
         	});
     	}
     	catch(\Exception $e){
-    		flash_modal( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué creado pero no se envió notificación', 'danger' );
+    		flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué creado pero no se envió notificación', 'danger' );
     	}
         
+    }
+
+    public function autorizarTicket($TICK_ID){
+
+    	//fecha actual
+		$fecactual = Carbon::now();
+
+		//encuentra el ticket
+		$ticket = Ticket::findOrFail($TICK_ID);
+
+		$ticket->ESAP_ID = 2; //estado ENVIADO A GESTIÓN HUMANA
+		$ticket->TICK_FECHAAPROBACION = $fecactual;
+		$ticket->save();
+
+	flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
+		return redirect()->route('cnfg-tickets.tickets.index');
+
+    }
+
+    public function rechazarTicket($TICK_ID){
+
+    	//fecha actual
+		$fecactual = Carbon::now();
+
+		//encuentra el ticket
+		$ticket = Ticket::findOrFail($TICK_ID);
+
+		$ticket->ESAP_ID = 2; //estado ENVIADO A GESTIÓN HUMANA
+		$ticket->TICK_FECHAAPROBACION = $fecactual;
+		$ticket->save();
+
+	flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
+		return redirect()->route('cnfg-tickets.tickets.index');
+
     }
 
 

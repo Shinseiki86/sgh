@@ -27,8 +27,8 @@ class EstadosAprobacionesTableSeeder extends Seeder
         $prioridad->save();
 
         $prioridad = new \SGH\EstadoAprobacion;
-        $prioridad->ESAP_DESCRIPCION = 'EN TRAMITE';
-        $prioridad->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA EN GESTIÓN POR PARTE DEL RESPONSABLE (E.S.T ó GESTIÓN HUMANA)';
+        $prioridad->ESAP_DESCRIPCION = 'RECHAZADO';
+        $prioridad->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA EN RECHAZADO POR PARTE DEL JEFE INMEDIATO';
         $prioridad->ESAP_COLOR =  'rgb(255, 0, 0)';
         $prioridad->ESAP_CREADOPOR =  'SYSTEM';
         $prioridad->save();

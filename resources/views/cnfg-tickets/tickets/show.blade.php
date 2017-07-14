@@ -1,4 +1,6 @@
 @extends('layouts.menu')
+@section('title', '/ Detalle Ticket')
+@include('datatable')
 
 @section('head')
 {!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
@@ -24,40 +26,52 @@
 		$(".chosen-select").chosen(options);
 
 		$("#imagenModal").on("click", function() {
-		   
-		   var tickarchivo =  "{{ $ticket -> TICK_ARCHIVO }}";
-		   var src = "{{asset('storages/' . $ticket -> TICK_ARCHIVO )}}";
 
-		   if(tickarchivo == "" || tickarchivo == null){
-		   		src = "{{asset('storages/' . 'default.jpg' )}}";
-		   		
-		   		$('#imagepreview').attr('src', src );
-		   		$('#imagemodal').modal('show');
+			var tickarchivo =  "{{ $ticket -> TICK_ARCHIVO }}";
+			var src = "{{asset('storages/' . $ticket -> TICK_ARCHIVO )}}";
 
-		   		$('#btndescargar').hide();
-		   		$('#psinarchivos').show();
-		   		
-		   }else{
+			if(tickarchivo == "" || tickarchivo == null){
+				src = "{{asset('storages/' . 'default.jpg' )}}";
 
-		   		var img = new Image();
-		   		img.src = src;
+				$('#imagepreview').attr('src', src );
+				$('#imagemodal').modal('show');
 
-		   		if(!img.complete){
-		   			src = "{{asset('storages/' . 'filedefault.png' )}}";
-		   			$('#imagepreview').attr('src', src);
-		   			$('#imagemodal').modal('show'); 
-		   			
-		   		}else{
-		   			src = "{{asset('storages/' . $ticket -> TICK_ARCHIVO )}}";
-		   			$('#imagepreview').attr('src', src); 
-		   			$('#imagemodal').modal('show'); 
-		   		}
+				$('#btndescargar').hide();
+				$('#psinarchivos').show();
 
-		   		
-		   		$('#pconarchivos').show();
-		   }
+			}else{
 
-		   
+				var img = new Image();
+				img.src = src;
+
+				if(!img.complete){
+					src = "{{asset('storages/' . 'filedefault.png' )}}";
+					$('#imagepreview').attr('src', src);
+					$('#imagemodal').modal('show'); 
+
+				}else{
+					src = "{{asset('storages/' . $ticket -> TICK_ARCHIVO )}}";
+					$('#imagepreview').attr('src', src); 
+					$('#imagemodal').modal('show'); 
+				}
+
+
+				$('#pconarchivos').show();
+			}
+
+
+
+		});
+
+		$("#autorizarModal").on("click", function() {
+
+			$('#autorizarmodal').modal('show');
+
+		});
+
+		$("#rechazarModal").on("click", function() {
+
+			$('#rechazarmodal').modal('show');
 
 		});
 
@@ -182,9 +196,9 @@
 					-->
 					<p hidden>
 						@if ($ticket -> TICK_ARCHIVO != NULL and $ticket -> TICK_ARCHIVO != "")
-						   <img id="imageresource" src="{{asset('storages/' . $ticket -> TICK_ARCHIVO)}}" style="width: 500px; height: 264px;">
+						<img id="imageresource" src="{{asset('storages/' . $ticket -> TICK_ARCHIVO)}}" style="width: 500px; height: 264px;">
 						@else
-						   <img id="imageresource" src="{{asset('storages/' . 'filedefault.png' )}}" style="width: 500px; height: 264px;">
+						<img id="imageresource" src="{{asset('storages/' . 'filedefault.png' )}}" style="width: 500px; height: 264px;">
 						@endif
 						
 					</p>
@@ -199,6 +213,32 @@
 	</li>
 </ul>
 </p>
+
+</div>
+
+<div class="jumbotron text-center">
+	<strong>Acciones</strong>
+	<p>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<div class="row">
+					<a href="#" class="btn btn-success" role="button" id="autorizarModal">
+						<span class="fa fa-check" aria-hidden="true"></span> Autorizar
+					</a>
+					
+
+				</div>
+				<br>
+
+				<div class="row">
+					<a href="#" class="btn btn-danger" role="button" id="rechazarModal">
+						<span class="fa fa-close" aria-hidden="true"></span> Rechazar
+					</a>
+				</div>
+
+			</li>
+		</ul>
+	</p>
 
 </div>
 
@@ -227,9 +267,65 @@
 					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir
 				</button>
 
-					<a href="{{asset('storages/' . $ticket -> TICK_ARCHIVO)}}" class="btn btn-info" role="button" id="btndescargar" download>
+				<a href="{{asset('storages/' . $ticket -> TICK_ARCHIVO)}}" class="btn btn-info" role="button" id="btndescargar" download>
 					<span class="glyphicon glyphicon-save" aria-hidden="true"></span>Descargar
-					</a>
+				</a>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="autorizarmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">Confirmación</h4>
+			</div>
+			
+			<div>
+				<p class="text-center">
+					<b>¿Autorizar el Ticket?</b>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir
+				</button>
+
+				<a href="{{ URL::to('cnfg-tickets/tickets/autorizar/' . $ticket -> TICK_ID ) }}" class="btn btn-success" role="button" id="btnautorizar">
+					<span class="fa fa-check" aria-hidden="true"></span> SI
+				</a>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="rechazarmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">Confirmación</h4>
+			</div>
+			
+			<div>
+				<p class="text-center">
+					<b>¿Rechazar el Ticket?</b>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir
+				</button>
+
+				<a href="{{ URL::to('cnfg-tickets/tickets/rechazar/' . $ticket -> TICK_ID ) }}" class="btn btn-success" role="button" id="btnautorizar">
+					<span class="fa fa-check" aria-hidden="true"></span> SI
+				</a>
 				
 			</div>
 		</div>
@@ -245,8 +341,6 @@
 
 	</div>
 </div>
-
-
 
 
 @endsection
