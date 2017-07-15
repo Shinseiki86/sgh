@@ -21,7 +21,7 @@
 		<thead>
 			<tr>
 				<th class="col-md-5"> Empleador </th>
-				<th class="col-md-5"> Implicado </th>
+				<th class="col-md-5"> Empleado </th>
 				<th class="col-md-5"> Estado </th>
 				<th class="col-md-5"> Tipo de Incidente </th>
 				<th class="col-md-5"> Prioridad </th>

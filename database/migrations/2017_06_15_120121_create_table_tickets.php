@@ -63,6 +63,10 @@ class CreateTableTickets extends Migration
                 ->nullable()
                 ->comment('descripción del ticket');
 
+            $table->string('TICK_MOTIVORECHAZO', 3000)
+                ->nullable()
+                ->comment('descripción del causal de rechazo del ticket por parte del jefe inmediato');
+
             $table->unsignedInteger('PRIO_ID')
                 ->comment('relacion a la tabla prioridades');
 

@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('tickets', 'TicketController');
 		Route::get('tickets/autorizar/{TICK_ID}', 'TicketController@autorizarTicket');
 		Route::get('tickets/rechazar/{TICK_ID}', 'TicketController@rechazarTicket');
+		Route::post('tickets/cerrar/{TICK_ID}', 'TicketController@cerrarTicket');
+
 	});
 
 });

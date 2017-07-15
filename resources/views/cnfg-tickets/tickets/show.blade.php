@@ -12,7 +12,8 @@
 {!! Html::script('assets/scripts/bootstrap/bootstrap.min.js') !!}
 <script type="text/javascript">
 
-	var options = {
+		//===================================================================
+		var options = {
 			/*
 			disable_search_threshold: 5,
 			width: '100%',
@@ -24,7 +25,11 @@
 
 		//para volver los select mucho mas amigables en listas grandes de datos
 		$(".chosen-select").chosen(options);
+		//===================================================================
 
+
+		//===================================================================
+		//se encarga de mostrar la imagen y/o archivo
 		$("#imagenModal").on("click", function() {
 
 			var tickarchivo =  "{{ $ticket -> TICK_ARCHIVO }}";
@@ -62,25 +67,57 @@
 
 
 		});
+		//===================================================================
 
+
+		//===================================================================
+		//modal para autorizar el ticket
 		$("#autorizarModal").on("click", function() {
 
 			$('#autorizarmodal').modal('show');
 
 		});
+		//===================================================================
 
+		//===================================================================
+		//modal para rechazar el ticket
 		$("#rechazarModal").on("click", function() {
 
 			$('#rechazarmodal').modal('show');
 
 		});
+		//===================================================================
+
+
+		//===================================================================
+		//si el estado de aprobación es diferente del inicial cuando se creae el ticket
+		//se esconden los botones
+		var ESAP_ID = "{{ $ticket -> ESAP_ID }}";
+		
+		if(ESAP_ID != 1){
+
+
+			$('#daccionauto').hide();
+			$('#daccionrecha').hide();
+
+		}
+		//===================================================================
+
+		//===================================================================
+		//modal para rechazar el ticket
+		$("#cerrarModal").on("click", function() {
+
+			$('#cerrarmodal').modal('show');
+
+		});
+		//===================================================================		
+
 
 	</script>
 	@parent
 	@endsection
 
 	@section('section')
-
 
 	<h1 class="page-header">Ticket No. {{ $ticket->TICK_ID }}:</h1>
 
@@ -105,7 +142,7 @@
 
 				<li class="list-group-item">
 					<div class="row">
-						<div class="col-lg-4"><strong>Implicado:</strong></div>
+						<div class="col-lg-4"><strong>Empleado:</strong></div>
 						<div class="col-lg-8">{{ nombre_empleado($ticket -> contrato -> PROS_ID) }}</div>
 					</div>
 				</li>
@@ -221,7 +258,7 @@
 	<p>
 		<ul class="list-group">
 			<li class="list-group-item">
-				<div class="row">
+				<div class="row" id="daccionauto">
 					<a href="#" class="btn btn-success" role="button" id="autorizarModal">
 						<span class="fa fa-check" aria-hidden="true"></span> Autorizar
 					</a>
@@ -230,9 +267,15 @@
 				</div>
 				<br>
 
-				<div class="row">
+				<div class="row" id="daccionrecha">
 					<a href="#" class="btn btn-danger" role="button" id="rechazarModal">
 						<span class="fa fa-close" aria-hidden="true"></span> Rechazar
+					</a>
+				</div>
+
+				<div class="row" id="daccionrecha">
+					<a href="#" class="btn btn-success" role="button" id="cerrarModal">
+						<span class="fa fa-check" aria-hidden="true"></span> Cerrar Ticket
 					</a>
 				</div>
 
@@ -315,18 +358,112 @@
 			
 			<div>
 				<p class="text-center">
-					<b>¿Rechazar el Ticket?</b>
+					<b>Ingrese el motivo de rechazo</b>
 				</p>
+
+				<p class="text-center">
+					<div class="form-group{{ $errors->has('TICK_MOTIVORECHAZO') ? ' has-error' : '' }}">
+						<div class="col-md-6">
+							{{ Form::textarea('TICK_MOTIVORECHAZO', old('TICK_MOTIVORECHAZO'), [ 'class' => 'form-control', 'maxlength' => '3000', 'id' => 'TICK_MOTIVORECHAZO']) }}
+							@if ($errors->has('TICK_MOTIVORECHAZO'))
+							<span class="help-block">
+								<strong>{{ $errors->first('TICK_MOTIVORECHAZO') }}</strong>
+							</span>
+							@endif
+						</div>
+					</div>
+				</p>
+
 			</div>
+
+
+
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">
 					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir
 				</button>
 
-				<a href="{{ URL::to('cnfg-tickets/tickets/rechazar/' . $ticket -> TICK_ID ) }}" class="btn btn-success" role="button" id="btnautorizar">
+				<a href="{{ URL::to('cnfg-tickets/tickets/rechazar/' . $ticket -> TICK_ID ) }}" class="btn btn-success" role="button" id="btnrechazar">
 					<span class="fa fa-check" aria-hidden="true"></span> SI
 				</a>
 				
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="cerrarmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">Confirmación</h4>
+			</div>
+			
+			<div>
+				<p class="text-center">
+					<b>Detalles del Cierre</b>
+				</p>
+
+				<p class="text-center">
+					{{ Form::open( ['url' => 'cnfg-tickets/tickets/cerrar/' . $ticket -> TICK_ID , 'id'=>'frmCerrarTicket', 'class' => 'form-vertical'] ) }}
+
+						
+
+						<div class="form-group{{ $errors->has('SANC_ID') ? ' has-error' : '' }}">
+						<label for="SANC_ID" class="col-md-4 control-label">Decisión Administrativa</label>
+						<div class="col-md-6">
+							{{ Form::select('SANC_ID', [null => 'Seleccione una opción'] + $arrSanciones , old('SANC_ID'), [
+							'class' => 'form-control',
+							'required'
+							]) }}
+
+							@if ($errors->has('SANC_ID'))
+							<span class="help-block">
+								<strong>{{ $errors->first('SANC_ID') }}</strong>
+							</span>
+							@endif
+						</div>
+					</div>
+
+						{{ Form::label('TICK_CONCLUSION', 'Observaciones:') }}
+						{{ Form::textarea('TICK_CONCLUSION', old('TICK_CONCLUSION'), [
+							'class' => 'form-control',
+							'size' => '20x3',
+							'placeholder' => 'Escriba aquí...',
+							'style' => 'resize: vertical',
+							'required'
+						]) }}
+
+					
+						
+					
+
+				</p>
+
+			</div>
+
+
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir
+				</button>
+
+				<a href="{{ URL::to('cnfg-tickets/tickets/cerrar/' . $ticket -> TICK_ID ) }}" class="btn btn-success" role="button" id="btnrechazar">
+					<span class="fa fa-check" aria-hidden="true"></span> SI
+				</a>
+
+				{{ Form::button('<i class="fa fa-times-circle" aria-hidden="true"></i> Cerrar 2 ',[
+						'name'=>'btn-confirmClose',
+						'class'=>'btn btn-xs btn-success',
+						'id'=>'submit',
+						'type'=>'submit',
+					]) }}
+
+				{{ Form::close() }}
+
 			</div>
 		</div>
 	</div>
@@ -341,6 +478,5 @@
 
 	</div>
 </div>
-
 
 @endsection
