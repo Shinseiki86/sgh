@@ -213,7 +213,7 @@
                     </li>
 
                     <li {{ (Request::is('gestion-humana/*') ? 'class=active' : '') }}>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Gestión Humana<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-users"></i> Gestión Humana<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li {{ (Request::is('*/prospectos') ? 'class=active' : '') }}>

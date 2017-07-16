@@ -71,8 +71,11 @@ class TicketController extends Controller
     {
         // Se obtiene el registro
         $ticket = Ticket::findOrFail($TICK_ID);
+
+        $arrSanciones = model_to_array(Sancion::class, 'SANC_DESCRIPCION');
+
         // Muestra la vista y pasa el registro
-        return view('cnfg-tickets/tickets/show', compact('ticket'));
+        return view('cnfg-tickets/tickets/show', compact('ticket','arrSanciones'));
     }
 
 	/**
@@ -123,6 +126,8 @@ class TicketController extends Controller
 
 		//fecha actual
 		$fecactual = Carbon::now();
+
+		$filename = null;
 
 		//si viene un archivo en el request
 		if(Input::hasFile('TICK_ARCHIVO')){
@@ -184,9 +189,70 @@ class TicketController extends Controller
         	});
     	}
     	catch(\Exception $e){
-    		flash_modal( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué creado pero no se envió notificación', 'danger' );
+    		flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué creado pero no se envió notificación', 'danger' );
     	}
         
+    }
+
+    public function autorizarTicket($TICK_ID){
+
+    	//fecha actual
+		$fecactual = Carbon::now();
+
+		//encuentra el ticket
+		$ticket = Ticket::findOrFail($TICK_ID);
+
+		$ticket->ESAP_ID = 2; //estado ENVIADO A GESTIÓN HUMANA
+		$ticket->TICK_FECHAAPROBACION = $fecactual;
+		$ticket->save();
+
+	flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
+		return redirect()->route('cnfg-tickets.tickets.index');
+
+    }
+
+    public function rechazarTicket($TICK_ID){
+
+    	//fecha actual
+		$fecactual = Carbon::now();
+
+		//encuentra el ticket
+		$ticket = Ticket::findOrFail($TICK_ID);
+
+		$ticket->ESAP_ID = 3; //estado ENVIADO A GESTIÓN HUMANA
+		$ticket->TICK_FECHAAPROBACION = $fecactual;
+		$ticket->save();
+
+	flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazo exitosamente.', 'success' );
+		return redirect()->route('cnfg-tickets.tickets.index');
+
+    }
+
+    public function cerrarTicket($TICK_ID){
+
+    	//Datos recibidos desde la vista.
+		$data = request()->all();
+
+		//dd($data);
+
+    	//fecha actual
+		$fecactual = Carbon::now();
+
+		//encuentra el ticket
+		$ticket = Ticket::findOrFail($TICK_ID);
+
+		$ticket->ESTI_ID = 3; //estado CERRADO
+		$ticket->TICK_FECHACIERE = $fecactual;
+
+		//SE ACTUALIZAN LOS CAMPOS DEL CIERRE DEL TICKET
+		$ticket->SANC_ID = $data['SANC_ID'];
+		$ticket->TICK_CONCLUSION = $data['TICK_CONCLUSION'];
+
+		$ticket->save();
+
+	flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );
+		return redirect()->route('cnfg-tickets.tickets.index');
+
     }
 
 
@@ -218,6 +284,7 @@ class TicketController extends Controller
 	{
 		//Datos recibidos desde la vista.
 		$data = request()->all();
+
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($data, $TICK_ID);
 
@@ -227,7 +294,7 @@ class TicketController extends Controller
 		$ticket->update($data);
 
 		// redirecciona al index de controlador
-		flash_alert( 'Ticket '.$ticket->TICK_ID.' modificada exitosamente.', 'success' );
+		flash_alert( 'Ticket '.$ticket->TICK_ID.' modificado exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 	}
 
