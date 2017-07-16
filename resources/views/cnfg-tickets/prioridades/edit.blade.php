@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Prioridad '.$prioridad->PRIO_ID)
+@section('page_heading', 'Actualizar Prioridad')
 
 @section('section')
 

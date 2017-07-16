@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Tipo de Incidente '.$tipoincidente->TIIN_ID)
+@section('page_heading', 'Actualizar Tipo de Incidente')
 
 @section('section')
 

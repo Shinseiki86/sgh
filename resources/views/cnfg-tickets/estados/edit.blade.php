@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Estado de Ticket '.$estadoticket->ESTI_ID)
+@section('page_heading', 'Actualizar Estado de Ticket')
 
 @section('section')
 

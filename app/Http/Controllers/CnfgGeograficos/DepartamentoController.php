@@ -13,11 +13,14 @@ use SGH\Departamento;
 
 class DepartamentoController extends Controller
 {
-	public function __construct()
+    public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:depart-index', ['only' => ['index']]);
+		$this->middleware('permission:depart-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:depart-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:depart-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

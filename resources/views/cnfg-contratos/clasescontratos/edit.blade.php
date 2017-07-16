@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar clase de contrato '.$clasecontrato->CNOS_ID)
+@section('page_heading', 'Actualizar clase de contrato')
 
 @section('section')
 

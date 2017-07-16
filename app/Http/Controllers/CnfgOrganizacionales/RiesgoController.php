@@ -14,13 +14,14 @@ use SGH\Riesgo;
 
 class RiesgoController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:riesgoarl-index', ['only' => ['index']]);
+		$this->middleware('permission:riesgoarl-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:riesgoarl-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:riesgoarl-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

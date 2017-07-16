@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Ciudad '.$ciudad->CIUD_ID)
+@section('page_heading', 'Actualizar Ciudad')
 
 @section('section')
 

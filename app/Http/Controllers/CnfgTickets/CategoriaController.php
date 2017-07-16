@@ -14,6 +14,14 @@ use SGH\Categoria;
 
 class CategoriaController extends Controller
 {
+    public function __construct()
+	{
+		$this->middleware('auth');
+		$this->middleware('permission:tkcategoria-index', ['only' => ['index']]);
+		$this->middleware('permission:tkcategoria-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tkcategoria-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tkcategoria-delete',   ['only' => ['destroy']]);
+	}
 
 	/**
 	 * Get a validator for an incoming registration request.

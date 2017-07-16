@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Departamento '.$departamento->DEPA_ID)
+@section('page_heading', 'Actualizar Departamento')
 
 @section('section')
 

@@ -18,6 +18,10 @@ class CargoController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:cargo-index', ['only' => ['index']]);
+		$this->middleware('permission:cargo-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:cargo-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:cargo-delete',   ['only' => ['destroy']]);
 	}
 
 
@@ -27,18 +31,13 @@ class CargoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'CARG_DESCRIPCION' => ['required', 'max:100'],
+		return Validator::make($data, [
+			'CARG_DESCRIPCION' => ['required','max:100','unique:CARGOS,CARG_DESCRIPCION,'.$id.',CARG_ID'],
 			'CNOS_ID' => ['required'],
 			'CARG_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 	/**
@@ -75,17 +74,7 @@ class CargoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$cargo = Cargo::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Cargo '.$cargo->CARG_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.cargos.index');
+		parent::storeModel(Cargo::class, 'cnfg-contratos.cargos.index');
 	}
 
 
@@ -116,19 +105,7 @@ class CargoController extends Controller
 	 */
 	public function update($CARG_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$cargo = Cargo::findOrFail($CARG_ID);
-		//y se actualiza con los datos recibidos.
-		$cargo->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Cargo '.$cargo->CARG_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.cargos.index');
+		parent::updateModel($CARG_ID, Cargo::class, 'cnfg-contratos.cargos.index');
 	}
 
 	/**

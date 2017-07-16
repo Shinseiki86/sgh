@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Jefe '. $jefe->JEFE_ID)
+@section('page_heading', 'Actualizar Jefe')
 
 @section('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}

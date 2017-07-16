@@ -14,31 +14,27 @@ use SGH\TipoContrato;
 
 class TipoContratoController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:tipocontrato-index', ['only' => ['index']]);
+		$this->middleware('permission:tipocontrato-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tipocontrato-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tipocontrato-delete',   ['only' => ['destroy']]);
 	}
-
-
+	
 	/**
 	 * Get a validator for an incoming registration request.
 	 *
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'TICO_DESCRIPCION' => ['required', 'max:100'],
+		return Validator::make($data, [
+			'TICO_DESCRIPCION' => ['required','max:100','unique:TIPOSCONTRATOS,TICO_DESCRIPCION,'.$id.',TICO_ID'],
 			'TICO_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -72,17 +68,7 @@ class TipoContratoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$cno = TipoContrato::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Tipo de contrato '.$cno->TICO_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.tiposcontratos.index');
+		parent::storeModel(TipoContrato::class, 'cnfg-contratos.tiposcontratos.index');
 	}
 
 
@@ -110,19 +96,7 @@ class TipoContratoController extends Controller
 	 */
 	public function update($TICO_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$cno = TipoContrato::findOrFail($TICO_ID);
-		//y se actualiza con los datos recibidos.
-		$cno->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Tiposcontrato '.$cno->TICO_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.tiposcontratos.index');
+		parent::updateModel($TICO_ID, TipoContrato::class, 'cnfg-contratos.tiposcontratos.index');
 	}
 
 	/**

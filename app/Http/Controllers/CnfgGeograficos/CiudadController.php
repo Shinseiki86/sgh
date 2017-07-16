@@ -14,11 +14,14 @@ use SGH\Departamento;
 
 class CiudadController extends Controller
 {
-	public function __construct()
+    public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:ciudad-index', ['only' => ['index']]);
+		$this->middleware('permission:ciudad-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:ciudad-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:ciudad-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

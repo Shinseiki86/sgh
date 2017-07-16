@@ -14,13 +14,14 @@ use SGH\Temporal;
 
 class TemporalController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:emprtemp-index', ['only' => ['index']]);
+		$this->middleware('permission:emprtemp-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:emprtemp-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:emprtemp-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -28,19 +29,14 @@ class TemporalController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
+		return Validator::make($data, [
 			'TEMP_RAZONSOCIAL' => ['required', 'max:300'],
 			'TEMP_NOMBRECOMERCIAL' => ['required', 'max:300'],
 			'TEMP_DIRECCION' => ['required', 'max:300'],
 			'TEMP_OBSERVACIONES' => ['required', 'max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -74,17 +70,7 @@ class TemporalController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$temporal = Temporal::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Temporal '.$temporal->TEMP_ID.' creada exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.temporales.index');
+		parent::storeModel(Temporal::class, 'cnfg-contratos.temporales.index');
 	}
 
 
@@ -112,19 +98,7 @@ class TemporalController extends Controller
 	 */
 	public function update($TEMP_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$temporal = Temporal::findOrFail($TEMP_ID);
-		//y se actualiza con los datos recibidos.
-		$temporal->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Temporal '.$temporal->TEMP_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.temporales.index');
+		parent::updateModel($TEMP_ID, Temporal::class, 'cnfg-contratos.temporales.index');
 	}
 
 	/**

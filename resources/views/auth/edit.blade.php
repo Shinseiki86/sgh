@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar usuario '.$usuario->id)
+@section('page_heading', 'Actualizar usuario')
 
 @section('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}

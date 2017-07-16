@@ -14,11 +14,13 @@ use SGH\Role;
 
 class RoleController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:rol-index', ['only' => ['index']]);
+		$this->middleware('permission:rol-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:rol-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:rol-delete',   ['only' => ['destroy']]);
 	}
 
 
@@ -73,26 +75,7 @@ class RoleController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$validator = $this->validator($data);
-
-		if($validator->passes()){
-			//Se crea el registro.
-			$rol = Role::create($data);
-			
-			//Relación con permissions
-			$permisos_ids = isset($data['permisos_ids']) ? $data['permisos_ids'] : [];
-			$rol->permissions()->sync($permisos_ids, true);
-
-			// redirecciona al index de controlador
-			flash_alert( 'Rol "'.$rol->display_name.'" creado exitosamente.', 'success' );
-			return redirect()->route('auth.roles.index');
-		} else {
-			return redirect()->back()->withErrors($validator)->withInput();
-		}
+		parent::storeModel(Role::class, 'auth.roles.index');
 	}
 
 
@@ -124,28 +107,7 @@ class RoleController extends Controller
 	 */
 	public function update($id)
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$validator = $this->validator($data, $id);
-
-		if($validator->passes()){
-			// Se obtiene el registro
-			$rol = Role::findOrFail($id);
-			//y se actualiza con los datos recibidos.
-			$rol->update($data);
-
-			//Relación con permissions
-			$permisos_ids = isset($data['permisos_ids']) ? $data['permisos_ids'] : [];
-			$rol->permissions()->sync($permisos_ids, true);
-
-			// redirecciona al index de controlador
-			flash_alert( 'Rol "'.$rol->display_name.'" modificado exitosamente.', 'success' );
-			return redirect()->route('auth.roles.index');
-		} else {
-			return redirect()->back()->withErrors($validator)->withInput();
-		}
+		parent::updateModel($id, Role::class, 'auth.roles.index');
 	}
 
 	/**

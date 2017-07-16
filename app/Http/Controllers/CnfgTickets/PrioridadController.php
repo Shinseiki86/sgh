@@ -14,11 +14,13 @@ use SGH\Prioridad;
 
 class PrioridadController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:tkprioridad-index', ['only' => ['index']]);
+		$this->middleware('permission:tkprioridad-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tkprioridad-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tkprioridad-delete',   ['only' => ['destroy']]);
 	}
 
 

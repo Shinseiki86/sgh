@@ -14,11 +14,13 @@ use SGH\Cnos;
 
 class CnosController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:cnos-index', ['only' => ['index']]);
+		$this->middleware('permission:cnos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:cnos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:cnos-delete',   ['only' => ['destroy']]);
 	}
 
 
@@ -28,17 +30,12 @@ class CnosController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'CNOS_CODIGO' => ['required', 'numeric'],
-			'CNOS_DESCRIPCION' => ['required', 'max:300'],
+		return Validator::make($data, [
+			'CNOS_CODIGO' => ['required','numeric','unique:CNOS,CNOS_CODIGO,'.$id.',CNOS_ID'],
+			'CNOS_DESCRIPCION' => ['required','max:300','unique:CNOS,CNOS_DESCRIPCION,'.$id.',CNOS_ID'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -72,19 +69,8 @@ class CnosController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$cno = Cnos::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Cno '.$cno->CNOS_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.cnos.index');
+		parent::storeModel(Cnos::class, 'cnfg-contratos.cnos.index');
 	}
-
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -101,7 +87,6 @@ class CnosController extends Controller
 		return view('cnfg-contratos/cnos/edit', compact('cno'));
 	}
 
-
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
@@ -110,19 +95,7 @@ class CnosController extends Controller
 	 */
 	public function update($CNOS_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$cno = Cnos::findOrFail($CNOS_ID);
-		//y se actualiza con los datos recibidos.
-		$cno->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Cno '.$cno->CNOS_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.cnos.index');
+		parent::updateModel($CNOS_ID, Cnos::class, 'cnfg-contratos.cnos.index');
 	}
 
 	/**

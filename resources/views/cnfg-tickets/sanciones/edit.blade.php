@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Decisión Administrativa '.$sancion->SANC_ID)
+@section('page_heading', 'Actualizar Decisión Administrativa')
 
 @section('section')
 

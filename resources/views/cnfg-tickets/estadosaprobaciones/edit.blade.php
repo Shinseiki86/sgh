@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Estado de Aprobación '.$estadoaprobacion->ESAP_ID)
+@section('page_heading', 'Actualizar Estado de Aprobación')
 
 @section('section')
 

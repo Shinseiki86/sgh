@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Motivo de Retiro '.$motivoretiro->MORE_ID)
+@section('page_heading', 'Actualizar Motivo de Retiro')
 
 @section('section')
 

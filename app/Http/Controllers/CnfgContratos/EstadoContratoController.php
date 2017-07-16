@@ -10,15 +10,17 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-use SGH\Estadocontrato;
+use SGH\EstadoContrato;
 
 class EstadoContratoController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:estadocontrato-index', ['only' => ['index']]);
+		$this->middleware('permission:estadocontrato-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:estadocontrato-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:estadocontrato-delete',   ['only' => ['destroy']]);
 	}
 
 
@@ -28,19 +30,13 @@ class EstadoContratoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'ESCO_DESCRIPCION' => ['required', 'max:100'],
+		return Validator::make($data, [
+			'ESCO_DESCRIPCION' => ['required','max:100','unique:ESTADOSCONTRATOS,ESCO_DESCRIPCION,'.$id.',ESCO_ID'],
 			'ESCO_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
-
 
 	/**
 	 * Muestra una lista de los registros.
@@ -72,17 +68,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$estadocontrato = EstadoContrato::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Estado de contrato '.$estadocontrato->ESCO_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.estadoscontratos.index');
+		parent::storeModel(EstadoContrato::class, 'cnfg-contratos.estadoscontratos.index');
 	}
 
 
@@ -110,19 +96,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function update($ESCO_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$estadocontrato = EstadoContrato::findOrFail($ESCO_ID);
-		//y se actualiza con los datos recibidos.
-		$estadocontrato->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Estado de contrato '.$estadocontrato->ESCO_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.estadoscontratos.index');
+		parent::updateModel($ESCO_ID, EstadoContrato::class, 'cnfg-contratos.estadoscontratos.index');
 	}
 
 	/**

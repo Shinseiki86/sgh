@@ -70,7 +70,13 @@ class AuthController extends Controller
 		//Requiere que el usuario inicie sesión, excepto en la vista logout.
 		$this->middleware($this->guestMiddleware(),
 			['except' => array_collapse([$arrActionsLogin, $arrActionsAdmin])]
-		);	
+		);
+		
+        $this->middleware('permission:usuario-index', ['only' => ['index']]);
+        $this->middleware('permission:usuario-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:usuario-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:usuario-delete',   ['only' => ['destroy']]);
+
 
 	}
 

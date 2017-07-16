@@ -22,7 +22,7 @@
 			<tr>
 				<th class="col-xs-1">Nombre</th>
 				<th class="col-xs-3">Display</th>
-				<th class="col-xs-3">Permisos</th>
+				{{--<th class="col-xs-3">Permisos</th>--}}
 				<th class="hidden-xs col-sm-1">Creado</th>
 				<th class="hidden-xs col-sm-1">Modificado</th>
 				<th class="col-xs-1 all"></th>
@@ -34,8 +34,15 @@
 			@foreach($roles as $rol)
 			<tr>
 				<td>{{ $rol -> name }}</td>
-				<td>{{ $rol -> display_name }} <i class="fa fa-question-circle" aria-hidden="true" data-tooltip="tooltip" data-container="body" title="{{ $rol -> description }}"></i></td>
-				<td>{{ $rol -> permissions ->implode('display_name', ', ') }}</td>
+				<td>
+					{{ $rol -> display_name }}
+					@if($rol->description)
+					<i class="fa fa-question-circle" aria-hidden="true" data-tooltip="tooltip" data-container="body" title="{{ $rol -> description }}"></i>
+					@endif
+				</td>
+				{{--<td>
+					<i class="fa fa-address-card-o" aria-hidden="true" data-tooltip="tooltip" data-placement="bottom" data-container="body" title="{{ $rol -> permissions ->implode('display_name', ', ') }}"></i>
+				</td>--}}
 				<td>{{ $rol -> created_at }}</td>
 				<td>{{ $rol -> updated_at }}</td>
 				<td>

@@ -14,12 +14,14 @@ use SGH\EstadoAprobacion;
 
 class EstadoAprobacionController extends Controller
 {
-    
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:tkestados-index', ['only' => ['index']]);
+		$this->middleware('permission:tkestados-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tkestados-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tkestados-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

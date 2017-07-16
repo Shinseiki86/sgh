@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Ticket '.$ticket->TICK_ID)
+@section('page_heading', 'Actualizar Ticket')
 
 @section('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}

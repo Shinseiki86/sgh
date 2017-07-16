@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Tipo de empleador '.$tipoempleador->CNOS_ID)
+@section('page_heading', 'Actualizar Tipo de empleador')
 
 @section('section')
 

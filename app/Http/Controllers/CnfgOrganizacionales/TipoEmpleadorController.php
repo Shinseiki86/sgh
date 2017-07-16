@@ -14,13 +14,14 @@ use SGH\TipoEmpleador;
 
 class TipoEmpleadorController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:tipoemple-index', ['only' => ['index']]);
+		$this->middleware('permission:tipoemple-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tipoemple-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tipoemple-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

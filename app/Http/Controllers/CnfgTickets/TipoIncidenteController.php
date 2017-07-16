@@ -14,13 +14,14 @@ use SGH\TipoIncidente;
 
 class TipoIncidenteController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:tktpincidente-index', ['only' => ['index']]);
+		$this->middleware('permission:tktpincidente-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tktpincidente-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tktpincidente-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

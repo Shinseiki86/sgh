@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Riesgo '.$riesgo->RIES_ID)
+@section('page_heading', 'Actualizar Riesgo')
 
 @section('section')
 

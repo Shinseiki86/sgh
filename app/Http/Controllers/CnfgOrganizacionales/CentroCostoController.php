@@ -15,13 +15,14 @@ use SGH\Gerencia;
 
 class CentroCostoController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:ceco-index', ['only' => ['index']]);
+		$this->middleware('permission:ceco-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:ceco-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:ceco-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

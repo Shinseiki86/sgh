@@ -18,6 +18,14 @@ use Carbon\Carbon;
 
 class TicketController extends Controller
 {
+    public function __construct()
+	{
+		$this->middleware('auth');
+		$this->middleware('permission:ticket-index', ['only' => ['index']]);
+		$this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:ticket-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:ticket-delete',   ['only' => ['destroy']]);
+	}
 
 	/**
 	 * Get a validator for an incoming registration request.

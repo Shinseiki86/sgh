@@ -14,13 +14,14 @@ use SGH\Sancion;
 
 class SancionController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:tksancion-index', ['only' => ['index']]);
+		$this->middleware('permission:tksancion-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tksancion-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tksancion-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

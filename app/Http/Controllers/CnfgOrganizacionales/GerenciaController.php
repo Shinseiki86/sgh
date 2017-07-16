@@ -15,6 +15,14 @@ use SGH\Empleador;
 
 class GerenciaController extends Controller
 {
+    public function __construct()
+	{
+		$this->middleware('auth');
+		$this->middleware('permission:gerencia-index', ['only' => ['index']]);
+		$this->middleware('permission:gerencia-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:gerencia-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:gerencia-delete',   ['only' => ['destroy']]);
+	}
 
 	/**
 	 * Get a validator for an incoming registration request.

@@ -14,6 +14,14 @@ use SGH\Proceso;
 
 class ProcesoController extends Controller
 {
+    public function __construct()
+	{
+		$this->middleware('auth');
+		$this->middleware('permission:proceso-index', ['only' => ['index']]);
+		$this->middleware('permission:proceso-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:proceso-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:proceso-delete',   ['only' => ['destroy']]);
+	}
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -21,18 +29,13 @@ class ProcesoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($data)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
-			'PROC_DESCRIPCION' => ['required','max:100'],
+		return Validator::make($data, [
+			'PROC_DESCRIPCION' => ['required','max:100','unique:PROCESOS,PROC_DESCRIPCION,'.$id.',PROC_ID'],
 			'PROC_OBSERVACIONES' => ['max:300'],
 			'GERE_ids' => ['array'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -68,22 +71,8 @@ class ProcesoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data);
-
-		//Se crea el registro.
-		$proceso = Proceso::create($data);
-		//Relación con procesos
-		$GERE_ids = isset($data['GERE_ids']) ? $data['GERE_ids'] : [];
-		$proceso->gerencias()->sync($GERE_ids, true);
-
-		// redirecciona al index de controlador
-		flash_alert( 'Proceso '.$proceso->GERE_ID.' creada exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.procesos.index');
+		parent::storeModel(Proceso::class, 'cnfg-organizacionales.procesos.index');
 	}
-
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -113,23 +102,7 @@ class ProcesoController extends Controller
 	 */
 	public function update($PROC_ID)
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data, $PROC_ID);
-
-		// Se obtiene el registro
-		$proceso = Proceso::findOrFail($PROC_ID);
-		//y se actualiza con los datos recibidos.
-		$proceso->update($data);
-
-		//Relación con procesos
-		$GERE_ids = isset($data['GERE_ids']) ? $data['GERE_ids'] : [];
-		$proceso->gerencias()->sync($GERE_ids, true);
-
-		// redirecciona al index de controlador
-		flash_alert( 'Proceso '.$proceso->GERE_ID.' modificada exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.procesos.index');
+		parent::updateModel($PROC_ID, Proceso::class, 'cnfg-organizacionales.procesos.index');
 	}
 
 	/**

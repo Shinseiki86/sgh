@@ -64,19 +64,23 @@ if (! function_exists('model_to_array')) {
             $models = $class;
             $primaryKey = isset($primaryKey) ? $primaryKey : $models->first()->getKeyName();
         } else {
-
-
             $class = class_exists($class) ? $class : '\\SGH\\'.basename($class);
             $primaryKey = isset($primaryKey) ? $primaryKey : (new $class)->getKeyName();
-
             $models = $class::orderBy($primaryKey)->select([ $primaryKey , $column ]);
-
-            //Si la columna es una expresión, se obtiene el alias de la columna
-            if($column instanceof \Illuminate\Database\Query\Expression)
-                $column = str_replace('"', '', array_last(explode(') AS ', $column->getValue())));
-
         }
-        return $models->pluck($column, $primaryKey)->toArray();
+
+        //Si la columna es una expresión, se obtiene el alias de la columna
+        if($column instanceof \Illuminate\Database\Query\Expression)
+            $column = str_replace('"', '', array_last(explode(') AS ', $column->getValue())));
+
+        if (is_array($column)){
+            array_push($column, $primaryKey);
+            $models = $models->select($column)->get()->keyBy($primaryKey);
+        } elseif (is_string($column)) {
+            $models = $models->pluck($column, $primaryKey);
+        }
+
+        return $models->toArray();
     }
 }
 

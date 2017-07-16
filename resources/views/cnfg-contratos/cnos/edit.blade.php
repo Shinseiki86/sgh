@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Clasif. de Ocupación '.$cno->CNOS_ID)
+@section('page_heading', 'Actualizar Clasif. de Ocupación')
 
 @section('section')
 

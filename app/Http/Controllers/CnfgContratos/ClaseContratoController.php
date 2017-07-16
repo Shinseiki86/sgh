@@ -14,13 +14,14 @@ use SGH\ClaseContrato;
 
 class ClaseContratoController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:clasecontrato-index', ['only' => ['index']]);
+		$this->middleware('permission:clasecontrato-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:clasecontrato-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:clasecontrato-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -28,17 +29,14 @@ class ClaseContratoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'CLCO_DESCRIPCION' => ['required', 'max:100'],
+		$validator = Validator::make($data, [
+			'CLCO_DESCRIPCION' => ['required','max:100','unique:CLASESCONTRATOS,CLCO_DESCRIPCION,'.$id.',CLCO_ID'],
 			'CLCO_OBSERVACIONES' => ['max:300'],
 		]);
 
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
+		return $validator;
 	}
 
 
@@ -72,19 +70,8 @@ class ClaseContratoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$clasecontrato = ClaseContrato::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.clasescontratos.index');
+		parent::storeModel(ClaseContrato::class, 'cnfg-contratos.clasescontratos.index');
 	}
-
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -101,7 +88,6 @@ class ClaseContratoController extends Controller
 		return view('cnfg-contratos/clasescontratos/edit', compact('clasecontrato'));
 	}
 
-
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
@@ -110,19 +96,7 @@ class ClaseContratoController extends Controller
 	 */
 	public function update($CLCO_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$cno = ClaseContrato::findOrFail($CLCO_ID);
-		//y se actualiza con los datos recibidos.
-		$cno->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Clase de contrato '.$cno->CLCO_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.clasescontratos.index');
+		parent::updateModel($CLCO_ID, ClaseContrato::class, 'cnfg-contratos.clasescontratos.index');
 	}
 
 	/**

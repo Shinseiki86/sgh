@@ -14,13 +14,14 @@ use SGH\Empleador;
 
 class EmpleadorController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:empleador-index', ['only' => ['index']]);
+		$this->middleware('permission:empleador-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:empleador-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:empleador-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

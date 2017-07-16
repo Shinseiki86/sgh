@@ -14,13 +14,14 @@ use SGH\MotivoRetiro;
 
 class MotivoRetiroController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:motretiro-index', ['only' => ['index']]);
+		$this->middleware('permission:motretiro-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:motretiro-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:motretiro-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -28,19 +29,13 @@ class MotivoRetiroController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'MORE_DESCRIPCION' => ['required', 'max:100'],
+		return Validator::make($data, [
+			'MORE_DESCRIPCION' => ['required','max:100','unique:MOTIVOSRETIROS,MORE_DESCRIPCION,'.$id.',MORE_ID'],
 			'MORE_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
-
 
 	/**
 	 * Muestra una lista de los registros.
@@ -72,17 +67,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$motivoretiro = MotivoRetiro::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Motivo de retiro '.$motivoretiro->MORE_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.motivosretiros.index');
+		parent::storeModel(MotivoRetiro::class, 'cnfg-contratos.motivosretiros.index');
 	}
 
 
@@ -101,7 +86,6 @@ class MotivoRetiroController extends Controller
 		return view('cnfg-contratos/motivosretiros/edit', compact('motivoretiro'));
 	}
 
-
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
@@ -110,19 +94,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function update($MORE_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$motivoretiro = MotivoRetiro::findOrFail($MORE_ID);
-		//y se actualiza con los datos recibidos.
-		$motivoretiro->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Motivo de retiro '.$motivoretiro->MORE_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.motivosretiros.index');
+		parent::updateModel($MORE_ID, MotivoRetiro::class, 'cnfg-contratos.motivosretiros.index');
 	}
 
 	/**

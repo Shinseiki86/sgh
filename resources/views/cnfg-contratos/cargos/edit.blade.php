@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Cargo '.$cargo->CARG_ID)
+@section('page_heading', 'Actualizar Cargo')
 
 @section('section')
 

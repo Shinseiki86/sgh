@@ -17,6 +17,14 @@ use Carbon\Carbon;
 
 class JefeController extends Controller
 {
+    public function __construct()
+	{
+		$this->middleware('auth');
+		$this->middleware('permission:jefe-index', ['only' => ['index']]);
+		$this->middleware('permission:jefe-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:jefe-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:jefe-delete',   ['only' => ['destroy']]);
+	}
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -24,17 +32,12 @@ class JefeController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($data)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'PROS_ID' => ['required'],
 			'JEFE_OBSERVACIONES' => ['max:300'],
-			]);
-
-		if ($validator->fails())
-			return redirect()->back()
-		->withErrors($validator)
-		->withInput()->send();
+		]);
 	}
 
 
@@ -80,19 +83,7 @@ class JefeController extends Controller
 	 */
 	public function store()
 	{
-
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data);
-
-		//Se crea el registro.
-		$jefe = Jefe::create(request()->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Jefe '.$jefe->JEFE_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.jefes.index');
+		parent::storeModel(Jefe::class, 'cnfg-contratos.jefes.index');
 	}
 
 
@@ -132,19 +123,7 @@ class JefeController extends Controller
 	 */
 	public function update($JEFE_ID)
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data, $JEFE_ID);
-
-		// Se obtiene el registro
-		$jefe = Jefe::findOrFail($JEFE_ID);
-		//y se actualiza con los datos recibidos.
-		$jefe->update($data);
-
-		// redirecciona al index de controlador
-		flash_alert( 'Jefe '.$jefe->JEFE_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-contratos.jefes.index');
+		parent::updateModel($JEFE_ID, Jefe::class, 'cnfg-contratos.jefes.index');
 	}
 
 	/**

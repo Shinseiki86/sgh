@@ -14,11 +14,13 @@ use SGH\Permission;
 
 class PermissionController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:permiso-index', ['only' => ['index']]);
+		$this->middleware('permission:permiso-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:permiso-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:permiso-delete',   ['only' => ['destroy']]);
 	}
 
 
@@ -73,26 +75,7 @@ class PermissionController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$validator = $this->validator($data);
-
-		if($validator->passes()){
-			//Se crea el registro.
-			$permiso = Permission::create($data);
-			
-			//Relación con roles
-			$roles_ids = isset($data['roles_ids']) ? $data['roles_ids'] : [];
-			$permiso->roles()->sync($roles_ids, true);
-
-			// redirecciona al index de controlador
-			flash_alert( 'Permiso "'.$permiso->display_name.'" creado exitosamente.', 'success' );
-			return redirect()->route('auth.permisos.index');
-		} else {
-			return redirect()->back()->withErrors($validator)->withInput();
-		}
+		parent::storeModel(Permission::class, 'auth.permisos.index');
 	}
 
 
@@ -124,28 +107,7 @@ class PermissionController extends Controller
 	 */
 	public function update($id)
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$validator = $this->validator($data, $id);
-
-		if($validator->passes()){
-			// Se obtiene el registro
-			$permiso = Permission::findOrFail($id);
-			//y se actualiza con los datos recibidos.
-			$permiso->update($data);
-
-			//Relación con permissions
-			$roles_ids = isset($data['roles_ids']) ? $data['roles_ids'] : [];
-			$permiso->roles()->sync($roles_ids, true);
-
-			// redirecciona al index de controlador
-			flash_alert( 'Permiso "'.$permiso->display_name.'" modificado exitosamente.', 'success' );
-			return redirect()->route('auth.permisos.index');
-		} else {
-			return redirect()->back()->withErrors($validator)->withInput();
-		}
+		parent::updateModel($id, Permission::class, 'auth.permisos.index');
 	}
 
 	/**

@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Gerencia '.$gerencia->GERE_ID)
+@section('page_heading', 'Actualizar Gerencia')
 
 @section('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}

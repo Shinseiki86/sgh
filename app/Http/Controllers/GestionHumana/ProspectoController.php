@@ -14,13 +14,14 @@ use SGH\Prospecto;
 
 class ProspectoController extends Controller
 {
-    //
-
     public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('permission:prospecto-index', ['only' => ['index']]);
+		$this->middleware('permission:prospecto-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:prospecto-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:prospecto-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.

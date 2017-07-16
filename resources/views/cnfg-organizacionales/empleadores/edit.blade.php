@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Actualizar Empleador '.$empleador->EMPL_ID)
+@section('page_heading', 'Actualizar Empleador')
 
 @section('section')
 
