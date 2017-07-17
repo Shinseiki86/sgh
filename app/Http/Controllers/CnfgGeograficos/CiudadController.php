@@ -29,11 +29,11 @@ class CiudadController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
 		$validator = Validator::make($request->all(), [
-			'CIUD_CODIGO' => ['required', 'numeric'],
-			'CIUD_DESCRIPCION' => ['required', 'max:300'],
+			'CIUD_CODIGO' => ['required', 'numeric', 'unique:CIUDADES,CIUD_CODIGO,'.$id.',CIUD_ID'],
+			'CIUD_DESCRIPCION' => ['required', 'max:300', 'unique:CIUDADES,CIUD_DESCRIPCION,'.$id.',CIUD_ID'],
 		]);
 
 		if ($validator->fails())
@@ -76,17 +76,7 @@ class CiudadController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$ciudad = Ciudad::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Ciudad '.$ciudad->CIUD_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-geograficos.ciudades.index');
+		parent::storeModel(Ciudad::class, 'cnfg-geograficos.ciudades.index');
 	}
 
 
@@ -117,19 +107,7 @@ class CiudadController extends Controller
 	 */
 	public function update($CIUD_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$ciudad = Ciudad::findOrFail($CIUD_ID);
-		//y se actualiza con los datos recibidos.
-		$ciudad->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Ciudad '.$ciudad->CIUD_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-geograficos.ciudades.index');
+		parent::updateModel($CIUD_ID, Ciudad::class, 'cnfg-geograficos.ciudades.index');
 	}
 
 	/**

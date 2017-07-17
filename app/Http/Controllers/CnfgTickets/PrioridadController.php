@@ -30,10 +30,10 @@ class PrioridadController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'PRIO_DESCRIPCION' => ['required', 'max:100'],
+		$validator = Validator::make($data, [
+			'PRIO_DESCRIPCION' => ['required', 'max:100', 'unique:PRIORIDADES,PRIO_DESCRIPCION,'.$id.',PRIO_ID'],
 			'PRIO_COLOR' => ['required', 'max:100'],
 			'PRIO_OBSERVACIONES' => ['max:300'],
 		]);
@@ -75,17 +75,7 @@ class PrioridadController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$prioridad = Prioridad::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Prioridad '.$prioridad->PRIO_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.prioridades.index');
+		parent::storeModel(Prioridad::class, 'cnfg-tickets.prioridades.index');
 	}
 
 
@@ -113,19 +103,7 @@ class PrioridadController extends Controller
 	 */
 	public function update($PRIO_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$prioridad = Prioridad::findOrFail($PRIO_ID);
-		//y se actualiza con los datos recibidos.
-		$prioridad->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Prioridad '.$prioridad->PRIO_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.prioridades.index');
+		parent::updateModel($PRIO_ID, Prioridad::class, 'cnfg-tickets.prioridades.index');
 	}
 
 	/**

@@ -29,10 +29,10 @@ class EstadoAprobacionController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'ESAP_DESCRIPCION' => ['required', 'max:100'],
+		$validator = Validator::make($data, [
+			'ESAP_DESCRIPCION' => ['required', 'max:100', 'unique:ESTADOSAPROBACIONES,ESAP_DESCRIPCION,'.$id.',ESAP_ID'],
 			'ESAP_COLOR' => ['required', 'max:100'],
 			'ESAP_OBSERVACIONES' => ['max:300'],
 		]);
@@ -74,17 +74,7 @@ class EstadoAprobacionController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$estadoticket = EstadoAprobacion::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'EstadoAprobacion '.$estadoticket->ESAP_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.estadosaprobaciones.index');
+		parent::storeModel(EstadoAprobacion::class, 'cnfg-tickets.estadosaprobaciones.index');
 	}
 
 
@@ -112,19 +102,7 @@ class EstadoAprobacionController extends Controller
 	 */
 	public function update($ESAP_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$estadoaprobacion = EstadoAprobacion::findOrFail($ESAP_ID);
-		//y se actualiza con los datos recibidos.
-		$estadoaprobacion->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Estado de Aprobación '.$estadoaprobacion->ESAP_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.estadosaprobaciones.index');
+		parent::updateModel($ESAP_ID, EstadoAprobacion::class, 'cnfg-tickets.estadosaprobaciones.index');
 	}
 
 	/**

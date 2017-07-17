@@ -29,10 +29,10 @@ class TipoIncidenteController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'TIIN_DESCRIPCION' => ['required', 'max:100'],
+		$validator = Validator::make($data, [
+			'TIIN_DESCRIPCION' => ['required', 'max:100', 'unique:TIPOSINCIDENTES,TIIN_DESCRIPCION,'.$id.',TIIN_ID'],
 			'TIIN_OBSERVACIONES' => ['max:300'],
 		]);
 
@@ -73,17 +73,7 @@ class TipoIncidenteController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$tipoincidente = TipoIncidente::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'TipoIncidente '.$tipoincidente->TIIN_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.tiposincidentes.index');
+		parent::storeModel(TipoIncidente::class, 'cnfg-tickets.tiposincidentes.index');
 	}
 
 
@@ -111,19 +101,7 @@ class TipoIncidenteController extends Controller
 	 */
 	public function update($TIIN_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$tipoincidente = TipoIncidente::findOrFail($TIIN_ID);
-		//y se actualiza con los datos recibidos.
-		$tipoincidente->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'TipoIncidente '.$tipoincidente->TIIN_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.tiposincidentes.index');
+		parent::updateModel($TIIN_ID, TipoIncidente::class, 'cnfg-tickets.tiposincidentes.index');
 	}
 
 	/**

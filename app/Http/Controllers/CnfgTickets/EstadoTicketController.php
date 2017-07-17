@@ -29,10 +29,10 @@ class EstadoTicketController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'ESTI_DESCRIPCION' => ['required', 'max:100'],
+		$validator = Validator::make($data, [
+			'ESTI_DESCRIPCION' => ['required', 'max:100', 'unique:ESTADOSTICKETS,ESTI_DESCRIPCION,'.$id.',ESTI_ID'],
 			'ESTI_COLOR' => ['required', 'max:100'],
 			'ESTI_OBSERVACIONES' => ['max:300'],
 		]);
@@ -74,17 +74,7 @@ class EstadoTicketController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$estadoticket = EstadoTicket::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'EstadoTicket '.$estadoticket->ESTI_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.estadostickets.index');
+		parent::storeModel(EstadoTicket::class, 'cnfg-tickets.estadostickets.index');
 	}
 
 
@@ -112,19 +102,7 @@ class EstadoTicketController extends Controller
 	 */
 	public function update($ESTI_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$estadoticket = EstadoTicket::findOrFail($ESTI_ID);
-		//y se actualiza con los datos recibidos.
-		$estadoticket->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'EstadoTicket '.$estadoticket->ESTI_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.estadostickets.index');
+		parent::storeModel($ESTI_ID, EstadoTicket::class, 'cnfg-tickets.estadostickets.index');
 	}
 
 	/**
@@ -139,10 +117,10 @@ class EstadoTicketController extends Controller
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($estadoticket->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$estadoticket->ESTI_ID.' no se puede borrar.', 'danger' );
+			flash_modal( 'Estado de Ticket '.$estadoticket->ESTI_ID.' no se puede borrar.', 'danger' );
 		} else {
 			$estadoticket->delete();
-				flash_alert( 'EstadoTicket '.$estadoticket->ESTI_ID.' eliminado exitosamente.', 'success' );
+				flash_alert( 'Estado de Ticket '.$estadoticket->ESTI_ID.' eliminado exitosamente.', 'success' );
 		}
 
 		return redirect()->route('cnfg-tickets.estadostickets.index');

@@ -29,10 +29,10 @@ class TipoEmpleadorController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id)
 	{
-		$validator = Validator::make($request->all(), [
-			'TIEM_DESCRIPCION' => ['required', 'max:100'],
+		$validator = Validator::make($data, [
+			'TIEM_DESCRIPCION' => ['required', 'max:100', 'unique:TIPOSEMPLEADORES,TIEM_DESCRIPCION,'.$id.',TIEM_ID'],
 			'TIEM_OBSERVACIONES' => ['max:300'],
 		]);
 
@@ -73,17 +73,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$cno = TipoEmpleador::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Tipo de empleador '.$cno->TIEM_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.tiposempleadores.index');
+		parent::storeModel(TipoEmpleador::class, 'cnfg-organizacionales.tiposempleadores.index');
 	}
 
 
@@ -111,19 +101,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function update($TIEM_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$cno = TipoEmpleador::findOrFail($TIEM_ID);
-		//y se actualiza con los datos recibidos.
-		$cno->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Tipo de empleador '.$cno->TIEM_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.tiposempleadores.index');
+		parent::updateModel($TIEM_ID, TipoEmpleador::class, 'cnfg-organizacionales.tiposempleadores.index');
 	}
 
 	/**

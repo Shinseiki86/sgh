@@ -29,11 +29,11 @@ class EmpleadorController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'EMPL_RAZONSOCIAL' => ['required', 'max:300'],
-			'EMPL_NOMBRECOMERCIAL' => ['required', 'max:300'],
+		$validator = Validator::make($data, [
+			'EMPL_RAZONSOCIAL' => ['required', 'max:300', 'unique:EMPLEADORES,EMPL_RAZONSOCIAL,'.$id.',EMPL_ID'],
+			'EMPL_NOMBRECOMERCIAL' => ['required', 'max:300', 'unique:EMPLEADORES,EMPL_NOMBRECOMERCIAL,'.$id.',EMPL_ID'],
 			'EMPL_DIRECCION' => ['required', 'max:300'],
 			'EMPL_OBSERVACIONES' => ['required', 'max:300'],
 		]);
@@ -75,17 +75,7 @@ class EmpleadorController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$empleador = Empleador::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Empleador '.$empleador->EMPL_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.empleadores.index');
+		parent::storeModel(Empleador::class, 'cnfg-organizacionales.empleadores.index');
 	}
 
 
@@ -113,19 +103,7 @@ class EmpleadorController extends Controller
 	 */
 	public function update($EMPL_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$empleador = Empleador::findOrFail($EMPL_ID);
-		//y se actualiza con los datos recibidos.
-		$empleador->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Empleador '.$empleador->EMPL_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.empleadores.index');
+		parent::updateModel($EMPL_ID, Empleador::class, 'cnfg-organizacionales.empleadores.index');
 	}
 
 	/**
@@ -140,7 +118,7 @@ class EmpleadorController extends Controller
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($empleador->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$empleador->EMPL_ID.' no se puede borrar.', 'danger' );
+			flash_modal( 'Empleador '.$empleador->EMPL_ID.' no se puede borrar.', 'danger' );
 		} else {
 			$empleador->delete();
 				flash_alert( 'Empleador '.$empleador->EMPL_ID.' eliminado exitosamente.', 'success' );

@@ -29,10 +29,10 @@ class RiesgoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'RIES_DESCRIPCION' => ['required', 'max:100'],
+		$validator = Validator::make($data, [
+			'RIES_DESCRIPCION' => ['required', 'max:100', 'unique:RIESGOS,RIES_DESCRIPCION,'.$id.',RIES_ID'],
 			'RIES_FACTOR' => ['required', 'numeric'],
 			'RIES_OBSERVACIONES' => ['max:300'],
 		]);
@@ -74,17 +74,7 @@ class RiesgoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$riesgo = Riesgo::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Riesgo '.$riesgo->RIES_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.riesgos.index');
+		parent::storeModel(Riesgo::class, 'cnfg-organizacionales.riesgos.index');
 	}
 
 
@@ -112,19 +102,7 @@ class RiesgoController extends Controller
 	 */
 	public function update($RIES_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$riesgo = Riesgo::findOrFail($RIES_ID);
-		//y se actualiza con los datos recibidos.
-		$riesgo->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Riesgo '.$riesgo->RIES_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.riesgos.index');
+		parent::updateModel($RIES_ID ,Riesgo::class, 'cnfg-organizacionales.riesgos.index');
 	}
 
 	/**

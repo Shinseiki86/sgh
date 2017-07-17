@@ -28,11 +28,11 @@ class DepartamentoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
 		$validator = Validator::make($request->all(), [
-			'DEPA_CODIGO' => ['required', 'numeric'],
-			'DEPA_DESCRIPCION' => ['required', 'max:300'],
+			'DEPA_CODIGO' => ['required', 'numeric', 'unique:DEPARTAMENTOS,DEPA_CODIGO,'.$id.',DEPA_ID'],
+			'DEPA_DESCRIPCION' => ['required', 'max:300', 'unique:DEPARTAMENTOS,DEPA_DESCRIPCION,'.$id.',DEPA_ID'],
 		]);
 
 		if ($validator->fails())
@@ -72,17 +72,7 @@ class DepartamentoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$departamento = Departamento::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Departamento '.$departamento->DEPA_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-geograficos.departamentos.index');
+		parent::storeModel(Departamento::class, 'cnfg-geograficos.departamentos.index');
 	}
 
 
@@ -110,19 +100,7 @@ class DepartamentoController extends Controller
 	 */
 	public function update($DEPA_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$departamento = Departamento::findOrFail($DEPA_ID);
-		//y se actualiza con los datos recibidos.
-		$departamento->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Departamento '.$departamento->DEPA_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-geograficos.departamentos.index');
+		parent::updateModel($DEPA_ID, Departamento::class, 'cnfg-geograficos.departamentos.index');
 	}
 
 	/**

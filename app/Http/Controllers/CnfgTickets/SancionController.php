@@ -29,10 +29,10 @@ class SancionController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
 		$validator = Validator::make($request->all(), [
-			'SANC_DESCRIPCION' => ['required', 'max:100'],
+			'SANC_DESCRIPCION' => ['required', 'max:100', 'unique:SANCIONES,SANC_DESCRIPCION,'.$id.',SANC_ID'],
 			'SANC_OBSERVACIONES' => ['max:300'],
 		]);
 
@@ -73,17 +73,7 @@ class SancionController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		//Se crea el registro.
-		$sancion = Sancion::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Sanción '.$sancion->SANC_ID.' creada exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.sanciones.index');
+		parent::storeModel(Sancion::class, 'cnfg-tickets.sanciones.index');
 	}
 
 
@@ -111,19 +101,7 @@ class SancionController extends Controller
 	 */
 	public function update($SANC_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$sancion = Sancion::findOrFail($SANC_ID);
-		//y se actualiza con los datos recibidos.
-		$sancion->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Sanción '.$sancion->SANC_ID.' modificada exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.sanciones.index');
+		parent::updateModel($SANC_ID, Sancion::class, 'cnfg-tickets.sanciones.index');
 	}
 
 	/**
