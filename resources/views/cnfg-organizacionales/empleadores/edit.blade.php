@@ -42,6 +42,18 @@
 			</div>
 		</div>
 
+		<div class="form-group{{ $errors->has('EMPL_COREO') ? ' has-error' : '' }}">
+			{{ Form::label('EMPL_COREO', 'Email',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::text('EMPL_COREO', old('EMPL_COREO'), [ 'class' => 'form-control', 'maxlength' => '100', 'required' ]) }}
+				@if ($errors->has('EMPL_COREO'))
+					<span class="help-block">
+						<strong>{{ $errors->first('EMPL_COREO') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
 		<div class="form-group{{ $errors->has('EMPL_OBSERVACIONES') ? ' has-error' : '' }}">
 			{{ Form::label('EMPL_OBSERVACIONES', 'Observaciones',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">

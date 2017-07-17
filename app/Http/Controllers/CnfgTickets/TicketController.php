@@ -215,13 +215,64 @@ class TicketController extends Controller
 
 	}
 
+	protected function sendEmailAutorizacion($tickets, $view, $asunto)
+	{
+
+		try{
+			\Mail::send($view, compact('tickets'), function($message) use ($asunto){
+
+				//============================================================================
+				//bloque para determinar los correos a donde se despachara el email
+				
+    			//obtiene el email del usuario logueado
+				$email = \Auth::user()->email;
+
+				$user_id = $tickets->contrato->empleador->EMPL_ID;
+
+				dd($user_id);
+				//============================================================================
+
+
+				/*
+
+	            //Se obtiene el usuario que creó el ticket
+				$user = auth()->user();
+	            //remitente
+				$message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
+	            //asunto
+				$message->subject($asunto);
+	            //email del creador del ticket
+				$copiaa = $user->email;
+	            //setea copia a
+				$message->cc($copiaa, $name = null);
+	            //receptor
+	            //$message->to( explode(',', $para), $name = null);
+				$message->to($jefe_email, $name = null);
+
+				*/
+			});
+		}
+		catch(\Exception $e){
+			flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué actualizado pero no se envió notificación', 'danger' );
+		}
+
+	}
+
 	public function autorizarTicket($TICK_ID){
 
-    	//fecha actual
+		//fecha actual
 		$fecactual = Carbon::now();
 
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
+
+
+		$email = \Auth::user()->email;
+
+				$user_id = $ticket->contrato->empleador->EMPL_ID;
+
+				dd($user_id);
+
 
 		$ticket->ESAP_ID = 2; //estado ENVIADO A GESTIÓN HUMANA
 		$ticket->TICK_FECHAAPROBACION = $fecactual;

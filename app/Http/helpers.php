@@ -175,6 +175,64 @@ if (! function_exists('get_email_jefe')) {
 
 }
 
+if (! function_exists('get_email_empleador')) {
+    /**
+     * Implode an array with the key and value pair giving
+     * a glue, a separator between pairs and the array
+     * to implode.
+     * @param string $glue The glue between key and value
+     * @param string $separator Separator between pairs
+     * @param array $array The array to implode
+     * @return string The imploded array
+     */
+    function get_email_empleador($EMPL_ID) {
+
+        $empleador = \SGH\Empleador::where('EMPL_ID', $EMPL_ID)->pluck('EMPL_COREO');
+
+
+        $empl_email = null;
+
+        if ($empleador != null) {
+            $empl_email = $empleador[0];
+        }else{
+            $empl_email = "sghmasterpromo@gmail.com";
+        }
+        
+        return $empl_email;
+
+    }
+
+}
+
+if (! function_exists('get_email_user')) {
+    /**
+     * Implode an array with the key and value pair giving
+     * a glue, a separator between pairs and the array
+     * to implode.
+     * @param string $glue The glue between key and value
+     * @param string $separator Separator between pairs
+     * @param array $array The array to implode
+     * @return string The imploded array
+     */
+    function get_email_user($USER_ID) {
+
+        $usuario = \SGH\User::where('USER_id', $USER_ID)->pluck('email');
+
+
+        $user_email = null;
+
+        if ($usuario != null) {
+            $user_email = $usuario[0];
+        }else{
+            $user_email = "sghmasterpromo@gmail.com";
+        }
+        
+        return $user_email;
+
+    }
+
+}
+
 
 
 if (! function_exists('array_implode')) {

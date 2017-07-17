@@ -31,7 +31,7 @@
 
         <li class="list-group-item">
           <div class="row">
-            <div class="col-lg-4"><strong>Implicado:</strong>
+            <div class="col-lg-4"><strong>Empleado:</strong>
             {{ nombre_empleado($tickets -> contrato -> PROS_ID) }}
             </div>
           </div>

@@ -33,6 +33,10 @@ class CreateTableEmpleadores extends Migration
             $table->string('EMPL_DIRECCION', 300)
                 ->comment('dirección de la empresa');
 
+            $table->string('EMPL_COREO', 100)
+                ->nullable()
+                ->comment('correo electronico del encargado en el empleador');
+
             $table->string('EMPL_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();
             

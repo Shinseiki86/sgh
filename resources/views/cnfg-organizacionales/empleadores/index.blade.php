@@ -23,6 +23,7 @@
 				<th class="col-md-5">Razón Social</th>
 				<th class="col-md-5">Nombre Comercial</th>
 				<th class="col-md-5">Dirección</th>
+				<th class="col-md-5">Correo</th>
 				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
@@ -33,6 +34,7 @@
 				<td>{{ $empleador -> EMPL_RAZONSOCIAL }}</td>
 				<td>{{ $empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $empleador -> EMPL_DIRECCION }}</td>
+				<td>{{ $empleador -> EMPL_COREO }}</td>
 				<td>{{ $empleador -> EMPL_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
