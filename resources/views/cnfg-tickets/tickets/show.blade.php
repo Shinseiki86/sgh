@@ -100,6 +100,10 @@
 			$('#daccionauto').hide();
 			$('#daccionrecha').hide();
 
+		}else if(ESAP_ID == 1){
+
+			$('#daccioncerrar').hide();
+
 		}
 		//===================================================================
 
@@ -273,7 +277,7 @@
 					</a>
 				</div>
 
-				<div class="row" id="daccionrecha">
+				<div class="row" id="daccioncerrar">
 					<a href="#" class="btn btn-success" role="button" id="cerrarModal">
 						<span class="fa fa-check" aria-hidden="true"></span> Cerrar Ticket
 					</a>

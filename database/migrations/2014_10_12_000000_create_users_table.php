@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
 		Schema::create($this->nomTabla, function (Blueprint $table) {
 			$table->increments('USER_id')
 				->comment('Valor autonumérico, llave primaria de la tabla USERS.');
+			$table->unsignedInteger('cedula')->unique()
+                ->comment('cedula del usuario');
 			$table->string('name')
 				->comment('Nombre completo del usuario.');
 			$table->string('username')->unique()

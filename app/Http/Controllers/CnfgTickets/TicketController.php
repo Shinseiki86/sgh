@@ -18,7 +18,7 @@ use Carbon\Carbon;
 
 class TicketController extends Controller
 {
-    public function __construct()
+	public function __construct()
 	{
 		$this->middleware('auth');
 		$this->middleware('permission:ticket-index', ['only' => ['index']]);
@@ -68,15 +68,15 @@ class TicketController extends Controller
 	}
 
 	public function show($TICK_ID)
-    {
+	{
         // Se obtiene el registro
-        $ticket = Ticket::findOrFail($TICK_ID);
+		$ticket = Ticket::findOrFail($TICK_ID);
 
-        $arrSanciones = model_to_array(Sancion::class, 'SANC_DESCRIPCION');
+		$arrSanciones = model_to_array(Sancion::class, 'SANC_DESCRIPCION');
 
         // Muestra la vista y pasa el registro
-        return view('cnfg-tickets/tickets/show', compact('ticket','arrSanciones'));
-    }
+		return view('cnfg-tickets/tickets/show', compact('ticket','arrSanciones'));
+	}
 
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
@@ -148,6 +148,7 @@ class TicketController extends Controller
 		$ticket = Ticket::create($data);
 
 		//se actualiza el nombre del archivo concatenando el ID del registro para garantizar su unicidad
+		//en caso de que en el request venga un archivo
 		if($filename != null){
 			$ticket->TICK_ARCHIVO = $filename[0]. "-" . $ticket->TICK_ID . "." . $filename[1];
 			$ticket->save();
@@ -155,6 +156,9 @@ class TicketController extends Controller
 			$file->move($destinationPath, $ticket->TICK_ARCHIVO);
 		}
 		
+		//determinar cual es el usuario que realizó la creación del ticket
+		$usuario = \Auth::user()->USER_id;
+		$ticket->USER_id = $usuario;
 
 		$ticket->TICK_FECHASOLICITUD = $fecactual;
 		$ticket->save();
@@ -162,9 +166,11 @@ class TicketController extends Controller
 		$TICK_ID = $ticket->TICK_ID;
 		$tickets = Ticket::findOrFail($TICK_ID);
 
-		//dd($tickets);
+		//===================================================================================
+		//Bloque para envío de email
 		$subject = "Nuevo Ticket";
 		$this->sendEmail($tickets, 'emails.info_ticket_creado', $subject);
+		//===================================================================================
 
 		// redirecciona al index de controlador
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' creado exitosamente.', 'success' );
@@ -172,29 +178,44 @@ class TicketController extends Controller
 	}
 
 	protected function sendEmail($tickets, $view, $asunto)
-    {
-    	try{
-    		\Mail::send($view, compact('tickets'), function($message) use ($asunto){
-	            //Se obtiene el usuario que creó la encuesta
-	            $user = auth()->user();
+	{
+
+		try{
+			\Mail::send($view, compact('tickets'), function($message) use ($asunto){
+
+				//============================================================================
+				//bloque para determinar los correos a donde se despachara el email
+				
+    			//obtiene la cedula del usuario
+				$cedula = \Auth::user()->cedula;
+				//obtiene el id del prospecto que se encuentra como jefe en el contrato
+				$jefe = get_jefe_prospecto($cedula);
+				//obtiene el email del jefe
+				$jefe_email = get_email_jefe($jefe);
+				//============================================================================
+
+	            //Se obtiene el usuario que creó el ticket
+				$user = auth()->user();
 	            //remitente
-	            $message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
+				$message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
 	            //asunto
-	            $message->subject($asunto);
-
-	            $emails = $user->email .",". "coordinadornomina@aseoregional.com";
-
+				$message->subject($asunto);
+	            //email del creador del ticket
+				$copiaa = $user->email;
+	            //setea copia a
+				$message->cc($copiaa, $name = null);
 	            //receptor
-	            $message->to( explode(',', $emails), $user->name);
-        	});
-    	}
-    	catch(\Exception $e){
-    		flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué creado pero no se envió notificación', 'danger' );
-    	}
-        
-    }
+	            //$message->to( explode(',', $para), $name = null);
+				$message->to($jefe_email, $name = null);
+			});
+		}
+		catch(\Exception $e){
+			flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué creado pero no se envió notificación', 'danger' );
+		}
 
-    public function autorizarTicket($TICK_ID){
+	}
+
+	public function autorizarTicket($TICK_ID){
 
     	//fecha actual
 		$fecactual = Carbon::now();
@@ -206,12 +227,12 @@ class TicketController extends Controller
 		$ticket->TICK_FECHAAPROBACION = $fecactual;
 		$ticket->save();
 
-	flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
+		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 
-    }
+	}
 
-    public function rechazarTicket($TICK_ID){
+	public function rechazarTicket($TICK_ID){
 
     	//fecha actual
 		$fecactual = Carbon::now();
@@ -223,12 +244,12 @@ class TicketController extends Controller
 		$ticket->TICK_FECHAAPROBACION = $fecactual;
 		$ticket->save();
 
-	flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazo exitosamente.', 'success' );
+		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazo exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 
-    }
+	}
 
-    public function cerrarTicket($TICK_ID){
+	public function cerrarTicket($TICK_ID){
 
     	//Datos recibidos desde la vista.
 		$data = request()->all();
@@ -250,10 +271,10 @@ class TicketController extends Controller
 
 		$ticket->save();
 
-	flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );
+		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 
-    }
+	}
 
 
 	/**

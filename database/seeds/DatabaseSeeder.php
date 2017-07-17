@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PrioridadesTableSeeder::class);
         $this->call(CategoriasTableSeeder::class);
         $this->call(TiposIncidentesTableSeeder::class);
-        $this->call(JefesTableSeeder::class);
         $this->call(ContratosTableSeeder::class);
         $this->call(EstadosAprobacionesTableSeeder::class);
         $this->call(SancionesTableSeeder::class);        

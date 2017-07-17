@@ -95,6 +95,7 @@ use SGH\Permission;
                 //Admin
                 $admin = User::create( [
                     'name' => 'Administrador',
+                    'cedula' => 1144173746,
                     'username' => 'admin',
                     'email' => 'admin@example.com',
                     'password'  => \Hash::make($pass)
@@ -107,6 +108,7 @@ use SGH\Permission;
                 //Owner
                 $owner = User::create( [
                     'name' => 'Owner',
+                    'cedula' => 1144173745,
                     'username' => 'owner',
                     'email' => 'diegoarmandocortes@outlook.com',
                     'password'  => \Hash::make('Side102')
@@ -116,6 +118,7 @@ use SGH\Permission;
                 //Owner
                 $owner = User::create( [
                     'name' => 'Owner1',
+                    'cedula' => 1144173744,
                     'username' => 'owner1',
                     'email' => 'rodriguez221293@outlook.com',
                     'password'  => \Hash::make($pass)
@@ -125,6 +128,7 @@ use SGH\Permission;
                 //Editores
                 $gesthum1 = User::create( [
                     'name' => 'Gestión humana 1 de prueba',
+                    'cedula' => 1144173743,
                     'username' => 'gesthum1',
                     'email' => 'gesthum1@example.com',
                     'password'  => \Hash::make($pass)
@@ -133,6 +137,7 @@ use SGH\Permission;
 
                 $gesthum2 = User::create( [
                     'name' => 'Gestión humana 2 de prueba',
+                    'cedula' => 1144173742,
                     'username' => 'gesthum2',
                     'email' => 'gesthum2@example.com',
                     'password'  => \Hash::make($pass)

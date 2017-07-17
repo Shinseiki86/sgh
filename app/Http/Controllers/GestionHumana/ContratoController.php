@@ -118,7 +118,7 @@ class ContratoController extends Controller
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
-		$primaryKey = 'JEFE_ID';
+		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
 			'PROS_SEGUNDONOMBRE',
@@ -127,7 +127,7 @@ class ContratoController extends Controller
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
 
-		$jefe = Jefe::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'JEFES.'.$primaryKey , $column ])->get();
+		$jefe = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'PROSPECTOS.'.$primaryKey , $column ])->get();
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 
@@ -211,7 +211,7 @@ class ContratoController extends Controller
 		//Se crea un array con los riesgos existentes
 		$arrRiesgos = model_to_array(Riesgo::class, 'RIES_DESCRIPCION');
 
-		$primaryKey = 'JEFE_ID';
+		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
 			'PROS_SEGUNDONOMBRE',
@@ -220,7 +220,7 @@ class ContratoController extends Controller
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
 
-		$jefe = Jefe::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'JEFES.'.$primaryKey , $column ])->get();
+		$jefe = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'PROSPECTOS.'.$primaryKey , $column ])->get();
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 		// Muestra el formulario de edición y pasa el registro a editar

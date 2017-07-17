@@ -49,6 +49,10 @@ class CreateTableTickets extends Migration
             $table->unsignedInteger('CONT_ID')
                 ->comment('relacion a la tabla contratos');
 
+            $table->unsignedInteger('USER_id')
+                ->nullable()
+                ->comment('relacion a la tabla usuarios');
+
             $table->unsignedInteger('ESTI_ID')
                 ->comment('relacion a la tabla estados tickets');
 
@@ -99,6 +103,13 @@ class CreateTableTickets extends Migration
             $table->foreign('CONT_ID')
                 ->references('CONT_ID')
                 ->on('CONTRATOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Relación con tabla USUARIOS
+            $table->foreign('USER_id')
+                ->references('USER_id')
+                ->on('USERS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

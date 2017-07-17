@@ -119,6 +119,62 @@ if (! function_exists('nombre_empleado')) {
 
 }
 
+if (! function_exists('get_jefe_prospecto')) {
+    /**
+     * Implode an array with the key and value pair giving
+     * a glue, a separator between pairs and the array
+     * to implode.
+     * @param string $glue The glue between key and value
+     * @param string $separator Separator between pairs
+     * @param array $array The array to implode
+     * @return string The imploded array
+     */
+    function get_jefe_prospecto($PROS_CEDULA) {
+
+        $prospecto = \SGH\Prospecto::activos()->where('PROS_CEDULA', $PROS_CEDULA)->pluck('JEFE_ID');
+        $pros_jefe = null;
+
+        if ($prospecto != null) {
+            $pros_jefe = $prospecto;
+        }else{
+            $pros_jefe = null;
+        }
+        
+        return $pros_jefe;
+
+    }
+
+}
+
+if (! function_exists('get_email_jefe')) {
+    /**
+     * Implode an array with the key and value pair giving
+     * a glue, a separator between pairs and the array
+     * to implode.
+     * @param string $glue The glue between key and value
+     * @param string $separator Separator between pairs
+     * @param array $array The array to implode
+     * @return string The imploded array
+     */
+    function get_email_jefe($PROS_ID) {
+
+        $jefe = \SGH\Prospecto::where('PROS_ID', $PROS_ID)->pluck('PROS_CORREO');
+
+
+        $jefe_email = null;
+
+        if ($jefe != null) {
+            $jefe_email = $jefe[0];
+        }else{
+            $jefe_email = "sghmasterpromo@gmail.com";
+        }
+        
+        return $jefe_email;
+
+    }
+
+}
+
 
 
 if (! function_exists('array_implode')) {

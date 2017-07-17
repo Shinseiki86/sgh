@@ -106,8 +106,8 @@ class CreateTableContratos extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('JEFE_ID')
-                ->references('JEFE_ID')
-                ->on('JEFES')
+                ->references('PROS_ID')
+                ->on('PROSPECTOS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

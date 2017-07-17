@@ -37,6 +37,7 @@
 				<th class="col-md-5">Riesgo</th>
 				<th class="col-md-5">Centro Costo</th>
 				<th class="col-md-5">Caso Médico</th>
+				<th class="col-md-5">Jefe</th>
 				<th class="col-md-5">Observaciones</th>
 				<th class="col-md-1 all"></th>
 			</tr>
@@ -62,6 +63,7 @@
 				<td>{{ $contrato -> riesgo -> RIES_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> centrocosto -> CECO_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> CONT_CASOMEDICO }}</td>
+				<td>{{ nombre_empleado($contrato->JEFE_ID) }}</td>
 				<td>{{ $contrato -> CONT_OBSERVACIONES }}</td>
 				<td>
 
