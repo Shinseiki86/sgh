@@ -14,7 +14,7 @@ class ContratosTableSeeder extends Seeder
         //
         $contrato = new \SGH\Contrato;
     	$contrato->PROS_ID = 1;
-    	$contrato->JEFE_ID = NULL;
+    	$contrato->JEFE_ID = 2;
     	$contrato->CONT_CASOMEDICO = 'NO';
     	$contrato->CARG_ID = 1;
     	$contrato->CONT_FECHAINGRESO = '2017-07-01';

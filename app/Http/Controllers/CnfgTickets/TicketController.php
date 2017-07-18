@@ -11,6 +11,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Ticket;
+use SGH\User;
 use SGH\Mail;
 use SGH\Prospecto;
 
@@ -215,48 +216,6 @@ class TicketController extends Controller
 
 	}
 
-	protected function sendEmailAutorizacion($tickets, $view, $asunto)
-	{
-
-		try{
-			\Mail::send($view, compact('tickets'), function($message) use ($asunto){
-
-				//============================================================================
-				//bloque para determinar los correos a donde se despachara el email
-				
-    			//obtiene el email del usuario logueado
-				$email = \Auth::user()->email;
-
-				$user_id = $tickets->contrato->empleador->EMPL_ID;
-
-				dd($user_id);
-				//============================================================================
-
-
-				/*
-
-	            //Se obtiene el usuario que creó el ticket
-				$user = auth()->user();
-	            //remitente
-				$message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
-	            //asunto
-				$message->subject($asunto);
-	            //email del creador del ticket
-				$copiaa = $user->email;
-	            //setea copia a
-				$message->cc($copiaa, $name = null);
-	            //receptor
-	            //$message->to( explode(',', $para), $name = null);
-				$message->to($jefe_email, $name = null);
-
-				*/
-			});
-		}
-		catch(\Exception $e){
-			flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué actualizado pero no se envió notificación', 'danger' );
-		}
-
-	}
 
 	public function autorizarTicket($TICK_ID){
 
@@ -266,24 +225,65 @@ class TicketController extends Controller
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 
-
-		$email = \Auth::user()->email;
-
-				$user_id = $ticket->contrato->empleador->EMPL_ID;
-
-				dd($user_id);
-
-
 		$ticket->ESAP_ID = 2; //estado ENVIADO A GESTIÓN HUMANA
 		$ticket->TICK_FECHAAPROBACION = $fecactual;
 		$ticket->save();
+
+		//===================================================================================
+		$empl_id = $ticket->contrato->empleador->EMPL_ID;
+		$user_id = $ticket->USER_id;
+		//Bloque para envío de email
+		$subject = "Ticket Autorizado";
+		$this->sendEmailAutorizacion($ticket, 'emails.info_ticket_autorizado', $subject, $empl_id, $user_id);
+		//===================================================================================
 
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
 
 	}
 
+	protected function sendEmailAutorizacion($tickets, $view, $asunto, $empl_id, $user_id)
+	{
+
+		try{
+			\Mail::send($view, compact('tickets'), function($message) use ($asunto, $empl_id, $user_id){
+
+				//============================================================================
+				//bloque para determinar los correos a donde se despachara el email
+				
+				//usuario que lo autoriza
+    			$email_user_auto = \Auth::user()->email;
+				//email de la persona encargada del empleador
+				$empl_email = get_email_empleador($empl_id);
+				//email del usuario que creo el ticket
+				$email_user_creo = get_email_user($user_id);
+		
+				//============================================================================
+
+				$copiaa = [$email_user_auto, $email_user_creo];
+
+	            //remitente
+				$message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
+	            //asunto
+				$message->subject($asunto);
+	            //setea copia a
+				$message->cc($copiaa, $name = null);
+	            //receptor
+	            //$message->to( explode(',', $para), $name = null);
+				$message->to($empl_email, $name = null);
+
+				
+			});
+		}
+		catch(\Exception $e){
+			flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué enviado a G.H pero no se envió notificación', 'danger' );
+		}
+
+	}
+
 	public function rechazarTicket($TICK_ID){
+
+		$data = request()->all();
 
     	//fecha actual
 		$fecactual = Carbon::now();
@@ -291,12 +291,59 @@ class TicketController extends Controller
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 
-		$ticket->ESAP_ID = 3; //estado ENVIADO A GESTIÓN HUMANA
+		$ticket->ESAP_ID = 3; //estado RECHAZADO
+		$ticket->ESTI_ID = 3; //estado ticket CERADO
 		$ticket->TICK_FECHAAPROBACION = $fecactual;
+		$ticket->TICK_FECHACIERE = $fecactual;
+		$ticket->TICK_MOTIVORECHAZO = $data['TICK_MOTIVORECHAZO'];
 		$ticket->save();
 
-		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazo exitosamente.', 'success' );
+		//===================================================================================
+		$user_id = $ticket->USER_id;
+		//Bloque para envío de email
+		$subject = "Ticket Rechazado";
+		$this->sendEmailRechazo($ticket, 'emails.info_ticket_rechazado', $subject, $user_id);
+		//===================================================================================
+
+		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazado exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
+
+	}
+
+	protected function sendEmailRechazo($tickets, $view, $asunto, $user_id)
+	{
+
+		try{
+			\Mail::send($view, compact('tickets'), function($message) use ($asunto, $user_id){
+
+				//============================================================================
+				//bloque para determinar los correos a donde se despachara el email
+				
+				//usuario que lo autoriza
+    			$email_user_auto = \Auth::user()->email;
+				//email del usuario que creo el ticket
+				$email_user_creo = get_email_user($user_id);
+		
+				//============================================================================
+
+				$copiaa = [$email_user_auto];
+
+	            //remitente
+				$message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
+	            //asunto
+				$message->subject($asunto);
+	            //setea copia a
+				$message->cc($copiaa, $name = null);
+	            //receptor
+	            //$message->to( explode(',', $para), $name = null);
+				$message->to($email_user_creo, $name = null);
+
+				
+			});
+		}
+		catch(\Exception $e){
+			flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué enviado a G.H pero no se envió notificación', 'danger' );
+		}
 
 	}
 
@@ -314,16 +361,65 @@ class TicketController extends Controller
 		$ticket = Ticket::findOrFail($TICK_ID);
 
 		$ticket->ESTI_ID = 3; //estado CERRADO
+		$ticket->ESAP_ID = 4; //estado FINALIZADO POR GESTIÓN HUMANA
 		$ticket->TICK_FECHACIERE = $fecactual;
 
 		//SE ACTUALIZAN LOS CAMPOS DEL CIERRE DEL TICKET
 		$ticket->SANC_ID = $data['SANC_ID'];
 		$ticket->TICK_CONCLUSION = $data['TICK_CONCLUSION'];
-
 		$ticket->save();
+
+		//===================================================================================
+		$user_id = $ticket->USER_id;
+		//Bloque para envío de email
+		$subject = "Ticket Cerrado por G.H";
+		$this->sendEmailCerrar($ticket, 'emails.info_ticket_cerrado', $subject, $user_id);
+		//===================================================================================
 
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );
 		return redirect()->route('cnfg-tickets.tickets.index');
+
+	}
+
+	protected function sendEmailCerrar($tickets, $view, $asunto, $user_id)
+	{
+
+		try{
+			\Mail::send($view, compact('tickets'), function($message) use ($asunto, $user_id){
+
+				//============================================================================
+				//bloque para determinar los correos a donde se despachara el email
+				
+				//usuario que lo autoriza
+    			$email_user_cierra = \Auth::user()->email;
+				//email del usuario que creo el ticket
+				$email_user_creo = get_email_user($user_id);
+				//se obtiene el model con el usuario (user_id)
+				$user = User::findOrFail($user_id);
+				//se extrae la cedula del usuario y se determina quien es el jefe por un helper
+				$jefe = get_jefe_prospecto($user->cedula);
+				//se obtiene el email del jefe por un helper
+				$email_jefe = get_email_jefe($jefe);
+				//============================================================================
+
+				//se envía copia al usuario que cierra el ticket y al que lo creo inicialmente. el mensaje se dirije al jefe que es quien autorizó el ticket
+				$copiaa = [$email_user_cierra, $email_user_creo];
+	            //remitente
+				$message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
+	            //asunto
+				$message->subject($asunto);
+	            //setea copia a
+				$message->cc($copiaa, $name = null);
+	            //receptor
+	            //$message->to( explode(',', $para), $name = null);
+				$message->to($email_jefe, $name = null);
+
+				
+			});
+		}
+		catch(\Exception $e){
+			flash_alert( 'Error: servicio de email no disponible:' . $e->getMessage() . '\n El Ticket fué enviado a G.H pero no se envió notificación', 'danger' );
+		}
 
 	}
 

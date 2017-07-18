@@ -12,25 +12,32 @@ class EstadosAprobacionesTableSeeder extends Seeder
     public function run()
     {
         //
-        $prioridad = new \SGH\EstadoAprobacion;
-        $prioridad->ESAP_DESCRIPCION = 'EN REVISIÓN';
-        $prioridad->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA EN REVISIÓN POR EL JEFE INMEDIATO';
-        $prioridad->ESAP_COLOR =  'rgb(0, 153, 51)';
-        $prioridad->ESAP_CREADOPOR =  'SYSTEM';
-        $prioridad->save();
+        $estadoaprobacion = new \SGH\EstadoAprobacion;
+        $estadoaprobacion->ESAP_DESCRIPCION = 'EN REVISIÓN';
+        $estadoaprobacion->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA EN REVISIÓN POR EL JEFE INMEDIATO';
+        $estadoaprobacion->ESAP_COLOR =  'rgb(0, 153, 51)';
+        $estadoaprobacion->ESAP_CREADOPOR =  'SYSTEM';
+        $estadoaprobacion->save();
 
-        $prioridad = new \SGH\EstadoAprobacion;
-        $prioridad->ESAP_DESCRIPCION = 'ENVIADO A G.H';
-        $prioridad->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE AUTORIZOÓ Y SE ENVIÓ A GESTIÓN HUMANA';
-        $prioridad->ESAP_COLOR =  'rgb(255, 102, 0)';
-        $prioridad->ESAP_CREADOPOR =  'SYSTEM';
-        $prioridad->save();
+        $estadoaprobacion = new \SGH\EstadoAprobacion;
+        $estadoaprobacion->ESAP_DESCRIPCION = 'ENVIADO A G.H';
+        $estadoaprobacion->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE AUTORIZOÓ Y SE ENVIÓ A GESTIÓN HUMANA';
+        $estadoaprobacion->ESAP_COLOR =  'rgb(255, 102, 0)';
+        $estadoaprobacion->ESAP_CREADOPOR =  'SYSTEM';
+        $estadoaprobacion->save();
 
-        $prioridad = new \SGH\EstadoAprobacion;
-        $prioridad->ESAP_DESCRIPCION = 'RECHAZADO';
-        $prioridad->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA EN RECHAZADO POR PARTE DEL JEFE INMEDIATO';
-        $prioridad->ESAP_COLOR =  'rgb(255, 0, 0)';
-        $prioridad->ESAP_CREADOPOR =  'SYSTEM';
-        $prioridad->save();
+        $estadoaprobacion = new \SGH\EstadoAprobacion;
+        $estadoaprobacion->ESAP_DESCRIPCION = 'RECHAZADO';
+        $estadoaprobacion->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA EN RECHAZADO POR PARTE DEL JEFE INMEDIATO';
+        $estadoaprobacion->ESAP_COLOR =  'rgb(255, 0, 0)';
+        $estadoaprobacion->ESAP_CREADOPOR =  'SYSTEM';
+        $estadoaprobacion->save();
+
+        $estadoaprobacion = new \SGH\EstadoAprobacion;
+        $estadoaprobacion->ESAP_DESCRIPCION = 'FINALIZADO POR G.H';
+        $estadoaprobacion->ESAP_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA FINALIZADO POR PARTE DE GESTIÓN HUMANA';
+        $estadoaprobacion->ESAP_COLOR =  'rgb(36, 231, 17)';
+        $estadoaprobacion->ESAP_CREADOPOR =  'SYSTEM';
+        $estadoaprobacion->save();
     }
 }

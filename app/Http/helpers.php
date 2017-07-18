@@ -135,7 +135,7 @@ if (! function_exists('get_jefe_prospecto')) {
         $pros_jefe = null;
 
         if ($prospecto != null) {
-            $pros_jefe = $prospecto;
+            $pros_jefe = $prospecto[0];
         }else{
             $pros_jefe = null;
         }
@@ -192,7 +192,7 @@ if (! function_exists('get_email_empleador')) {
 
         $empl_email = null;
 
-        if ($empleador != null) {
+        if($empleador != null) {
             $empl_email = $empleador[0];
         }else{
             $empl_email = "sghmasterpromo@gmail.com";

@@ -361,22 +361,17 @@
 			</div>
 			
 			<div>
-				<p class="text-center">
-					<b>Ingrese el motivo de rechazo</b>
-				</p>
+			{{ Form::open( ['url' => 'cnfg-tickets/tickets/rechazar/' . $ticket -> TICK_ID , 'id'=>'frmRechazarTicket', 'class' => 'form-vertical'] ) }}
 
-				<p class="text-center">
-					<div class="form-group{{ $errors->has('TICK_MOTIVORECHAZO') ? ' has-error' : '' }}">
-						<div class="col-md-6">
-							{{ Form::textarea('TICK_MOTIVORECHAZO', old('TICK_MOTIVORECHAZO'), [ 'class' => 'form-control', 'maxlength' => '3000', 'id' => 'TICK_MOTIVORECHAZO']) }}
-							@if ($errors->has('TICK_MOTIVORECHAZO'))
-							<span class="help-block">
-								<strong>{{ $errors->first('TICK_MOTIVORECHAZO') }}</strong>
-							</span>
-							@endif
-						</div>
-					</div>
-				</p>
+				{{ Form::label('TICK_MOTIVORECHAZO', 'Motivo de Rechazo:') }}
+
+						{{ Form::textarea('TICK_MOTIVORECHAZO', old('TICK_MOTIVORECHAZO'), [
+							'class' => 'form-control',
+							'size' => '20x3',
+							'placeholder' => 'Escriba aquí...',
+							'style' => 'resize: vertical',
+							'required'
+						]) }}
 
 			</div>
 
@@ -387,9 +382,14 @@
 					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir
 				</button>
 
-				<a href="{{ URL::to('cnfg-tickets/tickets/rechazar/' . $ticket -> TICK_ID ) }}" class="btn btn-success" role="button" id="btnrechazar">
-					<span class="fa fa-check" aria-hidden="true"></span> SI
-				</a>
+				{{ Form::button('<i class="fa fa-times-circle" aria-hidden="true"></i> Rechazar',[
+						'name'=>'btn-confirmClose',
+						'class'=>'btn btn-success',
+						'id'=>'submit',
+						'type'=>'submit',
+					]) }}
+
+				{{ Form::close() }}
 				
 			</div>
 		</div>
@@ -455,13 +455,9 @@
 					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir
 				</button>
 
-				<a href="{{ URL::to('cnfg-tickets/tickets/cerrar/' . $ticket -> TICK_ID ) }}" class="btn btn-success" role="button" id="btnrechazar">
-					<span class="fa fa-check" aria-hidden="true"></span> SI
-				</a>
-
-				{{ Form::button('<i class="fa fa-times-circle" aria-hidden="true"></i> Cerrar 2 ',[
+				{{ Form::button('<i class="fa fa-check" aria-hidden="true"></i> Cerrar',[
 						'name'=>'btn-confirmClose',
-						'class'=>'btn btn-xs btn-success',
+						'class'=>'btn btn-success',
 						'id'=>'submit',
 						'type'=>'submit',
 					]) }}

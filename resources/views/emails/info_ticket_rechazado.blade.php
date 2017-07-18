@@ -1,9 +1,9 @@
 @extends('emails/layout')
-@section('title', '- Nuevo Ticket')
+@section('title', '- Ticket Autorizado')
 
 @section('tituloMensaje')
-  <td class="alert alert-warning" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #FF9F00; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top">
-    {{ 'Nueva solicitud de ticket disciplinario' }}
+  <td class="alert alert-warning" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #FF001E; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top">
+    {{ 'El Ticket ha sido rechazado'}}
   </td>
 @endsection
 
@@ -19,6 +19,15 @@
     <strong>Datos Generales</strong>
     <p>
       <ul class="list-group">
+
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-lg-4"><strong>Motivo de Rechazo:</strong>
+            {{ $tickets->TICK_MOTIVORECHAZO }}
+            </div>
+           
+          </div>
+        </li>
 
         <li class="list-group-item">
           <div class="row">
@@ -90,6 +99,10 @@
 
   </div>
         
+    </tr>
+
+    <tr>
+      ¡El Ticket ha sido rechazado!
     </tr>
 
      <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

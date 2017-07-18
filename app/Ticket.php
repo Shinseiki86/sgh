@@ -70,4 +70,10 @@ class Ticket extends ModelWithSoftDeletes
 		return $this->belongsTo(EstadoAprobacion::class, $foreingKey);
 	}
 
+	public function sancion()
+	{
+		$foreingKey = 'SANC_ID';
+		return $this->belongsTo(Sancion::class, $foreingKey);
+	}
+
 }

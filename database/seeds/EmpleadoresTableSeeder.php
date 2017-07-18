@@ -17,6 +17,7 @@ class EmpleadoresTableSeeder extends Seeder
     	$empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL CALI S.A ESP';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOCALI';
         $empleador->EMPL_DIRECCION = 'CALLE 70 E BIS # 7-34';
+        $empleador->EMPL_COREO = 'kfrodriguez6@misena.edu.co';
     	$empleador->EMPL_OBSERVACIONES =  'EMPLEADOR DE PRUEBA';
     	$empleador->EMPL_CREADOPOR =  'SYSTEM';
     	$empleador->save();
@@ -25,6 +26,7 @@ class EmpleadoresTableSeeder extends Seeder
     	$empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL VALLE S.A ESP';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOVALLE';
         $empleador->EMPL_DIRECCION = 'CALLE 70 E BIS # 7-34';
+        $empleador->EMPL_COREO = 'kfrodriguez6@misena.edu.co';
     	$empleador->EMPL_OBSERVACIONES =  'EMPLEADOR DE PRUEBA';
     	$empleador->EMPL_CREADOPOR =  'SYSTEM';
     	$empleador->save();
