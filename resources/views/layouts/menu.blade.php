@@ -102,7 +102,7 @@
                     </li>
 
                     <li {{ (Request::is('auth*') ? 'class=active' : '') }}>
-                        <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios y roles<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user-circle-o"></i> Usuarios y roles<span class="fa arrow"></span></a>
 
                         <ul class="nav nav-second-level">
                             <li {{ (Request::is('*/usuarios') ? 'class=active' : '') }}>
@@ -112,48 +112,44 @@
                                 <a href="{{ url ('auth/roles') }}"><i class="fa fa-male" aria-hidden="true"></i><i class="fa fa-female" aria-hidden="true"></i> Roles</a>
                             </li>
                             <li {{ (Request::is('*/permisos') ? 'class=active' : '') }}>
-                                <a href="{{ url ('auth/permisos') }}"><i class="fa fa-check" aria-hidden="true"></i> Permisos</a>
+                                <a href="{{ url ('auth/permisos') }}"><i class="fa fa-address-card-o" aria-hidden="true"></i> Permisos</a>
                             </li>
                         </ul>
                     </li>
 
                     <li {{ (Request::is('cnfg-*') ? 'class=active' : '') }}>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Parametros Generales<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-cogs"></i> Parametros Generales<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#"><i class="fa fa-handshake-o fa-fw"></i> Contratos<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
 
                                     <li {{ (Request::is('*/cnos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-contratos/cnos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Clasificación de ocupaciones</a>
+                                        <a href="{{ url ('cnfg-contratos/cnos') }}"><i class="fa  fa-yelp"></i> Clasificación de ocupaciones</a>
                                     </li>
                                     
                                     <li {{ (Request::is('*/cargos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-contratos/cargos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Cargos</a>
+                                        <a href="{{ url ('cnfg-contratos/cargos') }}"><i class="fa fa-sign-language"></i> Cargos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/tiposcontratos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-contratos/tiposcontratos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Tipos de contratos</a>
+                                        <a href="{{ url ('cnfg-contratos/tiposcontratos') }}"><i class="fa fa-id-card-o"></i> Tipos de contratos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/temporales') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-contratos/temporales') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Empresas temporales</a>
+                                        <a href="{{ url ('cnfg-contratos/temporales') }}"><i class="fa fa-briefcase"></i> Empresas temporales</a>
                                     </li>
 
                                     <li {{ (Request::is('*/clasescontratos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-contratos/clasescontratos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Clases de contratos</a>
+                                        <a href="{{ url ('cnfg-contratos/clasescontratos') }}"><i class="fa fa-id-card"></i> Clases de contratos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/estadoscontratos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-contratos/estadoscontratos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Estados de contratos</a>
+                                        <a href="{{ url ('cnfg-contratos/estadoscontratos') }}"><i class="fa fa-cube"></i> Estados de contratos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/motivosretiros') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-contratos/motivosretiros') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Motivos de retiro</a>
-                                    </li>
-
-                                    <li {{ (Request::is('*/jefes') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-contratos/jefes') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Jefes </a>
+                                        <a href="{{ url ('cnfg-contratos/motivosretiros') }}"><i class="fa fa-hand-o-right"></i> Motivos de retiro</a>
                                     </li>
 
                                 </ul>
@@ -165,36 +161,81 @@
                                 <ul class="nav nav-third-level">
 
                                     <li {{ (Request::is('*/empleadores') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-organizacionales/empleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Empleadores</a>
+                                        <a href="{{ url ('cnfg-organizacionales/empleadores') }}"><i class="fa fa-black-tie"></i> Empleadores</a>
                                     </li>
 
                                     <li {{ (Request::is('*/gerencias') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-organizacionales/gerencias') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Gerencias</a>
+                                        <a href="{{ url ('cnfg-organizacionales/gerencias') }}"><i class="fa fa-arrows-alt"></i> Gerencias</a>
                                     </li>
 
                                     <li {{ (Request::is('*/procesos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-organizacionales/procesos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Procesos</a>
+                                        <a href="{{ url ('cnfg-organizacionales/procesos') }}"><i class="fa fa-crosshairs"></i> Procesos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/centroscostos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-organizacionales/centroscostos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Centros de costos</a>
+                                        <a href="{{ url ('cnfg-organizacionales/centroscostos') }}"><i class="fa fa-money"></i> Centros de costos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/tiposempleadores') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-organizacionales/tiposempleadores') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Tipos de empleadores</a>
+                                        <a href="{{ url ('cnfg-organizacionales/tiposempleadores') }}"><i class="fa fa-bars"></i> Tipos de empleadores</a>
                                     </li>
 
                                     <li {{ (Request::is('*/riesgos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-organizacionales/riesgos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Riesgos ARL </a>
+                                        <a href="{{ url ('cnfg-organizacionales/riesgos') }}"><i class="fa fa-fire"></i> Riesgos ARL </a>
                                     </li>
 
                                     <li {{ (Request::is('*/grupos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-organizacionales/grupos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Grupos de Empleados </a>
+                                        <a href="{{ url ('cnfg-organizacionales/grupos') }}"><i class="fa fa-user-o"></i> Grupos de Empleados </a>
                                     </li>
 
                                     <li {{ (Request::is('*/turnos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-organizacionales/turnos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Turnos </a>
+                                        <a href="{{ url ('cnfg-organizacionales/turnos') }}"><i class="fa fa-clock-o"></i> Turnos </a>
                                     </li>
+
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-ticket"></i> Tickets<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+
+                                    <li {{ (Request::is('*/prioridades') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/prioridades') }}">
+                                        <i class="fa fa-first-order"></i> 
+                                        Prioridades</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/estadostickets') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/estadostickets') }}">
+                                         <i class="fa fa-empire"></i> 
+                                        Estados de Ticket</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/sanciones') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/sanciones') }}">
+                                         <i class="fa fa-gavel"></i> 
+                                        Sanciones</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/estadosaprobaciones') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/estadosaprobaciones') }}">
+                                         <i class="fa fa-check-circle-o"></i> 
+                                        Estados de Aprobaciones</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/categorias') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/categorias') }}">
+                                         <i class="fa fa-newspaper-o"></i>  
+                                        Categorías</a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/tiposincidentes') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-tickets/tiposincidentes') }}"> 
+                                         <i class="fa fa-exclamation-triangle"></i> 
+                                        Tipos de Incidentes</a>
+                                    </li>
+                                    
 
                                 </ul>
                                 <!-- /.nav-third-level -->
@@ -205,11 +246,11 @@
                                 <ul class="nav nav-third-level">
 
                                     <li {{ (Request::is('*/departamentos') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-geograficos/departamentos') }}"><i class="fa fa-building-o fa-fw"></i> Departamentos</a>
+                                        <a href="{{ url ('cnfg-geograficos/departamentos') }}"><i class="fa fa-circle"></i> Departamentos</a>
                                     </li>
 
                                     <li {{ (Request::is('*/ciudades') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-geograficos/ciudades') }}"><i class="fa fa-building-o fa-fw"></i> Ciudades</a>
+                                        <a href="{{ url ('cnfg-geograficos/ciudades') }}"><i class="fa fa-circle-o"></i> Ciudades</a>
                                     </li>
 
                                     
@@ -225,21 +266,21 @@
                         <ul class="nav nav-second-level">
 
                             <li {{ (Request::is('*/prospectos') ? 'class=active' : '') }}>
-                                <a href="{{ url ('gestion-humana/prospectos') }}">Hoja de Vida</a>
+                                <a href="{{ url ('gestion-humana/prospectos') }}"><i class="fa fa-file-o"></i> Hojas de Vida</a>
                             </li>
 
                             <li {{ (Request::is('*/contratos') ? 'class=active' : '') }}>
-                                <a href="{{ url ('gestion-humana/contratos') }}">Contratos</a>
+                                <a href="{{ url ('gestion-humana/contratos') }}"><i class="fa fa-file-text-o"></i> Contratos</a>
                             </li>
 
                             <li>
-                                <a href="#">Herramientas de Nómina<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-wrench"></i> Herramientas de Nómina<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
 
 
 
                                     <li {{ (Request::is('*/uploads') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('gestion-humana/helpers/validadorTNL') }}">Validador de TNL</a>
+                                        <a href="{{ url ('gestion-humana/helpers/validadorTNL') }}"><i class="fa fa-check-square-o"></i> Validador de TNL</a>
                                     </li>
 
                                 </ul>
@@ -247,35 +288,13 @@
                             </li>
 
                             <li>
-                                <a href="#">Ticket Disciplinario<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-ticket"></i> Ticket Disciplinario<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
 
-                                    <li {{ (Request::is('*/prioridades') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/prioridades') }}">Prioridades</a>
-                                    </li>
-
-                                    <li {{ (Request::is('*/estadostickets') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/estadostickets') }}">Estados de Ticket</a>
-                                    </li>
-
-                                    <li {{ (Request::is('*/sanciones') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/sanciones') }}">Sanciones</a>
-                                    </li>
-
-                                    <li {{ (Request::is('*/estadosaprobaciones') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/estadosaprobaciones') }}">Estados de Aprobaciones</a>
-                                    </li>
-
-                                    <li {{ (Request::is('*/categorias') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/categorias') }}">Categorías</a>
-                                    </li>
-
-                                    <li {{ (Request::is('*/tiposincidentes') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/tiposincidentes') }}">Tipos de Incidentes</a>
-                                    </li>
-
                                      <li {{ (Request::is('*/tickets') ? 'class=active' : '') }}>
-                                        <a href="{{ url ('cnfg-tickets/tickets') }}">Tickets</a>
+                                        <a href="{{ url ('cnfg-tickets/tickets') }}">
+                                         <i class="fa fa-id-badge"></i> 
+                                        Tickets</a>
                                     </li>
 
                                 </ul>
