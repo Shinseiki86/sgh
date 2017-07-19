@@ -29,9 +29,8 @@ class Controller extends BaseController
 	 *
 	 * @return Response
 	 */
-	protected function storeModel($class, $redirect)
+	protected function storeModel($class, $redirect, array $relations = [])
 	{
-
 		//Datos recibidos desde la vista.
 		$data = request()->all();
 
@@ -40,11 +39,14 @@ class Controller extends BaseController
 
 		if($validator->passes()){
 			$class = $this->getClass($class);
+
 			//Se crea el registro.
 			$model = $class::create($data);
 
-			$nameClass = str_upperspace(class_basename($model));
+			//Se crean las relaciones
+			$this->storeRelations($model, $relations);
 
+			$nameClass = str_upperspace(class_basename($model));
 			// redirecciona al index de controlador
 			flash_alert( $nameClass.' '.$model->id.' creado exitosamente.', 'success' );
 			return redirect()->route($redirect)->send();
@@ -59,7 +61,7 @@ class Controller extends BaseController
 	 * @param  int  $CLCO_ID
 	 * @return Response
 	 */
-	protected function updateModel($id, $class, $redirect)
+	protected function updateModel($id, $class, $redirect, array $relations = [])
 	{
 		//Datos recibidos desde la vista.
 		$data = request()->all();
@@ -68,14 +70,17 @@ class Controller extends BaseController
 		$validator = $this->validator($data, $id);
 
 		if($validator->passes()){
-			// Se obtiene el registro
 			$class = $this->getClass($class);
+
+			// Se obtiene el registro
 			$model = $class::findOrFail($id);
 			//y se actualiza con los datos recibidos.
 			$model->update($data);
 
-			$nameClass = str_upperspace(class_basename($model));
+			//Se crean las relaciones
+			$this->storeRelations($model, $relations);
 
+			$nameClass = str_upperspace(class_basename($model));
 			// redirecciona al index de controlador
 			flash_alert( $nameClass.' '.$model->id.' modificado exitosamente.', 'success' );
 			return redirect()->route($redirect)->send();
@@ -87,6 +92,19 @@ class Controller extends BaseController
 	private function getClass($class)
 	{
 		return class_exists($class) ? $class : '\\SGH\\'.basename($class);
+	}
+
+	private function storeRelations($model, $relations)
+	{
+		//Datos recibidos desde la vista.
+		$data = request()->all();
+
+		if(!empty($relations)){
+			foreach ($relations as $ids => $relation) {
+				$arrayIds = isset($data[$ids]) ? $data[$ids] : [];
+				$model->$relation()->sync($arrayIds, true);
+			}
+		}
 	}
 
 }

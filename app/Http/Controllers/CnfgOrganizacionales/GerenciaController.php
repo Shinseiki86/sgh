@@ -32,17 +32,12 @@ class GerenciaController extends Controller
 	 */
 	protected function validator($data, $GERE_ID = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'GERE_DESCRIPCION' => ['required','max:100','unique:GERENCIAS,GERE_DESCRIPCION,'.$GERE_ID.',GERE_ID'],
 			'EMPL_ID' => ['required'],
 			'GERE_OBSERVACIONES' => ['max:300'],
 			'PROC_ids' => ['array'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -81,21 +76,7 @@ class GerenciaController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data);
-
-		//Se crea el registro.
-		$gerencia = Gerencia::create($data);
-		
-		//Relación con procesos
-		$PROC_ids = isset($data['PROC_ids']) ? $data['PROC_ids'] : [];
-		$gerencia->procesos()->sync($PROC_ids, true);
-
-		// redirecciona al index de controlador
-		flash_alert( 'Gerencia '.$gerencia->GERE_ID.' creada exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.gerencias.index');
+		parent::storeModel(Gerencia::class, 'cnfg-organizacionales.gerencias.index', ['PROC_ids'=>'procesos']);
 	}
 
 
@@ -130,23 +111,9 @@ class GerenciaController extends Controller
 	 */
 	public function update($GERE_ID)
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data, $GERE_ID);
-
-		// Se obtiene el registro
-		$gerencia = Gerencia::findOrFail($GERE_ID);
-		//y se actualiza con los datos recibidos.
-		$gerencia->update($data);
-
-		//Relación con procesos
-		$PROC_ids = isset($data['PROC_ids']) ? $data['PROC_ids'] : [];
-		$gerencia->procesos()->sync($PROC_ids, true);
-
-		// redirecciona al index de controlador
-		flash_alert( 'Gerencia '.$gerencia->GERE_ID.' modificada exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.gerencias.index');
+		parent::updateModel($GERE_ID, Gerencia::class, 'cnfg-organizacionales.gerencias.index', [
+			'PROC_ids'=>'procesos'
+		]);
 	}
 
 	/**
