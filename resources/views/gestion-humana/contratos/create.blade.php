@@ -199,6 +199,36 @@
 			</div>
 		</div>
 
+		<div class="form-group{{ $errors->has('GRUP_ID') ? ' has-error' : '' }}">
+			<label for="GRUP_ID" class="col-md-2 control-label">Grupo de Empleado</label>
+			<div class="col-md-6">
+				{{ Form::select('GRUP_ID', [null => 'Seleccione un grupo'] + $arrGrupos , old('GRUP_ID'), [
+				'class' => 'form-control chosen-select',
+				]) }}
+
+				@if ($errors->has('GRUP_ID'))
+				<span class="help-block">
+					<strong>{{ $errors->first('GRUP_ID') }}</strong>
+				</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('TURN_ID') ? ' has-error' : '' }}">
+			<label for="TURN_ID" class="col-md-2 control-label">Turno</label>
+			<div class="col-md-6">
+				{{ Form::select('TURN_ID', [null => 'Seleccione un turno'] + $arrTurnos , old('TURN_ID'), [
+				'class' => 'form-control chosen-select',
+				]) }}
+
+				@if ($errors->has('TURN_ID'))
+				<span class="help-block">
+					<strong>{{ $errors->first('TURN_ID') }}</strong>
+				</span>
+				@endif
+			</div>
+		</div>
+
 		<div class="form-group{{ $errors->has('JEFE_ID') ? ' has-error' : '' }}">
 			<label for="JEFE_ID" class="col-md-2 control-label">Jefe Inmediato</label>
 			<div class="col-md-6">
@@ -216,13 +246,6 @@
 		</div>
 		
 
-		<div class="form-group{{ $errors->has('CONT_CASOMEDICO') ? ' has-error' : '' }}">
-			{{ Form::label('CONT_CASOMEDICO', '¿R.M?',  [ 'class' => 'col-md-2 control-label' ]) }}
-			<div class="col-md-6">
-				{{	Form::select('CONT_CASOMEDICO', ['NO' => 'NO', 'SI' => 'SI'], null, [ 'class' => 'form-control chosen-select' ]) }}
-			</div>
-		</div>
-
 		<div class="form-group{{ $errors->has('CONT_OBSERVACIONES') ? ' has-error' : '' }}">
 		{{ Form::label('CONT_OBSERVACIONES', 'Observaciones',  [ 'class' => 'col-md-2 control-label' ]) }}
 			<div class="col-md-6">
@@ -232,6 +255,13 @@
 						<strong>{{ $errors->first('CONT_OBSERVACIONES') }}</strong>
 					</span>
 				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('CONT_CASOMEDICO') ? ' has-error' : '' }}">
+			{{ Form::label('CONT_CASOMEDICO', '¿R.M?',  [ 'class' => 'col-md-2 control-label' ]) }}
+			<div class="col-md-6">
+				{{	Form::select('CONT_CASOMEDICO', ['NO' => 'NO', 'SI' => 'SI'], null, [ 'class' => 'form-control chosen-select' ]) }}
 			</div>
 		</div>
 

@@ -145,6 +145,37 @@
 	</div>
 </div>
 
+<div class="form-group{{ $errors->has('GRUP_ID') ? ' has-error' : '' }}">
+	<label for="GRUP_ID" class="col-md-4 control-label">Grupo de Empleado</label>
+	<div class="col-md-6">
+		{{ Form::select('GRUP_ID', [null => 'Seleccione un grupo'] + $arrGrupos , old('GRUP_ID'), [
+		'class' => 'form-control',
+		]) }}
+
+		@if ($errors->has('GRUP_ID'))
+		<span class="help-block">
+			<strong>{{ $errors->first('GRUP_ID') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
+
+<div class="form-group{{ $errors->has('TURN_ID') ? ' has-error' : '' }}">
+	<label for="TURN_ID" class="col-md-4 control-label">Turno</label>
+	<div class="col-md-6">
+		{{ Form::select('TURN_ID', [null => 'Seleccione un turno'] + $arrTurnos , old('TURN_ID'), [
+		'class' => 'form-control',
+		]) }}
+
+		@if ($errors->has('TURN_ID'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TURN_ID') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
+
+
 <div class="form-group{{ $errors->has('TICK_DESCRIPCION') ? ' has-error' : '' }}">
 	{{ Form::label('TICK_DESCRIPCION', 'Descripción de los Hechos',  [ 'class' => 'col-md-4 control-label' ]) }}
 	<div class="col-md-6">

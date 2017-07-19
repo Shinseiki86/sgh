@@ -60,6 +60,8 @@ use SGH\Permission;
                 $this->createPermissions('clasecontrato', 'clases de contratos');
                 $this->createPermissions('estadocontrato', 'estados de contratos');
                 $this->createPermissions('motretiro', 'motivo de retiro');
+                $this->createPermissions('grupo', 'grupos');
+                $this->createPermissions('turno', 'turnos');
                 $this->createPermissions('empleador', 'empleadores');
                 $this->createPermissions('gerencia', 'gerencias');
                 $this->createPermissions('proceso', 'procesos');

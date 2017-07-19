@@ -188,6 +188,14 @@
                                         <a href="{{ url ('cnfg-organizacionales/riesgos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Riesgos ARL </a>
                                     </li>
 
+                                    <li {{ (Request::is('*/grupos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-organizacionales/grupos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Grupos de Empleados </a>
+                                    </li>
+
+                                    <li {{ (Request::is('*/turnos') ? 'class=active' : '') }}>
+                                        <a href="{{ url ('cnfg-organizacionales/turnos') }}"><i class="fa fa-dot-circle-o fa-fw"></i> Turnos </a>
+                                    </li>
+
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>

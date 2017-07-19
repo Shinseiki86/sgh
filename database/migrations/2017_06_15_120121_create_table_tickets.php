@@ -80,6 +80,14 @@ class CreateTableTickets extends Migration
             $table->unsignedInteger('TIIN_ID')
                 ->comment('relacion a la tabla tipos de incidente');
 
+            $table->unsignedInteger('TURN_ID')
+                ->nullable()
+                ->comment('relacion a la tabla turnos de trabajo');
+
+            $table->unsignedInteger('GRUP_ID')
+                ->nullable()
+                ->comment('relacion a la tabla grupos de empleados');
+
             $table->string('TICK_OBSERVACIONES', 3000)
                 ->nullable()
                 ->comment('observaciones del ticket');

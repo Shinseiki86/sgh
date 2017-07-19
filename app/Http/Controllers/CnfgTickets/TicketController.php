@@ -110,7 +110,13 @@ class TicketController extends Controller
 
 		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
 
-		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion'));
+		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
+
+		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
+
+		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
+
+		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
 	}
 
 	/**

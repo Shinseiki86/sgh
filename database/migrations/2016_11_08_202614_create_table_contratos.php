@@ -79,6 +79,12 @@ class CreateTableContratos extends Migration
             $table->integer('CECO_ID')->unsigned()
                 ->comment('centro de costos del contrato');
 
+            $table->integer('GRUP_ID')->nullable()->unsigned()
+                ->comment('Grupo del empleado');
+
+            $table->integer('TURN_ID')->nullable()->unsigned()
+                ->comment('Turno del empleado');
+
             $table->string('CONT_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();
             
@@ -164,6 +170,18 @@ class CreateTableContratos extends Migration
             $table->foreign('CECO_ID')
                 ->references('CECO_ID')
                 ->on('CENTROSCOSTOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('GRUP_ID')
+                ->references('GRUP_ID')
+                ->on('GRUPOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+             $table->foreign('TURN_ID')
+                ->references('TURN_ID')
+                ->on('TURNOS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

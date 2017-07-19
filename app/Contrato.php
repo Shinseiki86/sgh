@@ -34,6 +34,8 @@ class Contrato extends ModelWithSoftDeletes
 		'RIES_ID',
 		'TIEM_ID',
 		'CECO_ID',
+		'TURN_ID',
+		'GRUP_ID',
 		'JEFE_ID',
 		'CONT_OBSERVACIONES',
 	];
@@ -102,6 +104,18 @@ class Contrato extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'CECO_ID';
 		return $this->belongsTo(CentroCosto::class, $foreingKey);
+	}
+
+	public function grupo()
+	{
+		$foreingKey = 'GRUP_ID';
+		return $this->belongsTo(Grupo::class, $foreingKey);
+	}
+
+	public function turno()
+	{
+		$foreingKey = 'TURN_ID';
+		return $this->belongsTo(Turno::class, $foreingKey);
 	}
 
 }

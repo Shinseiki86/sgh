@@ -32,6 +32,8 @@ class Ticket extends ModelWithSoftDeletes
 		'PRIO_ID',
 		'CATE_ID',
 		'TIIN_ID',
+		'TURN_ID',
+		'GRUP_ID',
 	];
 
 	public function contrato()
@@ -74,6 +76,18 @@ class Ticket extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'SANC_ID';
 		return $this->belongsTo(Sancion::class, $foreingKey);
+	}
+
+	public function grupo()
+	{
+		$foreingKey = 'GRUP_ID';
+		return $this->belongsTo(Grupo::class, $foreingKey);
+	}
+
+	public function turno()
+	{
+		$foreingKey = 'TURN_ID';
+		return $this->belongsTo(Turno::class, $foreingKey);
 	}
 
 }

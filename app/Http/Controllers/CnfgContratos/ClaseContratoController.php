@@ -27,16 +27,14 @@ class ClaseContratoController extends Controller
 	 * Get a validator for an incoming registration request.
 	 *
 	 * @param  Request $request
-	 * @return void
+	 * @return Validator
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'CLCO_DESCRIPCION' => ['required','max:100','unique:CLASESCONTRATOS,CLCO_DESCRIPCION,'.$id.',CLCO_ID'],
 			'CLCO_OBSERVACIONES' => ['max:300'],
 		]);
-
-		return $validator;
 	}
 
 

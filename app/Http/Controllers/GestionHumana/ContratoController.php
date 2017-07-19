@@ -54,7 +54,6 @@ class ContratoController extends Controller
 			'CONT_CASOMEDICO'   => ['required', 'max:2'],
 			'CONT_OBSERVACIONES'=> ['max:300'],
 		]);
-
 		if ($validator->fails())
 			return redirect()->back()
 						->withErrors($validator)
@@ -104,6 +103,12 @@ class ContratoController extends Controller
 		//Se crea un array con los riesgos existentes
 		$arrRiesgos = model_to_array(Riesgo::class, 'RIES_DESCRIPCION');
 
+		//Se crea un array con los grupos existentes
+		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
+
+		//Se crea un array con los turnos existentes
+		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
+
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
 				'PROS_PRIMERNOMBRE',
@@ -131,7 +136,7 @@ class ContratoController extends Controller
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 
-		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrJefes'));
+		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes'));
 	}
 
 	/**
@@ -152,6 +157,8 @@ class ContratoController extends Controller
 		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
 		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
 		if(!$request->has('JEFE_ID')){	$request['JEFE_ID'] = null; }
+		if(!$request->has('GRUP_ID')){	$request['GRUP_ID'] = null; }
+		if(!$request->has('TURN_ID')){	$request['TURN_ID'] = null; }
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
@@ -211,6 +218,12 @@ class ContratoController extends Controller
 		//Se crea un array con los riesgos existentes
 		$arrRiesgos = model_to_array(Riesgo::class, 'RIES_DESCRIPCION');
 
+		//Se crea un array con los grupos existentes
+		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
+
+		//Se crea un array con los turnos existentes
+		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
+
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -224,7 +237,7 @@ class ContratoController extends Controller
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrJefes'));
+		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes'));
 	}
 
 
@@ -245,6 +258,8 @@ class ContratoController extends Controller
 		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
 		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
 		if(!$request->has('JEFE_ID')){	$request['JEFE_ID'] = null; }
+		if(!$request->has('GRUP_ID')){	$request['GRUP_ID'] = null; }
+		if(!$request->has('TURN_ID')){	$request['TURN_ID'] = null; }
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
