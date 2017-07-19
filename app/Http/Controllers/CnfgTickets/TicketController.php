@@ -441,10 +441,41 @@ class TicketController extends Controller
 		// Se obtiene el registro
 		$ticket = Ticket::findOrFail($TICK_ID);
 
+		$primaryKey = 'CONT_ID';
+		$column = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA'
+			], 'PROS_NOMBRESAPELLIDOS');
+		$columnName = 'PROS_NOMBRESAPELLIDOS';
+
+		$prospecto = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'CONTRATOS.'.$primaryKey , $column ])->get();
+		$arrContratos = $prospecto->pluck($columnName, $primaryKey)->toArray();
+		//dd($arrContratos);
+
+		$arrEstados = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
+
+		$arrEstadosAprobacion = model_to_array(EstadoAprobacion::class, 'ESAP_DESCRIPCION');
+
+		$arrPrioridad = model_to_array(Prioridad::class, 'PRIO_DESCRIPCION');
+
+		$arrCategorias = model_to_array(Categoria::class, 'CATE_DESCRIPCION');
+
+		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
+
+		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
+
+		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
+
+		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
+
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/tickets/edit', compact('ticket', 'arrProcesos'));
+		return view('cnfg-tickets/tickets/edit', compact('ticket','arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
 	}
 
 
@@ -459,12 +490,14 @@ class TicketController extends Controller
 		//Datos recibidos desde la vista.
 		$data = request()->all();
 
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data, $TICK_ID);
+		//dd($data);
 
-		// Se obtiene el registro
+		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
+		$this->validator($data);
+
+		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
-		//y se actualiza con los datos recibidos.
+
 		$ticket->update($data);
 
 		// redirecciona al index de controlador
