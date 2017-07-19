@@ -30,6 +30,8 @@
 				<th class="col-md-5"> Fecha Solicitud </th>
 				<th class="col-md-5"> Fecha Cierre </th>
 				<th class="col-md-5"> Estado Aprobación </th>
+				<th class="col-md-5"> Grupo </th>
+				<th class="col-md-5"> Turno </th>
 				<th class="hidden-xs col-md-2">Creado por</th>
 				<th class="col-md-1"></th>
 			</tr>
@@ -48,6 +50,8 @@
 				<td>{{ $ticket -> TICK_FECHASOLICITUD }}</td>
 				<td>{{ $ticket -> TICK_FECHACIERE }}</td>
 				<td>{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</td>
+				<td>{{ isset($ticket -> GRUP_ID) ? $ticket -> grupo -> GRUP_DESCRIPCION : '' }}</td>
+				<td>{{ isset($ticket -> TURN_ID) ? $ticket -> turno -> TURN_DESCRIPCION : '' }}</td>
 				<td>{{ $ticket -> TICK_CREADOPOR }}</td>
 				<td>
 

@@ -163,6 +163,20 @@ class CreateTableTickets extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+             //Relación con tabla GRUPOS
+            $table->foreign('GRUP_ID')
+                ->references('GRUP_ID')
+                ->on('GRUPOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Relación con tabla TURNOS
+            $table->foreign('TURN_ID')
+                ->references('TURN_ID')
+                ->on('TURNOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
         });
         
         if(env('DB_CONNECTION') == 'pgsql')
