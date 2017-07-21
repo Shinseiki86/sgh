@@ -42,13 +42,13 @@ $(function() {
 		
 		$('body').addClass("sidebar-closed");
 
-		$("#menu-toggle").removeClass("active")
-			.find('.fa').addClass("fa-toggle-off").removeClass("fa-toggle-on");
+		$("#menu-toggle").addClass("active")
+			.find('.fa').removeClass("fa-toggle-off").addClass("fa-toggle-on");
 
 		$('#sidebar .nav-second-level, #sidebar .nav-third-level').removeClass('collapse');
 	} else {
-		$("#menu-toggle").addClass("active")
-			.find('.fa').removeClass("fa-toggle-off").addClass("fa-toggle-on");
+		$("#menu-toggle").removeClass("active")
+			.find('.fa').addClass("fa-toggle-off").removeClass("fa-toggle-on");
 	}
 	
 	$(window).bind("load resize", function() {

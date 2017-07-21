@@ -121,12 +121,16 @@ body {
 .menu-toggler {
 	position: relative;
 	float: left;
-	margin: 14px 0px 8px 15px;
+    margin: 0px;
+	/*margin: 14px 0px 8px 15px;*/
 	background-color: transparent;
 	background-image: none;
 	border: 1px solid transparent;
 	border-radius: 4px;
 	cursor: pointer;
+	color: #333;
+    padding: 0px 25px;
+    height: 22px;
 }
 
 .menu-toggler .icon-bar {
@@ -138,6 +142,10 @@ body {
 	margin-top: 4px;
 }
 
+.navbar-brand {
+	padding-top: 10px;
+    height: 0px;
+}
 
 /*
  * Sidebar

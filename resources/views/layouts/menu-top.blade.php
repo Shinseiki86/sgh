@@ -1,6 +1,13 @@
 <header>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-        <a class="navbar-brand" href="{{ url ('') }}">SGH</a>
+
+        <div class="col-xs-1">
+            <a class="navbar-brand" href="{{ url ('') }}" >SGH</a>
+            <!--menu toggle button -->
+            <button id="menu-toggle" type="button" data-toggle="button" class="menu-toggler sidebar-toggler btn btn-link" style="margin-left: 0px;color: #333;">
+                <i class="fa fa-toggle-off fa-fw"></i>
+            </button>
+        </div>
 
         <div class="navbar-header">
 
@@ -80,12 +87,6 @@
                 @endif
             </ul>
             
-            <!--menu toggle button -->
-            <button id="menu-toggle" type="button" data-toggle="button" class="menu-toggler sidebar-toggler btn btn-link">
-                <i class="fa fa-fw"></i>
-            </button>
-
         </div>
-        <!-- /.navbar-header -->
-    </nav>
+    </nav> <!-- /.navbar-header -->
 </header>
