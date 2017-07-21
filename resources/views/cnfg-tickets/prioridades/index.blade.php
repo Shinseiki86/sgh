@@ -20,18 +20,18 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">Descripción</th>
-				<th class="col-md-5">Color</th>
-				<th class="col-md-5">Observaciones</th>
-				<th class="hidden-xs col-md-2">Creado por</th>
-				<th class="col-md-1"></th>
+				<th class="col-md-3">Descripción</th>
+				<th class="col-md-1">Color</th>
+				<th class="col-md-4">Observaciones</th>
+				<th class="hidden-xs col-md-1">Creado</th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach($prioridades as $prioridad)
 			<tr>
 				<td>{{ $prioridad -> PRIO_DESCRIPCION }}</td>
-				<td>{{ $prioridad -> PRIO_COLOR }}</td>
+				<td style="background-color:{{ $prioridad -> PRIO_COLOR }}">{{ str_replace(['rgb(', ')'], '', $prioridad->PRIO_COLOR) }}</td>
 				<td>{{ $prioridad -> PRIO_OBSERVACIONES }}</td>
 				<td>{{ $prioridad -> PRIO_CREADOPOR }}</td>
 				<td>

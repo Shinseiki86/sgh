@@ -26,14 +26,14 @@
 				<th class="col-md-5"> Tipo de Incidente </th>
 				<th class="col-md-5"> Prioridad </th>
 				<th class="col-md-5"> Categoria </th>
-				<th class="col-md-5"> Fecha Evento </th>
-				<th class="col-md-5"> Fecha Solicitud </th>
-				<th class="col-md-5"> Fecha Cierre </th>
-				<th class="col-md-5"> Estado Aprobación </th>
-				<th class="col-md-5"> Grupo </th>
-				<th class="col-md-5"> Turno </th>
-				<th class="hidden-xs col-md-2">Creado por</th>
-				<th class="col-md-1"></th>
+				<th class="col-md-1"> Fecha Evento </th>
+				<th class="col-md-1"> Fecha Solicitud </th>
+				<th class="col-md-1"> Fecha Cierre </th>
+				<th class="col-md-1"> Estado Aprobación </th>
+				<th class="col-md-1"> Grupo </th>
+				<th class="col-md-1"> Turno </th>
+				<th class="hidden-xs col-md-1">Creado</th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 

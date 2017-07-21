@@ -24,8 +24,8 @@
 				<th class="col-md-1">Código</th>
 				<th class="col-md-4">Descripción</th>
 				<th class="col-md-4">Departamento</th>
-				<th class="hidden-xs col-md-2">Creado por</th>
-				<th class="col-md-1"></th>
+				<th class="hidden-xs col-md-1">Creado</th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 

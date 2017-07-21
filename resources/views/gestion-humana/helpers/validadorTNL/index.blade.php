@@ -23,16 +23,16 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="hidden-xs col-md-1">EMPRESA</th>
-				<th class="col-md-1">IDENTIFICACION</th>
-				<th class="col-md-5">NOMBRE</th>
-				<th class="col-md-5">FECHA INI</th>
-				<th class="col-md-5">DÍAS</th>
-				<th class="col-md-5">FECHA FIN</th>
-				<th class="col-md-5">CONTING.</th>
-				<th class="col-md-5">PRIMER DÍA AT</th>
-				<th class="col-md-1">DOCUMENTO</th>
-				<th class="col-md-1"></th>
+				<th class="hidden-xs col-md-1">Empresa</th>
+				<th class="col-md-1">Identificación</th>
+				<th class="col-md-5">Nombre</th>
+				<th class="col-md-5">Fecha ini</th>
+				<th class="col-md-5">Días</th>
+				<th class="col-md-5">Fecha fin</th>
+				<th class="col-md-5">Conting.</th>
+				<th class="col-md-5">Primer día at</th>
+				<th class="col-md-1">Documento</th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 
@@ -48,9 +48,7 @@
 				<td>{{ $incap -> INCA_CONTINGENCIA }}</td>
 				<td>{{ $incap -> INCA_PRIMERDIAAT }}</td>
 				<td>{{ $incap -> INCA_DOCUMENTO }}</td>
-				<td>
-					
-				</td>
+				<td></td>
 			</tr>
 			@endforeach
 		</tbody>

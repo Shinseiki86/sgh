@@ -20,18 +20,18 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">Descripción</th>
-				<th class="col-md-5">Color</th>
-				<th class="col-md-5">Observaciones</th>
-				<th class="hidden-xs col-md-2">Creado por</th>
-				<th class="col-md-1"></th>
+				<th class="col-md-3">Descripción</th>
+				<th class="col-md-1">Color</th>
+				<th class="col-md-4">Observaciones</th>
+				<th class="hidden-xs col-md-1">Creado</th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach($estadosaprobaciones as $estadoaprobacion)
 			<tr>
 				<td>{{ $estadoaprobacion -> ESAP_DESCRIPCION }}</td>
-				<td>{{ $estadoaprobacion -> ESAP_COLOR }}</td>
+				<td style="background-color:{{ $estadoaprobacion -> ESAP_COLOR }}">{{ str_replace(['rgb(', ')'], '', $estadoaprobacion->ESAP_COLOR) }}</td>
 				<td>{{ $estadoaprobacion -> ESAP_OBSERVACIONES }}</td>
 				<td>{{ $estadoaprobacion -> ESAP_CREADOPOR }}</td>
 				<td>

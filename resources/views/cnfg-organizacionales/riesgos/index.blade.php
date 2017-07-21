@@ -20,9 +20,9 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">Riesgo</th>
-				<th class="col-md-5">Factor</th>
-				<th class="hidden-xs col-md-2">Creado por</th>
+				<th class="col-md-6">Riesgo</th>
+				<th class="col-md-4">Factor</th>
+				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>

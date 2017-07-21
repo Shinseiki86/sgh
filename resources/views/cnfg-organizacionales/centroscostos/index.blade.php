@@ -21,12 +21,12 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">Empresa</th>
-				<th class="col-md-5">Gerencia</th>
-				<th class="col-md-5">Codigo</th>
-				<th class="col-md-5">Descripción</th>
-				<th class="hidden-xs col-md-2">Creado por</th>
-				<th class="col-md-1"></th>
+				<th class="col-md-3">Empresa</th>
+				<th class="col-md-3">Gerencia</th>
+				<th class="col-md-1">Codigo</th>
+				<th class="col-md-3">Descripción</th>
+				<th class="hidden-xs col-md-1">Creado por</th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 

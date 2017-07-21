@@ -20,12 +20,12 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5">Razón Social</th>
-				<th class="col-md-5">Nombre Comercial</th>
-				<th class="col-md-5">Dirección</th>
-				<th class="col-md-5">Correo</th>
-				<th class="hidden-xs col-md-2">Creado por</th>
-				<th class="col-md-1"></th>
+				<th class="col-md-3">Razón Social</th>
+				<th class="col-md-3">Nombre Comercial</th>
+				<th class="col-md-3">Dirección</th>
+				<th class="col-md-3">Correo</th>
+				<th class="hidden-xs col-md-1">Creado</th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 		<tbody>

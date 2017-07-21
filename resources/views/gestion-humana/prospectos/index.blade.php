@@ -31,7 +31,7 @@
 				<th class="col-md-5">Telefono</th>
 				<th class="col-md-5">Celular</th>
 				<th class="col-md-5">Correo</th>
-				<th class="col-md-1"></th>
+				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 
