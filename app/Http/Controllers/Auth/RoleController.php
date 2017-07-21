@@ -23,7 +23,6 @@ class RoleController extends Controller
 		$this->middleware('permission:rol-delete',   ['only' => ['destroy']]);
 	}
 
-
 	/**
 	 * Get a validator for an incoming registration request.
 	 *
@@ -32,15 +31,12 @@ class RoleController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return  Validator::make($data, [
 			'name'         => ['required','max:15','unique:roles,name,'.$id.',id'],
 			'display_name' => ['required','max:50','unique:roles,display_name,'.$id.',id'],
 			'description'  => ['required','max:100'],
 		]);
-
-		return $validator;
 	}
-
 
 	/**
 	 * Muestra una lista de los registros.
@@ -75,7 +71,7 @@ class RoleController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Role::class, 'auth.roles.index');
+		parent::storeModel(Role::class, 'auth.roles.index', ['permisos_ids'=>'permissions']);
 	}
 
 
@@ -107,7 +103,7 @@ class RoleController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Role::class, 'auth.roles.index');
+		parent::updateModel($id, Role::class, 'auth.roles.index', ['permisos_ids'=>'permissions']);
 	}
 
 	/**

@@ -32,13 +32,11 @@ class PermissionController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'name'         => ['required','max:15','unique:permissions,name,'.$id.',id'],
 			'display_name' => ['required','max:50','unique:permissions,display_name,'.$id.',id'],
 			'description'  => ['required','max:100'],
 		]);
-
-		return $validator;
 	}
 
 
@@ -75,7 +73,7 @@ class PermissionController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Permission::class, 'auth.permisos.index');
+		parent::storeModel(Permission::class, 'auth.permisos.index', ['roles_ids'=>'roles']);
 	}
 
 
@@ -107,7 +105,7 @@ class PermissionController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Permission::class, 'auth.permisos.index');
+		parent::updateModel($id, Permission::class, 'auth.permisos.index', ['roles_ids'=>'roles']);
 	}
 
 	/**

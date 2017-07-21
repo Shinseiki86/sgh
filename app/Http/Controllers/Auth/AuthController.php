@@ -221,7 +221,6 @@ class AuthController extends Controller
 			'email' => 'required|email|max:255|unique:USERS,email,'.$usuario->USER_id.',USER_id',
 		]);
 
-
 		$usuario->name = Input::get('name');
 		$usuario->email = Input::get('email');
 		$usuario->USER_MODIFICADOPOR = auth()->user()->username;

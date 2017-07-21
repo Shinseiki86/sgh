@@ -75,6 +75,7 @@ use SGH\Permission;
                 //$this->createPermissions('VALIDADOR DE TNL', 'VALIDADOR DE TNL');
                 $this->createPermissions('tkprioridad', 'prioridades ticket');
                 $this->createPermissions('tkestados', 'estados ticket');
+                $this->createPermissions('tkaprobacion', 'estados aprobaciones');
                 $this->createPermissions('tkcategoria', 'categorías ticket');
                 $this->createPermissions('tksancion', 'categorías ticket');
                 $this->createPermissions('tktpincidente', 'tipo incidente ticket');
