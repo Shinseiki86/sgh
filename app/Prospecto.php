@@ -31,6 +31,8 @@ class Prospecto extends ModelWithSoftDeletes
 		'PROS_TELEFONO',
 		'PROS_CELULAR',
 		'PROS_CORREO',
+		'PROS_MARCA',
+		'PROS_MARCAOBSERVACIONES',
 	];
 
 	public function scopeActivos($query)

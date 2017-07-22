@@ -14,7 +14,7 @@ use SGH\Prospecto;
 
 class ProspectoController extends Controller
 {
-    public function __construct()
+	public function __construct()
 	{
 		$this->middleware('auth');
 		$this->middleware('permission:prospecto-index', ['only' => ['index']]);
@@ -43,12 +43,14 @@ class ProspectoController extends Controller
 			'PROS_TELEFONO'        => ['max:10', 'numeric'],
 			'PROS_CELULAR'         => ['max:15', 'numeric'],
 			'PROS_CORREO'           => ['max:100'],
-		]);
+			'PROS_MARCA'           => ['max:2'],
+			'PROS_MARCAOBSERVACIONES'           => ['max:300'],
+			]);
 
 		if ($validator->fails())
 			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
+		->withErrors($validator)
+		->withInput()->send();
 	}
 
 
@@ -150,7 +152,7 @@ class ProspectoController extends Controller
 			flash_modal( 'Temporale '.$prospecto->EMPL_ID.' no se puede borrar.', 'danger' );
 		} else {
 			$prospecto->delete();
-				flash_alert( 'Prospecto '.$prospecto->EMPL_ID.' eliminado exitosamente.', 'success' );
+			flash_alert( 'Prospecto '.$prospecto->EMPL_ID.' eliminado exitosamente.', 'success' );
 		}
 
 		return redirect()->route('gestion-humana.prospectos.index');

@@ -233,8 +233,6 @@ if (! function_exists('get_email_user')) {
 
 }
 
-
-
 if (! function_exists('array_implode')) {
     /**
      * Implode an array with the key and value pair giving
