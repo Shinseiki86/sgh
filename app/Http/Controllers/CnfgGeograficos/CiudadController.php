@@ -31,15 +31,11 @@ class CiudadController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
+		return validator::make($data, [
 			'CIUD_CODIGO' => ['required', 'numeric', 'unique:CIUDADES,CIUD_CODIGO,'.$id.',CIUD_ID'],
 			'CIUD_DESCRIPCION' => ['required', 'max:300', 'unique:CIUDADES,CIUD_DESCRIPCION,'.$id.',CIUD_ID'],
 		]);
 
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 

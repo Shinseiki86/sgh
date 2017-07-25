@@ -30,15 +30,11 @@ class DepartamentoController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
+		return Validator::make($data, [
 			'DEPA_CODIGO' => ['required', 'numeric', 'unique:DEPARTAMENTOS,DEPA_CODIGO,'.$id.',DEPA_ID'],
 			'DEPA_DESCRIPCION' => ['required', 'max:300', 'unique:DEPARTAMENTOS,DEPA_DESCRIPCION,'.$id.',DEPA_ID'],
 		]);
 
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 

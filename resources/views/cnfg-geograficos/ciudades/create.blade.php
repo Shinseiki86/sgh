@@ -21,7 +21,7 @@
 		<div class="form-group{{ $errors->has('CIUD_DESCRIPCION') ? ' has-error' : '' }}">
 			{{ Form::label('CIUD_DESCRIPCION', 'Descripción',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">
-				{{ Form::text('CIUD_DESCRIPCION', old('CIUD_DESCRIPCION'), [ 'class' => 'form-control', 'maxlength' => '25', 'required' ]) }}
+				{{ Form::text('CIUD_DESCRIPCION', old('CIUD_DESCRIPCION'), [ 'class' => 'form-control', 'maxlength' => '300', 'required' ]) }}
 				@if ($errors->has('CIUD_DESCRIPCION'))
 					<span class="help-block">
 						<strong>{{ $errors->first('CIUD_DESCRIPCION') }}</strong>
