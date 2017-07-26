@@ -70,6 +70,10 @@ class CreateTableContratos extends Migration
             $table->integer('EMPL_ID')->unsigned()
                 ->comment('empleador del colaborador');
 
+            $table->integer('TEMP_ID')->unsigned()
+                ->nullable()
+                ->comment('temporal del colaborador');
+
             $table->integer('RIES_ID')->unsigned()
                 ->comment('riesgo de ARL del colaborador');
 
@@ -150,6 +154,12 @@ class CreateTableContratos extends Migration
             $table->foreign('EMPL_ID')
                 ->references('EMPL_ID')
                 ->on('EMPLEADORES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('TEMP_ID')
+                ->references('TEMP_ID')
+                ->on('TEMPORALES')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

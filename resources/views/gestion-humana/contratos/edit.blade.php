@@ -22,6 +22,21 @@
 	</div>
 </div>
 
+<div class="form-group{{ $errors->has('TEMP_ID') ? ' has-error' : '' }}">
+	<label for="TEMP_ID" class="col-md-2 control-label">Temporal</label>
+	<div class="col-md-6">
+		{{ Form::select('TEMP_ID', [null => 'Seleccione una temporal'] + $arrTemporales , old('TEMP_ID'), [
+		'class' => 'form-control'
+		]) }}
+
+		@if ($errors->has('TEMP_ID'))
+		<span class="help-block">
+			<strong>{{ $errors->first('TEMP_ID') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
+
 <div class="form-group{{ $errors->has('TIEM_ID') ? ' has-error' : '' }}">
 	<label for="TIEM_ID" class="col-md-2 control-label">Tipo de empleador</label>
 	<div class="col-md-6">

@@ -121,6 +121,9 @@ class ContratoController extends Controller
 		//Se crea un array con los cargos disponibles
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
+		//Se crea un array con las temporales disponibles
+		$arrTemporales = model_to_array(Temporal::class, 'TEMP_RAZONSOCIAL');
+
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
@@ -137,7 +140,7 @@ class ContratoController extends Controller
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 
-		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes'));
+		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales'));
 	}
 
 	/**
@@ -160,6 +163,7 @@ class ContratoController extends Controller
 		if(!$request->has('JEFE_ID')){	$request['JEFE_ID'] = null; }
 		if(!$request->has('GRUP_ID')){	$request['GRUP_ID'] = null; }
 		if(!$request->has('TURN_ID')){	$request['TURN_ID'] = null; }
+		if(!$request->has('TEMP_ID')){	$request['TEMP_ID'] = null; }
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
@@ -210,16 +214,11 @@ class ContratoController extends Controller
 				'PROS_SEGUNDOAPELLIDO',
 			], 'PROS_NOMBRESAPELLIDOS'));
 
-		//Se crea un array con los prospectos y las marcas de la hoja de vida
-		$arrProspectosMarcas = model_to_array(Prospecto::class, expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
-			], 'PROS_NOMBRESAPELLIDOS'));
-
 		//Se crea un array con los cargos disponibles
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
+
+		//Se crea un array con las temporales disponibles
+		$arrTemporales = model_to_array(Temporal::class, 'TEMP_RAZONSOCIAL');
 
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
@@ -246,7 +245,7 @@ class ContratoController extends Controller
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrProspectosMarcas','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes'));
+		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales'));
 	}
 
 	/**
@@ -268,6 +267,7 @@ class ContratoController extends Controller
 		if(!$request->has('JEFE_ID')){	$request['JEFE_ID'] = null; }
 		if(!$request->has('GRUP_ID')){	$request['GRUP_ID'] = null; }
 		if(!$request->has('TURN_ID')){	$request['TURN_ID'] = null; }
+		if(!$request->has('TEMP_ID')){	$request['TEMP_ID'] = null; }
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$this->validator($request);
