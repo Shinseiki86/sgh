@@ -9,7 +9,7 @@
 
 		@include('layouts.menu-left')
 
-		<div id="page-wrapper" style="padding: 0 30px;">
+		<div id="page-wrapper">
 
 			<div class="row">
 				<div class="col-lg-12">
@@ -27,7 +27,7 @@
 	</div><!-- /.wrapper -->
 
 	<footer class="footer navbar-default navbar-fixed-bottom">
-		<div class="text-right" style="color: #606060;padding-right:20px;">
+		<div class="text-right text-muted">
 			<small>Powered by <i>diheke</i></small>
 		</div>
 	</footer>
