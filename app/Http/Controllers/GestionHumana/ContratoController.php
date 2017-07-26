@@ -115,6 +115,7 @@ class ContratoController extends Controller
 				'PROS_SEGUNDONOMBRE',
 				'PROS_PRIMERAPELLIDO',
 				'PROS_SEGUNDOAPELLIDO',
+				'PROS_CEDULA',
 			], 'PROS_NOMBRESAPELLIDOS'));
 
 		//Se crea un array con los cargos disponibles
@@ -209,6 +210,14 @@ class ContratoController extends Controller
 				'PROS_SEGUNDOAPELLIDO',
 			], 'PROS_NOMBRESAPELLIDOS'));
 
+		//Se crea un array con los prospectos y las marcas de la hoja de vida
+		$arrProspectosMarcas = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+			], 'PROS_NOMBRESAPELLIDOS'));
+
 		//Se crea un array con los cargos disponibles
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
@@ -237,9 +246,8 @@ class ContratoController extends Controller
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes'));
+		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrProspectosMarcas','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes'));
 	}
-
 
 	/**
 	 * Actualiza un registro en la base de datos.

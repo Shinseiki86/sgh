@@ -31,13 +31,14 @@
 				<th class="col-md-5">Telefono</th>
 				<th class="col-md-5">Celular</th>
 				<th class="col-md-5">Correo</th>
+				<th class="col-md-5">¿Descartada?</th>
 				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 
 		<tbody>
 			@foreach($prospectos as $prospecto)
-			<tr>
+			<tr class="{{ ($prospecto->PROS_MARCA == 'NO' || $prospecto->PROS_MARCA == NULL) ? '' : 'danger' }}">
 				<td>{{ $prospecto -> PROS_CEDULA }}</td>
 				<td>{{ $prospecto -> PROS_FECHAEXPEDICION }}</td>
 				<td>{{ $prospecto -> PROS_PRIMERNOMBRE }}</td>
@@ -49,6 +50,7 @@
 				<td>{{ $prospecto -> PROS_TELEFONO }}</td>
 				<td>{{ $prospecto -> PROS_CELULAR }}</td>
 				<td>{{ $prospecto -> PROS_CORREO }}</td>
+				<td>{{ $prospecto -> PROS_MARCA or 'NO' }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
 					<a class="btn btn-small btn-info btn-xs" href="{{ route('gestion-humana.prospectos.edit', [ 'PROS_ID' => $prospecto->PROS_ID ] ) }}" data-tooltip="tooltip" title="Editar">
@@ -67,6 +69,8 @@
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',
 					])}}
+
+
 				</td>
 			</tr>
 			@endforeach

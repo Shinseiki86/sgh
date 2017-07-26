@@ -8,7 +8,7 @@
 			Departamentos
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('cnfg-geograficos.departamentos.create') }}" data-tooltip="tooltip" title="Crear Tipo">
+			<a class='btn btn-primary' role='button' href="{{ route('cnfg-geograficos.departamentos.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>

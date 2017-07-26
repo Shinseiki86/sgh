@@ -138,6 +138,25 @@
 				</div>
 			</div>
 
+			<div class="form-group{{ $errors->has('PROS_MARCA') ? ' has-error' : '' }}">
+				{{ Form::label('PROS_MARCA', '¿Descartada?',  [ 'class' => 'col-md-2 control-label' ]) }}
+				<div class="col-md-9">
+					{{	Form::select('PROS_MARCA', ['' => 'Seleccione una opción..','NO' => 'NO', 'SI' => 'SI'], null, [ 'class' => 'form-control chosen-select' ]) }}
+				</div>
+			</div>
+
+			<div class="form-group{{ $errors->has('PROS_MARCAOBSERVACIONES') ? ' has-error' : '' }}">
+			{{ Form::label('PROS_MARCAOBSERVACIONES', 'Nota de descarte',  [ 'class' => 'col-md-2 control-label' ]) }}
+			<div class="col-md-9">
+			{{ Form::textarea('PROS_MARCAOBSERVACIONES', old('PROS_MARCAOBSERVACIONES'), [
+							'class' => 'form-control',
+							'size' => '20x3',
+							'placeholder' => 'Escriba aquí...',
+							'style' => 'resize: vertical'
+						]) }}
+			</div>
+			</div>
+
 		</div>
 
 		<div class="col-lg-6">

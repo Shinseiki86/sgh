@@ -46,6 +46,14 @@ class CreateTableProspecto extends Migration
             $table->string('PROS_SEXO', 1)
                 ->comment('sexo de la persona');
 
+            $table->string('PROS_MARCA', 2)
+                ->nullable()
+                ->comment('marca para determinar si la hoja de vida no se tiene en cuenta para otros procesos');
+
+             $table->string('PROS_MARCAOBSERVACIONES', 300)
+                ->nullable()
+                ->comment('observaciones sobre la marca realizada en la hoja de vida del empleado');
+
             $table->string('PROS_DIRECCION', 100)
                 ->comment('dirección de domicilio de la persona');
 
