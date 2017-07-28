@@ -21,6 +21,7 @@
 		<thead>
 			<tr>
 				<th class="col-md-5">Empleador</th>
+				<th class="col-md-5">E.S.T</th>
 				<th class="col-md-5">Tipo Contrato</th>
 				<th class="col-md-5">Clase de Contrato</th>
 				<th class="col-md-5">Cedula</th>
@@ -47,6 +48,7 @@
 			@foreach($contratos as $contrato)
 			<tr class="{{ ($contrato->ESCO_ID == 1) ? '' : 'danger' }}">
 				<td>{{ $contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
+				<td>{{ $contrato -> temporal -> TEMP_NOMBRECOMERCIAL or null }}</td>
 				<td>{{ $contrato -> tipocontrato -> TICO_DESCRIPCION }}</td>
 				<td>{{ $contrato -> clasecontrato -> CLCO_DESCRIPCION }}</td>
 				<td>{{ $contrato -> prospecto -> PROS_CEDULA }}</td>

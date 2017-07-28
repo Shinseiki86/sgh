@@ -37,6 +37,7 @@ class Contrato extends ModelWithSoftDeletes
 		'TURN_ID',
 		'GRUP_ID',
 		'JEFE_ID',
+		'TEMP_ID',
 		'CONT_OBSERVACIONES',
 	];
 
@@ -116,6 +117,12 @@ class Contrato extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'TURN_ID';
 		return $this->belongsTo(Turno::class, $foreingKey);
+	}
+
+	public function temporal()
+	{
+		$foreingKey = 'TEMP_ID';
+		return $this->belongsTo(Temporal::class, $foreingKey);
 	}
 
 }
