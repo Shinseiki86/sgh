@@ -72,7 +72,7 @@
 						'data-toggle'=>'modal',
 						'data-user_id'=>$usuario->USER_id,
 						'data-username'=>$usuario->username,
-						'data-action'=>'auth/usuarios/'.$usuario->USER_id,
+						'data-action'=>'usuarios/'.$usuario->USER_id,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',

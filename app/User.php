@@ -28,6 +28,7 @@ class User extends Authenticatable
 	protected $fillable = [
 		'name',
 		'username',
+		'cedula',
 		'email',
 		'password',
 		'USER_MODIFICADOPOR',

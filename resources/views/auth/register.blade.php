@@ -29,7 +29,7 @@
 			<label for="name" class="col-md-4 control-label">Nombre</label>
 
 			<div class="col-md-6">
-				<input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+				<input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
 
 				@if ($errors->has('name'))
 					<span class="help-block">
@@ -43,7 +43,7 @@
 			<label for="username" class="col-md-4 control-label">Usuario</label>
 
 			<div class="col-md-6">
-				<input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}">
+				<input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required>
 
 				@if ($errors->has('username'))
 					<span class="help-block">
@@ -53,11 +53,25 @@
 			</div>
 		</div>
 
+		<div class="form-group{{ $errors->has('cedula') ? ' has-error' : '' }}">
+			<label for="cedula" class="col-md-4 control-label">Cédula</label>
+
+			<div class="col-md-6">
+				{{ Form::text('cedula', old('cedula'), [ 'class' => 'form-control', 'pattern'=>'\d*', 'maxlength'=>'15', 'title'=>'Número de identificación (0-9), máximo 15 dígitos.', 'required' ]) }}
+
+				@if ($errors->has('cedula'))
+					<span class="help-block">
+						<strong>{{ $errors->first('cedula') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
 		<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 			<label for="email" class="col-md-4 control-label">E-Mail</label>
 
 			<div class="col-md-6">
-				<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+				<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
 				@if ($errors->has('email'))
 					<span class="help-block">
@@ -75,7 +89,7 @@
 					'name'=>'roles_ids[]',
 					'data-placeholder'=>'Seleccione los roles...',
 					'class' => 'form-control chosen-select',
-					'multiple'
+					'multiple',
 				]) }}
 				@if ($errors->has('roles_ids'))
 					<span class="help-block">
@@ -89,7 +103,7 @@
 			<label for="password" class="col-md-4 control-label">Contraseña</label>
 
 			<div class="col-md-6">
-				<input id="password" type="password" class="form-control" name="password">
+				<input id="password" type="password" class="form-control" name="password" required>
 
 				@if ($errors->has('password'))
 					<span class="help-block">
@@ -103,7 +117,7 @@
 			<label for="password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
 
 			<div class="col-md-6">
-				<input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+				<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
 
 				@if ($errors->has('password_confirmation'))
 					<span class="help-block">

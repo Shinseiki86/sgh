@@ -41,6 +41,8 @@ class Controller extends BaseController
 			$class = $this->getClass($class);
 
 			//Se crea el registro.
+			if(array_has($data, 'password'))
+				$data['password'] = bcrypt($data['password']);
 			$model = $class::create($data);
 
 			//Se crean las relaciones

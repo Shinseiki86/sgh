@@ -8,7 +8,7 @@
 			Procesos
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('cnfg-organizacionales.procesos.create') }}" data-tooltip="tooltip" title="Crear Proceso">
+			<a class='btn btn-primary' role='button' href="{{ route('cnfg-organizacionales.procesos.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>

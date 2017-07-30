@@ -91,7 +91,9 @@ class AuthController extends Controller
 		return Validator::make($data, [
 			'name' => 'required|max:255',
 			'username' => 'required|max:15|unique:USERS',
+			'cedula' => 'required|max:15|unique:USERS',
 			'email' => 'required|email|max:255|unique:USERS',
+			'roles_ids' => 'required|array',
 			'password' => 'required|min:6|confirmed',
 		]);
 	}
@@ -123,23 +125,7 @@ class AuthController extends Controller
 	 */
 	public function register(Request $request)
 	{
-		$validator = $this->validator($request->all());
-
-		if( $validator->fails() ) {
-			$this->throwValidationException(
-				$request, $validator
-			);
-		}
-
-		//Auth::guard($this->getGuard())->login($this->create($request->all()));
-		$usuario = $this->create($request->all());
-
-		//Relación con roles
-		$roles_ids = Input::has('roles_ids') ? Input::get('roles_ids') : [];
-		$usuario->roles()->sync($roles_ids, true);
-
-		Session::flash('message', 'Usuario '.$usuario->username.' creado exitosamente!');
-		return redirect()->route('auth.usuarios.index');
+		parent::storeModel(User::class, 'auth.usuarios.index', ['roles_ids'=>'roles']);
 	}
 
 	/**
@@ -216,24 +202,31 @@ class AuthController extends Controller
 		$usuario = isset($usuario->USER_id) ? $usuario : User::findOrFail($usuario);
 
 		//Validación de datos
-		$this->validate(request(), [
+		$validator = Validator::make(request()->all(), [
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:USERS,email,'.$usuario->USER_id.',USER_id',
+			'cedula' => 'required|numeric|unique:USERS,cedula,'.$usuario->USER_id.',USER_id',
 		]);
 
-		$usuario->name = Input::get('name');
-		$usuario->email = Input::get('email');
-		$usuario->USER_MODIFICADOPOR = auth()->user()->username;
-		//Se guarda modelo
-		$usuario->save();
+		if($validator->passes()){
+			$usuario->name = Input::get('name');
+			$usuario->email = Input::get('email');
+			$usuario->cedula = Input::get('cedula');
+			$usuario->USER_MODIFICADOPOR = auth()->user()->username;
+			//Se guarda modelo
+			$usuario->save();
 
-		//Relación con roles
-		$roles_ids = Input::has('roles_ids') ? Input::get('roles_ids') : [];
-		$usuario->roles()->sync($roles_ids, true);
+			//Relación con roles
+			$roles_ids = Input::has('roles_ids') ? Input::get('roles_ids') : [];
+			$usuario->roles()->sync($roles_ids, true);
 
-		// redirecciona al index de controlador
-		Session::flash('message', 'Usuario '.$usuario->username.' modificado exitosamente!');
-		return redirect()->route('auth.usuarios.index');
+			// redirecciona al index de controlador
+			flash_alert( 'Usuario '.$usuario->username.' modificado exitosamente!', 'success' );
+			return redirect()->route('auth.usuarios.index');
+		} else {
+			return redirect()->back()->withErrors($validator)->withInput();
+		}
+
 	}
 
 	/**
@@ -248,14 +241,14 @@ class AuthController extends Controller
 		$usuario = isset($usuario->USER_id) ? $usuario : User::findOrFail($usuario);
 
 		//Si el usuario fue creado por SYSTEM, no se puede borrar.
-		if($usuario->created_by == 'SYSTEM'){
-			Session::flash('error-modal', '¡Usuario '.$usuario->username.' no se puede borrar!');
+		if($usuario->USER_CREADOPOR == 'SYSTEM'){
+			flash_modal( '¡Usuario '.$usuario->username.' no se puede borrar!', 'danger' );
 		} else {
 			$usuario->delete();
-			Session::flash('warning', ['¡Usuario '.$usuario->username.' borrado!']);
+			flash_alert( '¡Usuario '.$usuario->username.' borrado!', 'warning' );
 		}
 
-		return redirect('usuarios');
+		return redirect()->route('auth.usuarios.index')->send();
 	}
 
 }
