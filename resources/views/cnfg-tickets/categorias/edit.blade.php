@@ -2,16 +2,14 @@
 
 @section('page_heading', 'Actualizar Proceso')
 
-@section('head')
+@push('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
-@parent
-@endsection
+@endpush
 
-@section('scripts')
+@push('scripts')
 	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
 	
-@parent
-@endsection
+@endpush
 
 @section('section')
 	{{ Form::model($categoria, ['action' => ['CnfgTickets\CategoriaController@update', $categoria->CATE_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}

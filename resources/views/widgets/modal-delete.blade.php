@@ -1,4 +1,4 @@
-@section('scripts')
+@push('scripts')
 	<script type="text/javascript">
 		//Carga de datos a mensajes modales para eliminar y clonar registros	
 		$('#tabla').on('click', '.btn-delete', function(event){
@@ -19,8 +19,7 @@
 		});
 
 	</script>
-@parent
-@endsection
+@endpush
 
 <!-- Mensaje Modal para confirmar borrado de registro-->
 <div class="modal fade" id="pregModalDelete" role="dialog" tabindex="-1" >

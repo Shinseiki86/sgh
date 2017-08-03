@@ -2,12 +2,11 @@
 
 @section('page_heading', 'Nuevo usuario')
 
-@section('head')
+@push('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
-@parent
-@endsection
+@endpush
 
-@section('scripts')
+@push('scripts')
 	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
 	<script type="text/javascript">
 		var options = {
@@ -19,8 +18,7 @@
 		};
 		$('.chosen-select').chosen(options); 
 	</script>
-@parent
-@endsection
+@endpush
 
 @section('section')
 	{{ Form::open(['url' => 'register', 'class' => 'form-horizontal']) }}

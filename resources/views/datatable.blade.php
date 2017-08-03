@@ -1,14 +1,13 @@
-@section('head')
+@push('head')
 	{!! Html::style('assets/stylesheets/datatable/buttons.dataTables.min.css') !!}
 	{!! Html::style('assets/stylesheets/datatable/responsive.dataTables.min.css') !!}
 	{!! Html::style('assets/stylesheets/datatable/buttons.bootstrap4.min.css') !!}
 	{!! Html::style('assets/stylesheets/datatable/dataTables.bootstrap4.min.css') !!}
 	{!! Html::style('assets/stylesheets/datatable/rowReorder.dataTables.min.css') !!}
 	{!! Html::style('assets/stylesheets/datatable/responsive.bootstrap.min.css') !!}
-@parent
-@endsection
+@endpush
 
-@section('scripts')
+@push('scripts')
 	{!! Html::script('assets/scripts/datatable/jquery.dataTables.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/dataTables.buttons.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/jszip.min.js') !!}
@@ -71,5 +70,4 @@
 
 	  });
     </script>
-@parent
-@endsection
+@endpush
