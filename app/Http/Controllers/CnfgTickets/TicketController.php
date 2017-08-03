@@ -167,9 +167,11 @@ class TicketController extends Controller
 		$usuario = \Auth::user()->USER_id;
 		$ticket->USER_id = $usuario;
 
+		//fecha de solicitud del ticket, es decir el currentdate
 		$ticket->TICK_FECHASOLICITUD = $fecactual;
 		$ticket->save();
 
+		//obtiene el TICK_ID para buscar el ticket
 		$TICK_ID = $ticket->TICK_ID;
 		$tickets = Ticket::findOrFail($TICK_ID);
 
@@ -513,12 +515,18 @@ class TicketController extends Controller
 	 */
 	public function destroy($TICK_ID, $showMsg=True)
 	{
+		//define el path de donde lo borrara
+		$destinationPath = public_path(). '/storages/';
+
 		$tickets = Ticket::findOrFail($TICK_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($tickets->TIPR_creadopor == 'SYSTEM'){
 			flash_modal( 'Ticket '.$tickets->TICK_ID.' no se puede borrar.', 'danger' );
 		} else {
+			if($tickets->TICK_ARCHIVO != NULL){
+				\File::delete($destinationPath . $tickets->TICK_ARCHIVO);
+			}
 			$tickets->delete();
 			flash_alert( 'Ticket '.$tickets->TICK_ID.' eliminado exitosamente.', 'success' );
 		}
