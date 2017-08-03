@@ -2,12 +2,11 @@
 @section('title', '/ Detalle Ticket')
 @include('datatable')
 
-@section('head')
+@push('head')
 {!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
-@parent
-@endsection
+@endpush
 
-@section('scripts')
+@push('scripts')
 {!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
 {!! Html::script('assets/scripts/bootstrap/bootstrap.min.js') !!}
 <script type="text/javascript">

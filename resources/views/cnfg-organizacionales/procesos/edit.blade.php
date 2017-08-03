@@ -2,12 +2,11 @@
 
 @section('page_heading', 'Actualizar Proceso')
 
-@section('head')
+@push('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
-@parent
-@endsection
+@endpush
 
-@section('scripts')
+@push('scripts')
 	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
 	<script type="text/javascript">
 		var options = {
@@ -19,8 +18,7 @@
 		};
 		$("#GERE_ids").val({{$GERE_ids}}).chosen(options); 
 	</script>
-@parent
-@endsection
+@endpush
 
 @section('section')
 	{{ Form::model($proceso, ['action' => ['CnfgOrganizacionales\ProcesoController@update', $proceso->PROC_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}

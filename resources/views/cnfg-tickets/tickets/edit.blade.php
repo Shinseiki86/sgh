@@ -2,12 +2,11 @@
 
 @section('page_heading', 'Actualizar Ticket')
 
-@section('head')
+@push('head')
 	{!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
-@parent
-@endsection
+@endpush
 
-@section('scripts')
+@push('scripts')
 	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
 	<script type="text/javascript">
 		$( document ).ready(function() {
@@ -26,8 +25,7 @@
 	});
 	</script>
 	
-@parent
-@endsection
+@endpush
 
 @section('section')
 	{{ Form::model($ticket, ['action' => ['CnfgTickets\TicketController@update', $ticket->TICK_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}

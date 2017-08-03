@@ -78,7 +78,7 @@
 		</div>
 	</div><!-- Fin de Mensaje Modal.-->
 
-@section('scripts')
+@push('scripts')
 	<script type="text/javascript">
 
 		//Se cierra la alerta a los 10 segundos.
@@ -134,5 +134,4 @@
 			})
 		@endif
 	</script>
-@parent
-@endsection
+@endpush

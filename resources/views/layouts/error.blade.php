@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('head')
+@push('head')
 	{{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
 	<style>
 		.title {
@@ -20,6 +20,6 @@
 			font-family: 'Lato';
 		}
 	</style>
-@endsection
+@endpush
 
 @section('section')

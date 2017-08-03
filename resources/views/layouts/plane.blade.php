@@ -20,7 +20,7 @@
 	{!! Html::script('assets/scripts/pace.min.js') !!}
 	{!! Html::style('assets/stylesheets/sb-admin-2.css') !!}
 
-	@yield('head')
+	@stack('head')
 
 </head>
 <body class="sidebar-closed">
@@ -39,6 +39,6 @@
 
 		})
 	</script>
-	@yield('scripts')
+	@stack('scripts')
 </body>
 </html>
