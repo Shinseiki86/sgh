@@ -12,5 +12,16 @@ class DepartamentosTableSeeder extends Seeder
     public function run()
     {
         //
+        $departamento = new \SGH\Departamento;
+        $departamento->DEPA_CODIGO = 76;
+        $departamento->DEPA_DESCRIPCION =  'VALLE DEL CAUCA';
+        $departamento->DEPA_CREADOPOR =  'SYSTEM';
+        $departamento->save();
+
+        $departamento = new \SGH\Departamento;
+        $departamento->DEPA_CODIGO = 1;
+        $departamento->DEPA_DESCRIPCION =  'CUNDINAMARCA';
+        $departamento->DEPA_CREADOPOR =  'SYSTEM';
+        $departamento->save();
     }
 }

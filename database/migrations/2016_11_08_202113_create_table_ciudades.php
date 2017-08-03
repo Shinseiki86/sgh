@@ -15,7 +15,7 @@ class CreateTableCiudades extends Migration
      */
     public function up()
     {
-        $commentTabla = 'CIUDRTAMENTOS: contiene los departamentos del territorio nacional';
+        $commentTabla = 'CIUDADES: contiene los departamentos del territorio nacional';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {

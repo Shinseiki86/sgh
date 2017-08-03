@@ -31,17 +31,19 @@ class EmpleadorController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'EMPL_RAZONSOCIAL' => ['required', 'max:300', 'unique:EMPLEADORES,EMPL_RAZONSOCIAL,'.$id.',EMPL_ID'],
 			'EMPL_NOMBRECOMERCIAL' => ['required', 'max:300', 'unique:EMPLEADORES,EMPL_NOMBRECOMERCIAL,'.$id.',EMPL_ID'],
 			'EMPL_DIRECCION' => ['required', 'max:300'],
-			'EMPL_OBSERVACIONES' => ['required', 'max:300'],
+			'EMPL_OBSERVACIONES' => ['max:300'],
+			'EMPL_NIT' => ['required', 'max:15'],
+			'EMPL_NOMBREREPRESENTANTE' => ['required','max:300'],
+			'EMPL_CEDULAREPRESENTANTE' => ['required','max:20'],
+			'CIUD_CEDULA' => ['required'],
+			'CIUD_DOMICILIO' => ['required'],
 		]);
 
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
+		
 	}
 
 
@@ -65,7 +67,9 @@ class EmpleadorController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-organizacionales/empleadores/create');
+		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_DESCRIPCION');
+
+		return view('cnfg-organizacionales/empleadores/create', compact('arrCiudades'));
 	}
 
 	/**
@@ -75,6 +79,7 @@ class EmpleadorController extends Controller
 	 */
 	public function store()
 	{
+		//dd(request()->all());
 		parent::storeModel(Empleador::class, 'cnfg-organizacionales.empleadores.index');
 	}
 
@@ -90,8 +95,10 @@ class EmpleadorController extends Controller
 		// Se obtiene el registro
 		$empleador = Empleador::findOrFail($EMPL_ID);
 
+		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_DESCRIPCION');
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/empleadores/edit', compact('empleador'));
+		return view('cnfg-organizacionales/empleadores/edit', compact('empleador','arrCiudades'));
 	}
 
 

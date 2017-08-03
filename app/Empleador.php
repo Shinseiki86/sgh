@@ -22,6 +22,23 @@ class Empleador extends ModelWithSoftDeletes
 		'EMPL_NOMBRECOMERCIAL',
 		'EMPL_DIRECCION',
 		'EMPL_OBSERVACIONES',
+		'EMPL_NIT',
+		'EMPL_NOMBREREPRESENTANTE',
+		'EMPL_CEDULAPRESENTANTE',
+		'CIUD_CEDULA',
+		'CIUD_DOMICILIO',
 	];
+
+	public function ciudad_expedicion()
+	{
+		$foreingKey = 'CIUD_CEDULA';
+		return $this->belongsTo(Ciudad::class, $foreingKey);
+	}
+
+	public function ciudad_domicilio()
+	{
+		$foreingKey = 'CIUD_DOMICILIO';
+		return $this->belongsTo(Ciudad::class, $foreingKey);
+	}
 
 }

@@ -21,9 +21,14 @@
 		<thead>
 			<tr>
 				<th class="col-md-3">Razón Social</th>
+				<th class="col-md-3">NIT</th>
 				<th class="col-md-3">Nombre Comercial</th>
+				<th class="col-md-3">Representante</th>
+				<th class="col-md-3">Cedula</th>
+				<th class="col-md-3">Ciudad de Expedición</th>
 				<th class="col-md-3">Dirección</th>
-				<th class="col-md-3">Correo</th>
+				<th class="col-md-3">Ciudad</th>
+				<th class="col-md-3">Email Responsable G.H</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
 			</tr>
@@ -32,8 +37,13 @@
 			@foreach($empleadores as $empleador)
 			<tr>
 				<td>{{ $empleador -> EMPL_RAZONSOCIAL }}</td>
+				<td>{{ $empleador -> EMPL_NIT }}</td>
 				<td>{{ $empleador -> EMPL_NOMBRECOMERCIAL }}</td>
+				<td>{{ $empleador -> EMPL_NOMBREREPRESENTANTE }}</td>
+				<td>{{ $empleador -> EMPL_CEDULAREPRESENTANTE }}</td>
+				<td>{{ $empleador -> ciudad_expedicion -> CIUD_DESCRIPCION }}</td>
 				<td>{{ $empleador -> EMPL_DIRECCION }}</td>
+				<td>{{ $empleador -> ciudad_domicilio -> CIUD_DESCRIPCION }}</td>
 				<td>{{ $empleador -> EMPL_COREO }}</td>
 				<td>{{ $empleador -> EMPL_CREADOPOR }}</td>
 				<td>

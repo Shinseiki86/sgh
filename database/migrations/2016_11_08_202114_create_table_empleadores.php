@@ -27,11 +27,26 @@ class CreateTableEmpleadores extends Migration
             $table->string('EMPL_RAZONSOCIAL', 300)
                 ->comment('razon social del empleador');
 
+            $table->unsignedBigInteger('EMPL_NIT')->unique()
+                ->comment('numero de identificación tributaria del empleador.');
+
+            $table->unsignedBigInteger('EMPL_CEDULAREPRESENTANTE')
+                ->comment('numero de cedula del representante legal del empleador.');
+
+            $table->string('EMPL_NOMBREREPRESENTANTE', 300)
+                ->comment('nombre del representante legal del empleador');
+
+            $table->unsignedInteger('CIUD_CEDULA')
+                ->comment('ciudad de expedición de cedula del representante.');
+
             $table->string('EMPL_NOMBRECOMERCIAL', 300)
                 ->comment('nombre comercial del empleador');
 
             $table->string('EMPL_DIRECCION', 300)
                 ->comment('dirección de la empresa');
+
+             $table->unsignedInteger('CIUD_DOMICILIO')
+                ->comment('ciudad de domicilio del empleador.');
 
             $table->string('EMPL_COREO', 100)
                 ->nullable()
@@ -53,6 +68,19 @@ class CreateTableEmpleadores extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('EMPL_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
+
+
+            $table->foreign('CIUD_CEDULA')
+                ->references('CIUD_ID')
+                ->on('CIUDADES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('CIUD_DOMICILIO')
+                ->references('CIUD_ID')
+                ->on('CIUDADES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
         });
         

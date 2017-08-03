@@ -35,8 +35,6 @@
 		//variable para almacenar el estado del ticket
 		var esap_id = $('#ESAP_ID').val(tempesap);
 
-		//alert(esti_id.val() + ' - ' + esap_id.val());
-
 	});
 
 </script>
@@ -102,7 +100,7 @@
 </div>
 
 <div class="form-group{{ $errors->has('CONT_ID') ? ' has-error' : '' }}">
-	<label for="CONT_ID" class="col-md-4 control-label">Implicado</label>
+	<label for="CONT_ID" class="col-md-4 control-label">Empleado</label>
 	<div class="col-md-6">
 		{{ Form::select('CONT_ID', [null => 'Seleccione un empleado'] + $arrContratos , old('CONT_ID'), [
 		'class' => 'form-control chosen-select',
@@ -150,6 +148,8 @@
 	<div class="col-md-6">
 		{{ Form::select('GRUP_ID', [null => 'Seleccione un grupo'] + $arrGrupos , old('GRUP_ID'), [
 		'class' => 'form-control',
+		'disabled',
+		'id' => 'GRUP_ID'
 		]) }}
 
 		@if ($errors->has('GRUP_ID'))

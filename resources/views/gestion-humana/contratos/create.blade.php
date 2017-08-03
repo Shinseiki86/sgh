@@ -88,7 +88,7 @@
 <div class="form-group{{ $errors->has('TIEM_ID') ? ' has-error' : '' }}">
 	<label for="TIEM_ID" class="col-md-2 control-label">Tipo de empleador</label>
 	<div class="col-md-6">
-		{{ Form::select('TIEM_ID', [null => 'Seleccione un empleador'] + $arrTiposempleadores , old('TIEM_ID'), [
+		{{ Form::select('TIEM_ID', [null => 'Seleccione un tipo de empleador'] + $arrTiposempleadores , old('TIEM_ID'), [
 		'class' => 'form-control',
 		'required'
 		]) }}
@@ -104,7 +104,7 @@
 <div class="form-group{{ $errors->has('CECO_ID') ? ' has-error' : '' }}">
 	<label for="CECO_ID" class="col-md-2 control-label">Centro de costo</label>
 	<div class="col-md-6">
-		{{ Form::select('CECO_ID', [null => 'Seleccione un empleador'] + $arrCentroscostos , old('CECO_ID'), [
+		{{ Form::select('CECO_ID', [null => 'Seleccione un centro de costo'] + $arrCentroscostos , old('CECO_ID'), [
 		'class' => 'form-control',
 		'required'
 		]) }}
@@ -279,7 +279,7 @@
 	<label for="JEFE_ID" class="col-md-2 control-label">Jefe Inmediato</label>
 	<div class="col-md-6">
 		{{ Form::select('JEFE_ID', [null => 'Seleccione un empleado'] + $arrJefes , old('JEFE_ID'), [
-		'class' => 'form-control',
+		'class' => 'form-control chosen-select',
 		'required'
 		]) }}
 
