@@ -20,6 +20,13 @@ class Grupo extends ModelWithSoftDeletes
 	protected $fillable = [
 		'GRUP_DESCRIPCION',
 		'GRUP_OBSERVACIONES',
+		'EMPL_ID',
 	];
+
+	public function empleador()
+	{
+		$foreingKey = 'EMPL_ID';
+		return $this->belongsTo(Empleador::class, $foreingKey);
+	}
 
 }

@@ -18,6 +18,22 @@
 			</div>
 		</div>
 
+		<div class="form-group{{ $errors->has('EMPL_ID') ? ' has-error' : '' }}">
+			<label for="EMPL_ID" class="col-md-4 control-label">Empleador</label>
+			<div class="col-md-6">
+				{{ Form::select('EMPL_ID', [null => 'Seleccione un empleador'] + $arrEmpleadores , old('EMPL_ID'), [
+				'class' => 'form-control',
+				'required'
+				]) }}
+
+				@if ($errors->has('EMPL_ID'))
+				<span class="help-block">
+					<strong>{{ $errors->first('EMPL_ID') }}</strong>
+				</span>
+				@endif
+			</div>
+		</div>
+
 		<div class="form-group{{ $errors->has('GRUP_OBSERVACIONES') ? ' has-error' : '' }}">
 			{{ Form::label('GRUP_OBSERVACIONES', 'Observaciones',  [ 'class' => 'col-md-4 control-label' ]) }}
 			<div class="col-md-6">

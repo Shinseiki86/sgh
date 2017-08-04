@@ -58,7 +58,13 @@ class GrupoController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-organizacionales/grupos/create');
+		//Se crea un array con los grupos existentes
+		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
+
+		//Se crea un array con los empleadores
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
+		return view('cnfg-organizacionales/grupos/create', compact('arrEmpleadores'));
 	}
 
 	/**
@@ -83,8 +89,11 @@ class GrupoController extends Controller
 		// Se obtiene el registro
 		$grupo = Grupo::findOrFail($EMPL_ID);
 
+		//Se crea un array con los empleadores
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/grupos/edit', compact('grupo'));
+		return view('cnfg-organizacionales/grupos/edit', compact('grupo','arrEmpleadores'));
 	}
 
 
