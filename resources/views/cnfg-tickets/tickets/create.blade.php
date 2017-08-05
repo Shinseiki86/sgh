@@ -146,7 +146,7 @@
 	<div class="col-md-6">
 		{{ Form::select('GRUP_ID', [null => 'Seleccione un grupo'] + $arrGrupos , old('GRUP_ID'), [
 		'class' => 'form-control',
-		'disabled',
+		//'disabled',
 		'id' => 'GRUP_ID'
 		]) }}
 

@@ -23,7 +23,7 @@ Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 
 Route::group(['middleware' => 'auth'], function() {
-	Route::get('/',  function(){return view('layouts/menu');});
+	Route::get('/',  function(){return view('dashboard/index');});
 });
 
 //Rutas para admin y owner
@@ -58,6 +58,8 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 	Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
 		Route::resource('prospectos', 'ProspectoController', ['parameters'=>['prospectos' => 'PROS_ID']]);
 		Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
+		Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');
+
 		Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {
 			//upload tablas de TNL
 			Route::get('validadorTNL', 'TnlController@index')->name('tnl.index');
@@ -78,7 +80,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::get('tickets/autorizar/{TICK_ID}', 'TicketController@autorizarTicket');
 		Route::post('tickets/rechazar/{TICK_ID}', 'TicketController@rechazarTicket');
 		Route::post('tickets/cerrar/{TICK_ID}', 'TicketController@cerrarTicket');
-
+		Route::get('getTicketsPorEstado', 'TicketController@getTicketsPorEstado');
 	});
 
 });

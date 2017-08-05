@@ -34,24 +34,21 @@ class TicketController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($data)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'TICK_DESCRIPCION' => ['required','max:3000'],
 			'CONT_ID' => ['required'],
 			'ESTI_ID' => ['required'],
 			'ESAP_ID' => ['required'],
 			'PRIO_ID' => ['required'],
+			'GRUP_ID' => ['required'],
+			'TURN_ID' => ['required'],
 			'CATE_ID' => ['required'],
 			'TIIN_ID' => ['required'],
 			'TICK_FECHAEVENTO' => ['required'],
 			'TICK_OBSERVACIONES' => ['max:3000'],
-			]);
-
-		if ($validator->fails())
-			return redirect()->back()
-		->withErrors($validator)
-		->withInput()->send();
+		]);
 	}
 
 
@@ -129,11 +126,6 @@ class TicketController extends Controller
 		//Datos recibidos desde la vista.
 		$data = request()->all();
 
-		//dd($data);
-
-		//fecha actual
-		$fecactual = Carbon::now();
-
 		$filename = null;
 
 		//si viene un archivo en el request
@@ -150,40 +142,42 @@ class TicketController extends Controller
 		if(!request()->has('TICK_FECHACUMPLIMIENTO')){	$data['TICK_FECHACUMPLIMIENTO'] = null; }
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data);
-		//Se crea el registro.
-		$ticket = Ticket::create($data);
+		$validator = $this->validator($data);
 
-		//se actualiza el nombre del archivo concatenando el ID del registro para garantizar su unicidad
-		//en caso de que en el request venga un archivo
-		if($filename != null){
-			$ticket->TICK_ARCHIVO = $filename[0]. "-" . $ticket->TICK_ID . "." . $filename[1];
-			$ticket->save();
-			//mueve el archivo a la ruta indicada
-			$file->move($destinationPath, $ticket->TICK_ARCHIVO);
+		if($validator->passes()){
+
+			$data['TICK_FECHASOLICITUD'] = Carbon::now();
+
+			//se actualiza el nombre del archivo concatenando el ID del registro para garantizar su unicidad
+			//en caso de que en el request venga un archivo
+			if($filename != null){
+				$data['TICK_ARCHIVO'] = $filename[0]. "-" . $ticket->TICK_ID . "." . $filename[1];
+				//mueve el archivo a la ruta indicada
+				$file->move($destinationPath, $data['TICK_ARCHIVO']);
+			}
+			
+			//determinar cual es el usuario que realizó la creación del ticket
+			$data['USER_id'] = \Auth::user()->USER_id;
+
+			//Se crea el registro.
+			$ticket = Ticket::create($data);
+
+			/*obtiene el TICK_ID para buscar el ticket
+			$TICK_ID = $ticket->TICK_ID;
+			$tickets = Ticket::findOrFail($TICK_ID);*/
+
+			//===================================================================================
+			//Bloque para envío de email
+			$subject = "Nuevo Ticket";
+			$this->sendEmail($ticket, 'emails.info_ticket_creado', $subject);
+			//===================================================================================
+
+			// redirecciona al index de controlador
+			flash_alert( 'Ticket '.$ticket->TICK_ID.' creado exitosamente.', 'success' );
+			return redirect()->route('cnfg-tickets.tickets.index');
+		} else {
+			return redirect()->back()->withErrors($validator)->withInput()->send();
 		}
-		
-		//determinar cual es el usuario que realizó la creación del ticket
-		$usuario = \Auth::user()->USER_id;
-		$ticket->USER_id = $usuario;
-
-		//fecha de solicitud del ticket, es decir el currentdate
-		$ticket->TICK_FECHASOLICITUD = $fecactual;
-		$ticket->save();
-
-		//obtiene el TICK_ID para buscar el ticket
-		$TICK_ID = $ticket->TICK_ID;
-		$tickets = Ticket::findOrFail($TICK_ID);
-
-		//===================================================================================
-		//Bloque para envío de email
-		$subject = "Nuevo Ticket";
-		$this->sendEmail($tickets, 'emails.info_ticket_creado', $subject);
-		//===================================================================================
-
-		// redirecciona al index de controlador
-		flash_alert( 'Ticket '.$ticket->TICK_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.tickets.index');
 	}
 
 	protected function sendEmail($tickets, $view, $asunto)
@@ -492,19 +486,20 @@ class TicketController extends Controller
 		//Datos recibidos desde la vista.
 		$data = request()->all();
 
-		//dd($data);
-
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data);
+		$validator = $this->validator($data, $TICK_ID);
 
-		//encuentra el ticket
-		$ticket = Ticket::findOrFail($TICK_ID);
+		if($validator->passes()){
+			//encuentra el ticket
+			$ticket = Ticket::findOrFail($TICK_ID);
+			$ticket->update($data);
 
-		$ticket->update($data);
-
-		// redirecciona al index de controlador
-		flash_alert( 'Ticket '.$ticket->TICK_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.tickets.index');
+			// redirecciona al index de controlador
+			flash_alert( 'Ticket '.$ticket->TICK_ID.' modificado exitosamente.', 'success' );
+			return redirect()->route('cnfg-tickets.tickets.index');
+		} else {
+			return redirect()->back()->withErrors($validator)->withInput()->send();
+		}
 	}
 
 	/**
@@ -534,6 +529,25 @@ class TicketController extends Controller
 		return redirect()->route('cnfg-tickets.tickets.index');
 	}
 
-	
+	/**
+	 * Tickets por estado.
+	 *
+	 * @return json
+	 */
+	public function getTicketsPorEstado()
+	{
+		$data = \SGH\Ticket::join('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
+								->select(
+									'ESTI_DESCRIPCION',
+									'ESTI_COLOR',
+									\DB::raw('COUNT("TICK_ID")')
+								)
+								->groupBy(
+									'ESTI_DESCRIPCION',
+									'ESTI_COLOR'
+								)
+								->get();
+		return $data->toJson();
+	}
 	
 }
