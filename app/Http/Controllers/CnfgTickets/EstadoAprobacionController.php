@@ -31,16 +31,11 @@ class EstadoAprobacionController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'ESAP_DESCRIPCION' => ['required', 'max:100', 'unique:ESTADOSAPROBACIONES,ESAP_DESCRIPCION,'.$id.',ESAP_ID'],
 			'ESAP_COLOR' => ['required', 'max:100'],
 			'ESAP_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 

@@ -539,7 +539,7 @@ class TicketController extends Controller
 		$data = \SGH\Ticket::join('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
 								->select(
 									'ESTI_DESCRIPCION',
-									'ESTI_COLOR',
+									'ESTI_COLOR as COLOR',
 									\DB::raw('COUNT("TICK_ID")')
 								)
 								->groupBy(

@@ -31,16 +31,11 @@ class EstadoTicketController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'ESTI_DESCRIPCION' => ['required', 'max:100', 'unique:ESTADOSTICKETS,ESTI_DESCRIPCION,'.$id.',ESTI_ID'],
 			'ESTI_COLOR' => ['required', 'max:100'],
 			'ESTI_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -102,7 +97,7 @@ class EstadoTicketController extends Controller
 	 */
 	public function update($ESTI_ID)
 	{
-		parent::storeModel($ESTI_ID, EstadoTicket::class, 'cnfg-tickets.estadostickets.index');
+		parent::updateModel($ESTI_ID, EstadoTicket::class, 'cnfg-tickets.estadostickets.index');
 	}
 
 	/**

@@ -31,15 +31,10 @@ class TipoIncidenteController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'TIIN_DESCRIPCION' => ['required', 'max:100', 'unique:TIPOSINCIDENTES,TIIN_DESCRIPCION,'.$id.',TIIN_ID'],
 			'TIIN_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 

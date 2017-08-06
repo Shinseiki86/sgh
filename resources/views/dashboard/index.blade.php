@@ -16,12 +16,12 @@
 @section('section')
 
 	<div class="col-xs-12 col-sd-5 col-md-5">
-		<div class="panel panel-info" >
+		<div class="panel panel-info panel-chart">
 			<div class="panel-heading">
 				Título
 				<div class="pull-right">
-					<label for="groupResps">Tipo</label>
-					<select id="groupResps">
+					<label>Tipo</label>
+					<select class="typeChart disabled">
 						<option value="bar">Barras</option>
 						<option value="pie">Torta</option>
 					</select>
@@ -34,12 +34,12 @@
 	</div>
 
 	<div class="col-xs-12 col-sd-5 col-md-5">
-		<div class="panel panel-info" >
+		<div class="panel panel-info panel-chart">
 			<div class="panel-heading">
 				Título
 				<div class="pull-right">
-					<label for="groupResps">Tipo</label>
-					<select id="groupResps">
+					<label>Tipo</label>
+					<select class="typeChart disabled">
 						<option value="bar">Barras</option>
 						<option value="pie">Torta</option>
 					</select>
@@ -58,6 +58,7 @@
 	{!! Html::script('assets/scripts/momentjs/moment-with-locales.min.js') !!}
 	<script type="text/javascript">
 		moment.locale('es');
+		window.chart = [];
 
 		$(function () {
 			newChart(
@@ -65,19 +66,43 @@
 				'Contratos por Empleador',
 				'EMPL_NOMBRECOMERCIAL',
 				'count',
-				'chart1'
+				'chart1',
+				'bar'
 			);
 			newChart(
 				'cnfg-tickets/getTicketsPorEstado',
 				'Tickets por estado',
 				'ESTI_DESCRIPCION',
 				'count',
-				'chart2'
+				'chart2',
+				'bar'
 			);
+
+			$('.typeChart').removeClass('disabled');
 		});
 
+		$('.typeChart').on('change', function(ev) {
+			var idCanvas = $(this).closest('.panel-chart').find('.canvas-chart').attr('id');
+			var type = $(this).find(":selected").val();
+			console.log(idCanvas);
+			console.log(type);
 
-		function newChart($route, $title, $nameX, $nameY, $idCanvas){
+			var chart = window.chart[idCanvas];
+			var chartData = chart.config.data;
+			var opcs = getOptionsChart(type);
+			opcs.title.text = chart.config.options.title.text;
+			
+			window.chart[idCanvas].destroy();
+			var canvas = document.getElementById(idCanvas).getContext('2d');
+			window.chart[idCanvas] = new Chart(canvas, {
+				type: type,
+				data: chartData,
+				options: opcs
+			});// Fin window.chart
+			window.chart[idCanvas].update();
+		});
+
+		function newChart($route, $title, $nameX, $nameY, $idCanvas, $type){
 			$.ajax({
 				//async: false, 
 				url: $route,
@@ -87,12 +112,13 @@
 					"X-CSRF-TOKEN": $('input[name="_token"]').val()
 				},
 				success: function($result) {
-				    var labels = [], data=[];
+				    var labels = [], data=[], colors=[];
 				    $result.forEach(function(packet) {
-				      labels.push(packet[$nameX]);
-				      data.push(parseInt(packet[$nameY]));
+						labels.push(packet[$nameX]);
+						data.push(parseInt(packet[$nameY]));
+						if(typeof packet['COLOR'] == 'string'){ colors.push(packet['COLOR']); }
 				    });
-					buildChart($title, labels, data, $idCanvas);
+					buildChart($title, labels, data, colors, $idCanvas, $type);
 				},
 				error: function($e){
 					console.log('Error ajax: '+$e);
@@ -100,80 +126,34 @@
 			});
 		}
 
-		function buildChart($title, $labels, $data, $idCanvas){
+		function buildChart($title, $labels, $data, $colors, $idCanvas, $type){
 
-			//Se crea un arreglo con los colores asociados a cada pregunta.
-			var colors = [];
-			$labels.forEach(function ($label, $index) {
-				colors.push(getColor($index));
-			});
+			//Si $colors está vacío, se crea un arreglo de colores.
+			if($colors.length === 0){
+				$labels.forEach(function ($label, $index) {
+					$colors.push(getColor($index));
+				});
+			}
 
 			var chartData = {
 				labels: $labels,
 				datasets: [{
 					label: 'Registros',
-					backgroundColor: colors,
+					backgroundColor: $colors,
 					data: $data,
 				}]
 			};
 
-			var opcs = {
-				animation: {
-					duration: 0,
-					onComplete: function () {
-						// render the value of the chart above the bar
-						var ctx = this.chart.ctx;
-						Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, 'normal', Chart.defaults.global.defaultFontFamily);
-						ctx.fillStyle = this.chart.config.options.defaultFontColor;
-						ctx.textAlign = 'center';
-						ctx.textBaseline = 'bottom';
-						this.data.datasets.forEach(function (dataset) {
-							drawLabelBar(ctx, dataset);
-						});
-					}
-				},
-				elements: {
-					rectangle: {
-						borderWidth: 2,
-						//borderColor: 'rgb(0, 204, 0)',
-						borderSkipped: 'bottom'
-					}
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true,
-							min: 0,
-							stepSize: 1,
-							fontSize: 16
-						}
-					}],
-					xAxes: [{
-						ticks: {
-							fontSize: 16
-						}
-					}]
-				},
-				maintainAspectRatio: false,
-				responsive: true,
-				title: {
-					display: true,
-					fontSize: 20,
-					padding: 25,
-					text: $title
-				},
-				legend: {
-					display: false
-				}
-			};
+			var opcs = getOptionsChart($type);
+			opcs.title.text = $title;
 
 			var canvas = document.getElementById($idCanvas).getContext('2d');
-			window.chartLineResps = new Chart(canvas, {
-				type: 'bar',
+			window.chart[$idCanvas] = new Chart(canvas, {
+				type: $type,
 				data: chartData,
 				options: opcs
-			}); // Fin window.chartLineResps
-			window.chartLineResps.update();
+			});// Fin window.chart
+			window.chart[$idCanvas].update();
 		}
 
 
@@ -227,14 +207,15 @@
 					ctx.save();
 					// Translate 0,0 to the point you want the text
 					ctx.translate(model.x, model.y);
-					// Rotate context by -90 degrees
-					ctx.rotate(-90 * Math.PI / 180);
+					/*/ Rotate context by -90 degrees
+					ctx.rotate(-90 * Math.PI / 180);*/
+
 					// Draw text
 					ctx.shadowColor = "white";
 					ctx.shadowOffsetX = 1; 
 					ctx.shadowOffsetY = 1;
 					ctx.shadowBlur = 1;
-					ctx.fillText(dataset.data[i], 10, -5);
+					ctx.fillText(dataset.data[i], 2, -5);
 					ctx.restore();
 				}
 			}
@@ -297,6 +278,70 @@
 				}
 			}), self); //Chart.helpers.each
 		}// Fin function drawLabelPie
+
+		//Retorna json con las opcines para construir el gráfico según el tipo.
+		var getOptionsChart = function ($type) {
+			switch($type){
+				case 'bar':
+					return {
+						animation: {
+							duration: 0,
+							onComplete: function () {
+								// render the value of the chart above the bar
+								var ctx = this.chart.ctx;
+								Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, 'normal', Chart.defaults.global.defaultFontFamily);
+								ctx.fillStyle = this.chart.config.options.defaultFontColor;
+								ctx.textAlign = 'center';
+								ctx.textBaseline = 'bottom';
+								this.data.datasets.forEach(function (dataset) {
+									drawLabelBar(ctx, dataset);
+								});
+							}
+						},
+						elements: {rectangle: {borderWidth: 2, borderSkipped: 'bottom'}},
+						scales: {
+							yAxes: [{ticks: {
+									beginAtZero: true,
+									min: 0,
+									stepSize: 1,
+									fontSize: 16
+							}}],
+							xAxes: [{ticks: {fontSize: 16}}]
+						},
+						maintainAspectRatio: false,
+						responsive: true,
+						title: {
+							display: true,
+							fontSize: 20,
+							padding: 30
+						},
+						legend: {display: false}
+					};
+				break;
+			
+				case 'pie':
+					return {
+						maintainAspectRatio: false,
+						responsive: true,
+						title: {
+							display: true,
+							fontSize: 20
+						},
+						legend: {
+							position: 'left',
+							onClick: null,
+							labels: {
+								fontSize: 16
+							}
+						},
+						animation: {
+							duration: 0,
+							onComplete: function(){ drawLabelPie(this); }
+						}
+					};
+				break;
+			}
+		}// Fin function getOptionsChart
 
 	</script>
 @endpush

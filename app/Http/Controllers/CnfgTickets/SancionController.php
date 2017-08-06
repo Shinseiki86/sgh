@@ -31,15 +31,10 @@ class SancionController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
+		return Validator::make($request->all(), [
 			'SANC_DESCRIPCION' => ['required', 'max:100', 'unique:SANCIONES,SANC_DESCRIPCION,'.$id.',SANC_ID'],
 			'SANC_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 

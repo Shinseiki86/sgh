@@ -32,16 +32,11 @@ class PrioridadController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'PRIO_DESCRIPCION' => ['required', 'max:100', 'unique:PRIORIDADES,PRIO_DESCRIPCION,'.$id.',PRIO_ID'],
 			'PRIO_COLOR' => ['required', 'max:100'],
 			'PRIO_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 

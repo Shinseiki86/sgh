@@ -31,16 +31,11 @@ class CategoriaController extends Controller
 	 */
 	protected function validator($data)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'CATE_DESCRIPCION' => ['required','max:100'],
 			'CATE_OBSERVACIONES' => ['max:300'],
 			'CATE_ids' => ['array'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -76,17 +71,7 @@ class CategoriaController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data);
-
-		//Se crea el registro.
-		$categoria = Categoria::create($data);
-
-		// redirecciona al index de controlador
-		flash_alert( 'Categoria '.$categoria->CATE_ID.' creada exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.categorias.index');
+		parent::storeModel(Categoria::class, 'cnfg-tickets.categorias.index');
 	}
 
 
@@ -116,19 +101,7 @@ class CategoriaController extends Controller
 	 */
 	public function update($CATE_ID)
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($data, $CATE_ID);
-
-		// Se obtiene el registro
-		$categoria = Categoria::findOrFail($CATE_ID);
-		//y se actualiza con los datos recibidos.
-		$categoria->update($data);
-
-		// redirecciona al index de controlador
-		flash_alert( 'Categoria '.$categoria->CATE_ID.' modificada exitosamente.', 'success' );
-		return redirect()->route('cnfg-tickets.categorias.index');
+		parent::updateModel($CATE_ID, Categoria::class, 'cnfg-tickets.categorias.index');
 	}
 
 	/**
