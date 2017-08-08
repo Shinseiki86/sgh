@@ -34,9 +34,9 @@ class ContratoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
+		return Validator::make($data, [
 			'EMPL_ID' => ['numeric', 'required'],
 			'TIEM_ID' => ['numeric', 'required'],
 			'CECO_ID' => ['numeric', 'required'],
@@ -54,10 +54,6 @@ class ContratoController extends Controller
 			'CONT_CASOMEDICO'   => ['required', 'max:2'],
 			'CONT_OBSERVACIONES'=> ['max:300'],
 		]);
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -150,30 +146,7 @@ class ContratoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-
-		//dd($request);
-
-		if(!$request->has('MORE_ID')){	$request['MORE_ID'] = null; }
-		if(!$request->has('CONT_FECHARETIRO')){	$request['CONT_FECHARETIRO'] = null; }
-		if(!$request->has('CONT_VARIABLE')){	$request['CONT_VARIABLE'] = null; }
-		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
-		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
-		if(!$request->has('JEFE_ID')){	$request['JEFE_ID'] = null; }
-		if(!$request->has('GRUP_ID')){	$request['GRUP_ID'] = null; }
-		if(!$request->has('TURN_ID')){	$request['TURN_ID'] = null; }
-		if(!$request->has('TEMP_ID')){	$request['TEMP_ID'] = null; }
-
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-		
-		//Se crea el registro.
-		$contrato = Contrato::create($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Contrato '.$contrato->CONT_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('gestion-humana.contratos.index');
+		parent::storeModel(Contrato::class, 'gestion-humana.contratos.index');
 	}
 
 
@@ -256,30 +229,7 @@ class ContratoController extends Controller
 	 */
 	public function update($CONT_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-
-		if(!$request->has('MORE_ID')){	$request['MORE_ID'] = null; }
-		if(!$request->has('CONT_FECHARETIRO')){	$request['CONT_FECHARETIRO'] = null; }
-		if(!$request->has('CONT_VARIABLE')){	$request['CONT_VARIABLE'] = null; }
-		if(!$request->has('CONT_RODAJE')){	$request['CONT_RODAJE'] = null; }
-		if(!$request->has('CONT_OBSERVACIONES')){	$request['CONT_OBSERVACIONES'] = null; }
-		if(!$request->has('JEFE_ID')){	$request['JEFE_ID'] = null; }
-		if(!$request->has('GRUP_ID')){	$request['GRUP_ID'] = null; }
-		if(!$request->has('TURN_ID')){	$request['TURN_ID'] = null; }
-		if(!$request->has('TEMP_ID')){	$request['TEMP_ID'] = null; }
-
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-
-		// Se obtiene el registro
-		$contrato = Contrato::findOrFail($CONT_ID);
-		//y se actualiza con los datos recibidos.
-		$contrato->update($request->all());
-
-		// redirecciona al index de controlador
-		flash_alert( 'Contrato '.$contrato->CONT_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('gestion-humana.contratos.index');
+		parent::updateModel($CONT_ID, Contrato::class, 'gestion-humana.contratos.index');
 	}
 
 	/**
@@ -302,5 +252,27 @@ class ContratoController extends Controller
 
 		return redirect()->route('gestion-humana.contratos.index');
 	}
+
+	/**
+	 * Contratos activos por empleador.
+	 *
+	 * @return json
+	 */
+	public function getContratosEmpleador()
+	{
+		$data = \SGH\Empleador::join('CONTRATOS', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+								->select(
+									//'EMPLEADORES.EMPL_RAZONSOCIAL',
+									'EMPLEADORES.EMPL_NOMBRECOMERCIAL',
+									\DB::raw('COUNT("CONT_ID")')
+								)
+								->groupBy(
+									'EMPLEADORES.EMPL_RAZONSOCIAL',
+									'EMPLEADORES.EMPL_NOMBRECOMERCIAL'
+								)
+								->get();
+		return $data->toJson();
+	}
+
 	
 }
