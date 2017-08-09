@@ -264,7 +264,7 @@ class ContratoController extends Controller
 								->select(
 									//'EMPLEADORES.EMPL_RAZONSOCIAL',
 									'EMPLEADORES.EMPL_NOMBRECOMERCIAL',
-									\DB::raw('COUNT("CONT_ID")')
+									\DB::raw('COUNT("CONT_ID") as count')
 								)
 								->groupBy(
 									'EMPLEADORES.EMPL_RAZONSOCIAL',

@@ -540,7 +540,7 @@ class TicketController extends Controller
 								->select(
 									'ESTI_DESCRIPCION',
 									'ESTI_COLOR as COLOR',
-									\DB::raw('COUNT("TICK_ID")')
+									\DB::raw('COUNT("TICK_ID") as count')
 								)
 								->groupBy(
 									'ESTI_DESCRIPCION',
