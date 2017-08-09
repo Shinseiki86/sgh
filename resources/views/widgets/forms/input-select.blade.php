@@ -1,0 +1,1 @@
+{{ Form::select($name, [null => 'Seleccione uno'] + (isset($data)?$data:[]) , old($name), ['class' => 'form-control chosen-select'] + (isset($options)?$options:[])) }}
