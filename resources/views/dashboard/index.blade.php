@@ -15,41 +15,8 @@
 
 @section('section')
 
-	<div class="col-xs-12 col-sd-5 col-md-5">
-		<div class="panel panel-info panel-chart">
-			<div class="panel-heading">
-				Título
-				<div class="pull-right">
-					<label>Tipo</label>
-					<select class="typeChart disabled">
-						<option value="bar">Barras</option>
-						<option value="pie">Torta</option>
-					</select>
-				</div>
-			</div>
-			<div class="panel-body">
-				<canvas class="canvas-chart" id="chart1" style="height:250px"></canvas>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-xs-12 col-sd-5 col-md-5">
-		<div class="panel panel-info panel-chart">
-			<div class="panel-heading">
-				Título
-				<div class="pull-right">
-					<label>Tipo</label>
-					<select class="typeChart disabled">
-						<option value="bar">Barras</option>
-						<option value="pie">Torta</option>
-					</select>
-				</div>
-			</div>
-			<div class="panel-body">
-				<canvas class="canvas-chart" id="chart2" style="height:250px"></canvas>
-			</div>
-		</div>
-	</div>
+	@include('widgets.charts.panelchart', ['idCanvas' => 'chart1', 'title' => 'Contratos x Empleador' ])
+	@include('widgets.charts.panelchart', ['idCanvas' => 'chart2', 'title' => 'Tickets x Estado' ])
 
 @endsection
 
@@ -112,12 +79,12 @@
 					"X-CSRF-TOKEN": $('input[name="_token"]').val()
 				},
 				success: function($result) {
-				    var labels = [], data=[], colors=[];
-				    $result.forEach(function(packet) {
+					var labels = [], data=[], colors=[];
+					$result.forEach(function(packet) {
 						labels.push(packet[$nameX]);
 						data.push(parseInt(packet[$nameY]));
 						if(typeof packet['COLOR'] == 'string'){ colors.push(packet['COLOR']); }
-				    });
+					});
 					buildChart($title, labels, data, colors, $idCanvas, $type);
 				},
 				error: function($e){
@@ -127,33 +94,34 @@
 		}
 
 		function buildChart($title, $labels, $data, $colors, $idCanvas, $type){
+			//if($data.length>0){
+				//Si $colors está vacío, se crea un arreglo de colores.
+				if($colors.length === 0){
+					$labels.forEach(function ($label, $index) {
+						$colors.push(getColor($index));
+					});
+				}
 
-			//Si $colors está vacío, se crea un arreglo de colores.
-			if($colors.length === 0){
-				$labels.forEach(function ($label, $index) {
-					$colors.push(getColor($index));
-				});
-			}
+				var chartData = {
+					labels: $labels,
+					datasets: [{
+						label: 'Registros',
+						backgroundColor: $colors,
+						data: $data,
+					}]
+				};
 
-			var chartData = {
-				labels: $labels,
-				datasets: [{
-					label: 'Registros',
-					backgroundColor: $colors,
-					data: $data,
-				}]
-			};
+				var opcs = getOptionsChart($type);
+				opcs.title.text = $title;
 
-			var opcs = getOptionsChart($type);
-			opcs.title.text = $title;
-
-			var canvas = document.getElementById($idCanvas).getContext('2d');
-			window.chart[$idCanvas] = new Chart(canvas, {
-				type: $type,
-				data: chartData,
-				options: opcs
-			});// Fin window.chart
-			window.chart[$idCanvas].update();
+				var canvas = document.getElementById($idCanvas).getContext('2d');
+				window.chart[$idCanvas] = new Chart(canvas, {
+					type: $type,
+					data: chartData,
+					options: opcs
+				});// Fin window.chart
+				window.chart[$idCanvas].update();
+			
 		}
 
 
@@ -342,6 +310,26 @@
 				break;
 			}
 		}// Fin function getOptionsChart
+
+		//Muestra mensaje cuando no hay datos para construir el gráfico.
+		Chart.plugins.register({
+			afterDraw: function(chart) {
+				if (chart.data.datasets[0].data.length === 0) {
+					// No data is present
+					var ctx = chart.chart.ctx;
+					var width = chart.chart.width;
+					var height = chart.chart.height
+					chart.clear();
+
+					ctx.save();
+					ctx.textAlign = 'center';
+					ctx.textBaseline = 'middle';
+					ctx.font = "16px normal 'Helvetica Nueue'";
+					ctx.fillText('No hay datos para mostrar', width / 2, height / 2);
+					ctx.restore();
+				}
+			}
+		});
 
 	</script>
 @endpush
