@@ -60,7 +60,7 @@ class Controller extends BaseController
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $CLCO_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
 	protected function updateModel($id, $class, $redirect, array $relations = [])
@@ -84,7 +84,7 @@ class Controller extends BaseController
 
 			$nameClass = str_upperspace(class_basename($model));
 			// redirecciona al index de controlador
-			flash_alert( $nameClass.' '.$model->id.' modificado exitosamente.', 'success' );
+			flash_alert( $nameClass.' '.$id.' modificado exitosamente.', 'success' );
 			return redirect()->route($redirect)->send();
 		} else {
 			return redirect()->back()->withErrors($validator)->withInput()->send();
@@ -107,6 +107,35 @@ class Controller extends BaseController
 				$model->$relation()->sync($arrayIds, true);
 			}
 		}
+	}
+
+
+	/**
+	 * Elimina un registro en la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	protected function destroyModel($id, $class, $redirect)
+	{
+		// Se obtiene el registro
+		$class = $this->getClass($class);
+		$model = $class::findOrFail($id);
+
+        $prefix = strtoupper(substr($class::CREATED_AT, 0, 4));
+        $deleted_by = $prefix.'_ELIMINADOPOR';
+
+		$nameClass = str_upperspace(class_basename($model));
+
+		//Si el registro fue creado por SYSTEM, no se puede borrar.
+		if($model->$deleted_by == 'SYSTEM'){
+			flash_modal( $nameClass.' '.$id.' no se puede borrar.', 'danger' );
+		} else {
+			$model->delete();
+			flash_alert( $nameClass.' '.$id.' eliminado exitosamente.', 'success' );
+		}
+
+		return redirect()->route($redirect)->send();
 	}
 
 }

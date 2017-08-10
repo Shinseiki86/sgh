@@ -38,6 +38,7 @@ class ContratoController extends Controller
 	{
 		return Validator::make($data, [
 			'EMPL_ID' => ['numeric', 'required'],
+			'TEMP_ID' => ['numeric', 'required'],
 			'TIEM_ID' => ['numeric', 'required'],
 			'CECO_ID' => ['numeric', 'required'],
 			'ESCO_ID' => ['numeric', 'required'],
@@ -45,6 +46,8 @@ class ContratoController extends Controller
 			'CLCO_ID' => ['numeric', 'required'],
 			'RIES_ID' => ['numeric', 'required'],
 			'PROS_ID' => ['numeric', 'required'],
+			'GRUP_ID' => ['numeric', 'required'],
+			'TURN_ID' => ['numeric', 'required'],
 			//'JEFE_ID' => ['numeric'],
 			'CARG_ID' => ['numeric', 'required'],
 			'CONT_FECHAINGRESO' => ['date', 'required'],

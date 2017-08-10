@@ -13,6 +13,9 @@ use SGH\Departamento;
 
 class DepartamentoController extends Controller
 {
+
+	private $routeIndex = 'cnfg-geograficos.departamentos.index';
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -68,7 +71,7 @@ class DepartamentoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Departamento::class, 'cnfg-geograficos.departamentos.index');
+		parent::storeModel(Departamento::class, $this->routeIndex);
 	}
 
 
@@ -96,7 +99,7 @@ class DepartamentoController extends Controller
 	 */
 	public function update($DEPA_ID)
 	{
-		parent::updateModel($DEPA_ID, Departamento::class, 'cnfg-geograficos.departamentos.index');
+		parent::updateModel($DEPA_ID, Departamento::class, $this->routeIndex);
 	}
 
 	/**
@@ -107,17 +110,7 @@ class DepartamentoController extends Controller
 	 */
 	public function destroy($DEPA_ID, $showMsg=True)
 	{
-		$departamento = Departamento::findOrFail($DEPA_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($departamento->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Departamento '.$departamento->DEPA_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$departamento->delete();
-				flash_alert( 'Departamento '.$departamento->DEPA_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-geograficos.departamentos.index');
+		parent::destroyModel($DEPA_ID, Departamento::class, $this->routeIndex);
 	}
 
 

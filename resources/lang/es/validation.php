@@ -178,6 +178,29 @@ return [
         'PROC_OBSERVACIONES'    => 'Observaciones',
 
         'PROS_CEDULA'           => 'Cédula',
+
+        'EMPL_ID' => 'Empleador',
+        'CONT_OBSERVACIONES' => 'Observaciones',
+        'CONT_FECHAINGRESO' => 'Fecha de Ingreso',
+        'CARG_ID' => 'Cargo',
+        'CECO_ID' => 'Centro de costo',
+        'CLCO_ID' => 'Clase de contrato',
+        'CONT_CASOMEDICO' => '¿R.M?',
+        'ESCO_ID' => 'Estado de contrato',
+        'GRUP_ID' => 'Grupo de Empleado',
+        'JEFE_ID' => 'Jefe Inmediato',
+        'MORE_ID' => 'Motivo de Retiro',
+        'PROS_ID' => 'Prospecto',
+        'RIES_ID' => 'Riesgo ARL',
+        'TEMP_ID' => 'Temporal',
+        'TICO_ID' => 'Tipo de contrato',
+        'TIEM_ID' => 'Tipo de empleador',
+        'TURN_ID' => 'Turno',
+        'CONT_RODAJE' => 'Rodaje',
+        'CONT_SALARIO' => 'Salario',
+        'CONT_VARIABLE' => 'Variable',
+        'CONT_FECHARETIRO' => 'Fecha de Retiro',
+
     ],
 
 ];
