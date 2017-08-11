@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CentroscostosTableSeeder extends Seeder
+class CentrosCostosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

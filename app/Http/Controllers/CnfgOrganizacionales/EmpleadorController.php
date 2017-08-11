@@ -67,7 +67,7 @@ class EmpleadorController extends Controller
 	 */
 	public function create()
 	{
-		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_DESCRIPCION');
+		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
 		return view('cnfg-organizacionales/empleadores/create', compact('arrCiudades'));
 	}
@@ -95,7 +95,7 @@ class EmpleadorController extends Controller
 		// Se obtiene el registro
 		$empleador = Empleador::findOrFail($EMPL_ID);
 
-		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_DESCRIPCION');
+		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('cnfg-organizacionales/empleadores/edit', compact('empleador','arrCiudades'));

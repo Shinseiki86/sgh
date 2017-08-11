@@ -19,19 +19,20 @@ class Departamento extends ModelWithSoftDeletes
 
 	protected $fillable = [
 		'DEPA_CODIGO',
-		'DEPA_DESCRIPCION',
+		'DEPA_NOMBRE',
+		'PAIS_ID',
 	];
-
-    public function countCiudadesSortable($query, $direction)
-    {
-        return $query->withCount('ciudades')
-                    ->orderBy('ciudades_count', $direction);
-    }
 
 	public function ciudades()
 	{
 		$foreingKey = 'DEPA_ID';
 		return $this->hasMany(Ciudad::class, $foreingKey);
+	}
+
+	public function pais()
+	{
+		$foreingKey = 'PAIS_ID';
+		return $this->belongsTo(Pais::class, $foreingKey);
 	}
 
 }

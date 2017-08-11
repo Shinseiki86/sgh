@@ -23,10 +23,13 @@ class CreateTableDepartamentos extends Migration
                 ->comment('Valor autonumérico, llave primaria de la tabla departamentos.');
 
             $table->unsignedInteger('DEPA_CODIGO')
-                ->comment('codigo del departamento de acuerdo a clasificación DANE');
+                ->comment('Código del departamento de acuerdo a clasificación DANE');
 
-            $table->string('DEPA_DESCRIPCION', 300)
-                ->comment('descripcion del motivo de retiro');
+            $table->unsignedInteger('PAIS_ID')
+                ->comment('Llave foranea con PAISES');
+
+            $table->string('DEPA_NOMBRE', 300)
+                ->comment('Nombre del departamento');
             
             //Traza
             $table->string('DEPA_CREADOPOR')
@@ -42,6 +45,12 @@ class CreateTableDepartamentos extends Migration
             $table->timestamp('DEPA_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
 
+            //Relación con tabla DEPARTAMENTOS
+            $table->foreign('PAIS_ID')
+                ->references('PAIS_ID')
+                ->on('PAISES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
         
         if(env('DB_CONNECTION') == 'pgsql')

@@ -19,7 +19,7 @@ class Ciudad extends ModelWithSoftDeletes
 
 	protected $fillable = [
 		'CIUD_CODIGO',
-		'CIUD_DESCRIPCION',
+		'CIUD_NOMBRE',
 		'DEPA_ID',
 	];
 

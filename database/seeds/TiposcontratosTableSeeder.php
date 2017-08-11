@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TiposcontratosTableSeeder extends Seeder
+class TiposContratosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

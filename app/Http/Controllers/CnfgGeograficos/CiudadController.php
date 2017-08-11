@@ -14,6 +14,9 @@ use SGH\Departamento;
 
 class CiudadController extends Controller
 {
+
+	private $routeIndex = 'cnfg-geograficos.ciudades.index';
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -32,8 +35,8 @@ class CiudadController extends Controller
 	protected function validator($data, $id = 0)
 	{
 		return validator::make($data, [
-			'CIUD_CODIGO' => ['required', 'numeric', 'unique:CIUDADES,CIUD_CODIGO,'.$id.',CIUD_ID'],
-			'CIUD_DESCRIPCION' => ['required', 'max:300', 'unique:CIUDADES,CIUD_DESCRIPCION,'.$id.',CIUD_ID'],
+			'CIUD_CODIGO' => ['required', 'numeric', 'unique:CIUDADES,CIUD_CODIGO,'.$id.',CIUD_CODIGO'],
+			'CIUD_NOMBRE' => ['required', 'max:300', 'unique:CIUDADES,CIUD_NOMBRE,'.$id.',CIUD_CODIGO'],
 		]);
 
 	}
@@ -60,7 +63,7 @@ class CiudadController extends Controller
 	public function create()
 	{
 		//Se crea un array con los departamentos disponibles
-		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_DESCRIPCION');
+		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_NOMBRE');
 
 		return view('cnfg-geograficos/ciudades/create', compact('arrDepartamentos'));
 	}
@@ -72,7 +75,7 @@ class CiudadController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Ciudad::class, 'cnfg-geograficos.ciudades.index');
+		parent::storeModel(Ciudad::class, $this->routeIndex);
 	}
 
 
@@ -88,7 +91,7 @@ class CiudadController extends Controller
 		$ciudad = Ciudad::findOrFail($CIUD_ID);
 
 		//Se crea un array con los departamentos disponibles
-		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_DESCRIPCION');
+		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_NOMBRE');
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('cnfg-geograficos/ciudades/edit', compact('ciudad', 'arrDepartamentos'));
@@ -103,7 +106,7 @@ class CiudadController extends Controller
 	 */
 	public function update($CIUD_ID)
 	{
-		parent::updateModel($CIUD_ID, Ciudad::class, 'cnfg-geograficos.ciudades.index');
+		parent::updateModel($CIUD_ID, Ciudad::class, $this->routeIndex);
 	}
 
 	/**
@@ -114,17 +117,7 @@ class CiudadController extends Controller
 	 */
 	public function destroy($CIUD_ID, $showMsg=True)
 	{
-		$ciudad = Ciudad::findOrFail($CIUD_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($ciudad->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Ciudad '.$ciudad->CIUD_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$ciudad->delete();
-				flash_alert( 'Ciudad '.$ciudad->CIUD_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-geograficos.ciudades.index');
+		parent::destroyModel($CIUD_ID, Ciudad::class, $this->routeIndex);
 	}
 
 

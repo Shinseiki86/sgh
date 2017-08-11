@@ -35,7 +35,7 @@ class DepartamentoController extends Controller
 	{
 		return Validator::make($data, [
 			'DEPA_CODIGO' => ['required', 'numeric', 'unique:DEPARTAMENTOS,DEPA_CODIGO,'.$id.',DEPA_ID'],
-			'DEPA_DESCRIPCION' => ['required', 'max:300', 'unique:DEPARTAMENTOS,DEPA_DESCRIPCION,'.$id.',DEPA_ID'],
+			'DEPA_NOMBRE' => ['required', 'max:300', 'unique:DEPARTAMENTOS,DEPA_NOMBRE,'.$id.',DEPA_ID'],
 		]);
 
 	}
@@ -61,7 +61,10 @@ class DepartamentoController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-geograficos/departamentos/create');
+		//Se crea un array con los países disponibles
+		$arrPaises = model_to_array(Pais::class, 'PAIS_NOMBRE');
+
+		return view('cnfg-geograficos/departamentos/create', compact('arrPaises'));
 	}
 
 	/**
@@ -86,8 +89,11 @@ class DepartamentoController extends Controller
 		// Se obtiene el registro
 		$departamento = Departamento::findOrFail($DEPA_ID);
 
+		//Se crea un array con los países disponibles
+		$arrPaises = model_to_array(Pais::class, 'PAIS_NOMBRE');
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-geograficos/departamentos/edit', compact('departamento'));
+		return view('cnfg-geograficos/departamentos/edit', compact('departamento', 'arrPaises'));
 	}
 
 
@@ -110,7 +116,7 @@ class DepartamentoController extends Controller
 	 */
 	public function destroy($DEPA_ID, $showMsg=True)
 	{
-		parent::destroyModel($DEPA_ID, Departamento::class, $this->routeIndex);
+		parent::destroyModel($DEPA_ID, Departamento::class, $this->routeIndex, ['ciudades']);
 	}
 
 

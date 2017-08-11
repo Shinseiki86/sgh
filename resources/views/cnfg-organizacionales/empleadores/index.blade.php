@@ -41,9 +41,9 @@
 				<td>{{ $empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $empleador -> EMPL_NOMBREREPRESENTANTE }}</td>
 				<td>{{ $empleador -> EMPL_CEDULAREPRESENTANTE }}</td>
-				<td>{{ $empleador -> ciudad_expedicion -> CIUD_DESCRIPCION }}</td>
+				<td>{{ $empleador -> ciudad_expedicion -> CIUD_NOMBRE }}</td>
 				<td>{{ $empleador -> EMPL_DIRECCION }}</td>
-				<td>{{ $empleador -> ciudad_domicilio -> CIUD_DESCRIPCION }}</td>
+				<td>{{ $empleador -> ciudad_domicilio -> CIUD_NOMBRE }}</td>
 				<td>{{ $empleador -> EMPL_COREO }}</td>
 				<td>{{ $empleador -> EMPL_CREADOPOR }}</td>
 				<td>

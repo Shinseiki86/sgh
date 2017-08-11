@@ -25,10 +25,11 @@ class CreateTableCiudades extends Migration
             $table->unsignedInteger('CIUD_CODIGO')
                 ->comment('codigo del departamento de acuerdo a clasificación DANE');
 
-            $table->unsignedInteger('DEPA_ID');
+            $table->unsignedInteger('DEPA_ID')
+                ->comment('Llave foranea con DEPARTAMENTOS');
 
-            $table->string('CIUD_DESCRIPCION', 300)
-                ->comment('descripcion del motivo de retiro');
+            $table->string('CIUD_NOMBRE', 300)
+                ->comment('Nombre de la ciudad');
             
             //Traza
             $table->string('CIUD_CREADOPOR')

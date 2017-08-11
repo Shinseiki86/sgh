@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MotivosretirosTableSeeder extends Seeder
+class MotivosRetirosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

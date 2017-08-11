@@ -116,7 +116,7 @@ class Controller extends BaseController
 	 * @param  int  $id
 	 * @return Response
 	 */
-	protected function destroyModel($id, $class, $redirect)
+	protected function destroyModel($id, $class, $redirect, $relations=[])
 	{
 		// Se obtiene el registro
 		$class = $this->getClass($class);
@@ -131,10 +131,12 @@ class Controller extends BaseController
 		if($model->$deleted_by == 'SYSTEM'){
 			flash_modal( $nameClass.' '.$id.' no se puede borrar.', 'danger' );
 		} else {
+			foreach ($relations as $relation) {
+				$model->$relation()->delete();
+			}
 			$model->delete();
 			flash_alert( $nameClass.' '.$id.' eliminado exitosamente.', 'success' );
 		}
-
 		return redirect()->route($redirect)->send();
 	}
 

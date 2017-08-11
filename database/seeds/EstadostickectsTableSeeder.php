@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EstadostickectsTableSeeder extends Seeder
+class EstadosTickectsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -22,7 +22,7 @@
 		<thead>
 			<tr>
 				<th class="col-md-1">Código</th>
-				<th class="col-md-4">Descripción</th>
+				<th class="col-md-4">Nombre</th>
 				<th class="col-md-4">Departamento</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
@@ -33,8 +33,8 @@
 			@foreach($ciudades as $ciudad)
 			<tr>
 				<td>{{ $ciudad -> CIUD_CODIGO }}</td>
-				<td>{{ $ciudad -> CIUD_DESCRIPCION }}</td>
-				<td>{{ $ciudad -> departamento -> DEPA_DESCRIPCION }}</td>
+				<td>{{ $ciudad -> CIUD_NOMBRE }}</td>
+				<td>{{ $ciudad -> departamento -> DEPA_NOMBRE }}</td>
 				<td>{{ $ciudad -> CIUD_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
@@ -48,7 +48,7 @@
 						'data-toggle'=>'modal',
 						'data-id'=> $ciudad->CIUD_ID,
 						'data-modelo'=> str_upperspace(class_basename($ciudad)),
-						'data-descripcion'=> $ciudad->CIUD_DESCRIPCION,
+						'data-descripcion'=> $ciudad->CIUD_NOMBRE,
 						'data-action'=>'ciudades/'. $ciudad->CIUD_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',

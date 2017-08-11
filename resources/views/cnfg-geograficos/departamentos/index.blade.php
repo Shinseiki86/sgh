@@ -22,7 +22,8 @@
 			<tr>
 				<th class="hidden-xs col-md-1">ID</th>
 				<th class="col-md-1">Código</th>
-				<th class="col-md-5">Descripción</th>
+				<th class="col-md-3">Nombre</th>
+				<th class="col-md-3">País</th>
 				<th class="col-md-1">Ciudades</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
@@ -34,7 +35,8 @@
 			<tr>
 				<td>{{ $departamento -> DEPA_ID }}</td>
 				<td>{{ $departamento -> DEPA_CODIGO }}</td>
-				<td>{{ $departamento -> DEPA_DESCRIPCION }}</td>
+				<td>{{ $departamento -> DEPA_NOMBRE }}</td>
+				<td>{{ $departamento -> pais -> PAIS_NOMBRE }}</td>
 				<td>{{ $departamento -> ciudades -> count() }}</td>
 				<td>{{ $departamento -> DEPA_CREADOPOR }}</td>
 				<td>
@@ -49,7 +51,7 @@
 						'data-toggle'=>'modal',
 						'data-id'=> $departamento->DEPA_ID,
 						'data-modelo'=> str_upperspace(class_basename($departamento)),
-						'data-descripcion'=> $departamento->DEPA_DESCRIPCION,
+						'data-descripcion'=> $departamento->DEPA_NOMBRE,
 						'data-action'=>'departamentos/'. $departamento->DEPA_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',

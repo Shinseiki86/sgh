@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TiposempleadoresTableSeeder extends Seeder
+class TiposEmpleadoresTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
