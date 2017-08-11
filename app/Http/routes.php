@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 	});
 
 	Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
+		Route::resource('paises', 'PaisController');
 		Route::resource('departamentos', 'DepartamentoController');
 		Route::resource('ciudades', 'CiudadController');
 	});

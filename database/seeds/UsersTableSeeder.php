@@ -68,6 +68,7 @@ use SGH\Permission;
                 $this->createPermissions('ceco', 'centros de costo');
                 $this->createPermissions('tipoemple', 'tipos de empleador');
                 $this->createPermissions('riesgoarl', 'riesgos de ARL');
+                $this->createPermissions('pais', 'pais');
                 $this->createPermissions('depart', 'departamentos');
                 $this->createPermissions('ciudad', 'ciudades');
                 $this->createPermissions('prospecto', 'hojas de vida');

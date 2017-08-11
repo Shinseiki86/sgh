@@ -146,12 +146,15 @@ return [
         'ROLE_rol'              => 'Identificador interno',
         'ROLE_descripcion'      => 'Descripción',
 
+        'PAIS_ID'               => 'ID país',
+        'PAIS_CODIGO'           => 'Código país',
+        'PAIS_NOMBRE'           => 'Nombre país',
         'DEPA_ID'               => 'ID departamento',
         'DEPA_CODIGO'           => 'Código departamento',
-        'DEPA_DESCRIPCION'      => 'Descripción',
+        'DEPA_NOMBRE'           => 'Nombre departamento',
 
         'CIUD_CODIGO'           => 'Código ciudad',
-        'CIUD_DESCRIPCION'      => 'Descripción',
+        'CIUD_NOMBRE'           => 'Nombre ciudad',
 
         'GERE_DESCRIPCION'      => 'Descripción',
         'GERE_OBSERVACIONES'    => 'Observaciones',

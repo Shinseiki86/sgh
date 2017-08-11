@@ -44,12 +44,17 @@
 				@endif
 
 				<!-- Geográficos -->
-				@if(Entrust::can(['depart-*', 'ciudad-*', ]))
+				@if(Entrust::can(['pais-*', 'depart-*', 'ciudad-*', ]))
 				<li>
 					<a href="#" class="dropdown-collapse"><i class="fa fa-globe fa-fw"></i> <span class="side-menu-title">Geográficos</span><span class="fa arrow"></span></a>
 					
 					<ul class="nav nav-second-level">
 
+						@if(Entrust::can('pais-*'))
+						<li>
+							<a href="{{ url ('cnfg-geograficos/paises') }}"><i class="fa fa-circle fa-fw"></i> Países</a>
+						</li>
+						@endif
 						@if(Entrust::can('depart-*'))
 						<li>
 							<a href="{{ url ('cnfg-geograficos/departamentos') }}"><i class="fa fa-circle fa-fw"></i> Departamentos</a>
