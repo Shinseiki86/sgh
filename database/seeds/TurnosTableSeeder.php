@@ -26,6 +26,8 @@ class TurnosTableSeeder extends Seeder
     	$turno = new \SGH\Turno;
     	$turno->TURN_DESCRIPCION = 'TURNO NOCHE';
         $turno->TURN_CODIGO = 'T3';
+         $turno->TURN_HORAINICIO = '22:00:00';
+        $turno->TURN_HORAFINAL = '06:00:00';
     	$turno->TURN_OBSERVACIONES =  'TURNO DE PRUEBA';
         $turno->EMPL_ID =  1;
     	$turno->TURN_CREADOPOR =  'SYSTEM';
