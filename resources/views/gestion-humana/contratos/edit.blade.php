@@ -11,7 +11,6 @@
 	{!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
 	{!! Html::script('assets/scripts/momentjs/moment-with-locales.min.js') !!}
 	{!! Html::script('assets/scripts/bootstrap/bootstrap-datetimepicker.min.js') !!}
-
 	<script type="text/javascript">
 		$(function () {
 			$('.datetimepicker').datetimepicker({
@@ -41,6 +40,11 @@
 					nextCentury: 'Siglo Siguiente'
 				}
 			});
+
+			//opciones del choosen select
+			var options = {no_results_text: 'Ningún resultado coincide.'};
+			//para volver los select mucho mas amigables en listas grandes de datos
+			$('.chosen-select').chosen(options);
 		});
 	</script>
 @endpush

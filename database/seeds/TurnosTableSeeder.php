@@ -13,25 +13,23 @@ class TurnosTableSeeder extends Seeder
     {
     	//$this->command->info('---Seeder Empleadores');
     	
-    	$turno = new \SGH\Turno;
-    	$turno->TURN_DESCRIPCION = 'TURNO DÍA';
-        $turno->TURN_CODIGO = 'T1';
-        $turno->TURN_HORAINICIO = '06:00:00';
-        $turno->TURN_HORAFINAL = '14:00:00';
-    	$turno->TURN_OBSERVACIONES =  'TURNO DE PRUEBA';
-        $turno->EMPL_ID =  1;
-    	$turno->TURN_CREADOPOR =  'SYSTEM';
-    	$turno->save();
+        \SGH\Turno::create([
+            'TURN_DESCRIPCION' => 'TURNO DÍA',
+            'TURN_CODIGO' => 'T1',
+            'TURN_HORAINICIO' => '06:00:00',
+            'TURN_HORAFINAL' => '14:00:00',
+            'TURN_OBSERVACIONES' => 'TURNO DE DÍA',
+            'EMPL_ID' => 1,
+        ]);
 
-    	$turno = new \SGH\Turno;
-    	$turno->TURN_DESCRIPCION = 'TURNO NOCHE';
-        $turno->TURN_CODIGO = 'T3';
-         $turno->TURN_HORAINICIO = '22:00:00';
-        $turno->TURN_HORAFINAL = '06:00:00';
-    	$turno->TURN_OBSERVACIONES =  'TURNO DE PRUEBA';
-        $turno->EMPL_ID =  1;
-    	$turno->TURN_CREADOPOR =  'SYSTEM';
-    	$turno->save();
+    	\SGH\Turno::create([
+        	'TURN_DESCRIPCION' => 'TURNO NOCHE',
+            'TURN_CODIGO' => 'T3',
+            'TURN_HORAINICIO' => '22:00:00',
+            'TURN_HORAFINAL' => '06:00:00',
+        	'TURN_OBSERVACIONES' => 'TURNO DE NOCHE',
+            'EMPL_ID' => 1,
+        ]);
 
     }
 }

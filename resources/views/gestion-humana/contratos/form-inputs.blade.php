@@ -23,7 +23,7 @@
 
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'CIUD_CONTRATA', 'label'=>'Ciudad de Contratación', 'data'=>$arrCiudades])
 
-@include('widgets.forms.group', ['type'=>'select', 'name'=>'CIUD_CONTRATA', 'label'=>'Ciudad de Servicio', 'data'=>$arrCiudades])
+@include('widgets.forms.group', ['type'=>'select', 'name'=>'CIUD_SERVICIO', 'label'=>'Ciudad de Servicio', 'data'=>$arrCiudades])
 
 {{--@include('widgets.forms.group', ['type'=>'date', 'name'=>'CONT_FECHARETIRO', 'label'=>'Fecha de Retiro' ])--}}
 

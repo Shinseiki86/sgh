@@ -42,17 +42,9 @@
 			});
 
 			//opciones del choosen select
-			var options = {
-				/*
-				disable_search_threshold: 5,
-				width: '100%',
-				placeholder_text_single: 'Seleccione una opción',
-				placeholder_text_multiple: 'Seleccione algunas opciones',
-				*/
-				no_results_text: 'Ningún resultado coincide.'
-			};
+			var options = {no_results_text: 'Ningún resultado coincide.'};
 			//para volver los select mucho mas amigables en listas grandes de datos
-			$(".chosen-select").chosen(options);
+			$('.chosen-select').chosen(options);
 		});
 	</script>
 @endpush
