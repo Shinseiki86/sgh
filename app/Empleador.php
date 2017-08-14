@@ -41,4 +41,22 @@ class Empleador extends ModelWithSoftDeletes
 		return $this->belongsTo(Ciudad::class, $foreingKey);
 	}
 
+	public function turnos()
+	{
+		$foreingKey = 'EMPL_ID';
+		return $this->hasMany(Turno::class, $foreingKey);
+	}
+
+	public function grupos()
+	{
+		$foreingKey = 'EMPL_ID';
+		return $this->hasMany(Grupo::class, $foreingKey);
+	}
+
+	public function contratos()
+	{
+		$foreingKey = 'EMPL_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

@@ -58,9 +58,6 @@ class GrupoController extends Controller
 	 */
 	public function create()
 	{
-		//Se crea un array con los grupos existentes
-		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
-
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 

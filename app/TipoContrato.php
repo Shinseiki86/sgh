@@ -22,4 +22,10 @@ class TipoContrato extends ModelWithSoftDeletes
 		'TICO_OBSERVACIONES',
 	];
 
+	public function contratos()
+	{
+		$foreingKey = 'TICO_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

@@ -26,4 +26,10 @@ class EstadoContrato extends ModelWithSoftDeletes
 	const ACTIVO	= 1;
 	const RETIRADO	= 2;
 
+	public function contratos()
+	{
+		$foreingKey = 'ESCO_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

@@ -23,4 +23,10 @@ class Riesgo extends ModelWithSoftDeletes
 		'RIES_OBSERVACIONES',
 	];
 
+	public function contratos()
+	{
+		$foreingKey = 'RIES_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

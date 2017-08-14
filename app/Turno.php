@@ -20,6 +20,19 @@ class Turno extends ModelWithSoftDeletes
 	protected $fillable = [
 		'TURN_DESCRIPCION',
 		'TURN_OBSERVACIONES',
+		'EMPL_ID'
 	];
+
+	public function empleador()
+	{
+		$foreingKey = 'EMPL_ID';
+		return $this->belongsTo(Empleador::class, $foreingKey);
+	}
+
+	public function contratos()
+	{
+		$foreingKey = 'TURN_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
 
 }

@@ -22,4 +22,10 @@ class ClaseContrato extends ModelWithSoftDeletes
 		'CLCO_OBSERVACIONES',
 	];
 
+	public function contratos()
+	{
+		$foreingKey = 'CLCO_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

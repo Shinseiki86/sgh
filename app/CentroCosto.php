@@ -30,4 +30,10 @@ class CentroCosto extends ModelWithSoftDeletes
 		return $this->belongsTo(Gerencia::class, $foreingKey);
 	}
 
+	public function contratos()
+	{
+		$foreingKey = 'CECO_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

@@ -47,4 +47,10 @@ class Prospecto extends ModelWithSoftDeletes
 
 	}
 
+	public function contratos()
+	{
+		$foreingKey = 'PROS_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

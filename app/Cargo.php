@@ -29,4 +29,10 @@ class Cargo extends ModelWithSoftDeletes
 		return $this->belongsTo(Cno::class, $foreingKey);
 	}
 
+	public function contratos()
+	{
+		$foreingKey = 'CARG_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

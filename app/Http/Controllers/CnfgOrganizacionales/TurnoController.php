@@ -58,7 +58,10 @@ class TurnoController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-organizacionales/turnos/create');
+		//Se crea un array con los empleadores
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
+		return view('cnfg-organizacionales/turnos/create', compact('arrEmpleadores'));
 	}
 
 	/**
@@ -83,8 +86,11 @@ class TurnoController extends Controller
 		// Se obtiene el registro
 		$turno = Turno::findOrFail($TURN_ID);
 
+		//Se crea un array con los empleadores
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/turnos/edit', compact('turno'));
+		return view('cnfg-organizacionales/turnos/edit', compact('turno','arrEmpleadores'));
 	}
 
 

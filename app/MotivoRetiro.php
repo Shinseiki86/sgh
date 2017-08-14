@@ -21,4 +21,10 @@ class MotivoRetiro extends ModelWithSoftDeletes
 		'MORE_DESCRIPCION',
 		'MORE_OBSERVACIONES',
 	];
+
+	public function contratos()
+	{
+		$foreingKey = 'MORE_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
 }

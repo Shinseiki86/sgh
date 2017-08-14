@@ -29,4 +29,10 @@ class Grupo extends ModelWithSoftDeletes
 		return $this->belongsTo(Empleador::class, $foreingKey);
 	}
 
+	public function contratos()
+	{
+		$foreingKey = 'GRUP_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

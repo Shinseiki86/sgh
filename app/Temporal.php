@@ -23,4 +23,10 @@ class Temporal extends ModelWithSoftDeletes
 		'TEMP_OBSERVACIONES',
 	];
 
+	public function contratos()
+	{
+		$foreingKey = 'TEMP_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

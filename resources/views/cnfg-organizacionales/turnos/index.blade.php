@@ -21,6 +21,7 @@
 		<thead>
 			<tr>
 				<th class="col-md-4">Descripción</th>
+				<th class="col-md-4">Empleador</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
@@ -30,6 +31,7 @@
 			@foreach($turnos as $turno)
 			<tr>
 				<td>{{ $turno -> TURN_DESCRIPCION }}</td>
+				<td>{{ $turno -> empleador -> EMPL_NOMBRECOMERCIAL}}</td>
 				<td>{{ $turno -> TURN_OBSERVACIONES }}</td>
 				<td>{{ $turno -> TURN_CREADOPOR }}</td>
 				<td>

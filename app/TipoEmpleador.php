@@ -22,4 +22,10 @@ class TipoEmpleador extends ModelWithSoftDeletes
 		'TIEM_OBSERVACIONES',
 	];
 
+	public function contratos()
+	{
+		$foreingKey = 'TIEM_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 }

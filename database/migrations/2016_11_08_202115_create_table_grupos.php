@@ -27,7 +27,7 @@ class CreateTableGrupos extends Migration
             $table->string('GRUP_DESCRIPCION', 300)
                 ->comment('descripción del grupo de empleados');
 
-             $table->integer('EMPL_ID')->unsigned()
+            $table->integer('EMPL_ID')->unsigned()
                 ->comment('empleador que tiene asociado este grupo');
 
             $table->string('GRUP_OBSERVACIONES', 300)
