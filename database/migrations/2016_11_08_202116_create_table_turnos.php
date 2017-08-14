@@ -30,6 +30,15 @@ class CreateTableTurnos extends Migration
             $table->integer('EMPL_ID')->unsigned()
                 ->comment('empleador que tiene asociado el turno');
 
+            $table->string('TURN_CODIGO', 10)
+                ->comment('codigo del turno de trabajo');
+
+            $table->time('TURN_HORAINICIO')
+                ->comment('hora de inicio del turno de trabajo');
+
+            $table->time('TURN_HORAFINAL')
+                ->comment('hora de finalización del turno de trabajo');
+
             $table->string('TURN_OBSERVACIONES', 300)
                 ->nullable()
                 ->comment('observaciones del turno de trabajo');

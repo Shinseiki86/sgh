@@ -29,5 +29,17 @@ class Ciudad extends ModelWithSoftDeletes
 		return $this->belongsTo(Departamento::class, $foreingKey);
 	}
 
+	public function ciudad_contratos()
+	{
+		$foreingKey = 'CIUD_CONTRATA';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
+	public function ciudad_servicios()
+	{
+		$foreingKey = 'CIUD_SERVICIO';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 
 }

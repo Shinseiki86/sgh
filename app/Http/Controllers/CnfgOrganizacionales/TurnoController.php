@@ -33,6 +33,10 @@ class TurnoController extends Controller
 	{
 		return Validator::make($data, [
 			'TURN_DESCRIPCION' => ['required', 'max:300', 'unique:TURNOS,TURN_DESCRIPCION,'.$id.',TURN_ID'],
+			'TURN_CODIGO' => ['required','max:10'],
+			'TURN_HORAINICIO' => ['required'],
+			'TURN_HORAFINAL' => ['required'],
+			'TURN_CODIGO' => ['required','max:10'],
 			'TURN_OBSERVACIONES' => ['max:300'],
 		]);
 	}

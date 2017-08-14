@@ -48,6 +48,8 @@ class ContratoController extends Controller
 			'PROS_ID' => ['numeric', 'required'],
 			'GRUP_ID' => ['numeric', 'required'],
 			'TURN_ID' => ['numeric', 'required'],
+			'CIUD_CONTRATA' => ['numeric', 'required'],
+			'CIUD_SERVICIO' => ['numeric', 'required'],
 			//'JEFE_ID' => ['numeric'],
 			'CARG_ID' => ['numeric', 'required'],
 			'CONT_FECHAINGRESO' => ['date', 'required'],
@@ -126,6 +128,9 @@ class ContratoController extends Controller
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
+		//Se crea un array con las ciudades disponibles
+		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
+
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -139,7 +144,7 @@ class ContratoController extends Controller
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 
-		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales'));
+		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades'));
 	}
 
 	/**
@@ -208,6 +213,9 @@ class ContratoController extends Controller
 		//Se crea un array con los turnos existentes
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
 
+		//Se crea un array con las ciudades disponibles
+		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
+
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -221,7 +229,7 @@ class ContratoController extends Controller
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales'));
+		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades'));
 	}
 
 	/**

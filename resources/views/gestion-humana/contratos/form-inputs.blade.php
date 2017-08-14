@@ -1,3 +1,5 @@
+@include('widgets.forms.group', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])
+
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'EMPL_ID', 'label'=>'Empleador', 'data'=>$arrEmpleadores])
 
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'TEMP_ID', 'label'=>'Temporal', 'data'=>$arrTemporales])
@@ -14,12 +16,14 @@
 
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'RIES_ID', 'label'=>'Riesgo ARL', 'data'=>$arrRiesgos])
 
-@include('widgets.forms.group', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])
-
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'CARG_ID', 'label'=>'Cargo', 'data'=>$arrCargos])
 
 
 @include('widgets.forms.group', ['type'=>'date', 'name'=>'CONT_FECHAINGRESO', 'label'=>'Fecha de Ingreso' ])
+
+@include('widgets.forms.group', ['type'=>'select', 'name'=>'CIUD_CONTRATA', 'label'=>'Ciudad de Contratación', 'data'=>$arrCiudades])
+
+@include('widgets.forms.group', ['type'=>'select', 'name'=>'CIUD_CONTRATA', 'label'=>'Ciudad de Servicio', 'data'=>$arrCiudades])
 
 {{--@include('widgets.forms.group', ['type'=>'date', 'name'=>'CONT_FECHARETIRO', 'label'=>'Fecha de Retiro' ])--}}
 

@@ -2,6 +2,71 @@
 
 @section('page_heading', 'Actualizar Turno')
 
+@push('scripts')
+	{!! Html::script('assets/scripts/momentjs/moment-with-locales.min.js') !!}
+	{!! Html::script('assets/scripts/bootstrap/bootstrap-datetimepicker.min.js') !!}
+	<script type="text/javascript">
+		$(function () {
+			$('#TURN_HORAINICIO').datetimepicker({
+				locale: 'es',
+				format: 'HH:mm:ss',
+				icons: {
+					date: "fa fa-calendar",
+					up: "fa fa-arrow-up",
+					down: "fa fa-arrow-down",
+					previous: 'fa fa-chevron-left',
+					next: 'fa fa-chevron-right',
+					today: 'glyphicon glyphicon-screenshot',
+					clear: 'fa fa-trash',
+					close: 'fa fa-times'
+				},
+				tooltips: {
+					selectMonth: 'Seleccione Mes',
+					prevMonth: 'Mes Anterior',
+					nextMonth: 'Mes Siguiente',
+					selectYear: 'Seleccione Año',
+					prevYear: 'Año Anterior',
+					nextYear: 'Año Siguiente',
+					selectDecade: 'Seleccione Década',
+					prevDecade: 'Década Anterior',
+					nextDecade: 'Década Siguiente',
+					prevCentury: 'Siglo Anterior',
+					nextCentury: 'Siglo Siguiente'
+				}
+			});
+
+			$('#TURN_HORAFINAL').datetimepicker({
+				locale: 'es',
+				format: 'HH:mm:ss',
+				icons: {
+					date: "fa fa-calendar",
+					up: "fa fa-arrow-up",
+					down: "fa fa-arrow-down",
+					previous: 'fa fa-chevron-left',
+					next: 'fa fa-chevron-right',
+					today: 'glyphicon glyphicon-screenshot',
+					clear: 'fa fa-trash',
+					close: 'fa fa-times'
+				},
+				tooltips: {
+					selectMonth: 'Seleccione Mes',
+					prevMonth: 'Mes Anterior',
+					nextMonth: 'Mes Siguiente',
+					selectYear: 'Seleccione Año',
+					prevYear: 'Año Anterior',
+					nextYear: 'Año Siguiente',
+					selectDecade: 'Seleccione Década',
+					prevDecade: 'Década Anterior',
+					nextDecade: 'Década Siguiente',
+					prevCentury: 'Siglo Anterior',
+					nextCentury: 'Siglo Siguiente'
+				}
+			});
+
+		});
+	</script>	
+@endpush
+
 @section('section')
 
 	{{ Form::model($turno, ['action' => ['CnfgOrganizacionales\TurnoController@update', $turno->TURN_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
@@ -13,6 +78,42 @@
 				@if ($errors->has('TURN_DESCRIPCION'))
 					<span class="help-block">
 						<strong>{{ $errors->first('TURN_DESCRIPCION') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('TURN_CODIGO') ? ' has-error' : '' }}">
+			{{ Form::label('TURN_CODIGO', 'Codigo',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::text('TURN_CODIGO', old('TURN_CODIGO'), [ 'class' => 'form-control', 'maxlength' => '10', 'required' ]) }}
+				@if ($errors->has('TURN_CODIGO'))
+					<span class="help-block">
+						<strong>{{ $errors->first('TURN_CODIGO') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('TURN_HORAINICIO') ? ' has-error' : '' }}">
+			{{ Form::label('TURN_HORAINICIO', 'Hora Inicial',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::text('TURN_HORAINICIO', old('TURN_HORAINICIO'), [ 'class' => 'form-control', 'required' , 'id' => 'TURN_HORAINICIO']) }}
+				@if ($errors->has('TURN_HORAINICIO'))
+					<span class="help-block">
+						<strong>{{ $errors->first('TURN_HORAINICIO') }}</strong>
+					</span>
+				@endif
+			</div>
+		</div>
+
+		<div class="form-group{{ $errors->has('TURN_HORAFINAL') ? ' has-error' : '' }}">
+			{{ Form::label('TURN_HORAFINAL', 'Hora Final',  [ 'class' => 'col-md-4 control-label' ]) }}
+			<div class="col-md-6">
+				{{ Form::text('TURN_HORAFINAL', old('TURN_HORAFINAL'), [ 'class' => 'form-control', 'required' , 'id' => 'TURN_HORAFINAL']) }}
+				@if ($errors->has('TURN_HORAFINAL'))
+					<span class="help-block">
+						<strong>{{ $errors->first('TURN_HORAFINAL') }}</strong>
 					</span>
 				@endif
 			</div>

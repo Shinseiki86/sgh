@@ -20,6 +20,9 @@ class Turno extends ModelWithSoftDeletes
 	protected $fillable = [
 		'TURN_DESCRIPCION',
 		'TURN_OBSERVACIONES',
+		'TURN_CODIGO',
+		'TURN_HORAINICIO',
+		'TURN_HORAFINAL',
 		'EMPL_ID'
 	];
 

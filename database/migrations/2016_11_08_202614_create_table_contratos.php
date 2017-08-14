@@ -89,6 +89,12 @@ class CreateTableContratos extends Migration
             $table->integer('TURN_ID')->nullable()->unsigned()
                 ->comment('Turno del empleado');
 
+            $table->integer('CIUD_CONTRATA')->unsigned()
+                ->comment('Ciudad por donde fue contratado el colaborador');
+
+            $table->integer('CIUD_SERVICIO')->unsigned()
+                ->comment('Ciudad en donde el empleado presta el servicio');
+
             $table->string('CONT_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();
             
@@ -192,6 +198,19 @@ class CreateTableContratos extends Migration
              $table->foreign('TURN_ID')
                 ->references('TURN_ID')
                 ->on('TURNOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('CIUD_CONTRATA')
+                ->references('CIUD_ID')
+                ->on('CIUDADES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+
+            $table->foreign('CIUD_SERVICIO')
+                ->references('CIUD_ID')
+                ->on('CIUDADES')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

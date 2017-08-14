@@ -30,6 +30,9 @@ class ContratosTableSeeder extends Seeder
     	$contrato->RIES_ID = 1;
     	$contrato->TIEM_ID = 1;
     	$contrato->CECO_ID = 1;
+        $contrato->CIUD_CONTRATA = 1004;
+        $contrato->CIUD_SERVICIO = 1004;
+        $contrato->CECO_ID = 1;
     	$contrato->CONT_OBSERVACIONES = 'CONTRATO DE PRUEBA';
     	$contrato->save();
 
@@ -51,6 +54,8 @@ class ContratosTableSeeder extends Seeder
     	$contrato->RIES_ID = 1;
     	$contrato->TIEM_ID = 1;
     	$contrato->CECO_ID = 1;
+        $contrato->CIUD_CONTRATA = 1004;
+        $contrato->CIUD_SERVICIO = 1004;
     	$contrato->CONT_OBSERVACIONES = 'CONTRATO DE PRUEBA';
     	$contrato->save();
 
