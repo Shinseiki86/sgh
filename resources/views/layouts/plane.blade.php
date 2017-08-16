@@ -21,6 +21,8 @@
 	{!! Html::style('assets/stylesheets/sb-admin-2.css') !!}
 
 	@stack('head')
+	@section('cssdatatable')
+	@show
 
 </head>
 <body class="sidebar-closed">
@@ -40,5 +42,7 @@
 		})
 	</script>
 	@stack('scripts')
+	@section('datatable')
+	@show
 </body>
 </html>

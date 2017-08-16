@@ -11,6 +11,8 @@ use SGH\Http\Controllers\Controller;
 
 use SGH\Ciudad;
 use SGH\Departamento;
+use Yajra\Datatables\Facades\Datatables;
+use Symfony\Component\DomCrawler\Form;
 
 class CiudadController extends Controller
 {
@@ -20,7 +22,7 @@ class CiudadController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:ciudad-index', ['only' => ['index']]);
+		$this->middleware('permission:ciudad-index', ['only' => ['index','listadoCiudades']]);
 		$this->middleware('permission:ciudad-create', ['only' => ['create', 'store']]);
 		$this->middleware('permission:ciudad-edit', ['only' => ['edit', 'update']]);
 		$this->middleware('permission:ciudad-delete',   ['only' => ['destroy']]);
@@ -50,11 +52,11 @@ class CiudadController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$ciudades = Ciudad::all();
+		//$ciudades = Ciudad::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-geograficos/ciudades/index', compact('ciudades'));
+		//return view('cnfg-geograficos/ciudades/index', compact('ciudades'));
+		return view('cnfg-geograficos/ciudades/listado');
 	}
-
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
 	 *

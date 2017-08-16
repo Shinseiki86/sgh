@@ -25,13 +25,13 @@
 
     <script>
      $(function () {
-
       	/*
       	para realizar la paginacion de una tabla lo unico que hay que hacer es asignarle un id a la tabla,
       	en este caso el id es "tabla" e invocar la función Datatable, lo demas que ven sobre esta función
       	son configuraciones de presentación
       	HFG--Se Realiza ajuste de texto, otros atributos
       	*/
+      	
 	 	$('.table').DataTable({  
 	 		"lengthMenu": [[5, 10, 15, 25,50,100], [5, 10, 15, 25,50,100]],
 	 		"sScrollY": "350px",

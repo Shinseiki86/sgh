@@ -162,6 +162,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
@@ -211,6 +212,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Zipper' => Chumper\Zipper\Facades\Zipper::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
 ];
