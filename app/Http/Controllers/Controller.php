@@ -116,28 +116,54 @@ class Controller extends BaseController
 	 * @param  int  $id
 	 * @return Response
 	 */
-	protected function destroyModel($id, $class, $redirect, $relations=[])
+	protected function destroyModel($id, $class, $redirect)
 	{
 		// Se obtiene el registro
 		$class = $this->getClass($class);
 		$model = $class::findOrFail($id);
 
         $prefix = strtoupper(substr($class::CREATED_AT, 0, 4));
-        $deleted_by = $prefix.'_ELIMINADOPOR';
+        $created_by = $prefix.'_CREADOPOR';
 
 		$nameClass = str_upperspace(class_basename($model));
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($model->$deleted_by == 'SYSTEM'){
+		if($model->$created_by == 'SYSTEEM'){
 			flash_modal( $nameClass.' '.$id.' no se puede borrar.', 'danger' );
 		} else {
-			foreach ($relations as $relation) {
-				$model->$relation()->delete();
+
+			$confirmDeleteRelations = (bool)request()->get('_deleteRelations');
+			$relations = $model->relationships('HasMany');
+			$hasRelations = $confirmDeleteRelations ? true : $this->validateRelations($id, $relations);
+
+			if($hasRelations and $confirmDeleteRelations){
+				foreach ($relations as $relation => $info) {
+					$model->$relation()->delete();
+				}
+				$model->delete();
+				flash_alert( $nameClass.' '.$id.' eliminado exitosamente.', 'success' );
 			}
-			$model->delete();
-			flash_alert( $nameClass.' '.$id.' eliminado exitosamente.', 'success' );
 		}
 		return redirect()->route($redirect)->send();
+	}
+
+	protected function validateRelations($id, $relations)
+	{
+		$hasRelations = false;
+		$strRelations = [];
+		$action = request()->getRequestUri();
+
+		foreach ($relations as $relation => $info) {
+			if($info['count']>0){
+				$strRelations[] = $info['count'].' '.$relation;
+				$hasRelations = true;
+			}
+		}
+
+		if(!empty($strRelations)){
+			session()->flash('deleteWithRelations', compact('id','strRelations','action'));
+		}
+		return $hasRelations;
 	}
 
 }

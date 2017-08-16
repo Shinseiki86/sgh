@@ -110,7 +110,7 @@ class PaisController extends Controller
 	 */
 	public function destroy($PAIS_ID, $showMsg=True)
 	{
-		parent::destroyModel($PAIS_ID, Pais::class, $this->routeIndex, ['departamentos']);
+		parent::destroyModel($PAIS_ID, Pais::class, $this->routeIndex);
 	}
 
 

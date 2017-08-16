@@ -2,12 +2,14 @@
 
 namespace SGH;
 
+use SGH\Traits\RelationshipsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ModelWithSoftDeletes extends Model
 {
     use SoftDeletes;
+    use RelationshipsTrait;
 
     //protected $prefix = strtoupper(substr($this::CREATED_AT, 0, 4));
     
