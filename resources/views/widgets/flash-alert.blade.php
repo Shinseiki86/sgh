@@ -50,33 +50,33 @@
 </div>
 
 <!-- MODALES -->
-	<!-- Mensaje Modal-->
-	<div class="modal fade" id="messageModal" role="dialog" tabindex="-1" >
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header panel-heading" style="border-top-left-radius: inherit; border-top-right-radius: inherit;">
-					<h4 class="modal-title"></h4>
-				</div>
+<!-- Mensaje Modal-->
+<div class="modal fade" id="messageModal" role="dialog" tabindex="-1" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header panel-heading" style="border-top-left-radius: inherit; border-top-right-radius: inherit;">
+				<h4 class="modal-title"></h4>
+			</div>
 
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-xs-2">
-							<i class="fa fa-3x fa-fw"></i>
-						</div>
-						<div class="col-xs-10">
-							<h4 id="message"></h4>
-						</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-xs-2">
+						<i class="fa fa-3x fa-fw"></i>
+					</div>
+					<div class="col-xs-10">
+						<h4 id="message"></h4>
 					</div>
 				</div>
+			</div>
 
-				<div class="modal-footer">
-					<button type="button" class="btn btn-xs btn-success" data-dismiss="modal">
-						<i class="fa fa-times" aria-hidden="true"></i> OK
-					</button>
-				</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-xs btn-success" data-dismiss="modal">
+					<i class="fa fa-times" aria-hidden="true"></i> OK
+				</button>
 			</div>
 		</div>
-	</div><!-- Fin de Mensaje Modal.-->
+	</div>
+</div><!-- Fin de Mensaje Modal.-->
 
 @push('scripts')
 	<script type="text/javascript">
@@ -90,9 +90,9 @@
 
 		//Si el mensaje es modal, se configura la ventana según el tipo de mensaje (success, warning y danger).
 		@if (Session::has('modal-info'))
-			$(document).ready(function () {
+			$(function() {
 				var modal = $('#messageModal');
-				modal.find('#message').html('{{{Session::get('modal-message')}}}');
+				modal.find('#message').html('{!!Session::get('modal-message')!!}');
 				modal.find('.fa').addClass('fa-info-circle');
 				modal.find('.modal-content')
 					.addClass('panel-info')
@@ -101,9 +101,9 @@
 			})
 		@endif
 		@if (Session::has('modal-success'))
-			$(document).ready(function () {
+			$(function() {
 				var modal = $('#messageModal');
-				modal.find('#message').html('{{{Session::get('modal-message')}}}');
+				modal.find('#message').html('{!!Session::get('modal-message')!!}');
 				modal.find('.fa').addClass('fa-check');
 				modal.find('.modal-content')
 					.addClass('panel-success')
@@ -112,9 +112,9 @@
 			})
 		@endif
 		@if (Session::has('modal-warning'))
-			$(document).ready(function () {
+			$(function() {
 				var modal = $('#messageModal');
-				modal.find('#message').html('{{{Session::get('modal-warning')}}}');
+				modal.find('#message').html('{!!Session::get('modal-warning')!!}');
 				modal.find('.fa').addClass('fa-exclamation-triangle');
 				modal.find('.modal-content')
 					.addClass('panel-warning')
@@ -123,9 +123,9 @@
 			})
 		@endif
 		@if (session()->has('modal-danger'))
-			$(document).ready(function () {
+			$(function() {
 				var modal = $('#messageModal');
-				modal.find('#message').html('{{{Session::get('modal-danger')}}}');
+				modal.find('#message').html('{!!Session::get('modal-danger')!!}');
 				modal.find('.fa').addClass('fa-exclamation-circle');
 				modal.find('.modal-content')
 					.addClass('panel-danger')

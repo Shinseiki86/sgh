@@ -116,7 +116,7 @@ class DepartamentoController extends Controller
 	 */
 	public function destroy($DEPA_ID, $showMsg=True)
 	{
-		parent::destroyModel($DEPA_ID, Departamento::class, $this->routeIndex, ['ciudades']);
+		parent::destroyModel($DEPA_ID, Departamento::class, $this->routeIndex);
 	}
 
 
