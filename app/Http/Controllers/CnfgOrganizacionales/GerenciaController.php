@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\Gerencia;
-use SGH\Empleador;
+use SGH\Models\Gerencia;
+use SGH\Models\Empleador;
 
 class GerenciaController extends Controller
 {

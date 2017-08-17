@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-use SGH\Cnos;
-use SGH\Cargo;
+use SGH\Models\Cnos;
+use SGH\Models\Cargo;
 
 class CargoController extends Controller
 {

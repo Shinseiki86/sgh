@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Contrato;
-use SGH\Prospecto;
-use SGH\Jefe;
-use SGH\Cargo;
-use SGH\Riesgo;
+use SGH\Models\Contrato;
+use SGH\Models\Prospecto;
+use SGH\Models\Jefe;
+use SGH\Models\Cargo;
+use SGH\Models\Riesgo;
+use SGH\Models\Empleador;
 
 class ContratoController extends Controller
 {
@@ -271,7 +272,7 @@ class ContratoController extends Controller
 	 */
 	public function getContratosEmpleador()
 	{
-		$data = \SGH\Empleador::join('CONTRATOS', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+		$data = Empleador::join('CONTRATOS', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
 								->select(
 									//'EMPLEADORES.EMPL_RAZONSOCIAL',
 									'EMPLEADORES.EMPL_NOMBRECOMERCIAL',

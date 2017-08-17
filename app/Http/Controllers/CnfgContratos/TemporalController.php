@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-use SGH\Temporal;
+use SGH\Models\Temporal;
 
 class TemporalController extends Controller
 {

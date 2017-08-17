@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\Grupo;
+use SGH\Models\Grupo;
 
 class GrupoController extends Controller
 {

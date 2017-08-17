@@ -10,7 +10,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 use Yajra\Datatables\Facades\Datatables;
 
-use SGH\Departamento;
+use SGH\Models\Departamento;
 
 class DepartamentoController extends Controller
 {

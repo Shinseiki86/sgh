@@ -19,7 +19,7 @@ return [
     | the role if it is in a different namespace.
     |
     */
-    'role' => 'SGH\Role',
+    'role' => 'SGH\Models\Role',
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
     | Update the permission if it is in a different namespace.
     |
     */
-    'permission' => 'SGH\Permission',
+    'permission' => 'SGH\Models\Permission',
 
     /*
     |--------------------------------------------------------------------------

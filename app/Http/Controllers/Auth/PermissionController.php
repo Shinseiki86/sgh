@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Permission;
+use SGH\Models\Permission;
 
 class PermissionController extends Controller
 {

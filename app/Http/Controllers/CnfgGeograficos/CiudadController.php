@@ -10,8 +10,8 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 use Yajra\Datatables\Facades\Datatables;
 
-use SGH\Ciudad;
-use SGH\Departamento;
+use SGH\Models\Ciudad;
+use SGH\Models\Departamento;
 
 class CiudadController extends Controller
 {
