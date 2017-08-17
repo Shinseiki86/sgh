@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Cnos;
 
 class CnosTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class CnosTableSeeder extends Seeder
 	{
 		//$this->command->info('---Seeder Cnos ');
 		
-		$cno = new \SGH\Cnos;
+		$cno = new Cnos;
         $cno->CNOS_CODIGO = '001';
         $cno->CNOS_DESCRIPCION = 'COORDINADORES';
         $cno->CNOS_OBSERVACIONES =  'CLASIFICACIÓN DE OCUPACIÓN DE COORDINADORES';

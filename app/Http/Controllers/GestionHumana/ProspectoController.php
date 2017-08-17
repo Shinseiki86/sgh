@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 
-use SGH\Prospecto;
+use SGH\Models\Prospecto;
 
 class ProspectoController extends Controller
 {

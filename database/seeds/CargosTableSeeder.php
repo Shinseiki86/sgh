@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Cargo;
 
 class CargosTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class CargosTableSeeder extends Seeder
 	{
 		//$this->command->info('---Seeder Cargos');
 		
-		$cargo = new \SGH\Cargo;
+		$cargo = new Cargo;
         $cargo->CARG_DESCRIPCION = 'COORDINADOR DE NÓMINA';
         $cargo->CARG_OBSERVACIONES =  'CARGO DE PRUEBA';
         $cargo->CNOS_ID =  1;

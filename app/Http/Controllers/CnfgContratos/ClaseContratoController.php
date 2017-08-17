@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-use SGH\ClaseContrato;
+use SGH\Models\ClaseContrato;
 
 class ClaseContratoController extends Controller
 {

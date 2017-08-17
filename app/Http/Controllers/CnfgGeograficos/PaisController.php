@@ -10,7 +10,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 use Yajra\Datatables\Facades\Datatables;
 
-use SGH\Pais;
+use SGH\Models\Pais;
 
 class PaisController extends Controller
 {
@@ -101,10 +101,10 @@ class PaisController extends Controller
 	public function edit($PAIS_ID)
 	{
 		// Se obtiene el registro
-		$departamento = Pais::findOrFail($PAIS_ID);
+		$pais = Pais::findOrFail($PAIS_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-geograficos/paises/edit', compact('departamento'));
+		return view('cnfg-geograficos/paises/edit', compact('pais'));
 	}
 
 

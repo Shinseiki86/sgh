@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\TipoIncidente;
+use SGH\Models\TipoIncidente;
 
 class TipoIncidenteController extends Controller
 {

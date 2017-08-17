@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Riesgo;
 
 class RiesgosTableSeeder extends Seeder
 {
@@ -13,14 +14,14 @@ class RiesgosTableSeeder extends Seeder
 	{
 		//$this->command->info('---Seeder Clasescontratos');
 		
-		$riesgo = new \SGH\Riesgo;
+		$riesgo = new Riesgo;
         $riesgo->RIES_DESCRIPCION = 'RIESGO I';
         $riesgo->RIES_FACTOR = 0.522;
         $riesgo->RIES_OBSERVACIONES =  'RIESGO I';
         $riesgo->RIES_CREADOPOR =  'SYSTEM';
         $riesgo->save();
 
-        $riesgo = new \SGH\Riesgo;
+        $riesgo = new Riesgo;
         $riesgo->RIES_DESCRIPCION = 'RIESGO II';
         $riesgo->RIES_FACTOR = 1.044;
         $riesgo->RIES_OBSERVACIONES =  'RIESGO II';

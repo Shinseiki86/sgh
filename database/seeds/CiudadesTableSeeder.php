@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Ciudad;
 
 class CiudadesTableSeeder extends Seeder
 {
@@ -1135,7 +1136,7 @@ class CiudadesTableSeeder extends Seeder
 		];
 
 		foreach ($ciudades as $ciudad) {
-			\SGH\Ciudad::create($ciudad);
+			Ciudad::create($ciudad);
 		}
 	}
 }

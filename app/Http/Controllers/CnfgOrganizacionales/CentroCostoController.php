@@ -1,14 +1,17 @@
 <?php
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
-use SGH\Http\Requests;
+
 use Validator;
+use SGH\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
-use SGH\CentroCosto;
-use SGH\Gerencia;
+
+use SGH\Models\CentroCosto;
+use SGH\Models\Gerencia;
+
 class CentroCostoController extends Controller
 {
     public function __construct()

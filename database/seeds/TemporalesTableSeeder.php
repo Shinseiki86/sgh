@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Temporal;
 
 class TemporalesTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class TemporalesTableSeeder extends Seeder
 	{
 		//$this->command->info('---Seeder Temporales');
 		
-		$temporal = new \SGH\Temporal;
+		$temporal = new Temporal;
         $temporal->TEMP_RAZONSOCIAL = 'PROSERVIS TEMPORALES SAS';
         $temporal->TEMP_NOMBRECOMERCIAL = 'PROSERVIS';
         $temporal->TEMP_DIRECCION = 'CALLE 39 E BIS 89';
@@ -21,7 +22,7 @@ class TemporalesTableSeeder extends Seeder
         $temporal->TEMP_CREADOPOR =  'SYSTEM';
         $temporal->save();
 
-        $temporal = new \SGH\Temporal;
+        $temporal = new Temporal;
         $temporal->TEMP_RAZONSOCIAL = 'ATIEMPO TEMPORALES SAS';
         $temporal->TEMP_NOMBRECOMERCIAL = 'ATIEMPO';
         $temporal->TEMP_DIRECCION = 'CALLE 39 E BIS 89';

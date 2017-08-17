@@ -1,9 +1,9 @@
 <?php
 	
 use Illuminate\Database\Seeder;
-use SGH\User;
-use SGH\Role;
-use SGH\Permission;
+use SGH\Models\User;
+use SGH\Models\Role;
+use SGH\Models\Permission;
 
 	class UsersTableSeeder extends Seeder {
 

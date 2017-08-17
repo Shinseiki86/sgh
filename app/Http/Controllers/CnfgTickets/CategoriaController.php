@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\Categoria;
+use SGH\Models\Categoria;
 
 class CategoriaController extends Controller
 {

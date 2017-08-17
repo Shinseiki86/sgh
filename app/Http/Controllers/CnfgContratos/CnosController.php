@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-use SGH\Cnos;
+use SGH\Models\Cnos;
 
 class CnosController extends Controller
 {

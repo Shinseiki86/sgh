@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Pais;
 
 class PaisesTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class PaisesTableSeeder extends Seeder
      */
     public function run()
     {
-        \SGH\Pais::create([
+        Pais::create([
             'PAIS_CODIGO'       => 57,
             'PAIS_NOMBRE'  =>  'COLOMBIA',
         ]);

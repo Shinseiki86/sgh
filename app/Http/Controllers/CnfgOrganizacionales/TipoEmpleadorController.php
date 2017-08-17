@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\TipoEmpleador;
+use SGH\Models\TipoEmpleador;
 
 class TipoEmpleadorController extends Controller
 {

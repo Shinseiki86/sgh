@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use Maatwebsite\Excel\Facades\Excel;
 
-use SGH\Tnl;
-use SGH\Incapacidad;
+use SGH\Models\Tnl;
+use SGH\Models\Incapacidad;
 use DateTime;
 use Carbon\Carbon;
 

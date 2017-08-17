@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Empleador;
 
 class EmpleadoresTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class EmpleadoresTableSeeder extends Seeder
     {
     	//$this->command->info('---Seeder Empleadores');
     	
-    	$empleador = new \SGH\Empleador;
+    	$empleador = new Empleador;
     	$empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL CALI S.A ESP';
         $empleador->EMPL_NIT = 900332590;
         $empleador->EMPL_CEDULAREPRESENTANTE = 79398605;
@@ -27,7 +28,7 @@ class EmpleadoresTableSeeder extends Seeder
     	$empleador->EMPL_CREADOPOR =  'SYSTEM';
     	$empleador->save();
 
-    	$empleador = new \SGH\Empleador;
+    	$empleador = new Empleador;
     	$empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL VALLE S.A ESP';
         $empleador->EMPL_NIT = 900235531;
         $empleador->EMPL_CEDULAREPRESENTANTE = 79398605;

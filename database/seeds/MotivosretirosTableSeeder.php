@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\MotivoRetiro;
 
 class MotivosRetirosTableSeeder extends Seeder
 {
@@ -13,13 +14,13 @@ class MotivosRetirosTableSeeder extends Seeder
     {
     	//$this->command->info('---Seeder Motivosretiros');
     	
-    	$motivoretiro = new \SGH\MotivoRetiro;
+    	$motivoretiro = new MotivoRetiro;
     	$motivoretiro->MORE_DESCRIPCION = 'RENUNCIA VOLUNTARIA';
     	$motivoretiro->MORE_OBSERVACIONES =  'MOTIVO RETIRO DE PRUEBA';
     	$motivoretiro->MORE_CREADOPOR =  'SYSTEM';
     	$motivoretiro->save();
 
-    	$motivoretiro = new \SGH\MotivoRetiro;
+    	$motivoretiro = new MotivoRetiro;
     	$motivoretiro->MORE_DESCRIPCION = 'DESPIDO SIN JUSTA CAUSA';
     	$motivoretiro->MORE_OBSERVACIONES =  'MOREEADOR DE PRUEBA';
     	$motivoretiro->MORE_CREADOPOR =  'SYSTEM';

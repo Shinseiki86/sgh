@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Contrato;
 
 class ContratosTableSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class ContratosTableSeeder extends Seeder
     public function run()
     {
         //
-        $contrato = new \SGH\Contrato;
+        $contrato = new Contrato;
     	$contrato->PROS_ID = 1;
     	$contrato->JEFE_ID = 2;
     	$contrato->CONT_CASOMEDICO = 'NO';
@@ -36,7 +37,7 @@ class ContratosTableSeeder extends Seeder
     	$contrato->CONT_OBSERVACIONES = 'CONTRATO DE PRUEBA';
     	$contrato->save();
 
-    	$contrato = new \SGH\Contrato;
+    	$contrato = new Contrato;
     	$contrato->PROS_ID = 2;
     	$contrato->JEFE_ID = 1;
     	$contrato->CONT_CASOMEDICO = 'NO';

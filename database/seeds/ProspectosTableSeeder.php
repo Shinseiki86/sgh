@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Prospecto;
 
 class ProspectosTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class ProspectosTableSeeder extends Seeder
     {
     	//$this->command->info('---Seeder Prospectos');
     	
-    	$prospecto = new \SGH\Prospecto;
+    	$prospecto = new Prospecto;
     	$prospecto->PROS_CEDULA = 1144173746;
     	$prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
     	$prospecto->PROS_PRIMERNOMBRE =  'KEVIN';
@@ -28,7 +29,7 @@ class ProspectosTableSeeder extends Seeder
     	$prospecto->PROS_CREADOPOR =  'SYSTEM';
     	$prospecto->save();
 
-        $prospecto = new \SGH\Prospecto;
+        $prospecto = new Prospecto;
         $prospecto->PROS_CEDULA = 1144173745;
         $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
         $prospecto->PROS_PRIMERNOMBRE =  'HECTOR';
@@ -43,7 +44,7 @@ class ProspectosTableSeeder extends Seeder
         $prospecto->PROS_CREADOPOR =  'SYSTEM';
         $prospecto->save();
 
-        $prospecto = new \SGH\Prospecto;
+        $prospecto = new Prospecto;
         $prospecto->PROS_CEDULA = 1144173744;
         $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
         $prospecto->PROS_PRIMERNOMBRE =  'DIEGO';
