@@ -73,6 +73,7 @@ use SGH\Permission;
                 $this->createPermissions('ciudad', 'ciudades');
                 $this->createPermissions('prospecto', 'hojas de vida');
                 $this->createPermissions('contrato', 'contratos');
+                $this->createPermissions('plantaslaborales', 'plantas laborales');
                 //$this->createPermissions('VALIDADOR DE TNL', 'VALIDADOR DE TNL');
                 $this->createPermissions('tkprioridad', 'prioridades ticket');
                 $this->createPermissions('tkestados', 'estados ticket');

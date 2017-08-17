@@ -177,6 +177,12 @@
 						</li>
 						@endif
 
+						@if(Entrust::can('plantaslaborales-*'))
+						<li>
+							<a href="{{ url ('cnfg-organizacionales/plantaslaborales') }}"><i class="fa fa-area-chart"></i> Plantas Laborales </a>
+						</li>
+						@endif
+
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>

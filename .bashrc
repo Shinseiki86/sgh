@@ -6,13 +6,18 @@ alias art:mig="php artisan migrate"
 alias art:reset="php artisan migrate:reset && php artisan migrate --seed"
 alias art:ref="php artisan migrate:refresh --seed"
 alias art:roll="php artisan migrate:rollback"
-alias art:dump="php artisan dumpautoload"
 alias art:cls="art clear-compiled && art cache:clear && art view:clear && art route:clear && art optimize"
 alias t="vendor/bin/phpunit"
 alias art:sch="php artisan schedule:run"
 alias art:cmpl="php artisan clear-compiled"
+
 alias comp:da="composer dump-autoload"
+alias art:dump="php artisan dumpautoload"
+alias art:cac="php artisan cache:clear"
+alias art:vc="php artisan view:clear"
+alias art:rc="php artisan route:clear"
 alias art:opt="php artisan optimize"
+
 
 # Generators Package
 alias g:c="php artisan generate:controller"
