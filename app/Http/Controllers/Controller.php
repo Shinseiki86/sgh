@@ -93,7 +93,7 @@ class Controller extends BaseController
 
 	private function getClass($class)
 	{
-		return class_exists($class) ? $class : '\\SGH\\'.basename($class);
+		return class_exists($class) ? $class : '\\SGH\\Models\\'.basename($class);
 	}
 
 	private function storeRelations($model, $relations)

@@ -64,7 +64,7 @@ if (! function_exists('model_to_array')) {
             $models = $class;
             $primaryKey = isset($primaryKey) ? $primaryKey : $models->first()->getKeyName();
         } else {
-            $class = class_exists($class) ? $class : '\\SGH\\'.basename($class);
+            $class = class_exists($class) ? $class : '\\SGH\\Models\\'.basename($class);
             $primaryKey = isset($primaryKey) ? $primaryKey : (new $class)->getKeyName();
             $models = $class::orderBy($primaryKey)->select([ $primaryKey , $column ]);
         }
@@ -96,7 +96,7 @@ if (! function_exists('nombre_empleado')) {
      */
     function nombre_empleado($PROS_ID) {
         
-        $prospecto = \SGH\Prospecto::findOrFail($PROS_ID);
+        $prospecto = \SGH\Models\Prospecto::findOrFail($PROS_ID);
         
         $nombre = "";
 
@@ -131,7 +131,7 @@ if (! function_exists('get_jefe_prospecto')) {
      */
     function get_jefe_prospecto($PROS_CEDULA) {
 
-        $prospecto = \SGH\Prospecto::activos()->where('PROS_CEDULA', $PROS_CEDULA)->pluck('JEFE_ID');
+        $prospecto = \SGH\Models\Prospecto::activos()->where('PROS_CEDULA', $PROS_CEDULA)->pluck('JEFE_ID');
         $pros_jefe = null;
 
         if ($prospecto != null) {
@@ -158,7 +158,7 @@ if (! function_exists('get_email_jefe')) {
      */
     function get_email_jefe($PROS_ID) {
 
-        $jefe = \SGH\Prospecto::where('PROS_ID', $PROS_ID)->pluck('PROS_CORREO');
+        $jefe = \SGH\Models\Prospecto::where('PROS_ID', $PROS_ID)->pluck('PROS_CORREO');
 
 
         $jefe_email = null;
@@ -187,7 +187,7 @@ if (! function_exists('get_email_empleador')) {
      */
     function get_email_empleador($EMPL_ID) {
 
-        $empleador = \SGH\Empleador::where('EMPL_ID', $EMPL_ID)->pluck('EMPL_COREO');
+        $empleador = \SGH\Models\Empleador::where('EMPL_ID', $EMPL_ID)->pluck('EMPL_COREO');
 
 
         $empl_email = null;
@@ -216,7 +216,7 @@ if (! function_exists('get_email_user')) {
      */
     function get_email_user($USER_ID) {
 
-        $usuario = \SGH\User::where('USER_id', $USER_ID)->pluck('email');
+        $usuario = \SGH\Models\Models\User::where('USER_id', $USER_ID)->pluck('email');
 
 
         $user_email = null;

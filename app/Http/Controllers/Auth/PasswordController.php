@@ -40,7 +40,7 @@ class PasswordController extends Controller
     }
 
     public function sendEmail($USER_id){
-        $user = \SGH\User::findOrFail($USER_id);
+        $user = \SGH\Models\User::findOrFail($USER_id);
         $this->sendResetLinkEmail($user);
     }
 
@@ -66,7 +66,7 @@ class PasswordController extends Controller
         if ( auth()->check() && is_null($token) ){
             //Si el rol es admin y el id recibido por GET no es null...
             if( auth()->user()->rol->ROLE_rol == 'admin' && Input::get('USER_id') !== null)
-                $user = \SGH\User::findOrFail(Input::get('USER_id'));
+                $user = \SGH\Models\User::findOrFail(Input::get('USER_id'));
             else
                 $user = auth()->user();
 
