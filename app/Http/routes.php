@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('riesgos', 'RiesgoController');
 		Route::resource('grupos', 'GrupoController');
 		Route::resource('turnos', 'TurnoController');
+		Route::resource('plantaslaborales', 'PlantaLaboralController');
 	});
 
 	Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {

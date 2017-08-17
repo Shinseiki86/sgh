@@ -59,4 +59,10 @@ class Empleador extends ModelWithSoftDeletes
 		return $this->hasMany(Contrato::class, $foreingKey);
 	}
 
+	public function plantaslaborales()
+	{
+		$foreingKey = 'EMPL_ID';
+		return $this->hasMany(PlantaLaboral::class, $foreingKey);
+	}
+
 }
