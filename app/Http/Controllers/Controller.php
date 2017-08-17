@@ -128,18 +128,13 @@ class Controller extends BaseController
 		$nameClass = str_upperspace(class_basename($model));
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($model->$created_by == 'SYSTEEM'){
-			flash_modal( $nameClass.' '.$id.' no se puede borrar.', 'danger' );
+		if($model->$created_by == 'SYSTEM'){
+			flash_modal( $nameClass.' '.$id.' no se puede borrar (Creado por SYSTEM).', 'danger' );
 		} else {
 
-			$confirmDeleteRelations = (bool)request()->get('_deleteRelations');
 			$relations = $model->relationships('HasMany');
-			$hasRelations = $confirmDeleteRelations ? true : $this->validateRelations($id, $relations);
 
-			if($hasRelations and $confirmDeleteRelations){
-				foreach ($relations as $relation => $info) {
-					$model->$relation()->delete();
-				}
+			if(!$this->validateRelations($nameClass, $relations)){
 				$model->delete();
 				flash_alert( $nameClass.' '.$id.' eliminado exitosamente.', 'success' );
 			}
@@ -147,11 +142,10 @@ class Controller extends BaseController
 		return redirect()->route($redirect)->send();
 	}
 
-	protected function validateRelations($id, $relations)
+	protected function validateRelations($nameClass, $relations)
 	{
 		$hasRelations = false;
 		$strRelations = [];
-		$action = request()->getRequestUri();
 
 		foreach ($relations as $relation => $info) {
 			if($info['count']>0){
@@ -161,9 +155,34 @@ class Controller extends BaseController
 		}
 
 		if(!empty($strRelations)){
-			session()->flash('deleteWithRelations', compact('id','strRelations','action'));
+			session()->flash('deleteWithRelations', compact('nameClass','strRelations'));
 		}
 		return $hasRelations;
+	}
+
+
+	protected function buttonEdit($ruta)
+	{
+		return \Html::link($ruta, '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', [
+			'class'=>'btn btn-small btn-info btn-xs',
+			'title'=>'Editar',
+			'data-tooltip'=>'tooltip'
+		],null,false).' ';
+	}
+
+	protected function buttonDelete($model, $modelId, $modelDescrip, $action)
+	{
+		return \Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
+			'class'=>'btn btn-xs btn-danger btn-delete',
+			'data-toggle'=>'modal',
+			'data-id'=> $model->$modelId,
+			'data-modelo'=> str_upperspace(class_basename($model)),
+			'data-descripcion'=> $model->$modelDescrip,
+			'data-action'=> $action.'/'.$model->$modelId,
+			'data-target'=>'#pregModalDelete',
+			'data-tooltip'=>'tooltip',
+			'title'=>'Borrar',
+		]);
 	}
 
 }

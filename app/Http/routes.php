@@ -50,9 +50,11 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 
 	Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
 		Route::resource('paises', 'PaisController');
+		Route::get('getPaises', 'PaisController@getData');
 		Route::resource('departamentos', 'DepartamentoController');
+		Route::get('getDepartamentos', 'DepartamentoController@getData');
 		Route::resource('ciudades', 'CiudadController');
-		Route::get('getCiudades', 'CiudadController@getCiudades');
+		Route::get('getCiudades', 'CiudadController@getData');
 	});
 
 	Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {

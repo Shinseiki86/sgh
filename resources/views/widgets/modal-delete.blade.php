@@ -1,10 +1,10 @@
 @push('scripts')
-	<script type="text/javascript">		
-		//Carga de datos a mensajes modales para eliminar y clonar registros	
-		$('#tabla').on('click', '.btn-delete', function(event){
+	<script type="text/javascript">
+
+		//Carga de datos a mensajes modales para eliminar registros	
+		$('.btn-delete').on('click', function(event){
 			var modal = $('#pregModalDelete');
 			var button = $(event.currentTarget); // Button that triggered the modal
-			
 			var id = button.data('id'); // Se obtiene valor en data-id
 			modal.find('.id').text(id); //Se asigna en la etiqueta con clase id
 
@@ -21,7 +21,7 @@
 		@if(Session::has('deleteWithRelations'))
 		$(function() {
 			var modal = $('#deleteWithRelations');
-			modal.find('.frmModal').attr('action', '{{Session::get('deleteWithRelations')['action']}}');
+			modal.find('.nameClass').text('{{Session::get('deleteWithRelations')['nameClass']}}');
 			modal.modal('show');
 		})
 		@endif
@@ -56,7 +56,6 @@
 
 					{{ Form::token() }}
 					{{ Form::hidden('_method', 'DELETE') }}
-					{{ Form::hidden('_deleteRelations', false) }}
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i> SI ',[
 						'class'=>'btn btn-xs btn-danger',
 						'type'=>'submit',
@@ -76,7 +75,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content panel-danger">
 			<div class="modal-header panel-heading" style="border-top-left-radius: inherit; border-top-right-radius: inherit;">
-				<h4 class="modal-title">¿Borrar registro <span class="id"></span>?</h4>
+				<h4 class="modal-title"><span class="nameClass"></span> con relaciones</h4>
 			</div>
 
 			<div class="modal-body">
@@ -85,34 +84,21 @@
 						<i class="fa fa-exclamation-triangle fa-3x fa-fw"></i>
 					</div>
 					<div class="col-xs-10">
-						<h4>Registro tiene las siguientes relaciones:<h4>
+						<h4><span class="nameClass"></span> tiene las siguientes relaciones:<h4>
 						<ul>
 						@foreach(Session::get('deleteWithRelations')['strRelations'] as $rel)
 							<li>{{$rel}}</li>
 						@endforeach
 						</ul>
-						Se borrarán todos los registros asociados. ¿Seguro?
+						No es posible borrar el registro.
 					</div>
 				</div>
 			</div>
 
 			<div class="modal-footer">
-				<form id="frmDelete" method="POST" action="" accept-charset="UTF-8" class="frmModal pull-right">
-					<button type="button" class="btn btn-xs btn-default" data-dismiss="modal">
-						<i class="fa fa-times" aria-hidden="true"></i> NO
-					</button>
-
-					{{ Form::token() }}
-					{{ Form::hidden('_method', 'DELETE') }}
-					{{ Form::hidden('_deleteRelations', true) }}
-					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i> SI ',[
-						'class'=>'btn btn-xs btn-danger',
-						'type'=>'submit',
-						'data-toggle'=>'modal',
-						'data-backdrop'=>'static',
-						'data-target'=>'#msgModalDeleting',
-					]) }}
-				</form>
+				<button type="button" class="btn btn-xs btn-default" data-dismiss="modal">
+					<i class="fa fa-times" aria-hidden="true"></i> OK
+				</button>
 			</div>
 		</div>
 	</div>
