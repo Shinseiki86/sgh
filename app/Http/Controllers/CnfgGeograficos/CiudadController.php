@@ -55,8 +55,36 @@ class CiudadController extends Controller
 		//$ciudades = Ciudad::all();
 		//Se carga la vista y se pasan los registros
 		//return view('cnfg-geograficos/ciudades/index', compact('ciudades'));
-		return view('cnfg-geograficos/ciudades/listado');
+		return view('cnfg-geograficos/ciudades/index');
 	}
+
+	/**
+	 * Muestra una lista de los registros.
+	 *
+	 * @return Response
+	 */
+	public function getCiudades()
+	{
+		//return Datatables::eloquent(SGH\Ciudad::query())->make(true);
+		return Datatables::collection(Ciudad::with('departamento')->get())->addColumn('action', function($ciudad){
+			$ruta = route('cnfg-geograficos.ciudades.edit', [ 'CIUD_ID' => $ciudad->CIUD_ID ] );
+			return  "<a class='btn btn-small btn-info btn-xs' href='".$ruta."' data-tooltip='tooltip' title='Editar'>
+						<i class='fa fa-pencil-square-o' aria-hidden='true'></i>
+					</a>".
+					\Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
+						'class'=>'btn btn-xs btn-danger btn-delete',
+						'data-toggle'=>'modal',
+						'data-id'=>  $ciudad->CIUD_ID,
+						'data-modelo'=> str_upperspace(class_basename($ciudad)),
+						'data-descripcion'=> $ciudad->CIUD_NOMBRE,
+						'data-action'=>'ciudades/'. $ciudad->CIUD_ID,
+						'data-target'=>'#pregModalDelete',
+						'data-tooltip'=>'tooltip',
+						'title'=>'Borrar',
+					]);
+		})->make(true);
+	}
+
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
 	 *

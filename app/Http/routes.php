@@ -1,7 +1,4 @@
 <?php
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,7 +23,6 @@ Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/',  function(){return view('dashboard/index');});
 });
-
 
 //Rutas para admin y owner
 Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
@@ -56,27 +52,7 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('paises', 'PaisController');
 		Route::resource('departamentos', 'DepartamentoController');
 		Route::resource('ciudades', 'CiudadController');
-		Route::get('listado', function(){
-	//return Datatables::eloquent(SGH\Ciudad::query())->make(true);
-
-						return Datatables::collection(SGH\Ciudad::with('departamento')->get())->addColumn('action', function($ciudad){
-							$ruta=route('cnfg-geograficos.ciudades.edit', [ 'CIUD_ID' => $ciudad->CIUD_ID ] );
-							return  "<a class='btn btn-small btn-info btn-xs' href='".$ruta."' data-tooltip='tooltip' title='Editar'>
-											<i class='fa fa-pencil-square-o' aria-hidden='true'></i>
-										</a>"." ".
-										Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-											'class'=>'btn btn-xs btn-danger btn-delete',
-											'data-toggle'=>'modal',
-											'data-id'=>  $ciudad->CIUD_ID,
-											'data-modelo'=> str_upperspace(class_basename($ciudad)),
-											'data-descripcion'=> $ciudad->CIUD_NOMBRE,
-											'data-action'=>'ciudades/'. $ciudad->CIUD_ID,
-											'data-target'=>'#pregModalDelete',
-											'data-tooltip'=>'tooltip',
-											'title'=>'Borrar',
-										]);
-						})->make(true);
-					});
+		Route::get('getCiudades', 'CiudadController@getCiudades');
 	});
 
 	Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
