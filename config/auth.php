@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => SGH\User::class,
+            'model' => SGH\Models\User::class,
             'table' => 'users',
         ],
 

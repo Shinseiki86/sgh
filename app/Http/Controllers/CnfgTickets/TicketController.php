@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\Ticket;
-use SGH\User;
-use SGH\Mail;
-use SGH\Prospecto;
+use SGH\Models\Ticket;
+use SGH\Models\User;
+use SGH\Models\Mail;
+use SGH\Models\Prospecto;
 
 use Carbon\Carbon;
 
@@ -536,7 +536,7 @@ class TicketController extends Controller
 	 */
 	public function getTicketsPorEstado()
 	{
-		$data = \SGH\Ticket::join('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
+		$data = Ticket::join('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
 								->select(
 									'ESTI_DESCRIPCION',
 									'ESTI_COLOR as COLOR',

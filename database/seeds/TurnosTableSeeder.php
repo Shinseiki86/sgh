@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Turno;
 
 class TurnosTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class TurnosTableSeeder extends Seeder
     {
     	//$this->command->info('---Seeder Empleadores');
     	
-        \SGH\Turno::create([
+        Turno::create([
             'TURN_DESCRIPCION' => 'TURNO DÍA',
             'TURN_CODIGO' => 'T1',
             'TURN_HORAINICIO' => '06:00:00',
@@ -22,7 +23,7 @@ class TurnosTableSeeder extends Seeder
             'EMPL_ID' => 1,
         ]);
 
-    	\SGH\Turno::create([
+    	Turno::create([
         	'TURN_DESCRIPCION' => 'TURNO NOCHE',
             'TURN_CODIGO' => 'T3',
             'TURN_HORAINICIO' => '22:00:00',

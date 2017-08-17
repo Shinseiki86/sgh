@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
+use Yajra\Datatables\Facades\Datatables;
 
-use SGH\Pais;
+use SGH\Models\Pais;
 
 class PaisController extends Controller
 {
@@ -48,10 +49,26 @@ class PaisController extends Controller
 	 */
 	public function index()
 	{
-		//Se obtienen todos los registros.
-		$paises = Pais::all();
-		//Se carga la vista y se pasan los registros
-		return view('cnfg-geograficos/paises/index', compact('paises'));
+		return view('cnfg-geograficos/paises/index');
+	}
+
+	/**
+	 * Retorna json para Datatable.
+	 *
+	 * @return json
+	 */
+	public function getData()
+	{
+		$model = Pais::with('departamentos')->get();
+		return Datatables::collection($model)
+			->addColumn('departamentos', function($model){
+				return $model->departamentos->count();
+			})
+			->addColumn('action', function($model){
+				$ruta = route('cnfg-geograficos.paises.edit', [ 'PAIS_ID'=>$model->PAIS_ID ]);
+				return parent::buttonEdit($ruta).
+					parent::buttonDelete($model, 'PAIS_ID', 'PAIS_NOMBRE', 'paises');
+			})->make(true);
 	}
 
 	/**
@@ -84,10 +101,10 @@ class PaisController extends Controller
 	public function edit($PAIS_ID)
 	{
 		// Se obtiene el registro
-		$departamento = Pais::findOrFail($PAIS_ID);
+		$pais = Pais::findOrFail($PAIS_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-geograficos/paises/edit', compact('departamento'));
+		return view('cnfg-geograficos/paises/edit', compact('pais'));
 	}
 
 
@@ -110,7 +127,7 @@ class PaisController extends Controller
 	 */
 	public function destroy($PAIS_ID, $showMsg=True)
 	{
-		parent::destroyModel($PAIS_ID, Pais::class, $this->routeIndex, ['departamentos']);
+		parent::destroyModel($PAIS_ID, Pais::class, $this->routeIndex);
 	}
 
 

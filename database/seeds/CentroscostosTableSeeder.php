@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\CentroCosto;
 
 class CentrosCostosTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class CentrosCostosTableSeeder extends Seeder
 	{
 		//$this->command->info('---Seeder Centroscostos');
 		
-		$centrocosto = new \SGH\CentroCosto;
+		$centrocosto = new CentroCosto;
 		$centrocosto->CECO_CODIGO = '500101';
 		$centrocosto->GERE_ID = 1;
         $centrocosto->CECO_DESCRIPCION = 'GESTIÓN HUMANA';
@@ -21,7 +22,7 @@ class CentrosCostosTableSeeder extends Seeder
         $centrocosto->CECO_CREADOPOR =  'SYSTEM';
         $centrocosto->save();
 
-        $centrocosto = new \SGH\CentroCosto;
+        $centrocosto = new CentroCosto;
         $centrocosto->CECO_CODIGO = '500102';
         $centrocosto->GERE_ID = 1;
         $centrocosto->CECO_DESCRIPCION = 'BIENESTAR Y DESARROLLO';

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Gerencia;
 
 class GerenciasTableSeeder extends Seeder
 {
@@ -13,14 +14,14 @@ class GerenciasTableSeeder extends Seeder
 	{
 		//$this->command->info('---Seeder Gerencias');
 		
-		$gerencia = new \SGH\Gerencia;
+		$gerencia = new Gerencia;
         $gerencia->GERE_DESCRIPCION = 'GERENCIA DE GESTIÓN HUMANA';
         $gerencia->EMPL_ID = 1;
         $gerencia->GERE_OBSERVACIONES =  'GERENCIA DE PRUEBA';
         $gerencia->GERE_CREADOPOR =  'SYSTEM';
         $gerencia->save();
 
-        $gerencia = new \SGH\Gerencia;
+        $gerencia = new Gerencia;
         $gerencia->GERE_DESCRIPCION = 'GERENCIA DE OPERACIONES';
         $gerencia->EMPL_ID = 1;
         $gerencia->GERE_OBSERVACIONES =  'GERENCIA DE PRUEBA';

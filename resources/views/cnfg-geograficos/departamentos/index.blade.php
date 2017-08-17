@@ -1,6 +1,5 @@
 @extends('layouts.menu')
 @section('title', '/ Departamentos')
-@include('datatable')
 
 @section('page_heading')
 	<div class="row">
@@ -20,7 +19,6 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="hidden-xs col-md-1">ID</th>
 				<th class="col-md-1">Código</th>
 				<th class="col-md-3">Nombre</th>
 				<th class="col-md-3">País</th>
@@ -29,39 +27,16 @@
 				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
-
-		<tbody>
-			@foreach($departamentos as $departamento)
-			<tr>
-				<td>{{ $departamento -> DEPA_ID }}</td>
-				<td>{{ $departamento -> DEPA_CODIGO }}</td>
-				<td>{{ $departamento -> DEPA_NOMBRE }}</td>
-				<td>{{ $departamento -> pais -> PAIS_NOMBRE }}</td>
-				<td>{{ $departamento -> ciudades -> count() }}</td>
-				<td>{{ $departamento -> DEPA_CREADOPOR }}</td>
-				<td>
-					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-geograficos.departamentos.edit', [ 'DEPA_ID' => $departamento->DEPA_ID ] ) }}" data-tooltip="tooltip" title="Editar">
-						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-					</a>
-
-					<!-- carga botón de borrar -->
-					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'class'=>'btn btn-xs btn-danger btn-delete',
-						'data-toggle'=>'modal',
-						'data-id'=> $departamento->DEPA_ID,
-						'data-modelo'=> str_upperspace(class_basename($departamento)),
-						'data-descripcion'=> $departamento->DEPA_NOMBRE,
-						'data-action'=>'departamentos/'. $departamento->DEPA_ID,
-						'data-target'=>'#pregModalDelete',
-						'data-tooltip'=>'tooltip',
-						'title'=>'Borrar',
-					])}}
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
+		<tbody></tbody>
 	</table>
 
 	@include('widgets/modal-delete')
+	@include('datatable-ajax', ['urlAjax'=>'getDepartamentos', 'columns'=>[
+		'DEPA_CODIGO',
+		'DEPA_NOMBRE',
+		'pais.PAIS_NOMBRE',
+		'ciudades',
+		'DEPA_CREADOPOR',
+		'action',
+	]])	
 @endsection

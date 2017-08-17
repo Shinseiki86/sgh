@@ -74,7 +74,7 @@ if (! function_exists('model_to_array')) {
             $column = str_replace('"', '', array_last(explode(') AS ', $column->getValue())));
 
         if (is_array($column)){
-            array_push($column, $primaryKey);
+            $column[] = $primaryKey;
             $models = $models->select($column)->get()->keyBy($primaryKey);
         } elseif (is_string($column)) {
             $models = $models->pluck($column, $primaryKey);

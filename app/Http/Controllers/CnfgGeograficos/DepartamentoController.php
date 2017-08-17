@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
+use Yajra\Datatables\Facades\Datatables;
 
-use SGH\Departamento;
+use SGH\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
@@ -48,11 +49,29 @@ class DepartamentoController extends Controller
 	 */
 	public function index()
 	{
-		//Se obtienen todos los registros.
-		$departamentos = Departamento::all();
-		//Se carga la vista y se pasan los registros
-		return view('cnfg-geograficos/departamentos/index', compact('departamentos'));
+		return view('cnfg-geograficos/departamentos/index');
 	}
+
+
+	/**
+	 * Retorna json para Datatable.
+	 *
+	 * @return json
+	 */
+	public function getData()
+	{
+		$model = Departamento::with('pais','ciudades')->get();
+		return Datatables::collection($model)
+			->addColumn('ciudades', function($model){
+				return $model->ciudades->count();
+			})
+			->addColumn('action', function($model){
+				$ruta = route('cnfg-geograficos.departamentos.edit', [ 'DEPA_ID'=>$model->DEPA_ID ]);
+				return parent::buttonEdit($ruta).
+					parent::buttonDelete($model, 'DEPA_ID', 'DEPA_NOMBRE', 'departamentos');
+			})->make(true);
+	}
+
 
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
@@ -116,7 +135,7 @@ class DepartamentoController extends Controller
 	 */
 	public function destroy($DEPA_ID, $showMsg=True)
 	{
-		parent::destroyModel($DEPA_ID, Departamento::class, $this->routeIndex, ['ciudades']);
+		parent::destroyModel($DEPA_ID, Departamento::class, $this->routeIndex);
 	}
 
 

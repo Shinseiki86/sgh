@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
+use Yajra\Datatables\Facades\Datatables;
 
-use SGH\Ciudad;
-use SGH\Departamento;
+use SGH\Models\Ciudad;
+use SGH\Models\Departamento;
 
 class CiudadController extends Controller
 {
@@ -20,7 +21,7 @@ class CiudadController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:ciudad-index', ['only' => ['index']]);
+		$this->middleware('permission:ciudad-index', ['only' => ['index','listadoCiudades']]);
 		$this->middleware('permission:ciudad-create', ['only' => ['create', 'store']]);
 		$this->middleware('permission:ciudad-edit', ['only' => ['edit', 'update']]);
 		$this->middleware('permission:ciudad-delete',   ['only' => ['destroy']]);
@@ -49,10 +50,23 @@ class CiudadController extends Controller
 	 */
 	public function index()
 	{
-		//Se obtienen todos los registros.
-		$ciudades = Ciudad::all();
-		//Se carga la vista y se pasan los registros
-		return view('cnfg-geograficos/ciudades/index', compact('ciudades'));
+		return view('cnfg-geograficos/ciudades/index');
+	}
+
+	/**
+	 * Retorna json para Datatable.
+	 *
+	 * @return json
+	 */
+	public function getData()
+	{
+		$model = Ciudad::with('departamento')->get();
+		return Datatables::collection($model)
+			->addColumn('action', function($model){
+				$ruta = route('cnfg-geograficos.ciudades.edit', [ 'CIUD_ID'=>$model->CIUD_ID ]);
+				return parent::buttonEdit($ruta).
+					parent::buttonDelete($model, 'CIUD_ID', 'CIUD_NOMBRE', 'ciudades');
+			})->make(true);
 	}
 
 	/**

@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,7 +9,6 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
 
 //Autenticación
 Route::auth();
@@ -53,8 +51,11 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 
 	Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
 		Route::resource('paises', 'PaisController');
+		Route::get('getPaises', 'PaisController@getData');
 		Route::resource('departamentos', 'DepartamentoController');
+		Route::get('getDepartamentos', 'DepartamentoController@getData');
 		Route::resource('ciudades', 'CiudadController');
+		Route::get('getCiudades', 'CiudadController@getData');
 	});
 
 	Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {

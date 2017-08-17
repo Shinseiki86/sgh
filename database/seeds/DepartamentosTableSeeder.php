@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Departamento;
 
 class DepartamentosTableSeeder extends Seeder
 {
@@ -48,7 +49,7 @@ class DepartamentosTableSeeder extends Seeder
 		];
 
 		foreach ($dptos as $dpto) {
-			\SGH\Departamento::create($dpto);
+			Departamento::create($dpto);
 		}
 	}
 }

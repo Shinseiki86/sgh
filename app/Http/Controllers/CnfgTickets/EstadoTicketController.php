@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\EstadoTicket;
+use SGH\Models\EstadoTicket;
 
 class EstadoTicketController extends Controller
 {

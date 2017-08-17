@@ -1,10 +1,10 @@
 @push('scripts')
 	<script type="text/javascript">
-		//Carga de datos a mensajes modales para eliminar y clonar registros	
-		$('#tabla').on('click', '.btn-delete', function(event){
-			var button = $(event.currentTarget); // Button that triggered the modal
+
+		//Carga de datos a mensajes modales para eliminar registros	
+		$('.btn-delete').on('click', function(event){
 			var modal = $('#pregModalDelete');
-			
+			var button = $(event.currentTarget); // Button that triggered the modal
 			var id = button.data('id'); // Se obtiene valor en data-id
 			modal.find('.id').text(id); //Se asigna en la etiqueta con clase id
 
@@ -15,8 +15,16 @@
 			modal.find('.descripcion').html(descripcion);
 
 			var urlForm = button.data('action'); // Se cambia acción del formulario.
-			$('.frmModal').attr('action', urlForm);
+			modal.find('.frmModal').attr('action', urlForm);
 		});
+
+		@if(Session::has('deleteWithRelations'))
+		$(function() {
+			var modal = $('#deleteWithRelations');
+			modal.find('.nameClass').text('{{Session::get('deleteWithRelations')['nameClass']}}');
+			modal.modal('show');
+		})
+		@endif
 
 	</script>
 @endpush
@@ -61,6 +69,41 @@
 	</div>
 </div><!-- Fin de Mensaje Modal confirmar borrado de registro.-->
 
+@if(Session::has('deleteWithRelations'))
+<!-- Mensaje Modal para confirmar borrado de registro-->
+<div class="modal fade" id="deleteWithRelations" role="dialog" tabindex="-1" >
+	<div class="modal-dialog">
+		<div class="modal-content panel-danger">
+			<div class="modal-header panel-heading" style="border-top-left-radius: inherit; border-top-right-radius: inherit;">
+				<h4 class="modal-title"><span class="nameClass"></span> con relaciones</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-xs-2">
+						<i class="fa fa-exclamation-triangle fa-3x fa-fw"></i>
+					</div>
+					<div class="col-xs-10">
+						<h4><span class="nameClass"></span> tiene las siguientes relaciones:<h4>
+						<ul>
+						@foreach(Session::get('deleteWithRelations')['strRelations'] as $rel)
+							<li>{{$rel}}</li>
+						@endforeach
+						</ul>
+						No es posible borrar el registro.
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-xs btn-default" data-dismiss="modal">
+					<i class="fa fa-times" aria-hidden="true"></i> OK
+				</button>
+			</div>
+		</div>
+	</div>
+</div><!-- Fin de Mensaje Modal confirmar borrado de registro.-->
+@endif
 
 <!-- Mensaje Modal al borrar registro. Bloquea la pantalla mientras se procesa la solicitud -->
 <div class="modal fade" id="msgModalDeleting" role="dialog">

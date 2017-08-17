@@ -2,18 +2,17 @@
 
 namespace SGH\Http\Controllers\Auth;
 
-use SGH\User;
-use SGH\Rol;
 use Validator;
 use SGH\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
+use SGH\Models\User;
+use SGH\Models\Rol;
 
 class AuthController extends Controller
 {

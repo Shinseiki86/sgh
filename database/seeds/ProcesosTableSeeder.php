@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Proceso;
 
 class ProcesosTableSeeder extends Seeder
 {
@@ -13,15 +14,15 @@ class ProcesosTableSeeder extends Seeder
 	{
 		//$this->command->info('---Seeder Gerencias');
 		
-        \SGH\Proceso::create([
+        Proceso::create([
             'PROC_DESCRIPCION' => 'SOLICITUD DE PROCESOS DISCIPLINARIOS',
             'PROC_OBSERVACIONES' =>  'DISCIPLINARIOS',
         ]);
-        \SGH\Proceso::create([
+        Proceso::create([
             'PROC_DESCRIPCION' => 'PROCESO 1',
             'PROC_OBSERVACIONES' =>  'PRUEBAS',
         ]);
-        \SGH\Proceso::create([
+        Proceso::create([
             'PROC_DESCRIPCION' => 'PROCESO 2',
             'PROC_OBSERVACIONES' =>  'PRUEBAS',
         ]);

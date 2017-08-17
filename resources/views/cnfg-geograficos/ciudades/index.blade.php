@@ -1,7 +1,5 @@
 @extends('layouts.menu')
 @section('title', '/ Ciudades')
-@include('datatable')
-
 
 @section('page_heading')
 	<div class="row">
@@ -25,40 +23,18 @@
 				<th class="col-md-4">Nombre</th>
 				<th class="col-md-4">Departamento</th>
 				<th class="hidden-xs col-md-1">Creado</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all">Acciones</th>
 			</tr>
 		</thead>
-
-		<tbody>
-			@foreach($ciudades as $ciudad)
-			<tr>
-				<td>{{ $ciudad -> CIUD_CODIGO }}</td>
-				<td>{{ $ciudad -> CIUD_NOMBRE }}</td>
-				<td>{{ $ciudad -> departamento -> DEPA_NOMBRE }}</td>
-				<td>{{ $ciudad -> CIUD_CREADOPOR }}</td>
-				<td>
-					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-geograficos.ciudades.edit', [ 'CIUD_ID' => $ciudad->CIUD_ID ] ) }}" data-tooltip="tooltip" title="Editar">
-						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-					</a>
-
-					<!-- carga botón de borrar -->
-					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'class'=>'btn btn-xs btn-danger btn-delete',
-						'data-toggle'=>'modal',
-						'data-id'=> $ciudad->CIUD_ID,
-						'data-modelo'=> str_upperspace(class_basename($ciudad)),
-						'data-descripcion'=> $ciudad->CIUD_NOMBRE,
-						'data-action'=>'ciudades/'. $ciudad->CIUD_ID,
-						'data-target'=>'#pregModalDelete',
-						'data-tooltip'=>'tooltip',
-						'title'=>'Borrar',
-					])}}
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
+		<tbody></tbody>
 	</table>
 
 	@include('widgets/modal-delete')
+	@include('datatable-ajax', ['urlAjax'=>'getCiudades', 'columns'=>[
+		'CIUD_CODIGO',
+		'CIUD_NOMBRE',
+		'departamento.DEPA_NOMBRE',
+		'CIUD_CREADOPOR',
+		'action',
+	]])	
 @endsection

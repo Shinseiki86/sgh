@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\Riesgo;
+use SGH\Models\Riesgo;
 
 class RiesgoController extends Controller
 {

@@ -116,28 +116,73 @@ class Controller extends BaseController
 	 * @param  int  $id
 	 * @return Response
 	 */
-	protected function destroyModel($id, $class, $redirect, $relations=[])
+	protected function destroyModel($id, $class, $redirect)
 	{
 		// Se obtiene el registro
 		$class = $this->getClass($class);
 		$model = $class::findOrFail($id);
 
         $prefix = strtoupper(substr($class::CREATED_AT, 0, 4));
-        $deleted_by = $prefix.'_ELIMINADOPOR';
+        $created_by = $prefix.'_CREADOPOR';
 
 		$nameClass = str_upperspace(class_basename($model));
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($model->$deleted_by == 'SYSTEM'){
-			flash_modal( $nameClass.' '.$id.' no se puede borrar.', 'danger' );
+		if($model->$created_by == 'SYSTEM'){
+			flash_modal( $nameClass.' '.$id.' no se puede borrar (Creado por SYSTEM).', 'danger' );
 		} else {
-			foreach ($relations as $relation) {
-				$model->$relation()->delete();
+
+			$relations = $model->relationships('HasMany');
+
+			if(!$this->validateRelations($nameClass, $relations)){
+				$model->delete();
+				flash_alert( $nameClass.' '.$id.' eliminado exitosamente.', 'success' );
 			}
-			$model->delete();
-			flash_alert( $nameClass.' '.$id.' eliminado exitosamente.', 'success' );
 		}
 		return redirect()->route($redirect)->send();
+	}
+
+	protected function validateRelations($nameClass, $relations)
+	{
+		$hasRelations = false;
+		$strRelations = [];
+
+		foreach ($relations as $relation => $info) {
+			if($info['count']>0){
+				$strRelations[] = $info['count'].' '.$relation;
+				$hasRelations = true;
+			}
+		}
+
+		if(!empty($strRelations)){
+			session()->flash('deleteWithRelations', compact('nameClass','strRelations'));
+		}
+		return $hasRelations;
+	}
+
+
+	protected function buttonEdit($ruta)
+	{
+		return \Html::link($ruta, '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', [
+			'class'=>'btn btn-small btn-info btn-xs',
+			'title'=>'Editar',
+			'data-tooltip'=>'tooltip'
+		],null,false).' ';
+	}
+
+	protected function buttonDelete($model, $modelId, $modelDescrip, $action)
+	{
+		return \Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
+			'class'=>'btn btn-xs btn-danger btn-delete',
+			'data-toggle'=>'modal',
+			'data-id'=> $model->$modelId,
+			'data-modelo'=> str_upperspace(class_basename($model)),
+			'data-descripcion'=> $model->$modelDescrip,
+			'data-action'=> $action.'/'.$model->$modelId,
+			'data-target'=>'#pregModalDelete',
+			'data-tooltip'=>'tooltip',
+			'title'=>'Borrar',
+		]);
 	}
 
 }

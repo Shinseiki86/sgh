@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SGH\Models\Ticket;
 
 class TicketsTableSeeder extends Seeder
 {

@@ -21,7 +21,6 @@
 	{!! Html::style('assets/stylesheets/sb-admin-2.css') !!}
 
 	@stack('head')
-
 </head>
 <body class="sidebar-closed">
 	@yield('body')
@@ -36,9 +35,9 @@
 			tooltips = $('[data-tooltip="tooltip"]');
 			if(tooltips.length > 0)
 				tooltips.tooltip();
-
 		})
 	</script>
+	
 	@stack('scripts')
 </body>
 </html>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\Sancion;
+use SGH\Models\Sancion;
 
 class SancionController extends Controller
 {
