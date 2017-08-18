@@ -34,9 +34,8 @@
 	@include('datatable-ajax', ['urlAjax'=>'getDepartamentos', 'columns'=>[
 		'DEPA_CODIGO',
 		'DEPA_NOMBRE',
-		'pais.PAIS_NOMBRE',
-		'ciudades',
+		'PAIS_NOMBRE',
+		'CIUDADES_COUNT',
 		'DEPA_CREADOPOR',
-		'action',
 	]])	
 @endsection

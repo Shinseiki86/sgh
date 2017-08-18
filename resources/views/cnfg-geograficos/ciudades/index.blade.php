@@ -33,8 +33,7 @@
 	@include('datatable-ajax', ['urlAjax'=>'getCiudades', 'columns'=>[
 		'CIUD_CODIGO',
 		'CIUD_NOMBRE',
-		'departamento.DEPA_NOMBRE',
+		'DEPA_NOMBRE',
 		'CIUD_CREADOPOR',
-		'action',
 	]])	
 @endsection

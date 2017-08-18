@@ -59,9 +59,12 @@ class PaisController extends Controller
 	 */
 	public function getData()
 	{
-		$model = Pais::with('departamentos')->get();
+		//$model = Pais::with('departamentos')->get();
+		$model = Pais::select(['PAIS_ID','PAIS_CODIGO','PAIS_NOMBRE','PAIS_CREADOPOR'])
+						->get();
+
 		return Datatables::collection($model)
-			->addColumn('departamentos', function($model){
+			->addColumn('DEPARTAMENTOS_COUNT', function($model){
 				return $model->departamentos->count();
 			})
 			->addColumn('action', function($model){

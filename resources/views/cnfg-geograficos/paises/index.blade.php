@@ -33,8 +33,7 @@
 	@include('datatable-ajax', ['urlAjax'=>'getPaises', 'columns'=>[
 		'PAIS_CODIGO',
 		'PAIS_NOMBRE',
-		'departamentos',
+		'DEPARTAMENTOS_COUNT',
 		'PAIS_CREADOPOR',
-		'action',
 	]])	
 @endsection

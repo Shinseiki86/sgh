@@ -60,7 +60,12 @@ class CiudadController extends Controller
 	 */
 	public function getData()
 	{
-		$model = Ciudad::with('departamento')->get();
+		$model = Ciudad::join('DEPARTAMENTOS', 'DEPARTAMENTOS.DEPA_ID', '=', 'CIUDADES.DEPA_ID')
+						->select(['CIUD_ID','CIUD_CODIGO','CIUD_NOMBRE','DEPA_NOMBRE','CIUD_CREADOPOR'])
+						->get();
+		//$model = Ciudad::with('departamento')->get();
+						//dd($model->take(10));
+
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
 				$ruta = route('cnfg-geograficos.ciudades.edit', [ 'CIUD_ID'=>$model->CIUD_ID ]);

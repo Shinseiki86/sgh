@@ -27,6 +27,7 @@
 				@foreach($columns as $col)
 					{data:'{{$col}}'},
 				@endforeach
+					{data:'action', orderable: false, searchable: false}
 				],
 				lengthMenu: [[5, 10, 15, 25,50,100], [5, 10, 15, 25,50,100]],
 				pagingType: 'simple_numbers',

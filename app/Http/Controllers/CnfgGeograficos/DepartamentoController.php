@@ -60,9 +60,13 @@ class DepartamentoController extends Controller
 	 */
 	public function getData()
 	{
-		$model = Departamento::with('pais','ciudades')->get();
+		//$model = Departamento::with('pais','ciudades')->get();
+		$model = Departamento::join('PAISES', 'PAISES.PAIS_ID', '=', 'DEPARTAMENTOS.PAIS_ID')
+						->select(['DEPA_ID','DEPA_CODIGO','DEPA_NOMBRE','PAIS_NOMBRE','DEPA_CREADOPOR'])
+						->get();
+
 		return Datatables::collection($model)
-			->addColumn('ciudades', function($model){
+			->addColumn('CIUDADES_COUNT', function($model){
 				return $model->ciudades->count();
 			})
 			->addColumn('action', function($model){
