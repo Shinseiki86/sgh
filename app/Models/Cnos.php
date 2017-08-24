@@ -23,12 +23,6 @@ class Cnos extends ModelWithSoftDeletes
 		'CNOS_OBSERVACIONES',
 	];
 
-	public function countCargosSortable($query, $direction)
-    {
-        return $query->withCount('cargos')
-                    ->orderBy('cargos_count', $direction);
-    }
-
 	public function cargos()
 	{
 		$foreingKey = 'CNOS_ID';

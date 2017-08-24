@@ -14,6 +14,8 @@ use SGH\Models\Riesgo;
 
 class RiesgoController extends Controller
 {
+	private $routeIndex = 'cnfg-organizacionales.riesgos.index';
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -31,16 +33,11 @@ class RiesgoController extends Controller
 	 */
 	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'RIES_DESCRIPCION' => ['required', 'max:100', 'unique:RIESGOS,RIES_DESCRIPCION,'.$id.',RIES_ID'],
 			'RIES_FACTOR' => ['required', 'numeric'],
 			'RIES_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -74,7 +71,7 @@ class RiesgoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Riesgo::class, 'cnfg-organizacionales.riesgos.index');
+		parent::storeModel(Riesgo::class, $this->routeIndex);
 	}
 
 
@@ -102,7 +99,7 @@ class RiesgoController extends Controller
 	 */
 	public function update($RIES_ID)
 	{
-		parent::updateModel($RIES_ID ,Riesgo::class, 'cnfg-organizacionales.riesgos.index');
+		parent::updateModel($RIES_ID ,Riesgo::class, $this->routeIndex);
 	}
 
 	/**
@@ -111,19 +108,9 @@ class RiesgoController extends Controller
 	 * @param  int  $RIES_ID
 	 * @return Response
 	 */
-	public function destroy($RIES_ID, $showMsg=True)
+	public function destroy($RIES_ID)
 	{
-		$riesgo = Riesgo::findOrFail($RIES_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($riesgo->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$riesgo->RIES_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$riesgo->delete();
-				flash_alert( 'Riesgo '.$riesgo->RIES_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-organizacionales.riesgos.index');
+		parent::destroyModel($RIES_ID, Riesgo::class, $this->routeIndex);
 	}
 	
 }

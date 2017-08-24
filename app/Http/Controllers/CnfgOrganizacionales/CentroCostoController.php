@@ -14,6 +14,8 @@ use SGH\Models\Gerencia;
 
 class CentroCostoController extends Controller
 {
+	private $routeIndex = 'cnfg-organizacionales.centroscostos.index';
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -28,19 +30,16 @@ class CentroCostoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($request, $CECO_ID = 0)
+	protected function validator($data, $id = 0)
 	{
-		$validator = Validator::make($request->all(), [
-			'CECO_CODIGO'        => ['numeric', 'required', 'unique:CENTROSCOSTOS,CECO_CODIGO,'.$CECO_ID.',CECO_ID'],//forma para validar un campo unique
+		return Validator::make($data, [
+			'CECO_CODIGO'        => ['numeric', 'required', 'unique:CENTROSCOSTOS,CECO_CODIGO,'.$id.',CECO_ID'],//forma para validar un campo unique
 			'CECO_DESCRIPCION'   => ['required', 'max:100'],
 			'GERE_ID'            => ['required'],
 			'CECO_OBSERVACIONES' => ['max:300'],
 		]);
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
+
 	/**
 	 * Muestra una lista de los registros.
 	 *
@@ -72,15 +71,7 @@ class CentroCostoController extends Controller
 	 */
 	public function store()
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request);
-		//Se crea el registro.
-		$centrocosto = CentroCosto::create($request->all());
-		// redirecciona al index de controlador
-		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' creado exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.centroscostos.index');
+		parent::storeModel(CentroCosto::class, $this->routeIndex);
 	}
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -105,35 +96,18 @@ class CentroCostoController extends Controller
 	 */
 	public function update($CECO_ID)
 	{
-		//Datos recibidos desde la vista.
-		$request = request();
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$this->validator($request, $CECO_ID);
-		// Se obtiene el registro
-		$centrocosto = CentroCosto::findOrFail($CECO_ID);
-		//y se actualiza con los datos recibidos.
-		$centrocosto->update($request->all());
-		// redirecciona al index de controlador
-		flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' modificado exitosamente.', 'success' );
-		return redirect()->route('cnfg-organizacionales.centroscostos.index');
+		parent::updateModel($CECO_ID, CentroCosto::class, $this->routeIndex);
 	}
+
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
 	 * @param  int  $CECO_ID
 	 * @return Response
 	 */
-	public function destroy($CECO_ID, $showMsg=True)
+	public function destroy($CECO_ID)
 	{
-		$centrocosto = CentroCosto::findOrFail($CECO_ID);
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($centrocosto->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Centro de costo '.$centrocosto->CECO_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$centrocosto->delete();
-				flash_alert( 'Centro de costo '.$centrocosto->CECO_ID.' eliminado exitosamente.', 'success' );
-		}
-		return redirect()->route('cnfg-organizacionales.centroscostos.index');
+		parent::destroyModel($CECO_ID, CentroCosto::class, $this->routeIndex);
 	}
 	
 }

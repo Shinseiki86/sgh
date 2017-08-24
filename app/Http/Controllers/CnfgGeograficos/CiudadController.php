@@ -15,8 +15,8 @@ use SGH\Models\Departamento;
 
 class CiudadController extends Controller
 {
-
 	private $routeIndex = 'cnfg-geograficos.ciudades.index';
+	private $class = Ciudad::class;
 
     public function __construct()
 	{
@@ -42,7 +42,6 @@ class CiudadController extends Controller
 
 	}
 
-
 	/**
 	 * Muestra una lista de los registros.
 	 *
@@ -61,10 +60,14 @@ class CiudadController extends Controller
 	public function getData()
 	{
 		$model = Ciudad::join('DEPARTAMENTOS', 'DEPARTAMENTOS.DEPA_ID', '=', 'CIUDADES.DEPA_ID')
-						->select(['CIUD_ID','CIUD_CODIGO','CIUD_NOMBRE','DEPA_NOMBRE','CIUD_CREADOPOR'])
-						->get();
-		//$model = Ciudad::with('departamento')->get();
-						//dd($model->take(10));
+						->select([
+							'CIUD_ID',
+							'CIUD_CODIGO',
+							'CIUD_NOMBRE',
+							'DEPA_CODIGO',
+							'DEPA_NOMBRE',
+							'CIUD_CREADOPOR',
+						])->get();
 
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
@@ -134,11 +137,10 @@ class CiudadController extends Controller
 	 * @param  int  $CIUD_ID
 	 * @return Response
 	 */
-	public function destroy($CIUD_ID, $showMsg=True)
+	public function destroy($CIUD_ID)
 	{
 		parent::destroyModel($CIUD_ID, Ciudad::class, $this->routeIndex);
 	}
-
 
 }
 

@@ -14,6 +14,8 @@ use SGH\Models\TipoEmpleador;
 
 class TipoEmpleadorController extends Controller
 {
+	private $routeIndex = 'cnfg-organizacionales.tiposempleadores.index';
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -31,15 +33,10 @@ class TipoEmpleadorController extends Controller
 	 */
 	protected function validator($data, $id)
 	{
-		$validator = Validator::make($data, [
+		return Validator::make($data, [
 			'TIEM_DESCRIPCION' => ['required', 'max:100', 'unique:TIPOSEMPLEADORES,TIEM_DESCRIPCION,'.$id.',TIEM_ID'],
 			'TIEM_OBSERVACIONES' => ['max:300'],
 		]);
-
-		if ($validator->fails())
-			return redirect()->back()
-						->withErrors($validator)
-						->withInput()->send();
 	}
 
 
@@ -53,7 +50,7 @@ class TipoEmpleadorController extends Controller
 		//Se obtienen todos los registros.
 		$tiposempleadores = TipoEmpleador::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-organizacionales/tiposempleadores/index', compact('tiposempleadores'));
+		return view($this->routeIndex, compact('tiposempleadores'));
 	}
 
 	/**
@@ -73,7 +70,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(TipoEmpleador::class, 'cnfg-organizacionales.tiposempleadores.index');
+		parent::storeModel(TipoEmpleador::class, $this->routeIndex);
 	}
 
 
@@ -101,7 +98,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function update($TIEM_ID)
 	{
-		parent::updateModel($TIEM_ID, TipoEmpleador::class, 'cnfg-organizacionales.tiposempleadores.index');
+		parent::updateModel($TIEM_ID, TipoEmpleador::class, $this->routeIndex);
 	}
 
 	/**
@@ -110,19 +107,9 @@ class TipoEmpleadorController extends Controller
 	 * @param  int  $TIEM_ID
 	 * @return Response
 	 */
-	public function destroy($TIEM_ID, $showMsg=True)
+	public function destroy($TIEM_ID)
 	{
-		$cno = TipoEmpleador::findOrFail($TIEM_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($cno->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Tipo de empleador '.$cno->TIEM_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$cno->delete();
-				flash_alert( 'Tipo de empleador '.$cno->TIEM_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-organizacionales.tiposempleadores.index');
+		parent::destroyModel($TIEM_ID, TipoEmpleador::class, $this->routeIndex);
 	}
 	
 }

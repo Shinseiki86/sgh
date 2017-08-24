@@ -15,6 +15,9 @@ use SGH\Models\Cargo;
 
 class CargoController extends Controller
 {
+	private $route = 'cnfg-contratos.cargos';
+	private $class = Cargo::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -50,7 +53,7 @@ class CargoController extends Controller
 		//Se obtienen todos los registros.
 		$cargos = Cargo::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-contratos/cargos/index', compact('cargos'));
+		return view($this->route.'.index', compact('cargos'));
 	}
 
 	/**
@@ -63,7 +66,7 @@ class CargoController extends Controller
 		//Se crea un array con los CNOS disponibles
 		$arrCnos = model_to_array(Cnos::class, 'CNOS_DESCRIPCION');
 
-		return view('cnfg-contratos/cargos/create', compact('arrCnos'));
+		return view($this->route.'.create', compact('arrCnos'));
 		
 	}
 
@@ -74,7 +77,7 @@ class CargoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Cargo::class, 'cnfg-contratos.cargos.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -93,7 +96,7 @@ class CargoController extends Controller
 		$arrCnos = model_to_array(Cnos::class, 'CNOS_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-contratos/cargos/edit', compact('cargo', 'arrCnos'));
+		return view($this->route.'.edit', compact('cargo', 'arrCnos'));
 	}
 
 
@@ -105,7 +108,7 @@ class CargoController extends Controller
 	 */
 	public function update($CARG_ID)
 	{
-		parent::updateModel($CARG_ID, Cargo::class, 'cnfg-contratos.cargos.index');
+		parent::updateModel($CARG_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -114,19 +117,9 @@ class CargoController extends Controller
 	 * @param  int  $CARG_ID
 	 * @return Response
 	 */
-	public function destroy($CARG_ID, $showMsg=True)
+	public function destroy($CARG_ID)
 	{
-		$cargo = Cargo::findOrFail($CARG_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($cargo->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Cargo '.$cargo->CARG_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$cargo->delete();
-				flash_alert( 'Cargo '.$cargo->CARG_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-contratos.cargos.index');
+		parent::destroyModel($CARG_ID, $this->class, $this->routeIndex);
 	}
 	
 }

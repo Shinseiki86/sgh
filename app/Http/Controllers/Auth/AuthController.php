@@ -16,7 +16,6 @@ use SGH\Models\Rol;
 
 class AuthController extends Controller
 {
-
 	protected $username = 'username';
 	
 	/*

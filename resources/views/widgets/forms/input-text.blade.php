@@ -1,1 +1,1 @@
-{{ Form::text( $name, old($name), ['class' => 'form-control '] + (isset($options)?$options:[]) )}}
+{{ Form::text( $name, old($name), ['class'=>'form-control'] + (isset($options)?$options:[]) )}}

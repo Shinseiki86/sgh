@@ -1,3 +1,6 @@
+@include('datapicker')
+@include('chosen')
+
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])
 
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'EMPL_ID', 'label'=>'Empleador', 'data'=>$arrEmpleadores])
@@ -17,7 +20,6 @@
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'RIES_ID', 'label'=>'Riesgo ARL', 'data'=>$arrRiesgos])
 
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'CARG_ID', 'label'=>'Cargo', 'data'=>$arrCargos])
-
 
 @include('widgets.forms.group', ['type'=>'date', 'name'=>'CONT_FECHAINGRESO', 'label'=>'Fecha de Ingreso' ])
 

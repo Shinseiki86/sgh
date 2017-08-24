@@ -72,9 +72,8 @@
 				<td>{{ $contrato -> ciudad_servicio -> CIUD_NOMBRE }}</td>
 				<td>{{ $contrato -> CONT_OBSERVACIONES }}</td>
 				<td>
-
 					<!-- Botón Editar (edit) -->
-					@if($contrato->ESCO_ID == sgh\EstadoContrato::ACTIVO)
+					@if($contrato->ESCO_ID == SGH\Models\EstadoContrato::ACTIVO)
 					<a class="btn btn-xs btn-info" href="{{ route('gestion-humana.contratos.edit', [ 'CONT_ID' => $contrato->CONT_ID ]) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
@@ -96,7 +95,7 @@
 					@endif
 
 					<!-- Botón Cambiar estado -->
-					@if($contrato->ESCO_ID == sgh\EstadoContrato::ACTIVO)
+					@if($contrato->ESCO_ID == SGH\Models\EstadoContrato::ACTIVO)
 					<a class="btn btn-xs btn-warning" href="#" data-tooltip="tooltip" title="Cambiar estado">
 						<i class="fa fa-flag" aria-hidden="true"></i>
 					</a>

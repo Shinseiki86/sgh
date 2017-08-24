@@ -1,6 +1,5 @@
 @extends('layouts.menu')
 @section('title', '/ Prospectos')
-@include('datatable')
 
 @section('page_heading')
 	<div class="row">
@@ -16,7 +15,6 @@
 @endsection
 
 @section('section')
-
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
@@ -35,47 +33,22 @@
 				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
-
-		<tbody>
-			@foreach($prospectos as $prospecto)
-			<tr class="{{ ($prospecto->PROS_MARCA == 'NO' || $prospecto->PROS_MARCA == NULL) ? '' : 'danger' }}">
-				<td>{{ $prospecto -> PROS_CEDULA }}</td>
-				<td>{{ $prospecto -> PROS_FECHAEXPEDICION }}</td>
-				<td>{{ $prospecto -> PROS_PRIMERNOMBRE }}</td>
-				<td>{{ $prospecto -> PROS_SEGUNDONOMBRE }}</td>
-				<td>{{ $prospecto -> PROS_PRIMERAPELLIDO }}</td>
-				<td>{{ $prospecto -> PROS_SEGUNDOAPELLIDO }}</td>
-				<td>{{ $prospecto -> PROS_SEXO }}</td>
-				<td>{{ $prospecto -> PROS_DIRECCION }}</td>
-				<td>{{ $prospecto -> PROS_TELEFONO }}</td>
-				<td>{{ $prospecto -> PROS_CELULAR }}</td>
-				<td>{{ $prospecto -> PROS_CORREO }}</td>
-				<td>{{ $prospecto -> PROS_MARCA or 'NO' }}</td>
-				<td>
-					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('gestion-humana.prospectos.edit', [ 'PROS_ID' => $prospecto->PROS_ID ] ) }}" data-tooltip="tooltip" title="Editar">
-						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-					</a>
-
-					<!-- carga botón de borrar -->
-					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
-						'class'=>'btn btn-xs btn-danger btn-delete',
-						'data-toggle'=>'modal',
-						'data-id'=> $prospecto->PROS_ID,
-						'data-modelo'=> str_upperspace(class_basename($prospecto)),
-						'data-descripcion'=> $prospecto->PROS_PRIMERNOMBRE,
-						'data-action'=>'prospectos/'. $prospecto->PROS_ID,
-						'data-target'=>'#pregModalDelete',
-						'data-tooltip'=>'tooltip',
-						'title'=>'Borrar',
-					])}}
-
-
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
+		<tbody></tbody>
 	</table>
 
 	@include('widgets/modal-delete')
+	@include('datatable-ajax', ['urlAjax'=>'getProspectos', 'columns'=>[
+		'PROS_CEDULA',
+		'PROS_FECHAEXPEDICION',
+		'PROS_PRIMERNOMBRE',
+		'PROS_SEGUNDONOMBRE',
+		'PROS_PRIMERAPELLIDO',
+		'PROS_SEGUNDOAPELLIDO',
+		'PROS_SEXO',
+		'PROS_DIRECCION',
+		'PROS_TELEFONO',
+		'PROS_CELULAR',
+		'PROS_CORREO',
+		'PROS_MARCA',
+	]])	
 @endsection

@@ -60,7 +60,9 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 
 	Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
 		Route::resource('prospectos', 'ProspectoController', ['parameters'=>['prospectos' => 'PROS_ID']]);
+		Route::get('getProspectos', 'ProspectoController@getData');
 		Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
+		Route::get('getContratos', 'ContratoController@getData');
 		Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');
 
 		Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {

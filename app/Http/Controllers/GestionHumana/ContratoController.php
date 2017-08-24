@@ -77,6 +77,26 @@ class ContratoController extends Controller
 	}
 
 	/**
+	 * Retorna json para Datatable.
+	 *
+	 * @return json
+	 */
+	public function getData()
+	{
+		$model = Contrato::select([
+							'CONT_ID',
+						])->get();
+
+		return Datatables::collection($model)
+			->addColumn('action', function($model){
+				$ruta = route($this->route.'.edit', [ 'CONT_ID'=>$model->CONT_ID ]);
+				return parent::buttonEdit($ruta).
+					parent::buttonDelete($model, 'CONT_ID', 'PROS_CEDULA', 'contratos');
+			})->make(true);
+	}
+
+
+	/**
 	 * Muestra el formulario para crear un nuevo registro.
 	 *
 	 * @return Response
@@ -143,7 +163,6 @@ class ContratoController extends Controller
 
 		$jefe = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'PROSPECTOS.'.$primaryKey , $column ])->get();
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
-
 
 		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades'));
 	}
