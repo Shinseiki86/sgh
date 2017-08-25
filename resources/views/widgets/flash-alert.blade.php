@@ -1,7 +1,7 @@
 {{-- Utilizado para mostrar mensajes provenientes de los controladores --}}
 
 <!-- ALERTAS -->
-<div class="alertas">
+<div class="alerts">
 
 	@if (Session::has('alert-info'))
 		@foreach(Session::get('alert-info') as $msg)

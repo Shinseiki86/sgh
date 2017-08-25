@@ -23,10 +23,12 @@ class Controller extends BaseController
         return $validator->errors()->all();
     }
 
-
 	/**
 	 * Guarda el registro nuevo en la base de datos.
 	 *
+	 * @param  string  $class
+	 * @param  string  $redirect
+	 * @param  array  $relations
 	 * @return Response
 	 */
 	protected function storeModel($class, $redirect, array $relations = [])
@@ -61,6 +63,9 @@ class Controller extends BaseController
 	 * Actualiza un registro en la base de datos.
 	 *
 	 * @param  int  $id
+	 * @param  string  $class
+	 * @param  string  $redirect
+	 * @param  array  $relations
 	 * @return Response
 	 */
 	protected function updateModel($id, $class, $redirect, array $relations = [])
@@ -91,29 +96,12 @@ class Controller extends BaseController
 		}
 	}
 
-	private function getClass($class)
-	{
-		return class_exists($class) ? $class : '\\SGH\\Models\\'.basename($class);
-	}
-
-	private function storeRelations($model, $relations)
-	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-
-		if(!empty($relations)){
-			foreach ($relations as $ids => $relation) {
-				$arrayIds = isset($data[$ids]) ? $data[$ids] : [];
-				$model->$relation()->sync($arrayIds, true);
-			}
-		}
-	}
-
-
 	/**
 	 * Elimina un registro en la base de datos.
 	 *
 	 * @param  int  $id
+	 * @param  string  $class
+	 * @param  string  $redirect
 	 * @return Response
 	 */
 	protected function destroyModel($id, $class, $redirect)
@@ -142,6 +130,19 @@ class Controller extends BaseController
 		return redirect()->route($redirect)->send();
 	}
 
+	private function storeRelations($model, $relations)
+	{
+		//Datos recibidos desde la vista.
+		$data = request()->all();
+
+		if(!empty($relations)){
+			foreach ($relations as $ids => $relation) {
+				$arrayIds = isset($data[$ids]) ? $data[$ids] : [];
+				$model->$relation()->sync($arrayIds, true);
+			}
+		}
+	}
+
 	protected function validateRelations($nameClass, $relations)
 	{
 		$hasRelations = false;
@@ -159,7 +160,6 @@ class Controller extends BaseController
 		}
 		return $hasRelations;
 	}
-
 
 	protected function buttonEdit($ruta)
 	{
@@ -185,4 +185,8 @@ class Controller extends BaseController
 		]);
 	}
 
+	private function getClass($class)
+	{
+		return class_exists($class) ? $class : '\\SGH\\Models\\'.basename($class);
+	}
 }
