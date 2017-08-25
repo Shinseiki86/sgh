@@ -66,7 +66,10 @@ class GerenciaController extends Controller
 
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
-		return view('cnfg-organizacionales/gerencias/create', compact('arrEmpleadores', 'arrProcesos'));
+		//JSON con valores preseleccionados para el select múltiple
+		$PROC_ids = json_encode([]);
+
+		return view('cnfg-organizacionales/gerencias/create', compact('arrEmpleadores', 'arrProcesos', 'PROC_ids'));
 	}
 
 	/**
@@ -96,6 +99,7 @@ class GerenciaController extends Controller
 
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
+		//JSON con valores preseleccionados para el select múltiple
 		$PROC_ids = $gerencia->procesos->pluck('PROC_ID')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
