@@ -30,6 +30,9 @@ class CreateTableDepartamentos extends Migration
 
             $table->string('DEPA_NOMBRE', 300)
                 ->comment('Nombre del departamento');
+
+            $table->string('DEPA_DESCRIPCION', 300)
+                ->comment('Nombre del departamento');
             
             //Traza
             $table->string('DEPA_CREADOPOR')

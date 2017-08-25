@@ -1,8 +1,8 @@
 <?php
 
-namespace SGH;
+namespace SGH\Models;
 
-use SGH\ModelWithSoftDeletes;
+use SGH\Models\ModelWithSoftDeletes;
 
 class PlantaLaboral extends ModelWithSoftDeletes
 {
@@ -29,10 +29,10 @@ class PlantaLaboral extends ModelWithSoftDeletes
 		return $this->belongsTo(Empleador::class, $foreingKey);
 	}
 
-	public function cargos()
+	public function cargo()
 	{
 		$foreingKey = 'CARG_ID';
-		return $this->hasMany(Cargo::class, $foreingKey);
+		return $this->belongsTo(Cargo::class, $foreingKey);
 	}
 
 }

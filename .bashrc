@@ -12,7 +12,7 @@ alias art:sch="php artisan schedule:run"
 alias art:cmpl="php artisan clear-compiled"
 
 alias comp:da="composer dump-autoload"
-alias art:dump="php artisan dumpautoload"
+alias art:dump="php artisan dump autoload"
 alias art:cac="php artisan cache:clear"
 alias art:vc="php artisan view:clear"
 alias art:rc="php artisan route:clear"
