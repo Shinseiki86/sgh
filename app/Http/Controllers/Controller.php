@@ -54,7 +54,7 @@ class Controller extends BaseController
 			return redirect()->route($redirect)->send();
 		} else {
 			return redirect()->back()->withErrors($validator)->withInput()->send();
-		}
+		}		
 	}
 
 	/**

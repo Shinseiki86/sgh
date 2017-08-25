@@ -41,6 +41,7 @@ class CiudadController extends Controller
 		]);
 
 	}
+	
 
 	/**
 	 * Muestra una lista de los registros.

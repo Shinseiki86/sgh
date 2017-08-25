@@ -183,6 +183,12 @@
 						</li>
 						@endif
 
+						{{-- @if(Entrust::can('turno-*')) --}}
+						<li>
+							<a href="{{ url ('tipoEntidads') }}"><i class="fa fa-institution fa-fw"></i> Tipo Entidades </a>
+						</li>
+						{{-- @endif --}}
+
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>
@@ -257,6 +263,20 @@
 
 						<li>
 							<a href="{{ url ('gestion-humana/helpers/validadorTNL') }}"><i class="fa fa-check-square-o fa-fw"></i> Validador de TNL</a>
+						</li>
+
+					</ul>
+					<!-- /.nav-second-level -->
+				</li>
+
+				<!-- Ausentismo -->
+				<li>
+					<a href="#" class="dropdown-collapse"><i class="fa fa-bed fa-fw"></i> <span class="side-menu-title">Ausentismo</span><span class="fa arrow"></span></a>
+
+					<ul class="nav nav-second-level">
+
+						<li>
+							<a href="{{ url ('gestion-humana/helpers/validadorTNL') }}"><i class="fa fa-check-square-o fa-fw"></i> Diagnosticos</a>
 						</li>
 
 					</ul>

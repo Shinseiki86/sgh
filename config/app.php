@@ -147,6 +147,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        Mitul\Generator\GeneratorServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -213,6 +216,9 @@ return [
         'Zipper' => Chumper\Zipper\Facades\Zipper::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'Form'      => Collective\Html\FormFacade::class,
+         'Html'      => Collective\Html\HtmlFacade::class,
+         'Flash'     => Laracasts\Flash\Flash::class,
     ],
 
 ];

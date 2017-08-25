@@ -203,7 +203,10 @@ return [
         'CONT_SALARIO' => 'Salario',
         'CONT_VARIABLE' => 'Variable',
         'CONT_FECHARETIRO' => 'Fecha de Retiro',
-
+        'DIAG_CODIGO' => 'Codigo CIE10',
+        'DIAG_DESCRIPCION' => 'Descripcion',
+        'TIEN_CODIGO' => 'Codigo Tipo Entidad',
+        'TIEN_DESCRIPCION' => 'Descripcion',
     ],
 
 ];

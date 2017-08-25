@@ -105,3 +105,11 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 	Route::get('/blank', 'SBAdminController@blank');
 	Route::get('/documentation', 'SBAdminController@documentation');
 });*/
+
+
+Route::resource('tipoEntidads', 'TipoEntidadController');
+Route::get('getTipoEntidad', 'TipoEntidadController@getData');
+Route::get('tipoEntidads/{id}/delete', [
+    'as' => 'tipoEntidads.delete',
+    'uses' => 'TipoEntidadController@destroy',
+]);
