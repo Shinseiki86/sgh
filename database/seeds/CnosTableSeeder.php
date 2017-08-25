@@ -20,6 +20,13 @@ class CnosTableSeeder extends Seeder
         $cno->CNOS_OBSERVACIONES =  'CLASIFICACIÓN DE OCUPACIÓN DE COORDINADORES';
         $cno->CNOS_CREADOPOR =  'SYSTEM';
         $cno->save();
+
+        $cno = new Cnos;
+        $cno->CNOS_CODIGO = '002';
+        $cno->CNOS_DESCRIPCION = 'OPERATIVOS';
+        $cno->CNOS_OBSERVACIONES =  'CLASIFICACIÓN DE OCUPACIÓN DE PERSONAL OPERATIVO';
+        $cno->CNOS_CREADOPOR =  'SYSTEM';
+        $cno->save();
 	}
 
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\PlantaLaboral;
+use SGH\Models\PlantaLaboral;
 
 class PlantaLaboralController extends Controller
 {
@@ -34,7 +34,7 @@ class PlantaLaboralController extends Controller
 		return Validator::make($data, [
 			'EMPL_ID' => ['numeric', 'required'],
 			'CARG_ID' => ['numeric', 'required'],
-			'PALA_CANTIDAD' => ['required'],
+			'PALA_CANTIDAD' => ['numeric','required'],
 		]);
 	}
 
@@ -48,6 +48,7 @@ class PlantaLaboralController extends Controller
 	{
 		//Se obtienen todos los registros.
 		$plantaslaborales = PlantaLaboral::all();
+		//dd($plantaslaborales);
 		//Se carga la vista y se pasan los registros
 		return view('cnfg-organizacionales/plantaslaborales/index', compact('plantaslaborales'));
 	}
@@ -62,7 +63,10 @@ class PlantaLaboralController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		return view('cnfg-organizacionales/plantaslaborales/create', compact('arrEmpleadores'));
+		//Se crea un array con los empleadores
+		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
+
+		return view('cnfg-organizacionales/plantaslaborales/create', compact('arrEmpleadores','arrCargos'));
 	}
 
 	/**
@@ -82,16 +86,19 @@ class PlantaLaboralController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function edit($EMPL_ID)
+	public function edit($PALA_ID)
 	{
 		// Se obtiene el registro
-		$grupo = PlantaLaboral::findOrFail($EMPL_ID);
+		$plantalaboral = PlantaLaboral::findOrFail($PALA_ID);
 
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
+		//Se crea un array con los empleadores
+		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/plantaslaborales/edit', compact('grupo','arrEmpleadores'));
+		return view('cnfg-organizacionales/plantaslaborales/edit', compact('plantalaboral','arrEmpleadores','arrCargos'));
 	}
 
 
@@ -101,9 +108,9 @@ class PlantaLaboralController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function update($EMPL_ID)
+	public function update($PALA_ID)
 	{
-		parent::updateModel($EMPL_ID, PlantaLaboral::class, 'cnfg-organizacionales.plantaslaborales.index');
+		parent::updateModel($PALA_ID, PlantaLaboral::class, 'cnfg-organizacionales.plantaslaborales.index');
 	}
 
 	/**
@@ -112,16 +119,16 @@ class PlantaLaboralController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function destroy($EMPL_ID, $showMsg=True)
+	public function destroy($PALA_ID, $showMsg=True)
 	{
-		$plantaslaborales = PlantaLaboral::findOrFail($EMPL_ID);
+		$plantaslaborales = PlantaLaboral::findOrFail($PALA_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($plantaslaborales->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'PlantaLaboral '.$plantaslaborales->EMPL_ID.' no se puede borrar.', 'danger' );
+			flash_modal( 'Planta Laboral '.$plantaslaborales->PALA_ID.' no se puede borrar.', 'danger' );
 		} else {
 			$plantaslaborales->delete();
-				flash_alert( 'PlantaLaboral '.$plantaslaborales->EMPL_ID.' eliminado exitosamente.', 'success' );
+				flash_alert( 'Planta Laboral '.$plantaslaborales->PALA_ID.' eliminado exitosamente.', 'success' );
 		}
 
 		return redirect()->route('cnfg-organizacionales.plantaslaborales.index');

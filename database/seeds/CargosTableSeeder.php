@@ -20,5 +20,12 @@ class CargosTableSeeder extends Seeder
         $cargo->CNOS_ID =  1;
         $cargo->CARG_CREADOPOR =  'SYSTEM';
         $cargo->save();
+
+        $cargo = new Cargo;
+        $cargo->CARG_DESCRIPCION = 'CONDUCTOR';
+        $cargo->CARG_OBSERVACIONES =  'CARGO DE PRUEBA';
+        $cargo->CNOS_ID =  2;
+        $cargo->CARG_CREADOPOR =  'SYSTEM';
+        $cargo->save();
 	}
 }
