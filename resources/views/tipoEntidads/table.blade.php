@@ -13,7 +13,7 @@
 			<td>{!! $tipoEntidad->TIEN_OBSERVACIONES !!}</td>
              <td>
                 <!-- Botón Editar (edit) -->
-                <a class="btn btn-small btn-info btn-xs" href="{{ route('tipoEntidads.edit', [ $tipoEntidad->PREFIJO_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+                <a class="btn btn-small btn-info btn-xs" href="{{ route('tipoEntidads.edit', [ $tipoEntidad->TIEN_ID ] ) }}" data-tooltip="tooltip" title="Editar">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
 
@@ -21,10 +21,10 @@
                 {{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
                     'class'=>'btn btn-xs btn-danger btn-delete',
                     'data-toggle'=>'modal',
-                    'data-id'=> $tipoEntidad->PREFIJO_ID,
+                    'data-id'=> $tipoEntidad->TIEN_ID,
                     'data-modelo'=> str_upperspace(class_basename($tipoEntidad)),
-                    'data-descripcion'=> $tipoEntidad->PREFIJO_NOMBRE,
-                    'data-action'=>'ciudades/'. $tipoEntidad->PREFIJO_ID,
+                    'data-descripcion'=> $tipoEntidad->TIEN_NOMBRE,
+                    'data-action'=>'ciudades/'. $tipoEntidad->TIEN_ID,
                     'data-target'=>'#pregModalDelete',
                     'data-tooltip'=>'tooltip',
                     'title'=>'Borrar',

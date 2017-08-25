@@ -113,3 +113,11 @@ Route::get('tipoEntidads/{id}/delete', [
     'as' => 'tipoEntidads.delete',
     'uses' => 'TipoEntidadController@destroy',
 ]);
+
+
+Route::resource('entidads', 'EntidadController');
+Route::get('getEntidad', 'EntidadController@getData');
+Route::get('entidads/{id}/delete', [
+    'as' => 'entidads.delete',
+    'uses' => 'EntidadController@destroy',
+]);

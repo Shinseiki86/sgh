@@ -12,25 +12,24 @@ class TipoEntidadesTableSeeder extends Seeder
      */
     public function run()
     {
-    	//$this->command->info('---Seeder Empleadores');
     	
-        TipoEntidad::create([
-            'TIEN_CODIGO' => 'RIESGO',
+        
+       TipoEntidad::create([
+            'TIEN_CODIGO' => 'ARL',
             'TIEN_DESCRIPCION' => 'Administradora de Riesgos Laborales',
             'TIEN_OBSERVACIONES' => 'Empresas que administran los Riesgos del Empleado',
         ]);
 
-    	TipoEntidad::create([
-            'TIEN_CODIGO' => 'SALUD',
+        TipoEntidad::create([
+            'TIEN_CODIGO' => 'EPS',
             'TIEN_DESCRIPCION' => 'Entidad Promotora de Salud',
             'TIEN_OBSERVACIONES' => 'Empresas que administran la salud del Empleado',
         ]);
 
         TipoEntidad::create([
-            'TIEN_CODIGO' => 'RECREACION',
+            'TIEN_CODIGO' => 'CCF',
             'TIEN_DESCRIPCION' => 'Cajas de Compensacion',
             'TIEN_OBSERVACIONES' => 'Empresas orientadas a la Recreacion de los Empleados',
         ]);
-
     }
 }

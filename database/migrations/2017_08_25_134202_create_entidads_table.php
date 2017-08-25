@@ -3,9 +3,9 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTipoEntidadsTable extends Migration
+class CreateEntidadsTable extends Migration
 {
-	private $nomTabla = 'tipoEntidades';
+	private $nomTabla = 'entidades';
 
 	/**
 	 * Run the migrations.
@@ -14,30 +14,33 @@ class CreateTipoEntidadsTable extends Migration
 	 */
 	public function up()
 	{
-		$commentTabla = 'Contiene la clasificación de tipos de entidades existentes como ejemplo: cajas de compensación, EPS, ARL, fondos de pensiones etc';
+		$commentTabla = 'Contiene las entidades existentes de todos los tipos de entidades';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::create('tipoEntidades', function(Blueprint $table)
+		Schema::create('entidades', function(Blueprint $table)
 		{
 			
-			$table->increments('TIEN_ID')->comment('Valor autonumérico, llave primaria de la tabla.');
-			$table->string('TIEN_CODIGO')->comment('Codigo del tipo de Entidad');
-			$table->string('TIEN_DESCRIPCION')->comment('Descripcion del tipo de Entidad');
-			$table->string('TIEN_OBSERVACIONES')->comment('Observaciones correspondientes al tipo de entidad')->nullable();
+			$table->increments('ENTI_ID')->comment('Valor autonumérico, llave primaria de la tabla.');
+			$table->string('ENTI_CODIGO')->comment('Codigo de la Entidad');
+			$table->string('ENTI_NIT')->comment('Nit de la Endidad');
+			$table->string('ENTI_RAZONSOCIAL')->comment('Razon Social de la Entidad');
+			$table->string('ENTI_OBSERVACIONES')->nullable()->comment('Observacion Relacionada a la Entidad');
+			$table->unsignedInteger('TIEN_ID');
+			$table->foreign('TIEN_ID')->references('TIEN_ID')->on('tipoentidades')->onDelete('cascade')->onUpdate('cascade');
 
 
 			//Traza
-            $table->string('TIEN_CREADOPOR')
+            $table->string('ENTI_CREADOPOR')
                 ->comment('Usuario que creó el registro en la tabla');
-            $table->timestamp('TIEN_FECHACREADO')
+            $table->timestamp('ENTI_FECHACREADO')
                 ->comment('Fecha en que se creó el registro en la tabla.');
-            $table->string('TIEN_MODIFICADOPOR')->nullable()
+            $table->string('ENTI_MODIFICADOPOR')->nullable()
                 ->comment('Usuario que realizó la última modificación del registro en la tabla.');
-            $table->timestamp('TIEN_FECHAMODIFICADO')->nullable()
+            $table->timestamp('ENTI_FECHAMODIFICADO')->nullable()
                 ->comment('Fecha de la última modificación del registro en la tabla.');
-            $table->string('TIEN_ELIMINADOPOR')->nullable()
+            $table->string('ENTI_ELIMINADOPOR')->nullable()
                 ->comment('Usuario que eliminó el registro en la tabla.');
-            $table->timestamp('TIEN_FECHAELIMINADO')->nullable()
+            $table->timestamp('ENTI_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
 
             //Relaciones
@@ -57,7 +60,7 @@ class CreateTipoEntidadsTable extends Migration
 	public function down()
 	{
 		echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::drop('tipoEntidades');
+		Schema::drop('entidades');
 	}
 
 }

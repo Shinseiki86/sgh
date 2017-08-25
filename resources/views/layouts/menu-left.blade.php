@@ -189,6 +189,12 @@
 						</li>
 						{{-- @endif --}}
 
+						{{-- @if(Entrust::can('turno-*')) --}}
+						<li>
+							<a href="{{ url ('entidads') }}"><i class="fa fa-institution fa-fw"></i> Entidades </a>
+						</li>
+						{{-- @endif --}}
+
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>

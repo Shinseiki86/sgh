@@ -207,6 +207,9 @@ return [
         'DIAG_DESCRIPCION' => 'Descripcion',
         'TIEN_CODIGO' => 'Codigo Tipo Entidad',
         'TIEN_DESCRIPCION' => 'Descripcion',
+        'ENTI_CODIGO' => 'Codigo Entidad',
+        'ENTI_NIT' => 'Nit Entidad',
+        'ENTI_RAZONSOCIAL' => 'Razon Social',
     ],
 
 ];
