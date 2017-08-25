@@ -46,7 +46,7 @@
 						'data-toggle'=>'modal',
 						'data-id'=> $plantalaboral->PALA_ID,
 						'data-modelo'=> str_upperspace(class_basename($plantalaboral)),
-						'data-descripcion'=> $plantalaboral->GRUP_DESCRIPCION,
+						'data-descripcion'=> $plantalaboral->empleador->EMPL_NOMBRECOMERCIAL . ' - ' .  $plantalaboral->cargo->CARG_DESCRIPCION,
 						'data-action'=>'plantaslaborales/'. $plantalaboral->PALA_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',

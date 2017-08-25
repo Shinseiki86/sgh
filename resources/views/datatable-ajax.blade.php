@@ -20,8 +20,10 @@
 				processing: true,
 				serverSide: true,
 				ajax: '{{$urlAjax}}',
-				sScrollY: '350px',
+				pagingType: 'simple_numbers',
+	 			lengthMenu: [[5,10,25,50,100], [5,10,15,25,50,100]],
 				bScrollCollapse: true,
+				sScrollY: '350px',
 				rowReorder: false,
 				columns: [
 				@foreach($columns as $col)
@@ -29,8 +31,6 @@
 				@endforeach
 					{data:'action', orderable: false, searchable: false}
 				],
-				lengthMenu: [[5, 10, 15, 25,50,100], [5, 10, 15, 25,50,100]],
-				pagingType: 'simple_numbers',
 				responsive: true,
 				language: { 
 					sProcessing:     'Procesando...', 
@@ -40,16 +40,14 @@
 					sInfo:           'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros', 
 					sInfoEmpty:      'Mostrando registros del 0 al 0 de un total de 0 registros', 
 					sInfoFiltered:   '(filtrado de un total de _MAX_ registros)', 
-					//sInfoPostFix:    '', 
 					sSearch:         'Buscar:', 
-					//sUrl:            '', 
 					sInfoThousands:  ',', 
 					sLoadingRecords: 'Cargando...', 
 					oPaginate: { 
-						sFirst:    'Primero', 
-						sLast:     'Último', 
-						sNext:     'Siguiente', 
-						sPrevious: 'Anterior'
+						sFirst:    '<i class="fa fa-angle-double-left" aria-hidden="true"></i>',
+						sLast:     '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+						sNext:     '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
+						sPrevious: '<i class="fa fa-chevron-left" aria-hidden="true"></i>'
 					} 
 				},
 				drawCallback : function(settings) {

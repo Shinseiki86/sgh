@@ -14,7 +14,8 @@ use SGH\Models\Gerencia;
 
 class CentroCostoController extends Controller
 {
-	private $routeIndex = 'cnfg-organizacionales.centroscostos.index';
+	private $route = 'cnfg-organizacionales.centroscostos';
+	private $class = CentroCosto::class;
 
     public function __construct()
 	{
@@ -71,7 +72,7 @@ class CentroCostoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(CentroCosto::class, $this->routeIndex);
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -96,7 +97,7 @@ class CentroCostoController extends Controller
 	 */
 	public function update($CECO_ID)
 	{
-		parent::updateModel($CECO_ID, CentroCosto::class, $this->routeIndex);
+		parent::updateModel($CECO_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -107,7 +108,7 @@ class CentroCostoController extends Controller
 	 */
 	public function destroy($CECO_ID)
 	{
-		parent::destroyModel($CECO_ID, CentroCosto::class, $this->routeIndex);
+		parent::destroyModel($CECO_ID, $this->class, $this->route.'.index');
 	}
 	
 }

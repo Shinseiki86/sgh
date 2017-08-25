@@ -119,7 +119,7 @@ class CargoController extends Controller
 	 */
 	public function destroy($CARG_ID)
 	{
-		parent::destroyModel($CARG_ID, $this->class, $this->routeIndex);
+		parent::destroyModel($CARG_ID, $this->class, $this->route.'.index');
 	}
 	
 }

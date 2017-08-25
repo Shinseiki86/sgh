@@ -14,6 +14,9 @@ use SGH\Models\Empleador;
 
 class EmpleadorController extends Controller
 {
+	private $route = 'cnfg-organizacionales.empleadores';
+	private $class = Empleador::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -42,10 +45,7 @@ class EmpleadorController extends Controller
 			'CIUD_CEDULA' => ['required'],
 			'CIUD_DOMICILIO' => ['required'],
 		]);
-
-		
 	}
-
 
 	/**
 	 * Muestra una lista de los registros.
@@ -57,7 +57,7 @@ class EmpleadorController extends Controller
 		//Se obtienen todos los registros.
 		$empleadores = Empleador::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-organizacionales/empleadores/index', compact('empleadores'));
+		return view($this->route.'.index', compact('empleadores'));
 	}
 
 	/**
@@ -69,7 +69,7 @@ class EmpleadorController extends Controller
 	{
 		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
-		return view('cnfg-organizacionales/empleadores/create', compact('arrCiudades'));
+		return view($this->route.'.create', compact('arrCiudades'));
 	}
 
 	/**
@@ -80,9 +80,8 @@ class EmpleadorController extends Controller
 	public function store()
 	{
 		//dd(request()->all());
-		parent::storeModel(Empleador::class, 'cnfg-organizacionales.empleadores.index');
+		parent::storeModel(Empleador::class, $this->route.'.index');
 	}
-
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -98,7 +97,7 @@ class EmpleadorController extends Controller
 		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/empleadores/edit', compact('empleador','arrCiudades'));
+		return view($this->route.'.edit', compact('empleador','arrCiudades'));
 	}
 
 
@@ -110,7 +109,7 @@ class EmpleadorController extends Controller
 	 */
 	public function update($EMPL_ID)
 	{
-		parent::updateModel($EMPL_ID, Empleador::class, 'cnfg-organizacionales.empleadores.index');
+		parent::updateModel($EMPL_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -119,19 +118,9 @@ class EmpleadorController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function destroy($EMPL_ID, $showMsg=True)
+	public function destroy($EMPL_ID)
 	{
-		$empleador = Empleador::findOrFail($EMPL_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($empleador->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Empleador '.$empleador->EMPL_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$empleador->delete();
-				flash_alert( 'Empleador '.$empleador->EMPL_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-organizacionales.empleadores.index');
+		parent::destroyModel($EMPL_ID, $this->class, $this->route.'.index');
 	}
 	
 }

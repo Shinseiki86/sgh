@@ -532,3 +532,32 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
 	color: #df8a13;
 }
+
+/*Alerta flotante a la derecha.*/
+.alerts {
+	position: fixed;
+	max-height: 500px;
+	max-width: 600px;
+	bottom : 20px;
+	right: 20px;
+	z-index: 999;
+}
+.alerts>.alert-flash{
+	width: 300px;
+	margin-bottom: 5px;
+}
+
+/*Sombra en botones*/
+.btn-danger, .btn-default, .btn-info, .btn-primary, .btn-success, .btn-warning {
+	-webkit-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.25), inset 0.5px 0.5px 0.5px 1px rgba(255, 255, 255, 0.25);
+	-moz-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.25), inset 0.5px 0.5px 0.5px 1px rgba(255, 255, 255, 0.25);
+	box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.25), inset 0.5px 0.5px 0.5px 1px rgba(255, 255, 255, 0.25);
+}
+/*.btn:hover{
+	box-shadow: inset 0px 0px 6px 2px rgba(0,0,0, .4), inset 0px 0px 6px 2px rgba(0,0,0, .4);
+}*/
+
+/*Quitar href de botones al imprimir*/
+@media print {
+	a[href]:after {content: none !important;}    
+}
