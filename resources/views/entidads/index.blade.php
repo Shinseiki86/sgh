@@ -2,7 +2,7 @@
 @section('title', '/ Ciudades')
 
 @section('page_heading')
-    
+    {{-- @include('entidads.modal') --}}
     <div class="row">
         <div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
             Entidades
@@ -36,7 +36,7 @@
         'ENTI_NIT',
         'ENTI_RAZONSOCIAL',
         'ENTI_OBSERVACIONES',
-        'TIEN_ID',
+        'tipoentidad.TIEN_DESCRIPCION',
     ]]) 
 @endsection
 

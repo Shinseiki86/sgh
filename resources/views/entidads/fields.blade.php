@@ -21,8 +21,7 @@
 <!-- Enti Razonsocial Field -->
 <div class="form-group  {{ $errors->has('ENTI_RAZONSOCIAL') ? ' has-error' : '' }}">
     {!! Form::label('ENTI_RAZONSOCIAL', 'Enti Razonsocial:', ['class' => 'col-md-4 control-label Enti Razonsocial']) !!}
-<div class='col-md-6'>
-	
+<div class='col-md-6'>	
 	{!! Form::text('ENTI_RAZONSOCIAL', null, ['class' => 'form-control ']) !!}
 	@include('widgets.forms.alerta',['name'=>'ENTI_RAZONSOCIAL'])
 	</div>
@@ -39,12 +38,14 @@
 </div>
 
 <!-- Tien Id Field -->
-<div class="form-group  {{ $errors->has('TIEN_ID') ? ' has-error' : '' }}">
+{{-- <div class="form-group  {{ $errors->has('TIEN_ID') ? ' has-error' : '' }}">
     {!! Form::label('TIEN_ID', 'Tien Id:', ['class' => 'col-md-4 control-label Tien Id']) !!}
-	{!! Form::number('TIEN_ID', null, ['class' => 'form-control']) !!}
-	@include('widgets.forms.alerta',['name'=>'TIEN_ID'])
+    <div class='col-md-6'>
+		{!! Form::number('TIEN_ID', null, ['class' => 'form-control']) !!}
+		@include('widgets.forms.alerta',['name'=>'TIEN_ID'])
 	</div>
-</div>
+</div> --}}
+@include('widgets.forms.group', ['type'=>'select', 'name'=>'TIEN_ID', 'label'=>'Tipo Entidad', 'data'=>$arrTipoEntidad])
 
 
 <!-- Submit Field 

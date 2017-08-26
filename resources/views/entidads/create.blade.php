@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Nueva ')
+@section('page_heading', 'Crear Entidad ')
 
 @section('section')
 {{-- <div class="col-md-6 col-md-offset-4"> --}}

@@ -282,7 +282,7 @@
 					<ul class="nav nav-second-level">
 
 						<li>
-							<a href="{{ url ('gestion-humana/helpers/validadorTNL') }}"><i class="fa fa-check-square-o fa-fw"></i> Diagnosticos</a>
+							<a href="{{ url ('') }}"><i class="fa fa-check-square-o fa-fw"></i> Diagnosticos</a>
 						</li>
 
 					</ul>

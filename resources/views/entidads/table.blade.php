@@ -14,7 +14,7 @@
 			<td>{!! $entidad->ENTI_NIT !!}</td>
 			<td>{!! $entidad->ENTI_RAZONSOCIAL !!}</td>
 			<td>{!! $entidad->ENTI_OBSERVACIONES !!}</td>
-			<td>{!! $entidad->TIEN_ID !!}</td>
+			<td>{!! $entidad->tipoentidad->TIEN_DESCRIPCION !!}</td>
              <td>
                 <!-- Botón Editar (edit) -->
                 <a class="btn btn-small btn-info btn-xs" href="{{ route('entidads.edit', [ $entidad->ENTI_ID ] ) }}" data-tooltip="tooltip" title="Editar">

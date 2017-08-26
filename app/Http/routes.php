@@ -121,3 +121,11 @@ Route::get('entidads/{id}/delete', [
     'as' => 'entidads.delete',
     'uses' => 'EntidadController@destroy',
 ]);
+
+
+Route::resource('pruebas', 'PruebaController');
+Route::get('getPrueba', 'PruebaController@getData');
+Route::get('pruebas/{id}/delete', [
+    'as' => 'pruebas.delete',
+    'uses' => 'PruebaController@destroy',
+]);

@@ -44,9 +44,9 @@ class EntidadController extends Controller
 	 */
 	public function index()
 	{
-		//$entidades = Entidad::all();
-		//return view('entidads/index2', compact('entidades'));
-		return view('entidads/index');
+		$entidades = Entidad::with('tipoentidad')->get();
+		return view('entidads/index2', compact('entidades'));
+		//return view('entidads/index');
 	}
 
 	/**
@@ -56,8 +56,8 @@ class EntidadController extends Controller
 	 */
 	public function getData()
 	{
-		$model = Entidad::select('ENTI_ID','ENTI_CODIGO','ENTI_NIT','ENTI_RAZONSOCIAL','ENTI_OBSERVACIONES','TIEN_ID')
-						->get();
+		//$model = Departamento::with('pais','ciudades')->get();
+		$model = Entidad::with('tipoentidad')->get();
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
 				$ruta = route('entidads.edit', [ 'ENTI_ID'=>$model->ENTI_ID ]);
@@ -74,7 +74,9 @@ class EntidadController extends Controller
 	 */
 	public function create()
 	{
-		return view('entidads.create');
+		$arrTipoEntidad = model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
+
+		return view('entidads.create', compact('arrTipoEntidad'));
 	}
 
 	/**
@@ -107,8 +109,9 @@ class EntidadController extends Controller
 	 * @return Response
 	 */
 	public function edit(Entidad $entidads)
-	{
-		return view('entidads.edit',['entidad'=>$entidads]);
+	{		
+		$arrTipoEntidad = model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
+		return view('entidads.edit',['entidad'=>$entidads,'arrTipoEntidad'=>$arrTipoEntidad]);
 	}
 
 	/**
