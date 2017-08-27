@@ -139,4 +139,8 @@ class Contrato extends ModelWithSoftDeletes
 		return $this->belongsTo(Ciudad::class, $foreingKey);
 	}
 
+	public function entidades(){
+		return $this->belongsToMany(Entidad::class);
+	}
+
 }
