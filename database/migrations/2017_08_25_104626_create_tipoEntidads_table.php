@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTipoEntidadsTable extends Migration
 {
-	private $nomTabla = 'tipoEntidades';
+	private $nomTabla = 'TIPOENTIDADES';
 
 	/**
 	 * Run the migrations.
@@ -17,7 +17,7 @@ class CreateTipoEntidadsTable extends Migration
 		$commentTabla = 'Contiene la clasificación de tipos de entidades existentes como ejemplo: cajas de compensación, EPS, ARL, fondos de pensiones etc';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::create('tipoEntidades', function(Blueprint $table)
+		Schema::create($this->nomTabla, function(Blueprint $table)
 		{
 			
 			$table->increments('TIEN_ID')->comment('Valor autonumérico, llave primaria de la tabla.');
@@ -57,7 +57,7 @@ class CreateTipoEntidadsTable extends Migration
 	public function down()
 	{
 		echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::drop('tipoEntidades');
+		Schema::drop($this->nomTabla);
 	}
 
 }

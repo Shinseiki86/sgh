@@ -8,7 +8,7 @@ class TipoEntidad extends ModelWithSoftDeletes
 {
     
     //Nombre de la tabla en la base de datos   
-    protected $table = "tipoEntidades";
+    protected $table = "TIPOENTIDADES";
     protected $primaryKey =  'TIEN_ID';
 
     //Traza: Nombre de campos en la tabla para auditoría de cambios
@@ -25,8 +25,8 @@ class TipoEntidad extends ModelWithSoftDeletes
 
 
     public static $rules = [
-        "TIEN_CODIGO" => "unique:tipoEntidades|required",
-		"TIEN_DESCRIPCION" => "unique:tipoEntidades|required",
+        "TIEN_CODIGO" => "unique:TIPOENTIDADES|required",
+		"TIEN_DESCRIPCION" => "unique:TIPOENTIDADES|required",
 		"TIEN_OBSERVACIONES" => "unique"
     ];
    

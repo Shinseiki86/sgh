@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDiagnosticosTable extends Migration
 {
-	private $nomTabla = 'diagnosticos';
+	private $nomTabla = 'DIAGNOSTICOS';
 
 	/**
 	 * Run the migrations.
@@ -17,7 +17,7 @@ class CreateDiagnosticosTable extends Migration
 		$commentTabla = 'Contiene los diagnosticos existentes en el CIE10';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::create('diagnosticos', function(Blueprint $table)
+		Schema::create($this->nomTabla, function(Blueprint $table)
 		{
 			
 			$table->increments('DIAG_ID')->comment('Valor autonumérico, llave primaria de la tabla.');
@@ -56,7 +56,7 @@ class CreateDiagnosticosTable extends Migration
 	public function down()
 	{
 		echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::drop('diagnosticos');
+		Schema::drop($this->nomTabla);
 	}
 
 }

@@ -7,7 +7,7 @@ class Diagnostico extends ModelWithSoftDeletes
 {
     
     //Nombre de la tabla en la base de datos   
-    protected $table = "diagnosticos";
+    protected $table = "DIAGNOSTICOS";
     protected $primaryKey =  'DIAG_ID';
 
     //Traza: Nombre de campos en la tabla para auditoría de cambios
@@ -23,8 +23,8 @@ class Diagnostico extends ModelWithSoftDeletes
 
 
     public static $rules = [
-        "DIAG_CODIGO" => "unique:diagnosticos|required",
-		"DIAG_DESCRIPCION" => "unique:diagnosticos|required"
+        "DIAG_CODIGO" => "unique:DIAGNOSTICOS|required",
+		"DIAG_DESCRIPCION" => "unique:DIAGNOSTICOS|required"
     ];
 
 
