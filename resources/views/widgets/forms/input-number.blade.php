@@ -1,1 +1,1 @@
-{{ Form::number( $name, old($name)!==null?old($name):'0', ['class' => 'form-control', 'min'=>'0'] + (isset($options)?$options:[]) )}}
+{{ Form::number( $name, old($name), ['class' => 'form-control', 'min'=>'0'] + (isset($options)?$options:[]) )}}

@@ -55,32 +55,58 @@ if (! function_exists('model_to_array')) {
      * @param  string|Model  $class
      * @param  string  $column
      * @param  string  $primaryKey
+     * @param  array  $whereArr
      * @return array
      */
-    function model_to_array($class, $column, $primaryKey = null)
+    function model_to_array($class, $column, $primaryKey = null, $whereArr = [])
     {
+        if( is_array($primaryKey) and empty($whereArr)){
+            $whereArr = $primaryKey;
+            $primaryKey = null;
+        }
 
-        if(is_object($class)){
-            $models = $class;
-            $primaryKey = isset($primaryKey) ? $primaryKey : $models->first()->getKeyName();
+        if($class instanceof Illuminate\Database\Eloquent\Collection){
+            //Si es un Modelo, no se aplican las clausulas where.
+            $model = $class;
+            $primaryKey = isset($primaryKey) ? $primaryKey : $model->first()->getKeyName();
+
         } else {
+
             $class = class_exists($class) ? $class : '\\SGH\\Models\\'.basename($class);
             $primaryKey = isset($primaryKey) ? $primaryKey : (new $class)->getKeyName();
-            $models = $class::orderBy($primaryKey)->select([ $primaryKey , $column ]);
+            $model = $class::orderBy($primaryKey)
+                            ->select([ $primaryKey , $column ]);
+
+            //Inclusión de clausulas where
+            foreach ($whereArr as $where) {
+                $columnWhere = $where[0];
+                if(isset($where[2])){
+                    $operatorWhere = $where[1];
+                    $valueWhere = $where[2];
+                } else {
+                    $operatorWhere = '=';
+                    $valueWhere = $where[1];
+                }
+                $model = $model->where($columnWhere, $operatorWhere, $valueWhere);
+            }
         }
 
-        //Si la columna es una expresión, se obtiene el alias de la columna
-        if($column instanceof \Illuminate\Database\Query\Expression)
+        //Si $column es una expresión, se adiciona alias a la columna (Compatibilidad para Postgress).
+        if($column instanceof \Illuminate\Database\Query\Expression){
             $column = str_replace('"', '', array_last(explode(') AS ', $column->getValue())));
-
-        if (is_array($column)){
-            $column[] = $primaryKey;
-            $models = $models->select($column)->get()->keyBy($primaryKey);
-        } elseif (is_string($column)) {
-            $models = $models->pluck($column, $primaryKey);
         }
 
-        return $models->toArray();
+        //Si $column es un array, se agrega $primaryKey y se retornan todas las columnas del array.
+        if(is_array($column)){
+            $column[] = $primaryKey;
+            $model = $model->select($column)->get()->keyBy($primaryKey);
+        }
+        //Si $column es un string, sólo se retorna la columna solicitada.
+        elseif (is_string($column)) {
+            $model = $model->pluck($column, $primaryKey);
+        }
+
+        return $model->toArray();
     }
 }
 

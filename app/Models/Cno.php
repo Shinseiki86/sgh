@@ -4,7 +4,7 @@ namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
 
-class Cnos extends ModelWithSoftDeletes
+class Cno extends ModelWithSoftDeletes
 {
 	
 	//Nombre de la tabla en la base de datos
