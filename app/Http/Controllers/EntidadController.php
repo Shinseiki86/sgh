@@ -17,10 +17,10 @@ class EntidadController extends Controller
 {
 
 	private $groupUrl='';
-	private $routeIndex = 'entidads.index';
+	private $routeIndex = 'entidades.index';
 	public function __construct()
 	{
-		$this->routeIndex=$this->groupUrl .'.entidads.index';
+		$this->routeIndex=$this->groupUrl .'.entidades.index';
 		$this->middleware('auth');
 	}
 
@@ -45,28 +45,10 @@ class EntidadController extends Controller
 	public function index()
 	{
 		$entidades = Entidad::with('tipoentidad')->get();
-		return view('entidads/index2', compact('entidades'));
-		//return view('entidads/index');
+		return view('entidades/index', compact('entidades'));
 	}
 
-	/**
-	 * Retorna json para Datatable.
-	 *
-	 * @return json
-	 */
-	public function getData()
-	{
-		//$model = Departamento::with('pais','ciudades')->get();
-		$model = Entidad::with('tipoentidad')->get();
-		return Datatables::collection($model)
-			->addColumn('action', function($model){
-				$ruta = route('entidads.edit', [ 'ENTI_ID'=>$model->ENTI_ID ]);
-				return parent::buttonEdit($ruta).
-					parent::buttonDelete($model, 'ENTI_ID', 'ENTI_RAZONSOCIAL', 'entidads');
-			})->make(true);
-	}
-
-
+	
 	/**
 	 * Show the form for creating a new Entidad.
 	 *
@@ -76,7 +58,7 @@ class EntidadController extends Controller
 	{
 		$arrTipoEntidad = model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
 
-		return view('entidads.create', compact('arrTipoEntidad'));
+		return view('entidades.create', compact('arrTipoEntidad'));
 	}
 
 	/**
@@ -98,7 +80,7 @@ class EntidadController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function show(Entidad $entidads){
+	public function show(Entidad $entidades){
 	}
 
 	/**
@@ -108,10 +90,10 @@ class EntidadController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function edit(Entidad $entidads)
+	public function edit(Entidad $entidades)
 	{		
 		$arrTipoEntidad = model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
-		return view('entidads.edit',['entidad'=>$entidads,'arrTipoEntidad'=>$arrTipoEntidad]);
+		return view('entidades.edit',['entidad'=>$entidades,'arrTipoEntidad'=>$arrTipoEntidad]);
 	}
 
 	/**

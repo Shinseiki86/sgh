@@ -17,10 +17,10 @@ class TipoEntidadController extends Controller
 {
 
 	private $groupUrl='';
-	private $routeIndex = 'tipoEntidads.index';
+	private $routeIndex = 'tipoentidades.index';
 	public function __construct()
 	{
-		$this->routeIndex=$this->groupUrl .'.tipoEntidads.index';
+		$this->routeIndex=$this->groupUrl .'.tipoentidades.index';
 		$this->middleware('auth');
 	}
 
@@ -44,29 +44,11 @@ class TipoEntidadController extends Controller
 	 */
 	public function index()
 	{
-		$tipoEntidads = TipoEntidad::all();
-		return view('tipoEntidads/index2', compact('tipoEntidads'));
-		//return view('tipoEntidads/index');
+		$tipoentidades = TipoEntidad::all();
+		return view('tipoentidades/index', compact('tipoentidades'));
 	}
 
-	/**
-	 * Retorna json para Datatable.
-	 *
-	 * @return json
-	 */
-	public function getData()
-	{
-		$model = TipoEntidad::select('TIEN_ID','TIEN_CODIGO','TIEN_DESCRIPCION','TIEN_OBSERVACIONES')
-						->get();
-		return Datatables::collection($model)
-			->addColumn('action', function($model){
-				$ruta = route('tipoEntidads.edit', [ 'TIEN_ID'=>$model->TIEN_ID ]);
-				return parent::buttonEdit($ruta).
-					parent::buttonDelete($model, 'TIEN_ID', 'TIEN_DESCRIPCION', 'tipoEntidads');
-			})->make(true);
-	}
-
-
+	
 	/**
 	 * Show the form for creating a new TipoEntidad.
 	 *
@@ -74,7 +56,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function create()
 	{
-		return view('tipoEntidads.create');
+		return view('tipoentidades.create');
 	}
 
 	/**
@@ -96,7 +78,7 @@ class TipoEntidadController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function show(TipoEntidad $tipoEntidads){
+	public function show(TipoEntidad $tipoentidades){
 	}
 
 	/**
@@ -106,9 +88,9 @@ class TipoEntidadController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function edit(TipoEntidad $tipoEntidads)
+	public function edit(TipoEntidad $tipoentidades)
 	{
-		return view('tipoEntidads.edit',['tipoEntidad'=>$tipoEntidads]);
+		return view('tipoentidades.edit',['tipoEntidad'=>$tipoentidades]);
 	}
 
 	/**

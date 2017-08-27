@@ -185,13 +185,13 @@
 
 						{{-- @if(Entrust::can('turno-*')) --}}
 						<li>
-							<a href="{{ url ('tipoEntidads') }}"><i class="fa fa-institution fa-fw"></i> Tipo Entidades </a>
+							<a href="{{ url ('tipoentidades') }}"><i class="fa fa-institution fa-fw"></i> Tipo Entidades </a>
 						</li>
 						{{-- @endif --}}
 
 						{{-- @if(Entrust::can('turno-*')) --}}
 						<li>
-							<a href="{{ url ('entidads') }}"><i class="fa fa-institution fa-fw"></i> Entidades </a>
+							<a href="{{ url ('entidades') }}"><i class="fa fa-institution fa-fw"></i> Entidades </a>
 						</li>
 						{{-- @endif --}}
 
@@ -282,7 +282,7 @@
 					<ul class="nav nav-second-level">
 
 						<li>
-							<a href="{{ url ('') }}"><i class="fa fa-check-square-o fa-fw"></i> Diagnosticos</a>
+							<a href="{{ url ('diagnosticos') }}"><i class="fa fa-heartbeat fa-fw"></i> Diagnosticos</a>
 						</li>
 
 					</ul>

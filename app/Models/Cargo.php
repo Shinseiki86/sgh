@@ -26,7 +26,7 @@ class Cargo extends ModelWithSoftDeletes
 	public function cno()
 	{
 		$foreingKey = 'CNOS_ID';
-		return $this->belongsTo(Cno::class, $foreingKey);
+		return $this->belongsTo(Cnos::class, $foreingKey);
 	}
 
 	public function contratos()
@@ -38,7 +38,7 @@ class Cargo extends ModelWithSoftDeletes
 	public function plantaslaborales()
 	{
 		$foreingKey = 'CARG_ID';
-		return $this->hasMany(Cargo::class, $foreingKey);
+		return $this->hasMany(PlantaLaboral::class, $foreingKey);
 	}
 
 }

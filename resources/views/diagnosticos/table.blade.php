@@ -1,19 +1,17 @@
 <table class="table table-striped" id="tabla">
     <thead>
-        <th>Tien Codigo</th>
-		<th>Tien Descripcion</th>
-		<th>Tien Observaciones</th>
+        <th>Diag Codigo</th>
+		<th>Diag Descripcion</th>
         <th class="col-md-1 all" width="50px">Acciones</th>
     </thead>
     <tbody>
-    @foreach($tipoEntidads as $tipoEntidad)
+    @foreach($diagnosticos as $diagnostico)
         <tr>
-            <td>{!! $tipoEntidad->TIEN_CODIGO !!}</td>
-			<td>{!! $tipoEntidad->TIEN_DESCRIPCION !!}</td>
-			<td>{!! $tipoEntidad->TIEN_OBSERVACIONES !!}</td>
+            <td>{!! $diagnostico->DIAG_CODIGO !!}</td>
+			<td>{!! $diagnostico->DIAG_DESCRIPCION !!}</td>
              <td>
                 <!-- Botón Editar (edit) -->
-                <a class="btn btn-small btn-info btn-xs" href="{{ route('tipoEntidads.edit', [ $tipoEntidad->TIEN_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+                <a class="btn btn-small btn-info btn-xs" href="{{ route('diagnosticos.edit', [ $diagnostico->DIAG_ID ] ) }}" data-tooltip="tooltip" title="Editar">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
 
@@ -21,10 +19,10 @@
                 {{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
                     'class'=>'btn btn-xs btn-danger btn-delete',
                     'data-toggle'=>'modal',
-                    'data-id'=> $tipoEntidad->TIEN_ID,
-                    'data-modelo'=> str_upperspace(class_basename($tipoEntidad)),
-                    'data-descripcion'=> $tipoEntidad->TIEN_NOMBRE,
-                    'data-action'=>'ciudades/'. $tipoEntidad->TIEN_ID,
+                    'data-id'=> $diagnostico->DIAG_ID,
+                    'data-modelo'=> str_upperspace(class_basename($diagnostico)),
+                    'data-descripcion'=> $diagnostico->DIAG_NOMBRE,
+                    'data-action'=>'ciudades/'. $diagnostico->DIAG_ID,
                     'data-target'=>'#pregModalDelete',
                     'data-tooltip'=>'tooltip',
                     'title'=>'Borrar',

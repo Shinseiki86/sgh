@@ -30,7 +30,7 @@ class FormFieldsGenerator
     public static function text($templateData, $field)
     {
         $textField = self::generateLabel($field);
-        $textField .="\n<div class='col-md-6'>\n\t" . "\n\t{!! Form::text('\$FIELD_NAME\$', null, ['class' => 'form-control ']) !!}" ;
+        $textField .="\n\t{!! Form::text('\$FIELD_NAME\$', null, ['class' => 'form-control ']) !!}" ;
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
         $templateData = self::replaceFieldVars($templateData, $field);
 

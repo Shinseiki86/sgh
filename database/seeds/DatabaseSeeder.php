@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SancionesTableSeeder::class);         
         $this->call(TipoEntidadesTableSeeder::class);
         $this->call(EntidadTableSeeder::class);
+        $this->call(DiagnosticosTableSeeder::class);
 
         
     }

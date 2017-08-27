@@ -6,10 +6,10 @@
 @section('page_heading')
     <div class="row">
         <div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-            TipoEntidads
+            Tipo Entidades
         </div>
         <div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-            <a class='btn btn-primary' role='button' href="{{ route('tipoEntidads.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
+            <a class='btn btn-primary' role='button' href="{{ route('tipoentidades.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </a>
         </div>
@@ -19,10 +19,10 @@
 @section('section')
 
    <div class="row">
-        @if($tipoEntidads->isEmpty())
-            <div class="well text-center">No se encontró ningun TipoEntidads.</div>
+        @if($tipoentidades->isEmpty())
+            <div class="well text-center">No se encontró ningun Tipoentidades.</div>
         @else
-            @include('tipoEntidads.table')
+            @include('tipoentidades.table')
         @endif
     </div>
 

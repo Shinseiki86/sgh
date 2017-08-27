@@ -9,7 +9,7 @@
             Entidades
         </div>
         <div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-            <a class='btn btn-primary' role='button' href="{{ route('entidads.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
+            <a class='btn btn-primary' role='button' href="{{ route('entidades.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </a>
         </div>
@@ -20,9 +20,9 @@
 
    <div class="row">
         @if($entidades->isEmpty())
-            <div class="well text-center">No se encontró ningun Entidads.</div>
+            <div class="well text-center">No se encontró ningun entidades.</div>
         @else
-            @include('entidads.table')
+            @include('entidades.table')
         @endif
     </div>
 

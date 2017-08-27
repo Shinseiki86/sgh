@@ -4,13 +4,13 @@
 
 @section('section')
 {{-- <div class="col-md-6 col-md-offset-4"> --}}
-	{{ Form::open(['route' => 'entidads.store', 'class' => 'form-horizontal']) }}
+	{{ Form::open(['route' => 'entidades.store', 'class' => 'form-horizontal']) }}
 
 		<!-- Elementos del formulario -->
-		@include('entidads.fields')
+		@include('entidades.fields')
 
 		<!-- Botones -->
-		@include('widgets.forms.buttons', ['url' => 'entidads'])
+		@include('widgets.forms.buttons', ['url' => 'entidades'])
 
 	{{ Form::close() }}
 {{-- </div> --}}

@@ -107,25 +107,25 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 });*/
 
 
-Route::resource('tipoEntidads', 'TipoEntidadController');
+Route::resource('tipoentidades', 'TipoEntidadController');
 Route::get('getTipoEntidad', 'TipoEntidadController@getData');
-Route::get('tipoEntidads/{id}/delete', [
-    'as' => 'tipoEntidads.delete',
+Route::get('tipoentidades/{id}/delete', [
+    'as' => 'tipoentidades.delete',
     'uses' => 'TipoEntidadController@destroy',
 ]);
 
 
-Route::resource('entidads', 'EntidadController');
+Route::resource('entidades', 'EntidadController');
 Route::get('getEntidad', 'EntidadController@getData');
-Route::get('entidads/{id}/delete', [
-    'as' => 'entidads.delete',
+Route::get('entidades/{id}/delete', [
+    'as' => 'entidades.delete',
     'uses' => 'EntidadController@destroy',
 ]);
 
 
-Route::resource('pruebas', 'PruebaController');
-Route::get('getPrueba', 'PruebaController@getData');
-Route::get('pruebas/{id}/delete', [
-    'as' => 'pruebas.delete',
-    'uses' => 'PruebaController@destroy',
+Route::resource('diagnosticos', 'DiagnosticoController');
+Route::get('getDiagnostico', 'DiagnosticoController@getData');
+Route::get('diagnosticos/{id}/delete', [
+    'as' => 'diagnosticos.delete',
+    'uses' => 'DiagnosticoController@destroy',
 ]);
