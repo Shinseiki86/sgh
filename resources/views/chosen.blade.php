@@ -8,6 +8,8 @@
 		$(function () {
 			//opciones del choosen select
 			var options = {
+				allow_single_deselect: true,
+				search_contains: true,
 				disable_search_threshold: 5,
 				width: '100%',
 				placeholder_text_single: 'Seleccione una opción',

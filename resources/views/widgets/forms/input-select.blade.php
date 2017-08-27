@@ -1,4 +1,4 @@
-{{ Form::select( isset($multiple) && $multiple ?$name.'[]':$name , (isset($data)?$data:[]) , old($name), ['id'=>$name, 'class'=>'form-control chosen-select'] + (isset($options)?$options:[]) + (isset($multiple) && $multiple ? ['multiple']:[]) ) }}
+{{ Form::select( isset($multiple) && $multiple ?$name.'[]':$name , [''=>'']+(isset($data)?$data:[]) , old($name), ['id'=>$name, 'class'=>'form-control chosen-select'] + (isset($options)?$options:[]) + (isset($multiple) && $multiple ? ['multiple']:[]) ) }}
 
 @if(isset(${$name}))
 @push('scripts')
