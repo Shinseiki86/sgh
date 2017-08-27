@@ -31,5 +31,5 @@
 			@include('widgets.forms.alerta',['name'=>'TIEN_ID'])
 		</div>
 	</div> --}}
-	@include('widgets.forms.group', ['type'=>'select', 'name'=>'TIEN_ID', 'label'=>'Tipo Entidad', 'data'=>$arrTipoEntidad])
+	@include('widgets.forms.input', ['type'=>'select', 'name'=>'TIEN_ID', 'label'=>'Tipo Entidad', 'data'=>$arrTipoEntidad])
 </div>

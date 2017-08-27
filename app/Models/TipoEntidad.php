@@ -1,6 +1,7 @@
-<?php namespace SGH\Models;
+<?php
 
-use Illuminate\Database\Eloquent\Model as Model;
+namespace SGH\Models;
+
 use SGH\Models\ModelWithSoftDeletes;
 
 class TipoEntidad extends ModelWithSoftDeletes

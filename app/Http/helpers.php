@@ -95,8 +95,9 @@ if (! function_exists('model_to_array')) {
         if($column instanceof \Illuminate\Database\Query\Expression){
             $column = str_replace('"', '', array_last(explode(') AS ', $column->getValue())));
         }
+
         //Si $column es un array, se agrega $primaryKey y se retornan todas las columnas del array.
-        elseif(is_array($column)){
+        if(is_array($column)){
             $column[] = $primaryKey;
             $model = $model->select($column)->get()->keyBy($primaryKey);
         }
