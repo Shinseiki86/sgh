@@ -152,6 +152,9 @@ class ContratoController extends Controller
 		//Se crea un array con las ciudades disponibles
 		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
+		//Se crea un array con las Entidades
+		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
+
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -164,7 +167,7 @@ class ContratoController extends Controller
 		$jefe = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'PROSPECTOS.'.$primaryKey , $column ])->get();
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
-		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades'));
+		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS'));
 	}
 
 	/**

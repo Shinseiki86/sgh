@@ -39,10 +39,8 @@ class Entidad extends ModelWithSoftDeletes
         return $this->belongsTo(TipoEntidad::class, $foreingKey);
     }
 
-    public function contratoentidad()
-    {
-        $foreingKey = 'COEN_ID';
-        return $this->hasMany(ContratoEntidad::class, $foreingKey);
+    public function contratos(){
+        return $this->belongsToMany(Contrato::class);
     }
 
 
