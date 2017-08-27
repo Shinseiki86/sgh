@@ -1,4 +1,4 @@
-{{--@include('datapicker')--}}
+{{--@include('datepicker')--}}
 @include('chosen')
 
 @include('widgets.forms.group', ['type'=>'text', 'name'=>'CECO_CODIGO', 'label'=>'Código', 'options'=>['maxlength' => '100'] ])

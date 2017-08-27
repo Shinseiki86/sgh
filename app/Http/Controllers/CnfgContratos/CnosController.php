@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-use SGH\Models\Cnos;
+use SGH\Models\Cno;
 
 class CnosController extends Controller
 {
@@ -47,7 +47,7 @@ class CnosController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$cnos = Cnos::all();
+		$cnos = Cno::all();
 		//Se carga la vista y se pasan los registros
 		return view('cnfg-contratos/cnos/index', compact('cnos'));
 	}
@@ -69,7 +69,7 @@ class CnosController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Cnos::class, 'cnfg-contratos.cnos.index');
+		parent::storeModel(Cno::class, 'cnfg-contratos.cnos.index');
 	}
 
 	/**
@@ -81,7 +81,7 @@ class CnosController extends Controller
 	public function edit($CNOS_ID)
 	{
 		// Se obtiene el registro
-		$cno = Cnos::findOrFail($CNOS_ID);
+		$cno = Cno::findOrFail($CNOS_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view('cnfg-contratos/cnos/edit', compact('cno'));
@@ -95,7 +95,7 @@ class CnosController extends Controller
 	 */
 	public function update($CNOS_ID)
 	{
-		parent::updateModel($CNOS_ID, Cnos::class, 'cnfg-contratos.cnos.index');
+		parent::updateModel($CNOS_ID, Cno::class, 'cnfg-contratos.cnos.index');
 	}
 
 	/**
@@ -106,7 +106,7 @@ class CnosController extends Controller
 	 */
 	public function destroy($CNOS_ID, $showMsg=True)
 	{
-		$cno = Cnos::findOrFail($CNOS_ID);
+		$cno = Cno::findOrFail($CNOS_ID);
 
 		//Si el registro fue creado por SYSTEM, no se puede borrar.
 		if($cno->TIPR_creadopor == 'SYSTEM'){

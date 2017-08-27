@@ -1,4 +1,4 @@
-{{--@include('datapicker')--}}
+{{--@include('datepicker')--}}
 {{--@include('chosen')--}}
 
 @include('widgets.forms.group', ['type'=>'text', 'name'=>'CLCO_DESCRIPCION', 'label'=>'Descripción', 'options'=>['maxlength' => '100'] ])

@@ -1,4 +1,4 @@
-@include('datapicker')
+@include('datepicker')
 @include('chosen')
 
 @include('widgets.forms.group', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])

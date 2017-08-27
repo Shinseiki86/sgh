@@ -1,4 +1,4 @@
-@include('datapicker')
+@include('datepicker')
 @include('chosen')
 
 @include('widgets.forms.group', ['type'=>'number', 'name'=>'PROS_CEDULA', 'label'=>'Cédula', 'options'=>['size' => '999999999999999' ] ])

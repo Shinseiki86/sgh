@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-use SGH\Models\Cnos;
+use SGH\Models\Cno;
 use SGH\Models\Cargo;
 
 class CargoController extends Controller
@@ -64,7 +64,7 @@ class CargoController extends Controller
 	public function create()
 	{
 		//Se crea un array con los CNOS disponibles
-		$arrCnos = model_to_array(Cnos::class, 'CNOS_DESCRIPCION');
+		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
 
 		return view($this->route.'.create', compact('arrCnos'));
 		
@@ -93,7 +93,7 @@ class CargoController extends Controller
 		$cargo = Cargo::findOrFail($CARG_ID);
 
 		//Se crea un array con los CNOS disponibles
-		$arrCnos = model_to_array(Cnos::class, 'CNOS_DESCRIPCION');
+		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->route.'.edit', compact('cargo', 'arrCnos'));
