@@ -70,7 +70,7 @@ class CreateTableGrupos extends Migration
     public function down()
     {
         echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
-        Schema::drop($this->nomTabla);
+        Schema::dropIfExists($this->nomTabla);
     }
 
 }
