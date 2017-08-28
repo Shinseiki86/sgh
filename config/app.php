@@ -160,10 +160,10 @@ return [
         SGH\Providers\RouteServiceProvider::class,
 
         //Add by DiegoCortes
-        Styde\Html\HtmlServiceProvider::class,
+        //Styde\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Chumper\Zipper\ZipperServiceProvider::class,
+        //Chumper\Zipper\ZipperServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
     ],
@@ -217,8 +217,8 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'Form'      => Collective\Html\FormFacade::class,
-         'Html'      => Collective\Html\HtmlFacade::class,
-         'Flash'     => Laracasts\Flash\Flash::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Flash'     => Laracasts\Flash\Flash::class,
     ],
 
 ];

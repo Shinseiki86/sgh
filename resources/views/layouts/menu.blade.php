@@ -3,11 +3,11 @@
 @section('body')
 	<!--div id="pageLoading">Cargando...</div-->
 
-	@include('layouts.menu-top')
+	@include('layouts.menu.menu-top')
 
 	<div id="wrapper">
 
-		@include('layouts.menu-left')
+		@include('layouts.menu.menu-left')
 
 		<div id="page-wrapper">
 

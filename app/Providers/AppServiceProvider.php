@@ -3,6 +3,7 @@
 namespace SGH\Providers;
 
 use Blade;
+use SGH\Models\Menu;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        view()->composer('layouts.menu.menu-left', function($view) {
+            $view->with('menus', Menu::menus());
+        });
+
         Blade::directive('datetime', function ($expression) {
             return "<?php echo ($expression)->format('d/m/Y h:i A'); ?>";
         });

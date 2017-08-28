@@ -3,9 +3,9 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatConratoEntidadTable extends Migration
+class CreateContratoEntidadTable extends Migration
 {
-    private $nomTabla = 'contrato_entidad';
+    private $nomTabla = 'CONTRATO_ENTIDAD';
     /**
      * Run the migrations.
      *
@@ -16,11 +16,11 @@ class CreatConratoEntidadTable extends Migration
         $commentTabla = 'Contiene Las entides de cada prospecto, por ejemplo EPS, ARL CCF';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
-        Schema::create('contrato_entidad', function (Blueprint $table) {
+        Schema::create($this->nomTabla, function (Blueprint $table) {
             $table->unsignedInteger('CONT_ID')->index();
             $table->unsignedInteger('ENTI_ID')->index();
-            $table->foreign('CONT_ID')->references('CONT_ID')->on('contratos')->onDelete('cascade')->onUpdate('cascade');
-             $table->foreign('ENTI_ID')->references('ENTI_ID')->on('entidades')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('CONT_ID')->references('CONT_ID')->on('CONTRATOS')->onDelete('cascade')->onUpdate('cascade');
+             $table->foreign('ENTI_ID')->references('ENTI_ID')->on('ENTIDADES')->onDelete('cascade')->onUpdate('cascade');
             $table->primary(['CONT_ID','ENTI_ID']);
             $table->timestamps();
         });
@@ -39,6 +39,6 @@ class CreatConratoEntidadTable extends Migration
     public function down()
     {
         echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
-        Schema::drop('contrato_entidad');
+        Schema::dropIfExists($this->nomTabla);
     }
 }

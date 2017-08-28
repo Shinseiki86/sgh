@@ -7,7 +7,7 @@ class Entidad extends ModelWithSoftDeletes
 {
     
     //Nombre de la tabla en la base de datos   
-    protected $table = "entidades";
+    protected $table = "ENTIDADES";
     protected $primaryKey =  'ENTI_ID';
 
     //Traza: Nombre de campos en la tabla para auditoría de cambios

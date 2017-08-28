@@ -19,56 +19,17 @@
 					<!-- /input-group -->
 				</li>
 
-				@if(Entrust::can(['usuario-*', 'rol-*', 'permiso-*']))
-				<li>
-					<a href="#" class="dropdown-collapse"><i class="fa fa-user-circle-o fa-fw"></i> <span class="side-menu-title">Usuarios y roles</span><span class="fa arrow"></span></a>
+                @foreach ($menus as $key => $item)
+					@if(Entrust::can(['usuario-*', 'rol-*', 'permiso-*']))
+	                    @if ($item['MENU_PARENT'] != 0)
+	                        @break
+	                    @endif
+	                    @include('layouts.menu.menu-item', ['item' => $item])
+	                @endif
+                @endforeach
 
-					<ul class="nav nav-second-level">
-						@if(Entrust::can('usuario-*'))
-						<li>
-							<a href="{{ url ('auth/usuarios') }}"><i class="fa fa-user fa-fw"></i> Usuarios</a>
-						</li>
-						@endif
-						@if(Entrust::can('rol-*'))
-						<li>
-							<a href="{{ url ('auth/roles') }}"><i class="fa fa-male"></i><i class="fa fa-female"></i> Roles</a>
-						</li>
-						@endif
-						@if(Entrust::can('permiso-*'))
-						<li>
-							<a href="{{ url ('auth/permisos') }}"><i class="fa fa-address-card-o fa-fw"></i> Permisos</a>
-						</li>
-						@endif
-					</ul>
-				</li>
-				@endif
-
-				<!-- Geográficos -->
+ 				<!-- Geográficos -->
 				@if(Entrust::can(['pais-*', 'depart-*', 'ciudad-*', ]))
-				<li>
-					<a href="#" class="dropdown-collapse"><i class="fa fa-globe fa-fw"></i> <span class="side-menu-title">Geográficos</span><span class="fa arrow"></span></a>
-					
-					<ul class="nav nav-second-level">
-
-						@if(Entrust::can('pais-*'))
-						<li>
-							<a href="{{ url ('cnfg-geograficos/paises') }}"><i class="fa fa-circle fa-fw"></i> Países</a>
-						</li>
-						@endif
-						@if(Entrust::can('depart-*'))
-						<li>
-							<a href="{{ url ('cnfg-geograficos/departamentos') }}"><i class="fa fa-circle fa-fw"></i> Departamentos</a>
-						</li>
-						@endif
-						@if(Entrust::can('ciudad-*'))
-						<li>
-							<a href="{{ url ('cnfg-geograficos/ciudades') }}"><i class="fa fa-circle-o fa-fw"></i> Ciudades</a>
-						</li>
-						@endif
-						
-					</ul>
-					<!-- /.nav-second-level -->
-				</li>
 				@endif
 
 				<!-- Contratos -->
@@ -183,17 +144,13 @@
 						</li>
 						@endif
 
-						{{-- @if(Entrust::can('turno-*')) --}}
 						<li>
 							<a href="{{ url ('tipoentidades') }}"><i class="fa fa-institution fa-fw"></i> Tipo Entidades </a>
 						</li>
-						{{-- @endif --}}
 
-						{{-- @if(Entrust::can('turno-*')) --}}
 						<li>
 							<a href="{{ url ('entidades') }}"><i class="fa fa-institution fa-fw"></i> Entidades </a>
 						</li>
-						{{-- @endif --}}
 
 					</ul>
 					<!-- /.nav-second-level -->
@@ -288,7 +245,6 @@
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>
-
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->

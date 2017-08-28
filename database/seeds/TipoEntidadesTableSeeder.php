@@ -8,12 +8,10 @@ class TipoEntidadesTableSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @reTIEN void
+     * @return void
      */
     public function run()
     {
-    	
-        
        TipoEntidad::create([
             'TIEN_CODIGO' => 'ARL',
             'TIEN_DESCRIPCION' => 'Administradora de Riesgos Laborales',

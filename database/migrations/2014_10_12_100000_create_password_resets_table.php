@@ -38,6 +38,6 @@ class CreatePasswordResetsTable extends Migration
 	public function down()
 	{
 		echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::drop('password_resets');
+		Schema::dropIfExists('password_resets');
 	}
 }

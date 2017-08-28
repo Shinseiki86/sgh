@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateEntidadsTable extends Migration
 {
-	private $nomTabla = 'entidades';
+	private $nomTabla = 'ENTIDADES';
 
 	/**
 	 * Run the migrations.
@@ -17,7 +17,7 @@ class CreateEntidadsTable extends Migration
 		$commentTabla = 'Contiene las entidades existentes de todos los tipos de entidades';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::create('entidades', function(Blueprint $table)
+		Schema::create($this->nomTabla, function(Blueprint $table)
 		{
 			
 			$table->increments('ENTI_ID')->comment('Valor autonumérico, llave primaria de la tabla.');
@@ -26,7 +26,7 @@ class CreateEntidadsTable extends Migration
 			$table->string('ENTI_RAZONSOCIAL')->comment('Razon Social de la Entidad');
 			$table->string('ENTI_OBSERVACIONES')->nullable()->comment('Observacion Relacionada a la Entidad');
 			$table->unsignedInteger('TIEN_ID');
-			$table->foreign('TIEN_ID')->references('TIEN_ID')->on('tipoentidades')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('TIEN_ID')->references('TIEN_ID')->on('TIPOENTIDADES')->onDelete('cascade')->onUpdate('cascade');
 
 
 			//Traza
@@ -60,7 +60,7 @@ class CreateEntidadsTable extends Migration
 	public function down()
 	{
 		echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::drop('entidades');
+		Schema::dropIfExists($this->nomTabla);
 	}
 
 }

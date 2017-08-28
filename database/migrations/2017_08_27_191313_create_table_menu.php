@@ -3,10 +3,10 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePaises extends Migration
+class CreateTableMenu extends Migration
 {
     
-    private $nomTabla = 'PAISES';
+    private $nomTabla = 'MENUS';
 
     /**
      * Run the migrations.
@@ -15,34 +15,34 @@ class CreateTablePaises extends Migration
      */
     public function up()
     {
-        $commentTabla = 'PAISES: contiene los países del territorio nacional';
+        $commentTabla = 'Tabla con las entradas que se mostrarán en el menú.';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
 
-            $table->increments('PAIS_ID')
-                ->comment('Valor autonumérico, llave primaria de la tabla departamentos.');
+            $table->increments('MENU_ID')
+                ->comment('Valor autonumérico, llave primaria de la tabla '.$this->nomTabla.'.');
 
-            $table->unsignedInteger('PAIS_CODIGO')
-                ->comment('Código del departamento de acuerdo a clasificación DANE');
+            $table->string('MENU_LABEL',300)->comment('');
+            $table->string('MENU_URL',300)->nullable()->comment('');
+            $table->string('MENU_ICON',300)->nullable()->comment('');
+            $table->unsignedInteger('MENU_PARENT')->default(0)->comment('');
+            $table->smallInteger('MENU_ORDER')->default(0)->comment('');
+            $table->boolean('MENU_ENABLED')->default(true)->comment('');
 
-            $table->string('PAIS_NOMBRE', 300)
-                ->comment('Nombre del país');
-            
             //Traza
-            $table->string('PAIS_CREADOPOR')
+            $table->string('MENU_CREADOPOR')
                 ->comment('Usuario que creó el registro en la tabla');
-            $table->timestamp('PAIS_FECHACREADO')
+            $table->timestamp('MENU_FECHACREADO')
                 ->comment('Fecha en que se creó el registro en la tabla.');
-            $table->string('PAIS_MODIFICADOPOR')->nullable()
+            $table->string('MENU_MODIFICADOPOR')->nullable()
                 ->comment('Usuario que realizó la última modificación del registro en la tabla.');
-            $table->timestamp('PAIS_FECHAMODIFICADO')->nullable()
+            $table->timestamp('MENU_FECHAMODIFICADO')->nullable()
                 ->comment('Fecha de la última modificación del registro en la tabla.');
-            $table->string('PAIS_ELIMINADOPOR')->nullable()
+            $table->string('MENU_ELIMINADOPOR')->nullable()
                 ->comment('Usuario que eliminó el registro en la tabla.');
-            $table->timestamp('PAIS_FECHAELIMINADO')->nullable()
+            $table->timestamp('MENU_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
-
         });
         
         if(env('DB_CONNECTION') == 'pgsql')
