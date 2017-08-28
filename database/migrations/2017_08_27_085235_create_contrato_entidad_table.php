@@ -17,12 +17,12 @@ class CreateContratoEntidadTable extends Migration
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
-            $table->unsignedInteger('CONT_ID')->index();
-            $table->unsignedInteger('ENTI_ID')->index();
-            $table->foreign('CONT_ID')->references('CONT_ID')->on('CONTRATOS')->onDelete('cascade')->onUpdate('cascade');
-             $table->foreign('ENTI_ID')->references('ENTI_ID')->on('ENTIDADES')->onDelete('cascade')->onUpdate('cascade');
-            $table->primary(['CONT_ID','ENTI_ID']);
-            $table->timestamps();
+            $table->unsignedInteger('CONTRATO_ID')->index();
+            $table->unsignedInteger('ENTIDAD_ID')->index();
+            $table->foreign('CONTRATO_ID')->references('CONTRATO_ID')->on('CONTRATOS')->onDelete('cascade')->onUpdate('cascade');
+             $table->foreign('ENTIDAD_ID')->references('ENTIDAD_ID')->on('ENTIDADES')->onDelete('cascade')->onUpdate('cascade');
+            $table->primary(['CONTRATO_ID','ENTIDAD_ID']);            
+
         });
 
         if(env('DB_CONNECTION') == 'pgsql')

@@ -2,7 +2,9 @@
 
 namespace SGH\Http\Controllers\GestionHumana;
 
-use SGH\Http\Requests;
+use Illuminate\Http\Request;
+
+use Cinema\Http\Requests;
 use Validator;
 use SGH\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -152,8 +154,15 @@ class ContratoController extends Controller
 		//Se crea un array con las ciudades disponibles
 		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
-		//Se crea un array con las Entidades
-		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
+		//Se crea un array con las Entidades EPS
+		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',1]]);
+
+		//Se crea un array con las Entidades ARL
+		$arrARL = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',2]]);
+
+		//Se crea un array con las Entidades CCF
+		$arrCCF = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',3]]);
+
 
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
@@ -167,7 +176,7 @@ class ContratoController extends Controller
 		$jefe = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'PROSPECTOS.'.$primaryKey , $column ])->get();
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
-		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS'));
+		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
 	}
 
 	/**
@@ -177,7 +186,7 @@ class ContratoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Contrato::class, 'gestion-humana.contratos.index');
+		parent::storeModel(Contrato::class, 'gestion-humana.contratos.index', ['eps_id'=>'entidades','arl_id'=>'entidades','ccf_id'=>'entidades']);		
 	}
 
 
@@ -239,6 +248,9 @@ class ContratoController extends Controller
 		//Se crea un array con las ciudades disponibles
 		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
+		//Se crea un array con las Entidades
+		$arrEPS= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',['TIEN_ID','=','1']);
+
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -252,7 +264,7 @@ class ContratoController extends Controller
 		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades'));
+		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS'));
 	}
 
 	/**
@@ -261,9 +273,10 @@ class ContratoController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function update($CONT_ID)
+	public function update(Contrato $contrato)
 	{
-		parent::updateModel($CONT_ID, Contrato::class, 'gestion-humana.contratos.index');
+		parent::updateModel($contrato, Contrato::class, 'gestion-humana.contratos.index');
+
 	}
 
 	/**

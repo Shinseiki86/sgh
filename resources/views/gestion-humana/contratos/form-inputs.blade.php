@@ -1,6 +1,6 @@
 @include('datepicker')
 @include('chosen')
-
+<div class='col-md-8 col-md-offset-2'>
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])
 
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'EMPL_ID', 'label'=>'Empleador', 'data'=>$arrEmpleadores])
@@ -25,7 +25,7 @@
 {{--@include('widgets.forms.input', ['type'=>'date', 'name'=>'CONT_FECHARETIRO', 'label'=>'Fecha de Retiro' ])--}}
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'MORE_ID', 'label'=>'Motivo de Retiro', 'data'=>$arrMotivosretiro])
 
-<div class="col-xs-12">
+<div class="col-md-13 ">
 	@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'CONT_SALARIO', 'label'=>'Salario', 'options'=>['size' => '99999999999999' ] ])
 	@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'CONT_VARIABLE', 'label'=>'Variable', 'options'=>['size' => '99999999999999' ] ])
 	@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'CONT_RODAJE', 'label'=>'Rodaje', 'options'=>['size' => '99999999999999' ] ])
@@ -37,9 +37,15 @@
 @include('widgets.forms.input', ['type'=>'select', 'column'=>10, 'name'=>'JEFE_ID', 'label'=>'Jefe Inmediato', 'data'=>$arrJefes])
 @include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'CONT_CASOMEDICO', 'label'=>'¿R.M?', 'data'=>['NO' => 'NO', 'SI' => 'SI']])
 
-<<<<<<< HEAD
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'CONT_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
 
-=======
->>>>>>> 0bcc4994bad14cf0fcebd868c8eef4cba904d846
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'CONT_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
+<div class="col-md-13 ">
+	@include('widgets.forms.input', ['type'=>'select', 'name'=>'eps_id', 'label'=>'EPS', 'data'=>$arrEPS, 'multiple'=>true])
+
+	@include('widgets.forms.input', ['type'=>'select', 'name'=>'arl_id', 'label'=>'ARL', 'data'=>$arrARL, 'multiple'=>true])
+
+	@include('widgets.forms.input', ['type'=>'select', 'name'=>'ccf_id', 'label'=>'Caja de Compensacion', 'data'=>$arrCCF, 'multiple'=>true])
+</div>
+
+</div>

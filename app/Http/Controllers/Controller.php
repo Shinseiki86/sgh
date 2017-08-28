@@ -11,10 +11,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 
 use Illuminate\Contracts\Validation\Validator;
 
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
+    public static $modeloCreado;
     /**
      * {@inheritdoc}
      */
@@ -46,7 +48,6 @@ class Controller extends BaseController
 			if(array_has($data, 'password'))
 				$data['password'] = bcrypt($data['password']);
 			$model = $class::create($data);
-
 			//Se crean las relaciones
 			$this->storeRelations($model, $relations);
 
@@ -138,7 +139,8 @@ class Controller extends BaseController
 		if(!empty($relations)){
 			foreach ($relations as $ids => $relation) {
 				$arrayIds = isset($data[$ids]) ? $data[$ids] : [];
-				$model->$relation()->sync($arrayIds, true);
+				$model->$relation()->sync($arrayIds, false);
+
 			}
 		}
 	}
