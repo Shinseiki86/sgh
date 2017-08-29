@@ -12,24 +12,80 @@ class DiagnosticosTableSeeder extends Seeder
      */
     public function run()
     {
-    	$diagnostico = new Diagnostico;
-    	$diagnostico->DIAG_CODIGO = 'A00';
-        $diagnostico->DIAG_DESCRIPCION = 'Colera';
-    	$diagnostico->save();
 
-        $diagnostico = new Diagnostico;
-        $diagnostico->DIAG_CODIGO = 'A01';
-        $diagnostico->DIAG_DESCRIPCION = 'Fiebre';
-        $diagnostico->save();
-
-        $diagnostico = new Diagnostico;
-        $diagnostico->DIAG_CODIGO = 'A02';
-        $diagnostico->DIAG_DESCRIPCION = 'Cefalea';
-        $diagnostico->save();
-
-        $diagnostico = new Diagnostico;
-        $diagnostico->DIAG_CODIGO = 'A03';
-        $diagnostico->DIAG_DESCRIPCION = 'Dolor Abdominal';
-        $diagnostico->save();
+        $lista=array(
+            ['DIAG_CODIGO'=>'A00','DIAG_DESCRIPCION'=>'Cólera'],
+            ['DIAG_CODIGO'=>'A00.0','DIAG_DESCRIPCION'=>'Cólera debido a Vibrio cholerae 01, biotipo cholerae'],
+            ['DIAG_CODIGO'=>'A00.1','DIAG_DESCRIPCION'=>'Cólera debido a Vibrio cholerae 01, biotipo El Tor'],
+            ['DIAG_CODIGO'=>'A00.9','DIAG_DESCRIPCION'=>'Cólera, no especificado'],
+            ['DIAG_CODIGO'=>'A01','DIAG_DESCRIPCION'=>'Fiebres tifoidea y paratifoidea'],
+            ['DIAG_CODIGO'=>'A01.0','DIAG_DESCRIPCION'=>'Fiebre tifoidea'],
+            ['DIAG_CODIGO'=>'A01.1','DIAG_DESCRIPCION'=>'Fiebre paratifoidea A'],
+            ['DIAG_CODIGO'=>'A01.2','DIAG_DESCRIPCION'=>'Fiebre paratifoidea B'],
+            ['DIAG_CODIGO'=>'A01.3','DIAG_DESCRIPCION'=>'Fiebre paratifoidea C'],
+            ['DIAG_CODIGO'=>'A01.4','DIAG_DESCRIPCION'=>'Fiebre paratifoidea, no especificada'],
+            ['DIAG_CODIGO'=>'A02','DIAG_DESCRIPCION'=>'Otras infecciones debidas a Salmonella'],
+            ['DIAG_CODIGO'=>'A02.0','DIAG_DESCRIPCION'=>'Enteritis debida a Salmonella'],
+            ['DIAG_CODIGO'=>'A02.1','DIAG_DESCRIPCION'=>'Septicemia debida a Salmonella'],
+            ['DIAG_CODIGO'=>'A02.2','DIAG_DESCRIPCION'=>'Infecciones localizadas debidas a Salmonella'],
+            ['DIAG_CODIGO'=>'A02.8','DIAG_DESCRIPCION'=>'Otras infecciones especificadas como debidas a Salmonella'],
+            ['DIAG_CODIGO'=>'A02.9','DIAG_DESCRIPCION'=>'Infección debida a Salmonella, no especificada'],
+            ['DIAG_CODIGO'=>'A03','DIAG_DESCRIPCION'=>'Shigelosis'],
+            ['DIAG_CODIGO'=>'A03.0','DIAG_DESCRIPCION'=>'Shigelosis debida a Shigella dysenteriae'],
+            ['DIAG_CODIGO'=>'A03.1','DIAG_DESCRIPCION'=>'Shigelosis debida a Shigella flexneri'],
+            ['DIAG_CODIGO'=>'A03.2','DIAG_DESCRIPCION'=>'Shigelosis debida a Shigella boydii'],
+            ['DIAG_CODIGO'=>'A03.3','DIAG_DESCRIPCION'=>'Shigelosis debida a Shigella sonnei'],
+            ['DIAG_CODIGO'=>'A03.8','DIAG_DESCRIPCION'=>'Otras shigelosis'],
+            ['DIAG_CODIGO'=>'A03.9','DIAG_DESCRIPCION'=>'Shigelosis de tipo no especificado'],
+            ['DIAG_CODIGO'=>'A04','DIAG_DESCRIPCION'=>'Otras infecciones intestinales bacterianas'],
+            ['DIAG_CODIGO'=>'A04.0','DIAG_DESCRIPCION'=>'Infección debida a Escherichia coli enteropatógena'],
+            ['DIAG_CODIGO'=>'A04.1','DIAG_DESCRIPCION'=>'Infección debida a Escherichia coli enterotoxígena'],
+            ['DIAG_CODIGO'=>'A04.2','DIAG_DESCRIPCION'=>'Infección debida a Escherichia coli enteroinvasiva'],
+            ['DIAG_CODIGO'=>'A04.3','DIAG_DESCRIPCION'=>'Infección debida a Escherichia coli enterohemorrágica'],
+            ['DIAG_CODIGO'=>'A04.4','DIAG_DESCRIPCION'=>'Otras infecciones intestinales debidas a Escherichia coli'],
+            ['DIAG_CODIGO'=>'A04.5','DIAG_DESCRIPCION'=>'Enteritis debida a Campylobacter'],
+            ['DIAG_CODIGO'=>'A04.6','DIAG_DESCRIPCION'=>'Enteritis debida a Yersinia enterocolitica'],
+            ['DIAG_CODIGO'=>'A04.7','DIAG_DESCRIPCION'=>'Enterocolitis debida a Clostridium difficile'],
+            ['DIAG_CODIGO'=>'A04.8','DIAG_DESCRIPCION'=>'Otras infecciones intestinales bacterianas especificadas'],
+            ['DIAG_CODIGO'=>'A04.9','DIAG_DESCRIPCION'=>'Infección intestinal bacteriana, no especificada'],
+            ['DIAG_CODIGO'=>'A05','DIAG_DESCRIPCION'=>'Otras intoxicaciones alimentarias bacterianas'],
+            ['DIAG_CODIGO'=>'A05.0','DIAG_DESCRIPCION'=>'Intoxicación alimentaria estafilocócica'],
+            ['DIAG_CODIGO'=>'A05.1','DIAG_DESCRIPCION'=>'Botulismo'],
+            ['DIAG_CODIGO'=>'A05.2','DIAG_DESCRIPCION'=>'Intoxicación alimentaria debida a Clostridium perfringens [Clostridium welchii]'],
+            ['DIAG_CODIGO'=>'A05.3','DIAG_DESCRIPCION'=>'Intoxicación alimentaria debida a Vibrio parahaemolyticus'],
+            ['DIAG_CODIGO'=>'A05.4','DIAG_DESCRIPCION'=>'Intoxicación alimentaria debida a Bacillus cereus'],
+            ['DIAG_CODIGO'=>'A05.8','DIAG_DESCRIPCION'=>'Otras intoxicaciones alimentarias debidas a bacterias especificadas'],
+            ['DIAG_CODIGO'=>'A05.9','DIAG_DESCRIPCION'=>'Intoxicación alimentaria bacteriana, no especificada'],
+            ['DIAG_CODIGO'=>'A06','DIAG_DESCRIPCION'=>'Amebiasis'],
+            ['DIAG_CODIGO'=>'A06.0','DIAG_DESCRIPCION'=>'Disentería amebiana aguda'],
+            ['DIAG_CODIGO'=>'A06.1','DIAG_DESCRIPCION'=>'Amebiasis intestinal crónica'],
+            ['DIAG_CODIGO'=>'A06.2','DIAG_DESCRIPCION'=>'Colitis amebiana no disentérica'],
+            ['DIAG_CODIGO'=>'A06.3','DIAG_DESCRIPCION'=>'Ameboma intestinal'],
+            ['DIAG_CODIGO'=>'A06.4','DIAG_DESCRIPCION'=>'Absceso amebiano del hígado'],
+            ['DIAG_CODIGO'=>'A06.5','DIAG_DESCRIPCION'=>'Absceso amebiano del pulmón (J99.8*)'],
+            ['DIAG_CODIGO'=>'A06.6','DIAG_DESCRIPCION'=>'Absceso amebiano del cerebro (G07*)'],
+            ['DIAG_CODIGO'=>'A06.7','DIAG_DESCRIPCION'=>'Amebiasis cutánea'],
+            ['DIAG_CODIGO'=>'A06.8','DIAG_DESCRIPCION'=>'Infección amebiana de otras localizaciones'],
+            ['DIAG_CODIGO'=>'A06.9','DIAG_DESCRIPCION'=>'Amebiasis, no especificada'],
+            ['DIAG_CODIGO'=>'A07','DIAG_DESCRIPCION'=>'Otras enfermedades intestinales debidas a protozoarios'],
+            ['DIAG_CODIGO'=>'A07.0','DIAG_DESCRIPCION'=>'Balantidiasis'],
+            ['DIAG_CODIGO'=>'A07.1','DIAG_DESCRIPCION'=>'Giardiasis [lambliasis]'],
+            ['DIAG_CODIGO'=>'A07.2','DIAG_DESCRIPCION'=>'Criptosporidiosis'],
+            ['DIAG_CODIGO'=>'A07.3','DIAG_DESCRIPCION'=>'Isosporiasis'],
+            ['DIAG_CODIGO'=>'A07.8','DIAG_DESCRIPCION'=>'Otras enfermedades intestinales especificadas debidas a protozoarios'],
+            ['DIAG_CODIGO'=>'A07.9','DIAG_DESCRIPCION'=>'Enfermedad intestinal debida a protozoarios, no especificada'],
+            ['DIAG_CODIGO'=>'A08','DIAG_DESCRIPCION'=>'Infecciones intestinales debidas a virus y otros organismos especificados'],
+            ['DIAG_CODIGO'=>'A08.0','DIAG_DESCRIPCION'=>'Enteritis debida a rotavirus'],
+            ['DIAG_CODIGO'=>'A08.1','DIAG_DESCRIPCION'=>'Gastroenteropatía aguda debida al agente de Norwalk'],
+            ['DIAG_CODIGO'=>'A08.2','DIAG_DESCRIPCION'=>'Enteritis debida a adenovirus'],
+            ['DIAG_CODIGO'=>'A08.3','DIAG_DESCRIPCION'=>'Otras enteritis virales'],
+            ['DIAG_CODIGO'=>'A08.4','DIAG_DESCRIPCION'=>'Infección intestinal viral, sin otra especificación'],
+            ['DIAG_CODIGO'=>'A08.5','DIAG_DESCRIPCION'=>'Otras infecciones intestinales especificadas'],
+                        );
+            
+        foreach ($lista as $CIE10) {
+            Diagnostico::create($CIE10);
+        };
+        
     }
 }

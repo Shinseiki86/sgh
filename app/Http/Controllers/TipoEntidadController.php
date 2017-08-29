@@ -20,7 +20,7 @@ class TipoEntidadController extends Controller
 	private $routeIndex = 'tipoentidades.index';
 	public function __construct()
 	{
-		$this->routeIndex=$this->groupUrl .'.tipoentidades.index';
+		$this->routeIndex=$this->groupUrl .'tipoentidades.index';
 		$this->middleware('auth');
 	}
 

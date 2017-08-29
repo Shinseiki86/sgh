@@ -20,7 +20,7 @@ class DiagnosticoController extends Controller
 	private $routeIndex = 'diagnosticos.index';
 	public function __construct()
 	{
-		$this->routeIndex=$this->groupUrl .'.diagnosticos.index';
+		$this->routeIndex=$this->groupUrl .'diagnosticos.index';
 		$this->middleware('auth');
 	}
 
