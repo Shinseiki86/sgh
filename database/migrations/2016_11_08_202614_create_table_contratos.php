@@ -38,6 +38,10 @@ class CreateTableContratos extends Migration
             $table->date('CONT_FECHAINGRESO')
                 ->comment('fecha de inicio del contrato');
 
+            $table->date('CONT_FECHATERMINACION')
+                ->nullable()
+                ->comment('fecha fin del contrato');
+
             $table->date('CONT_FECHARETIRO')
                 ->nullable()
                 ->comment('fecha de retiro del contrato');

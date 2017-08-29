@@ -118,7 +118,7 @@
 
 	</script>
 	@parent
-	@endsection
+
 
 	@section('section')
 

@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('page_heading', 'Nueva Planta Laboral')
+@section('page_heading', 'Nueva Planta de Personal')
 
 @section('section')
 {{ Form::open(['route' => 'cnfg-organizacionales.plantaslaborales.store', 'class' => 'form-horizontal']) }}
