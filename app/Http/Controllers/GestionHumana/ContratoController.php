@@ -155,10 +155,10 @@ class ContratoController extends Controller
 		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
 		//Se crea un array con las Entidades EPS
-		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',1]]);
+		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',2]]);
 
 		//Se crea un array con las Entidades ARL
-		$arrARL = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',2]]);
+		$arrARL = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',1]]);
 
 		//Se crea un array con las Entidades CCF
 		$arrCCF = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',3]]);
