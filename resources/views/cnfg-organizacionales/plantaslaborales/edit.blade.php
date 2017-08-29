@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('page_heading', 'Actualizar Planta Laboral')
+@section('page_heading', 'Actualizar Planta de Personal')
 
 @section('section')
 {{ Form::model($plantalaboral, ['action' => ['CnfgOrganizacionales\PlantaLaboralController@update', $plantalaboral->PALA_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
