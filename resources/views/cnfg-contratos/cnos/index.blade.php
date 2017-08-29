@@ -7,7 +7,7 @@
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-			Clasif. de Ocupaciones
+			Clasificación de Ocupaciones
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
 			<a class='btn btn-primary' role='button' href="{{ route('cnfg-contratos.cnos.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
