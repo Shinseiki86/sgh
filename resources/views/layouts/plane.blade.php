@@ -25,6 +25,7 @@
 <body class="sidebar-closed">
 	@yield('body')
 
+	
 	{!! Html::script('assets/scripts/jquery.min.js') !!}
 	{!! Html::script('assets/scripts/bootstrap/bootstrap.min.js') !!}
 	{!! Html::script('assets/scripts/metisMenu.min.js') !!}

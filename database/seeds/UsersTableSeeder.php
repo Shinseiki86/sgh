@@ -48,15 +48,14 @@ use SGH\Models\Permission;
 
             $this->command->info('--- Seeder Creación de Permisos');
 
-                $this->createPermissions('usuario', 'usuarios', null,  true, false);
-                $this->createPermissions('permiso', 'permisos', null, true, false);
-                $this->createPermissions('rol', 'roles', null, true, false);
-                $this->createPermissions('clasocup', 'clasificaciones de ocupación');
-                $this->createPermissions('cargo', 'cargos');
+                $this->createPermissions('usuarios', 'usuarios', null,  true, false);
+                $this->createPermissions('permisos', 'permisos', null, true, false);
+                $this->createPermissions('roles', 'roles', null, true, false);
+                $this->createPermissions('cargos', 'cargos');
                 $this->createPermissions('tipocontrato', 'tipos de contrato');
-                $this->createPermissions('emprtemp', 'empresas temporales');
+                $this->createPermissions('temporales', 'empresas temporales');
                 $this->createPermissions('cnos', 'clasificaciones de ocupación (CNOS)');
-                $this->createPermissions('jefe', 'jefes');
+                $this->createPermissions('jefes', 'jefes');
                 $this->createPermissions('clasecontrato', 'clases de contratos');
                 $this->createPermissions('estadocontrato', 'estados de contratos');
                 $this->createPermissions('motretiro', 'motivo de retiro');

@@ -66,6 +66,7 @@ class Menu extends ModelWithSoftDeletes
             $item = [ array_merge($line, ['submenu' => $menus->getChildren($data, $line) ]) ];
             $menuAll = array_merge($menuAll, $item);
         }
+        
         return $menus->menuAll = $menuAll;
     }
 }

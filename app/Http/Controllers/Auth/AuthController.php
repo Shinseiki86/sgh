@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use SGH\Models\User;
 use SGH\Models\Rol;
+use SGH\Models\Menu;
 
 class AuthController extends Controller
 {
@@ -70,10 +71,10 @@ class AuthController extends Controller
 			['except' => array_collapse([$arrActionsLogin, $arrActionsAdmin])]
 		);
 		
-        $this->middleware('permission:usuario-index', ['only' => ['index']]);
-        $this->middleware('permission:usuario-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:usuario-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:usuario-delete',   ['only' => ['destroy']]);
+        $this->middleware('permission:usuarios-index', ['only' => ['index']]);
+        $this->middleware('permission:usuarios-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:usuarios-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:usuarios-delete',   ['only' => ['destroy']]);
 
 
 	}
@@ -248,5 +249,41 @@ class AuthController extends Controller
 
 		return redirect()->route('auth.usuarios.index')->send();
 	}
+
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  bool  $throttles
+     * @return \Illuminate\Http\Response
+     */
+    protected function handleUserWasAuthenticated(Request $request, $throttles)
+    {
+        session()->put('menus', Menu::menus());
+
+        //parent::handleUserWasAuthenticated($request, $throttles);
+        if ($throttles) {
+            $this->clearLoginAttempts($request);
+        }
+
+        if (method_exists($this, 'authenticated')) {
+            return $this->authenticated($request, Auth::guard($this->getGuard())->user());
+        }
+
+        return redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        session()->forget('menus');
+        \Auth::guard($this->getGuard())->logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+    }
 
 }

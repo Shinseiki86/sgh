@@ -12,7 +12,7 @@
         <ul class="nav nav-second-level">
             @foreach ($item['submenu'] as $submenu)
                 @if ($submenu['submenu'] == [])
-                    <li><a href="{{ url('menu',['MENU_ID' => $submenu['MENU_ID'], 'MENU_URL' => $submenu['MENU_URL']]) }}">
+                    <li><a href="{{ url($submenu['MENU_URL']) }}">
                         <i class="fa fa-{{ $submenu['MENU_ICON'] }} fa-fw"></i> 
                         {{ $submenu['MENU_LABEL'] }}
                     </a></li>
