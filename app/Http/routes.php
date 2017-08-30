@@ -111,3 +111,6 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 
 Route::resource('diagnosticos', 'DiagnosticoController');
 Route::get('getDiagnostico', 'DiagnosticoController@getData');
+
+Route::resource('select','SelectController');
+Route::get('/buscaCiudad','SelectController@buscaCiudad');

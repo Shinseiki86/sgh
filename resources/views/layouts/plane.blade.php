@@ -20,6 +20,10 @@
 	{!! Html::script('assets/scripts/pace.min.js') !!}
 	{!! Html::style('assets/stylesheets/sb-admin-2.css') !!}
 
+
+
+	
+
 	@stack('head')
 </head>
 <body class="sidebar-closed">
@@ -30,6 +34,10 @@
 	{!! Html::script('assets/scripts/bootstrap/bootstrap.min.js') !!}
 	{!! Html::script('assets/scripts/metisMenu.min.js') !!}
 	{!! Html::script('assets/scripts/sb-admin-2.js') !!}
+	{!!Html::script('select2-4.0.3/dist/js/select2.js')!!}
+    {!!Html::style('select2-4.0.3/dist/css/select2.css',['rel'=>"stylesheet"])!!}
+
+
 
 	<script type="text/javascript">
 		$(function () {
@@ -38,7 +46,10 @@
 				tooltips.tooltip();
 		})
 	</script>
-	
+
+	@section('select2')
+	@show
+		
 	@stack('scripts')
 </body>
 </html>
