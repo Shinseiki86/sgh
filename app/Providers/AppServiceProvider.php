@@ -15,9 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        /*view()->composer('layouts.menu.menu-left', function($view) {
-            $view->with('menus', Menu::menus());
-        });*/
+        view()->composer('layouts.menu.menu-left', function($view) {
+            $view->with('menus', session()->get('menus'));
+        });
 
         Blade::directive('datetime', function ($expression) {
             return "<?php echo ($expression)->format('d/m/Y h:i A'); ?>";

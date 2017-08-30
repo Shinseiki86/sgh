@@ -18,7 +18,8 @@
 					</div>
 					<!-- /input-group -->
 				</li>
-                @foreach (session()->get('menus') as $key => $item)
+				@if(isset($menus))
+                @foreach ($menus as $key => $item)
 					@if(Entrust::can(['usuarios-*', 'roles-*', 'permisos-*']))
 	                    @if ($item['MENU_PARENT'] != 0)
 	                        @break
@@ -26,7 +27,7 @@
 	                    @include('layouts.menu.menu-item', ['item' => $item])
 	                @endif
                 @endforeach
-	
+				@endif
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->

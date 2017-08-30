@@ -78,14 +78,14 @@ class MenuTableSeeder extends Seeder
         ]);
             Menu::create([
                 'MENU_LABEL' => 'Contratos',
-                'MENU_URL' => 'cnfg-contratos/contratos',
+                'MENU_URL' => 'gestion-humana/contratos',
                 'MENU_ICON' => 'file-text-o',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
             Menu::create([
                 'MENU_LABEL' => 'Hojas de Vida',
-                'MENU_URL' => 'cnfg-contratos/prospectos',
+                'MENU_URL' => 'gestion-humana/prospectos',
                 'MENU_ICON' => 'file-text-o',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
