@@ -23,13 +23,8 @@
 		{!! Form::text('ENTI_OBSERVACIONES', null, ['class' => 'form-control ']) !!}
 		@include('widgets.forms.alerta',['name'=>'ENTI_OBSERVACIONES'])
 	</div>
-	<!-- Tien Id Field -->
-	{{-- <div class="form-group  {{ $errors->has('TIEN_ID') ? ' has-error' : '' }}">
-		{!! Form::label('TIEN_ID', 'Tien Id:', ['class' => 'control-label Tien Id']) !!}
-		<div class='col-md-6'>
-			{!! Form::number('TIEN_ID', null, ['class' => 'form-control']) !!}
-			@include('widgets.forms.alerta',['name'=>'TIEN_ID'])
-		</div>
-	</div> --}}
-	@include('widgets.forms.input', ['type'=>'select', 'name'=>'TIEN_ID', 'label'=>'Tipo Entidad', 'data'=>$arrTipoEntidad])
+
+	@include('widgets.forms.input', ['type'=>'select','column'=>14, 'name'=>'TIEN_ID', 'label'=>'Tipo Entidad', 'data'=>$arrTipoEntidad])
+
+	
 </div>

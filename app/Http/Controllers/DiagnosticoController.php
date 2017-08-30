@@ -1,14 +1,12 @@
-<?php namespace SGH\Http\Controllers;
+<?php
+namespace SGH\Http\Controllers;
 
 use Validator;
 use SGH\Http\Requests;
-use SGH\Http\Requests\CreateDiagnosticoRequest;
-use SGH\Http\Requests\UpdateDiagnosticoRequest;
 use Flash;
 use Session;
 use Redirect;
 use SGH\Http\Controllers\Controller;
-use Mitul\Controller\AppBaseController as AppBaseController;
 use Response;
 use SGH\Models\Diagnostico;
 use Yajra\Datatables\Facades\Datatables;

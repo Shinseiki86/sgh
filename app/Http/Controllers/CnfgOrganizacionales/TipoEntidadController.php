@@ -1,23 +1,20 @@
-<?php namespace SGH\Http\Controllers;
+<?php 
+namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
 use Validator;
 use SGH\Http\Requests;
-use SGH\Http\Requests\CreateTipoEntidadRequest;
-use SGH\Http\Requests\UpdateTipoEntidadRequest;
 use Flash;
 use Session;
 use Redirect;
 use SGH\Http\Controllers\Controller;
-use Mitul\Controller\AppBaseController as AppBaseController;
-use Response;
 use SGH\Models\TipoEntidad;
 use Yajra\Datatables\Facades\Datatables;
 
 class TipoEntidadController extends Controller
 {
 
-	private $groupUrl='';
-	private $routeIndex = 'tipoentidades.index';
+	private $groupUrl='cnfg-organizacionales.';
+	private $routeIndex = 'cnfg-organizacionales.tipoentidades.index';
 	public function __construct()
 	{
 		$this->routeIndex=$this->groupUrl .'tipoentidades.index';
@@ -45,7 +42,7 @@ class TipoEntidadController extends Controller
 	public function index()
 	{
 		$tipoentidades = TipoEntidad::all();
-		return view('tipoentidades/index', compact('tipoentidades'));
+		return view($this->routeIndex, compact('tipoentidades'));
 	}
 
 	
@@ -56,7 +53,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function create()
 	{
-		return view('tipoentidades.create');
+		return view('cnfg-organizacionales.tipoentidades.create');
 	}
 
 	/**
@@ -90,7 +87,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function edit(TipoEntidad $tipoentidades)
 	{
-		return view('tipoentidades.edit',['tipoEntidad'=>$tipoentidades]);
+		return view('cnfg-organizacionales.tipoentidades.edit',['tipoEntidad'=>$tipoentidades]);
 	}
 
 	/**

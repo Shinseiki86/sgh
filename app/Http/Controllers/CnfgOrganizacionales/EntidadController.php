@@ -1,4 +1,5 @@
-<?php namespace SGH\Http\Controllers;
+<?php 
+namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
 use Validator;
 use SGH\Http\Requests;
@@ -16,7 +17,7 @@ use Yajra\Datatables\Facades\Datatables;
 class EntidadController extends Controller
 {
 
-	private $groupUrl='';
+	private $groupUrl='cnfg-organizacionales.';
 	private $routeIndex = 'entidades.index';
 	public function __construct()
 	{
@@ -45,7 +46,7 @@ class EntidadController extends Controller
 	public function index()
 	{
 		$entidades = Entidad::with('tipoentidad')->get();
-		return view('entidades/index', compact('entidades'));
+		return view($this->routeIndex, compact('entidades'));
 	}
 
 	
@@ -58,7 +59,7 @@ class EntidadController extends Controller
 	{
 		$arrTipoEntidad = model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
 
-		return view('entidades.create', compact('arrTipoEntidad'));
+		return view('cnfg-organizacionales.entidades.create', compact('arrTipoEntidad'));
 	}
 
 	/**
@@ -93,7 +94,7 @@ class EntidadController extends Controller
 	public function edit(Entidad $entidades)
 	{		
 		$arrTipoEntidad = model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
-		return view('entidades.edit',['entidad'=>$entidades,'arrTipoEntidad'=>$arrTipoEntidad]);
+		return view('cnfg-organizacionales.entidades.edit',['entidad'=>$entidades,'arrTipoEntidad'=>$arrTipoEntidad]);
 	}
 
 	/**

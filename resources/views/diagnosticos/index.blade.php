@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('title', '/ Ciudades')
+@section('title', '/Diagnosticos')
 
 @section('page_heading')
     @include('diagnosticos.modal')
@@ -20,7 +20,7 @@
 
     <table class="table table-striped" id="tabla">
         <thead>
-        <th>Codigo</th>
+        <th>Codigo CIE10</th>
         <th>Descripcion</th>
         <th class="col-md-1 all" width="50px">Acciones</th>
     </thead>
@@ -29,7 +29,7 @@
 
     @include('widgets/modal-delete')
     @include('datatable-ajax', ['urlAjax'=>'getDiagnostico', 'columns'=>[
-        'DIAG_ID',
+        'DIAG_CODIGO',
         'DIAG_DESCRIPCION',
     ]]) 
 @endsection

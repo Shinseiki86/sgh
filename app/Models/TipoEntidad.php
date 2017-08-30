@@ -27,7 +27,6 @@ class TipoEntidad extends ModelWithSoftDeletes
     public static $rules = [
         "TIEN_CODIGO" => "unique:TIPOENTIDADES|required",
 		"TIEN_DESCRIPCION" => "unique:TIPOENTIDADES|required",
-		"TIEN_OBSERVACIONES" => "unique"
     ];
    
     public function entidades()

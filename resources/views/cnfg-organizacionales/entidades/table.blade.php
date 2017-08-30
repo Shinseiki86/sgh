@@ -1,10 +1,10 @@
 <table class="table table-striped" id="tabla">
     <thead>
-        <th>Enti Codigo</th>
-		<th>Enti Nit</th>
-		<th>Enti Razonsocial</th>
-		<th>Enti Observaciones</th>
-		<th>Tien Id</th>
+        <th>Codigo</th>
+		<th>Nit</th>
+		<th>Razonsocial</th>
+		<th>Tipo de Entidad</th>
+		<th>Observaciones</th>
         <th class="col-md-1 all" width="50px">Acciones</th>
     </thead>
     <tbody>
@@ -13,11 +13,11 @@
             <td>{!! $entidad->ENTI_CODIGO !!}</td>
 			<td>{!! $entidad->ENTI_NIT !!}</td>
 			<td>{!! $entidad->ENTI_RAZONSOCIAL !!}</td>
-			<td>{!! $entidad->ENTI_OBSERVACIONES !!}</td>
 			<td>{!! $entidad->tipoentidad->TIEN_DESCRIPCION !!}</td>
-             <td>
+            <td>{!! $entidad->ENTI_OBSERVACIONES !!}</td>
+            <td>
                 <!-- Botón Editar (edit) -->
-                <a class="btn btn-small btn-info btn-xs" href="{{ route('entidades.edit', [ $entidad->ENTI_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+                <a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-organizacionales.entidades.edit', [ $entidad->ENTI_ID ] ) }}" data-tooltip="tooltip" title="Editar">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
 
@@ -28,7 +28,7 @@
                     'data-id'=> $entidad->ENTI_ID,
                     'data-modelo'=> str_upperspace(class_basename($entidad)),
                     'data-descripcion'=> $entidad->ENTI_RAZONSOCIAL,
-                    'data-action'=>'ciudades/'. $entidad->ENTI_ID,
+                    'data-action'=>'entidades/'. $entidad->ENTI_ID,
                     'data-target'=>'#pregModalDelete',
                     'data-tooltip'=>'tooltip',
                     'title'=>'Borrar',

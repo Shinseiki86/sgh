@@ -40,12 +40,12 @@
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'CONT_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
 
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'CONT_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
-<div class="col-md-13 ">
-	@include('widgets.forms.input', ['type'=>'select', 'name'=>'eps_id', 'label'=>'EPS', 'data'=>$arrEPS, 'multiple'=>true])
 
-	@include('widgets.forms.input', ['type'=>'select', 'name'=>'arl_id', 'label'=>'ARL', 'data'=>$arrARL, 'multiple'=>true])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'eps_id', 'label'=>'EPS', 'data'=>$arrEPS, 'multiple'=>true])
 
-	@include('widgets.forms.input', ['type'=>'select', 'name'=>'ccf_id', 'label'=>'Caja de Compensacion', 'data'=>$arrCCF, 'multiple'=>true])
-</div>
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'arl_id', 'label'=>'ARL', 'data'=>$arrARL, 'multiple'=>true])
+
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'ccf_id', 'label'=>'Caja de Compensacion', 'data'=>$arrCCF, 'multiple'=>true])
+
 
 </div>

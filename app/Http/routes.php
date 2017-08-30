@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 		Route::resource('grupos', 'GrupoController');
 		Route::resource('turnos', 'TurnoController');
 		Route::resource('plantaslaborales', 'PlantaLaboralController');
+		Route::resource('tipoentidades', 'TipoEntidadController');
+		Route::resource('entidades', 'EntidadController');
 	});
 
 	Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
@@ -107,25 +109,5 @@ Route::group(['middleware' => ['auth', 'role:admin|owner']], function() {
 });*/
 
 
-Route::resource('tipoentidades', 'TipoEntidadController');
-Route::get('getTipoEntidad', 'TipoEntidadController@getData');
-Route::get('tipoentidades/{id}/delete', [
-    'as' => 'tipoentidades.delete',
-    'uses' => 'TipoEntidadController@destroy',
-]);
-
-
-Route::resource('entidades', 'EntidadController');
-Route::get('getEntidad', 'EntidadController@getData');
-Route::get('entidades/{id}/delete', [
-    'as' => 'entidades.delete',
-    'uses' => 'EntidadController@destroy',
-]);
-
-
 Route::resource('diagnosticos', 'DiagnosticoController');
 Route::get('getDiagnostico', 'DiagnosticoController@getData');
-Route::get('diagnosticos/{id}/delete', [
-    'as' => 'diagnosticos.delete',
-    'uses' => 'DiagnosticoController@destroy',
-]);

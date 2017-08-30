@@ -211,14 +211,14 @@ class MenuTableSeeder extends Seeder
             ]);
             Menu::create([
                 'MENU_LABEL' => 'Tipo Entidades',
-                'MENU_URL' => 'cnfg-organizacionales/plantaslaborales',
+                'MENU_URL' => 'cnfg-organizacionales/tipoentidades',
                 'MENU_ICON' => 'institution',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
             Menu::create([
                 'MENU_LABEL' => 'Entidades',
-                'MENU_URL' => 'cnfg-organizacionales/plantaslaborales',
+                'MENU_URL' => 'cnfg-organizacionales/entidades',
                 'MENU_ICON' => 'institution',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
