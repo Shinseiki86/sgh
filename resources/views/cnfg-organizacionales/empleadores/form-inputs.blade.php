@@ -7,7 +7,7 @@
 
 @include('widgets.forms.input', ['type'=>'text', 'name'=>'EMPL_DIRECCION', 'label'=>'Dirección', 'options'=>['maxlength' => '100'] ])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'CIUD_DOMICILIO', 'label'=>'Ciudad', 'data'=>$arrCiudades])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'CIUD_DOMICILIO', 'label'=>'Ciudad', 'data'=>$arrCiudades, 'options'=>['data-live-search'=>'true']])
 
 @include('widgets.forms.input', ['type'=>'text', 'name'=>'EMPL_NOMBRECOMERCIAL', 'label'=>'Nombre Comercial', 'options'=>['maxlength' => '100'] ])
 
@@ -15,7 +15,7 @@
 
 @include('widgets.forms.input', ['type'=>'number', 'name'=>'EMPL_CEDULAREPRESENTANTE', 'label'=>'Cedula Representante', 'options'=>['size' => '999999999999999' ] ])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'CIUD_CEDULA', 'label'=>'Ciudad de Expedición', 'data'=>$arrCiudades])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'CIUD_CEDULA', 'label'=>'Ciudad de Expedición', 'data'=>$arrCiudades, 'options'=>['data-live-search'=>'true']])
 
 @include('widgets.forms.input', ['type'=>'email', 'name'=>'EMPL_COREO', 'label'=>'Correo electrónico responsable G.H'])
 

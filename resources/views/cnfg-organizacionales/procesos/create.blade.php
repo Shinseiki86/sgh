@@ -8,7 +8,7 @@
 	@rinclude('form-inputs')
 
 	<!-- Botones -->
-	@include('widgets.forms.buttons', ['url' => 'cnfg-organizacionales/plantaslaborales'])
+	@include('widgets.forms.buttons', ['url' => 'cnfg-organizacionales/procesos'])
 
 {{ Form::close() }}
 @endsection

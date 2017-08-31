@@ -38,6 +38,7 @@ class CiudadController extends Controller
 		return validator::make($data, [
 			'CIUD_CODIGO' => ['required', 'numeric', 'unique:CIUDADES,CIUD_CODIGO,'.$id.',CIUD_CODIGO'],
 			'CIUD_NOMBRE' => ['required', 'max:300', 'unique:CIUDADES,CIUD_NOMBRE,'.$id.',CIUD_CODIGO'],
+			'DEPA_ID'     => ['required', 'numeric']
 		]);
 
 	}

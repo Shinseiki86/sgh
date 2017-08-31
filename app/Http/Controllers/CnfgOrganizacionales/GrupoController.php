@@ -14,6 +14,9 @@ use SGH\Models\Grupo;
 
 class GrupoController extends Controller
 {
+	private $route = 'cnfg-organizacionales.grupos';
+	private $class = Grupo::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -48,7 +51,7 @@ class GrupoController extends Controller
 		//Se obtienen todos los registros.
 		$grupos = Grupo::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-organizacionales/grupos/index', compact('grupos'));
+		return view($this->route.'.index', compact('grupos'));
 	}
 
 	/**
@@ -61,7 +64,7 @@ class GrupoController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		return view('cnfg-organizacionales/grupos/create', compact('arrEmpleadores'));
+		return view($this->route.'.create', compact('arrEmpleadores'));
 	}
 
 	/**
@@ -71,7 +74,7 @@ class GrupoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Grupo::class, 'cnfg-organizacionales.grupos.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -90,7 +93,7 @@ class GrupoController extends Controller
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/grupos/edit', compact('grupo','arrEmpleadores'));
+		return view($this->route.'.edit', compact('grupo','arrEmpleadores'));
 	}
 
 
@@ -102,7 +105,7 @@ class GrupoController extends Controller
 	 */
 	public function update($EMPL_ID)
 	{
-		parent::updateModel($EMPL_ID, Grupo::class, 'cnfg-organizacionales.grupos.index');
+		parent::updateModel($EMPL_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -113,17 +116,7 @@ class GrupoController extends Controller
 	 */
 	public function destroy($EMPL_ID, $showMsg=True)
 	{
-		$grupos = Grupo::findOrFail($EMPL_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($grupos->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Grupo '.$grupos->EMPL_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$grupos->delete();
-				flash_alert( 'Grupo '.$grupos->EMPL_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-organizacionales.grupos.index');
+		parent::destroyModel($EMPL_ID, $this->class, $this->route.'.index');
 	}
 	
 }

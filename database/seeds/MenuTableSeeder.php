@@ -41,6 +41,14 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
+            Menu::create([
+                'MENU_LABEL' => 'Menú',
+                'MENU_URL' => 'auth/menu',
+                'MENU_ICON' => 'address-card-o',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+                'MENU_ENABLED' => true,
+            ]);
 
         $orderItem = 0;
         $parent = Menu::create([

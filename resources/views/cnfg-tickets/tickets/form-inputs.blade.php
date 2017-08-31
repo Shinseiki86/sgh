@@ -5,7 +5,7 @@
 @include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'TICK_FECHAEVENTO', 'label'=>'Fecha del Evento' ])
 
 {{-- DISABLED EN CREATE, SELECT DEFAULT 1 --}}
-@if(explode("@", \Route::currentRouteAction())[1] == 'create')
+@if(current_route_action() == 'create')
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'ESTI_ID', 'label'=>'Estado', 'data'=>$arrEstados, 'value'=>1, 'readonly'=>true])
 @else
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'ESTI_ID', 'label'=>'Estado', 'data'=>$arrEstados])
@@ -30,7 +30,7 @@
 
 
 {{-- DISABLED EN CREATE, SELECT DEFAULT 1 --}}
-@if(explode("@", \Route::currentRouteAction())[1] == 'create')
+@if(current_route_action() == 'create')
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'ESAP_ID', 'label'=>'Estado de Aprobación', 'data'=>$arrEstadosAprobacion, 'value'=>1, 'readonly'=>true])
 @else
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'ESAP_ID', 'label'=>'Estado de Aprobación', 'data'=>$arrEstadosAprobacion])

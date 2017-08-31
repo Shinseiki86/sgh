@@ -4,4 +4,4 @@
 
 @include('widgets.forms.input', ['type'=>'text', 'column'=>8, 'name'=>'CIUD_NOMBRE', 'label'=>'Descripción', 'options'=>['maxlength' => '300'] ])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'DEPA_ID', 'label'=>'Departamento', 'data'=>$arrDepartamentos])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'DEPA_ID', 'label'=>'Departamento', 'data'=>$arrDepartamentos, 'options'=>['data-live-search'=>'true']])

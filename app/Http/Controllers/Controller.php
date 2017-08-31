@@ -135,13 +135,19 @@ class Controller extends BaseController
 	{
 		//Datos recibidos desde la vista.
 		$data = request()->all();
-
 		if(!empty($relations)){
-			foreach ($relations as $ids => $relation) {
-				$arrayIds = isset($data[$ids]) ? $data[$ids] : [];
-				$model->$relation()->sync($arrayIds, false);
+			foreach ($relations as $relation => $ids) {
+
+				if( is_string($ids) and $ids != '' )
+					$arrayIds = isset($data[$ids]) ? $data[$ids] : [];
+
+				if( is_array($ids) and !empty($ids) )
+					$arrayIds = $ids;
+
+				$model->$relation()->sync($arrayIds, true);
 
 			}
+
 		}
 	}
 

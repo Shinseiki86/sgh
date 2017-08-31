@@ -14,6 +14,9 @@ use SGH\Models\Proceso;
 
 class ProcesoController extends Controller
 {
+	private $route = 'cnfg-organizacionales.procesos';
+	private $class = Proceso::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -49,7 +52,7 @@ class ProcesoController extends Controller
 		//Se obtienen todos los registros.
 		$procesos = Proceso::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-organizacionales/procesos/index', compact('procesos'));
+		return view($this->route.'.index', compact('procesos'));
 	}
 
 	/**
@@ -61,7 +64,7 @@ class ProcesoController extends Controller
 	{
 		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 
-		return view('cnfg-organizacionales/procesos/create', compact('arrGerencias'));
+		return view($this->route.'.create', compact('arrGerencias'));
 	}
 
 	/**
@@ -71,7 +74,7 @@ class ProcesoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Proceso::class, 'cnfg-organizacionales.procesos.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 	/**
@@ -90,7 +93,7 @@ class ProcesoController extends Controller
 		$GERE_ids = $proceso->gerencias->pluck('GERE_ID')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/procesos/edit', compact('proceso', 'arrGerencias', 'GERE_ids'));
+		return view($this->route.'.edit', compact('proceso', 'arrGerencias', 'GERE_ids'));
 	}
 
 
@@ -102,7 +105,8 @@ class ProcesoController extends Controller
 	 */
 	public function update($PROC_ID)
 	{
-		parent::updateModel($PROC_ID, Proceso::class, 'cnfg-organizacionales.procesos.index');
+		dump(request()->all());
+		parent::updateModel($PROC_ID, $this->class, $this->route.'.index', ['GERE_ids'=>'gerencias']);
 	}
 
 	/**
@@ -113,17 +117,7 @@ class ProcesoController extends Controller
 	 */
 	public function destroy($PROC_ID, $showMsg=True)
 	{
-		$proceso = Proceso::findOrFail($PROC_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($proceso->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Proceso '.$proceso->GERE_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$proceso->delete();
-				flash_alert( 'Proceso '.$proceso->GERE_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-organizacionales.procesos.index');
+		parent::destroyModel($PROC_ID, $this->class, $this->route.'.index');
 	}
 	
 }

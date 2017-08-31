@@ -15,6 +15,9 @@ use SGH\Models\Empleador;
 
 class GerenciaController extends Controller
 {
+	private $route = 'cnfg-organizacionales.gerencias';
+	private $class = Gerencia::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -51,7 +54,7 @@ class GerenciaController extends Controller
 		//Se obtienen todos los registros.
 		$gerencias = Gerencia::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-organizacionales/gerencias/index', compact('gerencias'));
+		return view($this->route.'.index', compact('gerencias'));
 	}
 
 	/**
@@ -69,7 +72,7 @@ class GerenciaController extends Controller
 		//JSON con valores preseleccionados para el select múltiple
 		$PROC_ids = json_encode([]);
 
-		return view('cnfg-organizacionales/gerencias/create', compact('arrEmpleadores', 'arrProcesos', 'PROC_ids'));
+		return view($this->route.'.create', compact('arrEmpleadores', 'arrProcesos', 'PROC_ids'));
 	}
 
 	/**
@@ -79,9 +82,8 @@ class GerenciaController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Gerencia::class, 'cnfg-organizacionales.gerencias.index', ['PROC_ids'=>'procesos']);
+		parent::storeModel($this->class, $this->route.'.index', ['PROC_ids'=>'procesos']);
 	}
-
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -103,9 +105,8 @@ class GerenciaController extends Controller
 		$PROC_ids = $gerencia->procesos->pluck('PROC_ID')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/gerencias/edit', compact('gerencia', 'arrEmpleadores', 'arrProcesos', 'PROC_ids'));
+		return view($this->route.'.edit', compact('gerencia', 'arrEmpleadores', 'arrProcesos', 'PROC_ids'));
 	}
-
 
 	/**
 	 * Actualiza un registro en la base de datos.
@@ -115,7 +116,7 @@ class GerenciaController extends Controller
 	 */
 	public function update($GERE_ID)
 	{
-		parent::updateModel($GERE_ID, Gerencia::class, 'cnfg-organizacionales.gerencias.index', [
+		parent::updateModel($GERE_ID, $this->class, $this->route.'.index', [
 			'PROC_ids'=>'procesos'
 		]);
 	}
@@ -128,17 +129,7 @@ class GerenciaController extends Controller
 	 */
 	public function destroy($GERE_ID, $showMsg=True)
 	{
-		$gerencia = Gerencia::findOrFail($GERE_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($gerencia->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Gerencia '.$gerencia->GERE_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$gerencia->delete();
-				flash_alert( 'Gerencia '.$gerencia->GERE_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-organizacionales.gerencias.index');
+		parent::destroyModel($GERE_ID, $this->class, $this->route.'.index');
 	}
 	
 }

@@ -37,6 +37,7 @@ class DepartamentoController extends Controller
 		return Validator::make($data, [
 			'DEPA_CODIGO' => ['required', 'numeric', 'unique:DEPARTAMENTOS,DEPA_CODIGO,'.$id.',DEPA_ID'],
 			'DEPA_NOMBRE' => ['required', 'max:300', 'unique:DEPARTAMENTOS,DEPA_NOMBRE,'.$id.',DEPA_ID'],
+			'PAIS_ID'     => ['required', 'numeric']//, 'exists:PAISES'],
 		]);
 
 	}
