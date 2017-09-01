@@ -140,7 +140,9 @@ class Contrato extends ModelWithSoftDeletes
 	}
 
 	public function entidades(){
-		return $this->belongsToMany(Entidad::class);
+		$foreingKey = 'CONT_ID';
+		$otherKey   = 'ENTI_ID';
+		return $this->belongsToMany(Entidad::class, 'CONTRATO_ENTIDAD', $foreingKey, $otherKey);
 	}
 
 }

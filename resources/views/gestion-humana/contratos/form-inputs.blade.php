@@ -41,10 +41,10 @@
 
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'CONT_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'eps_id', 'label'=>'EPS', 'data'=>$arrEPS, 'options'=>['data-live-search'=>'true']])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'ENTI_ID_eps', 'label'=>'EPS', 'data'=>$arrEPS, 'options'=>['data-live-search'=>'true']])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'arl_id', 'label'=>'ARL', 'data'=>$arrARL, 'options'=>['data-live-search'=>'true']])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'ENTI_ID_arl', 'label'=>'ARL', 'data'=>$arrARL, 'options'=>['data-live-search'=>'true']])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'ccf_id', 'label'=>'Caja de Compensacion', 'data'=>$arrCCF, 'options'=>['data-live-search'=>'true']])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'ENTI_ID_ccf', 'label'=>'Caja de Compensacion', 'data'=>$arrCCF, 'options'=>['data-live-search'=>'true']])
 
 </div>

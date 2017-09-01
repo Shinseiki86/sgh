@@ -82,7 +82,7 @@ class GerenciaController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index', ['PROC_ids'=>'procesos']);
+		parent::storeModel($this->class, $this->route.'.index', ['procesos'=>'PROC_ids']);
 	}
 
 	/**
@@ -116,9 +116,7 @@ class GerenciaController extends Controller
 	 */
 	public function update($GERE_ID)
 	{
-		parent::updateModel($GERE_ID, $this->class, $this->route.'.index', [
-			'PROC_ids'=>'procesos'
-		]);
+		parent::updateModel($GERE_ID, $this->class, $this->route.'.index', ['procesos'=>'PROC_ids']);
 	}
 
 	/**

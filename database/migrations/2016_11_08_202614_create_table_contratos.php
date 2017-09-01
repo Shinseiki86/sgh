@@ -26,13 +26,12 @@ class CreateTableContratos extends Migration
             $table->integer('PROS_ID')->unsigned()
                 ->comment('referencia al prospecto que tiene el contrato con la empresa');
 
-            $table->integer('JEFE_ID')->unsigned()
-                ->nullable()
+            $table->unsignedInteger('JEFE_ID')->nullable()
                 ->comment('referencia al prospecto que es jefe del empleado');
 
             $table->string('CONT_CASOMEDICO', 2)->nullable();
 
-            $table->integer('CARG_ID')->unsigned()
+            $table->unsignedInteger('CARG_ID')
                 ->comment('referencia al cargo que tiene el colaborador en el contrato');
 
             $table->date('CONT_FECHAINGRESO')
@@ -46,61 +45,56 @@ class CreateTableContratos extends Migration
                 ->nullable()
                 ->comment('fecha de retiro del contrato');
 
-            $table->integer('CONT_SALARIO')->unsigned()
+            $table->unsignedInteger('CONT_SALARIO')
                 ->comment('asignacion salarial del colaborador en el contrato');
 
-            $table->integer('CONT_VARIABLE')
-                ->nullable()
-                ->unsigned()
+            $table->unsignedInteger('CONT_VARIABLE')->nullable()
                 ->comment('promedio salarial variable del colaborador en el contrato');
 
-            $table->integer('CONT_RODAJE')
-                ->nullable()
-                ->unsigned()
+            $table->unsignedInteger('CONT_RODAJE')->nullable()
                 ->comment('rodaje del colaborador en el contrato');
 
-            $table->integer('ESCO_ID')->unsigned()
+            $table->unsignedInteger('ESCO_ID')->unsigned()
                 ->comment('estado de contrato del colaborador');
 
-            $table->integer('MORE_ID')->nullable()->unsigned()
+            $table->unsignedInteger('MORE_ID')->nullable()
                 ->comment('motivo de retiro del contrato');
 
-            $table->integer('TICO_ID')->unsigned()
+            $table->unsignedInteger('TICO_ID')
                 ->comment('tipo de contrato del colaborador'); // temporal, directo
 
-            $table->integer('CLCO_ID')->unsigned()
+            $table->unsignedInteger('CLCO_ID')
                 ->comment('clase de contrato del colaborador (referencia a clase contratos)'); // termino fijo, indefinido
 
-            $table->integer('EMPL_ID')->unsigned()
+            $table->unsignedInteger('EMPL_ID')
                 ->comment('empleador del colaborador');
 
-            $table->integer('TEMP_ID')->unsigned()
-                ->nullable()
+            $table->unsignedInteger('TEMP_ID')->nullable()
                 ->comment('temporal del colaborador');
 
-            $table->integer('RIES_ID')->unsigned()
+            $table->unsignedInteger('RIES_ID')
                 ->comment('riesgo de ARL del colaborador');
 
-            $table->integer('TIEM_ID')->unsigned()
+            $table->unsignedInteger('TIEM_ID')
                 ->comment('tipo de empleador del colaborador');
 
-            $table->integer('CECO_ID')->unsigned()
+            $table->unsignedInteger('CECO_ID')
                 ->comment('centro de costos del contrato');
 
-            $table->integer('GRUP_ID')->nullable()->unsigned()
+            $table->unsignedInteger('GRUP_ID')->nullable()
                 ->comment('Grupo del empleado');
 
-            $table->integer('TURN_ID')->nullable()->unsigned()
+            $table->unsignedInteger('TURN_ID')->nullable()
                 ->comment('Turno del empleado');
 
-            $table->integer('CIUD_CONTRATA')->unsigned()
+            $table->unsignedInteger('CIUD_CONTRATA')
                 ->comment('Ciudad por donde fue contratado el colaborador');
 
-            $table->integer('CIUD_SERVICIO')->unsigned()
+            $table->unsignedInteger('CIUD_SERVICIO')
                 ->comment('Ciudad en donde el empleado presta el servicio');
 
-            $table->string('CONT_OBSERVACIONES', 300)
-                ->comment('observaciones del tipo de contrato')->nullable();
+            $table->string('CONT_OBSERVACIONES', 300)->nullable()
+                ->comment('observaciones del tipo de contrato');
             
             //Traza
             $table->string('CONT_CREADOPOR')

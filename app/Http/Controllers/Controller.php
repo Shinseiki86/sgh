@@ -36,7 +36,7 @@ class Controller extends BaseController
 	protected function storeModel($class, $redirect, array $relations = [])
 	{
 		//Datos recibidos desde la vista.
-		$data = request()->all();
+		$data = $this->getRequest();
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$validator = $this->validator($data);
@@ -72,7 +72,7 @@ class Controller extends BaseController
 	protected function updateModel($id, $class, $redirect, array $relations = [])
 	{
 		//Datos recibidos desde la vista.
-		$data = request()->all();
+		$data = $this->getRequest();
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
 		$validator = $this->validator($data, $id);
@@ -94,6 +94,49 @@ class Controller extends BaseController
 			return redirect()->route($redirect)->send();
 		} else {
 			return redirect()->back()->withErrors($validator)->withInput()->send();
+		}
+	}
+
+	/**
+	 * Obtiene los datos recibidos por request y elimina los input vacíos
+	 *
+	 * @return array
+	 */
+	private function getRequest()
+	{
+		$data = request()->all();
+		foreach ($data as $input => $value) {
+			if($value=='')
+		 		$data[$input] = null;
+		};
+		return $data;
+	}
+
+	/**
+	 * Guarda las relaciones entre modelos.
+	 *
+	 * @param  Illuminate\Database\Eloquent\Model $model
+	 * @param  array $relations
+	 * @return void
+	 */
+	private function storeRelations($model, array $relations)
+	{
+		//Datos recibidos desde la vista.
+		$data = request()->all();
+
+		if(!empty($relations)){
+			foreach ($relations as $relation => $ids) {
+				$arrayIds = [];
+				//Si $ids es un string, se refiere al nombre del campo en el form, por ende debe existir en $data
+				if( is_string($ids) and $ids!='' and isset($data[$ids]))
+					$arrayIds =  $data[$ids];
+
+				if( is_array($ids) and !empty($ids) )
+					$arrayIds = $ids;
+
+				$model->$relation()->sync($arrayIds, true);
+			}
+
 		}
 	}
 
@@ -129,26 +172,6 @@ class Controller extends BaseController
 			}
 		}
 		return redirect()->route($redirect)->send();
-	}
-
-	private function storeRelations($model, $relations)
-	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-		if(!empty($relations)){
-			foreach ($relations as $relation => $ids) {
-
-				if( is_string($ids) and $ids != '' )
-					$arrayIds = isset($data[$ids]) ? $data[$ids] : [];
-
-				if( is_array($ids) and !empty($ids) )
-					$arrayIds = $ids;
-
-				$model->$relation()->sync($arrayIds, true);
-
-			}
-
-		}
 	}
 
 	protected function validateRelations($nameClass, $relations)

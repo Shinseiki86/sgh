@@ -26,9 +26,9 @@ class Entidad extends ModelWithSoftDeletes
 
 
     public static $rules = [
-        "ENTI_CODIGO" => "unique:entidades|required",
-		"ENTI_NIT" => "unique:entidades|required",
-		"ENTI_RAZONSOCIAL" => "unique:entidades|required",
+        "ENTI_CODIGO" => "unique:ENTIDADES|required",
+		"ENTI_NIT" => "unique:ENTIDADES|required",
+		"ENTI_RAZONSOCIAL" => "unique:ENTIDADES|required",
 		"TIEN_ID" => "required|numeric"
     ];
 
@@ -40,7 +40,9 @@ class Entidad extends ModelWithSoftDeletes
     }
 
     public function contratos(){
-        return $this->belongsToMany(Contrato::class);
+        $foreingKey = 'ENTI_ID';
+        $otherKey   = 'CONT_ID';
+        return $this->belongsToMany(Contrato::class, 'CONTRATO_ENTIDAD', $foreingKey, $otherKey);
     }
 
 

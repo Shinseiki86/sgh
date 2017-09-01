@@ -74,7 +74,7 @@ class ProcesoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel($this->class, $this->route.'.index', ['gerencias'=>'GERE_ids']);
 	}
 
 	/**
@@ -106,7 +106,7 @@ class ProcesoController extends Controller
 	public function update($PROC_ID)
 	{
 		dump(request()->all());
-		parent::updateModel($PROC_ID, $this->class, $this->route.'.index', ['GERE_ids'=>'gerencias']);
+		parent::updateModel($PROC_ID, $this->class, $this->route.'.index', ['gerencias'=>'GERE_ids']);
 	}
 
 	/**

@@ -14,6 +14,9 @@ use SGH\Models\Permission;
 
 class PermissionController extends Controller
 {
+	private $route = 'auth.permisos';
+	private $class = Permission::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -50,7 +53,7 @@ class PermissionController extends Controller
 		//Se obtienen todos los registros.
 		$permisos = Permission::all();
 		//Se carga la vista y se pasan los registros
-		return view('auth/permisos/index', compact('permisos'));
+		return view($this->route.'.index', compact('permisos'));
 	}
 
 	/**
@@ -63,7 +66,7 @@ class PermissionController extends Controller
 		//Se crea un array con los Role disponibles
 		$arrRoles = model_to_array(Role::class, 'display_name');
 
-		return view('auth/permisos/create', compact('arrRoles'));
+		return view($this->route.'.create', compact('arrRoles'));
 	}
 
 	/**
@@ -73,7 +76,7 @@ class PermissionController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Permission::class, 'auth.permisos.index', ['roles_ids'=>'roles']);
+		parent::storeModel(Permission::class, $this->route.'.index', ['roles'=>'roles_ids']);
 	}
 
 
@@ -93,7 +96,7 @@ class PermissionController extends Controller
 		$roles_ids = $permiso->roles->pluck('id')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('auth/permisos/edit', compact('permiso', 'arrRoles', 'roles_ids'));
+		return view($this->route.'.edit', compact('permiso', 'arrRoles', 'roles_ids'));
 	}
 
 
@@ -105,7 +108,7 @@ class PermissionController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Permission::class, 'auth.permisos.index', ['roles_ids'=>'roles']);
+		parent::updateModel($id, Permission::class, $this->route.'.index', ['roles'=>'roles_ids']);
 	}
 
 	/**
@@ -116,17 +119,7 @@ class PermissionController extends Controller
 	 */
 	public function destroy($id, $showMsg=True)
 	{
-		$permiso = Permission::findOrFail($id);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($permiso->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Permiso "'.$permiso->display_name.'" no se puede borrar.', 'danger' );
-		} else {
-			$permiso->delete();
-				flash_alert( 'Permiso "'.$permiso->display_name.'" eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('auth.permisos.index');
+		parent::destroyModel($id, $this->class, $this->route.'.index');
 	}
 	
 }

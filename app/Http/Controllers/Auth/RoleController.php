@@ -14,6 +14,9 @@ use SGH\Models\Role;
 
 class RoleController extends Controller
 {
+	private $route = 'auth.roles';
+	private $class = Role::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -48,7 +51,7 @@ class RoleController extends Controller
 		//Se obtienen todos los registros.
 		$roles = Role::all();
 		//Se carga la vista y se pasan los registros
-		return view('auth/roles/index', compact('roles'));
+		return view($this->route.'.index', compact('roles'));
 	}
 
 	/**
@@ -61,7 +64,7 @@ class RoleController extends Controller
 		//Se crea un array con los Permission disponibles
 		$arrPermisos = model_to_array(Permission::class, 'display_name');
 
-		return view('auth/roles/create', compact('arrPermisos'));
+		return view($this->route.'.create', compact('arrPermisos'));
 	}
 
 	/**
@@ -71,7 +74,7 @@ class RoleController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Role::class, 'auth.roles.index', ['permisos_ids'=>'permissions']);
+		parent::storeModel(Role::class, $this->route.'.index', ['permissions'=>'permisos_ids']);
 	}
 
 
@@ -91,7 +94,7 @@ class RoleController extends Controller
 		$permisos_ids = $rol->permissions->pluck('id')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('auth/roles/edit', compact('rol', 'arrPermisos', 'permisos_ids'));
+		return view($this->route.'.edit', compact('rol', 'arrPermisos', 'permisos_ids'));
 	}
 
 
@@ -103,7 +106,7 @@ class RoleController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Role::class, 'auth.roles.index', ['permisos_ids'=>'permissions']);
+		parent::updateModel($id, Role::class, $this->route.'.index', ['permissions'=>'permisos_ids']);
 	}
 
 	/**
@@ -112,19 +115,9 @@ class RoleController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id, $showMsg=True)
+	public function destroy($id)
 	{
-		$rol = Role::findOrFail($id);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($rol->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Rol "'.$rol->display_name.'" no se puede borrar.', 'danger' );
-		} else {
-			$rol->delete();
-				flash_alert( 'Rol "'.$rol->display_name.'" eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('auth.roles.index');
+		parent::destroyModel($id, $this->class, $this->route.'.index');
 	}
 	
 }

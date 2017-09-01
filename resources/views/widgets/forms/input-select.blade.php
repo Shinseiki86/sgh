@@ -1,7 +1,7 @@
 {{ Form::select(
 	isset($multiple) && $multiple ?$name.'[]':$name,
 	(isset($multiple) && $multiple ? []:[''=>'']) + (isset($data)?$data:[]) , 
-	isset($value)? $value:old($name),
+	old($name),//isset($value)? $value:old($name),
 	[
 		'id'=>$name,
 		'class'=>'form-control selectpicker'.(isset($readonly) && $readonly ?' readonly':''),
@@ -14,8 +14,11 @@
 <script type="text/javascript">
 	$('#{{$name}}')
 		.val(
-			{{ old($name)!=null ?  json_encode(array_map('intval', old($name))) : (isset(${$name})?${$name}:'') }}
-		);//.selectpicker('render');
+			{{ ((old($name)!=null or old($name)!='') and is_array(old($name)))
+				? json_encode(array_map('intval', old($name)))
+				: (isset(${$name})?''.${$name}:'')
+			}}
+		);
 </script>
 @endpush
 @endif

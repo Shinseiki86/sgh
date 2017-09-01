@@ -18,9 +18,13 @@ use SGH\Models\Jefe;
 use SGH\Models\Cargo;
 use SGH\Models\Riesgo;
 use SGH\Models\Empleador;
+use SGH\Models\TipoEntidad;
 
 class ContratoController extends Controller
 {
+	private $route = 'gestion-humana.contratos';
+	private $class = Contrato::class;
+
 	public function __construct()
 	{
 		$this->middleware('auth');
@@ -41,7 +45,7 @@ class ContratoController extends Controller
 	{
 		return Validator::make($data, [
 			'EMPL_ID' => ['numeric', 'required'],
-			'TEMP_ID' => ['numeric', 'required'],
+			'TEMP_ID' => ['numeric',],
 			'TIEM_ID' => ['numeric', 'required'],
 			'CECO_ID' => ['numeric', 'required'],
 			'ESCO_ID' => ['numeric', 'required'],
@@ -53,14 +57,19 @@ class ContratoController extends Controller
 			'TURN_ID' => ['numeric', 'required'],
 			'CIUD_CONTRATA' => ['numeric', 'required'],
 			'CIUD_SERVICIO' => ['numeric', 'required'],
-			//'JEFE_ID' => ['numeric'],
+			'JEFE_ID' => ['numeric'],
 			'CARG_ID' => ['numeric', 'required'],
 			'CONT_FECHAINGRESO' => ['date', 'required'],
+			'CONT_FECHARETIRO' => ['date'],
+			'MORE_ID' => ['numeric'],
 			'CONT_SALARIO'      => ['numeric','required'],
 			'CONT_VARIABLE'     => ['numeric'],
 			'CONT_RODAJE'       => ['numeric'],
 			'CONT_CASOMEDICO'   => ['required', 'max:2'],
 			'CONT_OBSERVACIONES'=> ['max:300'],
+			'ENTI_ID_eps' => ['required'],
+			'ENTI_ID_arl' => ['required'],
+			'ENTI_ID_ccf' => ['required'],
 		]);
 	}
 
@@ -75,7 +84,7 @@ class ContratoController extends Controller
 		//Se obtienen todos los registros.
 		$contratos = Contrato::all();
 		//Se carga la vista y se pasan los registros
-		return view('gestion-humana/contratos/index', compact('contratos'));
+		return view($this->route.'.index', compact('contratos'));
 	}
 
 	/**
@@ -163,7 +172,7 @@ class ContratoController extends Controller
 		//Se crea un array con las Entidades CCF
 		$arrCCF = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',3]]);
 
-
+		//Se crea un array con los jefes activos
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -172,11 +181,13 @@ class ContratoController extends Controller
 			'PROS_SEGUNDOAPELLIDO',
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
+		$arrJefes = Prospecto::activos()
+							->orderBy('CONTRATOS.'.$primaryKey)
+							->select([ 'PROSPECTOS.'.$primaryKey , $column ])
+							->get();
+		$arrJefes = model_to_array($arrJefes, $columnName, $primaryKey);
 
-		$jefe = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'PROSPECTOS.'.$primaryKey , $column ])->get();
-		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
-
-		return view('gestion-humana/contratos/create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
+		return view($this->route.'.create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
 	}
 
 	/**
@@ -186,14 +197,20 @@ class ContratoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Contrato::class, 'gestion-humana.contratos.index', ['eps_id'=>'entidades','arl_id'=>'entidades','ccf_id'=>'entidades']);		
+		$entidades_id = [];
+		foreach (['eps','arl','ccf'] as $entidad) {
+			if(request()->get('ENTI_ID_'.$entidad)!=null)
+				$entidades_id[] = request()->get('ENTI_ID_'.$entidad);
+		}
+
+		parent::storeModel($this->class, $this->route.'.index', ['entidades'=>$entidades_id]);		
 	}
 
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CONT_ID
 	 * @return Response
 	 */
 	public function edit($CONT_ID)
@@ -247,10 +264,18 @@ class ContratoController extends Controller
 
 		//Se crea un array con las ciudades disponibles
 		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
+		//Se crea un array con las Entidades EPS
+		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::EPS]]);
+		$ENTI_ID_eps = $contrato->entidades()->where('TIEN_ID', TipoEntidad::EPS)->get()->first()->ENTI_ID;
 
-		//Se crea un array con las Entidades
-		$arrEPS= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',['TIEN_ID','=','1']);
+		//Se crea un array con las Entidades ARL
+		$arrARL = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::ARL]]);
+		$ENTI_ID_arl = $contrato->entidades()->where('TIEN_ID', TipoEntidad::ARL)->get()->first()->ENTI_ID;
 
+		//Se crea un array con las Entidades CCF
+		$arrCCF = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::CCF]]);
+		$ENTI_ID_ccf = $contrato->entidades()->where('TIEN_ID', TipoEntidad::CCF)->get()->first()->ENTI_ID;
+		
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -259,45 +284,42 @@ class ContratoController extends Controller
 			'PROS_SEGUNDOAPELLIDO',
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
-
-		$jefe = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'PROSPECTOS.'.$primaryKey , $column ])->get();
-		$arrJefes = $jefe->pluck($columnName, $primaryKey)->toArray();
+		$arrJefes = Prospecto::activos()
+							->orderBy('CONTRATOS.'.$primaryKey)
+							->select([ 'PROSPECTOS.'.$primaryKey , $column ])
+							->get();
+		$arrJefes = model_to_array($arrJefes, $columnName, $primaryKey);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('gestion-humana/contratos/edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS'));
+		return view($this->route.'.edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
 	}
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CONT_ID
 	 * @return Response
 	 */
-	public function update(Contrato $contrato)
+	public function update($CONT_ID)
 	{
-		parent::updateModel($contrato, Contrato::class, 'gestion-humana.contratos.index');
+		$entidades_id = [];
+		foreach (['eps','arl','ccf'] as $entidad) {
+			if(request()->get('ENTI_ID_'.$entidad)!=null)
+				$entidades_id[] = request()->get('ENTI_ID_'.$entidad);
+		}
+		parent::updateModel($CONT_ID, $this->class, $this->route.'.index', ['entidades'=>$entidades_id]);	
 
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $EMPL_ID
+	 * @param  int  $CONT_ID
 	 * @return Response
 	 */
-	public function destroy($EMPL_ID, $showMsg=True)
+	public function destroy($CONT_ID, $showMsg=True)
 	{
-		$prospecto = Contrato::findOrFail($EMPL_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($prospecto->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$prospecto->EMPL_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$prospecto->delete();
-				flash_alert( 'Contrato '.$prospecto->EMPL_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('gestion-humana.contratos.index');
+		parent::destroyModel($CONT_ID, $this->class, $this->route.'.index');
 	}
 
 	/**

@@ -17,6 +17,11 @@ class TipoEntidad extends ModelWithSoftDeletes
     const DELETED_AT = 'TIEN_FECHAELIMINADO';
     protected $dates = ['TIEN_FECHACREADO','TIEN_FECHAMODIFICADO','TIEN_FECHAELIMINADO'];
 
+    //Constantes para referenciar los estados de una encuesta
+    const ARL = 1;
+    const EPS = 2;
+    const CCF = 3;
+
     public $fillable = [
         "TIEN_CODIGO",
 		"TIEN_DESCRIPCION",
