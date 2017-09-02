@@ -266,16 +266,16 @@ class ContratoController extends Controller
 		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 		//Se crea un array con las Entidades EPS
 		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::EPS]]);
-		$ENTI_ID_eps = $contrato->entidades()->where('TIEN_ID', TipoEntidad::EPS)->get()->first()->ENTI_ID;
+		$ENTI_ID_eps = $contrato->getEntidad(TipoEntidad::EPS);
 
 		//Se crea un array con las Entidades ARL
 		$arrARL = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::ARL]]);
-		$ENTI_ID_arl = $contrato->entidades()->where('TIEN_ID', TipoEntidad::ARL)->get()->first()->ENTI_ID;
+		$ENTI_ID_arl = $contrato->getEntidad(TipoEntidad::ARL);
 
 		//Se crea un array con las Entidades CCF
 		$arrCCF = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::CCF]]);
-		$ENTI_ID_ccf = $contrato->entidades()->where('TIEN_ID', TipoEntidad::CCF)->get()->first()->ENTI_ID;
-		
+		$ENTI_ID_ccf = $contrato->getEntidad(TipoEntidad::CCF);
+
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
