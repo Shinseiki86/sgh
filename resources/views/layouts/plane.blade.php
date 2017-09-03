@@ -34,8 +34,7 @@
 	{!! Html::script('assets/scripts/bootstrap/bootstrap.min.js') !!}
 	{!! Html::script('assets/scripts/metisMenu.min.js') !!}
 	{!! Html::script('assets/scripts/sb-admin-2.js') !!}
-	{!!Html::script('select2-4.0.3/dist/js/select2.js')!!}
-    {!!Html::style('select2-4.0.3/dist/css/select2.css',['rel'=>"stylesheet"])!!}
+	
 
 
 
@@ -47,7 +46,9 @@
 		})
 	</script>
 
-	@section('select2')
+	@section('selectTwo')
+	@show
+	@section('selectDinamico')
 	@show
 		
 	@stack('scripts')
