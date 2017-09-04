@@ -30,7 +30,7 @@
 	@yield('body')
 
 	
-	{!! Html::script('assets/scripts/jquery.min.js') !!}
+	{!! Html::script('assets/scripts/jquery/jquery.min.js') !!}
 	{!! Html::script('assets/scripts/bootstrap/bootstrap.min.js') !!}
 	{!! Html::script('assets/scripts/metisMenu.min.js') !!}
 	{!! Html::script('assets/scripts/sb-admin-2.js') !!}
