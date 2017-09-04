@@ -44,35 +44,39 @@ class MenuController extends Controller
 	 */
 	public function reorder()
 	{
-		$source       = e(Input::get('source'));
-		$destination  = e(Input::get('destination',0));
+		$source       = Input::get('source');
+		$destination  = Input::get('destination')!='' ? Input::get('destination') : 0;
 
 		$item               = Menu::find($source);
-		$item->MENU_PARENT  = $destination;  
+		$item->MENU_PARENT  = $destination;
 		$item->save();
-dd($source);
+
 		$ordering       = json_decode(Input::get('order'));
 		$rootOrdering   = json_decode(Input::get('rootOrder'));
 
 		if($ordering){
-		  foreach($ordering as $order=>$item_id){
-			if($itemToOrder = Menu::find($item_id)){
-				$itemToOrder->MENU_ORDER = $order;
-				$itemToOrder->save();
+			foreach($ordering as $order=>$item_id){
+				if($itemToOrder = Menu::find($item_id)){
+					$itemToOrder->MENU_ORDER = $order;
+					$itemToOrder->save();
+				}
 			}
-		  }
 		} else {
-		  foreach($rootOrdering as $order=>$item_id){
-			if($itemToOrder = Menu::find($item_id)){
-				$itemToOrder->MENU_ORDER = $order;
-				$itemToOrder->save();
+			foreach($rootOrdering as $order=>$item_id){
+				if($itemToOrder = Menu::find($item_id)){
+					$itemToOrder->MENU_ORDER = $order;
+					$itemToOrder->save();
+				}
 			}
-		  }
 		}
+
+		session()->forget('menus');
+		session()->put('menus', Menu::menus());
 
 		return response()->json([
 			'status' => 'OK',
-			'msg' => $destination
+			'source' => $source,
+			'MENU_PARENT' => $destination
 		]);
 
 	}

@@ -1,4 +1,5 @@
 @push('head')
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	{!! Html::style('assets/stylesheets/nestable.css') !!}
 @endpush
 
@@ -6,6 +7,7 @@
 	{{ Html::script('assets/scripts/jquery/jquery.nestable.js') }}
 	<script type="text/javascript">
 		$(function() {
+		var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
 
 			$('.dd').nestable({
@@ -23,25 +25,48 @@
 							rootOrder[index] = $(elem).attr('data-id');
 						});
 					}
-
+					
+					console.log(details);
+					console.log(details.sourceId);
+					console.log(details.destId);
 					console.log(JSON.stringify(order));
 					console.log(JSON.stringify(rootOrder));
 
-					$.post('{{url("auth/menu/reorder")}}',
-						{
-							source : details.sourceId, 
-							destination: details.destId, 
-							order:JSON.stringify(order),
-							rootOrder:JSON.stringify(rootOrder) 
-						}, 
-						function(data) {
-							//console.log('data '+data); 
+					$.ajax({
+						url: '{{url("auth/menu/reorder")}}',
+						data: {
+								source:      details.sourceId, 
+								destination: details.destId, 
+								order:       JSON.stringify(order),
+								rootOrder:   JSON.stringify(rootOrder) 
+						},
+						dataType: 'json',
+						type: 'POST',
+						headers: {
+							'X-CSRF-TOKEN': csrfToken
+						}
 					})
-					.done(function() { 
+					.done(function( data, textStatus, jqXHR ) {
+						//console.log('Response: '+JSON.stringify(textStatus));
+						//$('#response').html(JSON.stringify(response));
 						$( "#success-indicator" ).fadeIn(100).delay(1000).fadeOut();
 					})
-					.fail(function() {  })
-					.always(function() {  });
+					.fail(function( jqXHR, textStatus, errorThrown ) {
+						//console.log('Err: '+JSON.stringify(jqXHR));
+						//$('#response').html(event.responseText);
+					})
+					.always(function( data, textStatus, jqXHR ) {
+						//console.log('proc: '+i+' de '+cantRows+'('+porcent+'%)');
+						if (jqXHR === 'Forbidden') {
+							console.log('Error en la conexión con el servidor. Presione F5.');
+						}
+						if (typeof jqXHR.responseJSON === 'undefined')
+							console.log('NetworkError: 500 Internal Server Error.');
+						else
+							console.log(jqXHR.responseJSON);
+					});
+
+
 				}
 			}).nestable('collapseAll');
 

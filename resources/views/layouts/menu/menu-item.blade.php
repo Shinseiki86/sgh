@@ -1,14 +1,9 @@
 <li>
-    @if ($item['submenu'] == [])
-        <a href="{{ url($item['MENU_LABEL']) }}">
-            <i class="fa fa-{{ $item['MENU_ICON'] }} fa-fw"></i> 
-            {{ $item['MENU_LABEL'] }}
-        </a>
-    @else
-        <a href="#" class="dropdown-collapse">
-            <i class="fa fa-{{ $item['MENU_ICON'] }} fa-fw"></i> 
-            <span class="side-menu-title">{{ $item['MENU_LABEL'] }}</span><span class="fa arrow"></span>
-        </a>
+    <a href="{{ url($item['MENU_LABEL']) }}" class="dropdown-collapse">
+        <i class="fa fa-{{ $item['MENU_ICON'] }} fa-fw"></i> 
+        <span class="side-menu-title">{{ $item['MENU_LABEL'] }}</span><span class="fa arrow"></span>
+    </a>
+    @if ($item['submenu'] != [])
         <ul class="nav nav-second-level">
             @foreach ($item['submenu'] as $submenu)
                 @if ($submenu['submenu'] == [])

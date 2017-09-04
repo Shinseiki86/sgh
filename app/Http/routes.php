@@ -17,7 +17,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'middleware' => ['auth'
 	Route::resource('roles', 'RoleController');
 	Route::resource('permisos', 'PermissionController');
 	Route::resource('menu', 'MenuController');
-	Route::get('menu/reorder', 'MenuController@reorder');
+	Route::post('menu/reorder', 'MenuController@reorder');
 });
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
