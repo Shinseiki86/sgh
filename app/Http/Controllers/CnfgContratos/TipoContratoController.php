@@ -14,13 +14,16 @@ use SGH\Models\TipoContrato;
 
 class TipoContratoController extends Controller
 {
+	private $route = 'cnfg-contratos.tiposcontratos';
+	private $class = TipoContrato::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:tipocontrato-index', ['only' => ['index']]);
-		$this->middleware('permission:tipocontrato-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tipocontrato-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tipocontrato-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:tiposcontratos-index', ['only' => ['index']]);
+		$this->middleware('permission:tiposcontratos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tiposcontratos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tiposcontratos-delete',   ['only' => ['destroy']]);
 	}
 	
 	/**
@@ -37,7 +40,6 @@ class TipoContratoController extends Controller
 		]);
 	}
 
-
 	/**
 	 * Muestra una lista de los registros.
 	 *
@@ -48,7 +50,7 @@ class TipoContratoController extends Controller
 		//Se obtienen todos los registros.
 		$tiposcontratos = TipoContrato::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-contratos/tiposcontratos/index', compact('tiposcontratos'));
+		return view($this->route.'.index', compact('tiposcontratos'));
 	}
 
 	/**
@@ -58,7 +60,7 @@ class TipoContratoController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-contratos/tiposcontratos/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -68,7 +70,7 @@ class TipoContratoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(TipoContrato::class, 'cnfg-contratos.tiposcontratos.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -84,7 +86,7 @@ class TipoContratoController extends Controller
 		$tiposcontrato = TipoContrato::findOrFail($TICO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-contratos/tiposcontratos/edit', compact('tiposcontrato'));
+		return view($this->route.'.edit', compact('tiposcontrato'));
 	}
 
 
@@ -96,7 +98,7 @@ class TipoContratoController extends Controller
 	 */
 	public function update($TICO_ID)
 	{
-		parent::updateModel($TICO_ID, TipoContrato::class, 'cnfg-contratos.tiposcontratos.index');
+		parent::updateModel($TICO_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -105,19 +107,9 @@ class TipoContratoController extends Controller
 	 * @param  int  $TICO_ID
 	 * @return Response
 	 */
-	public function destroy($TICO_ID, $showMsg=True)
+	public function destroy($TICO_ID)
 	{
-		$cno = TipoContrato::findOrFail($TICO_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($cno->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Tiposcontrato '.$cno->TICO_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$cno->delete();
-				flash_alert( 'Tiposcontrato '.$cno->TICO_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-contratos.tiposcontratos.index');
+		parent::destroyModel($TICO_ID, $this->class, $this->route.'.index');
 	}
 	
 }

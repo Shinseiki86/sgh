@@ -25,6 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $router->patterns([
+            'MENU_ID'=>'[0-9]+',
             'CNOS_ID'=>'[0-9]+',
             'CARG_ID'=>'[0-9]+',
             'TICO_ID'=>'[0-9]+',

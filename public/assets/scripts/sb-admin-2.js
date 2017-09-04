@@ -11,9 +11,9 @@ $(function() {
 	
 	//side menu toggle (setting)
 	$("#sidebar-area .dropdown-collapse").on((jQuery.support.touch ? "tap" : "click"), function(e) {
-		e.preventDefault();
+		//e.preventDefault();
 		
-		if ($("body").hasClass("sidebar-closed")) {
+		if ($("body").hasClass("sidebar-closed") && $(this).attr('href')=='#') {
 			return false;
 		}
 		
@@ -24,9 +24,8 @@ $(function() {
 		$(this).parent("li").siblings().removeClass("active").children("ul.in").collapse("hide");
 		
 		//}
-		return false;
+		//return false;
 	});
-			
 	
 	handleSidebarToggler();
 });

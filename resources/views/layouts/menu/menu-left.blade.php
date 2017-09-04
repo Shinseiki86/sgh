@@ -18,13 +18,14 @@
 					</div>
 					<!-- /input-group -->
 				</li>
+
 				@if(isset($menus))
                 @foreach ($menus as $key => $item)
 					{{-- @if(Entrust::can(['usuarios-*', 'roles-*', 'permisos-*'])) --}}
 	                    @if ($item['MENU_PARENT'] != 0)
 	                        @break
 	                    @endif
-	                    @include('layouts.menu.menu-item', ['item' => $item])
+	                    @include('layouts.menu.menu-list', ['item' => $item])
 	                {{-- @endif --}}
                 @endforeach
 				@endif

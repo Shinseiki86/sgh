@@ -14,13 +14,16 @@ use SGH\Models\Temporal;
 
 class TemporalController extends Controller
 {
+	private $route = 'cnfg-contratos.temporales';
+	private $class = Temporal::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:emprtemp-index', ['only' => ['index']]);
-		$this->middleware('permission:emprtemp-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:emprtemp-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:emprtemp-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:temporales-index', ['only' => ['index']]);
+		$this->middleware('permission:temporales-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:temporales-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:temporales-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -50,7 +53,7 @@ class TemporalController extends Controller
 		//Se obtienen todos los registros.
 		$temporales = Temporal::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-contratos/temporales/index', compact('temporales'));
+		return view($this->route.'.index', compact('temporales'));
 	}
 
 	/**
@@ -60,7 +63,7 @@ class TemporalController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-contratos/temporales/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -70,7 +73,7 @@ class TemporalController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Temporal::class, 'cnfg-contratos.temporales.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -86,7 +89,7 @@ class TemporalController extends Controller
 		$temporal = Temporal::findOrFail($TEMP_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-contratos/temporales/edit', compact('temporal'));
+		return view($this->route.'.edit', compact('temporal'));
 	}
 
 
@@ -98,7 +101,7 @@ class TemporalController extends Controller
 	 */
 	public function update($TEMP_ID)
 	{
-		parent::updateModel($TEMP_ID, Temporal::class, 'cnfg-contratos.temporales.index');
+		parent::updateModel($TEMP_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -107,19 +110,9 @@ class TemporalController extends Controller
 	 * @param  int  $TEMP_ID
 	 * @return Response
 	 */
-	public function destroy($TEMP_ID, $showMsg=True)
+	public function destroy($TEMP_ID)
 	{
-		$temporal = Temporal::findOrFail($TEMP_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($temporal->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$temporal->TEMP_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$temporal->delete();
-				flash_alert( 'Temporale '.$temporal->TEMP_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-contratos.temporales.index');
+		parent::destroyModel($TEMP_ID, $this->class, $this->route.'.index');
 	}
 	
 }

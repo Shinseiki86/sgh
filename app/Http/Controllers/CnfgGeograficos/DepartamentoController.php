@@ -14,16 +14,16 @@ use SGH\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
-
-	private $routeIndex = 'cnfg-geograficos.departamentos.index';
+	private $route = 'cnfg-geograficos.departamentos';
+	private $class = Departamento::class;
 
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:depart-index', ['only' => ['index']]);
-		$this->middleware('permission:depart-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:depart-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:depart-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:departamentos-index', ['only' => ['index']]);
+		$this->middleware('permission:departamentos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:departamentos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:departamentos-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -50,7 +50,7 @@ class DepartamentoController extends Controller
 	 */
 	public function index()
 	{
-		return view('cnfg-geograficos/departamentos/index');
+		return view($this->route.'.index');
 	}
 
 
@@ -88,7 +88,7 @@ class DepartamentoController extends Controller
 		//Se crea un array con los países disponibles
 		$arrPaises = model_to_array(Pais::class, 'PAIS_NOMBRE');
 
-		return view('cnfg-geograficos/departamentos/create', compact('arrPaises'));
+		return view($this->route.'.create', compact('arrPaises'));
 	}
 
 	/**
@@ -98,7 +98,7 @@ class DepartamentoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Departamento::class, $this->routeIndex);
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -117,7 +117,7 @@ class DepartamentoController extends Controller
 		$arrPaises = model_to_array(Pais::class, 'PAIS_NOMBRE');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-geograficos/departamentos/edit', compact('departamento', 'arrPaises'));
+		return view($this->route.'.edit', compact('departamento', 'arrPaises'));
 	}
 
 
@@ -129,7 +129,7 @@ class DepartamentoController extends Controller
 	 */
 	public function update($DEPA_ID)
 	{
-		parent::updateModel($DEPA_ID, Departamento::class, $this->routeIndex);
+		parent::updateModel($DEPA_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -140,7 +140,7 @@ class DepartamentoController extends Controller
 	 */
 	public function destroy($DEPA_ID)
 	{
-		parent::destroyModel($DEPA_ID, Departamento::class, $this->routeIndex);
+		parent::destroyModel($DEPA_ID, $this->class, $this->route.'.index');
 	}
 
 

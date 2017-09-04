@@ -14,13 +14,16 @@ use SGH\Models\ClaseContrato;
 
 class ClaseContratoController extends Controller
 {
+	private $route = 'cnfg-contratos.clasescontratos';
+	private $class = ClaseContrato::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:clasecontrato-index', ['only' => ['index']]);
-		$this->middleware('permission:clasecontrato-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:clasecontrato-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:clasecontrato-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:clasescontratos-index', ['only' => ['index']]);
+		$this->middleware('permission:clasescontratos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:clasescontratos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:clasescontratos-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -48,7 +51,7 @@ class ClaseContratoController extends Controller
 		//Se obtienen todos los registros.
 		$clasescontratos = ClaseContrato::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-contratos/clasescontratos/index', compact('clasescontratos'));
+		return view($this->route.'.index', compact('clasescontratos'));
 	}
 
 	/**
@@ -58,7 +61,7 @@ class ClaseContratoController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-contratos/clasescontratos/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -68,7 +71,7 @@ class ClaseContratoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(ClaseContrato::class, 'cnfg-contratos.clasescontratos.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 	/**
@@ -83,7 +86,7 @@ class ClaseContratoController extends Controller
 		$clasecontrato = ClaseContrato::findOrFail($CLCO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-contratos/clasescontratos/edit', compact('clasecontrato'));
+		return view($this->route.'.edit', compact('clasecontrato'));
 	}
 
 	/**
@@ -94,7 +97,7 @@ class ClaseContratoController extends Controller
 	 */
 	public function update($CLCO_ID)
 	{
-		parent::updateModel($CLCO_ID, ClaseContrato::class, 'cnfg-contratos.clasescontratos.index');
+		parent::updateModel($CLCO_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -103,19 +106,9 @@ class ClaseContratoController extends Controller
 	 * @param  int  $CLCO_ID
 	 * @return Response
 	 */
-	public function destroy($CLCO_ID, $showMsg=True)
+	public function destroy($CLCO_ID)
 	{
-		$clasecontrato = ClaseContrato::findOrFail($CLCO_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($clasecontrato->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Tiposcontrato '.$clasecontrato->CLCO_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$clasecontrato->delete();
-				flash_alert( 'Clase de contrato '.$clasecontrato->CLCO_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-contratos.clasescontratos.index');
+		parent::destroyModel($CLCO_ID, $this->class, $this->route.'.index');
 	}
 	
 }

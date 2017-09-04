@@ -14,6 +14,9 @@ use SGH\Models\Cno;
 
 class CnosController extends Controller
 {
+	private $route = 'cnfg-contratos.cnos';
+	private $class = Cno::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -22,7 +25,6 @@ class CnosController extends Controller
 		$this->middleware('permission:cnos-edit', ['only' => ['edit', 'update']]);
 		$this->middleware('permission:cnos-delete',   ['only' => ['destroy']]);
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -38,7 +40,6 @@ class CnosController extends Controller
 		]);
 	}
 
-
 	/**
 	 * Muestra una lista de los registros.
 	 *
@@ -49,7 +50,7 @@ class CnosController extends Controller
 		//Se obtienen todos los registros.
 		$cnos = Cno::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-contratos/cnos/index', compact('cnos'));
+		return view($this->route.'.index', compact('cnos'));
 	}
 
 	/**
@@ -59,7 +60,7 @@ class CnosController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-contratos/cnos/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -69,7 +70,7 @@ class CnosController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Cno::class, 'cnfg-contratos.cnos.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 	/**
@@ -84,7 +85,7 @@ class CnosController extends Controller
 		$cno = Cno::findOrFail($CNOS_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-contratos/cnos/edit', compact('cno'));
+		return view($this->route.'.edit', compact('cno'));
 	}
 
 	/**
@@ -95,7 +96,7 @@ class CnosController extends Controller
 	 */
 	public function update($CNOS_ID)
 	{
-		parent::updateModel($CNOS_ID, Cno::class, 'cnfg-contratos.cnos.index');
+		parent::updateModel($CNOS_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -104,19 +105,9 @@ class CnosController extends Controller
 	 * @param  int  $CNOS_ID
 	 * @return Response
 	 */
-	public function destroy($CNOS_ID, $showMsg=True)
+	public function destroy($CNOS_ID)
 	{
-		$cno = Cno::findOrFail($CNOS_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($cno->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Cno '.$cno->CNOS_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$cno->delete();
-				flash_alert( 'Cno '.$cno->CNOS_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-contratos.cnos.index');
+		parent::destroyModel($CNOS_ID, $this->class, $this->route.'.index');
 	}
 	
 }

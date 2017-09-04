@@ -14,13 +14,16 @@ use SGH\Models\EstadoContrato;
 
 class EstadoContratoController extends Controller
 {
+	private $route = 'cnfg-contratos.cnos';
+	private $class = EstadoContrato::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:estadocontrato-index', ['only' => ['index']]);
-		$this->middleware('permission:estadocontrato-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:estadocontrato-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:estadocontrato-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:estadoscontratos-index', ['only' => ['index']]);
+		$this->middleware('permission:estadoscontratos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:estadoscontratos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:estadoscontratos-delete',   ['only' => ['destroy']]);
 	}
 
 
@@ -48,7 +51,7 @@ class EstadoContratoController extends Controller
 		//Se obtienen todos los registros.
 		$estadoscontratos = EstadoContrato::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-contratos/estadoscontratos/index', compact('estadoscontratos'));
+		return view($this->route.'.index', compact('estadoscontratos'));
 	}
 
 	/**
@@ -58,7 +61,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-contratos/estadoscontratos/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -68,7 +71,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(EstadoContrato::class, 'cnfg-contratos.estadoscontratos.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -84,7 +87,7 @@ class EstadoContratoController extends Controller
 		$estadocontrato = EstadoContrato::findOrFail($ESCO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-contratos/estadoscontratos/edit', compact('estadocontrato'));
+		return view($this->route.'.edit', compact('estadocontrato'));
 	}
 
 
@@ -96,7 +99,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function update($ESCO_ID)
 	{
-		parent::updateModel($ESCO_ID, EstadoContrato::class, 'cnfg-contratos.estadoscontratos.index');
+		parent::updateModel($ESCO_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -105,19 +108,9 @@ class EstadoContratoController extends Controller
 	 * @param  int  $ESCO_ID
 	 * @return Response
 	 */
-	public function destroy($ESCO_ID, $showMsg=True)
+	public function destroy($ESCO_ID)
 	{
-		$estadocontrato = EstadoContrato::findOrFail($ESCO_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($estadocontrato->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Estadoscontrato '.$estadocontrato->ESCO_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$estadocontrato->delete();
-				flash_alert( 'Estadoscontrato '.$estadocontrato->ESCO_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-contratos.estadoscontratos.index');
+		parent::destroyModel($ESCO_ID, $this->class, $this->route.'.index');
 	}
 	
 }

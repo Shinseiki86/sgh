@@ -15,16 +15,16 @@ use SGH\Models\Departamento;
 
 class CiudadController extends Controller
 {
-	private $routeIndex = 'cnfg-geograficos.ciudades.index';
+	private $route = 'cnfg-geograficos.ciudades';
 	private $class = Ciudad::class;
 
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:ciudad-index', ['only' => ['index','listadoCiudades']]);
-		$this->middleware('permission:ciudad-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:ciudad-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:ciudad-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:ciudades-index', ['only' => ['index','listadoCiudades']]);
+		$this->middleware('permission:ciudades-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:ciudades-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:ciudades-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -51,7 +51,7 @@ class CiudadController extends Controller
 	 */
 	public function index()
 	{
-		return view('cnfg-geograficos/ciudades/index');
+		return view($this->route.'.index');
 	}
 
 	/**
@@ -73,7 +73,7 @@ class CiudadController extends Controller
 
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
-				$ruta = route('cnfg-geograficos.ciudades.edit', [ 'CIUD_ID'=>$model->CIUD_ID ]);
+				$ruta = route($this->route.'.edit', [ 'CIUD_ID'=>$model->CIUD_ID ]);
 				return parent::buttonEdit($ruta).
 					parent::buttonDelete($model, 'CIUD_ID', 'CIUD_NOMBRE', 'ciudades');
 			})->make(true);
@@ -89,7 +89,7 @@ class CiudadController extends Controller
 		//Se crea un array con los departamentos disponibles
 		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_NOMBRE');
 
-		return view('cnfg-geograficos/ciudades/create', compact('arrDepartamentos'));
+		return view($this->route.'.create', compact('arrDepartamentos'));
 	}
 
 	/**
@@ -99,7 +99,7 @@ class CiudadController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Ciudad::class, $this->routeIndex);
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -118,7 +118,7 @@ class CiudadController extends Controller
 		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_NOMBRE');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-geograficos/ciudades/edit', compact('ciudad', 'arrDepartamentos'));
+		return view($this->route.'.edit', compact('ciudad', 'arrDepartamentos'));
 	}
 
 
@@ -130,7 +130,7 @@ class CiudadController extends Controller
 	 */
 	public function update($CIUD_ID)
 	{
-		parent::updateModel($CIUD_ID, Ciudad::class, $this->routeIndex);
+		parent::updateModel($CIUD_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -141,7 +141,7 @@ class CiudadController extends Controller
 	 */
 	public function destroy($CIUD_ID)
 	{
-		parent::destroyModel($CIUD_ID, Ciudad::class, $this->routeIndex);
+		parent::destroyModel($CIUD_ID, $this->class, $this->route.'.index');
 	}
 
 }

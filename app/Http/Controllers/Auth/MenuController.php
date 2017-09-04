@@ -22,6 +22,20 @@ class MenuController extends Controller
 
 	}
 
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array $data
+	 * @return void
+	 */
+	protected function validator($data, $id = 0)
+	{
+		return Validator::make($data, [
+			'MENU_LABEL' => ['required','max:20'],
+			'MENU_ICON'  => ['required','max:50'],
+			'MENU_URL'   => ['max:250'],
+		]);
+	}
 
 	/**
 	 * Muestra una lista de los registros.
@@ -83,6 +97,48 @@ class MenuController extends Controller
 
 
 	/**
+	 * Muestra el formulario para crear un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		//Se crea un array con los Role disponibles
+		$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
+
+		return view($this->route.'.create', compact('arrMenus'));
+	}
+
+	/**
+	 * Guarda el registro nuevo en la base de datos.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		parent::storeModel($this->class, $this->route.'.index');
+	}
+
+
+	/**
+	 * Muestra el formulario para editar un registro en particular.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		// Se obtiene el registro
+		$menu = Menu::findOrFail($id);
+
+		//Se crea un array con los Role disponibles
+		$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
+
+		// Muestra el formulario de edición y pasa el registro a editar
+		return view($this->route.'.edit', compact('menu', 'arrMenus'));
+	}
+
+	/**
 	 * Actualiza un registro en la base de datos.
 	 *
 	 * @param  int  $id
@@ -90,7 +146,7 @@ class MenuController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Permission::class, $this->route.'.index', ['roles'=>'roles_ids']);
+		parent::updateModel($id, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -99,7 +155,7 @@ class MenuController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id, $showMsg=True)
+	public function destroy($id)
 	{
 		parent::destroyModel($id, $this->class, $this->route.'.index');
 	}

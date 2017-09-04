@@ -51,35 +51,44 @@ use SGH\Models\Permission;
                 $this->createPermissions('usuarios', 'usuarios', null,  true, false);
                 $this->createPermissions('permisos', 'permisos', null, true, false);
                 $this->createPermissions('roles', 'roles', null, true, false);
+                $this->createPermissions('menu', 'opciones del menú', null, true, false);
+
+                $this->createPermissions('paises', 'países');
+                $this->createPermissions('departamentos', 'departamentos');
+                $this->createPermissions('ciudades', 'ciudades');
+
                 $this->createPermissions('cargos', 'cargos');
-                $this->createPermissions('tipocontrato', 'tipos de contrato');
+                $this->createPermissions('tiposcontratos', 'tipos de contrato');
                 $this->createPermissions('temporales', 'empresas temporales');
                 $this->createPermissions('cnos', 'clasificaciones de ocupación (CNOS)');
                 $this->createPermissions('jefes', 'jefes');
-                $this->createPermissions('clasecontrato', 'clases de contratos');
-                $this->createPermissions('estadocontrato', 'estados de contratos');
-                $this->createPermissions('motretiro', 'motivo de retiro');
-                $this->createPermissions('grupo', 'grupos');
-                $this->createPermissions('turno', 'turnos');
-                $this->createPermissions('empleador', 'empleadores');
-                $this->createPermissions('gerencia', 'gerencias');
-                $this->createPermissions('proceso', 'procesos');
-                $this->createPermissions('ceco', 'centros de costo');
-                $this->createPermissions('tipoemple', 'tipos de empleador');
-                $this->createPermissions('riesgoarl', 'riesgos de ARL');
-                $this->createPermissions('pais', 'pais');
-                $this->createPermissions('depart', 'departamentos');
-                $this->createPermissions('ciudad', 'ciudades');
-                $this->createPermissions('prospecto', 'hojas de vida');
-                $this->createPermissions('contrato', 'contratos');
+                $this->createPermissions('clasescontratos', 'clases de contratos');
+                $this->createPermissions('estadoscontratos', 'estados de contratos');
+                $this->createPermissions('motivosretiros', 'motivo de retiro');
+
+                $this->createPermissions('grupos', 'grupos');
+                $this->createPermissions('turnos', 'turnos');
+                $this->createPermissions('empleadores', 'empleadores');
+                $this->createPermissions('gerencias', 'gerencias');
+                $this->createPermissions('procesos', 'procesos');
                 $this->createPermissions('plantaslaborales', 'plantas laborales');
+                $this->createPermissions('centroscostos', 'centros de costo');
+                $this->createPermissions('tiposempleadores', 'tipos de empleador');
+                $this->createPermissions('riesgos', 'riesgos de ARL');
+                $this->createPermissions('entidades', 'entidades');
+                $this->createPermissions('tipoEntidades', 'tipo entidades');
+
+                $this->createPermissions('prospectos', 'hojas de vida');
+                $this->createPermissions('contratos', 'contratos');
                 //$this->createPermissions('VALIDADOR DE TNL', 'VALIDADOR DE TNL');
+
                 $this->createPermissions('tkprioridad', 'prioridades ticket');
                 $this->createPermissions('tkestados', 'estados ticket');
                 $this->createPermissions('tkaprobacion', 'estados aprobaciones');
                 $this->createPermissions('tkcategoria', 'categorías ticket');
                 $this->createPermissions('tksancion', 'categorías ticket');
                 $this->createPermissions('tktpincidente', 'tipo incidente ticket');
+                
                 $perms = $this->createPermissions('ticket', 'tickets');
                 $rolSuperOper->attachPermissions([
                     $perms['index'],

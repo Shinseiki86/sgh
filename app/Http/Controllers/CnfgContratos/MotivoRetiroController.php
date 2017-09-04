@@ -14,13 +14,16 @@ use SGH\Models\MotivoRetiro;
 
 class MotivoRetiroController extends Controller
 {
+	private $route = 'cnfg-contratos.motivosretiros';
+	private $class = MotivoRetiro::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:motretiro-index', ['only' => ['index']]);
-		$this->middleware('permission:motretiro-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:motretiro-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:motretiro-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:motivosretiros-index', ['only' => ['index']]);
+		$this->middleware('permission:motivosretiros-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:motivosretiros-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:motivosretiros-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -47,7 +50,7 @@ class MotivoRetiroController extends Controller
 		//Se obtienen todos los registros.
 		$motivosretiros = MotivoRetiro::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-contratos/motivosretiros/index', compact('motivosretiros'));
+		return view($this->route.'.index', compact('motivosretiros'));
 	}
 
 	/**
@@ -57,7 +60,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-contratos/motivosretiros/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -67,7 +70,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(MotivoRetiro::class, 'cnfg-contratos.motivosretiros.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -83,7 +86,7 @@ class MotivoRetiroController extends Controller
 		$motivoretiro = MotivoRetiro::findOrFail($MORE_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-contratos/motivosretiros/edit', compact('motivoretiro'));
+		return view($this->route.'.edit', compact('motivoretiro'));
 	}
 
 	/**
@@ -94,7 +97,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function update($MORE_ID)
 	{
-		parent::updateModel($MORE_ID, MotivoRetiro::class, 'cnfg-contratos.motivosretiros.index');
+		parent::updateModel($MORE_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -103,19 +106,9 @@ class MotivoRetiroController extends Controller
 	 * @param  int  $MORE_ID
 	 * @return Response
 	 */
-	public function destroy($MORE_ID, $showMsg=True)
+	public function destroy($MORE_ID)
 	{
-		$motivoretiro = MotivoRetiro::findOrFail($MORE_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($motivoretiro->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Motivosretiro '.$motivoretiro->MORE_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$motivoretiro->delete();
-				flash_alert( 'Motivosretiro '.$motivoretiro->MORE_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-contratos.motivosretiros.index');
+		parent::destroyModel($MORE_ID, $this->class, $this->route.'.index');
 	}
 	
 }

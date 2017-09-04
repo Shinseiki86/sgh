@@ -21,10 +21,10 @@ class CargoController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:cargo-index', ['only' => ['index']]);
-		$this->middleware('permission:cargo-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:cargo-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:cargo-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:cargos-index', ['only' => ['index']]);
+		$this->middleware('permission:cargos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:cargos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:cargos-delete',   ['only' => ['destroy']]);
 	}
 
 

@@ -14,16 +14,16 @@ use SGH\Models\Pais;
 
 class PaisController extends Controller
 {
-
-	private $routeIndex = 'cnfg-geograficos.paises.index';
+	private $route = 'cnfg-geograficos.paises';
+	private $class = Pais::class;
 
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:pais-index', ['only' => ['index']]);
-		$this->middleware('permission:pais-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:pais-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:pais-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:paises-index', ['only' => ['index']]);
+		$this->middleware('permission:paises-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:paises-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:paises-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -38,9 +38,7 @@ class PaisController extends Controller
 			'PAIS_CODIGO' => ['required', 'numeric', 'unique:PAISES,PAIS_CODIGO,'.$id.',PAIS_ID'],
 			'PAIS_NOMBRE' => ['required', 'max:300', 'unique:PAISES,PAIS_NOMBRE,'.$id.',PAIS_ID'],
 		]);
-
 	}
-
 
 	/**
 	 * Muestra una lista de los registros.
@@ -49,7 +47,7 @@ class PaisController extends Controller
 	 */
 	public function index()
 	{
-		return view('cnfg-geograficos/paises/index');
+		return view($this->route.'.index');
 	}
 
 	/**
@@ -68,7 +66,7 @@ class PaisController extends Controller
 				return $model->departamentos->count();
 			})
 			->addColumn('action', function($model){
-				$ruta = route('cnfg-geograficos.paises.edit', [ 'PAIS_ID'=>$model->PAIS_ID ]);
+				$ruta = route($this->route.'.edit', [ 'PAIS_ID'=>$model->PAIS_ID ]);
 				return parent::buttonEdit($ruta).
 					parent::buttonDelete($model, 'PAIS_ID', 'PAIS_NOMBRE', 'paises');
 			})->make(true);
@@ -81,7 +79,7 @@ class PaisController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-geograficos/paises/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -91,9 +89,8 @@ class PaisController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Pais::class, $this->routeIndex);
+		parent::storeModel($this->class, $this->route.'.index');
 	}
-
 
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -107,9 +104,8 @@ class PaisController extends Controller
 		$pais = Pais::findOrFail($PAIS_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-geograficos/paises/edit', compact('pais'));
+		return view($this->route.'.edit', compact('pais'));
 	}
-
 
 	/**
 	 * Actualiza un registro en la base de datos.
@@ -119,7 +115,7 @@ class PaisController extends Controller
 	 */
 	public function update($PAIS_ID)
 	{
-		parent::updateModel($PAIS_ID, Pais::class, $this->routeIndex);
+		parent::updateModel($PAIS_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -130,7 +126,7 @@ class PaisController extends Controller
 	 */
 	public function destroy($PAIS_ID)
 	{
-		parent::destroyModel($PAIS_ID, Pais::class, $this->routeIndex);
+		parent::destroyModel($PAIS_ID, $this->class, $this->route.'.index');
 	}
 
 

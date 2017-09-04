@@ -1,5 +1,4 @@
- 
-<li class="dd-item dd3-item" data-id="{{$item['MENU_ID']}}">
+ <li class="dd-item dd3-item" data-id="{{$item['MENU_ID']}}">
 	@include('auth.menu.item', [ 'item' => $item ])
 	@if ($item['submenu'] != [])
 		<ol class="dd-list">

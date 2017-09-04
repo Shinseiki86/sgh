@@ -1,15 +1,21 @@
-  {!!Html::script('select2-4.0.3/dist/js/select2.js')!!}
-  {!!Html::script('select2-4.0.3/dist/js/i18n/es.js')!!}
-  {!!Html::style('select2-4.0.3/dist/css/select2.css',['rel'=>"stylesheet"])!!} 
-  {!!Html::style('select2-4.0.3/dist/css/select2-bootstrap.css',['rel'=>"stylesheet"])!!} 
+@push('head')
+  {!! Html::style('assets/stylesheets/select2/select2.min.css') !!}
+  {!! Html::style('assets/stylesheets/select2/select2-bootstrap.min.css') !!}
+@endpush
+
+@push('scripts')
+  {!! Html::script('assets/scripts/select2/select2.min.js') !!}
+  {!! Html::script('assets/scripts/select2/es.js') !!}
+
   <script>
     $("#{{$name}}").select2({
       allowClear: {{$allowClear}},
       placeholder: "{{$placeholder}}",
-      theme: "bootstrap",
-      
+      theme: "bootstrap"
     });
-</script> 
+  </script>
+@endpush
+
 {{-- ejemplo de llamado
 @section('selectTwo')
 	@include('widgets.forms.input-selectTwo',['name'=>'EMPL_ID','placeholder'=>'Seleccione un Departamento','allowClear'=>true])
