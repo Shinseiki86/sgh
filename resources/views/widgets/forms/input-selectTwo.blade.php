@@ -9,16 +9,12 @@
 
   <script>
     $("#{{$name}}").select2({
-      allowClear: {{$allowClear}},
-      placeholder: "{{$placeholder}}",
-      theme: "bootstrap"
+      allowClear: {{isset($allowClear)?'true':'false'}},
+      placeholder: "{{isset($placeholder)?$placeholder:''}}",
+      theme: "bootstrap",      
     });
-  </script>
+</script> 
 @endpush
-
 {{-- ejemplo de llamado
-@section('selectTwo')
-	@include('widgets.forms.input-selectTwo',['name'=>'EMPL_ID','placeholder'=>'Seleccione un Departamento','allowClear'=>true])
-
-@endsection 
+  @include('widgets.forms.input-selectTwo',['name'=>'EMPL_ID','placeholder'=>'Seleccione un Departamento','allowClear'=>true])
   --}}

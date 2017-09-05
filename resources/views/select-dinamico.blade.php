@@ -9,7 +9,7 @@
 				url:'{!!URL::to($url)!!}',
 				data:{'{{$selectPadre}}':cat_id},
 				success:function(data){;
-					op+='<option value="0" selected disabled>{{$prepend}}</option>';
+					op+='<option value="0" selected disabled>{{isset($placeholder)?$placeholder:''}}</option>';
 					for(var i=0;i<data.length;i++){
 					op+='<option value="'+data[i].{{$idBusqueda}}+'">'+data[i].{{$nombreBusqueda}}+'</option>';
 				   }
