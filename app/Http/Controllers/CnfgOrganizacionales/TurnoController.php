@@ -14,13 +14,16 @@ use SGH\Models\Turno;
 
 class TurnoController extends Controller
 {
+	private $route = 'cnfg-organizacionales.turnos';
+	private $class = Riesgo::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:turno-index', ['only' => ['index']]);
-		$this->middleware('permission:turno-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:turno-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:turno-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:turnos-index', ['only' => ['index']]);
+		$this->middleware('permission:turnos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:turnos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:turnos-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -52,7 +55,7 @@ class TurnoController extends Controller
 		//Se obtienen todos los registros.
 		$turnos = Turno::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-organizacionales/turnos/index', compact('turnos'));
+		return view($this->route.'.index', compact('turnos'));
 	}
 
 	/**
@@ -65,7 +68,7 @@ class TurnoController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		return view('cnfg-organizacionales/turnos/create', compact('arrEmpleadores'));
+		return view($this->route.'.create', compact('arrEmpleadores'));
 	}
 
 	/**
@@ -75,7 +78,7 @@ class TurnoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Turno::class, 'cnfg-organizacionales.turnos.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -94,7 +97,7 @@ class TurnoController extends Controller
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/turnos/edit', compact('turno','arrEmpleadores'));
+		return view($this->route.'.edit', compact('turno','arrEmpleadores'));
 	}
 
 
@@ -106,7 +109,7 @@ class TurnoController extends Controller
 	 */
 	public function update($TURN_ID)
 	{
-		parent::updateModel($TURN_ID, Turno::class, 'cnfg-organizacionales.turnos.index');
+		parent::updateModel($TURN_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -115,19 +118,9 @@ class TurnoController extends Controller
 	 * @param  int  $TURN_ID
 	 * @return Response
 	 */
-	public function destroy($TURN_ID, $showMsg=True)
+	public function destroy($TURN_ID)
 	{
-		$turnos = Turno::findOrFail($TURN_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($turnos->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Turno '.$turnos->TURN_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$turnos->delete();
-				flash_alert( 'Turno '.$turnos->TURN_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-organizacionales.turnos.index');
+		parent::destroyModel($TURN_ID, $this->class, $this->route.'.index');
 	}
 	
 }

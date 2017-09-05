@@ -20,10 +20,10 @@ class ProcesoController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:proceso-index', ['only' => ['index']]);
-		$this->middleware('permission:proceso-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:proceso-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:proceso-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:procesos-index', ['only' => ['index']]);
+		$this->middleware('permission:procesos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:procesos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:procesos-delete',   ['only' => ['destroy']]);
 	}
 
 	/**

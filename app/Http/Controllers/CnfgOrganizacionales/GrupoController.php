@@ -20,10 +20,10 @@ class GrupoController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:grupo-index', ['only' => ['index']]);
-		$this->middleware('permission:grupo-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:grupo-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:grupo-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:grupos-index', ['only' => ['index']]);
+		$this->middleware('permission:grupos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:grupos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:grupos-delete',   ['only' => ['destroy']]);
 	}
 
 	/**

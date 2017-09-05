@@ -28,10 +28,10 @@ class ContratoController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:contrato-index', ['only' => ['index']]);
-		$this->middleware('permission:contrato-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:contrato-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:contrato-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:contratos-index', ['only' => ['index']]);
+		$this->middleware('permission:contratos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:contratos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:contratos-delete',   ['only' => ['destroy']]);
 	}
 
 

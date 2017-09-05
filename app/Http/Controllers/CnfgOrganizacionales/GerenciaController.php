@@ -21,10 +21,10 @@ class GerenciaController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:gerencia-index', ['only' => ['index']]);
-		$this->middleware('permission:gerencia-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:gerencia-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:gerencia-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:gerencias-index', ['only' => ['index']]);
+		$this->middleware('permission:gerencias-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:gerencias-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:gerencias-delete',   ['only' => ['destroy']]);
 	}
 
 	/**

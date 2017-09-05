@@ -15,10 +15,10 @@ class ProspectoController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:prospecto-index', ['only' => ['index']]);
-		$this->middleware('permission:prospecto-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:prospecto-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:prospecto-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:prospectos-index', ['only' => ['index']]);
+		$this->middleware('permission:prospectos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:prospectos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:prospectos-delete',   ['only' => ['destroy']]);
 	}
 
 	/**

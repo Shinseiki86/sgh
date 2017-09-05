@@ -14,15 +14,16 @@ use SGH\Models\TipoEmpleador;
 
 class TipoEmpleadorController extends Controller
 {
-	private $routeIndex = 'cnfg-organizacionales.tiposempleadores.index';
+	private $route = 'cnfg-organizacionales.tiposempleadores';
+	private $class = Riesgo::class;
 
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:tipoemple-index', ['only' => ['index']]);
-		$this->middleware('permission:tipoemple-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tipoemple-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tipoemple-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:tiposempleadores-index', ['only' => ['index']]);
+		$this->middleware('permission:tiposempleadores-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:tiposempleadores-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:tiposempleadores-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -50,7 +51,7 @@ class TipoEmpleadorController extends Controller
 		//Se obtienen todos los registros.
 		$tiposempleadores = TipoEmpleador::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->routeIndex, compact('tiposempleadores'));
+		return view($this->route.'.index', compact('tiposempleadores'));
 	}
 
 	/**
@@ -60,7 +61,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-organizacionales/tiposempleadores/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -70,7 +71,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(TipoEmpleador::class, $this->routeIndex);
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -86,7 +87,7 @@ class TipoEmpleadorController extends Controller
 		$tipoempleador = TipoEmpleador::findOrFail($TIEM_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/tiposempleadores/edit', compact('tipoempleador'));
+		return view($this->route.'.edit', compact('tipoempleador'));
 	}
 
 
@@ -98,7 +99,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function update($TIEM_ID)
 	{
-		parent::updateModel($TIEM_ID, TipoEmpleador::class, $this->routeIndex);
+		parent::updateModel($TIEM_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -109,7 +110,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function destroy($TIEM_ID)
 	{
-		parent::destroyModel($TIEM_ID, TipoEmpleador::class, $this->routeIndex);
+		parent::destroyModel($TIEM_ID, $this->class, $this->route.'.index');
 	}
 	
 }

@@ -20,10 +20,10 @@ class EmpleadorController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:empleador-index', ['only' => ['index']]);
-		$this->middleware('permission:empleador-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:empleador-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:empleador-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:empleadores-index', ['only' => ['index']]);
+		$this->middleware('permission:empleadores-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:empleadores-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:empleadores-delete',   ['only' => ['destroy']]);
 	}
 
 	/**

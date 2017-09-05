@@ -14,6 +14,9 @@ use SGH\Models\PlantaLaboral;
 
 class PlantaLaboralController extends Controller
 {
+	private $route = 'cnfg-organizacionales.plantaslaborales';
+	private $class = PlantaLaboral::class;
+
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -50,7 +53,7 @@ class PlantaLaboralController extends Controller
 		$plantaslaborales = PlantaLaboral::all();
 		//dd($plantaslaborales);
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-organizacionales/plantaslaborales/index', compact('plantaslaborales'));
+		return view($this->route.'.index', compact('plantaslaborales'));
 	}
 
 	/**
@@ -66,7 +69,7 @@ class PlantaLaboralController extends Controller
 		//Se crea un array con los empleadores
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
-		return view('cnfg-organizacionales/plantaslaborales/create', compact('arrEmpleadores','arrCargos'));
+		return view($this->route.'.create', compact('arrEmpleadores','arrCargos'));
 	}
 
 	/**
@@ -76,7 +79,7 @@ class PlantaLaboralController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(PlantaLaboral::class, 'cnfg-organizacionales.plantaslaborales.index');
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -98,7 +101,7 @@ class PlantaLaboralController extends Controller
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/plantaslaborales/edit', compact('plantalaboral','arrEmpleadores','arrCargos'));
+		return view($this->route.'.edit', compact('plantalaboral','arrEmpleadores','arrCargos'));
 	}
 
 
@@ -110,7 +113,7 @@ class PlantaLaboralController extends Controller
 	 */
 	public function update($PALA_ID)
 	{
-		parent::updateModel($PALA_ID, PlantaLaboral::class, 'cnfg-organizacionales.plantaslaborales.index');
+		parent::updateModel($PALA_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -121,17 +124,7 @@ class PlantaLaboralController extends Controller
 	 */
 	public function destroy($PALA_ID, $showMsg=True)
 	{
-		$plantaslaborales = PlantaLaboral::findOrFail($PALA_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($plantaslaborales->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Planta Laboral '.$plantaslaborales->PALA_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$plantaslaborales->delete();
-				flash_alert( 'Planta Laboral '.$plantaslaborales->PALA_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-organizacionales.plantaslaborales.index');
+		parent::destroyModel($PALA_ID, $this->class, $this->route.'.index');
 	}
 	
 }

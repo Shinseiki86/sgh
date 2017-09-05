@@ -14,15 +14,16 @@ use SGH\Models\Riesgo;
 
 class RiesgoController extends Controller
 {
-	private $routeIndex = 'cnfg-organizacionales.riesgos.index';
+	private $route = 'cnfg-organizacionales.riesgos';
+	private $class = Riesgo::class;
 
     public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:riesgoarl-index', ['only' => ['index']]);
-		$this->middleware('permission:riesgoarl-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:riesgoarl-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:riesgoarl-delete',   ['only' => ['destroy']]);
+		$this->middleware('permission:riesgos-index', ['only' => ['index']]);
+		$this->middleware('permission:riesgos-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:riesgos-edit', ['only' => ['edit', 'update']]);
+		$this->middleware('permission:riesgos-delete',   ['only' => ['destroy']]);
 	}
 
 	/**
@@ -51,7 +52,7 @@ class RiesgoController extends Controller
 		//Se obtienen todos los registros.
 		$riesgos = Riesgo::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-organizacionales/riesgos/index', compact('riesgos'));
+		return view($this->route.'.index', compact('riesgos'));
 	}
 
 	/**
@@ -61,7 +62,7 @@ class RiesgoController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-organizacionales/riesgos/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -71,7 +72,7 @@ class RiesgoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Riesgo::class, $this->routeIndex);
+		parent::storeModel($this->class, $this->route.'.index');
 	}
 
 
@@ -87,7 +88,7 @@ class RiesgoController extends Controller
 		$riesgo = Riesgo::findOrFail($RIES_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-organizacionales/riesgos/edit', compact('riesgo'));
+		return view($this->route.'.edit', compact('riesgo'));
 	}
 
 
@@ -99,7 +100,7 @@ class RiesgoController extends Controller
 	 */
 	public function update($RIES_ID)
 	{
-		parent::updateModel($RIES_ID ,Riesgo::class, $this->routeIndex);
+		parent::updateModel($RIES_ID, $this->class, $this->route.'.index');
 	}
 
 	/**
@@ -110,7 +111,7 @@ class RiesgoController extends Controller
 	 */
 	public function destroy($RIES_ID)
 	{
-		parent::destroyModel($RIES_ID, Riesgo::class, $this->routeIndex);
+		parent::destroyModel($RIES_ID, $this->class, $this->route.'.index');
 	}
 	
 }
