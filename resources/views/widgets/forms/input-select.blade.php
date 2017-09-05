@@ -1,7 +1,7 @@
 {{ Form::select(
 	isset($multiple) && $multiple ?$name.'[]':$name,
 	(isset($multiple) && $multiple ? []:[''=>'']) + (isset($data)?$data:[]) , 
-	old($name),//isset($value)? $value:old($name),
+	isset($value)? $value:old($name),
 	[
 		'id'=>$name,
 		'class'=>'form-control selectpicker'.(isset($readonly) && $readonly ?' readonly':''),
