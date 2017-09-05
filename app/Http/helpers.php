@@ -360,7 +360,7 @@ if (! function_exists('get_email_user')) {
      */
     function get_email_user($USER_ID) {
 
-        $usuario = \SGH\Models\Models\User::where('USER_id', $USER_ID)->pluck('email');
+        $usuario = \SGH\Models\User::where('USER_id', $USER_ID)->pluck('email');
 
 
         $user_email = null;

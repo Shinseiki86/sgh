@@ -1,6 +1,5 @@
 @extends('layouts.menu')
 @section('title', '/ Detalle Ticket')
-@include('datatable')
 
 @push('head')
 {!! Html::style('assets/stylesheets/chosen/chosen.min.css') !!}
@@ -8,7 +7,6 @@
 
 @push('scripts')
 {!! Html::script('assets/scripts/chosen/chosen.jquery.min.js') !!}
-{!! Html::script('assets/scripts/bootstrap/bootstrap.min.js') !!}
 <script type="text/javascript">
 
 		//===================================================================
@@ -117,7 +115,7 @@
 
 
 	</script>
-	@parent
+@endpush
 
 
 	@section('section')
