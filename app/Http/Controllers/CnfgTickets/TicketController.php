@@ -11,6 +11,8 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Ticket;
+use SGH\Models\EstadoTicket;
+use SGH\Models\EstadoAprobacion;
 use SGH\Models\User;
 use SGH\Models\Mail;
 use SGH\Models\Prospecto;
@@ -227,7 +229,7 @@ class TicketController extends Controller
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 
-		$ticket->ESAP_ID = 2; //estado ENVIADO A GESTIÓN HUMANA
+		$ticket->ESAP_ID = EstadoAprobacion::ENVIADO; //estado ENVIADO A GESTIÓN HUMANA
 		$ticket->TICK_FECHAAPROBACION = $fecactual;
 		$ticket->save();
 
@@ -293,8 +295,8 @@ class TicketController extends Controller
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 
-		$ticket->ESAP_ID = 3; //estado RECHAZADO
-		$ticket->ESTI_ID = 3; //estado ticket CERADO
+		$ticket->ESAP_ID = EstadoAprobacion::RECHAZADO;
+		$ticket->ESTI_ID = EstadoTicket::CERRADO;
 		$ticket->TICK_FECHAAPROBACION = $fecactual;
 		$ticket->TICK_FECHACIERE = $fecactual;
 		$ticket->TICK_MOTIVORECHAZO = $data['TICK_MOTIVORECHAZO'];
@@ -362,8 +364,8 @@ class TicketController extends Controller
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 
-		$ticket->ESTI_ID = 3; //estado CERRADO
-		$ticket->ESAP_ID = 4; //estado FINALIZADO POR GESTIÓN HUMANA
+		$ticket->ESTI_ID = EstadoTicket::CERRADO;
+		$ticket->ESAP_ID = EstadoAprobacion::FINALIZADO;
 		$ticket->TICK_FECHACIERE = $fecactual;
 
 		//SE ACTUALIZAN LOS CAMPOS DEL CIERRE DEL TICKET

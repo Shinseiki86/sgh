@@ -23,4 +23,10 @@ class EstadoAprobacion extends ModelWithSoftDeletes
 		'ESAP_OBSERVACIONES',
 	];
 
+	//Constantes para referenciar los estados de aprobación
+	const REVISION	 = 1;
+	const ENVIADO    = 2;
+	const RECHAZADO  = 3;
+	const FINALIZADO = 4;
+
 }

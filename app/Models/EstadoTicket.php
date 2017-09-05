@@ -23,4 +23,10 @@ class EstadoTicket extends ModelWithSoftDeletes
 		'ESTI_OBSERVACIONES',
 	];
 
+	//Constantes para referenciar los estados de un ticket
+	const ABIERTO	 = 1;
+	const REASIGNADO = 2;
+	const CERRADO    = 3;
+
+
 }
