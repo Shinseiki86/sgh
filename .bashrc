@@ -10,6 +10,8 @@ alias art:cls="art clear-compiled && art cache:clear && art view:clear && art ro
 alias t="vendor/bin/phpunit"
 alias art:sch="php artisan schedule:run"
 alias art:cmpl="php artisan clear-compiled"
+alias seed="php artisan make:seeder"
+alias ejeseed="php artisan db:seed --class="
 
 alias comp:da="composer dump-autoload"
 alias art:dump="php artisan dump autoload"

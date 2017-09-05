@@ -111,3 +111,6 @@ Route::get('/buscaCiudad','SelectController@buscaCiudad');
 	Route::get('/documentation', 'SBAdminController@documentation');
 });*/
 
+
+
+Route::resource('tipoausentismos', 'TipoAusentismoController');

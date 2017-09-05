@@ -316,6 +316,14 @@ class MenuTableSeeder extends Seeder
                 'MENU_ORDER' => $orderItem++,
             ]);
 
+            Menu::create([
+                'MENU_LABEL' => 'Tipo Ausentismos',
+                'MENU_URL' => 'tipoausentismos',
+                'MENU_ICON' => 'fa-wrench',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
+
 
 /*                
 
