@@ -84,9 +84,8 @@ class MenuController extends Controller
 			}
 		}
 
-		session()->forget('menus');
-		session()->put('menus', Menu::menus());
-
+		$this->refreshMenu();
+		
 		return response()->json([
 			'status' => 'OK',
 			'source' => $source,
@@ -94,7 +93,16 @@ class MenuController extends Controller
 		]);
 
 	}
-
+	/**
+	 * Actuliza arreglo global en session con los menús disponibles.
+	 *
+	 * @return void
+	 */
+	private function refreshMenu()
+	{
+		session()->forget('menus');
+		session()->put('menus', Menu::menus());
+	}
 
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
@@ -104,9 +112,24 @@ class MenuController extends Controller
 	public function create()
 	{
 		//Se crea un array con los Role disponibles
-		$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
+		//$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
 
-		return view($this->route.'.create', compact('arrMenus'));
+		$arrRoutes = $this->getRoutes();
+
+		return view($this->route.'.create', compact('arrRoutes'));
+	}
+
+	private function getRoutes()
+	{
+		$arrRoutes = [];
+		foreach (Route::getRoutes() as $value) {
+			$uri = $value->getPath();
+			if(ends_with($uri, 'create')){
+				$uri = str_replace('/create', '', $uri);
+				$arrRoutes[$uri] = $uri;
+			}
+		}
+		return $arrRoutes;
 	}
 
 	/**
@@ -117,6 +140,7 @@ class MenuController extends Controller
 	public function store()
 	{
 		parent::storeModel($this->class, $this->route.'.index');
+		$this->refreshMenu();
 	}
 
 
@@ -132,10 +156,12 @@ class MenuController extends Controller
 		$menu = Menu::findOrFail($id);
 
 		//Se crea un array con los Role disponibles
-		$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
+		//$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
+
+		$arrRoutes = $this->getRoutes();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('menu', 'arrMenus'));
+		return view($this->route.'.edit', compact('menu', 'arrRoutes'));
 	}
 
 	/**
@@ -147,6 +173,7 @@ class MenuController extends Controller
 	public function update($id)
 	{
 		parent::updateModel($id, $this->class, $this->route.'.index');
+		$this->refreshMenu();
 	}
 
 	/**
@@ -158,6 +185,7 @@ class MenuController extends Controller
 	public function destroy($id)
 	{
 		parent::destroyModel($id, $this->class, $this->route.'.index');
+		$this->refreshMenu();
 	}
 	
 }

@@ -1,0 +1,1 @@
+{{ Form::checkbox( $name, 1, old($name), ['class'=>'form-control'] + (isset($options)?$options:[]) )}}

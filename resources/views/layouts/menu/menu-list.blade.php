@@ -14,7 +14,7 @@
                         </a>
                     </li>
                 @else
-                    @include('layouts.menu.menu-item', [ 'item' => $submenu ])
+                    @include('layouts.menu.menu-list', [ 'item' => $submenu ])
                 @endif
             @endforeach
         </ul>

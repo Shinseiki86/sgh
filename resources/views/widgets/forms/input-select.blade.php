@@ -5,8 +5,12 @@
 	[
 		'id'=>$name,
 		'class'=>'form-control selectpicker'.(isset($readonly) && $readonly ?' readonly':''),
-		'data-size'=>5
-	] + (isset($options)?$options:[]) + (isset($multiple) && $multiple ? ['multiple']:[])
+		'data-allow-clear'=>isset($allowClear) && $allowClear ?'true':'false',
+		'data-placeholder'=>isset($placeholder) ?$placeholder:'Seleccione una opción',
+	] + 
+	(isset($options)?$options:[]) +
+	(isset($multiple) && $multiple ? ['multiple']:[]) +
+	(isset($allowNew) && $allowNew ? ['data-tags'=>'true', 'data-select-on-close'=>'true']:[])
 ) }}
 
 @if(is_array(old($name)) or isset(${$name}))
