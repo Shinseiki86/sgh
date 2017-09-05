@@ -32,7 +32,7 @@ class TipoAusentismo extends ModelWithSoftDeletes
     public function conceptoausencias()
     {
         $foreingKey = 'COAU_ID';
-        //return $this->hasMany(ConceptoAusencia::class, $foreingKey);
+        return $this->hasMany(conceptoausencia::class, $foreingKey);
     }
 
 

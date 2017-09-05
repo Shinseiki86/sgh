@@ -114,3 +114,5 @@ Route::get('/buscaCiudad','SelectController@buscaCiudad');
 
 
 Route::resource('tipoausentismos', 'TipoAusentismoController');
+
+Route::resource('conceptoausencias', 'conceptoAusenciaController');

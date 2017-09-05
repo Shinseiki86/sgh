@@ -40,7 +40,7 @@ class TipoAusentismoController extends Controller
 	 * @return Response
 	 */
 	public function index()
-	{
+	{		
 		$tipoausentismos = TipoAusentismo::all();
 		return view('tipoausentismos/index', compact('tipoausentismos'));
 	}

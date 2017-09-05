@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EntidadTableSeeder::class);
         $this->call(DiagnosticosTableSeeder::class);
         $this->call(TipoAusentismosTableSeeder::class);
-
+        $this->call(ConceptoAusenciasTableSeeder::class);
         
     }
 }
