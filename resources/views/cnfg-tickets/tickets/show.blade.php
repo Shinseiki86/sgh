@@ -64,19 +64,6 @@
 		//===================================================================
 
 		//===================================================================
-		//si el estado de aprobación es diferente del inicial cuando se crea el ticket
-		//se esconden los botones
-		var ESAP_ID = "{{ $ticket->ESAP_ID }}";
-		
-		if(ESAP_ID != 1){
-			$('#daccionauto').hide();
-			$('#daccionrecha').hide();
-		} else if(ESAP_ID == 1){
-			$('#daccioncerrar').hide();
-		}
-		//===================================================================
-
-		//===================================================================
 		//modal para rechazar el ticket
 		$("#cerrarModal").on("click", function() {
 			$('#cerrarmodal').modal('show');
@@ -88,8 +75,8 @@
 
 @section('section')
 
-	@section ('generales_title','Datos Generales')
-	@section ('generales_body')
+	@section ('generales_panel_title','Datos Generales')
+	@section ('generales_panel_body')
 		<ul class="list-group">
 			@include('widgets.list-group-item', [
 				'label'=>'Empleador',
@@ -149,14 +136,14 @@
 	@endsection
 	@include('widgets.panel', ['as'=>'generales', 'header'=>true])
 
-	@section ('hechos_title','Descripción de los Hechos')
-	@section ('hechos_body')
+	@section ('hechos_panel_title','Descripción de los Hechos')
+	@section ('hechos_panel_body')
 		<div class="col-lg-8">{{ $ticket->TICK_DESCRIPCION }}</div>
 	@endsection
 	@include('widgets.panel', ['as'=>'hechos', 'header'=>true])
 
-	@section ('evidencias_title','Evidencia')
-	@section ('evidencias_body')
+	@section ('evidencias_panel_title','Evidencia')
+	@section ('evidencias_panel_body')
 		<div class="row">
 			<div class="col-lg-4"><strong>Archivos:</strong></div>
 			<div class="col-lg-8">
