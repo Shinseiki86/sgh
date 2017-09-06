@@ -98,47 +98,33 @@
 				'label'=>'Tipo de Incidente',
 				'value'=>$ticket->tipoincidente->TIIN_DESCRIPCION
 			])
-			<li class="list-group-item">
-				<div class="row">
-					<div class="col-lg-4"><strong>Prioridad:</strong></div>
-					<div class="col-lg-8">{{ $ticket->prioridad->PRIO_DESCRIPCION }}</div>
-				</div>
-			</li>
-
-			<li class="list-group-item">
-				<div class="row">
-					<div class="col-lg-4"><strong>Categoría:</strong></div>
-					<div class="col-lg-8">{{ $ticket->categoria->CATE_DESCRIPCION }}</div>
-				</div>
-			</li>
-
-			<li class="list-group-item">
-				<div class="row">
-					<div class="col-lg-4"><strong>Fecha del Evento:</strong></div>
-					<div class="col-lg-8">{{ $ticket->TICK_FECHAEVENTO }}</div>
-				</div>
-			</li>
-
-			<li class="list-group-item">
-				<div class="row">
-					<div class="col-lg-4"><strong>Observaciones:</strong></div>
-					<div class="col-lg-8">{{ $ticket->TICK_OBSERVACIONES }}</div>
-				</div>
-			</li>
-
-			<li class="list-group-item">
-				<div class="row">
-					<div class="col-lg-4"><strong>Estado Aprobación:</strong></div>
-					<div class="col-lg-8">{{ $ticket->estadoaprobacion->ESAP_DESCRIPCION }}</div>
-				</div>
-			</li>
+			@include('widgets.list-group-item', [
+				'label'=>'Prioridad',
+				'value'=>$ticket->prioridad->PRIO_DESCRIPCION
+			])
+			@include('widgets.list-group-item', [
+				'label'=>'Categoría',
+				'value'=>$ticket->categoria->CATE_DESCRIPCION
+			])
+			@include('widgets.list-group-item', [
+				'label'=>'Fecha del Evento',
+				'value'=>$ticket->TICK_FECHAEVENTO
+			])
+			@include('widgets.list-group-item', [
+				'label'=>'Observaciones',
+				'value'=>$ticket->TICK_OBSERVACIONES
+			])
+			@include('widgets.list-group-item', [
+				'label'=>'Estado Aprobación',
+				'value'=>$ticket->estadoaprobacion->ESAP_DESCRIPCION
+			])
 		</ul>
 	@endsection
 	@include('widgets.panel', ['as'=>'generales', 'header'=>true])
 
 	@section ('hechos_panel_title','Descripción de los Hechos')
 	@section ('hechos_panel_body')
-		<div class="col-lg-8">{{ $ticket->TICK_DESCRIPCION }}</div>
+		{{ $ticket->TICK_DESCRIPCION }}
 	@endsection
 	@include('widgets.panel', ['as'=>'hechos', 'header'=>true])
 

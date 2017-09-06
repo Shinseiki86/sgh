@@ -268,8 +268,11 @@ body {
 		display: block !important;
 		position: absolute;
 		z-index: 1000;
-		height: auto;
-		overflow: visible;
+		max-height: 300px !important;
+		overflow-x: hidden !important;
+		overflow-y: auto !important;
+		/*height: auto;*/
+		/*overflow: visible;*/
 		top: 41px;
 		left: 47px;
 		width: 203px;
@@ -280,8 +283,11 @@ body {
 		display: block !important;
 		position: absolute;
 		z-index: 1000;
-		height: auto;
-		overflow: visible;
+		max-height: 300px !important;
+		overflow-x: hidden !important;
+		overflow-y: auto !important;
+		/*height: auto;*/
+		/*overflow: visible;*/
 		top: 40px;
 		left: 0px;
 		width: 203px;
@@ -319,6 +325,17 @@ body {
 	.navbar-top-links .dropdown-tasks,
 	.navbar-top-links .dropdown-alerts {
 		margin-left: auto;
+	}
+}
+
+@media(max-height:600px) {
+	.sidebar {
+		z-index: 1000;
+		position: absolute;
+		width: 250px;
+		/*max-height: 300px !important;
+		overflow-x: hidden !important;
+		overflow-y: auto !important;*/
 	}
 }
 
