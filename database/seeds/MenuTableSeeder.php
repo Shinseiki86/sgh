@@ -12,13 +12,24 @@ class MenuTableSeeder extends Seeder
      */
     public function run()
     {
-        $orderMenu = 0;
+        $orderMenuLeft = 0;
+        $orderMenuTop = 0;
+
+
+        Menu::create([
+            'MENU_LABEL' => 'Menú',
+            'MENU_URL' => 'auth/menu',
+            'MENU_ICON' => 'fa-bars',
+            'MENU_ORDER' => $orderMenuLeft++,
+            'MENU_ENABLED' => true,
+        ]);
+
 
         $orderItem = 0;
         $parent = Menu::create([
             'MENU_LABEL' => 'Usuarios y roles',
             'MENU_ICON' => 'fa-user-circle-o',
-            'MENU_ORDER' => $orderMenu++,
+            'MENU_ORDER' => $orderMenuLeft++,
         ]);
             Menu::create([
                 'MENU_LABEL' => 'Usuarios',
@@ -41,20 +52,12 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
-            Menu::create([
-                'MENU_LABEL' => 'Menú',
-                'MENU_URL' => 'auth/menu',
-                'MENU_ICON' => 'fa-address-card-o',
-                'MENU_PARENT' => $parent->MENU_ID,
-                'MENU_ORDER' => $orderItem++,
-                'MENU_ENABLED' => true,
-            ]);
 
         $orderItem = 0;
         $parent = Menu::create([
             'MENU_LABEL' => 'Geográficos',
             'MENU_ICON' => 'fa-globe',
-            'MENU_ORDER' => $orderMenu++,
+            'MENU_ORDER' => $orderMenuLeft++,
         ]);
             Menu::create([
                 'MENU_LABEL' => 'Países',
@@ -82,22 +85,8 @@ class MenuTableSeeder extends Seeder
         $parent = Menu::create([
             'MENU_LABEL' => 'Contratos',
             'MENU_ICON' => 'fa-handshake-o',
-            'MENU_ORDER' => $orderMenu++,
+            'MENU_ORDER' => $orderMenuLeft++,
         ]);
-            Menu::create([
-                'MENU_LABEL' => 'Contratos',
-                'MENU_URL' => 'gestion-humana/contratos',
-                'MENU_ICON' => 'fa-file-text-o',
-                'MENU_PARENT' => $parent->MENU_ID,
-                'MENU_ORDER' => $orderItem++,
-            ]);
-            Menu::create([
-                'MENU_LABEL' => 'Hojas de Vida',
-                'MENU_URL' => 'gestion-humana/prospectos',
-                'MENU_ICON' => 'fa-file-text-o',
-                'MENU_PARENT' => $parent->MENU_ID,
-                'MENU_ORDER' => $orderItem++,
-            ]);
             Menu::create([
                 'MENU_LABEL' => 'Clasificación de ocupaciones',
                 'MENU_URL' => 'cnfg-contratos/cnos',
@@ -152,7 +141,7 @@ class MenuTableSeeder extends Seeder
         $parent = Menu::create([
             'MENU_LABEL' => 'Organizacionales',
             'MENU_ICON' => 'fa-sitemap',
-            'MENU_ORDER' => $orderMenu++,
+            'MENU_ORDER' => $orderMenuLeft++,
         ]);
             Menu::create([
                 'MENU_LABEL' => 'Empleadores',
@@ -236,15 +225,8 @@ class MenuTableSeeder extends Seeder
         $parent = Menu::create([
             'MENU_LABEL' => 'Tickets Disciplinarios',
             'MENU_ICON' => 'fa-ticket',
-            'MENU_ORDER' => $orderMenu++,
+            'MENU_ORDER' => $orderMenuLeft++,
         ]);
-            Menu::create([
-                'MENU_LABEL' => 'Tickets',
-                'MENU_URL' => 'cnfg-tickets/tickets',
-                'MENU_ICON' => 'fa-id-badge',
-                'MENU_PARENT' => $parent->MENU_ID,
-                'MENU_ORDER' => $orderItem++,
-            ]);
             Menu::create([
                 'MENU_LABEL' => 'Prioridades',
                 'MENU_URL' => 'cnfg-tickets/prioridades',
@@ -288,25 +270,12 @@ class MenuTableSeeder extends Seeder
                 'MENU_ORDER' => $orderItem++,
             ]);
 
-        $orderItem = 0;
-        $parent = Menu::create([
-            'MENU_LABEL' => 'Gestión Humana',
-            'MENU_ICON' => 'fa-users',
-            'MENU_ORDER' => $orderMenu++,
-        ]);
-            Menu::create([
-                'MENU_LABEL' => 'Validador de TNL',
-                'MENU_URL' => 'gestion-humana/helpers/validadorTNL',
-                'MENU_ICON' => 'fa-check-square-o',
-                'MENU_PARENT' => $parent->MENU_ID,
-                'MENU_ORDER' => $orderItem++,
-            ]);
 
         $orderItem = 0;
         $parent = Menu::create([
             'MENU_LABEL' => 'Ausentismos',
             'MENU_ICON' => 'fa-bed',
-            'MENU_ORDER' => $orderMenu++,
+            'MENU_ORDER' => $orderMenuLeft++,
         ]);
             Menu::create([
                 'MENU_LABEL' => 'Diagnósticos',
@@ -330,6 +299,48 @@ class MenuTableSeeder extends Seeder
                 'MENU_ICON' => 'fa-wrench',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
+            ]);
+
+
+        //TOP
+        Menu::create([
+            'MENU_LABEL' => 'Tickets',
+            'MENU_URL' => 'cnfg-tickets/tickets',
+            'MENU_ICON' => 'fa-id-badge',
+            'MENU_ORDER' => $orderMenuTop++,
+            'MENU_POSITION' => 'TOP',
+        ]);
+
+        $orderItem = 0;
+        $parent = Menu::create([
+            'MENU_LABEL' => 'Gestión Humana',
+            'MENU_ICON' => 'fa-users',
+            'MENU_ORDER' => $orderMenuTop++,
+            'MENU_POSITION' => 'TOP',
+        ]);
+            Menu::create([
+                'MENU_LABEL' => 'Contratos',
+                'MENU_URL' => 'gestion-humana/contratos',
+                'MENU_ICON' => 'fa-handshake-o',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderMenuTop++,
+                'MENU_POSITION' => 'TOP',
+            ]);
+            Menu::create([
+                'MENU_LABEL' => 'Hojas de Vida',
+                'MENU_URL' => 'gestion-humana/prospectos',
+                'MENU_ICON' => 'fa-drivers-license-o',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderMenuTop++,
+                'MENU_POSITION' => 'TOP',
+            ]);
+            Menu::create([
+                'MENU_LABEL' => 'Validador de TNL',
+                'MENU_URL' => 'gestion-humana/helpers/validadorTNL',
+                'MENU_ICON' => 'fa-check-square-o',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+                'MENU_POSITION' => 'TOP',
             ]);
 
 

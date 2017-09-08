@@ -1,7 +1,7 @@
 <div class="dd-handle dd3-handle">Drag</div>
 <div class="dd3-content">
 	<i class="fa {{ $item['MENU_ICON'] }} fa-fw"></i> 
-	{{ $item['MENU_LABEL'] }}
+	{{ $item['MENU_LABEL'] }} @if(!$item['MENU_ENABLED'])(DESHABILITADO)@endif
 	<div class="pull-right">
 		<!-- Botón Editar (edit) -->
 		<a class="btn btn-small btn-info btn-xs" href="{{ URL::to('auth/menu/'.$item['MENU_ID'].'/edit') }}" data-tooltip="tooltip" title="Editar">

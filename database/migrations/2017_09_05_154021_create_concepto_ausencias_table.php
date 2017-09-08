@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateconceptoausenciasTable extends Migration
+class CreateConceptoAusenciasTable extends Migration
 {
 	private $nomTabla = 'CONCEPTOAUSENCIAS';
 
