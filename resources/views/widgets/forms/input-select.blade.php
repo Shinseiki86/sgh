@@ -4,7 +4,7 @@
 	isset($value)? $value:old($name),
 	[
 		'id'=>$name,
-		'class'=>'form-control selectpicker'.(isset($readonly) && $readonly ?' readonly':''),
+		'class'=>'form-control selectpicker '.(!isset($class)?:$class),
 		'data-allow-clear'=>isset($allowClear) && $allowClear ?'true':'false',
 		'data-placeholder'=>isset($placeholder) ?$placeholder:'Seleccione una opción',
 	] + 

@@ -6,7 +6,7 @@
 
 {{-- DISABLED EN CREATE, SELECT DEFAULT 1 --}}
 @if(current_route_action() == 'create')
-@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'ESTI_ID', 'label'=>'Estado', 'data'=>$arrEstados, 'value'=>1, 'readonly'=>true])
+@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'ESTI_ID', 'label'=>'Estado', 'data'=>$arrEstados, 'value'=>1, 'class'=>'readonly'])
 @else
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'ESTI_ID', 'label'=>'Estado', 'data'=>$arrEstados])
 @endif
@@ -31,7 +31,7 @@
 
 {{-- DISABLED EN CREATE, SELECT DEFAULT 1 --}}
 @if(current_route_action() == 'create')
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'ESAP_ID', 'label'=>'Estado de Aprobación', 'data'=>$arrEstadosAprobacion, 'value'=>1, 'readonly'=>true])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'ESAP_ID', 'label'=>'Estado de Aprobación', 'data'=>$arrEstadosAprobacion, 'value'=>1, 'class'=>'readonly'])
 @else
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'ESAP_ID', 'label'=>'Estado de Aprobación', 'data'=>$arrEstadosAprobacion])
 @endif
