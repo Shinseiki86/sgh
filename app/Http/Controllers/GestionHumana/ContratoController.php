@@ -22,16 +22,12 @@ use SGH\Models\TipoEntidad;
 
 class ContratoController extends Controller
 {
-	private $route = 'gestion-humana.contratos';
-	private $class = Contrato::class;
+	protected $route = 'gestion-humana.contratos';
+	protected $class = Contrato::class;
 
 	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:contratos-index', ['only' => ['index']]);
-		$this->middleware('permission:contratos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:contratos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:contratos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 
@@ -203,7 +199,7 @@ class ContratoController extends Controller
 				$entidades_id[] = request()->get('ENTI_ID_'.$entidad);
 		}
 
-		parent::storeModel($this->class, $this->route.'.index', ['entidades'=>$entidades_id]);		
+		parent::storeModel(['entidades'=>$entidades_id]);		
 	}
 
 
@@ -307,7 +303,7 @@ class ContratoController extends Controller
 			if(request()->get('ENTI_ID_'.$entidad)!=null)
 				$entidades_id[] = request()->get('ENTI_ID_'.$entidad);
 		}
-		parent::updateModel($CONT_ID, $this->class, $this->route.'.index', ['entidades'=>$entidades_id]);	
+		parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);	
 
 	}
 
@@ -317,9 +313,9 @@ class ContratoController extends Controller
 	 * @param  int  $CONT_ID
 	 * @return Response
 	 */
-	public function destroy($CONT_ID, $showMsg=True)
+	public function destroy($CONT_ID)
 	{
-		parent::destroyModel($CONT_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($CONT_ID);
 	}
 
 	/**

@@ -14,13 +14,12 @@ use SGH\Models\TipoIncidente;
 
 class TipoIncidenteController extends Controller
 {
-    public function __construct()
+	protected $route = 'cnfg-tickets.tiposincidentes';
+	protected $class = TipoIncidente::class;
+
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:tktpincidente-index', ['only' => ['index']]);
-		$this->middleware('permission:tktpincidente-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tktpincidente-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tktpincidente-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -48,7 +47,7 @@ class TipoIncidenteController extends Controller
 		//Se obtienen todos los registros.
 		$tiposincidentes = TipoIncidente::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-tickets/tiposincidentes/index', compact('tiposincidentes'));
+		return view($this->route.'.index', compact('tiposincidentes'));
 	}
 
 	/**
@@ -58,7 +57,7 @@ class TipoIncidenteController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-tickets/tiposincidentes/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -68,7 +67,7 @@ class TipoIncidenteController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(TipoIncidente::class, 'cnfg-tickets.tiposincidentes.index');
+		parent::storeModel();
 	}
 
 
@@ -84,7 +83,7 @@ class TipoIncidenteController extends Controller
 		$tipoincidente = TipoIncidente::findOrFail($TIIN_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/tiposincidentes/edit', compact('tipoincidente'));
+		return view($this->route.'.edit', compact('tipoincidente'));
 	}
 
 
@@ -96,7 +95,7 @@ class TipoIncidenteController extends Controller
 	 */
 	public function update($TIIN_ID)
 	{
-		parent::updateModel($TIIN_ID, TipoIncidente::class, 'cnfg-tickets.tiposincidentes.index');
+		parent::updateModel($TIIN_ID);
 	}
 
 	/**
@@ -105,19 +104,9 @@ class TipoIncidenteController extends Controller
 	 * @param  int  $TIIN_ID
 	 * @return Response
 	 */
-	public function destroy($TIIN_ID, $showMsg=True)
+	public function destroy($TIIN_ID)
 	{
-		$tipoincidente = TipoIncidente::findOrFail($TIIN_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($tipoincidente->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$tipoincidente->TIIN_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$tipoincidente->delete();
-				flash_alert( 'TipoIncidente '.$tipoincidente->TIIN_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-tickets.tiposincidentes.index');
+		parent::destroyModel($TIIN_ID);
 	}
 	
 }

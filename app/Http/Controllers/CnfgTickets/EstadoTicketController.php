@@ -14,13 +14,12 @@ use SGH\Models\EstadoTicket;
 
 class EstadoTicketController extends Controller
 {
-    public function __construct()
+	protected $route = 'cnfg-tickets.estados';
+	protected $class = EstadoTicket::class;
+
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:tkestados-index', ['only' => ['index']]);
-		$this->middleware('permission:tkestados-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tkestados-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tkestados-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -49,7 +48,7 @@ class EstadoTicketController extends Controller
 		//Se obtienen todos los registros.
 		$estadostickets = EstadoTicket::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-tickets/estados/index', compact('estadostickets'));
+		return view($this->route.'.index', compact('estadostickets'));
 	}
 
 	/**
@@ -59,7 +58,7 @@ class EstadoTicketController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-tickets/estados/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -69,7 +68,7 @@ class EstadoTicketController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(EstadoTicket::class, 'cnfg-tickets.estadostickets.index');
+		parent::storeModel();
 	}
 
 
@@ -85,7 +84,7 @@ class EstadoTicketController extends Controller
 		$estadoticket = EstadoTicket::findOrFail($ESTI_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/estados/edit', compact('estadoticket'));
+		return view($this->route.'.edit', compact('estadoticket'));
 	}
 
 
@@ -97,7 +96,7 @@ class EstadoTicketController extends Controller
 	 */
 	public function update($ESTI_ID)
 	{
-		parent::updateModel($ESTI_ID, EstadoTicket::class, 'cnfg-tickets.estadostickets.index');
+		parent::updateModel($ESTI_ID);
 	}
 
 	/**
@@ -106,19 +105,9 @@ class EstadoTicketController extends Controller
 	 * @param  int  $ESTI_ID
 	 * @return Response
 	 */
-	public function destroy($ESTI_ID, $showMsg=True)
+	public function destroy($ESTI_ID)
 	{
-		$estadoticket = EstadoTicket::findOrFail($ESTI_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($estadoticket->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Estado de Ticket '.$estadoticket->ESTI_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$estadoticket->delete();
-				flash_alert( 'Estado de Ticket '.$estadoticket->ESTI_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-tickets.estadostickets.index');
+		parent::destroyModel($ESTI_ID);
 	}
 	
 }

@@ -14,16 +14,12 @@ use SGH\Models\Cno;
 
 class CnosController extends Controller
 {
-	private $route = 'cnfg-contratos.cnos';
-	private $class = Cno::class;
+	protected $route = 'cnfg-contratos.cnos';
+	protected $class = Cno::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:cnos-index', ['only' => ['index']]);
-		$this->middleware('permission:cnos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:cnos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:cnos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -70,7 +66,7 @@ class CnosController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 	/**
@@ -96,7 +92,7 @@ class CnosController extends Controller
 	 */
 	public function update($CNOS_ID)
 	{
-		parent::updateModel($CNOS_ID, $this->class, $this->route.'.index');
+		parent::updateModel($CNOS_ID);
 	}
 
 	/**
@@ -107,7 +103,7 @@ class CnosController extends Controller
 	 */
 	public function destroy($CNOS_ID)
 	{
-		parent::destroyModel($CNOS_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($CNOS_ID);
 	}
 	
 }

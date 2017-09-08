@@ -14,12 +14,12 @@ use SGH\Models\Menu;
 
 class MenuController extends Controller
 {
-	private $route = 'auth.menu';
-	private $class = Menu::class;
+	protected $route = 'auth.menu';
+	protected $class = Menu::class;
 
 	public function __construct()
 	{
-
+		parent::__construct();
 	}
 
 	/**
@@ -149,7 +149,7 @@ class MenuController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 		$this->refreshMenu();
 	}
 
@@ -182,7 +182,7 @@ class MenuController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, $this->class, $this->route.'.index');
+		parent::updateModel($id);
 		$this->refreshMenu();
 	}
 
@@ -194,7 +194,7 @@ class MenuController extends Controller
 	 */
 	public function destroy($id)
 	{
-		parent::destroyModel($id, $this->class, $this->route.'.index');
+		parent::destroyModel($id);
 		$this->refreshMenu();
 	}
 	

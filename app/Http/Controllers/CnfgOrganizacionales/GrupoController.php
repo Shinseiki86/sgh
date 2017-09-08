@@ -14,16 +14,12 @@ use SGH\Models\Grupo;
 
 class GrupoController extends Controller
 {
-	private $route = 'cnfg-organizacionales.grupos';
-	private $class = Grupo::class;
+	protected $route = 'cnfg-organizacionales.grupos';
+	protected $class = Grupo::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:grupos-index', ['only' => ['index']]);
-		$this->middleware('permission:grupos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:grupos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:grupos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -74,7 +70,7 @@ class GrupoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -105,7 +101,7 @@ class GrupoController extends Controller
 	 */
 	public function update($EMPL_ID)
 	{
-		parent::updateModel($EMPL_ID, $this->class, $this->route.'.index');
+		parent::updateModel($EMPL_ID);
 	}
 
 	/**
@@ -114,9 +110,9 @@ class GrupoController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function destroy($EMPL_ID, $showMsg=True)
+	public function destroy($EMPL_ID)
 	{
-		parent::destroyModel($EMPL_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($EMPL_ID);
 	}
 	
 }

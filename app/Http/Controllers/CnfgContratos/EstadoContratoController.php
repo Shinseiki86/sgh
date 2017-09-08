@@ -14,18 +14,13 @@ use SGH\Models\EstadoContrato;
 
 class EstadoContratoController extends Controller
 {
-	private $route = 'cnfg-contratos.cnos';
-	private $class = EstadoContrato::class;
+	protected $route = 'cnfg-contratos.cnos';
+	protected $class = EstadoContrato::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:estadoscontratos-index', ['only' => ['index']]);
-		$this->middleware('permission:estadoscontratos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:estadoscontratos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:estadoscontratos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -71,7 +66,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -99,7 +94,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function update($ESCO_ID)
 	{
-		parent::updateModel($ESCO_ID, $this->class, $this->route.'.index');
+		parent::updateModel($ESCO_ID);
 	}
 
 	/**
@@ -110,7 +105,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function destroy($ESCO_ID)
 	{
-		parent::destroyModel($ESCO_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($ESCO_ID);
 	}
 	
 }

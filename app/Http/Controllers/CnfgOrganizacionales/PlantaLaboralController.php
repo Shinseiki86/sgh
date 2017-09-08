@@ -14,16 +14,12 @@ use SGH\Models\PlantaLaboral;
 
 class PlantaLaboralController extends Controller
 {
-	private $route = 'cnfg-organizacionales.plantaslaborales';
-	private $class = PlantaLaboral::class;
+	protected $route = 'cnfg-organizacionales.plantaslaborales';
+	protected $class = PlantaLaboral::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:plantaslaborales-index', ['only' => ['index']]);
-		$this->middleware('permission:plantaslaborales-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:plantaslaborales-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:plantaslaborales-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -79,7 +75,7 @@ class PlantaLaboralController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -113,7 +109,7 @@ class PlantaLaboralController extends Controller
 	 */
 	public function update($PALA_ID)
 	{
-		parent::updateModel($PALA_ID, $this->class, $this->route.'.index');
+		parent::updateModel($PALA_ID);
 	}
 
 	/**
@@ -122,9 +118,9 @@ class PlantaLaboralController extends Controller
 	 * @param  int  $EMPL_ID
 	 * @return Response
 	 */
-	public function destroy($PALA_ID, $showMsg=True)
+	public function destroy($PALA_ID)
 	{
-		parent::destroyModel($PALA_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($PALA_ID);
 	}
 	
 }

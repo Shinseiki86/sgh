@@ -14,16 +14,12 @@ use SGH\Models\Riesgo;
 
 class RiesgoController extends Controller
 {
-	private $route = 'cnfg-organizacionales.riesgos';
-	private $class = Riesgo::class;
+	protected $route = 'cnfg-organizacionales.riesgos';
+	protected $class = Riesgo::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:riesgos-index', ['only' => ['index']]);
-		$this->middleware('permission:riesgos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:riesgos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:riesgos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -72,7 +68,7 @@ class RiesgoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -100,7 +96,7 @@ class RiesgoController extends Controller
 	 */
 	public function update($RIES_ID)
 	{
-		parent::updateModel($RIES_ID, $this->class, $this->route.'.index');
+		parent::updateModel($RIES_ID);
 	}
 
 	/**
@@ -111,7 +107,7 @@ class RiesgoController extends Controller
 	 */
 	public function destroy($RIES_ID)
 	{
-		parent::destroyModel($RIES_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($RIES_ID);
 	}
 	
 }

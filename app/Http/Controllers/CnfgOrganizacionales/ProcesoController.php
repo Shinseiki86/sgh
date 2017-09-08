@@ -14,16 +14,12 @@ use SGH\Models\Proceso;
 
 class ProcesoController extends Controller
 {
-	private $route = 'cnfg-organizacionales.procesos';
-	private $class = Proceso::class;
+	protected $route = 'cnfg-organizacionales.procesos';
+	protected $class = Proceso::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:procesos-index', ['only' => ['index']]);
-		$this->middleware('permission:procesos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:procesos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:procesos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -74,7 +70,7 @@ class ProcesoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index', ['gerencias'=>'GERE_ids']);
+		parent::storeModel(['gerencias'=>'GERE_ids']);
 	}
 
 	/**
@@ -106,7 +102,7 @@ class ProcesoController extends Controller
 	public function update($PROC_ID)
 	{
 		dump(request()->all());
-		parent::updateModel($PROC_ID, $this->class, $this->route.'.index', ['gerencias'=>'GERE_ids']);
+		parent::updateModel($PROC_ID, ['gerencias'=>'GERE_ids']);
 	}
 
 	/**
@@ -115,9 +111,9 @@ class ProcesoController extends Controller
 	 * @param  int  $PROC_ID
 	 * @return Response
 	 */
-	public function destroy($PROC_ID, $showMsg=True)
+	public function destroy($PROC_ID)
 	{
-		parent::destroyModel($PROC_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($PROC_ID);
 	}
 	
 }

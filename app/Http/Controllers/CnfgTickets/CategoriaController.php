@@ -14,13 +14,12 @@ use SGH\Models\Categoria;
 
 class CategoriaController extends Controller
 {
-    public function __construct()
+	protected $route = 'cnfg-tickets.categorias';
+	protected $class = Categoria::class;
+
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:tkcategoria-index', ['only' => ['index']]);
-		$this->middleware('permission:tkcategoria-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tkcategoria-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tkcategoria-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -49,7 +48,7 @@ class CategoriaController extends Controller
 		//Se obtienen todos los registros.
 		$categorias = Categoria::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-tickets/categorias/index', compact('categorias'));
+		return view($this->route.'.index', compact('categorias'));
 	}
 
 	/**
@@ -61,7 +60,7 @@ class CategoriaController extends Controller
 	{
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
-		return view('cnfg-tickets/categorias/create', compact('arrProcesos'));
+		return view($this->route.'.create', compact('arrProcesos'));
 	}
 
 	/**
@@ -71,7 +70,7 @@ class CategoriaController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Categoria::class, 'cnfg-tickets.categorias.index');
+		parent::storeModel();
 	}
 
 
@@ -89,7 +88,7 @@ class CategoriaController extends Controller
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/categorias/edit', compact('categoria', 'arrProcesos'));
+		return view($this->route.'.edit', compact('categoria', 'arrProcesos'));
 	}
 
 
@@ -101,7 +100,7 @@ class CategoriaController extends Controller
 	 */
 	public function update($CATE_ID)
 	{
-		parent::updateModel($CATE_ID, Categoria::class, 'cnfg-tickets.categorias.index');
+		parent::updateModel($CATE_ID);
 	}
 
 	/**
@@ -110,19 +109,9 @@ class CategoriaController extends Controller
 	 * @param  int  $CATE_ID
 	 * @return Response
 	 */
-	public function destroy($CATE_ID, $showMsg=True)
+	public function destroy($CATE_ID)
 	{
-		$categorias = Categoria::findOrFail($CATE_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($categorias->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Categoria '.$categorias->CATE_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$categorias->delete();
-				flash_alert( 'Categoria '.$categorias->CATE_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-tickets.categorias.index');
+		parent::destroyModel($CATE_ID);
 	}
 	
 }

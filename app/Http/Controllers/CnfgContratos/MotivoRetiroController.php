@@ -14,16 +14,12 @@ use SGH\Models\MotivoRetiro;
 
 class MotivoRetiroController extends Controller
 {
-	private $route = 'cnfg-contratos.motivosretiros';
-	private $class = MotivoRetiro::class;
+	protected $route = 'cnfg-contratos.motivosretiros';
+	protected $class = MotivoRetiro::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:motivosretiros-index', ['only' => ['index']]);
-		$this->middleware('permission:motivosretiros-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:motivosretiros-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:motivosretiros-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -70,7 +66,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -97,7 +93,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function update($MORE_ID)
 	{
-		parent::updateModel($MORE_ID, $this->class, $this->route.'.index');
+		parent::updateModel($MORE_ID);
 	}
 
 	/**
@@ -108,7 +104,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function destroy($MORE_ID)
 	{
-		parent::destroyModel($MORE_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($MORE_ID);
 	}
 	
 }

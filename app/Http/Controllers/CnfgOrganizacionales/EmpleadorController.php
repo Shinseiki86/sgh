@@ -14,16 +14,12 @@ use SGH\Models\Empleador;
 
 class EmpleadorController extends Controller
 {
-	private $route = 'cnfg-organizacionales.empleadores';
-	private $class = Empleador::class;
+	protected $route = 'cnfg-organizacionales.empleadores';
+	protected $class = Empleador::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:empleadores-index', ['only' => ['index']]);
-		$this->middleware('permission:empleadores-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:empleadores-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:empleadores-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -80,7 +76,7 @@ class EmpleadorController extends Controller
 	public function store()
 	{
 		//dd(request()->all());
-		parent::storeModel(Empleador::class, $this->route.'.index');
+		parent::storeModel(Empleador::class);
 	}
 
 	/**
@@ -109,7 +105,7 @@ class EmpleadorController extends Controller
 	 */
 	public function update($EMPL_ID)
 	{
-		parent::updateModel($EMPL_ID, $this->class, $this->route.'.index');
+		parent::updateModel($EMPL_ID);
 	}
 
 	/**
@@ -120,7 +116,7 @@ class EmpleadorController extends Controller
 	 */
 	public function destroy($EMPL_ID)
 	{
-		parent::destroyModel($EMPL_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($EMPL_ID);
 	}
 	
 }

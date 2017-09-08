@@ -15,16 +15,12 @@ use SGH\Models\Departamento;
 
 class CiudadController extends Controller
 {
-	private $route = 'cnfg-geograficos.ciudades';
-	private $class = Ciudad::class;
+	protected $route = 'cnfg-geograficos.ciudades';
+	protected $class = Ciudad::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:ciudades-index', ['only' => ['index','listadoCiudades']]);
-		$this->middleware('permission:ciudades-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:ciudades-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:ciudades-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -99,7 +95,7 @@ class CiudadController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -130,7 +126,7 @@ class CiudadController extends Controller
 	 */
 	public function update($CIUD_ID)
 	{
-		parent::updateModel($CIUD_ID, $this->class, $this->route.'.index');
+		parent::updateModel($CIUD_ID);
 	}
 
 	/**
@@ -141,7 +137,7 @@ class CiudadController extends Controller
 	 */
 	public function destroy($CIUD_ID)
 	{
-		parent::destroyModel($CIUD_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($CIUD_ID);
 	}
 
 }

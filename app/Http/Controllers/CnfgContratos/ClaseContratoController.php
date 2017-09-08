@@ -14,16 +14,12 @@ use SGH\Models\ClaseContrato;
 
 class ClaseContratoController extends Controller
 {
-	private $route = 'cnfg-contratos.clasescontratos';
-	private $class = ClaseContrato::class;
+	protected $route = 'cnfg-contratos.clasescontratos';
+	protected $class = ClaseContrato::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:clasescontratos-index', ['only' => ['index']]);
-		$this->middleware('permission:clasescontratos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:clasescontratos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:clasescontratos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -71,7 +67,7 @@ class ClaseContratoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 	/**
@@ -97,7 +93,7 @@ class ClaseContratoController extends Controller
 	 */
 	public function update($CLCO_ID)
 	{
-		parent::updateModel($CLCO_ID, $this->class, $this->route.'.index');
+		parent::updateModel($CLCO_ID);
 	}
 
 	/**
@@ -108,7 +104,7 @@ class ClaseContratoController extends Controller
 	 */
 	public function destroy($CLCO_ID)
 	{
-		parent::destroyModel($CLCO_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($CLCO_ID);
 	}
 	
 }

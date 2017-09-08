@@ -31,7 +31,8 @@ class VerifyCsrfToken extends BaseVerifier
         }
 
         // redirect the user back to the last page and show error
-        return Redirect::back()->withError('Disculpa, No fue posible verificar tu solicitud. Por favor intenta nuevamente.');
+        flash_alert( 'Disculpa, no fue posible verificar tu solicitud. Por favor intenta nuevamente.', 'danger' );
+        return Redirect::back();
     }
 
     /**

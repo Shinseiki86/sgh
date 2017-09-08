@@ -14,16 +14,12 @@ use SGH\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
-	private $route = 'cnfg-geograficos.departamentos';
-	private $class = Departamento::class;
+	protected $route = 'cnfg-geograficos.departamentos';
+	protected $class = Departamento::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:departamentos-index', ['only' => ['index']]);
-		$this->middleware('permission:departamentos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:departamentos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:departamentos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -98,7 +94,7 @@ class DepartamentoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -129,7 +125,7 @@ class DepartamentoController extends Controller
 	 */
 	public function update($DEPA_ID)
 	{
-		parent::updateModel($DEPA_ID, $this->class, $this->route.'.index');
+		parent::updateModel($DEPA_ID);
 	}
 
 	/**
@@ -140,7 +136,7 @@ class DepartamentoController extends Controller
 	 */
 	public function destroy($DEPA_ID)
 	{
-		parent::destroyModel($DEPA_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($DEPA_ID);
 	}
 
 

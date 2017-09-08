@@ -14,13 +14,12 @@ use SGH\Models\Prioridad;
 
 class PrioridadController extends Controller
 {
-    public function __construct()
+	protected $route = 'cnfg-tickets.prioridades';
+	protected $class = EstadoAprobacion::class;
+
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:tkprioridad-index', ['only' => ['index']]);
-		$this->middleware('permission:tkprioridad-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tkprioridad-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tkprioridad-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 
@@ -50,7 +49,7 @@ class PrioridadController extends Controller
 		//Se obtienen todos los registros.
 		$prioridades = Prioridad::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-tickets/prioridades/index', compact('prioridades'));
+		return view($this->route.'.index', compact('prioridades'));
 	}
 
 	/**
@@ -60,7 +59,7 @@ class PrioridadController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-tickets/prioridades/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -70,7 +69,7 @@ class PrioridadController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Prioridad::class, 'cnfg-tickets.prioridades.index');
+		parent::storeModel();
 	}
 
 
@@ -86,7 +85,7 @@ class PrioridadController extends Controller
 		$prioridad = Prioridad::findOrFail($PRIO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/prioridades/edit', compact('prioridad'));
+		return view($this->route.'.edit', compact('prioridad'));
 	}
 
 
@@ -98,7 +97,7 @@ class PrioridadController extends Controller
 	 */
 	public function update($PRIO_ID)
 	{
-		parent::updateModel($PRIO_ID, Prioridad::class, 'cnfg-tickets.prioridades.index');
+		parent::updateModel($PRIO_ID);
 	}
 
 	/**
@@ -107,19 +106,9 @@ class PrioridadController extends Controller
 	 * @param  int  $PRIO_ID
 	 * @return Response
 	 */
-	public function destroy($PRIO_ID, $showMsg=True)
+	public function destroy($PRIO_ID)
 	{
-		$prioridad = Prioridad::findOrFail($PRIO_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($prioridad->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$prioridad->PRIO_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$prioridad->delete();
-				flash_alert( 'Prioridad '.$prioridad->PRIO_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-tickets.prioridades.index');
+		parent::destroyModel($PRIO_ID);
 	}
 	
 }

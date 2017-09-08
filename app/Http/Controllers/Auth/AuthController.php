@@ -18,7 +18,9 @@ use SGH\Models\Menu;
 class AuthController extends Controller
 {
 	protected $username = 'username';
-	
+	protected $route = 'auth.usuarios';
+	protected $class = User::class;
+
 	/*
 	|--------------------------------------------------------------------------
 	| Registration & Login Controller
@@ -70,13 +72,8 @@ class AuthController extends Controller
 		$this->middleware($this->guestMiddleware(),
 			['except' => array_collapse([$arrActionsLogin, $arrActionsAdmin])]
 		);
-		
-        $this->middleware('permission:usuarios-index', ['only' => ['index']]);
-        $this->middleware('permission:usuarios-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:usuarios-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:usuarios-delete',   ['only' => ['destroy']]);
 
-
+		parent::__construct(false);
 	}
 
 	/**

@@ -14,16 +14,12 @@ use SGH\Models\TipoContrato;
 
 class TipoContratoController extends Controller
 {
-	private $route = 'cnfg-contratos.tiposcontratos';
-	private $class = TipoContrato::class;
+	protected $route = 'cnfg-contratos.tiposcontratos';
+	protected $class = TipoContrato::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:tiposcontratos-index', ['only' => ['index']]);
-		$this->middleware('permission:tiposcontratos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tiposcontratos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tiposcontratos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 	
 	/**
@@ -70,7 +66,7 @@ class TipoContratoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -98,7 +94,7 @@ class TipoContratoController extends Controller
 	 */
 	public function update($TICO_ID)
 	{
-		parent::updateModel($TICO_ID, $this->class, $this->route.'.index');
+		parent::updateModel($TICO_ID);
 	}
 
 	/**
@@ -109,7 +105,7 @@ class TipoContratoController extends Controller
 	 */
 	public function destroy($TICO_ID)
 	{
-		parent::destroyModel($TICO_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($TICO_ID);
 	}
 	
 }

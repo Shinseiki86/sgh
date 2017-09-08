@@ -15,18 +15,13 @@ use SGH\Models\Cargo;
 
 class CargoController extends Controller
 {
-	private $route = 'cnfg-contratos.cargos';
-	private $class = Cargo::class;
+	protected $route = 'cnfg-contratos.cargos';
+	protected $class = Cargo::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:cargos-index', ['only' => ['index']]);
-		$this->middleware('permission:cargos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:cargos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:cargos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
-
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -77,7 +72,7 @@ class CargoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -108,7 +103,7 @@ class CargoController extends Controller
 	 */
 	public function update($CARG_ID)
 	{
-		parent::updateModel($CARG_ID, $this->class, $this->route.'.index');
+		parent::updateModel($CARG_ID);
 	}
 
 	/**
@@ -119,7 +114,7 @@ class CargoController extends Controller
 	 */
 	public function destroy($CARG_ID)
 	{
-		parent::destroyModel($CARG_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($CARG_ID);
 	}
 	
 }

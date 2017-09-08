@@ -15,16 +15,12 @@ use SGH\Models\Empleador;
 
 class GerenciaController extends Controller
 {
-	private $route = 'cnfg-organizacionales.gerencias';
-	private $class = Gerencia::class;
+	protected $route = 'cnfg-organizacionales.gerencias';
+	protected $class = Gerencia::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:gerencias-index', ['only' => ['index']]);
-		$this->middleware('permission:gerencias-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:gerencias-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:gerencias-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -82,7 +78,7 @@ class GerenciaController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index', ['procesos'=>'PROC_ids']);
+		parent::storeModel(['procesos'=>'PROC_ids']);
 	}
 
 	/**
@@ -116,7 +112,7 @@ class GerenciaController extends Controller
 	 */
 	public function update($GERE_ID)
 	{
-		parent::updateModel($GERE_ID, $this->class, $this->route.'.index', ['procesos'=>'PROC_ids']);
+		parent::updateModel($GERE_ID, ['procesos'=>'PROC_ids']);
 	}
 
 	/**
@@ -125,9 +121,9 @@ class GerenciaController extends Controller
 	 * @param  int  $GERE_ID
 	 * @return Response
 	 */
-	public function destroy($GERE_ID, $showMsg=True)
+	public function destroy($GERE_ID)
 	{
-		parent::destroyModel($GERE_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($GERE_ID);
 	}
 	
 }

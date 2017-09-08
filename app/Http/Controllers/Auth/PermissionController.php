@@ -14,16 +14,12 @@ use SGH\Models\Permission;
 
 class PermissionController extends Controller
 {
-	private $route = 'auth.permisos';
-	private $class = Permission::class;
+	protected $route = 'auth.permisos';
+	protected $class = Permission::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:permisos-index', ['only' => ['index']]);
-		$this->middleware('permission:permisos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:permisos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:permisos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 
@@ -76,7 +72,7 @@ class PermissionController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Permission::class, $this->route.'.index', ['roles'=>'roles_ids']);
+		parent::storeModel(['roles'=>'roles_ids']);
 	}
 
 
@@ -108,7 +104,7 @@ class PermissionController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Permission::class, $this->route.'.index', ['roles'=>'roles_ids']);
+		parent::updateModel($id, Permission::class, ['roles'=>'roles_ids']);
 	}
 
 	/**
@@ -117,9 +113,9 @@ class PermissionController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id, $showMsg=True)
+	public function destroy($id)
 	{
-		parent::destroyModel($id, $this->class, $this->route.'.index');
+		parent::destroyModel($id);
 	}
 	
 }

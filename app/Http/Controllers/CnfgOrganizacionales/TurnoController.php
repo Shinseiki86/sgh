@@ -14,16 +14,12 @@ use SGH\Models\Turno;
 
 class TurnoController extends Controller
 {
-	private $route = 'cnfg-organizacionales.turnos';
-	private $class = Riesgo::class;
+	protected $route = 'cnfg-organizacionales.turnos';
+	protected $class = Riesgo::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:turnos-index', ['only' => ['index']]);
-		$this->middleware('permission:turnos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:turnos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:turnos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -78,7 +74,7 @@ class TurnoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -109,7 +105,7 @@ class TurnoController extends Controller
 	 */
 	public function update($TURN_ID)
 	{
-		parent::updateModel($TURN_ID, $this->class, $this->route.'.index');
+		parent::updateModel($TURN_ID);
 	}
 
 	/**
@@ -120,7 +116,7 @@ class TurnoController extends Controller
 	 */
 	public function destroy($TURN_ID)
 	{
-		parent::destroyModel($TURN_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($TURN_ID);
 	}
 	
 }

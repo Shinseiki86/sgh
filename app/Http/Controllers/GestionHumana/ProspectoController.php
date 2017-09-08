@@ -10,15 +10,12 @@ use SGH\Models\Prospecto;
 
 class ProspectoController extends Controller
 {
-	private $route = 'gestion-humana.prospectos';
+	protected $route = 'gestion-humana.prospectos';
+	protected $class = Prospecto::class;
 
 	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:prospectos-index', ['only' => ['index']]);
-		$this->middleware('permission:prospectos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:prospectos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:prospectos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -105,7 +102,7 @@ class ProspectoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Prospecto::class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -133,7 +130,7 @@ class ProspectoController extends Controller
 	 */
 	public function update($PROS_ID)
 	{
-		parent::updateModel($PROS_ID, Prospecto::class, $this->route.'.index');
+		parent::updateModel($PROS_ID);
 	}
 
 	/**
@@ -142,9 +139,9 @@ class ProspectoController extends Controller
 	 * @param  int  $PROS_ID
 	 * @return Response
 	 */
-	public function destroy($PROS_ID, $showMsg=True)
+	public function destroy($PROS_ID)
 	{
-		parent::destroyModel($PROS_ID, Prospecto::class, $this->route.'.index');
+		parent::destroyModel($PROS_ID);
 	}
 
 }

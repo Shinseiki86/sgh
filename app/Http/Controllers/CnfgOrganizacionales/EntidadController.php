@@ -19,10 +19,10 @@ class EntidadController extends Controller
 
 	private $groupUrl='cnfg-organizacionales.';
 	private $routeIndex = 'entidades.index';
+
 	public function __construct()
 	{
-		$this->routeIndex=$this->groupUrl .'entidades.index';
-		$this->middleware('auth');
+		parent::__construct();
 	}
 
 	/**

@@ -14,16 +14,12 @@ use SGH\Models\TipoEmpleador;
 
 class TipoEmpleadorController extends Controller
 {
-	private $route = 'cnfg-organizacionales.tiposempleadores';
-	private $class = Riesgo::class;
+	protected $route = 'cnfg-organizacionales.tiposempleadores';
+	protected $class = Riesgo::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:tiposempleadores-index', ['only' => ['index']]);
-		$this->middleware('permission:tiposempleadores-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tiposempleadores-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tiposempleadores-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -71,7 +67,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -99,7 +95,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function update($TIEM_ID)
 	{
-		parent::updateModel($TIEM_ID, $this->class, $this->route.'.index');
+		parent::updateModel($TIEM_ID);
 	}
 
 	/**
@@ -110,7 +106,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function destroy($TIEM_ID)
 	{
-		parent::destroyModel($TIEM_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($TIEM_ID);
 	}
 	
 }

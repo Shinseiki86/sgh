@@ -8,7 +8,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 
-
 use Illuminate\Contracts\Validation\Validator;
 
 
@@ -17,6 +16,19 @@ class Controller extends BaseController
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
     public static $modeloCreado;
+
+    public function __construct($requireAuth=true)
+	{
+		if($requireAuth)
+			$this->middleware('auth');
+		
+		$name = basename($this->class);
+		$this->middleware('permission:'.$name.'-index',  ['only' => ['index']]);
+		$this->middleware('permission:'.$name.'-create', ['only' => ['create', 'store']]);
+		$this->middleware('permission:'.$name.'-edit',   ['only' => ['edit', 'update']]);
+		$this->middleware('permission:'.$name.'-delete', ['only' => ['destroy']]);
+	}
+
     /**
      * {@inheritdoc}
      */
@@ -28,12 +40,10 @@ class Controller extends BaseController
 	/**
 	 * Guarda el registro nuevo en la base de datos.
 	 *
-	 * @param  string  $class
-	 * @param  string  $redirect
 	 * @param  array  $relations
 	 * @return Response
 	 */
-	protected function storeModel($class, $redirect, array $relations = [])
+	protected function storeModel(array $relations = [])
 	{
 		//Datos recibidos desde la vista.
 		$data = $this->getRequest();
@@ -42,7 +52,7 @@ class Controller extends BaseController
 		$validator = $this->validator($data);
 
 		if($validator->passes()){
-			$class = $this->getClass($class);
+			$class = $this->getClass($this->class);
 
 			//Se crea el registro.
 			if(array_has($data, 'password'))
@@ -54,7 +64,7 @@ class Controller extends BaseController
 			$nameClass = str_upperspace(class_basename($model));
 			// redirecciona al index de controlador
 			flash_alert( $nameClass.' '.$model->id.' creado exitosamente.', 'success' );
-			return redirect()->route($redirect)->send();
+			return redirect()->route($this->route.'.index')->send();
 		} else {
 			return redirect()->back()->withErrors($validator)->withInput()->send();
 		}		
@@ -64,12 +74,10 @@ class Controller extends BaseController
 	 * Actualiza un registro en la base de datos.
 	 *
 	 * @param  int  $id
-	 * @param  string  $class
-	 * @param  string  $redirect
 	 * @param  array  $relations
 	 * @return Response
 	 */
-	protected function updateModel($id, $class, $redirect, array $relations = [])
+	protected function updateModel($id, array $relations = [])
 	{
 		//Datos recibidos desde la vista.
 		$data = $this->getRequest();
@@ -78,7 +86,7 @@ class Controller extends BaseController
 		$validator = $this->validator($data, $id);
 
 		if($validator->passes()){
-			$class = $this->getClass($class);
+			$class = $this->getClass($this->class);
 
 			// Se obtiene el registro
 			$model = $class::findOrFail($id);
@@ -91,7 +99,7 @@ class Controller extends BaseController
 			$nameClass = str_upperspace(class_basename($model));
 			// redirecciona al index de controlador
 			flash_alert( $nameClass.' '.$id.' modificado exitosamente.', 'success' );
-			return redirect()->route($redirect)->send();
+			return redirect()->route($this->route.'.index')->send();
 		} else {
 			return redirect()->back()->withErrors($validator)->withInput()->send();
 		}
@@ -148,10 +156,10 @@ class Controller extends BaseController
 	 * @param  string  $redirect
 	 * @return Response
 	 */
-	protected function destroyModel($id, $class, $redirect)
+	protected function destroyModel($id)
 	{
 		// Se obtiene el registro
-		$class = $this->getClass($class);
+		$class = $this->getClass($this->class);
 		$model = $class::findOrFail($id);
 
         $prefix = strtoupper(substr($class::CREATED_AT, 0, 4));
@@ -171,7 +179,7 @@ class Controller extends BaseController
 				flash_alert( $nameClass.' '.$id.' eliminado exitosamente.', 'success' );
 			}
 		}
-		return redirect()->route($redirect)->send();
+		return redirect()->route($this->route.'.index')->send();
 	}
 
 	protected function validateRelations($nameClass, $relations)

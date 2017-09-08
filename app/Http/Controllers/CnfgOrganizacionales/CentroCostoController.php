@@ -14,17 +14,14 @@ use SGH\Models\Gerencia;
 
 class CentroCostoController extends Controller
 {
-	private $route = 'cnfg-organizacionales.centroscostos';
-	private $class = CentroCosto::class;
+	protected $route = 'cnfg-organizacionales.centroscostos';
+	protected $class = CentroCosto::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:centroscostos-index', ['only' => ['index']]);
-		$this->middleware('permission:centroscostos-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:centroscostos-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:centroscostos-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
+
 	/**
 	 * Get a validator for an incoming registration request.
 	 *
@@ -72,7 +69,7 @@ class CentroCostoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 	/**
 	 * Muestra el formulario para editar un registro en particular.
@@ -97,7 +94,7 @@ class CentroCostoController extends Controller
 	 */
 	public function update($CECO_ID)
 	{
-		parent::updateModel($CECO_ID, $this->class, $this->route.'.index');
+		parent::updateModel($CECO_ID);
 	}
 
 	/**
@@ -108,7 +105,7 @@ class CentroCostoController extends Controller
 	 */
 	public function destroy($CECO_ID)
 	{
-		parent::destroyModel($CECO_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($CECO_ID);
 	}
 	
 }

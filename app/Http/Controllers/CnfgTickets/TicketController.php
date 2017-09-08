@@ -21,13 +21,12 @@ use Carbon\Carbon;
 
 class TicketController extends Controller
 {
+	protected $route = 'cnfg-tickets.tickets';
+	protected $class = Ticket::class;
+
 	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:ticket-index', ['only' => ['index']]);
-		$this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:ticket-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:ticket-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -64,7 +63,7 @@ class TicketController extends Controller
 		//Se obtienen todos los registros.
 		$tickets = Ticket::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-tickets/tickets/index', compact('tickets'));
+		return view($this->route.'.index', compact('tickets'));
 	}
 
 	public function show($TICK_ID)
@@ -75,7 +74,7 @@ class TicketController extends Controller
 		$arrSanciones = model_to_array(Sancion::class, 'SANC_DESCRIPCION');
 
         // Muestra la vista y pasa el registro
-		return view('cnfg-tickets/tickets/show', compact('ticket','arrSanciones'));
+		return view($this->route.'.show', compact('ticket','arrSanciones'));
 	}
 
 	/**
@@ -115,7 +114,7 @@ class TicketController extends Controller
 
 		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
 
-		return view('cnfg-tickets/tickets/create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
+		return view($this->route.'.create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
 	}
 
 	/**
@@ -473,7 +472,7 @@ class TicketController extends Controller
 
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/tickets/edit', compact('ticket','arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
+		return view($this->route.'.edit', compact('ticket','arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
 	}
 
 
@@ -485,23 +484,7 @@ class TicketController extends Controller
 	 */
 	public function update($TICK_ID)
 	{
-		//Datos recibidos desde la vista.
-		$data = request()->all();
-
-		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$validator = $this->validator($data, $TICK_ID);
-
-		if($validator->passes()){
-			//encuentra el ticket
-			$ticket = Ticket::findOrFail($TICK_ID);
-			$ticket->update($data);
-
-			// redirecciona al index de controlador
-			flash_alert( 'Ticket '.$ticket->TICK_ID.' modificado exitosamente.', 'success' );
-			return redirect()->route('cnfg-tickets.tickets.index');
-		} else {
-			return redirect()->back()->withErrors($validator)->withInput()->send();
-		}
+		parent::updateModel($SANC_ID);
 	}
 
 	/**
@@ -510,25 +493,9 @@ class TicketController extends Controller
 	 * @param  int  $TICK_ID
 	 * @return Response
 	 */
-	public function destroy($TICK_ID, $showMsg=True)
+	public function destroy($TICK_ID)
 	{
-		//define el path de donde lo borrara
-		$destinationPath = public_path(). '/storages/';
-
-		$tickets = Ticket::findOrFail($TICK_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($tickets->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Ticket '.$tickets->TICK_ID.' no se puede borrar.', 'danger' );
-		} else {
-			if($tickets->TICK_ARCHIVO != NULL){
-				\File::delete($destinationPath . $tickets->TICK_ARCHIVO);
-			}
-			$tickets->delete();
-			flash_alert( 'Ticket '.$tickets->TICK_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-tickets.tickets.index');
+		parent::destroyModel($TICK_ID);
 	}
 
 	/**

@@ -48,48 +48,48 @@ use SGH\Models\Permission;
 
             $this->command->info('--- Seeder Creación de Permisos');
 
-                $this->createPermissions('usuarios', 'usuarios', null,  true, false);
-                $this->createPermissions('permisos', 'permisos', null, true, false);
-                $this->createPermissions('roles', 'roles', null, true, false);
-                $this->createPermissions('menu', 'opciones del menú', null, true, false);
+                $this->createPermissions(User::class, 'usuarios', null,  true, false);
+                $this->createPermissions(Permission::class, 'permisos', null, true, false);
+                $this->createPermissions(Role::class, 'roles', null, true, false);
+                $this->createPermissions(Menu::class, 'opciones del menú', null, true, false);
 
-                $this->createPermissions('paises', 'países');
-                $this->createPermissions('departamentos', 'departamentos');
-                $this->createPermissions('ciudades', 'ciudades');
+                $this->createPermissions(Pais::class, 'países');
+                $this->createPermissions(Departamento::class, 'departamentos');
+                $this->createPermissions(Ciudad::class, 'ciudades');
 
-                $this->createPermissions('cargos', 'cargos');
-                $this->createPermissions('tiposcontratos', 'tipos de contrato');
-                $this->createPermissions('temporales', 'empresas temporales');
-                $this->createPermissions('cnos', 'clasificaciones de ocupación (CNOS)');
-                $this->createPermissions('jefes', 'jefes');
-                $this->createPermissions('clasescontratos', 'clases de contratos');
-                $this->createPermissions('estadoscontratos', 'estados de contratos');
-                $this->createPermissions('motivosretiros', 'motivo de retiro');
+                $this->createPermissions(Cargo::class, 'cargos');
+                $this->createPermissions(TipoContrato::class, 'tipos de contrato');
+                $this->createPermissions(Temporal::class, 'empresas temporales');
+                $this->createPermissions(Cno::class, 'clasificaciones de ocupación (CNOS)');
+                $this->createPermissions(Jefe::class, 'jefes');
+                $this->createPermissions(ClaseContrato::class, 'clases de contratos');
+                $this->createPermissions(EstadoContrato::class, 'estados de contratos');
+                $this->createPermissions(MotivoRetiro::class, 'motivo de retiro');
 
-                $this->createPermissions('grupos', 'grupos');
-                $this->createPermissions('turnos', 'turnos');
-                $this->createPermissions('empleadores', 'empleadores');
-                $this->createPermissions('gerencias', 'gerencias');
-                $this->createPermissions('procesos', 'procesos');
-                $this->createPermissions('plantaslaborales', 'plantas laborales');
-                $this->createPermissions('centroscostos', 'centros de costo');
-                $this->createPermissions('tiposempleadores', 'tipos de empleador');
-                $this->createPermissions('riesgos', 'riesgos de ARL');
-                $this->createPermissions('entidades', 'entidades');
-                $this->createPermissions('tipoEntidades', 'tipo entidades');
+                $this->createPermissions(Grupo::class, 'grupos');
+                $this->createPermissions(Turno::class, 'turnos');
+                $this->createPermissions(Empleador::class, 'empleadores');
+                $this->createPermissions(Gerencia::class, 'gerencias');
+                $this->createPermissions(Proceso::class, 'procesos');
+                $this->createPermissions(PlantaLaboral::class, 'plantas laborales');
+                $this->createPermissions(CentroCosto::class, 'centros de costo');
+                $this->createPermissions(TipoEmpleador::class, 'tipos de empleador');
+                $this->createPermissions(Riesgo::class, 'riesgos de ARL');
+                $this->createPermissions(Entidad::class, 'entidades');
+                $this->createPermissions(TipoEntidad::class, 'tipo entidades');
 
-                $this->createPermissions('prospectos', 'hojas de vida');
-                $this->createPermissions('contratos', 'contratos');
+                $this->createPermissions(Prospecto::class, 'hojas de vida');
+                $this->createPermissions(Contrato::class, 'contratos');
                 //$this->createPermissions('VALIDADOR DE TNL', 'VALIDADOR DE TNL');
 
-                $this->createPermissions('tkprioridad', 'prioridades ticket');
-                $this->createPermissions('tkestados', 'estados ticket');
-                $this->createPermissions('tkaprobacion', 'estados aprobaciones');
-                $this->createPermissions('tkcategoria', 'categorías ticket');
-                $this->createPermissions('tksancion', 'categorías ticket');
-                $this->createPermissions('tktpincidente', 'tipo incidente ticket');
+                $this->createPermissions(Prioridad::class, 'prioridades ticket');
+                $this->createPermissions(Estado::class, 'estados ticket');
+                $this->createPermissions(Aprobacion::class, 'estados aprobaciones');
+                $this->createPermissions(Categoria::class, 'categorías ticket');
+                $this->createPermissions(Sancion::class, 'categorías ticket');
+                $this->createPermissions(Incidente::class, 'tipo incidente ticket');
                 
-                $perms = $this->createPermissions('ticket', 'tickets');
+                $perms = $this->createPermissions(Ticket::class, 'tickets');
                 $rolSuperOper->attachPermissions([
                     $perms['index'],
                     $perms['create'],
@@ -164,6 +164,8 @@ use SGH\Models\Permission;
 
         private function createPermissions($name, $display_name, $description = null, $attachAdmin=true, $attachGestHum=true)
         {
+            $name = basename($name);
+
             if($description == null)
                 $description = $display_name;
 

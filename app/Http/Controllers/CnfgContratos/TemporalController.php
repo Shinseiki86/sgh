@@ -14,16 +14,12 @@ use SGH\Models\Temporal;
 
 class TemporalController extends Controller
 {
-	private $route = 'cnfg-contratos.temporales';
-	private $class = Temporal::class;
+	protected $route = 'cnfg-contratos.temporales';
+	protected $class = Temporal::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:temporales-index', ['only' => ['index']]);
-		$this->middleware('permission:temporales-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:temporales-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:temporales-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -73,7 +69,7 @@ class TemporalController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 
@@ -101,7 +97,7 @@ class TemporalController extends Controller
 	 */
 	public function update($TEMP_ID)
 	{
-		parent::updateModel($TEMP_ID, $this->class, $this->route.'.index');
+		parent::updateModel($TEMP_ID);
 	}
 
 	/**
@@ -112,7 +108,7 @@ class TemporalController extends Controller
 	 */
 	public function destroy($TEMP_ID)
 	{
-		parent::destroyModel($TEMP_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($TEMP_ID);
 	}
 	
 }

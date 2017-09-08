@@ -14,16 +14,12 @@ use SGH\Models\Pais;
 
 class PaisController extends Controller
 {
-	private $route = 'cnfg-geograficos.paises';
-	private $class = Pais::class;
+	protected $route = 'cnfg-geograficos.paises';
+	protected $class = Pais::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:paises-index', ['only' => ['index']]);
-		$this->middleware('permission:paises-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:paises-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:paises-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -89,7 +85,7 @@ class PaisController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($this->class, $this->route.'.index');
+		parent::storeModel();
 	}
 
 	/**
@@ -115,7 +111,7 @@ class PaisController extends Controller
 	 */
 	public function update($PAIS_ID)
 	{
-		parent::updateModel($PAIS_ID, $this->class, $this->route.'.index');
+		parent::updateModel($PAIS_ID);
 	}
 
 	/**
@@ -126,7 +122,7 @@ class PaisController extends Controller
 	 */
 	public function destroy($PAIS_ID)
 	{
-		parent::destroyModel($PAIS_ID, $this->class, $this->route.'.index');
+		parent::destroyModel($PAIS_ID);
 	}
 
 

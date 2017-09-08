@@ -14,13 +14,12 @@ use SGH\Models\Sancion;
 
 class SancionController extends Controller
 {
-    public function __construct()
+	protected $route = 'cnfg-tickets.sanciones';
+	protected $class = Sancion::class;
+
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:tksancion-index', ['only' => ['index']]);
-		$this->middleware('permission:tksancion-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tksancion-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tksancion-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -48,7 +47,7 @@ class SancionController extends Controller
 		//Se obtienen todos los registros.
 		$sanciones = Sancion::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-tickets/sanciones/index', compact('sanciones'));
+		return view($this->route.'.index', compact('sanciones'));
 	}
 
 	/**
@@ -58,7 +57,7 @@ class SancionController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-tickets/sanciones/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -68,7 +67,7 @@ class SancionController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Sancion::class, 'cnfg-tickets.sanciones.index');
+		parent::storeModel();
 	}
 
 
@@ -84,7 +83,7 @@ class SancionController extends Controller
 		$sancion = Sancion::findOrFail($SANC_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/sanciones/edit', compact('sancion'));
+		return view($this->route.'.edit', compact('sancion'));
 	}
 
 
@@ -96,7 +95,7 @@ class SancionController extends Controller
 	 */
 	public function update($SANC_ID)
 	{
-		parent::updateModel($SANC_ID, Sancion::class, 'cnfg-tickets.sanciones.index');
+		parent::updateModel($SANC_ID);
 	}
 
 	/**
@@ -105,19 +104,9 @@ class SancionController extends Controller
 	 * @param  int  $SANC_ID
 	 * @return Response
 	 */
-	public function destroy($SANC_ID, $showMsg=True)
+	public function destroy($SANC_ID)
 	{
-		$sancion = Sancion::findOrFail($SANC_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($sancion->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Sanción '.$sancion->SANC_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$sancion->delete();
-				flash_alert( 'Sanción '.$sancion->SANC_ID.' eliminada exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-tickets.sanciones.index');
+		parent::destroyModel($SANC_ID);
 	}
 	
 }

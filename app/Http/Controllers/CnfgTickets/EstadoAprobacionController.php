@@ -14,13 +14,12 @@ use SGH\Models\EstadoAprobacion;
 
 class EstadoAprobacionController extends Controller
 {
-    public function __construct()
+	protected $route = 'cnfg-tickets.estadosaprobaciones';
+	protected $class = EstadoAprobacion::class;
+
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:tkestados-index', ['only' => ['index']]);
-		$this->middleware('permission:tkestados-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:tkestados-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:tkestados-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -49,7 +48,7 @@ class EstadoAprobacionController extends Controller
 		//Se obtienen todos los registros.
 		$estadosaprobaciones = EstadoAprobacion::all();
 		//Se carga la vista y se pasan los registros
-		return view('cnfg-tickets/estadosaprobaciones/index', compact('estadosaprobaciones'));
+		return view($this->route.'.index', compact('estadosaprobaciones'));
 	}
 
 	/**
@@ -59,7 +58,7 @@ class EstadoAprobacionController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-tickets/estadosaprobaciones/create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -69,7 +68,7 @@ class EstadoAprobacionController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(EstadoAprobacion::class, 'cnfg-tickets.estadosaprobaciones.index');
+		parent::storeModel();
 	}
 
 
@@ -85,7 +84,7 @@ class EstadoAprobacionController extends Controller
 		$estadoaprobacion = EstadoAprobacion::findOrFail($ESAP_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('cnfg-tickets/estadosaprobaciones/edit', compact('estadoaprobacion'));
+		return view($this->route.'.edit', compact('estadoaprobacion'));
 	}
 
 
@@ -97,7 +96,7 @@ class EstadoAprobacionController extends Controller
 	 */
 	public function update($ESAP_ID)
 	{
-		parent::updateModel($ESAP_ID, EstadoAprobacion::class, 'cnfg-tickets.estadosaprobaciones.index');
+		parent::updateModel($ESAP_ID);
 	}
 
 	/**
@@ -106,19 +105,9 @@ class EstadoAprobacionController extends Controller
 	 * @param  int  $ESAP_ID
 	 * @return Response
 	 */
-	public function destroy($ESAP_ID, $showMsg=True)
+	public function destroy($ESAP_ID)
 	{
-		$estadoaprobacion = EstadoAprobacion::findOrFail($ESAP_ID);
-
-		//Si el registro fue creado por SYSTEM, no se puede borrar.
-		if($estadoaprobacion->TIPR_creadopor == 'SYSTEM'){
-			flash_modal( 'Temporale '.$estadoaprobacion->ESAP_ID.' no se puede borrar.', 'danger' );
-		} else {
-			$estadoaprobacion->delete();
-				flash_alert( 'Estado de Aprobación '.$estadoaprobacion->ESAP_ID.' eliminado exitosamente.', 'success' );
-		}
-
-		return redirect()->route('cnfg-tickets.estadosaprobaciones.index');
+		parent::destroyModel($ESAP_ID);
 	}
 	
 }

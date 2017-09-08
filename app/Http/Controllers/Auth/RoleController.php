@@ -14,16 +14,12 @@ use SGH\Models\Role;
 
 class RoleController extends Controller
 {
-	private $route = 'auth.roles';
-	private $class = Role::class;
+	protected $route = 'auth.roles';
+	protected $class = Role::class;
 
-    public function __construct()
+	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->middleware('permission:roles-index', ['only' => ['index']]);
-		$this->middleware('permission:roles-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:roles-edit', ['only' => ['edit', 'update']]);
-		$this->middleware('permission:roles-delete',   ['only' => ['destroy']]);
+		parent::__construct();
 	}
 
 	/**
@@ -74,7 +70,7 @@ class RoleController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Role::class, $this->route.'.index', ['permissions'=>'permisos_ids']);
+		parent::storeModel(['permissions'=>'permisos_ids']);
 	}
 
 
@@ -106,7 +102,7 @@ class RoleController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Role::class, $this->route.'.index', ['permissions'=>'permisos_ids']);
+		parent::updateModel($id, Role::class, ['permissions'=>'permisos_ids']);
 	}
 
 	/**
@@ -117,7 +113,7 @@ class RoleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		parent::destroyModel($id, $this->class, $this->route.'.index');
+		parent::destroyModel($id);
 	}
 	
 }
