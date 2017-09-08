@@ -31,7 +31,7 @@ class SelectController extends Controller
 
     public function buscaCiudad(Request $request)
     { 
-        $data=Ciudad::select('CIUD_NOMBRE','CIUD_ID')->where('DEPA_ID',$request->id)->take(100)->get();
+        $data=Ciudad::select('CIUD_NOMBRE','CIUD_ID')->where('DEPA_ID',$request->DEPA_ID)->take(100)->get();
         return response()->json($data);
     }
 

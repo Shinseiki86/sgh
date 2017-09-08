@@ -1,29 +1,30 @@
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(document).on('change','#{{$selectPadre}}',function(){
-			var cat_id=$(this).val();
-			var op=" ";
-			$.ajax({
-				type:'get',
-				url:'{!!URL::to($url)!!}',
-				data:{'{{$selectPadre}}':cat_id},
-				success:function(data){;
-					op+='<option value="0" selected disabled>{{isset($placeholder)?$placeholder:''}}</option>';
-					for(var i=0;i<data.length;i++){
-					op+='<option value="'+data[i].{{$idBusqueda}}+'">'+data[i].{{$nombreBusqueda}}+'</option>';
-				   }
-				   $('#{{$selectHijo}}').html(" ");
-				   $('#{{$selectHijo}}').append(op);
-				   $('#{{$selectHijo}}').selectpicker('refresh');
-				},
-				error:function(){
-					alert('ha ocurrido un error');
-				}
-			});			
-		});	
-	});
-</script>
+@push('scripts')
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(document).on('change','#{{$selectPadre}}',function(){
+				var cat_id=$(this).val();
+				var op=" ";
+				$.ajax({
+					type:'get',
+					url:'{!!URL::to($url)!!}',
+					data:{'{{$selectPadre}}':cat_id},
+					success:function(data){;
+						op+='<option value="0" selected disabled>{{isset($prepend)?$prepend:''}}</option>';
+						for(var i=0;i<data.length;i++){
+						op+='<option value="'+data[i].{{$idBusqueda}}+'">'+data[i].{{$nombreBusqueda}}+'</option>';
+					   }
+					   $('#{{$selectHijo}}').html(" ");
+					   $('#{{$selectHijo}}').append(op);
+					   $('#{{$selectHijo}}').selectpicker('refresh');
+					},
+					error:function(){
+						alert('ha ocurrido un error');
+					}
+				});			
+			});	
+		});
+	</script>
+@endpush
 
 {{-- Ejemplo de como incluirlo
  @section('selectDinamico')

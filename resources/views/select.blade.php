@@ -3,24 +3,15 @@
 @section('page_heading', 'Nueva ')
 
 @section('section')
-	 {!! Form::select('departamentos',$departamentos,null,['id'=>'departamentos','class'=>' productcategory js-example-responsive form-control selectpicker','style'=>'width: 30%']) !!}
+	 {!! Form::select('departamentos',$departamentos,null,['id'=>'DEPA_ID','class'=>' productcategory js-example-responsive form-control selectpicker','style'=>'width: 30%']) !!}
 
 
-		{!! Form::select('ciudad',['placeholder'=>'Selecciona'],null,['id'=>'ciudad','class'=>'ciudades','style'=>'width: 30%']) !!}		
+		{!! Form::select('ciudad',['placeholder'=>'Selecciona'],null,['id'=>'ciudad','class'=>'ciudades selectpicker','style'=>'width: 30%']) !!}		
 		
 @endsection
 
-@section('select2')
-	<script>  
-      $("#departamentos").select2({
-      theme: "classic",
-      // templateSelection: formatState
-      });
-       $("#ciudad").select2({
-      theme: "classic",
-      // templateSelection: formatState
-      });
-	</script>
-	@include('select-dinamico', ['url'=>'buscaCiudad', 'selectPadre'=>'productcategory', 'selectHijo'=>'ciudades'])
+@push('scripts')
 	
-@endsection
+	@include('select-dinamico', ['url'=>'buscaCiudad', 'selectPadre'=>'DEPA_ID', 'selectHijo'=>'ciudad ', 'idBusqueda'=>'CIUD_ID', 'nombreBusqueda'=>'CIUD_NOMBRE', 'prepend'=>'Seleccione una Ciudad'])
+	
+@endpush

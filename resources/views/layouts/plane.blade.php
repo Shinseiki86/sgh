@@ -46,8 +46,7 @@
 		})
 	</script>
 
-	@section('selectDinamico')
-	@show		
+			
 	@stack('scripts')
 </body>
 </html>

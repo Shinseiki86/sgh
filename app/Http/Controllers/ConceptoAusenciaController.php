@@ -10,7 +10,7 @@ use Response;
 use SGH\Models\ConceptoAusencia;
 use Yajra\Datatables\Facades\Datatables;
 
-class conceptoausenciaController extends Controller
+class ConceptoAusenciaController extends Controller
 {
 
 	private $groupUrl='';
