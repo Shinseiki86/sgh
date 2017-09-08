@@ -259,7 +259,8 @@ class AuthController extends Controller
      */
     protected function handleUserWasAuthenticated(Request $request, $throttles)
     {
-        session()->put('menus', Menu::menus());
+    	//Se crea arreglo en session con los items del menú disponibles
+        MenuController::refreshMenu();
 
         //parent::handleUserWasAuthenticated($request, $throttles);
         if ($throttles) {
@@ -280,7 +281,9 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        session()->forget('menus');
+    	//Se elimina arreglo en session con los items del menú disponibles
+        MenuController::destroyMenu();
+
         \Auth::guard($this->getGuard())->logout();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');

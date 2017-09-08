@@ -13,7 +13,7 @@ $(function() {
 	$("#sidebar-area .dropdown-collapse").on((jQuery.support.touch ? "tap" : "click"), function(e) {
 		//e.preventDefault();
 		
-		if ($("body").hasClass("sidebar-closed") && $(this).attr('href')=='#') {
+		if ($("body").hasClass("sidebar-closed") && ($(this).attr('href')=='#' || $(this).attr('href')=='undefined')) {
 			return false;
 		}
 		

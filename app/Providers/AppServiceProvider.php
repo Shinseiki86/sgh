@@ -15,8 +15,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+        //Se pasa las variables con los array para construir el menú a la vista
         view()->composer('layouts.menu.menu-left', function($view) {
-            $view->with('menus', session()->get('menus'));
+            $view->with('menusLeft', session()->get('menusLeft'));
+        });
+        view()->composer('layouts.menu.menu-top', function($view) {
+            $view->with('menusTop', session()->get('menusTop'));
         });
 
         Blade::directive('datetime', function ($expression) {

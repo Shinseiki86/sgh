@@ -149,20 +149,20 @@ class TicketController extends Controller
 		if($validator->passes()){
 
 			$data['TICK_FECHASOLICITUD'] = Carbon::now();
-
-			//se actualiza el nombre del archivo concatenando el ID del registro para garantizar su unicidad
-			//en caso de que en el request venga un archivo
-			if($filename != null){
-				$data['TICK_ARCHIVO'] = $filename[0]. "-" . $ticket->TICK_ID . "." . $filename[1];
-				//mueve el archivo a la ruta indicada
-				$file->move($destinationPath, $data['TICK_ARCHIVO']);
-			}
 			
 			//determinar cual es el usuario que realizó la creación del ticket
 			$data['USER_id'] = \Auth::user()->USER_id;
 
 			//Se crea el registro.
 			$ticket = Ticket::create($data);
+
+			//se actualiza el nombre del archivo concatenando el ID del registro para garantizar su unicidad
+			//en caso de que en el request venga un archivo
+			if($filename != null && $ticket != null){
+				$data['TICK_ARCHIVO'] = $filename[0]. "-" . $ticket->TICK_ID . "." . $filename[1];
+				//mueve el archivo a la ruta indicada
+				$file->move($destinationPath, $data['TICK_ARCHIVO']);
+			}
 
 			/*obtiene el TICK_ID para buscar el ticket
 			$TICK_ID = $ticket->TICK_ID;

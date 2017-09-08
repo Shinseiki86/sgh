@@ -23,6 +23,7 @@ class Menu extends ModelWithSoftDeletes
 		'MENU_ICON',
 		'MENU_PARENT',
 		'MENU_ORDER',
+		'MENU_POSITION',
 		'MENU_ENABLED',
 	];
 
@@ -32,6 +33,7 @@ class Menu extends ModelWithSoftDeletes
 		'MENU_ICON'   => ['string', 'max:300'],
 		'MENU_PARENT' => 'numeric',
 		'MENU_ORDER'  => ['required', 'numeric'],
+		'MENU_POSITION'  => ['string'],
 		'MENU_ENABLED'=> 'bolean',
 	];
 
@@ -46,9 +48,11 @@ class Menu extends ModelWithSoftDeletes
 		return $children;
 	}
 
-	public function optionsMenu()
+	public function optionsMenu($showEnabled=false, $position='LEFT')
 	{
-		return $this->where('MENU_ENABLED', 1)
+		$arrMenu = $showEnabled ? $this : $this->where('MENU_ENABLED', true);
+
+		return $arrMenu->where('MENU_POSITION', $position)
 			->orderby('MENU_PARENT')
 			->orderby('MENU_ORDER')
 			->orderby('MENU_LABEL')
@@ -56,10 +60,10 @@ class Menu extends ModelWithSoftDeletes
 			->toArray();
 	}
 
-	public static function menus()
+	public static function menus($showEnabled=false, $position='LEFT')
 	{
 		$menus = new Menu();
-		$data = $menus->optionsMenu();
+		$data = $menus->optionsMenu($showEnabled, $position);
 
 		$menuAll = [];
 		foreach ($data as $line) {

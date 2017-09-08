@@ -28,6 +28,8 @@ class CreateTableMenu extends Migration
             $table->string('MENU_ICON',300)->nullable()->comment('');
             $table->unsignedInteger('MENU_PARENT')->default(0)->comment('');
             $table->smallInteger('MENU_ORDER')->default(0)->comment('');
+            $table->string('MENU_POSITION', 10)->default('LEFT')
+                    ->comment('Item puede estar ubicado en la barra superior (TOP) o en la barra lateral (LEFT)');
             $table->boolean('MENU_ENABLED')->default(true)->comment('');
 
             //Traza

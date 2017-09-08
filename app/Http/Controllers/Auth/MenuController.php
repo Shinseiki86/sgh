@@ -44,10 +44,11 @@ class MenuController extends Controller
 	 */
 	public function index()
 	{
-		//Se obtienen todos los registros.
-		$menusEdit = Menu::menus();
+		//Se obtienen todos los registros, incluyendo menus deshabilitados
+		$menusEditTop  = Menu::menus(true, 'TOP');
+		$menusEditLeft = Menu::menus(true, 'LEFT');
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('menusEdit'));
+		return view($this->route.'.index', compact('menusEditTop', 'menusEditLeft'));
 	}
 
 
@@ -59,49 +60,58 @@ class MenuController extends Controller
 	public function reorder()
 	{
 		$source       = Input::get('source');
+		$position     = Input::get('position');
 		$destination  = Input::get('destination')!='' ? Input::get('destination') : 0;
 
-		$item               = Menu::find($source);
-		$item->MENU_PARENT  = $destination;
-		$item->save();
+		$item = Menu::find($source)->update([
+					'MENU_PARENT' => $destination,
+					'MENU_POSITION' => $position,
+				]);
+
+		//Si el item contiene subitems, tambien se debe actualizar la posición para ellos.
+		$subItems = Menu::where('MENU_PARENT', $source)->update(['MENU_POSITION' => $position]);
 
 		$ordering       = json_decode(Input::get('order'));
 		$rootOrdering   = json_decode(Input::get('rootOrder'));
 
-		if($ordering){
-			foreach($ordering as $order=>$item_id){
-				if($itemToOrder = Menu::find($item_id)){
-					$itemToOrder->MENU_ORDER = $order;
-					$itemToOrder->save();
-				}
-			}
-		} else {
-			foreach($rootOrdering as $order=>$item_id){
-				if($itemToOrder = Menu::find($item_id)){
-					$itemToOrder->MENU_ORDER = $order;
-					$itemToOrder->save();
-				}
+		if(!$ordering){
+			$ordering = $rootOrdering;
+		}
+
+		foreach($ordering as $order=>$item_id){
+			if($itemToOrder = Menu::find($item_id)){
+				$itemToOrder->update(['MENU_ORDER'=>$order]);
 			}
 		}
 
 		$this->refreshMenu();
-		
 		return response()->json([
-			'status' => 'OK',
+			'status' => 'SAVED',
 			'source' => $source,
-			'MENU_PARENT' => $destination
+			'destination' => $destination,
 		]);
-
 	}
+	
 	/**
 	 * Actuliza arreglo global en session con los menús disponibles.
 	 *
 	 * @return void
 	 */
-	private function refreshMenu()
+	public static function refreshMenu()
 	{
-		session()->forget('menus');
-		session()->put('menus', Menu::menus());
+		self::destroyMenu();
+		session()->put('menusLeft', Menu::menus());
+		session()->put('menusTop', Menu::menus(false, 'TOP'));
+	}
+
+	/**
+	 * Actuliza arreglo global en session con los menús disponibles.
+	 *
+	 * @return void
+	 */
+	public static function destroyMenu()
+	{
+		session()->forget(['menusLeft','menusTop']);
 	}
 
 	/**
@@ -121,7 +131,7 @@ class MenuController extends Controller
 
 	private function getRoutes()
 	{
-		$arrRoutes = [];
+		$arrRoutes = ['#'=>'#'];
 		foreach (Route::getRoutes() as $value) {
 			$uri = $value->getPath();
 			if(ends_with($uri, 'create')){

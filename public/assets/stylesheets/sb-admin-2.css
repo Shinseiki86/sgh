@@ -236,7 +236,8 @@ body {
 	
 	
 	body.sidebar-closed #wrapper #page-wrapper {
-		margin: 55px 5px 60px 45px;
+		margin: 55px 5px 25px 0;
+	    padding-left: 75px;
 	}
 	
 	body.sidebar-closed #wrapper .sidebar {
@@ -577,4 +578,12 @@ table.dataTable thead .sorting:after {
 /*Quitar href de botones al imprimir*/
 @media print {
 	a[href]:after {content: none !important;}    
+}
+
+input[type=checkbox], input[type=radio] {
+    margin-top: 0;
+}
+
+.page-header{
+	margin-top: 15px;
 }

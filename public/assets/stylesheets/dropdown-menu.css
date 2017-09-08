@@ -80,6 +80,9 @@
 }
 
 @media (min-width: 768px) {
+  .dropdown-menu {
+    top:90%;
+  }
   ul.nav li:hover > ul.dropdown-menu {
     display: block;
   }
