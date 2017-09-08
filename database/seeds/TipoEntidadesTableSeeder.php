@@ -29,5 +29,11 @@ class TipoEntidadesTableSeeder extends Seeder
             'TIEN_DESCRIPCION' => 'Cajas de Compensacion',
             'TIEN_OBSERVACIONES' => 'Empresas orientadas a la Recreacion de los Empleados',
         ]);
+
+        TipoEntidad::create([
+            'TIEN_CODIGO' => 'AFP',
+            'TIEN_DESCRIPCION' => 'Fondos de Pensiones',
+            'TIEN_OBSERVACIONES' => 'Empresas administradoras de pensiones de los Empleados',
+        ]);
     }
 }
