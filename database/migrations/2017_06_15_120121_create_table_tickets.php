@@ -35,7 +35,7 @@ class CreateTableTickets extends Migration
                 ->nullable()
                 ->comment('fecha en que el jefe inmediato aprueba la solicitud del proceso disciplinario');
 
-            $table->date('TICK_FECHACIERE')
+            $table->date('TICK_FECHACIERRE')
                 ->nullable()
                 ->comment('fecha en que se cierra el caso');
 

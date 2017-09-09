@@ -13,7 +13,7 @@
 
     <tr>
 
-    <h1 class="page-header">Ticket No. {{ $tickets->TICK_ID }}</h1>
+    <h1 class="page-header">Ticket No. {{ $ticket->TICK_ID }}</h1>
 
   <div class="jumbotron text-center">
     <strong>Datos Generales</strong>
@@ -23,7 +23,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Fecha Creación:</strong>
-            {{ $tickets->TICK_FECHASOLICITUD }}
+            {{ $ticket->TICK_FECHASOLICITUD }}
             </div>
            
           </div>
@@ -32,7 +32,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Empleado:</strong>
-            {{ nombre_empleado($tickets -> contrato -> PROS_ID) }}
+            {{ nombre_empleado($ticket -> contrato -> PROS_ID) }}
             </div>
           </div>
         </li>
@@ -40,7 +40,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Estado:</strong>
-            {{ $tickets -> estadoticket -> ESTI_DESCRIPCION }}
+            {{ $ticket -> estadoticket -> ESTI_DESCRIPCION }}
             </div>
           </div>
         </li>
@@ -48,7 +48,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Tipo de Incidente:</strong>
-            {{ $tickets -> tipoincidente -> TIIN_DESCRIPCION }}
+            {{ $ticket -> tipoincidente -> TIIN_DESCRIPCION }}
             </div>
           </div>
         </li>
@@ -56,7 +56,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Prioridad:</strong>
-            {{ $tickets -> prioridad -> PRIO_DESCRIPCION }}
+            {{ $ticket -> prioridad -> PRIO_DESCRIPCION }}
             </div>
           </div>
         </li>
@@ -64,7 +64,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Categoría:</strong>
-            {{ $tickets -> categoria -> CATE_DESCRIPCION }}
+            {{ $ticket -> categoria -> CATE_DESCRIPCION }}
             </div>
           </div>
         </li>
@@ -72,7 +72,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Fecha del Evento:</strong>
-            {{ $tickets -> TICK_FECHAEVENTO }}
+            {{ $ticket -> TICK_FECHAEVENTO }}
             </div>
           </div>
         </li>
@@ -80,7 +80,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Estado Aprobación:</strong>
-            {{ $tickets -> estadoaprobacion -> ESAP_DESCRIPCION }}
+            {{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}
             </div>
           </div>
         </li>
@@ -96,7 +96,7 @@
       <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
       para ver el detalle del ticket haga click en el enlace <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> 
       <!-- Botón Ver (show) -->
-          <a class="btn btn-small btn-basic btn-xs" href="{{ URL::to('cnfg-tickets/tickets/' . $tickets->TICK_ID  ) }}" data-tooltip="tooltip" title="Ver">
+          <a class="btn btn-small btn-basic btn-xs" href="{{ URL::to('cnfg-tickets/tickets/' . $ticket->TICK_ID  ) }}" data-tooltip="tooltip" title="Ver">
             Ver Ticket
           </a>
       </strong>.

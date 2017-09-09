@@ -48,7 +48,7 @@
 				<td>{{ $ticket -> categoria -> CATE_DESCRIPCION }}</td>
 				<td>{{ $ticket -> TICK_FECHAEVENTO }}</td>
 				<td>{{ $ticket -> TICK_FECHASOLICITUD }}</td>
-				<td>{{ $ticket -> TICK_FECHACIERE }}</td>
+				<td>{{ $ticket -> TICK_FECHACIERRE }}</td>
 				<td>{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</td>
 				<td>{{ isset($ticket -> GRUP_ID) ? $ticket -> grupo -> GRUP_DESCRIPCION : '' }}</td>
 				<td>{{ isset($ticket -> TURN_ID) ? $ticket -> turno -> TURN_DESCRIPCION : '' }}</td>
