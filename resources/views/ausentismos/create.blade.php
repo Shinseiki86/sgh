@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 
-@section('page_heading', 'Nuev Ausentismo ')
+@section('page_heading', 'Nuevo Ausentismo ')
 
 @section('section')
 {{-- <div class="col-md-6 col-md-offset-4"> --}}
