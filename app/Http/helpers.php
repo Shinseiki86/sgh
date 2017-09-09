@@ -263,75 +263,15 @@ if (! function_exists('nombre_empleado')) {
 
 }
 
-if (! function_exists('get_jefe_prospecto')) {
-    /**
-     * Implode an array with the key and value pair giving
-     * a glue, a separator between pairs and the array
-     * to implode.
-     * @param string $glue The glue between key and value
-     * @param string $separator Separator between pairs
-     * @param array $array The array to implode
-     * @return string The imploded array
-     */
-    function get_jefe_prospecto($PROS_CEDULA) {
-
-        $prospecto = \SGH\Models\Prospecto::activos()->where('PROS_CEDULA', $PROS_CEDULA)->pluck('JEFE_ID');
-        $pros_jefe = null;
-
-        if ($prospecto != null) {
-            $pros_jefe = $prospecto[0];
-        }else{
-            $pros_jefe = null;
-        }
-        
-        return $pros_jefe;
-
-    }
-
-}
-
-if (! function_exists('get_email_jefe')) {
-    /**
-     * Implode an array with the key and value pair giving
-     * a glue, a separator between pairs and the array
-     * to implode.
-     * @param string $glue The glue between key and value
-     * @param string $separator Separator between pairs
-     * @param array $array The array to implode
-     * @return string The imploded array
-     */
-    function get_email_jefe($PROS_ID) {
-
-        $jefe = \SGH\Models\Prospecto::where('PROS_ID', $PROS_ID)->pluck('PROS_CORREO');
-
-
-        $jefe_email = null;
-
-        if ($jefe != null) {
-            $jefe_email = $jefe[0];
-        }else{
-            $jefe_email = "sghmasterpromo@gmail.com";
-        }
-        
-        return $jefe_email;
-
-    }
-
-}
 
 if (! function_exists('get_email_empleador')) {
     /**
-     * Implode an array with the key and value pair giving
-     * a glue, a separator between pairs and the array
-     * to implode.
-     * @param string $glue The glue between key and value
-     * @param string $separator Separator between pairs
-     * @param array $array The array to implode
-     * @return string The imploded array
+     * @param int $EMPL_ID 
+     * @return string
      */
     function get_email_empleador($EMPL_ID) {
 
-        $empleador = \SGH\Models\Empleador::where('EMPL_ID', $EMPL_ID)->pluck('EMPL_COREO');
+        $empleador = \SGH\Models\Empleador::where('EMPL_ID', $EMPL_ID)->pluck('EMPL_CORREO');
 
 
         $empl_email = null;
@@ -350,13 +290,8 @@ if (! function_exists('get_email_empleador')) {
 
 if (! function_exists('get_email_user')) {
     /**
-     * Implode an array with the key and value pair giving
-     * a glue, a separator between pairs and the array
-     * to implode.
-     * @param string $glue The glue between key and value
-     * @param string $separator Separator between pairs
-     * @param array $array The array to implode
-     * @return string The imploded array
+     * @param int $USER_ID 
+     * @return string
      */
     function get_email_user($USER_ID) {
 

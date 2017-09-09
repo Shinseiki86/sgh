@@ -26,7 +26,7 @@ class ProspectosTableSeeder extends Seeder
     	$prospecto->PROS_TELEFONO =  '4059682';
     	$prospecto->PROS_CELULAR =  '3177274520';
     	$prospecto->PROS_CORREO =  'rodriguez221293@outlook.com';
-    	$prospecto->PROS_CREADOPOR =  'SYSTEM';
+    	$prospecto->PROS_CREADOPOR =  'PRUEBAS';
     	$prospecto->save();
 
         $prospecto = new Prospecto;
@@ -41,11 +41,11 @@ class ProspectosTableSeeder extends Seeder
         $prospecto->PROS_TELEFONO =  '4059682';
         $prospecto->PROS_CELULAR =  '3177274520';
         $prospecto->PROS_CORREO =  'kfrodriguez6@misena.edu.co';
-        $prospecto->PROS_CREADOPOR =  'SYSTEM';
+        $prospecto->PROS_CREADOPOR =  'PRUEBAS';
         $prospecto->save();
 
         $prospecto = new Prospecto;
-        $prospecto->PROS_CEDULA = 1144173744;
+        $prospecto->PROS_CEDULA = 123456789;
         $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
         $prospecto->PROS_PRIMERNOMBRE =  'DIEGO';
         $prospecto->PROS_SEGUNDONOMBRE =  'ARMANDO';
@@ -55,8 +55,8 @@ class ProspectosTableSeeder extends Seeder
         $prospecto->PROS_DIRECCION =  'CALLE 72K # 8 N 75';
         $prospecto->PROS_TELEFONO =  '4059682';
         $prospecto->PROS_CELULAR =  '3177274520';
-        $prospecto->PROS_CORREO =  'coordinadornomina@aseoregional.com';
-        $prospecto->PROS_CREADOPOR =  'SYSTEM';
+        $prospecto->PROS_CORREO =  'shinseiki86@gmail.com';
+        $prospecto->PROS_CREADOPOR =  'PRUEBAS';
         $prospecto->save();
     }
 }

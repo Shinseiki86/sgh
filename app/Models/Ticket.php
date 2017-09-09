@@ -34,6 +34,7 @@ class Ticket extends ModelWithSoftDeletes
 		'TIIN_ID',
 		'TURN_ID',
 		'GRUP_ID',
+		'USER_id',
 	];
 
 	public function contrato()
@@ -89,5 +90,12 @@ class Ticket extends ModelWithSoftDeletes
 		$foreingKey = 'TURN_ID';
 		return $this->belongsTo(Turno::class, $foreingKey);
 	}
+
+	public function usuario()
+	{
+		$foreingKey = 'USER_id';
+		return $this->belongsTo(User::class, $foreingKey);
+	}
+
 
 }

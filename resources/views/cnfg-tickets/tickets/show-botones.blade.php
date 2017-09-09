@@ -8,7 +8,7 @@
 		{{-- ===================================================================
 		si el estado de aprobación es diferente del inicial cuando se crea el ticket
 		se esconden los botones --}}
-		@if($ticket->ESAP_ID != EstadoAprobacion::REVISION)
+		@if($ticket->ESAP_ID == EstadoAprobacion::REVISION)
 			<a href="#" class="btn btn-success" role="button" id="autorizarModal">
 				<span class="fa fa-check" aria-hidden="true"></span> Autorizar
 			</a>

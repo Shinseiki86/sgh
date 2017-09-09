@@ -13,6 +13,8 @@ alias art:cmpl="php artisan clear-compiled"
 alias seed="php artisan make:seeder"
 alias ejeseed="php artisan db:seed --class="
 
+alias art:jobs="art queue:work --sleep=3 --tries=3 --daemon"
+
 alias comp:da="composer dump-autoload"
 alias art:dump="php artisan dump autoload"
 alias art:cac="php artisan cache:clear"

@@ -121,7 +121,7 @@ class AuthController extends Controller
 	 */
 	public function register(Request $request)
 	{
-		parent::storeModel(User::class, 'auth.usuarios.index', ['roles'=>'roles_ids']);
+		parent::storeModel(['roles'=>'roles_ids']);
 	}
 
 	/**

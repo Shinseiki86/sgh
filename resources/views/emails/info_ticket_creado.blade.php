@@ -13,7 +13,7 @@
 
     <tr>
 
-    <h1 class="page-header">Ticket No. {{ $ticket->TICK_ID }}</h1>
+    <h1 class="page-header">Ticket No. {{ str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT) }}</h1>
 
   <div class="jumbotron text-center">
     <strong>Datos Generales</strong>

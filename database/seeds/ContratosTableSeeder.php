@@ -37,8 +37,31 @@ class ContratosTableSeeder extends Seeder
     	$contrato->CONT_OBSERVACIONES = 'CONTRATO DE PRUEBA';
     	$contrato->save();
 
+        $contrato = new Contrato;
+        $contrato->PROS_ID = 2;
+        $contrato->JEFE_ID = 1;
+        $contrato->CONT_CASOMEDICO = 'NO';
+        $contrato->CARG_ID = 1;
+        $contrato->CONT_FECHAINGRESO = '2017-07-01';
+        $contrato->CONT_FECHARETIRO = NULL;
+        $contrato->CONT_SALARIO = 1000000;
+        $contrato->CONT_VARIABLE = 500000;
+        $contrato->CONT_RODAJE = 350000;
+        $contrato->ESCO_ID = 1;
+        $contrato->MORE_ID = NULL;
+        $contrato->TICO_ID = 1;
+        $contrato->CLCO_ID = 1;
+        $contrato->EMPL_ID = 1;
+        $contrato->RIES_ID = 1;
+        $contrato->TIEM_ID = 1;
+        $contrato->CECO_ID = 1;
+        $contrato->CIUD_CONTRATA = 1004;
+        $contrato->CIUD_SERVICIO = 1004;
+        $contrato->CONT_OBSERVACIONES = 'CONTRATO DE PRUEBA';
+        $contrato->save();
+
     	$contrato = new Contrato;
-    	$contrato->PROS_ID = 2;
+    	$contrato->PROS_ID = 3;
     	$contrato->JEFE_ID = 1;
     	$contrato->CONT_CASOMEDICO = 'NO';
     	$contrato->CARG_ID = 1;

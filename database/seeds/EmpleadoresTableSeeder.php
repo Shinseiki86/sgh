@@ -23,7 +23,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'TOMAS SALVADOR MENDOZA PARDO';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOCALI';
         $empleador->EMPL_DIRECCION = 'CALLE 70 E BIS # 7-34';
-        $empleador->EMPL_COREO = 'kfrodriguez6@misena.edu.co';
+        $empleador->EMPL_CORREO = 'kfrodriguez6@misena.edu.co';
     	$empleador->EMPL_OBSERVACIONES =  'EMPLEADOR DE PRUEBA';
     	$empleador->EMPL_CREADOPOR =  'SYSTEM';
     	$empleador->save();
@@ -37,7 +37,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'TOMAS SALVADOR MENDOZA PARDO';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOVALLE';
         $empleador->EMPL_DIRECCION = 'CALLE 70 E BIS # 7-34';
-        $empleador->EMPL_COREO = 'kfrodriguez6@misena.edu.co';
+        $empleador->EMPL_CORREO = 'kfrodriguez6@misena.edu.co';
     	$empleador->EMPL_OBSERVACIONES =  'EMPLEADOR DE PRUEBA';
     	$empleador->EMPL_CREADOPOR =  'SYSTEM';
     	$empleador->save();

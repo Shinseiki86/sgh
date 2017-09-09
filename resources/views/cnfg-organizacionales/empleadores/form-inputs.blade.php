@@ -17,6 +17,6 @@
 
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'CIUD_CEDULA', 'label'=>'Ciudad de Expedición', 'data'=>$arrCiudades, 'options'=>['data-live-search'=>'true']])
 
-@include('widgets.forms.input', ['type'=>'email', 'name'=>'EMPL_COREO', 'label'=>'Correo electrónico responsable G.H'])
+@include('widgets.forms.input', ['type'=>'email', 'name'=>'EMPL_CORREO', 'label'=>'Correo electrónico responsable G.H'])
 
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'EMPL_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])

@@ -50,6 +50,14 @@ class User extends Authenticatable
 		return $this->belongsToMany(Role::class);
 	}
 
+
+	public function tickets()
+	{
+		$foreingKey = 'USER_id';
+		return $this->hasMany(Ticket::class, $foreingKey);
+	}
+
+
     /**
      * Perform the actual delete query on this model instance.
      * 

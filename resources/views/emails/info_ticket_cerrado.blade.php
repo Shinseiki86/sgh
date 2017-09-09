@@ -13,7 +13,7 @@
 
     <tr>
 
-    <h1 class="page-header">Ticket No. {{ $tickets->TICK_ID }}</h1>
+    <h1 class="page-header">Ticket No. {{ str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT) }}</h1>
 
   <div class="jumbotron text-center">
     <strong>Datos Generales</strong>
@@ -23,7 +23,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Decisión Administrativa:</strong>
-            {{ $tickets-> sancion -> SANC_DESCRIPCION }}
+            {{ $ticket-> sancion -> SANC_DESCRIPCION }}
             </div>
            
           </div>
@@ -32,7 +32,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Observaciones:</strong>
-            {{ $tickets-> TICK_CONCLUSION }}
+            {{ $ticket-> TICK_CONCLUSION }}
             </div>
            
           </div>
@@ -41,7 +41,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Fecha Creación:</strong>
-            {{ $tickets->TICK_FECHASOLICITUD }}
+            {{ $ticket->TICK_FECHASOLICITUD }}
             </div>
            
           </div>
@@ -50,7 +50,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Empleado:</strong>
-            {{ nombre_empleado($tickets -> contrato -> PROS_ID) }}
+            {{ nombre_empleado($ticket -> contrato -> PROS_ID) }}
             </div>
           </div>
         </li>
@@ -58,7 +58,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Estado:</strong>
-            {{ $tickets -> estadoticket -> ESTI_DESCRIPCION }}
+            {{ $ticket -> estadoticket -> ESTI_DESCRIPCION }}
             </div>
           </div>
         </li>
@@ -66,7 +66,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Tipo de Incidente:</strong>
-            {{ $tickets -> tipoincidente -> TIIN_DESCRIPCION }}
+            {{ $ticket -> tipoincidente -> TIIN_DESCRIPCION }}
             </div>
           </div>
         </li>
@@ -74,7 +74,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Fecha del Evento:</strong>
-            {{ $tickets -> TICK_FECHAEVENTO }}
+            {{ $ticket -> TICK_FECHAEVENTO }}
             </div>
           </div>
         </li>
@@ -94,7 +94,7 @@
       <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
       para ver el detalle del ticket haga click en el enlace <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> 
       <!-- Botón Ver (show) -->
-          <a class="btn btn-small btn-basic btn-xs" href="{{ URL::to('cnfg-tickets/tickets/' . $tickets->TICK_ID  ) }}" data-tooltip="tooltip" title="Ver">
+          <a class="btn btn-small btn-basic btn-xs" href="{{ URL::to('cnfg-tickets/tickets/' . $ticket->TICK_ID  ) }}" data-tooltip="tooltip" title="Ver">
             Ver Ticket
           </a>
       </strong>.

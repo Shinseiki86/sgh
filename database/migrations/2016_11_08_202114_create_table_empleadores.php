@@ -48,7 +48,7 @@ class CreateTableEmpleadores extends Migration
              $table->unsignedInteger('CIUD_DOMICILIO')
                 ->comment('ciudad de domicilio del empleador.');
 
-            $table->string('EMPL_COREO', 100)
+            $table->string('EMPL_CORREO', 100)
                 ->nullable()
                 ->comment('correo electronico del encargado en el empleador');
 

@@ -44,7 +44,7 @@
 				<td>{{ $empleador -> ciudad_expedicion -> CIUD_NOMBRE }}</td>
 				<td>{{ $empleador -> EMPL_DIRECCION }}</td>
 				<td>{{ $empleador -> ciudad_domicilio -> CIUD_NOMBRE }}</td>
-				<td>{{ $empleador -> EMPL_COREO }}</td>
+				<td>{{ $empleador -> EMPL_CORREO }}</td>
 				<td>{{ $empleador -> EMPL_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->

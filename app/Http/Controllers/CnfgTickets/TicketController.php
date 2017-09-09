@@ -11,6 +11,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Jobs\SendEmailNewTicket;
+use SGH\Jobs\SendEmailAuthorizedTicket;
 
 use SGH\Models\Ticket;
 use SGH\Models\EstadoTicket;
@@ -165,12 +166,8 @@ class TicketController extends Controller
 				$file->move($destinationPath, $data['TICK_ARCHIVO']);
 			}
 
-			/*obtiene el TICK_ID para buscar el ticket
-			$TICK_ID = $ticket->TICK_ID;
-			$tickets = Ticket::findOrFail($TICK_ID);*/
-
 			//===================================================================================
-			//Bloque para envío de email
+			//Job para envío de notificación al correo
 			$this->dispatch(new SendEmailNewTicket($ticket));
 			//===================================================================================
 
@@ -187,26 +184,23 @@ class TicketController extends Controller
 	public function autorizarTicket($TICK_ID){
 
 		//fecha actual
-		$fecactual = Carbon::now();
+		$currentDate = Carbon::now();
 
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 
-		$ticket->ESAP_ID = EstadoAprobacion::ENVIADO; //estado ENVIADO A GESTIÓN HUMANA
-		$ticket->TICK_FECHAAPROBACION = $fecactual;
-		$ticket->save();
+		// $ticket->update([
+		// 	'ESAP_ID' => EstadoAprobacion::ENVIADO, //estado ENVIADO A GESTIÓN HUMANA
+		// 	'TICK_FECHAAPROBACION' => $currentDate
+		// ]);
 
 		//===================================================================================
-		// $empl_id = $ticket->contrato->empleador->EMPL_ID;
-		// $user_id = $ticket->USER_id;
-		// //Bloque para envío de email
-		// $subject = "Ticket Autorizado";
-		// $this->sendEmailAutorizacion($ticket, 'emails.info_ticket_autorizado', $subject, $empl_id, $user_id);
+		//Job para envío de notificación al correo
+		$this->dispatch(new SendEmailAuthorizedTicket($ticket, \Auth::user()));
 		//===================================================================================
 
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
 		return redirect()->route($this->route.'.index');
-
 	}
 
 	public function rechazarTicket($TICK_ID){
@@ -214,15 +208,15 @@ class TicketController extends Controller
 		$data = request()->all();
 
     	//fecha actual
-		$fechactual = Carbon::now();
+		$currentDate = Carbon::now();
 
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 		$ticket->update([
 			'ESAP_ID' => EstadoAprobacion::RECHAZADO,
 			'ESTI_ID' => EstadoTicket::CERRADO,
-			'TICK_FECHAAPROBACION' => $fechactual,
-			'TICK_FECHACIERRE' => $fechactual,
+			'TICK_FECHAAPROBACION' => $currentDate,
+			'TICK_FECHACIERRE' => $currentDate,
 			'TICK_MOTIVORECHAZO' => $data['TICK_MOTIVORECHAZO']
 		]);
 

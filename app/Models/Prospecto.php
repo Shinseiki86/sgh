@@ -37,14 +37,11 @@ class Prospecto extends ModelWithSoftDeletes
 
 	public function scopeActivos($query)
 	{
-
 		$query = $query 
 			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
 			->where('ESCO_ID',1);
 
-
 		return $query;
-
 	}
 
 	public function contratos()
@@ -52,5 +49,12 @@ class Prospecto extends ModelWithSoftDeletes
 		$foreingKey = 'PROS_ID';
 		return $this->hasMany(Contrato::class, $foreingKey);
 	}
+
+	public static function getJefe($PROS_CEDULA)
+	{
+		$model = new static;
+        $prosJefe = $model->activos()->where('PROS_CEDULA', $PROS_CEDULA)->first();
+        return $prosJefe;
+    }
 
 }

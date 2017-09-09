@@ -6,6 +6,6 @@
 
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'EMPL_ID', 'label'=>'Empresa', 'data'=>$arrEmpleadores, 'options'=>['data-live-search'=>'true']])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'PROC_ids', 'label'=>'Procesos', 'data'=>$arrProcesos, 'multiple'=>true, 'options'=>['data-live-search'=>'true']])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'PROC_ids', 'label'=>'Procesos', 'data'=>$arrProcesos, 'multiple'=>true,])
 
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'GERE_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
