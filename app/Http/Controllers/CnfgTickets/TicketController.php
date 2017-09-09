@@ -168,7 +168,8 @@ class TicketController extends Controller
 
 			//===================================================================================
 			//Job para envío de notificación al correo
-			$this->dispatch(new SendEmailNewTicket($ticket));
+			$job = (new SendEmailNewTicket($ticket))->onQueue('emails');
+			$this->dispatch($job);
 			//===================================================================================
 
 			// redirecciona al index de controlador
@@ -189,14 +190,15 @@ class TicketController extends Controller
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 
-		// $ticket->update([
-		// 	'ESAP_ID' => EstadoAprobacion::ENVIADO, //estado ENVIADO A GESTIÓN HUMANA
-		// 	'TICK_FECHAAPROBACION' => $currentDate
-		// ]);
+		$ticket->update([
+			'ESAP_ID' => EstadoAprobacion::ENVIADO, //estado ENVIADO A GESTIÓN HUMANA
+			'TICK_FECHAAPROBACION' => $currentDate
+		]);
 
 		//===================================================================================
 		//Job para envío de notificación al correo
-		$this->dispatch(new SendEmailAuthorizedTicket($ticket, \Auth::user()));
+		$job = (new SendEmailAuthorizedTicket($ticket, \Auth::user()))->onQueue('emails');
+		$this->dispatch($job);
 		//===================================================================================
 
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
@@ -221,10 +223,9 @@ class TicketController extends Controller
 		]);
 
 		//===================================================================================
-		// $user_id = $ticket->USER_id;
-		// //Bloque para envío de email
-		// $subject = "Ticket Rechazado";
-		// $this->sendEmailRechazo($ticket, 'emails.info_ticket_rechazado', $subject, $user_id);
+		//Job para envío de notificación al correo
+		$job = (new SendEmailRejectedTicket($ticket, \Auth::user()))->onQueue('emails');
+		$this->dispatch($job);
 		//===================================================================================
 
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazado exitosamente.', 'success' );
@@ -247,8 +248,8 @@ class TicketController extends Controller
 		]);
 
 		//===================================================================================
-		//Bloque para envío de email
-		// $this->sendEmailCerrar($ticket, 'emails.info_ticket_cerrado', 'Ticket Cerrado por G.H', $ticket->USER_id);
+		$job = (new SendEmailClosedTicket($ticket, \Auth::user()))->onQueue('emails');
+		$this->dispatch($job);
 		//===================================================================================
 
 		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );

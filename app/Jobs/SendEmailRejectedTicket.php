@@ -12,22 +12,22 @@ use Mail;
 use SGH\Models\User;
 use SGH\Models\Prospecto;
 
-class SendEmailAuthorizedTicket extends Job implements ShouldQueue
+class SendEmailRejectedTicket extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
     private $ticket;
-    private $userAuthorizes;
+    private $userRejects;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($ticket, $userAuthorizes)
+    public function __construct($ticket, $userRejects)
     {
         $this->ticket = $ticket;
-        $this->userAuthorizes = $userAuthorizes;
+        $this->userRejects = $userRejects;
     }
 
     /**
@@ -38,20 +38,20 @@ class SendEmailAuthorizedTicket extends Job implements ShouldQueue
     public function handle()
     {
         $ticket = $this->ticket;
-        $userAuthorizes   = $this->userAuthorizes;
-        $view   = 'emails.info_ticket_autorizado';
+        $userRejects = $this->userRejects;
+        $view   = 'emails.info_ticket_rechazado';
 
         //if ($this->attempts() < 3) {
-            Mail::send($view, compact('ticket'), function($message) use($ticket, $userAuthorizes) {
+            Mail::send($view, compact('ticket'), function($message) use($ticket, $userRejects) {
                 //Remitente
                 $message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
                 //Asunto
                 $TICK_ID = str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT);
-                $message->subject('Ticket '.$TICK_ID.' autorizado');
+                $message->subject('Ticket '.$TICK_ID.' rechazado');
 
-                //Correo al usuario que autorizó el ticket y al responsable de GH
+                //Correo al usuario que rechazó el ticket y al responsable de GH
                 $empl_email = $ticket->contrato->empleador->EMPL_CORREO;
-                $message->to([ $userAuthorizes->email, $empl_email ]);
+                $message->to([ $userRejects->email, $empl_email ]);
 
                 //Copia al usuario que creó el ticket y al jefe
                 $owner = $ticket->usuario;
@@ -61,4 +61,5 @@ class SendEmailAuthorizedTicket extends Job implements ShouldQueue
         //}
 
     }
+
 }
