@@ -18,9 +18,7 @@
 						   }
 						   $('#{{$selectHijo}}').html(" ");
 						   $('#{{$selectHijo}}').append(op);
-						   $('#{{$selectHijo}}').selectpicker('refresh');
 						}
-						
 					},
 					error:function(){
 						alert('ha ocurrido un error');
