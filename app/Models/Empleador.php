@@ -28,6 +28,7 @@ class Empleador extends ModelWithSoftDeletes
 		'EMPL_CEDULAREPRESENTANTE',
 		'CIUD_CEDULA',
 		'CIUD_DOMICILIO',
+		'PROS_ID'
 	];
 
 	public function ciudad_expedicion()
@@ -40,6 +41,12 @@ class Empleador extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'CIUD_DOMICILIO';
 		return $this->belongsTo(Ciudad::class, $foreingKey);
+	}
+
+	public function prospecto()
+	{
+		$foreingKey = 'PROS_ID';
+		return $this->belongsTo(Prospecto::class, $foreingKey);
 	}
 
 	public function turnos()

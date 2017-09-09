@@ -65,7 +65,16 @@ class EmpleadorController extends Controller
 	{
 		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
-		return view($this->route.'.create', compact('arrCiudades'));
+		//Se crea un array con los prospectos disponibles
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+				'PROS_CEDULA',
+			], 'PROS_NOMBRESAPELLIDOS'));
+
+		return view($this->route.'.create', compact('arrCiudades','arrProspectos'));
 	}
 
 	/**
@@ -92,8 +101,17 @@ class EmpleadorController extends Controller
 
 		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
+		//Se crea un array con los prospectos disponibles
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+				'PROS_CEDULA',
+			], 'PROS_NOMBRESAPELLIDOS'));
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('empleador','arrCiudades'));
+		return view($this->route.'.edit', compact('empleador','arrCiudades','arrProspectos'));
 	}
 
 

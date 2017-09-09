@@ -28,7 +28,8 @@
 				<th class="col-md-3">Ciudad de Expedición</th>
 				<th class="col-md-3">Dirección</th>
 				<th class="col-md-3">Ciudad</th>
-				<th class="col-md-3">Email Responsable G.H</th>
+				<th class="col-md-3">Email Contacto</th>
+				<th class="col-md-3">Responsable G.H</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
 			</tr>
@@ -45,6 +46,7 @@
 				<td>{{ $empleador -> EMPL_DIRECCION }}</td>
 				<td>{{ $empleador -> ciudad_domicilio -> CIUD_NOMBRE }}</td>
 				<td>{{ $empleador -> EMPL_CORREO }}</td>
+				<td>{{ nombre_empleado($empleador -> prospecto -> PROS_ID) }}</td>
 				<td>{{ $empleador -> EMPL_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->

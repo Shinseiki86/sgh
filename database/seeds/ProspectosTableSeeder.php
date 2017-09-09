@@ -58,5 +58,20 @@ class ProspectosTableSeeder extends Seeder
         $prospecto->PROS_CORREO =  'shinseiki86@gmail.com';
         $prospecto->PROS_CREADOPOR =  'PRUEBAS';
         $prospecto->save();
+
+        $prospecto = new Prospecto;
+        $prospecto->PROS_CEDULA = 94378421;
+        $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
+        $prospecto->PROS_PRIMERNOMBRE =  'MARIA';
+        $prospecto->PROS_SEGUNDONOMBRE =  'ISABELLA';
+        $prospecto->PROS_PRIMERAPELLIDO =  'RODRIGUEZ';
+        $prospecto->PROS_SEGUNDOAPELLIDO =  'COLLAZOS';
+        $prospecto->PROS_SEXO =  'F';
+        $prospecto->PROS_DIRECCION =  'CALLE 72K # 8 N 76';
+        $prospecto->PROS_TELEFONO =  '4059682';
+        $prospecto->PROS_CELULAR =  '3177274520';
+        $prospecto->PROS_CORREO =  'krodriguez93@outlook.com';
+        $prospecto->PROS_CREADOPOR =  'PRUEBAS';
+        $prospecto->save();
     }
 }

@@ -20,9 +20,11 @@ class DatabaseSeeder extends Seeder
         $this->call(PaisesTableSeeder::class);
         $this->call(DepartamentosTableSeeder::class);
         $this->call(CiudadesTableSeeder::class);
-        $this->call(EmpleadoresTableSeeder::class);
-        $this->call(MotivosRetirosTableSeeder::class);
         $this->call(ProspectosTableSeeder::class);
+        $this->call(EmpleadoresTableSeeder::class);
+        $this->call(GruposTableSeeder::class);
+        $this->call(TurnosTableSeeder::class);
+        $this->call(MotivosRetirosTableSeeder::class);
         $this->call(ClasesContratosTableSeeder::class);
         $this->call(GerenciasTableSeeder::class);
         $this->call(ProcesosTableSeeder::class);
@@ -34,8 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PrioridadesTableSeeder::class);
         $this->call(CategoriasTableSeeder::class);
         $this->call(TiposIncidentesTableSeeder::class);
-        $this->call(GruposTableSeeder::class);
-        $this->call(TurnosTableSeeder::class);
         $this->call(ContratosTableSeeder::class);
         $this->call(EstadosAprobacionesTableSeeder::class);
         $this->call(SancionesTableSeeder::class);         

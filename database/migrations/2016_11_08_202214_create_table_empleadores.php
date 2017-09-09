@@ -45,12 +45,16 @@ class CreateTableEmpleadores extends Migration
             $table->string('EMPL_DIRECCION', 300)
                 ->comment('dirección de la empresa');
 
-             $table->unsignedInteger('CIUD_DOMICILIO')
+            $table->unsignedInteger('CIUD_DOMICILIO')
                 ->comment('ciudad de domicilio del empleador.');
 
             $table->string('EMPL_CORREO', 100)
                 ->nullable()
                 ->comment('correo electronico del encargado en el empleador');
+
+            $table->unsignedInteger('PROS_ID')
+                ->nullable()
+                ->comment('persona encargada del manejo de gestión humana del empleador.');
 
             $table->string('EMPL_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();
@@ -79,6 +83,12 @@ class CreateTableEmpleadores extends Migration
             $table->foreign('CIUD_DOMICILIO')
                 ->references('CIUD_ID')
                 ->on('CIUDADES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('PROS_ID')
+                ->references('PROS_ID')
+                ->on('PROSPECTOS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
