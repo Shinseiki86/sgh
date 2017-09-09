@@ -99,6 +99,7 @@ Route::resource('conceptoausencias', 'ConceptoAusenciaController');
 Route::resource('tipoausentismos', 'TipoAusentismoController');
 
 Route::resource('ausentismos', 'AusentismoController');
+Route::get('/buscaContrato','AusentismoController@buscaContrato');
 Route::get('/buscaDx', 'AusentismoController@buscaDx');
 Route::get('/autocomplete',array('as'=>'autocomplete','uses'=>'AusentismoController@autocomplete'));
 

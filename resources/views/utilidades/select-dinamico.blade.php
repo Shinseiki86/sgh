@@ -9,13 +9,18 @@
 					url:'{!!URL::to($url)!!}',
 					data:{'{{$selectPadre}}':cat_id},
 					success:function(data){;
-						op+='<option value="0" selected disabled>{{isset($prepend)?$prepend:''}}</option>';
-						for(var i=0;i<data.length;i++){
-						op+='<option value="'+data[i].{{$idBusqueda}}+'">'+data[i].{{$nombreBusqueda}}+'</option>';
-					   }
-					   $('#{{$selectHijo}}').html(" ");
-					   $('#{{$selectHijo}}').append(op);
-					   $('#{{$selectHijo}}').selectpicker('refresh');
+						if (data.length==0) {
+							alert('No Se Encontro Ningun Resultado');
+						} else {
+							op+='<option value="0" selected disabled>{{isset($prepend)?$prepend:''}}</option>';
+							for(var i=0;i<data.length;i++){
+							op+='<option value="'+data[i].{{$idBusqueda}}+'">'+data[i].{{$nombreBusqueda}}+'</option>';
+						   }
+						   $('#{{$selectHijo}}').html(" ");
+						   $('#{{$selectHijo}}').append(op);
+						   $('#{{$selectHijo}}').selectpicker('refresh');
+						}
+						
 					},
 					error:function(){
 						alert('ha ocurrido un error');

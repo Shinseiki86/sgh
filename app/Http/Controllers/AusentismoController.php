@@ -4,23 +4,29 @@ use Validator;
 use SGH\Http\Requests;
 use Illuminate\Http\Request;
 use Flash;
-use Session;
-use Redirect;
 use SGH\Http\Controllers\Controller;
 use Response;
 use SGH\Models\Ausentismo;
 use SGH\Models\Diagnostico;
+use SGH\Models\Prospecto;
+use SGH\Models\ConceptoAusencia;
+use SGH\Models\Entidad;
 use Yajra\Datatables\Facades\Datatables;
+
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Redirector;
 
 class AusentismoController extends Controller
 {
 
-	private $groupUrl='';
-	private $routeIndex = 'ausentismos.index';
+
+	protected $route='ausentismos';
+	protected $class = Ausentismo::class;
 	public function __construct()
-	{
-		$this->routeIndex=$this->groupUrl .'ausentismos.index';
-		$this->middleware('auth');
+	{	
+		
 	}
 
 	/**
@@ -44,7 +50,7 @@ class AusentismoController extends Controller
 	public function index()
 	{
 		$ausentismos = Ausentismo::all();
-		return view('ausentismos/index', compact('ausentismos'));
+		return view($this->route.'.index', compact('ausentismos'));
 		
 	}
 
@@ -54,17 +60,33 @@ class AusentismoController extends Controller
 		return response()->json($data);
 	}
 
-	public function autocomplete(Request $request)
-	{
-		$term=$request->term;
-		$data=Diagnostico::where('DIAG_DESCRIPCION','LIKE','%'.$term.'%')
-		->take(10)
-		->get();
-		$results=array();
-		foreach ($data as $key => $v) {
-			$results[]=['id'=>$v->DIAG_ID,'value'=>$v->DIAG_DESCRIPCION,'cod'=>$v->DIAG_CODIGO];
-		}
-		return response()->json($results);
+	public function autoComplete(Request $request) {
+	    $term = $request->term;
+	    $data=Diagnostico::where('DIAG_DESCRIPCION','LIKE','%'.$term.'%')
+	 		->take(10)
+	 		->get();
+	    $results=array();
+	    foreach ($data as $v) {
+	            $results[]=['id'=>$v->DIAG_ID,'value'=>$v->DIAG_DESCRIPCION,'cod'=>$v->DIAG_CODIGO];
+	    }
+	    if(count($results))
+	         return $results;
+	    else
+	        return ['value'=>'No se encontró ningun Resultado','id'=>''];
+	}
+
+	public function buscaContrato(Request $request)
+	{ 
+		$data = Prospecto::join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
+						->where([
+						    ['PROSPECTOS.PROS_ID', '=', $request->PROSPECTO],
+						    ['CONTRATOS.ESCO_ID', '=', '1'],
+						])
+						->select(['PROSPECTOS.PROS_ID as PROSP',
+							'CONT_FECHAINGRESO',
+							'ESCO_ID',
+						])->get();
+	    return response()->json($data);
 	}
 
 	
@@ -76,8 +98,26 @@ class AusentismoController extends Controller
 	 */
 	public function create()
 	{
-		return view('ausentismos.create');
+		//Se crea un array con los prospectos disponibles
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+				'PROS_CEDULA',
+			], 'PROS_NOMBRESAPELLIDOS'));
+
+		//Se crea un array con los conceptos de Ausentismos
+		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
+		
+		//Se crea un array con las Entidades Responsables
+		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
+
+
+		return view($this->route.'.create',compact('arrProspectos','arrConceptoAusentismo','arrEntidad'));
 	}
+
+	
 
 	/**
 	 * Store a newly created Ausentismo in storage.
@@ -88,7 +128,7 @@ class AusentismoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Ausentismo::class,  $this->routeIndex);
+		parent::storeModel();
 	}
 
 	/**
@@ -110,7 +150,22 @@ class AusentismoController extends Controller
 	 */
 	public function edit(Ausentismo $ausentismos)
 	{
-		return view('ausentismos.edit',['ausentismo'=>$ausentismos]);
+		//Se crea un array con los prospectos disponibles
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+				'PROS_CEDULA',
+			], 'PROS_NOMBRESAPELLIDOS'));
+
+		//Se crea un array con los conceptos de Ausentismos
+		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
+		
+		//Se crea un array con las Entidades Responsables
+		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
+
+		return view($this->route.'.edit',['ausentismo'=>$ausentismos],compact('arrProspectos','arrConceptoAusentismo','arrEntidad'));
 	}
 
 	/**
@@ -123,7 +178,7 @@ class AusentismoController extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel($ID, Ausentismo::class,  $this->routeIndex);
+		parent::updateModel($ID);
 	}
 
 	/**
@@ -135,6 +190,6 @@ class AusentismoController extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel($ID, Ausentismo::class, $this->routeIndex);
+		parent::destroyModel($ID);
 	}
 }
