@@ -256,6 +256,9 @@ if (! function_exists('nombre_empleado')) {
             $nombre = $prospecto->PROS_PRIMERNOMBRE . " " .
             $prospecto->PROS_PRIMERAPELLIDO . " " . $prospecto->PROS_SEGUNDOAPELLIDO;
         }
+        if($prospecto->PROS_SEGUNDONOMBRE == null && $prospecto->PROS_SEGUNDOAPELLIDO == null){
+            $nombre = $prospecto->PROS_PRIMERNOMBRE . " " . $prospecto->PROS_PRIMERAPELLIDO ;
+        }
         
         return strtoupper($nombre);
 

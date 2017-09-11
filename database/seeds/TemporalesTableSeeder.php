@@ -19,14 +19,16 @@ class TemporalesTableSeeder extends Seeder
         $temporal->TEMP_NOMBRECOMERCIAL = 'PROSERVIS';
         $temporal->TEMP_DIRECCION = 'CALLE 39 E BIS 89';
         $temporal->TEMP_OBSERVACIONES =  'TEMPORAL DE PRUEBA';
+        $temporal->PROS_ID =  5;
         $temporal->TEMP_CREADOPOR =  'SYSTEM';
         $temporal->save();
 
         $temporal = new Temporal;
-        $temporal->TEMP_RAZONSOCIAL = 'ATIEMPO TEMPORALES SAS';
+        $temporal->TEMP_RAZONSOCIAL = 'ATIEMPO SAS';
         $temporal->TEMP_NOMBRECOMERCIAL = 'ATIEMPO';
         $temporal->TEMP_DIRECCION = 'CALLE 39 E BIS 89';
         $temporal->TEMP_OBSERVACIONES =  'TEMPORAL DE PRUEBA';
+        $temporal->PROS_ID =  6;
         $temporal->TEMP_CREADOPOR =  'SYSTEM';
         $temporal->save();
 

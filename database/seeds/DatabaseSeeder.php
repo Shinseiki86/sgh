@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
         $this->call(CnosTableSeeder::class);
         $this->call(CargosTableSeeder::class);
         $this->call(TiposContratosTableSeeder::class);
-        $this->call(TemporalesTableSeeder::class);
         $this->call(PaisesTableSeeder::class);
         $this->call(DepartamentosTableSeeder::class);
         $this->call(CiudadesTableSeeder::class);
         $this->call(ProspectosTableSeeder::class);
         $this->call(EmpleadoresTableSeeder::class);
+        $this->call(TemporalesTableSeeder::class);
         $this->call(GruposTableSeeder::class);
         $this->call(TurnosTableSeeder::class);
         $this->call(MotivosRetirosTableSeeder::class);

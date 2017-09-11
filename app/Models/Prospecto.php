@@ -56,6 +56,12 @@ class Prospecto extends ModelWithSoftDeletes
 		return $this->hasMany(Empleador::class, $foreingKey);
 	}
 
+	public function temporales()
+	{
+		$foreingKey = 'PROS_ID';
+		return $this->hasMany(Temporal::class, $foreingKey);
+	}
+
 	public static function getJefe($PROS_CEDULA)
 	{
 		$model = new static;

@@ -21,8 +21,9 @@
 		<thead>
 			<tr>
 				<th class="col-md-3">Razón Social</th>
-				<th class="col-md-4">Nombre Comercial</th>
+				<th class="col-md-3">Nombre Comercial</th>
 				<th class="col-md-3">Dirección</th>
+				<th class="col-md-3">Responsable</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
 			</tr>
@@ -34,6 +35,7 @@
 				<td>{{ $temporal -> TEMP_RAZONSOCIAL }}</td>
 				<td>{{ $temporal -> TEMP_NOMBRECOMERCIAL }}</td>
 				<td>{{ $temporal -> TEMP_DIRECCION }}</td>
+				<td>{{ nombre_empleado( $temporal -> PROS_ID ) }}</td>
 				<td>{{ $temporal -> TEMP_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->

@@ -31,6 +31,10 @@ class CreateTableTemporales extends Migration
             $table->string('TEMP_DIRECCION', 300)
                 ->comment('dirección de la empresa');
 
+            $table->unsignedInteger('PROS_ID')
+                ->nullable()
+                ->comment('persona encargada del manejo de gestión humana de la temporal.');
+
             $table->string('TEMP_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();
             
@@ -47,6 +51,14 @@ class CreateTableTemporales extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('TEMP_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
+
+
+            //Relaciones
+            $table->foreign('PROS_ID')
+                ->references('PROS_ID')
+                ->on('PROSPECTOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
         });
         

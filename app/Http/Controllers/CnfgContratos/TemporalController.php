@@ -59,7 +59,16 @@ class TemporalController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		//Se crea un array con los prospectos disponibles
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+				'PROS_CEDULA',
+			], 'PROS_NOMBRESAPELLIDOS'));
+
+		return view($this->route.'.create', compact('arrProspectos'));
 	}
 
 	/**
@@ -84,8 +93,17 @@ class TemporalController extends Controller
 		// Se obtiene el registro
 		$temporal = Temporal::findOrFail($TEMP_ID);
 
+		//Se crea un array con los prospectos disponibles
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+				'PROS_CEDULA',
+			], 'PROS_NOMBRESAPELLIDOS'));
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('temporal'));
+		return view($this->route.'.edit', compact('temporal','arrProspectos'));
 	}
 
 
