@@ -24,7 +24,6 @@ class CreateTableGerencias extends Migration
                 ->comment('Valor autonumérico, llave primaria de la tabla gerencias.');
 
             $table->string('GERE_DESCRIPCION', 100)
-                ->unique()
                 ->comment('descripción de la gerencia, ej: gerencia de ventas, gerencia de mercadeo');
 
             $table->integer('EMPL_ID')->unsigned();
