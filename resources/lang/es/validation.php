@@ -186,6 +186,7 @@ return [
         'CONT_OBSERVACIONES' => 'Observaciones',
         'CONT_FECHAINGRESO' => 'Fecha de Ingreso',
         'CARG_ID' => 'Cargo',
+        'GERE_ID' => 'Gerencia',
         'CECO_ID' => 'Centro de costo',
         'CLCO_ID' => 'Clase de contrato',
         'CONT_CASOMEDICO' => '¿R.M?',

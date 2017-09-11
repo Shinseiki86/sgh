@@ -25,6 +25,9 @@ class CreateTablePlantaslaborales extends Migration
             $table->integer('EMPL_ID')->unsigned()
                 ->comment('Empleador el cual tiene la planta autorizada');
 
+            $table->integer('GERE_ID')->unsigned()
+                ->comment('Gerencia en la cual tiene la planta autorizada');
+
             $table->integer('CARG_ID')->unsigned()
                 ->comment('Cargo asociado al empleador el cual tiene el cargo autorizado');
 
@@ -52,6 +55,12 @@ class CreateTablePlantaslaborales extends Migration
             $table->foreign('EMPL_ID')
                 ->references('EMPL_ID')
                 ->on('EMPLEADORES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+             $table->foreign('GERE_ID')
+                ->references('GERE_ID')
+                ->on('GERENCIAS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

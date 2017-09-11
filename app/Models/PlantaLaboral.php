@@ -19,6 +19,7 @@ class PlantaLaboral extends ModelWithSoftDeletes
 
 	protected $fillable = [
 		'EMPL_ID',
+		'GERE_ID',
 		'CARG_ID',
 		'PALA_CANTIDAD',
 	];
@@ -33,6 +34,12 @@ class PlantaLaboral extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'CARG_ID';
 		return $this->belongsTo(Cargo::class, $foreingKey);
+	}
+
+	public function gerencia()
+	{
+		$foreingKey = 'GERE_ID';
+		return $this->belongsTo(Gerencia::class, $foreingKey);
 	}
 
 }

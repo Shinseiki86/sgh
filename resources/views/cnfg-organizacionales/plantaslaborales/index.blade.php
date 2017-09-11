@@ -21,6 +21,7 @@
 		<thead>
 			<tr>
 				<th class="col-md-4">Empleador</th>
+				<th class="col-md-4">Gerencia</th>
 				<th class="col-md-4">Cargo</th>
 				<th class="col-md-4">Cantidad</th>
 				<th class="hidden-xs col-md-1">Creado</th>
@@ -31,6 +32,7 @@
 			@foreach($plantaslaborales as $plantalaboral)
 			<tr>
 				<td>{{ $plantalaboral -> empleador -> EMPL_RAZONSOCIAL }}</td>
+				<td>{{ $plantalaboral -> gerencia -> GERE_DESCRIPCION }}</td>
 				<td>{{ $plantalaboral -> cargo -> CARG_DESCRIPCION }}</td>
 				<td>{{ $plantalaboral -> PALA_CANTIDAD }}</td>
 				<td>{{ $plantalaboral -> PALA_CREADOPOR }}</td>

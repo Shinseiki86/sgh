@@ -31,8 +31,9 @@ class PlantaLaboralController extends Controller
 	protected function validator($data, $id = 0)
 	{
 		return Validator::make($data, [
-			'EMPL_ID' => ['numeric', 'required'],
 			'CARG_ID' => ['numeric', 'required'],
+			'GERE_ID' => ['numeric', 'required'],
+			'EMPL_ID' => 'required|unique_with:PLANTASLABORALES,CARG_ID,GERE_ID',
 			'PALA_CANTIDAD' => ['numeric','required'],
 		]);
 	}
@@ -62,10 +63,13 @@ class PlantaLaboralController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		//Se crea un array con los empleadores
+		//Se crea un array con los cargos
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
-		return view($this->route.'.create', compact('arrEmpleadores','arrCargos'));
+		//Se crea un array con las gerencias
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
+
+		return view($this->route.'.create', compact('arrEmpleadores','arrCargos','arrGerencias'));
 	}
 
 	/**
@@ -93,11 +97,14 @@ class PlantaLaboralController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		//Se crea un array con los empleadores
+		//Se crea un array con los cargos
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
 
+		//Se crea un array con las gerencias
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('plantalaboral','arrEmpleadores','arrCargos'));
+		return view($this->route.'.edit', compact('plantalaboral','arrEmpleadores','arrCargos','arrGerencias'));
 	}
 
 

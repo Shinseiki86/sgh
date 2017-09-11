@@ -159,6 +159,9 @@ return [
         SGH\Providers\EventServiceProvider::class,
         SGH\Providers\RouteServiceProvider::class,
 
+        //add by KevinRodriguez
+        Felixkiss\UniqueWithValidator\ServiceProvider::class,
+
         //Add by DiegoCortes
         //Styde\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
