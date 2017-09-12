@@ -27,9 +27,6 @@ class CreateTableGrupos extends Migration
             $table->string('GRUP_DESCRIPCION', 300)
                 ->comment('descripción del grupo de empleados');
 
-            $table->integer('EMPL_ID')->unsigned()
-                ->comment('empleador que tiene asociado este grupo');
-
             $table->string('GRUP_OBSERVACIONES', 300)
                 ->comment('observaciones del grupo de empleados')->nullable();
             
@@ -46,13 +43,6 @@ class CreateTableGrupos extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('GRUP_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
-
-            //Relaciones
-            $table->foreign('EMPL_ID')
-                ->references('EMPL_ID')
-                ->on('EMPLEADORES')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
 
         });
         

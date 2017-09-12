@@ -49,18 +49,6 @@ class Empleador extends ModelWithSoftDeletes
 		return $this->belongsTo(Prospecto::class, $foreingKey);
 	}
 
-	public function turnos()
-	{
-		$foreingKey = 'EMPL_ID';
-		return $this->hasMany(Turno::class, $foreingKey);
-	}
-
-	public function grupos()
-	{
-		$foreingKey = 'EMPL_ID';
-		return $this->hasMany(Grupo::class, $foreingKey);
-	}
-
 	public function contratos()
 	{
 		$foreingKey = 'EMPL_ID';
@@ -71,6 +59,36 @@ class Empleador extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'EMPL_ID';
 		return $this->hasMany(PlantaLaboral::class, $foreingKey);
+	}
+
+	/*
+	 * Relación GERENCIAS-EMPLEADORES (muchos a muchos). 
+	 */
+	public function gerencias()
+	{
+		$foreingKey = 'GERE_ID';
+		$otherKey   = 'EMPL_ID';
+		return $this->belongsToMany(Gerencia::class, 'EMPLEADORES_GERENCIAS', $foreingKey,  $otherKey);
+	}
+
+	/*
+	 * Relación TURNOS-EMPLEADORES (muchos a muchos). 
+	 */
+	public function turnos()
+	{
+		$foreingKey = 'EMPL_ID';
+		$otherKey   = 'TURN_ID';
+		return $this->belongsToMany(Turno::class, 'EMPLEADORES_TURNOS', $foreingKey,  $otherKey);
+	}
+
+	/*
+	 * Relación GRUPOS-EMPLEADORES (muchos a muchos). 
+	 */
+	public function grupos()
+	{
+		$foreingKey = 'EMPL_ID';
+		$otherKey   = 'GRUP_ID';
+		return $this->belongsToMany(Grupo::class, 'EMPLEADORES_GRUPOS', $foreingKey,  $otherKey);
 	}
 
 }

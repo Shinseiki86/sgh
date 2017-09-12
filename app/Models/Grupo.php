@@ -23,16 +23,20 @@ class Grupo extends ModelWithSoftDeletes
 		'EMPL_ID',
 	];
 
-	public function empleador()
-	{
-		$foreingKey = 'EMPL_ID';
-		return $this->belongsTo(Empleador::class, $foreingKey);
-	}
-
 	public function contratos()
 	{
 		$foreingKey = 'GRUP_ID';
 		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
+	/*
+	 * Relación EMPLEADORES-GRUPOS (muchos a muchos). 
+	 */
+	public function empleadores()
+	{
+		$foreingKey = 'GRUP_ID';
+		$otherKey   = 'EMPL_ID';
+		return $this->belongsToMany(Empleador::class, 'EMPLEADORES_GRUPOS', $foreingKey,  $otherKey);
 	}
 
 }

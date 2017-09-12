@@ -30,9 +30,6 @@ class CreateTableCentrocostos extends Migration
             $table->string('CECO_DESCRIPCION', 300)
                 ->comment('descripción de la gerencia, ej: gerencia de ventas, gerencia de mercadeo');
 
-            $table->unsignedInteger('GERE_ID')
-                ->comment('relacion a la tabla gerencias');
-
             $table->string('CECO_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();
             
@@ -49,14 +46,6 @@ class CreateTableCentrocostos extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('CECO_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
-
-
-            //Relación con tabla EMPLEADORES
-            $table->foreign('GERE_ID')
-                ->references('GERE_ID')
-                ->on('GERENCIAS')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
 
 
         });

@@ -20,7 +20,6 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-2">Empleador</th>
 				<th class="col-md-4">Descripción</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
@@ -30,7 +29,6 @@
 		<tbody>
 			@foreach($grupos as $grupo)
 			<tr>
-				<td>{{ $grupo -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $grupo -> GRUP_DESCRIPCION }}</td>
 				<td>{{ $grupo -> GRUP_OBSERVACIONES }}</td>
 				<td>{{ $grupo -> GRUP_CREADOPOR }}</td>

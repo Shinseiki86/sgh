@@ -47,7 +47,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador = new Empleador;
         $empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL VALLE S.A. E.S.P';
         $empleador->EMPL_NIT = 900235531;
-        $empleador->EMPL_CEDULAREPRESENTANTE = 79944512;
+        $empleador->EMPL_CEDULAREPRESENTANTE = 79398605;
         $empleador->CIUD_CEDULA = 149;
         $empleador->CIUD_DOMICILIO = 1004;
         $empleador->EMPL_NOMBREREPRESENTANTE = 'TOMAS SALVADOR MENDOZA PARDO';
@@ -62,11 +62,11 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador = new Empleador;
         $empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL CALI S.A. E.S.P';
         $empleador->EMPL_NIT = 900332590;
-        $empleador->EMPL_CEDULAREPRESENTANTE = 79944512;
+        $empleador->EMPL_CEDULAREPRESENTANTE = 79398605;
         $empleador->CIUD_CEDULA = 149;
         $empleador->CIUD_DOMICILIO = 1004;
         $empleador->EMPL_NOMBREREPRESENTANTE = 'TOMAS SALVADOR MENDOZA PARDO';
-        $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOVALLE';
+        $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOCALI';
         $empleador->EMPL_DIRECCION = 'CL 70 7E BIS 04';
         $empleador->EMPL_CORREO = NULL;
         $empleador->EMPL_OBSERVACIONES =  NULL;
@@ -107,7 +107,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador = new Empleador;
         $empleador->EMPL_RAZONSOCIAL = 'CENTRAL COLOMBIANA DE ASEO S.A. E.S.P';
         $empleador->EMPL_NIT = 900415688;
-        $empleador->EMPL_CEDULAREPRESENTANTE = 79944512;
+        $empleador->EMPL_CEDULAREPRESENTANTE = 19497997;
         $empleador->CIUD_CEDULA = 149;
         $empleador->CIUD_DOMICILIO = 149;
         $empleador->EMPL_NOMBREREPRESENTANTE = 'JAIME ALBERTO CANO CAÑAS';
@@ -122,7 +122,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador = new Empleador;
         $empleador->EMPL_RAZONSOCIAL = 'METALMECANICA PROMOAMBIENTAL S.A.S';
         $empleador->EMPL_NIT = 900974517;
-        $empleador->EMPL_CEDULAREPRESENTANTE = 79944512;
+        $empleador->EMPL_CEDULAREPRESENTANTE = 73199072;
         $empleador->CIUD_CEDULA = 150;
         $empleador->CIUD_DOMICILIO = 150;
         $empleador->EMPL_NOMBREREPRESENTANTE = 'FABIAN MARRUGO GOMEZ';

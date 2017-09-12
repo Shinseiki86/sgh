@@ -19,16 +19,8 @@ class Gerencia extends ModelWithSoftDeletes
 
 	protected $fillable = [
 		'GERE_DESCRIPCION',
-		'EMPL_ID',
 		'GERE_OBSERVACIONES',
 	];
-
-
-	public function empleador()
-	{
-		$foreingKey = 'EMPL_ID';
-		return $this->belongsTo(Empleador::class, $foreingKey);
-	}
 
 	public function plantaslaborales()
 	{
@@ -44,6 +36,26 @@ class Gerencia extends ModelWithSoftDeletes
 		$foreingKey = 'GERE_ID';
 		$otherKey   = 'PROC_ID';
 		return $this->belongsToMany(Proceso::class, 'GERENCIAS_PROCESOS', $foreingKey,  $otherKey);
+	}
+
+	/*
+	 * Relación CENTROSCOSTOS-GERENCIAS (muchos a muchos). 
+	 */
+	public function centroscostos()
+	{
+		$foreingKey = 'GERE_ID';
+		$otherKey   = 'CECO_ID';
+		return $this->belongsToMany(CentroCosto::class, 'GERENCIAS_CENTROCOSTOS', $foreingKey,  $otherKey);
+	}
+
+	/*
+	 * Relación EMPLEADORES-GERENCIAS (muchos a muchos). 
+	 */
+	public function empleadores()
+	{
+		$foreingKey = 'GERE_ID';
+		$otherKey   = 'EMPL_ID';
+		return $this->belongsToMany(Empleador::class, 'EMPLEADORES_GERENCIAS', $foreingKey,  $otherKey);
 	}
 
 }

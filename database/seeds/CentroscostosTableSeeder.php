@@ -12,22 +12,288 @@ class CentrosCostosTableSeeder extends Seeder
      */
     public function run()
 	{
-		//$this->command->info('---Seeder Centroscostos');
-		
-		$centrocosto = new CentroCosto;
-		$centrocosto->CECO_CODIGO = '500101';
-		$centrocosto->GERE_ID = 1;
-        $centrocosto->CECO_DESCRIPCION = 'GESTIÓN HUMANA';
-        $centrocosto->CECO_OBSERVACIONES =  'CENTRO DE COSTOS DE PRUEBA';
+		$this->command->info('---Seeder Centroscostos');
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '010101';
+        $centrocosto->CECO_DESCRIPCION = 'GERENCIA GENERAL';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
         $centrocosto->CECO_CREADOPOR =  'SYSTEM';
         $centrocosto->save();
 
         $centrocosto = new CentroCosto;
-        $centrocosto->CECO_CODIGO = '500102';
-        $centrocosto->GERE_ID = 1;
-        $centrocosto->CECO_DESCRIPCION = 'BIENESTAR Y DESARROLLO';
-        $centrocosto->CECO_OBSERVACIONES =  'CENTRO DE COSTOS DE PRUEBA';
+        $centrocosto->CECO_CODIGO = '010201';
+        $centrocosto->CECO_DESCRIPCION = 'REVISORIA FISCAL';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
         $centrocosto->CECO_CREADOPOR =  'SYSTEM';
         $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '010301';
+        $centrocosto->CECO_DESCRIPCION = 'OFICINA CENTRAL';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '020101';
+        $centrocosto->CECO_DESCRIPCION = 'FINANCIERA Y CONTRALORIA';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '020201';
+        $centrocosto->CECO_DESCRIPCION = 'CONTABILIDAD';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '020301';
+        $centrocosto->CECO_DESCRIPCION = 'CARTERA';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '020401';
+        $centrocosto->CECO_DESCRIPCION = 'TESORERIA';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '030101';
+        $centrocosto->CECO_DESCRIPCION = 'REGULACION Y FACTURACION';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '030201';
+        $centrocosto->CECO_DESCRIPCION = 'SERVICIO AL CLIENTE';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '030301';
+        $centrocosto->CECO_DESCRIPCION = 'FACTURACION';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '040101';
+        $centrocosto->CECO_DESCRIPCION = 'ADMINISTRACION';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '040202';
+        $centrocosto->CECO_DESCRIPCION = 'CALIDAD';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '040301';
+        $centrocosto->CECO_DESCRIPCION = 'COMPRAS Y ALMACEN';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '040401';
+        $centrocosto->CECO_DESCRIPCION = 'SISTEMAS';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '040501';
+        $centrocosto->CECO_DESCRIPCION = 'SERVICIOS GENERALES';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '040601';
+        $centrocosto->CECO_DESCRIPCION = 'GESTION AMBIENTAL';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '050101';
+        $centrocosto->CECO_DESCRIPCION = 'GESTION HUMANA';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '050201';
+        $centrocosto->CECO_DESCRIPCION = 'SALUD OCUPACIONAL Y SEGURIDAD INDUSTRIAL';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '050301';
+        $centrocosto->CECO_DESCRIPCION = 'BIENESTAR Y DESARROLLO';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '060101';
+        $centrocosto->CECO_DESCRIPCION = 'VENTAS';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '070101';
+        $centrocosto->CECO_DESCRIPCION = 'JURIDICA';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32130';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERARIVO DE RECOLECCION';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32137';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE MANTENIMIENTO';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32231';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE TRANSPORTE';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32237';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE MANTENIMIENTO';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32332';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE REALIZACION';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32337';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE MANTENIMIENTO';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32433';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE TRASLADO DE CARGA';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32527';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE CALIF DE RESIDUOS';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32628';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE PLANIF DE TRANSFORMACIÓN';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32735';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE DEPURACIÓN DE RESIDUOS';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32832';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE REALIZACION';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32837';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE MANTENIMIENTO';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32932';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE REALIZACION';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '32937';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE MANTENIMIENTO';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '33030';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE RH';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '33037';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE MANTENIMIENTO RH';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '33181';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO CCIAL DE FACTURACION Y RECAUDO 3';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '39001';
+        $centrocosto->CECO_DESCRIPCION = 'COSTOS COMPARTIDOS DE OPERACIONES';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+
+        $centrocosto = new CentroCosto;
+        $centrocosto->CECO_CODIGO = '39002';
+        $centrocosto->CECO_DESCRIPCION = 'COSTOS COMPARTIDOS DE MANTENIMIENTO';
+        $centrocosto->CECO_OBSERVACIONES =  NULL;
+        $centrocosto->CECO_CREADOPOR =  'SYSTEM';
+        $centrocosto->save();
+		
+		
 	}
 }
