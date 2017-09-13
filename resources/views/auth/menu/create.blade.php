@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Item del Menú')
 
 @section('section')
-{{ Form::open(['route' => 'auth.menu.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'menu.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

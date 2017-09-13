@@ -15,7 +15,8 @@ use SGH\Models\Departamento;
 
 class CiudadController extends Controller
 {
-	protected $route = 'cnfg-geograficos.ciudades';
+	protected $view = 'cnfg-geograficos';
+	protected $route = 'ciudades';
 	protected $class = Ciudad::class;
 
 	public function __construct()
@@ -47,7 +48,7 @@ class CiudadController extends Controller
 	 */
 	public function index()
 	{
-		return view($this->route.'.index');
+		return view($this->view.'.'.$this->route.'.index');
 	}
 
 	/**
@@ -85,7 +86,7 @@ class CiudadController extends Controller
 		//Se crea un array con los departamentos disponibles
 		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_NOMBRE');
 
-		return view($this->route.'.create', compact('arrDepartamentos'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrDepartamentos'));
 	}
 
 	/**
@@ -114,7 +115,7 @@ class CiudadController extends Controller
 		$arrDepartamentos = model_to_array(Departamento::class, 'DEPA_NOMBRE');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('ciudad', 'arrDepartamentos'));
+		return view($this->view.'.'.$this->route.'.edit', compact('ciudad', 'arrDepartamentos'));
 	}
 
 

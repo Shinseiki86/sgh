@@ -15,7 +15,8 @@ use SGH\Models\Cargo;
 
 class CargoController extends Controller
 {
-	protected $route = 'cnfg-contratos.cargos';
+	protected $view = 'cnfg-contratos';
+	protected $route = 'cargos';
 	protected $class = Cargo::class;
 
 	public function __construct()
@@ -48,7 +49,7 @@ class CargoController extends Controller
 		//Se obtienen todos los registros.
 		$cargos = Cargo::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('cargos'));
+		return view($this->view.'.'.$this->route.'.index', compact('cargos'));
 	}
 
 	/**
@@ -61,7 +62,7 @@ class CargoController extends Controller
 		//Se crea un array con los CNOS disponibles
 		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
 
-		return view($this->route.'.create', compact('arrCnos'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrCnos'));
 		
 	}
 
@@ -91,7 +92,7 @@ class CargoController extends Controller
 		$arrCnos = model_to_array(Cno::class, 'CNOS_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('cargo', 'arrCnos'));
+		return view($this->view.'.'.$this->route.'.edit', compact('cargo', 'arrCnos'));
 	}
 
 

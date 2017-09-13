@@ -11,7 +11,7 @@ class User extends Authenticatable
 
 	//Nombre de la tabla en la base de datos
 	protected $table = 'USERS';
-    protected $primaryKey = 'USER_id';
+    protected $primaryKey = 'USER_ID';
 
 	//Traza: Nombre de campos en la tabla para auditoría de cambios
 	const CREATED_AT = 'created_at';
@@ -47,13 +47,15 @@ class User extends Authenticatable
 	//establecemos las relaciones con el modelo Role, ya que un usuario puede tener varios roles
 	//y un rol lo pueden tener varios usuarios
 	public function roles(){
-		return $this->belongsToMany(Role::class);
+		$foreingKey = 'user_id';
+		$otherKey   = 'role_id';
+		return $this->belongsToMany(Role::class, 'role_user', $foreingKey,  $otherKey);
 	}
 
 
 	public function tickets()
 	{
-		$foreingKey = 'USER_id';
+		$foreingKey = 'USER_ID';
 		return $this->hasMany(Ticket::class, $foreingKey);
 	}
 

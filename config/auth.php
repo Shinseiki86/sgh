@@ -70,11 +70,6 @@ return [
             'model' => SGH\Models\User::class,
             'table' => 'users',
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'USERS',
-        // ],
     ],
 
     /*

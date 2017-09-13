@@ -80,7 +80,7 @@ class ContratoController extends Controller
 		//Se obtienen todos los registros.
 		$contratos = Contrato::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('contratos'));
+		return view($this->view.'.'.$this->route.'.index', compact('contratos'));
 	}
 
 	/**
@@ -183,7 +183,7 @@ class ContratoController extends Controller
 							->get();
 		$arrJefes = model_to_array($arrJefes, $columnName, $primaryKey);
 
-		return view($this->route.'.create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
+		return view($this->view.'.'.$this->route.'.create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
 	}
 
 	/**
@@ -287,7 +287,7 @@ class ContratoController extends Controller
 		$arrJefes = model_to_array($arrJefes, $columnName, $primaryKey);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
+		return view($this->view.'.'.$this->route.'.edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
 	}
 
 	/**

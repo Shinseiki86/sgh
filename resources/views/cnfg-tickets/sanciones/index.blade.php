@@ -8,7 +8,7 @@
 			Decisiones Administrativas
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('cnfg-tickets.sanciones.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
+			<a class='btn btn-primary' role='button' href="{{ route('sanciones.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -34,7 +34,7 @@
 				<td>{{ $sancion -> SANC_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-tickets.sanciones.edit', [ 'SANC_ID' => $sancion->SANC_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('sanciones.edit', [ 'SANC_ID' => $sancion->SANC_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 

@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Estado de Aprobación')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-tickets.estadosaprobaciones.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'estadosaprobaciones.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

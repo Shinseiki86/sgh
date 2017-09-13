@@ -3,7 +3,7 @@
 @section('page_heading', 'Nuevo País')
 
 @section('section')
-	{{ Form::open(['route' => 'cnfg-geograficos.paises.store', 'class' => 'form-horizontal']) }}
+	{{ Form::open(['route' => 'paises.store', 'class' => 'form-horizontal']) }}
 
 		<!-- Elementos del formulario -->
 		@rinclude('form-inputs')

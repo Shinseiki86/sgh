@@ -2,7 +2,7 @@
 @section('page_heading', 'Nueva Planta de Personal')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-organizacionales.plantaslaborales.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'plantaslaborales.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

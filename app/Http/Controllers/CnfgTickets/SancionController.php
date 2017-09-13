@@ -47,7 +47,7 @@ class SancionController extends Controller
 		//Se obtienen todos los registros.
 		$sanciones = Sancion::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('sanciones'));
+		return view($this->view.'.'.$this->route.'.index', compact('sanciones'));
 	}
 
 	/**
@@ -57,7 +57,7 @@ class SancionController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -83,7 +83,7 @@ class SancionController extends Controller
 		$sancion = Sancion::findOrFail($SANC_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('sancion'));
+		return view($this->view.'.'.$this->route.'.edit', compact('sancion'));
 	}
 
 

@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Grupo')
 
 @section('section')	
-{{ Form::open(['route' => 'cnfg-organizacionales.grupos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'grupos.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

@@ -48,7 +48,7 @@ class RiesgoController extends Controller
 		//Se obtienen todos los registros.
 		$riesgos = Riesgo::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('riesgos'));
+		return view($this->view.'.'.$this->route.'.index', compact('riesgos'));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class RiesgoController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -84,7 +84,7 @@ class RiesgoController extends Controller
 		$riesgo = Riesgo::findOrFail($RIES_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('riesgo'));
+		return view($this->view.'.'.$this->route.'.edit', compact('riesgo'));
 	}
 
 

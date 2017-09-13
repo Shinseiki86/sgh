@@ -14,7 +14,8 @@ use SGH\Models\EstadoContrato;
 
 class EstadoContratoController extends Controller
 {
-	protected $route = 'cnfg-contratos.cnos';
+	protected $view = 'cnfg-contratos';
+	protected $route = 'estadoscontratos';
 	protected $class = EstadoContrato::class;
 
 	public function __construct()
@@ -46,7 +47,7 @@ class EstadoContratoController extends Controller
 		//Se obtienen todos los registros.
 		$estadoscontratos = EstadoContrato::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('estadoscontratos'));
+		return view($this->view.'.'.$this->route.'.index', compact('estadoscontratos'));
 	}
 
 	/**
@@ -56,7 +57,7 @@ class EstadoContratoController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -82,7 +83,7 @@ class EstadoContratoController extends Controller
 		$estadocontrato = EstadoContrato::findOrFail($ESCO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('estadocontrato'));
+		return view($this->view.'.'.$this->route.'.edit', compact('estadocontrato'));
 	}
 
 

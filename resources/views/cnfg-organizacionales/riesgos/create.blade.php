@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Riesgo')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-organizacionales.riesgos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'riesgos.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

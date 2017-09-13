@@ -2,7 +2,7 @@
 @section('page_heading', 'Nueva Categoría')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-tickets.categorias.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'categorias.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

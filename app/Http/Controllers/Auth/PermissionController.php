@@ -14,7 +14,8 @@ use SGH\Models\Permission;
 
 class PermissionController extends Controller
 {
-	protected $route = 'auth.permisos';
+	protected $view = 'auth';
+	protected $route = 'permisos';
 	protected $class = Permission::class;
 
 	public function __construct()
@@ -49,7 +50,7 @@ class PermissionController extends Controller
 		//Se obtienen todos los registros.
 		$permisos = Permission::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('permisos'));
+		return view($this->view.'.'.$this->route.'.index', compact('permisos'));
 	}
 
 	/**
@@ -62,7 +63,7 @@ class PermissionController extends Controller
 		//Se crea un array con los Role disponibles
 		$arrRoles = model_to_array(Role::class, 'display_name');
 
-		return view($this->route.'.create', compact('arrRoles'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrRoles'));
 	}
 
 	/**
@@ -92,7 +93,7 @@ class PermissionController extends Controller
 		$roles_ids = $permiso->roles->pluck('id')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('permiso', 'arrRoles', 'roles_ids'));
+		return view($this->view.'.'.$this->route.'.edit', compact('permiso', 'arrRoles', 'roles_ids'));
 	}
 
 
@@ -104,7 +105,7 @@ class PermissionController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Permission::class, ['roles'=>'roles_ids']);
+		parent::updateModel($id, ['roles'=>'roles_ids']);
 	}
 
 	/**

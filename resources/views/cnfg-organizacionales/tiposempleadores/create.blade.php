@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Tipo de empleador')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-organizacionales.tiposempleadores.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'tiposempleadores.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

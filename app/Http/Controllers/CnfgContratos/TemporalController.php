@@ -14,7 +14,8 @@ use SGH\Models\Temporal;
 
 class TemporalController extends Controller
 {
-	protected $route = 'cnfg-contratos.temporales';
+	protected $view = 'cnfg-contratos';
+	protected $route = 'temporales';
 	protected $class = Temporal::class;
 
 	public function __construct()
@@ -49,7 +50,7 @@ class TemporalController extends Controller
 		//Se obtienen todos los registros.
 		$temporales = Temporal::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('temporales'));
+		return view($this->view.'.'.$this->route.'.index', compact('temporales'));
 	}
 
 	/**
@@ -68,7 +69,7 @@ class TemporalController extends Controller
 				'PROS_CEDULA',
 			], 'PROS_NOMBRESAPELLIDOS'));
 
-		return view($this->route.'.create', compact('arrProspectos'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrProspectos'));
 	}
 
 	/**
@@ -103,7 +104,7 @@ class TemporalController extends Controller
 			], 'PROS_NOMBRESAPELLIDOS'));
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('temporal','arrProspectos'));
+		return view($this->view.'.'.$this->route.'.edit', compact('temporal','arrProspectos'));
 	}
 
 

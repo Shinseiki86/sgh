@@ -48,7 +48,7 @@ class ProcesoController extends Controller
 		//Se obtienen todos los registros.
 		$procesos = Proceso::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('procesos'));
+		return view($this->view.'.'.$this->route.'.index', compact('procesos'));
 	}
 
 	/**
@@ -60,7 +60,7 @@ class ProcesoController extends Controller
 	{
 		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 
-		return view($this->route.'.create', compact('arrGerencias'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrGerencias'));
 	}
 
 	/**
@@ -89,7 +89,7 @@ class ProcesoController extends Controller
 		$GERE_ids = $proceso->gerencias->pluck('GERE_ID')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('proceso', 'arrGerencias', 'GERE_ids'));
+		return view($this->view.'.'.$this->route.'.edit', compact('proceso', 'arrGerencias', 'GERE_ids'));
 	}
 
 

@@ -47,7 +47,7 @@ class TipoIncidenteController extends Controller
 		//Se obtienen todos los registros.
 		$tiposincidentes = TipoIncidente::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('tiposincidentes'));
+		return view($this->view.'.'.$this->route.'.index', compact('tiposincidentes'));
 	}
 
 	/**
@@ -57,7 +57,7 @@ class TipoIncidenteController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -83,7 +83,7 @@ class TipoIncidenteController extends Controller
 		$tipoincidente = TipoIncidente::findOrFail($TIIN_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('tipoincidente'));
+		return view($this->view.'.'.$this->route.'.edit', compact('tipoincidente'));
 	}
 
 

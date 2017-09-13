@@ -49,7 +49,7 @@ class PrioridadController extends Controller
 		//Se obtienen todos los registros.
 		$prioridades = Prioridad::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('prioridades'));
+		return view($this->view.'.'.$this->route.'.index', compact('prioridades'));
 	}
 
 	/**
@@ -59,7 +59,7 @@ class PrioridadController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -85,7 +85,7 @@ class PrioridadController extends Controller
 		$prioridad = Prioridad::findOrFail($PRIO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('prioridad'));
+		return view($this->view.'.'.$this->route.'.edit', compact('prioridad'));
 	}
 
 

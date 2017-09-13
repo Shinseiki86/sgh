@@ -48,7 +48,7 @@ class EstadoTicketController extends Controller
 		//Se obtienen todos los registros.
 		$estadostickets = EstadoTicket::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('estadostickets'));
+		return view($this->view.'.'.$this->route.'.index', compact('estadostickets'));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class EstadoTicketController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -84,7 +84,7 @@ class EstadoTicketController extends Controller
 		$estadoticket = EstadoTicket::findOrFail($ESTI_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('estadoticket'));
+		return view($this->view.'.'.$this->route.'.edit', compact('estadoticket'));
 	}
 
 

@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Cargo')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-contratos.cargos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'cargos.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

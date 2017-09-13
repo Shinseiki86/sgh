@@ -13,7 +13,7 @@
 			<td>{!! $tipoEntidad->TIEN_OBSERVACIONES !!}</td>
              <td>
                 <!-- Botón Editar (edit) -->
-                <a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-organizacionales.tipoentidades.edit', [ $tipoEntidad->TIEN_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+                <a class="btn btn-small btn-info btn-xs" href="{{ route('tipoentidades.edit', [ $tipoEntidad->TIEN_ID ] ) }}" data-tooltip="tooltip" title="Editar">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
 

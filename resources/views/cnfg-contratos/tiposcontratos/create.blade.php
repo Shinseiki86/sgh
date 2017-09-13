@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Tipo de contrato')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-contratos.tiposcontratos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'tiposcontratos.store', 'class' => 'form-horizontal']) }}
 	
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

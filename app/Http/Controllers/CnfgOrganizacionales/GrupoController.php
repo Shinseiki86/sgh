@@ -47,7 +47,7 @@ class GrupoController extends Controller
 		//Se obtienen todos los registros.
 		$grupos = Grupo::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('grupos'));
+		return view($this->view.'.'.$this->route.'.index', compact('grupos'));
 	}
 
 	/**
@@ -60,7 +60,7 @@ class GrupoController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		return view($this->route.'.create', compact('arrEmpleadores'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrEmpleadores'));
 	}
 
 	/**
@@ -89,7 +89,7 @@ class GrupoController extends Controller
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('grupo','arrEmpleadores'));
+		return view($this->view.'.'.$this->route.'.edit', compact('grupo','arrEmpleadores'));
 	}
 
 

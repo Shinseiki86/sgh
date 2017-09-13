@@ -2,7 +2,7 @@
 @section('page_heading', 'Nueva Empresa Temporal')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-contratos.temporales.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'temporales.store', 'class' => 'form-horizontal']) }}
 	
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

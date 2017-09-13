@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Turno')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-organizacionales.turnos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'turnos.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

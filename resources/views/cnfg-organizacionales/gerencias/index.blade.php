@@ -21,7 +21,7 @@
 		<thead>
 			<tr>
 				<th class="col-md-5">Empresa</th>
-				<th class="col-md-5">Descripción</th>
+				<th class="col-md-5">Centros de Costos</th>
 				<th class="col-md-5">Procesos</th>
 				<th class="hidden-xs col-md-2">Creado</th>
 				<th class="col-md-1 all"></th>
@@ -31,8 +31,8 @@
 		<tbody>
 			@foreach($gerencias as $gerencia)
 			<tr>
-				<td>{{ $gerencia -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $gerencia -> GERE_DESCRIPCION }}</td>
+				<td>{{ $gerencia -> centroscostos -> count() }}</td>
 				<td>{{ $gerencia -> procesos -> count() }}</td>
 				<td>{{ $gerencia -> GERE_CREADOPOR }}</td>
 				<td>

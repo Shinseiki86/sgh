@@ -2,7 +2,7 @@
 @section('page_heading', 'Nueva Prioridad')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-tickets.prioridades.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'prioridades.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

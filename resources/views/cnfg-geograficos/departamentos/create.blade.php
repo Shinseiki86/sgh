@@ -3,7 +3,7 @@
 @section('page_heading', 'Nuevo Departamento')
 
 @section('section')
-	{{ Form::open(['route' => 'cnfg-geograficos.departamentos.store', 'class' => 'form-horizontal']) }}
+	{{ Form::open(['route' => 'departamentos.store', 'class' => 'form-horizontal']) }}
 
 		<!-- Elementos del formulario -->
 		@rinclude('form-inputs')

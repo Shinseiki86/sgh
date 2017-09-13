@@ -49,7 +49,7 @@ class CreateTableTickets extends Migration
             $table->unsignedInteger('CONT_ID')
                 ->comment('relacion a la tabla contratos');
 
-            $table->unsignedInteger('USER_id')
+            $table->unsignedInteger('USER_ID')
                 ->nullable()
                 ->comment('relacion a la tabla usuarios');
 
@@ -115,8 +115,8 @@ class CreateTableTickets extends Migration
                 ->onUpdate('cascade');
 
             //Relación con tabla USUARIOS
-            $table->foreign('USER_id')
-                ->references('USER_id')
+            $table->foreign('USER_ID')
+                ->references('USER_ID')
                 ->on('USERS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

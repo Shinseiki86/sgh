@@ -21,7 +21,6 @@
 		<thead>
 			<tr>
 				<th class="col-md-5">Descripción</th>
-				<th class="col-md-3">Gerencias</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
 			</tr>
@@ -31,7 +30,6 @@
 			@foreach($procesos as $proceso)
 			<tr>
 				<td>{{ $proceso -> PROC_DESCRIPCION }}</td>
-				<td>{{ $proceso -> gerencias -> count() }}</td>
 				<td>{{ $proceso -> PROC_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->

@@ -10,7 +10,7 @@
 			Clasificación de Ocupaciones
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('cnfg-contratos.cnos.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
+			<a class='btn btn-primary' role='button' href="{{ route('cnos.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -41,7 +41,7 @@
 				<td>{{ $cno -> CNOS_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-contratos.cnos.edit', [ 'CNOS_ID' => $cno->CNOS_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnos.edit', [ 'CNOS_ID' => $cno->CNOS_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 

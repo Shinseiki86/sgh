@@ -3,7 +3,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">¿Borrar registro <span class="USER_id"></span>?</h4>
+				<h4 class="modal-title">¿Borrar registro <span class="USER_ID"></span>?</h4>
 			</div>
 
 			<div class="modal-body">

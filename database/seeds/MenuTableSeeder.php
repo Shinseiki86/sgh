@@ -19,7 +19,7 @@ class MenuTableSeeder extends Seeder
         Menu::create([
             'MENU_LABEL' => 'Menú',
             'MENU_URL' => 'auth/menu',
-            'MENU_ICON' => 'fa-bars',
+            'MENU_ICON' => 'fa-list',
             'MENU_ORDER' => $orderMenuLeft++,
             'MENU_ENABLED' => true,
         ]);
@@ -62,21 +62,21 @@ class MenuTableSeeder extends Seeder
             Menu::create([
                 'MENU_LABEL' => 'Países',
                 'MENU_URL' => 'cnfg-geograficos/paises',
-                'MENU_ICON' => 'fa-circle',
+                'MENU_ICON' => 'fa-globe',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
             Menu::create([
                 'MENU_LABEL' => 'Departamentos',
                 'MENU_URL' => 'cnfg-geograficos/departamentos',
-                'MENU_ICON' => 'fa-circle',
+                'MENU_ICON' => 'fa-flag',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
             Menu::create([
                 'MENU_LABEL' => 'Ciudades',
                 'MENU_URL' => 'cnfg-geograficos/ciudades',
-                'MENU_ICON' => 'fa-circle-o',
+                'MENU_ICON' => 'fa-flag-o',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);

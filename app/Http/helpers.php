@@ -113,6 +113,8 @@ if (! function_exists('model_to_array')) {
 
 if (! function_exists('current_route_action')) {
     /**
+     * Nombre del método actual llamado en el controlador.
+     * Perfecta para saber desde la vista si la llamada fue realizada por create o por edit, por ejemplo.
      * 
      * @return string 
      */
@@ -298,7 +300,7 @@ if (! function_exists('get_email_user')) {
      */
     function get_email_user($USER_ID) {
 
-        $usuario = \SGH\Models\User::where('USER_id', $USER_ID)->pluck('email');
+        $usuario = \SGH\Models\User::where('USER_ID', $USER_ID)->pluck('email');
 
 
         $user_email = null;

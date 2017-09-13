@@ -14,7 +14,8 @@ use SGH\Models\Menu;
 
 class MenuController extends Controller
 {
-	protected $route = 'auth.menu';
+	protected $view = 'auth';
+	protected $route = 'menu';
 	protected $class = Menu::class;
 
 	public function __construct()
@@ -48,7 +49,7 @@ class MenuController extends Controller
 		$menusEditTop  = Menu::menus(true, 'TOP');
 		$menusEditLeft = Menu::menus(true, 'LEFT');
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('menusEditTop', 'menusEditLeft'));
+		return view($this->view.'.'.$this->route.'.index', compact('menusEditTop', 'menusEditLeft'));
 	}
 
 
@@ -126,7 +127,7 @@ class MenuController extends Controller
 
 		$arrRoutes = $this->getRoutes();
 
-		return view($this->route.'.create', compact('arrRoutes'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrRoutes'));
 	}
 
 	private function getRoutes()
@@ -171,7 +172,7 @@ class MenuController extends Controller
 		$arrRoutes = $this->getRoutes();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('menu', 'arrRoutes'));
+		return view($this->view.'.'.$this->route.'.edit', compact('menu', 'arrRoutes'));
 	}
 
 	/**

@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Tipo de Incidente')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-tickets.tiposincidentes.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'tiposincidentes.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

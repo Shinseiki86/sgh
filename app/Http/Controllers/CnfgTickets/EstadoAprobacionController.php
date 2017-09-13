@@ -48,7 +48,7 @@ class EstadoAprobacionController extends Controller
 		//Se obtienen todos los registros.
 		$estadosaprobaciones = EstadoAprobacion::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('estadosaprobaciones'));
+		return view($this->view.'.'.$this->route.'.index', compact('estadosaprobaciones'));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class EstadoAprobacionController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -84,7 +84,7 @@ class EstadoAprobacionController extends Controller
 		$estadoaprobacion = EstadoAprobacion::findOrFail($ESAP_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('estadoaprobacion'));
+		return view($this->view.'.'.$this->route.'.edit', compact('estadoaprobacion'));
 	}
 
 

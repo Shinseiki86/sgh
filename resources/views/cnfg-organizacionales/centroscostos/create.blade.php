@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Centro de costos')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-organizacionales.centroscostos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'centroscostos.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

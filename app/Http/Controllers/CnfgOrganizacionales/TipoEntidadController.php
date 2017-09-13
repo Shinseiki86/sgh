@@ -42,7 +42,7 @@ class TipoEntidadController extends Controller
 	public function index()
 	{
 		$tipoentidades = TipoEntidad::all();
-		return view($this->routeIndex, compact('tipoentidades'));
+		return view($this->viewIndex, compact('tipoentidades'));
 	}
 
 	

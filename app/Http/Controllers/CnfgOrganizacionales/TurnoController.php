@@ -51,7 +51,7 @@ class TurnoController extends Controller
 		//Se obtienen todos los registros.
 		$turnos = Turno::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('turnos'));
+		return view($this->view.'.'.$this->route.'.index', compact('turnos'));
 	}
 
 	/**
@@ -64,7 +64,7 @@ class TurnoController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		return view($this->route.'.create', compact('arrEmpleadores'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrEmpleadores'));
 	}
 
 	/**
@@ -93,7 +93,7 @@ class TurnoController extends Controller
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('turno','arrEmpleadores'));
+		return view($this->view.'.'.$this->route.'.edit', compact('turno','arrEmpleadores'));
 	}
 
 

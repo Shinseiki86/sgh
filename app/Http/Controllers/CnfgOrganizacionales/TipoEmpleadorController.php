@@ -47,7 +47,7 @@ class TipoEmpleadorController extends Controller
 		//Se obtienen todos los registros.
 		$tiposempleadores = TipoEmpleador::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('tiposempleadores'));
+		return view($this->view.'.'.$this->route.'.index', compact('tiposempleadores'));
 	}
 
 	/**
@@ -57,7 +57,7 @@ class TipoEmpleadorController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -83,7 +83,7 @@ class TipoEmpleadorController extends Controller
 		$tipoempleador = TipoEmpleador::findOrFail($TIEM_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('tipoempleador'));
+		return view($this->view.'.'.$this->route.'.edit', compact('tipoempleador'));
 	}
 
 

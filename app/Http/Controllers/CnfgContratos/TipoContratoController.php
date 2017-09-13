@@ -14,7 +14,8 @@ use SGH\Models\TipoContrato;
 
 class TipoContratoController extends Controller
 {
-	protected $route = 'cnfg-contratos.tiposcontratos';
+	protected $view = 'cnfg-contratos';
+	protected $route = 'tiposcontratos';
 	protected $class = TipoContrato::class;
 
 	public function __construct()
@@ -46,7 +47,7 @@ class TipoContratoController extends Controller
 		//Se obtienen todos los registros.
 		$tiposcontratos = TipoContrato::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('tiposcontratos'));
+		return view($this->view.'.'.$this->route.'.index', compact('tiposcontratos'));
 	}
 
 	/**
@@ -56,7 +57,7 @@ class TipoContratoController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -82,7 +83,7 @@ class TipoContratoController extends Controller
 		$tiposcontrato = TipoContrato::findOrFail($TICO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('tiposcontrato'));
+		return view($this->view.'.'.$this->route.'.edit', compact('tiposcontrato'));
 	}
 
 

@@ -27,9 +27,6 @@ class CreateTableTurnos extends Migration
             $table->string('TURN_DESCRIPCION', 300)
                 ->comment('descripción del turno de trabajo');
 
-            $table->integer('EMPL_ID')->unsigned()
-                ->comment('empleador que tiene asociado el turno');
-
             $table->string('TURN_CODIGO', 10)
                 ->comment('codigo del turno de trabajo');
 
@@ -56,13 +53,6 @@ class CreateTableTurnos extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('TURN_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
-
-            //Relaciones
-            $table->foreign('EMPL_ID')
-                ->references('EMPL_ID')
-                ->on('EMPLEADORES')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
 
         });
         

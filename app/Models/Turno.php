@@ -23,19 +23,22 @@ class Turno extends ModelWithSoftDeletes
 		'TURN_CODIGO',
 		'TURN_HORAINICIO',
 		'TURN_HORAFINAL',
-		'EMPL_ID'
 	];
-
-	public function empleador()
-	{
-		$foreingKey = 'EMPL_ID';
-		return $this->belongsTo(Empleador::class, $foreingKey);
-	}
 
 	public function contratos()
 	{
 		$foreingKey = 'TURN_ID';
 		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
+	/*
+	 * Relación EMPLEADORES-TURNOS (muchos a muchos). 
+	 */
+	public function empleadores()
+	{
+		$foreingKey = 'TURN_ID';
+		$otherKey   = 'EMPL_ID';
+		return $this->belongsToMany(Empleador::class, 'EMPLEADORES_TURNOS', $foreingKey,  $otherKey);
 	}
 
 }

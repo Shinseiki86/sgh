@@ -21,8 +21,6 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-3">Empresa</th>
-				<th class="col-md-3">Gerencia</th>
 				<th class="col-md-1">Codigo</th>
 				<th class="col-md-3">Descripción</th>
 				<th class="hidden-xs col-md-1">Creado por</th>
@@ -33,8 +31,6 @@
 		<tbody>
 			@foreach($centroscostos as $centrocosto)
 			<tr>
-				<td>{{ $centrocosto -> gerencia -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
-				<td>{{ $centrocosto -> gerencia -> GERE_DESCRIPCION }}</td>
 				<td>{{ $centrocosto -> CECO_CODIGO }}</td>
 				<td>{{ $centrocosto -> CECO_DESCRIPCION }}</td>
 				<td>{{ $centrocosto -> CECO_CREADOPOR }}</td>

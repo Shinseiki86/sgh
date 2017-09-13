@@ -14,7 +14,8 @@ use SGH\Models\MotivoRetiro;
 
 class MotivoRetiroController extends Controller
 {
-	protected $route = 'cnfg-contratos.motivosretiros';
+	protected $view = 'cnfg-contratos';
+	protected $route = 'motivosretiros';
 	protected $class = MotivoRetiro::class;
 
 	public function __construct()
@@ -46,7 +47,7 @@ class MotivoRetiroController extends Controller
 		//Se obtienen todos los registros.
 		$motivosretiros = MotivoRetiro::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('motivosretiros'));
+		return view($this->view.'.'.$this->route.'.index', compact('motivosretiros'));
 	}
 
 	/**
@@ -56,7 +57,7 @@ class MotivoRetiroController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -82,7 +83,7 @@ class MotivoRetiroController extends Controller
 		$motivoretiro = MotivoRetiro::findOrFail($MORE_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('motivoretiro'));
+		return view($this->view.'.'.$this->route.'.edit', compact('motivoretiro'));
 	}
 
 	/**

@@ -4,10 +4,10 @@
 
 @section('section')
 {{-- <div class="col-md-6 col-md-offset-4"> --}}
-	{{ Form::open(['route' => 'cnfg-organizacionales.tipoentidades.store', 'class' => 'form-horizontal']) }}
+	{{ Form::open(['route' => 'tipoentidades.store', 'class' => 'form-horizontal']) }}
 
 		<!-- Elementos del formulario -->
-		@include('cnfg-organizacionales.tipoentidades.fields')
+		@include('tipoentidades.fields')
 
 		<!-- Botones -->
 		@include('widgets.forms.buttons', ['url' => 'cnfg-organizacionales/tipoentidades'])

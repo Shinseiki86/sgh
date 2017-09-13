@@ -66,7 +66,7 @@ class TicketController extends Controller
 		//Se obtienen todos los registros.
 		$tickets = Ticket::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('tickets'));
+		return view($this->view.'.'.$this->route.'.index', compact('tickets'));
 	}
 
 	public function show($TICK_ID)
@@ -77,7 +77,7 @@ class TicketController extends Controller
 		$arrSanciones = model_to_array(Sancion::class, 'SANC_DESCRIPCION');
 
         // Muestra la vista y pasa el registro
-		return view($this->route.'.show', compact('ticket','arrSanciones'));
+		return view($this->view.'.'.$this->route.'.show', compact('ticket','arrSanciones'));
 	}
 
 	/**
@@ -117,7 +117,7 @@ class TicketController extends Controller
 
 		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
 
-		return view($this->route.'.create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
 	}
 
 	/**
@@ -153,7 +153,7 @@ class TicketController extends Controller
 			$data['TICK_FECHASOLICITUD'] = Carbon::now();
 			
 			//determinar cual es el usuario que realizó la creación del ticket
-			$data['USER_id'] = \Auth::user()->USER_id;
+			$data['USER_ID'] = \Auth::user()->USER_ID;
 
 			//Se crea el registro.
 			$ticket = Ticket::create($data);
@@ -302,7 +302,7 @@ class TicketController extends Controller
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('ticket','arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
+		return view($this->view.'.'.$this->route.'.edit', compact('ticket','arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
 	}
 
 

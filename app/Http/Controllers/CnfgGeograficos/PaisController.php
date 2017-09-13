@@ -14,7 +14,8 @@ use SGH\Models\Pais;
 
 class PaisController extends Controller
 {
-	protected $route = 'cnfg-geograficos.paises';
+	protected $view = 'cnfg-geograficos';
+	protected $route = 'paises';
 	protected $class = Pais::class;
 
 	public function __construct()
@@ -43,7 +44,7 @@ class PaisController extends Controller
 	 */
 	public function index()
 	{
-		return view($this->route.'.index');
+		return view($this->view.'.'.$this->route.'.index');
 	}
 
 	/**
@@ -75,7 +76,7 @@ class PaisController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -100,7 +101,7 @@ class PaisController extends Controller
 		$pais = Pais::findOrFail($PAIS_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('pais'));
+		return view($this->view.'.'.$this->route.'.edit', compact('pais'));
 	}
 
 	/**

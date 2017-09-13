@@ -14,7 +14,8 @@ use SGH\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
-	protected $route = 'cnfg-geograficos.departamentos';
+	protected $view = 'cnfg-geograficos';
+	protected $route = 'departamentos';
 	protected $class = Departamento::class;
 
 	public function __construct()
@@ -46,7 +47,7 @@ class DepartamentoController extends Controller
 	 */
 	public function index()
 	{
-		return view($this->route.'.index');
+		return view($this->view.'.'.$this->route.'.index');
 	}
 
 
@@ -84,7 +85,7 @@ class DepartamentoController extends Controller
 		//Se crea un array con los países disponibles
 		$arrPaises = model_to_array(Pais::class, 'PAIS_NOMBRE');
 
-		return view($this->route.'.create', compact('arrPaises'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrPaises'));
 	}
 
 	/**
@@ -113,7 +114,7 @@ class DepartamentoController extends Controller
 		$arrPaises = model_to_array(Pais::class, 'PAIS_NOMBRE');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('departamento', 'arrPaises'));
+		return view($this->view.'.'.$this->route.'.edit', compact('departamento', 'arrPaises'));
 	}
 
 

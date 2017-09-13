@@ -33,9 +33,9 @@ class GerenciaController extends Controller
 	{
 		return Validator::make($data, [
 			'GERE_DESCRIPCION' => ['required','max:100','unique:GERENCIAS,GERE_DESCRIPCION,'.$GERE_ID.',GERE_ID'],
-			'EMPL_ID' => ['required'],
 			'GERE_OBSERVACIONES' => ['max:300'],
 			'PROC_ids' => ['array'],
+			'CECO_ids' => ['array'],
 		]);
 	}
 
@@ -65,10 +65,13 @@ class GerenciaController extends Controller
 
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
+		$arrCentrosCostos = model_to_array(CentroCosto::class, 'CECO_DESCRIPCION');
+
 		//JSON con valores preseleccionados para el select múltiple
 		$PROC_ids = json_encode([]);
+		$CECO_ids = json_encode([]);
 
-		return view($this->route.'.create', compact('arrEmpleadores', 'arrProcesos', 'PROC_ids'));
+		return view($this->route.'.create', compact('arrEmpleadores', 'arrProcesos', 'arrCentrosCostos' ,'PROC_ids', 'CECO_ids'));
 	}
 
 	/**
@@ -78,7 +81,7 @@ class GerenciaController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(['procesos'=>'PROC_ids']);
+		parent::storeModel(['procesos'=>'PROC_ids' , 'centroscostos'=>'CECO_ids']);
 	}
 
 	/**
@@ -97,11 +100,14 @@ class GerenciaController extends Controller
 
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
+		$arrCentrosCostos = model_to_array(CentroCosto::class, 'CECO_DESCRIPCION');
+
 		//JSON con valores preseleccionados para el select múltiple
 		$PROC_ids = $gerencia->procesos->pluck('PROC_ID')->toJson();
+		$CECO_ids = $gerencia->centroscostos->pluck('CECO_ID')->toJson();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('gerencia', 'arrEmpleadores', 'arrProcesos', 'PROC_ids'));
+		return view($this->route.'.edit', compact('gerencia', 'arrEmpleadores', 'arrProcesos', 'arrCentrosCostos' ,'PROC_ids' , 'CECO_ids'));
 	}
 
 	/**
@@ -112,7 +118,7 @@ class GerenciaController extends Controller
 	 */
 	public function update($GERE_ID)
 	{
-		parent::updateModel($GERE_ID, ['procesos'=>'PROC_ids']);
+		parent::updateModel($GERE_ID, ['procesos'=>'PROC_ids' , 'centroscostos'=>'CECO_ids']);
 	}
 
 	/**

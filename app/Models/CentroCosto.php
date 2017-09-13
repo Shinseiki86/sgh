@@ -36,4 +36,14 @@ class CentroCosto extends ModelWithSoftDeletes
 		return $this->hasMany(Contrato::class, $foreingKey);
 	}
 
+	/*
+	 * Relación CENTROSCOSTOS-GERENCIAS (muchos a muchos). 
+	 */
+	public function gerencias()
+	{
+		$foreingKey = 'CECO_ID';
+		$otherKey   = 'GERE_ID';
+		return $this->belongsToMany(Gerencia::class, 'GERENCIAS_CENTROCOSTOS', $foreingKey,  $otherKey);
+	}
+
 }

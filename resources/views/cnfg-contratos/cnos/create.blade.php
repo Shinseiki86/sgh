@@ -2,7 +2,7 @@
 @section('page_heading', 'Nueva Clasif. de Ocupación')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-contratos.cnos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'cnos.store', 'class' => 'form-horizontal']) }}
 	
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

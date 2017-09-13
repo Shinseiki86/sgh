@@ -50,7 +50,7 @@ class AusentismoController extends Controller
 	public function index()
 	{
 		$ausentismos = Ausentismo::all();
-		return view($this->route.'.index', compact('ausentismos'));
+		return view($this->view.'.'.$this->route.'.index', compact('ausentismos'));
 		
 	}
 
@@ -114,7 +114,7 @@ class AusentismoController extends Controller
 		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
 
 
-		return view($this->route.'.create',compact('arrProspectos','arrConceptoAusentismo','arrEntidad'));
+		return view($this->view.'.'.$this->route.'.create',compact('arrProspectos','arrConceptoAusentismo','arrEntidad'));
 	}
 
 	
@@ -165,7 +165,7 @@ class AusentismoController extends Controller
 		//Se crea un array con las Entidades Responsables
 		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
 
-		return view($this->route.'.edit',['ausentismo'=>$ausentismos],compact('arrProspectos','arrConceptoAusentismo','arrEntidad'));
+		return view($this->view.'.'.$this->route.'.edit',['ausentismo'=>$ausentismos],compact('arrProspectos','arrConceptoAusentismo','arrEntidad'));
 	}
 
 	/**

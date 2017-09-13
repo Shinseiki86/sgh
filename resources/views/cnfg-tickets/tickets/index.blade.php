@@ -8,7 +8,7 @@
 			Tickets
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('cnfg-tickets.tickets.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
+			<a class='btn btn-primary' role='button' href="{{ route('tickets.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -56,12 +56,12 @@
 				<td>
 
 					<!-- Botón Ver (show) -->
-					<a class="btn btn-small btn-basic btn-xs" href="{{ route('cnfg-tickets.tickets.show', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Ver">
+					<a class="btn btn-small btn-basic btn-xs" href="{{ route('tickets.show', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Ver">
 						<i class="fa fa-eye" aria-hidden="true"></i>
 					</a>
 
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-tickets.tickets.edit', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('tickets.edit', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 

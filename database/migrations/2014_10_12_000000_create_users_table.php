@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
 
 		echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
 		Schema::create($this->nomTabla, function (Blueprint $table) {
-			$table->increments('USER_id')
+			$table->increments('USER_ID')
 				->comment('Valor autonumérico, llave primaria de la tabla USERS.');
 			$table->string('name')
 				->comment('Nombre completo del usuario.');
@@ -66,6 +66,6 @@ class CreateUsersTable extends Migration
 	public function down()
 	{
 		echo '- Borrando tabla '.$this->nomTabla.'...' . PHP_EOL;
-		Schema::dropIfExists('USERS');
+		Schema::dropIfExists($this->nomTabla);
 	}
 }

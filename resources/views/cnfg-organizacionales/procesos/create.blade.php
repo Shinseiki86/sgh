@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Proceso')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-organizacionales.procesos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'procesos.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

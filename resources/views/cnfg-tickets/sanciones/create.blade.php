@@ -2,7 +2,7 @@
 @section('page_heading', 'Nueva Sanción')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-tickets.sanciones.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'sanciones.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

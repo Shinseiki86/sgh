@@ -20,7 +20,6 @@ class TurnosTableSeeder extends Seeder
             'TURN_HORAINICIO' => '06:00:00',
             'TURN_HORAFINAL' => '14:00:00',
             'TURN_OBSERVACIONES' => 'TURNO DE DÍA',
-            'EMPL_ID' => 1,
         ]);
 
     	Turno::create([
@@ -29,7 +28,6 @@ class TurnosTableSeeder extends Seeder
             'TURN_HORAINICIO' => '22:00:00',
             'TURN_HORAFINAL' => '06:00:00',
         	'TURN_OBSERVACIONES' => 'TURNO DE NOCHE',
-            'EMPL_ID' => 1,
         ]);
 
     }

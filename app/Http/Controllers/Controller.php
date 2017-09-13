@@ -6,16 +6,15 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 
 use Illuminate\Contracts\Validation\Validator;
 
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public static $modeloCreado;
+    //public static $modeloCreado;
 
     public function __construct($requireAuth=true)
 	{
@@ -29,13 +28,6 @@ class Controller extends BaseController
 		$this->middleware('permission:'.$name.'-delete', ['only' => ['destroy']]);
 	}
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function formatValidationErrors(Validator $validator)
-    {
-        return $validator->errors()->all();
-    }
 
 	/**
 	 * Guarda el registro nuevo en la base de datos.

@@ -50,7 +50,7 @@ class ProspectoController extends Controller
 	 */
 	public function index()
 	{
-		return view($this->route.'.index', compact('prospectos'));
+		return view($this->view.'.'.$this->route.'.index', compact('prospectos'));
 	}
 
 	/**
@@ -92,7 +92,7 @@ class ProspectoController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -118,7 +118,7 @@ class ProspectoController extends Controller
 		$prospecto = Prospecto::findOrFail($PROS_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('prospecto'));
+		return view($this->view.'.'.$this->route.'.edit', compact('prospecto'));
 	}
 
 

@@ -40,6 +40,9 @@ class EmpleadorController extends Controller
 			'EMPL_CEDULAREPRESENTANTE' => ['required'],
 			'CIUD_CEDULA' => ['required'],
 			'CIUD_DOMICILIO' => ['required'],
+			'GERE_ids' => ['array'],
+			'TURN_ids' => ['array'],
+			'GRUP_ids' => ['array'],
 		]);
 	}
 
@@ -65,6 +68,12 @@ class EmpleadorController extends Controller
 	{
 		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
+
+		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
+
+		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
+
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
 				'PROS_PRIMERNOMBRE',
@@ -74,7 +83,11 @@ class EmpleadorController extends Controller
 				'PROS_CEDULA',
 			], 'PROS_NOMBRESAPELLIDOS'));
 
-		return view($this->route.'.create', compact('arrCiudades','arrProspectos'));
+		$GERE_ids = json_encode([]);
+		$TURN_ids = json_encode([]);
+		$GRUP_ids = json_encode([]);
+
+		return view($this->route.'.create', compact('arrCiudades','arrProspectos','arrGerencias','arrTurnos','arrGrupos','GERE_ids','TURN_ids','GRUP_ids'));
 	}
 
 	/**
@@ -85,7 +98,9 @@ class EmpleadorController extends Controller
 	public function store()
 	{
 		//dd(request()->all());
-		parent::storeModel(Empleador::class);
+
+		dd($turnos);
+		parent::storeModel(['gerencias'=>'GERE_ids', 'turnos'=>'TURN_ids' , 'grupos'=>'GRUP_ids']);
 	}
 
 	/**
@@ -101,6 +116,12 @@ class EmpleadorController extends Controller
 
 		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
 
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
+
+		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
+
+		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
+
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
 				'PROS_PRIMERNOMBRE',
@@ -110,8 +131,13 @@ class EmpleadorController extends Controller
 				'PROS_CEDULA',
 			], 'PROS_NOMBRESAPELLIDOS'));
 
+		//JSON con valores preseleccionados para el select múltiple
+		$GERE_ids = $empleador->gerencias->pluck('GERE_ID')->toJson();
+		$TURN_ids = $empleador->turnos->pluck('TURN_ID')->toJson();
+		$GRUP_ids = $empleador->grupos->pluck('GRUP_ID')->toJson();
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('empleador','arrCiudades','arrProspectos'));
+		return view($this->route.'.edit', compact('empleador','arrCiudades','arrProspectos','arrGerencias','arrTurnos','arrGrupos','GERE_ids','TURN_ids','GRUP_ids'));
 	}
 
 
@@ -123,7 +149,7 @@ class EmpleadorController extends Controller
 	 */
 	public function update($EMPL_ID)
 	{
-		parent::updateModel($EMPL_ID);
+		parent::updateModel($EMPL_ID, ['gerencias'=>'GERE_ids' , 'turnos'=>'TURN_ids' , 'grupos'=>'GRUP_ids']);
 	}
 
 	/**

@@ -14,7 +14,8 @@ use SGH\Models\ClaseContrato;
 
 class ClaseContratoController extends Controller
 {
-	protected $route = 'cnfg-contratos.clasescontratos';
+	protected $view = 'cnfg-contratos';
+	protected $route = 'clasescontratos';
 	protected $class = ClaseContrato::class;
 
 	public function __construct()
@@ -47,7 +48,7 @@ class ClaseContratoController extends Controller
 		//Se obtienen todos los registros.
 		$clasescontratos = ClaseContrato::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('clasescontratos'));
+		return view($this->view.'.'.$this->route.'.index', compact('clasescontratos'));
 	}
 
 	/**
@@ -57,7 +58,7 @@ class ClaseContratoController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -82,7 +83,7 @@ class ClaseContratoController extends Controller
 		$clasecontrato = ClaseContrato::findOrFail($CLCO_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('clasecontrato'));
+		return view($this->view.'.'.$this->route.'.edit', compact('clasecontrato'));
 	}
 
 	/**

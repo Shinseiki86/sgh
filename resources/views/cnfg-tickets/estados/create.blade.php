@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Estado de Ticket')
 
 @section('section')
-{{ Form::open(['route' => 'cnfg-tickets.estadostickets.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'estadostickets.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

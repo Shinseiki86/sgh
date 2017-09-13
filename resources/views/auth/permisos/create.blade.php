@@ -2,7 +2,7 @@
 @section('page_heading', 'Nuevo Permiso')
 
 @section('section')
-{{ Form::open(['route' => 'auth.permisos.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'permisos.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

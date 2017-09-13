@@ -26,8 +26,6 @@ class CreateTableGerencias extends Migration
             $table->string('GERE_DESCRIPCION', 100)
                 ->comment('descripción de la gerencia, ej: gerencia de ventas, gerencia de mercadeo');
 
-            $table->integer('EMPL_ID')->unsigned();
-
             $table->string('GERE_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();
             
@@ -44,14 +42,6 @@ class CreateTableGerencias extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('GERE_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
-
-
-            //Relación con tabla EMPLEADORES
-            $table->foreign('EMPL_ID')
-                ->references('EMPL_ID')
-                ->on('EMPLEADORES')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
 
 
         });

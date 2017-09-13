@@ -1,7 +1,7 @@
-@extends('layout')
+@extends('layouts.menu')
+@section('title', '/ Cambiar Contraseña')
 
-<!-- Main Content -->
-@section('content')
+@section('section')
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">

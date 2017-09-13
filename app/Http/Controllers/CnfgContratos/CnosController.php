@@ -14,7 +14,8 @@ use SGH\Models\Cno;
 
 class CnosController extends Controller
 {
-	protected $route = 'cnfg-contratos.cnos';
+	protected $view = 'cnfg-contratos';
+	protected $route = 'cnos';
 	protected $class = Cno::class;
 
 	public function __construct()
@@ -46,7 +47,7 @@ class CnosController extends Controller
 		//Se obtienen todos los registros.
 		$cnos = Cno::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('cnos'));
+		return view($this->view.'.'.$this->route.'.index', compact('cnos'));
 	}
 
 	/**
@@ -56,7 +57,7 @@ class CnosController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -81,7 +82,7 @@ class CnosController extends Controller
 		$cno = Cno::findOrFail($CNOS_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('cno'));
+		return view($this->view.'.'.$this->route.'.edit', compact('cno'));
 	}
 
 	/**

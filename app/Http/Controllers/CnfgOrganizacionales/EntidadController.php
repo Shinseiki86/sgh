@@ -46,7 +46,7 @@ class EntidadController extends Controller
 	public function index()
 	{
 		$entidades = Entidad::with('tipoentidad')->get();
-		return view($this->routeIndex, compact('entidades'));
+		return view($this->viewIndex, compact('entidades'));
 	}
 
 	

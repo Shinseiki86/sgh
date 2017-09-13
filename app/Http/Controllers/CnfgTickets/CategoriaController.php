@@ -48,7 +48,7 @@ class CategoriaController extends Controller
 		//Se obtienen todos los registros.
 		$categorias = Categoria::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('categorias'));
+		return view($this->view.'.'.$this->route.'.index', compact('categorias'));
 	}
 
 	/**
@@ -60,7 +60,7 @@ class CategoriaController extends Controller
 	{
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
-		return view($this->route.'.create', compact('arrProcesos'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrProcesos'));
 	}
 
 	/**
@@ -88,7 +88,7 @@ class CategoriaController extends Controller
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('categoria', 'arrProcesos'));
+		return view($this->view.'.'.$this->route.'.edit', compact('categoria', 'arrProcesos'));
 	}
 
 
