@@ -39,8 +39,6 @@ class Ausentismo extends ModelWithSoftDeletes
 		"AUSE_DIAS" => "required",
 		"AUSE_FECHAACCIDENTE" => "date",
 		"ENTI_ID" => "required",
-        "PROSPECTO"=>"required",
-        "CIE10"=>"required"
     ];
 
 

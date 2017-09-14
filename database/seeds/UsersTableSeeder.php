@@ -88,6 +88,11 @@ use SGH\Models\Permission;
                 $this->createPermissions(Categoria::class, 'categorías ticket');
                 $this->createPermissions(Sancion::class, 'categorías ticket');
                 $this->createPermissions(Incidente::class, 'tipo incidente ticket');
+
+                $this->createPermissions(Ausentismo::class, 'Ausentismo');
+                $this->createPermissions(ConceptoAusencia::class, 'Concepto Ausencia');
+                $this->createPermissions(Diagnostico::class, 'Diagnostico');
+                $this->createPermissions(TipoAusentismo::class, 'Tipo de Ausentismo');
                 
                 $perms = $this->createPermissions(Ticket::class, 'tickets');
                 $rolSuperOper->attachPermissions([

@@ -1,4 +1,5 @@
-<?php namespace SGH\Http\Controllers;
+<?php 
+namespace SGH\Http\Controllers\CnfgAusentismos;
 
 use Validator;
 use SGH\Http\Requests;
@@ -23,7 +24,7 @@ class AusentismoController extends Controller
 {
 
 
-	protected $route='ausentismos';
+	protected $route='cnfg-ausentismos.ausentismos';
 	protected $class = Ausentismo::class;
 	public function __construct()
 	{	
@@ -61,6 +62,8 @@ class AusentismoController extends Controller
 		return response()->json($data);
 	}
 
+	
+
 	public function autoComplete(Request $request) {
 	    $term = $request->term;
 	    $data=Diagnostico::where('DIAG_DESCRIPCION','LIKE','%'.$term.'%')
@@ -75,6 +78,8 @@ class AusentismoController extends Controller
 	    else
 	        return ['value'=>'No se encontró ningun Resultado','id'=>''];
 	}
+
+
 
 	public function buscaContrato(Request $request)
 	{ 

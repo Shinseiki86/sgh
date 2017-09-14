@@ -89,17 +89,15 @@ Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], functio
 	Route::get('getTicketsPorEstado', 'TicketController@getTicketsPorEstado');
 });
 
-Route::resource('diagnosticos', 'DiagnosticoController');
-Route::get('getDiagnostico', 'DiagnosticoController@getData');
+Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'], function() {
+	Route::resource('diagnosticos', 'DiagnosticoController');
+	Route::get('getDiagnostico', 'DiagnosticoController@getData');
+	Route::resource('conceptoausencias', 'ConceptoAusenciaController');
+	Route::resource('tipoausentismos', 'TipoAusentismoController');
+	Route::resource('ausentismos', 'AusentismoController');
+	Route::get('/buscaContrato','AusentismoController@buscaContrato');
+	Route::get('/buscaDx', 'AusentismoController@buscaDx');
+	Route::get('/autocomplete',array('as'=>'autocomplete','uses'=>'AusentismoController@autocomplete'));
+});
 
-Route::resource('select','SelectController');
-Route::get('/buscaCiudad','SelectController@buscaCiudad');
-
-Route::resource('conceptoausencias', 'ConceptoAusenciaController');
-Route::resource('tipoausentismos', 'TipoAusentismoController');
-
-Route::resource('ausentismos', 'AusentismoController');
-Route::get('/buscaContrato','AusentismoController@buscaContrato');
-Route::get('/buscaDx', 'AusentismoController@buscaDx');
-Route::get('/autocomplete',array('as'=>'autocomplete','uses'=>'AusentismoController@autocomplete'));
 

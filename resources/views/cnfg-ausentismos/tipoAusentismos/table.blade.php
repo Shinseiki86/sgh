@@ -1,15 +1,19 @@
 <table class="table table-striped" id="tabla">
     <thead>
-        $FIELD_HEADERS$
+        <th>Codigo</th>
+		<th>Descripcion</th>
+		<th>Observaciones</th>
         <th class="col-md-1 all" width="50px">Acciones</th>
     </thead>
     <tbody>
-    @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
+    @foreach($tipoausentismos as $tipoausentismo)
         <tr>
-            $FIELD_BODY$
+            <td>{!! $tipoausentismo->TIAU_CODIGO !!}</td>
+			<td>{!! $tipoausentismo->TIAU_DESCRIPCION !!}</td>
+			<td>{!! $tipoausentismo->TIAU_OBSERVACIONES !!}</td>
              <td>
                 <!-- Botón Editar (edit) -->
-                <a class="btn btn-small btn-info btn-xs" href="{{ route('$MODEL_NAME_PLURAL_CAMEL$.edit', [ $$MODEL_NAME_CAMEL$->PREFIJO_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+                <a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-ausentismos.tipoausentismos.edit', [ $tipoausentismo->TIAU_ID ] ) }}" data-tooltip="tooltip" title="Editar">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
 
@@ -17,10 +21,10 @@
                 {{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
                     'class'=>'btn btn-xs btn-danger btn-delete',
                     'data-toggle'=>'modal',
-                    'data-id'=> $$MODEL_NAME_CAMEL$->PREFIJO_ID,
-                    'data-modelo'=> str_upperspace(class_basename($$MODEL_NAME_CAMEL$)),
-                    'data-descripcion'=> $$MODEL_NAME_CAMEL$->PREFIJO_NOMBRE,
-                    'data-action'=>'$MODEL_NAME_PLURAL_CAMEL$/'. $$MODEL_NAME_CAMEL$->PREFIJO_ID,
+                    'data-id'=> $tipoausentismo->TIAU_ID,
+                    'data-modelo'=> str_upperspace(class_basename($tipoausentismo)),
+                    'data-descripcion'=> $tipoausentismo->TIAU_NOMBRE,
+                    'data-action'=>'tipoausentismos/'. $tipoausentismo->TIAU_ID,
                     'data-target'=>'#pregModalDelete',
                     'data-tooltip'=>'tooltip',
                     'title'=>'Borrar',
