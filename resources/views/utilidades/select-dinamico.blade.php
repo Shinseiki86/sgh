@@ -1,7 +1,13 @@
+@push('head')
+	{!! Html::style('assets/stylesheets/toastr.min.css') !!}
+@endpush
+
 @push('scripts')
+	{!! Html::script('assets/scripts/toastr.min.js') !!}
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$(document).on('change','#{{$selectPadre}}',function(){
+				 $('#{{$selectHijo}}').empty();
 				var cat_id=$(this).val();
 				var op=" ";
 				$.ajax({
@@ -10,7 +16,7 @@
 					data:{'{{$selectPadre}}':cat_id},
 					success:function(data){;
 						if (data.length==0) {
-							alert('No Se Encontro Ningun Resultado');
+							toastr.error('No se Encontro ningun Resultado','No Hay Datos',{"hideMethod": "fadeOut","timeOut": "2000","progressBar": true,"closeButton": true,"positionClass": "toast-top-left",});
 						} else {
 							op+='<option value="0" selected disabled>{{isset($prepend)?$prepend:''}}</option>';
 							for(var i=0;i<data.length;i++){

@@ -10,7 +10,7 @@ class FormFieldsGenerator
  public static function generateLabel($field)
     {
         $label = Str::title(str_replace('_', ' ', $field['fieldName']));
-        $template = "{!! Form::label('\$FIELD_NAME\$', '\$FIELD_NAME_TITLE\$:', ['class' => 'col-md-4 control-label \$FIELD_NAME_TITLE\$']) !!}";
+        $template = "{!! Form::label('\$FIELD_NAME\$', '\$FIELD_NAME_TITLE\$:', ['class' => 'control-label \$FIELD_NAME_TITLE\$']) !!}";
         $template = str_replace('$FIELD_NAME_TITLE$', $label, $template);
         $template = str_replace('$FIELD_NAME$', $field['fieldName'], $template);
         return $template;

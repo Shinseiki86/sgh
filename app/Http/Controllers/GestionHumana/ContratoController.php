@@ -22,7 +22,8 @@ use SGH\Models\TipoEntidad;
 
 class ContratoController extends Controller
 {
-	protected $route = 'gestion-humana.contratos';
+	protected $view = 'gestion-humana';
+	protected $route = 'contratos';
 	protected $class = Contrato::class;
 
 	public function __construct()

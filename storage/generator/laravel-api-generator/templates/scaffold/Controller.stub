@@ -2,13 +2,10 @@
 
 use Validator;
 use $NAMESPACE_REQUEST$;
-use $NAMESPACE_REQUEST$\Create$MODEL_NAME$Request;
-use $NAMESPACE_REQUEST$\Update$MODEL_NAME$Request;
 use Flash;
 use Session;
 use Redirect;
 use $NAMESPACE_CONTROLLER$\Controller;
-use $BASE_CONTROLLER$ as AppBaseController;
 use Response;
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
 use Yajra\Datatables\Facades\Datatables;
@@ -16,11 +13,10 @@ use Yajra\Datatables\Facades\Datatables;
 class $MODEL_NAME$Controller extends Controller
 {
 
-	private $groupUrl='';
-	private $routeIndex = '$MODEL_NAME_PLURAL_CAMEL$.index';
+	protected $route='$MODEL_NAME_PLURAL_CAMEL$';
+	protected $class = $MODEL_NAME$::class;
 	public function __construct()
 	{
-		$this->routeIndex=$this->groupUrl .'.$MODEL_NAME_PLURAL_CAMEL$.index';
 		$this->middleware('auth');
 	}
 
@@ -46,7 +42,7 @@ class $MODEL_NAME$Controller extends Controller
 	{
 		//$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::all();
 		//return view('$MODEL_NAME_PLURAL_CAMEL$/index2', compact('$MODEL_NAME_PLURAL_CAMEL$'));
-		return view('$MODEL_NAME_PLURAL_CAMEL$/index');
+		return view($this->route.'.index');
 	}
 
 	/**
@@ -74,7 +70,7 @@ class $MODEL_NAME$Controller extends Controller
 	 */
 	public function create()
 	{
-		return view('$MODEL_NAME_PLURAL_CAMEL$.create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -86,7 +82,7 @@ class $MODEL_NAME$Controller extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel($MODEL_NAME$::class,  $this->routeIndex);
+		parent::storeModel();
 	}
 
 	/**
@@ -108,7 +104,7 @@ class $MODEL_NAME$Controller extends Controller
 	 */
 	public function edit($MODEL_NAME$ $$MODEL_NAME_PLURAL_CAMEL$)
 	{
-		return view('$MODEL_NAME_PLURAL_CAMEL$.edit',['$MODEL_NAME_CAMEL$'=>$$MODEL_NAME_PLURAL_CAMEL$]);
+		return view($this->route.'.edit',['$MODEL_NAME_CAMEL$'=>$$MODEL_NAME_PLURAL_CAMEL$]);
 	}
 
 	/**
@@ -121,7 +117,7 @@ class $MODEL_NAME$Controller extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel($ID, $MODEL_NAME$::class,  $this->routeIndex);
+		parent::updateModel();
 	}
 
 	/**
@@ -133,6 +129,6 @@ class $MODEL_NAME$Controller extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel($ID, $MODEL_NAME$::class, $this->routeIndex);
+		parent::destroyModel();
 	}
 }

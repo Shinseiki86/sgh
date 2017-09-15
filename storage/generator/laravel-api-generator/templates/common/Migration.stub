@@ -14,7 +14,7 @@ class Create$MODEL_NAME_PLURAL$Table extends Migration
 	 */
 	public function up()
 	{
-		$commentTabla = 'comenario';
+		$commentTabla = 'comentario';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
 		Schema::create('$TABLE_NAME$', function(Blueprint $table)

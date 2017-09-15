@@ -22,7 +22,7 @@
         @if($tipoausentismos->isEmpty())
             <div class="well text-center">No se encontró ningun tipoa de usentismo.</div>
         @else
-            @include('tipoausentismos.table')
+            @include('cnfg-ausentismos.tipoausentismos.table')
         @endif
     </div>
 

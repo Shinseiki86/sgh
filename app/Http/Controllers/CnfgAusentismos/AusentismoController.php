@@ -1,4 +1,5 @@
-<?php namespace SGH\Http\Controllers;
+<?php 
+namespace SGH\Http\Controllers\CnfgAusentismos;
 
 use Validator;
 use SGH\Http\Requests;
@@ -9,6 +10,7 @@ use Response;
 use SGH\Models\Ausentismo;
 use SGH\Models\Diagnostico;
 use SGH\Models\Prospecto;
+use SGH\Models\Contrato;
 use SGH\Models\ConceptoAusencia;
 use SGH\Models\Entidad;
 use Yajra\Datatables\Facades\Datatables;
@@ -20,13 +22,13 @@ use Illuminate\Routing\Redirector;
 
 class AusentismoController extends Controller
 {
-
-
-	protected $route='ausentismos';
+	protected $view  = 'cnfg-ausentismos';
+	protected $route = 'ausentismos';
 	protected $class = Ausentismo::class;
+	
 	public function __construct()
 	{	
-		
+		parent::__construct();
 	}
 
 	/**
@@ -60,6 +62,8 @@ class AusentismoController extends Controller
 		return response()->json($data);
 	}
 
+	
+
 	public function autoComplete(Request $request) {
 	    $term = $request->term;
 	    $data=Diagnostico::where('DIAG_DESCRIPCION','LIKE','%'.$term.'%')
@@ -74,6 +78,8 @@ class AusentismoController extends Controller
 	    else
 	        return ['value'=>'No se encontró ningun Resultado','id'=>''];
 	}
+
+
 
 	public function buscaContrato(Request $request)
 	{ 
@@ -98,23 +104,29 @@ class AusentismoController extends Controller
 	 */
 	public function create()
 	{
-		//Se crea un array con los prospectos disponibles
-		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
-				'PROS_CEDULA',
-			], 'PROS_NOMBRESAPELLIDOS'));
+		$CONT_PROSPECTOS = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA',
+			'CONT_FECHAINGRESO',
+		], 'CONT_PROSPECTOS');
 
+		$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+					->select(['CONT_ID', $CONT_PROSPECTOS])
+					->get();
+
+		//Se crea un array con los prospectos disponibles
+		$arrContratos = model_to_array($contratos, 'CONT_PROSPECTOS');
+		
 		//Se crea un array con los conceptos de Ausentismos
 		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
 		
 		//Se crea un array con las Entidades Responsables
 		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
-
-
-		return view($this->view.'.'.$this->route.'.create',compact('arrProspectos','arrConceptoAusentismo','arrEntidad'));
+		
+		return view($this->view.'.'.$this->route.'.create',compact('arrContratos','arrConceptoAusentismo','arrEntidad'));
 	}
 
 	
@@ -150,22 +162,33 @@ class AusentismoController extends Controller
 	 */
 	public function edit(Ausentismo $ausentismos)
 	{
-		//Se crea un array con los prospectos disponibles
-		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
-				'PROS_CEDULA',
-			], 'PROS_NOMBRESAPELLIDOS'));
+		$CONT_PROSPECTOS = expression_concat([
+		'PROS_PRIMERNOMBRE',
+		'PROS_SEGUNDONOMBRE',
+		'PROS_PRIMERAPELLIDO',
+		'PROS_SEGUNDOAPELLIDO',
+		'PROS_CEDULA',
+		'CONT_FECHAINGRESO',
+		], 'CONT_PROSPECTOS');
 
+		$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+					->select(['CONT_ID', $CONT_PROSPECTOS])
+					->get();
+
+		//Se crea un array con los prospectos disponibles
+		$arrContratos = model_to_array($contratos, 'CONT_PROSPECTOS');
+				$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')->get();
 		//Se crea un array con los conceptos de Ausentismos
 		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
 		
 		//Se crea un array con las Entidades Responsables
 		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
 
-		return view($this->view.'.'.$this->route.'.edit',['ausentismo'=>$ausentismos],compact('arrProspectos','arrConceptoAusentismo','arrEntidad'));
+
+		$diagnostico= Diagnostico::where('DIAG_ID','=',$ausentismos->DIAG_ID)->get();
+
+
+		return view($this->view.'.'.$this->route.'.edit',['ausentismo'=>$ausentismos,'diagnostico'=>$diagnostico],compact('arrContratos','arrConceptoAusentismo','arrEntidad'));
 	}
 
 	/**

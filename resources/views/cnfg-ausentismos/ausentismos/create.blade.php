@@ -3,14 +3,13 @@
 @section('page_heading', 'Nuevo Ausentismo ')
 
 @section('section')
-{{-- <div class="col-md-6 col-md-offset-4"> --}}
 	{{ Form::open(['route' => 'ausentismos.store', 'class' => 'form-horizontal']) }}
 
 		<!-- Elementos del formulario -->
-		@include('ausentismos.fields')
+		@include('cnfg-ausentismos.ausentismos.fields')
 
 		<!-- Botones -->
-		@include('widgets.forms.buttons', ['url' => 'ausentismos'])
+		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/ausentismos'])
 
 	{{ Form::close() }}
 {{-- </div> --}}

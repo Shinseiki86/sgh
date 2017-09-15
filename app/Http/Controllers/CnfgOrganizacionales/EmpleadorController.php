@@ -14,7 +14,8 @@ use SGH\Models\Empleador;
 
 class EmpleadorController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.empleadores';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'empleadores';
 	protected $class = Empleador::class;
 
 	public function __construct()
@@ -56,7 +57,7 @@ class EmpleadorController extends Controller
 		//Se obtienen todos los registros.
 		$empleadores = Empleador::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('empleadores'));
+		return view($this->view.'.'.$this->route.'.index', compact('empleadores'));
 	}
 
 	/**

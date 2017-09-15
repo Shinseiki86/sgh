@@ -14,7 +14,8 @@ use SGH\Models\TipoEmpleador;
 
 class TipoEmpleadorController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.tiposempleadores';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'tiposempleadores';
 	protected $class = Riesgo::class;
 
 	public function __construct()

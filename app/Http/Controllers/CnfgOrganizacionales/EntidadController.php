@@ -3,26 +3,23 @@ namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
 use Validator;
 use SGH\Http\Requests;
-use SGH\Http\Requests\CreateEntidadRequest;
-use SGH\Http\Requests\UpdateEntidadRequest;
 use Flash;
 use Session;
 use Redirect;
 use SGH\Http\Controllers\Controller;
-use Mitul\Controller\AppBaseController as AppBaseController;
 use Response;
 use SGH\Models\Entidad;
 use Yajra\Datatables\Facades\Datatables;
 
 class EntidadController extends Controller
-{
-
-	private $groupUrl='cnfg-organizacionales.';
-	private $routeIndex = 'entidades.index';
+{	
+	protected $view = 'cnfg-organizacionales';
+	protected $route='entidades';
+	protected $class = Entidad::class;
 
 	public function __construct()
-	{
-		parent::__construct();
+	{	
+		
 	}
 
 	/**
@@ -46,7 +43,7 @@ class EntidadController extends Controller
 	public function index()
 	{
 		$entidades = Entidad::with('tipoentidad')->get();
-		return view($this->viewIndex, compact('entidades'));
+		return view($this->view.'.'.$this->route.'.index', compact('entidades'));
 	}
 
 	
@@ -59,7 +56,7 @@ class EntidadController extends Controller
 	{
 		$arrTipoEntidad = model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
 
-		return view('cnfg-organizacionales.entidades.create', compact('arrTipoEntidad'));
+		return view($this->route.'.create', compact('arrTipoEntidad'));
 	}
 
 	/**
@@ -94,7 +91,7 @@ class EntidadController extends Controller
 	public function edit(Entidad $entidades)
 	{		
 		$arrTipoEntidad = model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
-		return view('cnfg-organizacionales.entidades.edit',['entidad'=>$entidades,'arrTipoEntidad'=>$arrTipoEntidad]);
+		return view($this->route.'.edit',['entidad'=>$entidades,'arrTipoEntidad'=>$arrTipoEntidad]);
 	}
 
 	/**

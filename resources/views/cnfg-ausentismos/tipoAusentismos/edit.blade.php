@@ -6,10 +6,10 @@
 	{{ Form::model($tipoAusentismo, ['route' => ['tipoausentismos.update', $tipoAusentismo ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<!-- Elementos del formulario -->
-		@include('tipoausentismos.fields')
+		@include('cnfg-ausentismos.tipoausentismos.fields')
 
 		<!-- Botones -->
-		@include('widgets.forms.buttons', ['url' => 'tipoausentismos'])
+		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/tipoausentismos'])
 
 	{{ Form::close() }}
 @endsection

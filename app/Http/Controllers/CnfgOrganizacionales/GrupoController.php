@@ -14,7 +14,8 @@ use SGH\Models\Grupo;
 
 class GrupoController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.grupos';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'grupos';
 	protected $class = Grupo::class;
 
 	public function __construct()

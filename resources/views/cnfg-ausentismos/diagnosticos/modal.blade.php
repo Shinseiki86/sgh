@@ -12,10 +12,10 @@
         
 
 		<!-- Elementos del formulario -->
-		@include('diagnosticos.fields')
+		@rinclude('fields')
 
 		<!-- Botones -->
-		@include('widgets.forms.buttons', ['url' => 'diagnosticos'])
+		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos.diagnosticos'])
 
 	
       </div>

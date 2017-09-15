@@ -1,11 +1,11 @@
 @extends('layouts.menu')
-@section('title', '/Diagnosticos')
+@section('title', '/ Diagnosticos')
 
 @section('page_heading')
-    @include('diagnosticos.modal')
+    @include('cnfg-ausentismos.diagnosticos.modal')
     <div class="row">
         <div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-            Diagnosticos
+            Diagnósticos
         </div>
         <div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
         <button class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Editar</button>
@@ -28,7 +28,7 @@
     </table>
 
     @include('widgets/modal-delete')
-    @include('datatable-ajax', ['urlAjax'=>'getDiagnostico', 'columns'=>[
+    @include('datatable-ajax', ['urlAjax'=>route('diagnosticos.getData'), 'columns'=>[
         'DIAG_CODIGO',
         'DIAG_DESCRIPCION',
     ]]) 

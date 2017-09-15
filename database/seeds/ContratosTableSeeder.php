@@ -18,7 +18,7 @@ class ContratosTableSeeder extends Seeder
     	$contrato->JEFE_ID = 2;
     	$contrato->CONT_CASOMEDICO = 'NO';
     	$contrato->CARG_ID = 1;
-    	$contrato->CONT_FECHAINGRESO = '2017-07-01';
+    	$contrato->CONT_FECHAINGRESO = '2015-06-01';
     	$contrato->CONT_FECHARETIRO = NULL;
     	$contrato->CONT_SALARIO = 1000000;
     	$contrato->CONT_VARIABLE = 500000;
@@ -42,9 +42,9 @@ class ContratosTableSeeder extends Seeder
         $contrato->JEFE_ID = 1;
         $contrato->CONT_CASOMEDICO = 'NO';
         $contrato->CARG_ID = 1;
-        $contrato->CONT_FECHAINGRESO = '2017-07-01';
+        $contrato->CONT_FECHAINGRESO = '2013-04-01';
         $contrato->CONT_FECHARETIRO = NULL;
-        $contrato->CONT_SALARIO = 1000000;
+        $contrato->CONT_SALARIO = 2000000;
         $contrato->CONT_VARIABLE = 500000;
         $contrato->CONT_RODAJE = 350000;
         $contrato->ESCO_ID = 1;
@@ -65,9 +65,9 @@ class ContratosTableSeeder extends Seeder
     	$contrato->JEFE_ID = 1;
     	$contrato->CONT_CASOMEDICO = 'NO';
     	$contrato->CARG_ID = 1;
-    	$contrato->CONT_FECHAINGRESO = '2017-07-01';
+    	$contrato->CONT_FECHAINGRESO = '2017-07-15';
     	$contrato->CONT_FECHARETIRO = NULL;
-    	$contrato->CONT_SALARIO = 1000000;
+    	$contrato->CONT_SALARIO = 3000000;
     	$contrato->CONT_VARIABLE = 500000;
     	$contrato->CONT_RODAJE = 350000;
     	$contrato->ESCO_ID = 1;

@@ -13,12 +13,13 @@ use Yajra\Datatables\Facades\Datatables;
 class TipoEntidadController extends Controller
 {
 
-	private $groupUrl='cnfg-organizacionales.';
-	private $routeIndex = 'cnfg-organizacionales.tipoentidades.index';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'tipoentidades';
+	protected $class = TipoEntidad::class;
+
 	public function __construct()
 	{
-		$this->routeIndex=$this->groupUrl .'tipoentidades.index';
-		$this->middleware('auth');
+		parent::__construct();
 	}
 
 	/**
@@ -42,7 +43,7 @@ class TipoEntidadController extends Controller
 	public function index()
 	{
 		$tipoentidades = TipoEntidad::all();
-		return view($this->viewIndex, compact('tipoentidades'));
+		return view($this->view.'.'.$this->route.'.index', compact('tipoentidades'));
 	}
 
 	
@@ -53,7 +54,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-organizacionales.tipoentidades.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -65,7 +66,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(TipoEntidad::class,  $this->routeIndex);
+		parent::storeModel();
 	}
 
 	/**
@@ -87,7 +88,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function edit(TipoEntidad $tipoentidades)
 	{
-		return view('cnfg-organizacionales.tipoentidades.edit',['tipoEntidad'=>$tipoentidades]);
+		return view($this->view.'.'.$this->route.'.edit',['tipoEntidad'=>$tipoentidades]);
 	}
 
 	/**
@@ -100,7 +101,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel($ID, TipoEntidad::class,  $this->routeIndex);
+		parent::updateModel($ID);
 	}
 
 	/**
@@ -112,6 +113,6 @@ class TipoEntidadController extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel($ID, TipoEntidad::class, $this->routeIndex);
+		parent::destroyModel($ID);
 	}
 }

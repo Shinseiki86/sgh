@@ -14,7 +14,8 @@ use SGH\Models\Riesgo;
 
 class RiesgoController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.riesgos';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'riesgos';
 	protected $class = Riesgo::class;
 
 	public function __construct()

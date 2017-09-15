@@ -22,7 +22,7 @@
         @if($tipoentidades->isEmpty())
             <div class="well text-center">No se encontró ningun Tipoentidades.</div>
         @else
-            @include('tipoentidades.table')
+            @rinclude('table')
         @endif
     </div>
 

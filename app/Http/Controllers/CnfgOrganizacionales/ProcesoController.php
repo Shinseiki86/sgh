@@ -14,7 +14,8 @@ use SGH\Models\Proceso;
 
 class ProcesoController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.procesos';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'procesos';
 	protected $class = Proceso::class;
 
 	public function __construct()

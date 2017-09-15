@@ -19,11 +19,7 @@
 @section('section')
 
    <div class="row">
-        @if($ausentismos->isEmpty())
-            <div class="well text-center">No se encontró ningun Ausentismos.</div>
-        @else
-            @include('ausentismos.table')
-        @endif
+        @include('cnfg-ausentismos.ausentismos.table')
     </div>
 
     @include('widgets/modal-delete')

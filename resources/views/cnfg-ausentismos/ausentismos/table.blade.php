@@ -1,8 +1,8 @@
-<table class="table table-striped" id="tabla">
+<table class="table table-striped" id="tabla">   
     <thead>
         <th>Diagnostico</th>
 		<th>Concepto Ausentismo</th>
-		<th>Contrato</th>
+		<th>Prospecto</th>
 		<th>Fecha Inicio</th>
 		<th>Fecha Final</th>
 		<th>Total Dias</th>
@@ -16,16 +16,16 @@
     <tbody>
     @foreach($ausentismos as $ausentismo)
         <tr>
-            <td>{!! $ausentismo->DIAG_ID !!}</td>
-			<td>{!! $ausentismo->COAU_ID !!}</td>
-			<td>{!! $ausentismo->CONT_ID !!}</td>
-			<td>{!! $ausentismo->AUSE_FECHAINICIO !!}</td>
+            <td>{!! $ausentismo->diagnostico->DIAG_DESCRIPCION !!}</td>
+			<td>{!! $ausentismo->conceptoausencia->COAU_DESCRIPCION !!}</td>
+			<td>{!! nombre_empleado($ausentismo->contrato->PROS_ID) !!}</td>
+			<td>{!! $ausentismo -> AUSE_FECHAINICIO !!}</td>
 			<td>{!! $ausentismo->AUSE_FECHAFINAL !!}</td>
 			<td>{!! $ausentismo->AUSE_DIAS !!}</td>
 			<td>{!! $ausentismo->AUSE_FECHAACCIDENTE !!}</td>
-			<td>{!! $ausentismo->ENTI_ID !!}</td>
-			<td>{!! $ausentismo->AUSE_IBC !!}</td>
-			<td>{!! $ausentismo->AUSE_VALOR !!}</td>
+			<td>{!! $ausentismo->enitdad->ENTI_RAZONSOCIAL !!}</td>
+			<td>{!! number_format($ausentismo->AUSE_IBC, 0) !!}</td>
+			<td>{!! number_format($ausentismo->AUSE_VALOR, 0) !!}</td>
 			<td>{!! $ausentismo->AUSE_OBSERVACIONES !!}</td>
              <td>
                 <!-- Botón Editar (edit) -->

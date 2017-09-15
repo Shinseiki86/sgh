@@ -15,7 +15,8 @@ use SGH\Models\Empleador;
 
 class GerenciaController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.gerencias';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'gerencias';
 	protected $class = Gerencia::class;
 
 	public function __construct()
@@ -50,7 +51,7 @@ class GerenciaController extends Controller
 		//Se obtienen todos los registros.
 		$gerencias = Gerencia::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('gerencias'));
+		return view($this->view.'.'.$this->route.'.index', compact('gerencias'));
 	}
 
 	/**

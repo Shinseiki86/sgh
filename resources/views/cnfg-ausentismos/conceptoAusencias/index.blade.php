@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('title', '/ Ciudades')
+@section('title', '/ Concepto Ausencias')
 @include('datatable')
 
 
@@ -19,11 +19,7 @@
 @section('section')
 
    <div class="row">
-        @if($conceptoausencias->isEmpty())
-            <div class="well text-center">No se encontró ningun concepto de ausencia.</div>
-        @else
-            @include('conceptoausencias.table')
-        @endif
+       @include('cnfg-ausentismos.conceptoausencias.table')
     </div>
 
     @include('widgets/modal-delete')

@@ -48,7 +48,7 @@ Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizac
 	Route::resource('turnos', 'TurnoController');
 	Route::resource('plantaslaborales', 'PlantaLaboralController');
 	Route::resource('tipoentidades', 'TipoEntidadController');
-	//Route::resource('entidades', 'EntidadController');
+	Route::resource('entidades', 'EntidadController');
 });
 
 Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
@@ -90,15 +90,13 @@ Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], functio
 	Route::get('getTicketsPorEstado', 'TicketController@getTicketsPorEstado');
 });
 
-Route::resource('diagnosticos', 'DiagnosticoController');
-Route::get('getDiagnostico', 'DiagnosticoController@getData');
-
-
-Route::resource('conceptoausencias', 'ConceptoAusenciaController');
-Route::resource('tipoausentismos', 'TipoAusentismoController');
-
-Route::resource('ausentismos', 'AusentismoController');
-Route::get('/buscaContrato','AusentismoController@buscaContrato');
-Route::get('/buscaDx', 'AusentismoController@buscaDx');
-Route::get('/autocomplete',array('as'=>'autocomplete','uses'=>'AusentismoController@autocomplete'));
-
+Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'], function() {
+	Route::resource('diagnosticos', 'DiagnosticoController');
+	Route::get('getDiagnosticos', 'DiagnosticoController@getData')->name('diagnosticos.getData');
+	Route::resource('conceptoausencias', 'ConceptoAusenciaController');
+	Route::resource('tipoausentismos', 'TipoAusentismoController');
+	Route::resource('ausentismos', 'AusentismoController');
+	Route::get('/buscaContrato','AusentismoController@buscaContrato');
+	Route::get('/buscaDx', 'AusentismoController@buscaDx');
+	Route::get('/autocomplete',array('as'=>'autocomplete','uses'=>'AusentismoController@autocomplete'));
+});

@@ -1,17 +1,16 @@
 @push('head')
-    {!! Html::style('http://demo.expertphp.in/css/jquery.ui.autocomplete.css') !!}
+    {!! Html::style('assets/stylesheets/jquery-ui.min.css') !!}
+    {!! Html::style('assets/stylesheets/jquery.ui.autocomplete.css') !!}
 @endpush
 
 @push('scripts')
-
-   {{--  {!! Html::script('http://demo.expertphp.in/js/jquery.js') !!} --}}
-    {!! Html::script('http://demo.expertphp.in/js/jquery-ui.min.js') !!}   
-    <script>
+    {!! Html::script('assets/scripts/jquery/jquery-ui.min.js') !!}  
+    <script>        
    $(document).ready(function() {
-     $("#DX_DESCRIPCION").autocomplete({
+     $("#{{ $first }}").autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: '{!! URL::route('autocomplete') !!}',
+                url: '{!! URL::route($ruta) !!}',
                 dataType: "json",
                 data: {
                     term : request.term
@@ -23,12 +22,35 @@
         },
         minLength:1,
         select:function(e,ui){
-            $('#CIE10').val(ui.item.cod);
-            $('#DX_DESCRIPCION').val(ui.item.value);
-            $('#DIAG_ID').val(ui.item.id);
+            $('#{{ $first }}').val(ui.item.value);   
+            @if (isset($cod))
+                $('#{{ $cod }}').val(ui.item.cod);  
+            @endif
+            @if (isset($id))
+                $('#{{ $id }}').val(ui.item.id); 
+            @endif
         },
         autofocus:true,
     });
     });
 </script>
 @endpush
+
+
+{{-- 
+@include('utilidades.autocomplete',['first'=>'DX_DESCRIPCION','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
+
+public function autoComplete(Request $request) {
+    $term = $request->term;
+    $data=Diagnostico::where('DIAG_DESCRIPCION','LIKE','%'.$term.'%')
+        ->take(10)
+        ->get();
+    $results=array();
+    foreach ($data as $v) {
+            $results[]=['id'=>$v->DIAG_ID,'value'=>$v->DIAG_DESCRIPCION,'cod'=>$v->DIAG_CODIGO];
+    }
+    if(count($results))
+         return $results;
+    else
+        return ['value'=>'No se encontró ningun Resultado','id'=>''];
+} --}}

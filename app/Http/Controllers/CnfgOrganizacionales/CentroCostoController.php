@@ -14,7 +14,8 @@ use SGH\Models\Gerencia;
 
 class CentroCostoController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.centroscostos';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'centroscostos';
 	protected $class = CentroCosto::class;
 
 	public function __construct()

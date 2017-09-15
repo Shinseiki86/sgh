@@ -1,5 +1,5 @@
 <?php
-namespace SGH\Http\Controllers;
+namespace SGH\Http\Controllers\CnfgAusentismos;
 
 use Validator;
 use SGH\Http\Requests;
@@ -14,12 +14,13 @@ use Yajra\Datatables\Facades\Datatables;
 class DiagnosticoController extends Controller
 {
 
-	private $groupUrl='';
-	private $routeIndex = 'diagnosticos.index';
+	protected $view='cnfg-ausentismos';
+	protected $route='diagnosticos';
+	protected $class = Diagnostico::class;
+	
 	public function __construct()
-	{
-		$this->routeIndex=$this->groupUrl .'diagnosticos.index';
-		$this->middleware('auth');
+	{	
+		parent::__construct();
 	}
 
 	/**
@@ -42,7 +43,7 @@ class DiagnosticoController extends Controller
 	 */
 	public function index()
 	{
-		return view('diagnosticos/index');
+		return view($this->view.'.'.$this->route.'.index');
 	}
 
 	/**
@@ -70,7 +71,7 @@ class DiagnosticoController extends Controller
 	 */
 	public function create()
 	{
-		return view('diagnosticos.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -82,7 +83,7 @@ class DiagnosticoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Diagnostico::class,  $this->routeIndex);
+		parent::storeModel();
 	}
 
 	/**
@@ -104,7 +105,7 @@ class DiagnosticoController extends Controller
 	 */
 	public function edit(Diagnostico $diagnosticos)
 	{
-		return view('diagnosticos.edit',['diagnostico'=>$diagnosticos]);
+		return view($this->view.'.'.$this->route.'.edit',['diagnostico'=>$diagnosticos]);
 	}
 
 	/**
@@ -117,7 +118,7 @@ class DiagnosticoController extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel($ID, Diagnostico::class,  $this->routeIndex);
+		parent::updateModel($ID);
 	}
 
 	/**
@@ -129,6 +130,6 @@ class DiagnosticoController extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel($ID, Diagnostico::class, $this->routeIndex);
+		parent::destroyModel($ID);
 	}
 }

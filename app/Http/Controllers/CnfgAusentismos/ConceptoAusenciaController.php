@@ -1,4 +1,5 @@
-<?php namespace SGH\Http\Controllers;
+<?php 
+namespace SGH\Http\Controllers\CnfgAusentismos;
 
 use Validator;
 use SGH\Http\Requests;
@@ -13,13 +14,15 @@ use Yajra\Datatables\Facades\Datatables;
 class ConceptoAusenciaController extends Controller
 {
 
-	private $groupUrl='';
-	private $routeIndex = 'conceptoausencias.index';
+	protected $view='cnfg-ausentismos';
+	protected $route='conceptoausencias';
+	protected $class = ConceptoAusencia::class;
+	
 	public function __construct()
-	{
-		$this->routeIndex=$this->groupUrl .'conceptoausencias.index';
-		$this->middleware('auth');
+	{	
+		parent::__construct();
 	}
+
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -51,7 +54,7 @@ class ConceptoAusenciaController extends Controller
 							'TIPOENTIDADES.TIEN_DESCRIPCION',
 						])->get();
 		//$conceptoausencias = ConceptoAusencia::all();
-		return view('conceptoausencias/index', compact('conceptoausencias'));
+		return view($this->view.'.'.$this->route.'.index', compact('conceptoausencias'));
 	}
 
 	
@@ -68,7 +71,7 @@ class ConceptoAusenciaController extends Controller
 		//Se crea un array con los tipos de Entidades
 		$arrTipoEntidad= model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
 
-		return view('conceptoausencias.create', compact('arrTipoAusentismo','arrTipoEntidad'));
+		return view($this->view.'.'.$this->route.'.create', compact('arrTipoAusentismo','arrTipoEntidad'));
 	}
 
 	/**
@@ -80,7 +83,7 @@ class ConceptoAusenciaController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(ConceptoAusencia::class,  $this->routeIndex);
+		parent::storeModel();
 	}
 
 	/**
@@ -107,7 +110,7 @@ class ConceptoAusenciaController extends Controller
 
 		//Se crea un array con los tipos de Entidades
 		$arrTipoEntidad= model_to_array(TipoEntidad::class, 'TIEN_DESCRIPCION');
-		return view('conceptoausencias.edit',['conceptoausencia'=>$conceptoausencias],compact('arrTipoAusentismo','arrTipoEntidad'));
+		return view($this->view.'.'.$this->route.'.edit',['conceptoausencia'=>$conceptoausencias],compact('arrTipoAusentismo','arrTipoEntidad'));
 	}
 
 	/**
@@ -120,7 +123,7 @@ class ConceptoAusenciaController extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel($ID, ConceptoAusencia::class,  $this->routeIndex);
+		parent::updateModel($ID);
 	}
 
 	/**
@@ -132,6 +135,6 @@ class ConceptoAusenciaController extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel($ID, ConceptoAusencia::class, $this->routeIndex);
+		parent::destroyModel($ID);
 	}
 }

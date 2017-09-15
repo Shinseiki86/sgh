@@ -1,4 +1,5 @@
-<?php namespace SGH\Http\Controllers;
+<?php 
+namespace SGH\Http\Controllers\CnfgAusentismos;
 
 use Validator;
 use SGH\Http\Requests;
@@ -12,13 +13,13 @@ use Yajra\Datatables\Facades\Datatables;
 
 class TipoAusentismoController extends Controller
 {
-
-	private $groupUrl='';
-	private $routeIndex = 'tipoausentismos.index';
+	protected $view='cnfg-ausentismos';
+	protected $route='tipoausentismos';
+	protected $class = TipoAusentismo::class;
+	
 	public function __construct()
-	{
-		$this->routeIndex=$this->groupUrl .'tipoausentismos.index';
-		$this->middleware('auth');
+	{	
+		parent::__construct();
 	}
 
 	/**
@@ -42,7 +43,7 @@ class TipoAusentismoController extends Controller
 	public function index()
 	{		
 		$tipoausentismos = TipoAusentismo::all();
-		return view('tipoausentismos/index', compact('tipoausentismos'));
+		return view($this->view.'.'.$this->route.'.index', compact('tipoausentismos'));
 	}
 
 
@@ -53,7 +54,7 @@ class TipoAusentismoController extends Controller
 	 */
 	public function create()
 	{
-		return view('tipoausentismos.create');
+		return view($this->view.'.'.$this->route.'.create');
 	}
 
 	/**
@@ -65,7 +66,7 @@ class TipoAusentismoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(TipoAusentismo::class,  $this->routeIndex);
+		parent::storeModel();
 	}
 
 	/**
@@ -87,7 +88,7 @@ class TipoAusentismoController extends Controller
 	 */
 	public function edit(TipoAusentismo $tipoausentismos)
 	{
-		return view('tipoausentismos.edit',['tipoAusentismo'=>$tipoausentismos]);
+		return view($this->view.'.'.$this->route.'.edit',['tipoAusentismo'=>$tipoausentismos]);
 	}
 
 	/**
@@ -100,7 +101,7 @@ class TipoAusentismoController extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel($ID, TipoAusentismo::class,  $this->routeIndex);
+		parent::updateModel($ID);
 	}
 
 	/**
@@ -112,6 +113,6 @@ class TipoAusentismoController extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel($ID, TipoAusentismo::class, $this->routeIndex);
+		parent::destroyModel($ID);
 	}
 }

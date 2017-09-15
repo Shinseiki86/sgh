@@ -14,7 +14,8 @@ use SGH\Models\PlantaLaboral;
 
 class PlantaLaboralController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.plantaslaborales';
+	protected $view = 'cnfg-organizacionales';
+	protected $route = 'plantaslaborales';
 	protected $class = PlantaLaboral::class;
 
 	public function __construct()

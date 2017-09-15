@@ -6,10 +6,10 @@
 	{{ Form::model($conceptoausencia, ['route' => ['conceptoausencias.update', $conceptoausencia ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<!-- Elementos del formulario -->
-		@include('conceptoausencias.fields')
+		@include('cnfg-ausentismos.conceptoausencias.fields')
 
 		<!-- Botones -->
-		@include('widgets.forms.buttons', ['url' => 'conceptoausencias'])
+		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/conceptoausencias'])
 
 	{{ Form::close() }}
 @endsection

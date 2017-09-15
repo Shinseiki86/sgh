@@ -1,13 +1,12 @@
 @include('chosen')
-@include('utilidades.autocomplete')
-@include('utilidades.buscarV')
+@include('utilidades.autocomplete',['first'=>'DX_DESCRIPCION','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
+@include('utilidades.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCION','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
 @include('datepicker')
 <div class='col-md-8 col-md-offset-2'>
 
 	<div class="row">
-		@include('widgets.forms.input', ['type'=>'select', 'column'=>8, 'name'=>'PROSPECTO', 'label'=>'Prospecto', 'data'=>$arrProspectos,'placeholder'=>'Seleccione un Prospecto','allowClear'=>true])
-		@include('widgets.forms.input', ['type'=>'select', 'column'=>4, 'name'=>'CONT_ID', 'label'=>'Contrato', 'placeholder'=>'Seleccione un Contrato','allowClear'=>true])
-		@include('utilidades.select-dinamico', ['url'=>'buscaContrato', 'selectPadre'=>'PROSPECTO', 'selectHijo'=>'CONT_ID', 'idBusqueda'=>'PROSP', 'nombreBusqueda'=>'CONT_FECHAINGRESO', 'prepend'=>'Seleccione un Cotrato'])
+		@include('widgets.forms.input', ['type'=>'select', 'name'=>'CONT_ID', 'label'=>'Prospecto', 'data'=>$arrContratos,'value','placeholder'=>'Seleccione un Prospecto','allowClear'=>true])
+		
 	</div>
 
 	<!-- Diagnostico -->

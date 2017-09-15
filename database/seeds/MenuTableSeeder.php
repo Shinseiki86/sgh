@@ -279,7 +279,7 @@ class MenuTableSeeder extends Seeder
         ]);
             Menu::create([
                 'MENU_LABEL' => 'Diagnósticos',
-                'MENU_URL' => 'diagnosticos',
+                'MENU_URL' => 'cnfg-ausentismos/diagnosticos',
                 'MENU_ICON' => 'fa-heartbeat',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
@@ -287,7 +287,7 @@ class MenuTableSeeder extends Seeder
 
             Menu::create([
                 'MENU_LABEL' => 'Tipo Ausentismos',
-                'MENU_URL' => 'tipoausentismos',
+                'MENU_URL' => 'cnfg-ausentismos/tipoausentismos',
                 'MENU_ICON' => 'fa-wrench',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
@@ -295,7 +295,7 @@ class MenuTableSeeder extends Seeder
 
             Menu::create([
                 'MENU_LABEL' => 'Concepto Ausencias',
-                'MENU_URL' => 'conceptoausencias',
+                'MENU_URL' => 'cnfg-ausentismos/conceptoausencias',
                 'MENU_ICON' => 'fa-share-square-o',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
@@ -303,7 +303,7 @@ class MenuTableSeeder extends Seeder
 
             Menu::create([
                 'MENU_LABEL' => 'Ausentismo',
-                'MENU_URL' => 'ausentismos',
+                'MENU_URL' => 'cnfg-ausentismos/ausentismos',
                 'MENU_ICON' => 'fa-wheelchair',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,

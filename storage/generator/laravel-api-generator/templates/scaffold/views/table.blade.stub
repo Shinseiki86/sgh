@@ -20,7 +20,7 @@
                     'data-id'=> $$MODEL_NAME_CAMEL$->PREFIJO_ID,
                     'data-modelo'=> str_upperspace(class_basename($$MODEL_NAME_CAMEL$)),
                     'data-descripcion'=> $$MODEL_NAME_CAMEL$->PREFIJO_NOMBRE,
-                    'data-action'=>'ciudades/'. $$MODEL_NAME_CAMEL$->PREFIJO_ID,
+                    'data-action'=>'$MODEL_NAME_PLURAL_CAMEL$/'. $$MODEL_NAME_CAMEL$->PREFIJO_ID,
                     'data-target'=>'#pregModalDelete',
                     'data-tooltip'=>'tooltip',
                     'title'=>'Borrar',
