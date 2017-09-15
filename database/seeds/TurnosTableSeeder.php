@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use SGH\Models\Turno;
+use SGH\Models\Empleador;
 
 class TurnosTableSeeder extends Seeder
 {
@@ -12,23 +13,37 @@ class TurnosTableSeeder extends Seeder
      */
     public function run()
     {
-    	//$this->command->info('---Seeder Empleadores');
-    	
-        Turno::create([
-            'TURN_DESCRIPCION' => 'TURNO DÍA',
-            'TURN_CODIGO' => 'T1',
-            'TURN_HORAINICIO' => '06:00:00',
-            'TURN_HORAFINAL' => '14:00:00',
-            'TURN_OBSERVACIONES' => 'TURNO DE DÍA',
-        ]);
+    	$this->command->info('---Seeder Turnos');
 
-    	Turno::create([
-        	'TURN_DESCRIPCION' => 'TURNO NOCHE',
-            'TURN_CODIGO' => 'T3',
-            'TURN_HORAINICIO' => '22:00:00',
-            'TURN_HORAFINAL' => '06:00:00',
-        	'TURN_OBSERVACIONES' => 'TURNO DE NOCHE',
-        ]);
+        $turno = new Turno;
+        $turno->TURN_DESCRIPCION = 'TURNO DÍA';
+        $turno->TURN_CODIGO = 'T1';
+        $turno->TURN_HORAINICIOPI = '06:00:00';
+        $turno->TURN_HORAFINALPI = '14:00:00';
+        $turno->TURN_HORAINICIOSI = NULL;
+        $turno->TURN_HORAFINALSI = NULL;
+        $turno->TURN_OBSERVACIONES = NULL;
+        $turno->save();
+
+        /*
+        $empleadores = Empleador::all('EMPL_ID')->toArray();
+        $turno->empleadores()->sync($empleadores);
+        */
+
+        $turno = new Turno;
+        $turno->TURN_DESCRIPCION = 'TURNO NOCHE';
+        $turno->TURN_CODIGO = 'T3';
+        $turno->TURN_HORAINICIOPI = '22:00:00';
+        $turno->TURN_HORAFINALPI = '06:00:00';
+        $turno->TURN_HORAINICIOSI = NULL;
+        $turno->TURN_HORAFINALSI = NULL;
+        $turno->TURN_OBSERVACIONES = NULL;
+        $turno->save();
+
+        /*
+        $empleadores = Empleador::all('EMPL_ID')->toArray();
+        $turno->empleadores()->sync($empleadores);
+        */
 
     }
 }

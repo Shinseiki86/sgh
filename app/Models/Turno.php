@@ -21,8 +21,10 @@ class Turno extends ModelWithSoftDeletes
 		'TURN_DESCRIPCION',
 		'TURN_OBSERVACIONES',
 		'TURN_CODIGO',
-		'TURN_HORAINICIO',
-		'TURN_HORAFINAL',
+		'TURN_HORAINICIOPI',
+		'TURN_HORAFINALPI',
+		'TURN_HORAINICIOSI',
+		'TURN_HORAFINALSI',
 	];
 
 	public function contratos()

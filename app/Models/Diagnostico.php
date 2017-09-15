@@ -1,4 +1,5 @@
-<?php namespace SGH\Models;
+<?php 
+namespace SGH\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
 use SGH\Models\ModelWithSoftDeletes;

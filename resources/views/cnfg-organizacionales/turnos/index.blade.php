@@ -20,7 +20,6 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-4">Empleador</th>
 				<th class="col-md-2">Codigo</th>
 				<th class="col-md-4">Descripción</th>
 				<th class="col-md-4">Inicio</th>
@@ -33,7 +32,6 @@
 		<tbody>
 			@foreach($turnos as $turno)
 			<tr>
-				<td>{{ $turno -> empleador -> EMPL_NOMBRECOMERCIAL}}</td>
 				<td>{{ $turno -> TURN_CODIGO }}</td>
 				<td>{{ $turno -> TURN_DESCRIPCION }}</td>
 				<td>{{ $turno -> TURN_HORAINICIO}}</td>
