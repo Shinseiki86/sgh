@@ -7,7 +7,7 @@
 	{{ Form::open(['route' => 'tipoausentismos.store', 'class' => 'form-horizontal']) }}
 
 		<!-- Elementos del formulario -->
-		@include('cnfg-ausentismos.tipoausentismos.fields')
+		@rinclude('fields')
 
 		<!-- Botones -->
 		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/tipoausentismos'])

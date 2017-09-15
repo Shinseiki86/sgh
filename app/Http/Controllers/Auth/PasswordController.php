@@ -60,12 +60,11 @@ class PasswordController extends Controller
             return view( 'auth.passwords.email' );
         }
 
-
         $email = Input::get('email');
         //Si está autenticado y no llegó un token...
         if ( auth()->check() && is_null($token) ){
             //Si el rol es admin y el id recibido por GET no es null...
-            if( auth()->user()->rol->ROLE_rol == 'admin' && Input::get('USER_ID') !== null)
+            if( \Entrust::hasRole('admin') && Input::get('USER_ID') !== null)
                 $user = \SGH\Models\User::findOrFail(Input::get('USER_ID'));
             else
                 $user = auth()->user();
@@ -74,30 +73,11 @@ class PasswordController extends Controller
             $token = \Password::getRepository()->create( $user );
         }
 
-        return view( 'auth.passwords.reset' )
-                ->with( 'email', $email )
-                ->with( 'token', $token );
-
+        return view('auth.passwords.reset')->with(
+            ['token' => $token, 'email' => $email]
+        );
     }
 
-
-    /**
-     * Reset the given user's password.
-     *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
-     * @param  string  $password
-     * @return void
-     */
-    protected function resetPassword($user, $password)
-    {
-        $user->forceFill([
-            'password' => bcrypt($password),
-            'remember_token' => Str::random(60),
-        ])->save();
-
-        //Auth::guard($this->getGuard())->login($user);
-        Session::flash('message', '¡Contraseña modificada para '.$user->username.'!');
-    }
 
     /**
      * Get the response for after a successful password reset.

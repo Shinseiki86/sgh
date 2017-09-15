@@ -35,12 +35,13 @@
             "tests/TestCase.php"
         ],
         "files": [
-            "app/Http/helpers.php"
+            "app/helpers.php"
         ]
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "php -r \"copy('.env.pgsql', '.env');\"",
+            "php artisan key:generate"
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
@@ -55,6 +56,6 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "Laravel5.4"
     }
 }

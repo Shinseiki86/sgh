@@ -23,10 +23,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('menusTop', session()->get('menusTop'));
         });
 
-        Blade::directive('datetime', function ($expression) {
-            return "<?php echo date_format(new DateTime($expression)), 'd/m/Y h:i A'); ?>";
-        });
-
         Blade::directive('rinclude', function($expression) {
             $viewBasePath = config('view.paths')[0];
             $curCompiledFilePath = Blade::getPath();

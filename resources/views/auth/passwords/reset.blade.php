@@ -10,7 +10,6 @@
 
 				<div class="panel-body">
 
-					@include('partials/errors')
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
 						{{ csrf_field() }}

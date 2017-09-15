@@ -42,8 +42,8 @@
 				<td>{{ $usuario -> name }}</td>
 				<td>{{ $usuario -> username }}</td>
 				<td>{{ $usuario -> roles ->implode('display_name', ',') }}</td>
-				<td class="hidden-xs">@datetime($usuario->USER_CREADOPOR)</td>
-				<td class="hidden-xs">{{ $usuario -> USER_MODIFICADOPOR }}</td>
+				<td class="hidden-xs">{{ datetime($usuario->created_at, true) }}</td>
+				<td class="hidden-xs">{{ datetime($usuario->modified_at, true) }}</td>
 				<td>
 
 					{{-- <!-- Botón Ver (show) -->
@@ -57,7 +57,7 @@
 					</a><!-- Fin Botón Contraseña (sendResetLinkEmail) --> --}}
 
 					<!-- Botón Contraseña (showResetForm) -->
-					<a class="btn btn-warning btn-xs" href="{{ URL::to('password/reset?USER_ID='.$usuario->USER_ID) }}" data-tooltip="tooltip" title="Cambiar Contraseña">
+					<a class="btn btn-warning btn-xs" href="{{ URL::to('password/reset/'.$usuario->USER_ID) }}" data-tooltip="tooltip" title="Cambiar Contraseña">
 						<i class="fa fa-key" aria-hidden="true"></i>
 					</a>
 

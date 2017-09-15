@@ -133,10 +133,9 @@ class MenuController extends Controller
 	private function getRoutes()
 	{
 		$arrRoutes = ['#'=>'#'];
-		foreach (Route::getRoutes() as $value) {
-			$uri = $value->getPath();
-			if(ends_with($uri, 'create')){
-				$uri = str_replace('/create', '', $uri);
+		foreach (Route::getRoutes()->get('GET') as $route) {
+			$uri = $route->uri();
+			if(!in_array($route->getActionMethod(), ['show', 'edit'])){
 				$arrRoutes[$uri] = $uri;
 			}
 		}
@@ -169,7 +168,7 @@ class MenuController extends Controller
 		//Se crea un array con los Role disponibles
 		//$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
 
-		$arrRoutes = $this->getRoutes();
+		$arrRoutes = $this->getRoutes() + [$menu->MENU_URL=>$menu->MENU_URL];
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->view.'.'.$this->route.'.edit', compact('menu', 'arrRoutes'));

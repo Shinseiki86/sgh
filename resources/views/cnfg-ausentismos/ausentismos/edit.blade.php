@@ -5,7 +5,7 @@
 @section('section')
 	{{ Form::model($ausentismo, ['route' => ['ausentismos.update', $ausentismo ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 		<!-- Elementos del formulario -->
-		@include('cnfg-ausentismos.ausentismos.fields')
+		@rinclude('fields')
 		@include('utilidades.rellena',['columns'=>['DX_DESCRIPCION'=>$diagnostico[0]->DIAG_DESCRIPCION,'CIE10'=>$diagnostico[0]->DIAG_CODIGO]])
 
 		<!-- Botones -->

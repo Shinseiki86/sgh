@@ -33,7 +33,7 @@ class PermissionController extends Controller
 	protected function validator($data, $id = 0)
 	{
 		return Validator::make($data, [
-			'name'         => ['required','max:15','unique:permissions,name,'.$id.',id'],
+			'name'         => ['required','max:30','unique:permissions,name,'.$id.',id'],
 			'display_name' => ['required','max:50','unique:permissions,display_name,'.$id.',id'],
 			'description'  => ['required','max:100'],
 		]);

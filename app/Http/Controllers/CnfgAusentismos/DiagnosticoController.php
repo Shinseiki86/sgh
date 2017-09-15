@@ -97,15 +97,15 @@ class DiagnosticoController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified Diagnostico.
+	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int $id
-	 *
+	 * @param  int  $ID
 	 * @return Response
 	 */
-	public function edit(Diagnostico $diagnosticos)
+	public function edit($ID)
 	{
-		return view($this->view.'.'.$this->route.'.edit',['diagnostico'=>$diagnosticos]);
+		$diagnostico = Diagnostico::findOrFail($ID);
+		return view($this->view.'.'.$this->route.'.edit',compact('diagnostico'));
 	}
 
 	/**

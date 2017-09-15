@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as Model;
 use SGH\Models\ModelWithSoftDeletes;
+use Illuminate\Validation\Rule;
 
 class TipoAusentismo extends ModelWithSoftDeletes
 {
@@ -22,12 +23,15 @@ class TipoAusentismo extends ModelWithSoftDeletes
 		"TIAU_OBSERVACIONES"
     ];
 
+    public static function rules($id)
+    {
+        $rules = [
+            "TIAU_CODIGO" => ['required', Rule::unique('TIPOAUSENTISMOS')->ignore($id, 'TIAU_ID')],
+            "TIAU_DESCRIPCION" => ['required', Rule::unique('TIPOAUSENTISMOS')->ignore($id, 'TIAU_ID')],
+        ];
 
-    public static $rules = [
-        "TIAU_CODIGO" => "required|unique:TIPOAUSENTISMOS",
-		"TIAU_DESCRIPCION" => "unique:TIPOAUSENTISMOS|required"
-    ];
-
+        return $rules;
+    }
 
     public function conceptoausencias()
     {

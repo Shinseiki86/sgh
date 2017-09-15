@@ -6,7 +6,7 @@
 	{{ Form::model($diagnostico, ['route' => ['diagnosticos.update', $diagnostico ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 		<!-- Elementos del formulario -->
-		@include('cnfg-ausentismos.diagnosticos.fields')
+		@rinclude('fields')
 
 		<!-- Botones -->
 		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/diagnosticos'])

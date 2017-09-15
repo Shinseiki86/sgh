@@ -28,9 +28,9 @@ class TipoAusentismoController extends Controller
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($data)
+	protected function validator($data, $id = 0)
 	{
-		return validator::make($data, TipoAusentismo::$rules);
+		return validator::make($data, TipoAusentismo::rules($id));
 
 	}
 
@@ -99,9 +99,9 @@ class TipoAusentismoController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function update($ID)
+	public function update($id)
 	{
-		parent::updateModel($ID);
+		parent::updateModel($id);
 	}
 
 	/**
@@ -111,8 +111,8 @@ class TipoAusentismoController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function destroy($ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($ID);
+		parent::destroyModel($id);
 	}
 }

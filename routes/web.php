@@ -13,6 +13,9 @@
 
 //Autenticación
 Route::auth();
+Route::get('password/email/{USER_ID}', 'Auth\PasswordController@sendEmail');
+Route::get('password/reset/{USER_ID}', 'Auth\PasswordController@showResetForm');
+Route::get('password/reset', 'Auth\PasswordController@showResetForm');
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::resource('usuarios', 'RegisterController');
 	Route::resource('roles', 'RoleController');
@@ -20,8 +23,6 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'middleware' => ['auth'
 	Route::resource('menu', 'MenuController', ['parameters'=>['menu' => 'MENU_ID']]);
 	Route::post('menu/reorder', 'MenuController@reorder')->name('auth.menu.reorder');
 });
-//Route::get('password/email/{USER_ID}', 'Auth\PasswordController@sendEmail');
-//Route::get('password/reset/{USER_ID}', 'Auth\PasswordController@showResetForm');
 
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/',  function(){return view('dashboard/index');});

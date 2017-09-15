@@ -7,7 +7,7 @@
 	{{ Form::open(['route' => 'diagnosticos.store', 'class' => 'form-horizontal']) }}
 
 		<!-- Elementos del formulario -->
-		@include('cnfg-ausentismos.diagnosticos.fields')
+		@rinclude('fields')
 
 		<!-- Botones -->
 		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/diagnosticos'])
