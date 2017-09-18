@@ -15,7 +15,7 @@ use SGH\Models\Turno;
 class TurnoController extends Controller
 {
 	protected $route = 'cnfg-organizacionales.turnos';
-	protected $class = Riesgo::class;
+	protected $class = Turno::class;
 
 	public function __construct()
 	{

@@ -22,8 +22,10 @@
 			<tr>
 				<th class="col-md-2">Codigo</th>
 				<th class="col-md-4">Descripción</th>
-				<th class="col-md-4">Inicio</th>
-				<th class="col-md-4">Fin</th>
+				<th class="col-md-2">Inicio P.I</th>
+				<th class="col-md-2">Fin P.I</th>
+				<th class="col-md-2">Inicio S.I</th>
+				<th class="col-md-2">Fin S.I</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
@@ -34,8 +36,10 @@
 			<tr>
 				<td>{{ $turno -> TURN_CODIGO }}</td>
 				<td>{{ $turno -> TURN_DESCRIPCION }}</td>
-				<td>{{ $turno -> TURN_HORAINICIO}}</td>
-				<td>{{ $turno -> TURN_HORAFINAL }}</td>
+				<td>{{ $turno -> TURN_HORAINICIOPI }}</td>
+				<td>{{ $turno -> TURN_HORAFINALPI }}</td>
+				<td>{{ $turno -> TURN_HORAINICIOSI }}</td>
+				<td>{{ $turno -> TURN_HORAFINALSI }}</td>
 				<td>{{ $turno -> TURN_OBSERVACIONES }}</td>
 				<td>{{ $turno -> TURN_CREADOPOR }}</td>
 				<td>
