@@ -14,7 +14,8 @@ use SGH\Models\Categoria;
 
 class CategoriaController extends Controller
 {
-	protected $route = 'cnfg-tickets.categorias';
+	protected $view = 'cnfg-tickets';
+	protected $route = 'categorias';
 	protected $class = Categoria::class;
 
 	public function __construct()
@@ -77,14 +78,11 @@ class CategoriaController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $CATE_ID
+	 * @param  int|Categoria  $categoria
 	 * @return Response
 	 */
-	public function edit($CATE_ID)
+	public function edit(Categoria $categoria)
 	{
-		// Se obtiene el registro
-		$categoria = Categoria::findOrFail($CATE_ID);
-
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
 		// Muestra el formulario de edición y pasa el registro a editar
@@ -95,23 +93,23 @@ class CategoriaController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $CATE_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($CATE_ID)
+	public function update($id)
 	{
-		parent::updateModel($CATE_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $CATE_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($CATE_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($CATE_ID);
+		parent::destroyModel($id);
 	}
 	
 }

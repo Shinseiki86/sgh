@@ -14,7 +14,8 @@ use SGH\Models\TipoIncidente;
 
 class TipoIncidenteController extends Controller
 {
-	protected $route = 'cnfg-tickets.tiposincidentes';
+	protected $view = 'cnfg-tickets';
+	protected $route = 'tiposincidentes';
 	protected $class = TipoIncidente::class;
 
 	public function __construct()
@@ -74,14 +75,11 @@ class TipoIncidenteController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $TIIN_ID
+	 * @param  TipoIncidente  $tipoincidente
 	 * @return Response
 	 */
-	public function edit($TIIN_ID)
+	public function edit(TipoIncidente $tipoincidente)
 	{
-		// Se obtiene el registro
-		$tipoincidente = TipoIncidente::findOrFail($TIIN_ID);
-
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->view.'.'.$this->route.'.edit', compact('tipoincidente'));
 	}
@@ -90,23 +88,23 @@ class TipoIncidenteController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $TIIN_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($TIIN_ID)
+	public function update($id)
 	{
-		parent::updateModel($TIIN_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $TIIN_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($TIIN_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($TIIN_ID);
+		parent::destroyModel($id);
 	}
 	
 }

@@ -14,7 +14,8 @@ use SGH\Models\Prioridad;
 
 class PrioridadController extends Controller
 {
-	protected $route = 'cnfg-tickets.prioridades';
+	protected $view = 'cnfg-tickets';
+	protected $route = 'prioridades';
 	protected $class = EstadoAprobacion::class;
 
 	public function __construct()
@@ -76,14 +77,11 @@ class PrioridadController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $PRIO_ID
+	 * @param  Prioridad  $prioridad
 	 * @return Response
 	 */
-	public function edit($PRIO_ID)
+	public function edit(Prioridad $prioridad)
 	{
-		// Se obtiene el registro
-		$prioridad = Prioridad::findOrFail($PRIO_ID);
-
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->view.'.'.$this->route.'.edit', compact('prioridad'));
 	}
@@ -92,23 +90,23 @@ class PrioridadController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $PRIO_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($PRIO_ID)
+	public function update($id)
 	{
-		parent::updateModel($PRIO_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $PRIO_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($PRIO_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($PRIO_ID);
+		parent::destroyModel($id);
 	}
 	
 }

@@ -24,7 +24,8 @@ use Carbon\Carbon;
 
 class TicketController extends Controller
 {
-	protected $route = 'cnfg-tickets.tickets';
+	protected $view = 'cnfg-tickets';
+	protected $route = 'tickets';
 	protected $class = Ticket::class;
 
 	public function __construct()
@@ -96,10 +97,8 @@ class TicketController extends Controller
 			'PROS_CEDULA'
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
-
 		$prospecto = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'CONTRATOS.'.$primaryKey , $column ])->get();
 		$arrContratos = $prospecto->pluck($columnName, $primaryKey)->toArray();
-		//dd($arrContratos);
 
 		$arrEstados = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
 
@@ -261,14 +260,11 @@ class TicketController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $TICK_ID
+	 * @param  Ticket  $ticket
 	 * @return Response
 	 */
-	public function edit($TICK_ID)
+	public function edit(Ticket $ticket)
 	{
-		// Se obtiene el registro
-		$ticket = Ticket::findOrFail($TICK_ID);
-
 		$primaryKey = 'CONT_ID';
 		$column = expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -278,10 +274,8 @@ class TicketController extends Controller
 			'PROS_CEDULA'
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
-
 		$prospecto = Prospecto::activos()->orderBy('CONTRATOS.'.$primaryKey)->select([ 'CONTRATOS.'.$primaryKey , $column ])->get();
 		$arrContratos = $prospecto->pluck($columnName, $primaryKey)->toArray();
-		//dd($arrContratos);
 
 		$arrEstados = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
 
@@ -309,23 +303,23 @@ class TicketController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $TICK_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($TICK_ID)
+	public function update($id)
 	{
-		parent::updateModel($SANC_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $TICK_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($TICK_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($TICK_ID);
+		parent::destroyModel($id);
 	}
 
 	/**

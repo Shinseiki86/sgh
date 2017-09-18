@@ -14,7 +14,8 @@ use SGH\Models\Sancion;
 
 class SancionController extends Controller
 {
-	protected $route = 'cnfg-tickets.sanciones';
+	protected $view = 'cnfg-tickets';
+	protected $route = 'sanciones';
 	protected $class = Sancion::class;
 
 	public function __construct()
@@ -74,14 +75,11 @@ class SancionController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $SANC_ID
+	 * @param  Sancion  $sancion
 	 * @return Response
 	 */
-	public function edit($SANC_ID)
+	public function edit(Sancion $sancion)
 	{
-		// Se obtiene el registro
-		$sancion = Sancion::findOrFail($SANC_ID);
-
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->view.'.'.$this->route.'.edit', compact('sancion'));
 	}
@@ -90,23 +88,23 @@ class SancionController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $SANC_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($SANC_ID)
+	public function update($id)
 	{
-		parent::updateModel($SANC_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $SANC_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($SANC_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($SANC_ID);
+		parent::destroyModel($id);
 	}
 	
 }

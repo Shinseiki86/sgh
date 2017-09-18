@@ -76,14 +76,11 @@ class RiesgoController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $RIES_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($RIES_ID)
+	public function edit(Riesgo $riesgo)
 	{
-		// Se obtiene el registro
-		$riesgo = Riesgo::findOrFail($RIES_ID);
-
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->view.'.'.$this->route.'.edit', compact('riesgo'));
 	}
@@ -92,23 +89,23 @@ class RiesgoController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $RIES_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($RIES_ID)
+	public function update($id)
 	{
-		parent::updateModel($RIES_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $RIES_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($RIES_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($RIES_ID);
+		parent::destroyModel($id);
 	}
 	
 }

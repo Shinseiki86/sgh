@@ -150,7 +150,7 @@ class AusentismoController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function show(Ausentismo $ausentismos){
+	public function show(Ausentismo $ausentismo){
 	}
 
 	/**
@@ -160,7 +160,7 @@ class AusentismoController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function edit(Ausentismo $ausentismos)
+	public function edit(Ausentismo $ausentismo)
 	{
 		$CONT_PROSPECTOS = expression_concat([
 		'PROS_PRIMERNOMBRE',
@@ -188,7 +188,7 @@ class AusentismoController extends Controller
 		$diagnostico= Diagnostico::where('DIAG_ID','=',$ausentismos->DIAG_ID)->get();
 
 
-		return view($this->view.'.'.$this->route.'.edit',['ausentismo'=>$ausentismos,'diagnostico'=>$diagnostico],compact('arrContratos','arrConceptoAusentismo','arrEntidad'));
+		return view($this->view.'.'.$this->route.'.edit',compact('ausentismo','diagnostico','arrContratos','arrConceptoAusentismo','arrEntidad'));
 	}
 
 	/**
@@ -199,9 +199,9 @@ class AusentismoController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function update($ID)
+	public function update($id)
 	{
-		parent::updateModel($ID);
+		parent::updateModel($id);
 	}
 
 	/**
@@ -211,8 +211,8 @@ class AusentismoController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function destroy($ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($ID);
+		parent::destroyModel($id);
 	}
 }

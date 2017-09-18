@@ -14,7 +14,8 @@ use SGH\Models\EstadoTicket;
 
 class EstadoTicketController extends Controller
 {
-	protected $route = 'cnfg-tickets.estados';
+	protected $view = 'cnfg-tickets';
+	protected $route = 'estados';
 	protected $class = EstadoTicket::class;
 
 	public function __construct()
@@ -78,11 +79,8 @@ class EstadoTicketController extends Controller
 	 * @param  int  $ESTI_ID
 	 * @return Response
 	 */
-	public function edit($ESTI_ID)
+	public function edit(EstadoTicket $estadoticket)
 	{
-		// Se obtiene el registro
-		$estadoticket = EstadoTicket::findOrFail($ESTI_ID);
-
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->view.'.'.$this->route.'.edit', compact('estadoticket'));
 	}
@@ -91,23 +89,23 @@ class EstadoTicketController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $ESTI_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($ESTI_ID)
+	public function update($id)
 	{
-		parent::updateModel($ESTI_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $ESTI_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($ESTI_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($ESTI_ID);
+		parent::destroyModel($id);
 	}
 	
 }

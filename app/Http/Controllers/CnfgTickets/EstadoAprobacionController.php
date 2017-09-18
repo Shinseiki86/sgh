@@ -14,7 +14,8 @@ use SGH\Models\EstadoAprobacion;
 
 class EstadoAprobacionController extends Controller
 {
-	protected $route = 'cnfg-tickets.estadosaprobaciones';
+	protected $view = 'cnfg-tickets';
+	protected $route = 'estadosaprobaciones';
 	protected $class = EstadoAprobacion::class;
 
 	public function __construct()
@@ -75,14 +76,11 @@ class EstadoAprobacionController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $ESAP_ID
+	 * @param  int|EstadoAprobacion  $estadoaprobacion
 	 * @return Response
 	 */
-	public function edit($ESAP_ID)
+	public function edit(EstadoAprobacion $estadoaprobacion)
 	{
-		// Se obtiene el registro
-		$estadoaprobacion = EstadoAprobacion::findOrFail($ESAP_ID);
-
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->view.'.'.$this->route.'.edit', compact('estadoaprobacion'));
 	}
@@ -91,23 +89,23 @@ class EstadoAprobacionController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $ESAP_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($ESAP_ID)
+	public function update($id)
 	{
-		parent::updateModel($ESAP_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $ESAP_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($ESAP_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($ESAP_ID);
+		parent::destroyModel($id);
 	}
 	
 }

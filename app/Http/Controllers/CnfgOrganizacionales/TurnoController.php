@@ -14,7 +14,8 @@ use SGH\Models\Turno;
 
 class TurnoController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.turnos';
+	protected $view  = 'cnfg-organizacionales';
+	protected $route = 'turnos';
 	protected $class = Riesgo::class;
 
 	public function __construct()
@@ -84,11 +85,8 @@ class TurnoController extends Controller
 	 * @param  int  $TURN_ID
 	 * @return Response
 	 */
-	public function edit($TURN_ID)
+	public function edit(Turno $turno)
 	{
-		// Se obtiene el registro
-		$turno = Turno::findOrFail($TURN_ID);
-
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
@@ -103,20 +101,20 @@ class TurnoController extends Controller
 	 * @param  int  $TURN_ID
 	 * @return Response
 	 */
-	public function update($TURN_ID)
+	public function update($id)
 	{
-		parent::updateModel($TURN_ID);
+		parent::updateModel($id);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $TURN_ID
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($TURN_ID)
+	public function destroy($id)
 	{
-		parent::destroyModel($TURN_ID);
+		parent::destroyModel($id);
 	}
 	
 }
