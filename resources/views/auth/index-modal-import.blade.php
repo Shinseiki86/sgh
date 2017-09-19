@@ -6,49 +6,33 @@
 		'title'=>'Importar desde Excel',
 ]) }}
 
-	<!-- Mensaje Modal. -->
-	<div class="modal fade" id="pregModalImport" role="dialog" tabindex="-1" >
-		<div class="modal-dialog">
-
-			{{ Form::open( [ 'url'=>'usuarios/importXLS', 'class'=>'form-vertical', 'files'=>true ]) }}
-
-			<!-- Modal content-->
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<h4 class="modal-title">Importar XLS con usuarios</h4>
-				</div>
-
-				<div class="modal-body">
-
-				{{-- Inicialmente se iba a generar la plantilla con los datos del modelo, pero por facilidad y poca disponibilidad de tiempo, se optó por un archivo ya creado y guardado en public.
-					<a class='btn btn-primary' role='button' href="{{ URL::to('usuarios/plantilla/xlsx') }}">
-						<i class="fa fa-download" aria-hidden="true"></i> Descargar plantilla
-					</a>
-				--}}
-					<a class='btn btn-info' role='button' href="{{ asset('templates/TemplateImportUsers.xlsx') }}" download>
-						<i class="fa fa-download" aria-hidden="true"></i> Descargar plantilla
-					</a>
-
-
+@push('modals')
+<div class="modal fade" id="pregModalImport" role="dialog" tabindex="-1" >
+	<div class="modal-dialog">
+		<div class="modal-content panel-info">
+			<div class="modal-header panel-heading" style="border-top-left-radius: inherit; border-top-right-radius: inherit;">
+				<h4 class="modal-title">
+					Importar XLS con usuarios
+					<span class="pull-right">
+						<a class='btn btn-info btn-xs' role='button' href="{{ asset('templates/TemplateImportUsers.xlsx') }}" download>
+							<i class="fa fa-download" aria-hidden="true"></i> Descargar plantilla
+						</a>
+					</span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				{{ Form::open( [ 'url'=>'usuarios/importXLS', 'class'=>'form-vertical', 'files'=>true ]) }}
 					<div class="form-group">
 						{{ Form::label('archivo', 'Archivo') }}
-						{{ Form::file('archivo', [ 
-							'class' => 'form-control',
-							'accept' => '.xls*',
-							'required',
-						]) }}
+						{{ Form::file('archivo', [ 'class' => 'form-control', 'accept' => '.xls*', 'required']) }}
 					</div>
-
-				</div>
-
-				<div class="modal-footer">
+			</div>
+			<div class="modal-footer">
 					{{ Form::button('<i class="fa fa-times" aria-hidden="true"></i> Cancelar', [ 'class'=>'btn btn-default', 'data-dismiss'=>'modal', 'type'=>'button' ]) }}
 					{{ Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar', [ 'class'=>'btn btn-primary', 'type'=>'submit' ]) }}
-				</div>
-
+				{{ Form::close() }}
 			</div>
-
-			{{ Form::close() }}
 		</div>
 	</div>
+</div>
+@endpush

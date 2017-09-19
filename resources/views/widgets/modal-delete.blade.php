@@ -29,6 +29,7 @@
 	</script>
 @endpush
 
+@push('modals')
 <!-- Mensaje Modal para confirmar borrado de registro-->
 <div class="modal fade" id="pregModalDelete" role="dialog" tabindex="-1" >
 	<div class="modal-dialog">
@@ -119,3 +120,5 @@
 
 	</div>
 </div><!-- Fin de Mensaje Modal al borrar registro.-->
+
+@endpush

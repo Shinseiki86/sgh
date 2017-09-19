@@ -224,6 +224,21 @@ if (! function_exists('flash_modal')) {
 }
 
 
+if (! function_exists('datetime')) {
+    /**
+     * Convierte un Date a String formateado
+     * @param string|Date $date Fecha a convertir.
+     * @return string Fecha formateada
+     */
+    function datetime( $date , $showTime=false) {
+        //if()
+        //new DateTime($date)
+
+        $format = $showTime ? 'd/m/Y h:i A' : 'd/m/Y';
+
+        return $date->format($format);
+    }
+}
 
 
 

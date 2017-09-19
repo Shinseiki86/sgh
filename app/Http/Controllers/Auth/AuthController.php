@@ -3,11 +3,9 @@
 namespace SGH\Http\Controllers\Auth;
 
 use Validator;
-use SGH\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use SGH\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

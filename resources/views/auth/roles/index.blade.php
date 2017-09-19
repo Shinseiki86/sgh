@@ -43,8 +43,8 @@
 				{{--<td>
 					<i class="fa fa-address-card-o" aria-hidden="true" data-tooltip="tooltip" data-placement="bottom" data-container="body" title="{{ $rol -> permissions ->implode('display_name', ', ') }}"></i>
 				</td>--}}
-				<td>{{ $rol -> created_at }}</td>
-				<td>{{ $rol -> updated_at }}</td>
+				<td>{{ datetime($rol->created_at, true) }}</td>
+				<td>{{ datetime($rol->updated_at, true) }}</td>
 				<td>
 
 					<!-- Botón Editar (edit) -->

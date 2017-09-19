@@ -36,8 +36,8 @@
 				<td>{{ $permiso -> name }}</td>
 				<td>{{ $permiso -> display_name }}</td>
 				<td>{{ $permiso -> roles -> count() }}</td>
-				<td>{{ $permiso -> created_at }}</td>
-				<td>{{ $permiso -> updated_at }}</td>
+				<td>{{ datetime($permiso->created_at, true) }}</td>
+				<td>{{ datetime($permiso->updated_at, true) }}</td>
 				<td>
 
 					<!-- Botón Editar (edit) -->

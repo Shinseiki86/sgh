@@ -1,12 +1,11 @@
-@extends('layout')
+@extends('layouts.menu')
+@section('page_heading', 'Cambiar Contraseña')
 
-<!-- Main Content -->
-@section('content')
+@section('section')
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Cambiar Contraseña</div>
 				<div class="panel-body">
 					@if (session('status'))
 						<div class="alert alert-success">
@@ -14,31 +13,18 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-						{{ csrf_field() }}
+					{{ Form::open(['url'=>'password/email', 'class' => 'form-horizontal']) }}
 
-						<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-							<label for="email" class="col-md-4 control-label">Correo Electrónico (E-Mail)</label>
-
-							<div class="col-md-6">
-								<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-								@if ($errors->has('email'))
-									<span class="help-block">
-										<strong>{{ $errors->first('email') }}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
+						@include('widgets.forms.input', ['type'=>'email', 'name'=>'email', 'label'=>'Correo Electrónico (E-Mail)'])
 
 						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
+							<div class="col-xs-8 col-xs-offset-4 text-right">
 								<button type="submit" class="btn btn-primary">
 									<i class="fa fa-envelope" aria-hidden="true"></i> Enviar enlace al correo
 								</button>
 							</div>
 						</div>
-					</form>
+					{{ Form::close() }}
 				</div>
 			</div>
 		</div>

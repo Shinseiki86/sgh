@@ -39,6 +39,8 @@
 			});
 		</script>
 		@stack('scripts')
+
+		@stack('modals')
 		@include('widgets.modal-loading')
 	</body>
 </html>

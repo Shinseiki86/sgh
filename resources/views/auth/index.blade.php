@@ -66,17 +66,18 @@
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 
-					<!-- Botón Borrar (destroy) -->
-					{{ Form::button('<i class="fa fa-user-times" aria-hidden="true"></i>',[
-						'class'=>'btn btn-xs btn-danger',
-						'data-toggle'=>'modal',
-						'data-user_id'=>$usuario->USER_id,
-						'data-username'=>$usuario->username,
-						'data-action'=>'usuarios/'.$usuario->USER_id,
-						'data-target'=>'#pregModalDelete',
-						'data-tooltip'=>'tooltip',
-						'title'=>'Borrar',
-					])}}
+	                <!-- carga botón de borrar -->
+	                {{ Form::button('<i class="fa fa-user-times" aria-hidden="true"></i>',[
+	                    'class'=>'btn btn-xs btn-danger btn-delete',
+	                    'data-toggle'=>'modal',
+						'data-id'=>$usuario->USER_id,
+	                    'data-modelo'=> 'Usuario',
+	                    'data-descripcion'=> $usuario->username,
+	                    'data-action'=>'usuarios/'.$usuario->USER_id,
+	                    'data-target'=>'#pregModalDelete',
+	                    'data-tooltip'=>'tooltip',
+	                    'title'=>'Borrar',
+	                ])}}
 
 				</td>
 			</tr>
@@ -84,30 +85,5 @@
 		</tbody>
 	</table>
 
-	@include('auth/index-modalDelete')
-	{{--@include('widgets/modal-delete')--}}
-	
+	@include('widgets.modal-delete')
 @endsection
-
-
-@push('scripts')
-	<script type="text/javascript">
-	//Carga de datos a mensajes modales para eliminar y clonar registros
-	$(function() {
-		$('.modal').on('show.bs.modal', function (event) {
-
-			var button = $(event.relatedTarget); // Button that triggered the modal
-			var modal = $(this);
-
-			var USER_id = button.data('user_id'); // Extract info from data-* attributes
-			modal.find('.USER_id').text(USER_id);
-
-			var username = button.data('username'); // Extract info from data-* attributes
-			modal.find('.username').text(username);
-
-			var urlForm = button.data('action'); // Extract info from data-* attributes
-			$('.frmModal').attr('action', urlForm);
-		});
-	});
-	</script>
-@endpush

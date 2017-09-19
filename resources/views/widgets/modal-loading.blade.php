@@ -3,6 +3,7 @@
 		$('form').submit( function() {
 			var button = $(this).find("button[type=submit]:focus" )
 			button.attr('disabled', true);
+			$('body').css('cursor', 'progress');
 			if(button.data('toggle')!='modal'){
 				$('#msgModalLoading').modal('show');
 			}			
