@@ -15,7 +15,7 @@ use SGH\Models\Prioridad;
 class PrioridadController extends Controller
 {
 	protected $route = 'cnfg-tickets.prioridades';
-	protected $class = EstadoAprobacion::class;
+	protected $class = Prioridad::class;
 
 	public function __construct()
 	{

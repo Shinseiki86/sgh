@@ -83,11 +83,11 @@ use SGH\Models\Permission;
                 //$this->createPermissions('VALIDADOR DE TNL', 'VALIDADOR DE TNL');
 
                 $this->createPermissions(Prioridad::class, 'prioridades ticket');
-                $this->createPermissions(Estado::class, 'estados ticket');
-                $this->createPermissions(Aprobacion::class, 'estados aprobaciones');
+                $this->createPermissions(EstadoTicket::class, 'estados ticket');
+                $this->createPermissions(EstadoAprobacion::class, 'estados aprobaciones');
                 $this->createPermissions(Categoria::class, 'categorías ticket');
                 $this->createPermissions(Sancion::class, 'categorías ticket');
-                $this->createPermissions(Incidente::class, 'tipo incidente ticket');
+                $this->createPermissions(TipoIncidente::class, 'tipo incidente ticket');
 
                 $this->createPermissions(Ausentismo::class, 'Ausentismo');
                 $this->createPermissions(ConceptoAusencia::class, 'Concepto Ausencia');

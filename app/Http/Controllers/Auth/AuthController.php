@@ -152,6 +152,19 @@ class AuthController extends Controller
 	}
 
 
+    /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function getCredentials(Request $request)
+    {
+    	$credentials = $request->only($this->loginUsername(), 'password');
+    	$credentials['username'] = strtolower($credentials['username']);
+        return $credentials;
+    }
+
 	/**
 	 * Muestra una lista de los registros.
 	 *

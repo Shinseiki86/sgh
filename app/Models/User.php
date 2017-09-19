@@ -87,6 +87,7 @@ class User extends Authenticatable
         static::creating(function($model) {
             $prefix = strtoupper(substr($model->getKeyName(), 0, 4));
             $created_by = $prefix.'_CREADOPOR';
+            $model->username = strtolower($model->username);
             $model->$created_by = auth()->check() ? auth()->user()->username : 'SYSTEM';
             return true;
         });
