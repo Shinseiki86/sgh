@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
     {
         //dump( get_class($e) );
         //Si está en modo depuración y no es una excepción de SOAP
-        if (!env('APP_DEBUG', false) and !$this->isSoapError($e)){
+        if (!env('APP_DEBUG', false)){
                 //Si la ruta no existe, mostar view 404.
                 if($e instanceof \ReflectionException OR
                     $e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException

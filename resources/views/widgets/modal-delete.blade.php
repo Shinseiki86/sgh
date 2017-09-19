@@ -61,6 +61,7 @@
 						'type'=>'submit',
 						'data-toggle'=>'modal',
 						'data-backdrop'=>'static',
+						'data-keyboard'=>'false',
 						'data-target'=>'#msgModalDeleting',
 					]) }}
 				</form>
@@ -107,13 +108,11 @@
 
 <!-- Mensaje Modal al borrar registro. Bloquea la pantalla mientras se procesa la solicitud -->
 <div class="modal fade" id="msgModalDeleting" role="dialog">
-	<div class="modal-dialog">
-
-		<!-- Modal content-->
+	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-body">
+			<div class="modal-body text-center">
 				<h4>
-					<i class="fa fa-cog fa-spin fa-3x fa-fw" style="vertical-align: middle;"></i> Borrando registro...
+					<i class="fa fa-cog fa-spin fa-2x fa-fw" style="vertical-align: middle;"></i> Borrando registro...
 				</h4>
 			</div>
 		</div>

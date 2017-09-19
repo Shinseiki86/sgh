@@ -36,8 +36,9 @@
 				tooltips = $('[data-tooltip="tooltip"]');
 				if(tooltips.length > 0)
 					tooltips.tooltip();
-			})
+			});
 		</script>
 		@stack('scripts')
+		@include('widgets.modal-loading')
 	</body>
 </html>
