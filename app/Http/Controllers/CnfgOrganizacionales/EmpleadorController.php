@@ -67,21 +67,16 @@ class EmpleadorController extends Controller
 	public function create()
 	{
 		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
-
 		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
-
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
-
 		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
-
-		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
-				'PROS_CEDULA',
-			], 'PROS_NOMBRESAPELLIDOS'));
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA',
+		], 'PROS_NOMBRESAPELLIDOS'));
 
 		$GERE_ids = json_encode([]);
 		$TURN_ids = json_encode([]);
@@ -97,9 +92,6 @@ class EmpleadorController extends Controller
 	 */
 	public function store()
 	{
-		//dd(request()->all());
-
-		dd($turnos);
 		parent::storeModel(['gerencias'=>'GERE_ids', 'turnos'=>'TURN_ids' , 'grupos'=>'GRUP_ids']);
 	}
 
@@ -111,25 +103,18 @@ class EmpleadorController extends Controller
 	 */
 	public function edit($EMPL_ID)
 	{
-		// Se obtiene el registro
 		$empleador = Empleador::findOrFail($EMPL_ID);
-
 		$arrCiudades = model_to_array(Ciudad::class, 'CIUD_NOMBRE');
-
 		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
-
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
-
 		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
-
-		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
-				'PROS_CEDULA',
-			], 'PROS_NOMBRESAPELLIDOS'));
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA',
+		], 'PROS_NOMBRESAPELLIDOS'));
 
 		//JSON con valores preseleccionados para el select múltiple
 		$GERE_ids = $empleador->gerencias->pluck('GERE_ID')->toJson();
