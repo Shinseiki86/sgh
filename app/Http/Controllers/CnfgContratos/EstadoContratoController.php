@@ -14,7 +14,7 @@ use SGH\Models\EstadoContrato;
 
 class EstadoContratoController extends Controller
 {
-	protected $route = 'cnfg-contratos.cnos';
+	protected $route = 'cnfg-contratos.estadoscontratos';
 	protected $class = EstadoContrato::class;
 
 	public function __construct()

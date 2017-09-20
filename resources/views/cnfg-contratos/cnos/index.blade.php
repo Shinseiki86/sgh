@@ -2,8 +2,6 @@
 @section('title', '/ Clasif. de Ocupaciones')
 @include('datatable')
 
-
-
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">

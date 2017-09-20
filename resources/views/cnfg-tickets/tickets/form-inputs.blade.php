@@ -15,7 +15,7 @@
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'PRIO_ID', 'label'=>'Prioridad', 'data'=>$arrPrioridad])
 
-@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'CONT_ID', 'label'=>'Empleado', 'data'=>$arrContratos, 'options'=>['data-live-search'=>'true']])
+@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'CONT_ID', 'label'=>'Empleado', 'data'=>$arrContratos])
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'TIIN_ID', 'label'=>'Tipo de Incidente', 'data'=>$arrTiposIncidentes])
 

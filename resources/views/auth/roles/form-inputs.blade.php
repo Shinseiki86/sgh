@@ -5,6 +5,6 @@
 
 @include('widgets.forms.input', ['type'=>'text', 'name'=>'display_name', 'label'=>'Nombre para mostrar', 'options'=>['maxlength' => '50'] ])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'permisos_ids', 'label'=>'Permisos', 'data'=>$arrPermisos, 'multiple'=>true, 'options'=>['data-live-search'=>'true']])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'permisos_ids', 'label'=>'Permisos', 'data'=>$arrPermisos, 'multiple'=>true ])
 
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'description', 'label'=>'Descripción', 'options'=>['maxlength' => '100'] ])

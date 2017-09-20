@@ -10,3 +10,5 @@
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'PROC_ID', 'label'=>'Proceso', 'data'=>$arrProcesos])
 
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'CATE_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
+
+</div>
