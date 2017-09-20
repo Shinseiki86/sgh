@@ -1,1 +1,1 @@
-@extends('emails/actionCambioContrasena')
+@extends('layouts.emails.actionCambioContrasena')

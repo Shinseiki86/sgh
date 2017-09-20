@@ -39,7 +39,7 @@ class SendEmailAuthorizedTicket extends Job implements ShouldQueue
     {
         $ticket = $this->ticket;
         $userAuthorizes   = $this->userAuthorizes;
-        $view   = 'emails.info_ticket_autorizado';
+        $view   = 'layouts.emails.info_ticket_autorizado';
 
         //if ($this->attempts() < 3) {
             Mail::send($view, compact('ticket'), function($message) use($ticket, $userAuthorizes) {

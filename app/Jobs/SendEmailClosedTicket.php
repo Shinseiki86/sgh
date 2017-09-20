@@ -39,7 +39,7 @@ class SendEmailClosedTicket extends Job implements ShouldQueue
     {
         $ticket = $this->ticket;
         $userCloses = $this->userCloses;
-        $view   = 'emails.info_ticket_cerrado';
+        $view   = 'layouts.emails.info_ticket_cerrado';
 
         //if ($this->attempts() < 3) {
             Mail::send($view, compact('ticket'), function($message) use($ticket, $userCloses) {

@@ -39,7 +39,7 @@ class SendEmailRejectedTicket extends Job implements ShouldQueue
     {
         $ticket = $this->ticket;
         $userRejects = $this->userRejects;
-        $view   = 'emails.info_ticket_rechazado';
+        $view   = 'layouts.emails.info_ticket_rechazado';
 
         //if ($this->attempts() < 3) {
             Mail::send($view, compact('ticket'), function($message) use($ticket, $userRejects) {

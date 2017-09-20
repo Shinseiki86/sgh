@@ -1,4 +1,4 @@
-@extends('emails/layout')
+@extends('layouts.emails.layout')
 @section('title', '- Nuevo Ticket')
 
 @section('tituloMensaje')

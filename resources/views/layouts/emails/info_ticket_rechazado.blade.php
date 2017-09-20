@@ -1,9 +1,9 @@
-@extends('emails/layout')
+@extends('layouts.emails.layout')
 @section('title', '- Ticket Autorizado')
 
 @section('tituloMensaje')
-  <td class="alert alert-warning" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #00FF04; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top">
-    Ticket No. {{ str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT) }} Autorizado
+  <td class="alert alert-warning" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #FF001E; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top">
+    {{ 'El Ticket ha sido rechazado'}}
   </td>
 @endsection
 
@@ -13,10 +13,21 @@
 
     <tr>
 
+    <h1 class="page-header">Ticket No. {{ str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT) }}</h1>
+
   <div class="jumbotron text-center">
     <strong>Datos Generales</strong>
     <p>
       <ul class="list-group">
+
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-lg-4"><strong>Motivo de Rechazo:</strong>
+            {{ $ticket->TICK_MOTIVORECHAZO }}
+            </div>
+           
+          </div>
+        </li>
 
         <li class="list-group-item">
           <div class="row">
@@ -91,7 +102,7 @@
     </tr>
 
     <tr>
-      ¡El Ticket ha sido autorizado!
+      ¡El Ticket ha sido rechazado!
     </tr>
 
      <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

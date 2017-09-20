@@ -1,4 +1,4 @@
-<li>
+<li class="nav nav-first-level">
     <a href="{{ isset($item['MENU_URL']) ? url($item['MENU_URL']) : '#' }}" target="{{ starts_with($item['MENU_URL'], 'http') ? '_blank' : '' }}" class="dropdown-collapse">
         <i class="fa {{ $item['MENU_ICON'] }} fa-fw"></i> 
         <span class="side-menu-title">{{ $item['MENU_LABEL'] }}</span><span class="fa arrow"></span>

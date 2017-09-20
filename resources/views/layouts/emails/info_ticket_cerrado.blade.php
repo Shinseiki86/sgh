@@ -1,9 +1,9 @@
-@extends('emails/layout')
-@section('title', '- Ticket Autorizado')
+@extends('layouts.emails.layout')
+@section('title', '- Ticket Cerrado')
 
 @section('tituloMensaje')
-  <td class="alert alert-warning" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #FF001E; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top">
-    {{ 'El Ticket ha sido rechazado'}}
+  <td class="alert alert-warning" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #2F00FF; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top">
+    {{ 'El Ticket ha sido cerrado por G.H'}}
   </td>
 @endsection
 
@@ -22,8 +22,17 @@
 
         <li class="list-group-item">
           <div class="row">
-            <div class="col-lg-4"><strong>Motivo de Rechazo:</strong>
-            {{ $ticket->TICK_MOTIVORECHAZO }}
+            <div class="col-lg-4"><strong>Decisión Administrativa:</strong>
+            {{ $ticket-> sancion -> SANC_DESCRIPCION }}
+            </div>
+           
+          </div>
+        </li>
+
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-lg-4"><strong>Observaciones:</strong>
+            {{ $ticket-> TICK_CONCLUSION }}
             </div>
            
           </div>
@@ -64,32 +73,8 @@
 
         <li class="list-group-item">
           <div class="row">
-            <div class="col-lg-4"><strong>Prioridad:</strong>
-            {{ $ticket -> prioridad -> PRIO_DESCRIPCION }}
-            </div>
-          </div>
-        </li>
-
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-lg-4"><strong>Categoría:</strong>
-            {{ $ticket -> categoria -> CATE_DESCRIPCION }}
-            </div>
-          </div>
-        </li>
-
-        <li class="list-group-item">
-          <div class="row">
             <div class="col-lg-4"><strong>Fecha del Evento:</strong>
             {{ $ticket -> TICK_FECHAEVENTO }}
-            </div>
-          </div>
-        </li>
-
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-lg-4"><strong>Estado Aprobación:</strong>
-            {{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}
             </div>
           </div>
         </li>
@@ -102,7 +87,7 @@
     </tr>
 
     <tr>
-      ¡El Ticket ha sido rechazado!
+      ¡El Ticket ha sido cerrado!
     </tr>
 
      <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

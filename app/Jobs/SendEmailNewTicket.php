@@ -36,7 +36,7 @@ class SendEmailNewTicket extends Job implements ShouldQueue
     public function handle()
     {
         $ticket = $this->ticket;
-        $view   = 'emails.info_ticket_creado';
+        $view   = 'layouts.emails.info_ticket_creado';
 
         if ($this->attempts() < 3) {
             Mail::send($view, compact('ticket'), function($message) use($ticket) {

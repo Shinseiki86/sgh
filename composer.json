@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "shinseiki86/sgh",
+    "description": "SGH",
+    "keywords": ["framework", "laravel", "sgh"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -46,7 +46,7 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "php -r \"copy('.env.pgsql', '.env');\""
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"

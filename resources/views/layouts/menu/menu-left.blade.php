@@ -4,20 +4,7 @@
 		<div class="sidebar-nav navbar-collapse" id="sidebar-area">
 			<ul class="nav" id="sidebar">
 
-				<li class="sidebar-search">
-					<div class="input-group custom-search-form">
-						<input type="text" class="form-control" placeholder="Search...">
-						<span class="input-group-btn">
-						<button class="btn btn-default" type="button">
-							<i class="fa fa-search"></i>
-						</button>
-					</span>
-					</div>
-					<div  class="search-icon">
-						<a href="#"><i class="fa fa fa-search fa-fw"></i></a>
-					</div>
-					<!-- /input-group -->
-				</li>
+				@rinclude('menu-left-search')
 
 				@if(isset($menusLeft))
                 @foreach ($menusLeft as $key => $item)
