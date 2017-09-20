@@ -35,6 +35,7 @@ class Ticket extends ModelWithSoftDeletes
 		'TURN_ID',
 		'GRUP_ID',
 		'USER_id',
+		'TICK_CREADOPOR',
 	];
 
 	public function contrato()

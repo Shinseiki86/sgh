@@ -1,2 +1,2 @@
-{{ Form::text( $name, old($name) , ['class'=>'form-control autocomplete'] + (isset($options)?$options:[]) )}}
+{{ Form::text( $name, isset($value)? $value:old($name), , ['class'=>'form-control autocomplete'] + (isset($options)?$options:[]) )}}
 {{-- {{ Form::text( $name, old($name)!=null?old($name):(isset(${$name})?${$name}:'') , ['class'=>'form-control autocomplete'] + (isset($options)?$options:[]) )}} --}}

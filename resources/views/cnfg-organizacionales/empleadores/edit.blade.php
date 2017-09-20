@@ -3,7 +3,7 @@
 
 @section('section')
 {{ Form::model($empleador, ['action' => ['CnfgOrganizacionales\EmpleadorController@update', $empleador->EMPL_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
-{{dump($empleador)}}
+	
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')
 

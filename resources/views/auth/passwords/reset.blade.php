@@ -18,12 +18,10 @@
 
 						<input type="hidden" name="token" value="{{ $token }}">
 
-						@include('widgets.forms.input', ['type'=>'email', 'name'=>'email', 'label'=>'E-Mail', 'options'=>['readonly', 'value'=>$email ] ])
+						@include('widgets.forms.input', ['type'=>'email', 'name'=>'email', 'value'=>$email, 'label'=>'E-Mail', 'options'=>['readonly'] ])
 
 						@include('widgets.forms.input', ['type'=>'password', 'name'=>'password', 'label'=>'Nueva Contraseña' ])
 						@include('widgets.forms.input', ['type'=>'password', 'name'=>'password_confirmation', 'label'=>'Confirmar Contraseña' ])
-
-
 
 						<div class="form-group">
 							<div class="col-xs-8 col-xs-offset-4 text-right">

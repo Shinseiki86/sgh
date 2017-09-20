@@ -115,8 +115,6 @@ class TicketController extends Controller
 
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
 
-		$arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
-
 		return view($this->route.'.create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
 	}
 
