@@ -12,6 +12,8 @@ use SGH\Http\Controllers\Controller;
 
 use SGH\Jobs\SendEmailNewTicket;
 use SGH\Jobs\SendEmailAuthorizedTicket;
+use SGH\Jobs\SendEmailRejectedTicket;
+use SGH\Jobs\SendEmailClosedTicket;
 
 use SGH\Models\Ticket;
 use SGH\Models\EstadoTicket;
@@ -312,7 +314,7 @@ class TicketController extends Controller
 	 */
 	public function update($TICK_ID)
 	{
-		parent::updateModel($SANC_ID);
+		parent::updateModel($TICK_ID);
 	}
 
 	/**

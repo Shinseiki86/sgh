@@ -34,6 +34,7 @@ class Ticket extends ModelWithSoftDeletes
 		'TIIN_ID',
 		'TURN_ID',
 		'GRUP_ID',
+		'SANC_ID',
 		'USER_id',
 		'TICK_CREADOPOR',
 	];

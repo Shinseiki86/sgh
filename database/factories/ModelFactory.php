@@ -2,7 +2,8 @@
 
 use SGH\Models\User;
 use SGH\Models\Ticket;
-use SGH\Models\Prospecto;
+use SGH\Models\EstadoTicket;
+use SGH\Models\EstadoAprobacion;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,17 +32,31 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 
 $factory->define(Ticket::class, function (Faker\Generator $faker) {
 
-    //$prospecto = Prospecto::activos()->select([ 'CONT_ID' , 'CONT_FECHAINGRESO' ])->get();
-    //$arrContratos = model_to_array($prospecto, 'CONT_FECHAINGRESO');
-    $arrContratos = model_to_array(Contrato::class, 'CONT_FECHAINGRESO');
+    $CONT_ID = array_rand(model_to_array(Contrato::class, 'CONT_FECHAINGRESO'));
+    $ESTI_ID = array_rand(model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION'));
 
-    $arrEstadosTicket = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
-    $arrEstadosAprobacion = model_to_array(EstadoAprobacion::class, 'ESAP_DESCRIPCION');
+    $ESAP_ID = array_rand(model_to_array(EstadoAprobacion::class, 'ESAP_DESCRIPCION'));
+    
+    $TICK_FECHAAPROBACION = null;
+    $TICK_FECHACIERRE = null;
+    switch ($ESAP_ID) {
+        case EstadoAprobacion::ENVIADO:
+            $TICK_FECHAAPROBACION = $faker->dateTime();
+            break;
+        case EstadoAprobacion::FINALIZADO:
+        case EstadoAprobacion::RECHAZADO:
+            $TICK_FECHACIERRE = $faker->dateTime();
+            $ESTI_ID = EstadoTicket::CERRADO;
+            break;
+    }
+
+    $SANC_ID = null;
+    if($ESAP_ID == EstadoAprobacion::FINALIZADO)
+        $SANC_ID = array_rand(model_to_array(Sancion::class, 'SANC_DESCRIPCION'));
+
     $arrPrioridad = model_to_array(Prioridad::class, 'PRIO_DESCRIPCION');
     $arrCategorias = model_to_array(Categoria::class, 'CATE_DESCRIPCION');
-
     $arrTiposIncidentes = model_to_array(TipoIncidente::class, 'TIIN_DESCRIPCION');
-
     $arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
     $arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
     $arrUsers = model_to_array(User::class, 'username');
@@ -51,13 +66,14 @@ $factory->define(Ticket::class, function (Faker\Generator $faker) {
         'TICK_OBSERVACIONES' => '"'.$faker->sentence().'"',
         'TICK_FECHASOLICITUD' => $faker->dateTime(),
         'TICK_FECHAEVENTO' => $faker->dateTime(),
-        //'TICK_FECHAAPROBACION',
-        //'TICK_FECHACIERRE',
-        //'TICK_FECHACUMPLIMIENTO',
+        'TICK_FECHACUMPLIMIENTO' => $faker->dateTime(),
         //'TICK_ARCHIVO',
-        'CONT_ID' => array_rand($arrContratos),
-        'ESTI_ID' => array_rand($arrEstadosTicket),
-        'ESAP_ID' => array_rand($arrEstadosAprobacion),
+        'CONT_ID' => $CONT_ID,
+        'ESTI_ID' => $ESTI_ID,
+        'ESAP_ID' => $ESAP_ID,
+        'TICK_FECHAAPROBACION' => $TICK_FECHAAPROBACION,
+        'TICK_FECHACIERRE' => $TICK_FECHACIERRE,
+        'SANC_ID' => $SANC_ID,
         'PRIO_ID' => array_rand($arrPrioridad),
         'CATE_ID' => array_rand($arrCategorias),
         'TIIN_ID' => array_rand($arrTiposIncidentes),

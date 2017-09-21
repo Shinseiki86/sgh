@@ -22,4 +22,10 @@ class Sancion extends ModelWithSoftDeletes
 		'SANC_OBSERVACIONES',
 	];
 
+	public function tickets()
+	{
+		$foreingKey = 'SANC_ID';
+		return $this->hasMany(Ticket::class, $foreingKey);
+	}
+
 }

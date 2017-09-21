@@ -115,7 +115,7 @@ use SGH\Models\Permission;
                     'name' => 'Administrador',
                     'cedula' => 1144173746,
                     'username' => 'admin',
-                    'email' => 'admin@example.com',
+                    'email' => 'sghmasterpromo@gmail.com',
                     'password'  => \Hash::make($pass)
                 ]);
                 // role attach alias
@@ -148,7 +148,7 @@ use SGH\Models\Permission;
                     'name' => 'Gestión humana 1 de prueba',
                     'cedula' => 1144173743,
                     'username' => 'gesthum1',
-                    'email' => 'gesthum1@example.com',
+                    'email' => 'eva360.uniajc@gmail.com',
                     'password'  => \Hash::make($pass)
                 ]);
                 $gesthum1->attachRole($this->rolGestHum);
@@ -157,7 +157,7 @@ use SGH\Models\Permission;
                     'name' => 'Gestión humana 2 de prueba',
                     'cedula' => 1144173742,
                     'username' => 'gesthum2',
-                    'email' => 'gesthum2@example.com',
+                    'email' => 'sgh@gmail.com',
                     'password'  => \Hash::make($pass)
                 ]);
                 $gesthum2->attachRole($this->rolGestHum);

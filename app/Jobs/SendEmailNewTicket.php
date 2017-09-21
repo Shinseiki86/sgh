@@ -38,13 +38,15 @@ class SendEmailNewTicket extends Job implements ShouldQueue
         $ticket = $this->ticket;
         $view   = 'layouts.emails.info_ticket_creado';
 
-        if ($this->attempts() < 3) {
+        //if ($this->attempts() < 3) {
+        try{
             Mail::send($view, compact('ticket'), function($message) use($ticket) {
                 //Remitente
                 $message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
                 //Asunto
                 $TICK_ID = str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT);
                 $message->subject('Ticket '.$TICK_ID.' creado');
+                
                 //Correo al usuario que creó el ticket
                 $user = $ticket->usuario;
                 $message->to($user->email, $user->name);
@@ -53,7 +55,8 @@ class SendEmailNewTicket extends Job implements ShouldQueue
                 $jefe_email = $prosJefe->PROS_CORREO;
                 $message->cc($jefe_email, $name = null);
             });
+        } catch(\Exception $e){
+            flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID, 'danger' );
         }
-
     }
 }

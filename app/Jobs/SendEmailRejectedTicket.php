@@ -42,6 +42,7 @@ class SendEmailRejectedTicket extends Job implements ShouldQueue
         $view   = 'layouts.emails.info_ticket_rechazado';
 
         //if ($this->attempts() < 3) {
+        try{
             Mail::send($view, compact('ticket'), function($message) use($ticket, $userRejects) {
                 //Remitente
                 $message->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
@@ -50,16 +51,22 @@ class SendEmailRejectedTicket extends Job implements ShouldQueue
                 $message->subject('Ticket '.$TICK_ID.' rechazado');
 
                 //Correo al usuario que rechazó el ticket y al responsable de GH
-                $empl_email = $ticket->contrato->empleador->EMPL_CORREO;
-                $message->to([ $userRejects->email, $empl_email ]);
+                $empleador = $ticket->contrato->empleador;
+                $to = [ $userRejects->email ];
+                if(isset($empleador->EMPL_CORREO))
+                    $to[] = $empleador->EMPL_CORREO;
+                $message->to($to);
 
                 //Copia al usuario que creó el ticket y al jefe
                 $owner = $ticket->usuario;
-                $jefe_email =  Prospecto::getJefe($owner->cedula)->PROS_CORREO;
-                $message->cc([ $owner->email, $jefe_email ]);
+                $jefe =  Prospecto::getJefe($owner->cedula);
+                $cc = [ $owner->email ];
+                if(isset($jefe->PROS_CORREO))
+                    $cc[] = $jefe->PROS_CORREO;
+                $message->cc($cc);
             });
-        //}
-
+        } catch(\Exception $e){
+            flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID, 'danger' );
+        }
     }
-
 }
