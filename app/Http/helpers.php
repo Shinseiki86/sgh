@@ -34,13 +34,13 @@ if (! function_exists('expression_concat')) {
             $alias = '"'.$alias.'"';
         }
 
-        $sqlIni = 'CONCAT(';
+        $sqlIni = 'CONCAT_WS(\' \',';
         $sqlEnd = ') AS '.$alias;
         $sqlColumns = null;
         foreach ($columns as $column) {
             $sqlColumns = !isset($sqlColumns)
                 ? $column
-                : $sqlColumns.', \' \' , '.$column;
+                : $sqlColumns.','.$column;
         }
         
         return \DB::raw($sqlIni.$sqlColumns.$sqlEnd);
