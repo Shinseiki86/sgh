@@ -98,6 +98,8 @@ Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'],
 	Route::get('/buscaContrato','AusentismoController@buscaContrato');
 	Route::get('/buscaDx', 'AusentismoController@buscaDx');
 	Route::get('/autocomplete',array('as'=>'autocomplete','uses'=>'AusentismoController@autocomplete'));
+	Route::resource('prorrogaausentismos', 'ProrrogaAusentismoController');
 });
+
 
 

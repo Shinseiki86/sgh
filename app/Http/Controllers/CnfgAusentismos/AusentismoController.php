@@ -115,6 +115,7 @@ class AusentismoController extends Controller
 
 		$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
 					->select(['CONT_ID', $CONT_PROSPECTOS])
+					->where('CONTRATOS.ESCO_ID', '=', '1')
 					->get();
 
 		//Se crea un array con los prospectos disponibles
@@ -175,6 +176,7 @@ class AusentismoController extends Controller
 
 		$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
 					->select(['CONT_ID', $CONT_PROSPECTOS])
+					->where('CONTRATOS.ESCO_ID', '=', '1')
 					->get();
 
 		//Se crea un array con los prospectos disponibles

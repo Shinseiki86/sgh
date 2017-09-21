@@ -1,6 +1,7 @@
-<?php namespace SGH\Models;
+<?php 
+namespace SGH\Models;
 
-use Illuminate\Database\Eloquent\Model as Model;
+
 use SGH\Models\ModelWithSoftDeletes;
 
 class Ausentismo extends ModelWithSoftDeletes
@@ -69,7 +70,7 @@ class Ausentismo extends ModelWithSoftDeletes
     public function prorrogaausentismos()
     {
         $foreingKey = 'PROR_ID';
-        //return $this->hasMany(ProrrogaAusentismo::class, $foreingKey);
+        return $this->hasMany(ProrrogaAusentismo::class, $foreingKey);
     }
 
 
