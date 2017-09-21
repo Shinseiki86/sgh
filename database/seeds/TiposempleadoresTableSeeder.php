@@ -16,14 +16,14 @@ class TiposEmpleadoresTableSeeder extends Seeder
     	
     	$empleador = new TipoEmpleador;
     	$empleador->TIEM_DESCRIPCION = 'DIRECTO';
-    	$empleador->TIEM_OBSERVACIONES =  'TIPO EMPLEADOR DE PRUEBA';
-    	$empleador->TIEM_CREADOPOR =  'SYSTEM';
+    	$empleador->TIEM_OBSERVACIONES =  NULL;
+    	$empleador->TIEM_CREADOPOR =  'admin';
     	$empleador->save();
 
     	$empleador = new TipoEmpleador;
     	$empleador->TIEM_DESCRIPCION = 'TEMPORAL';
-    	$empleador->TIEM_OBSERVACIONES =  'TIPO EMPLEADOR DE PRUEBA';
-    	$empleador->TIEM_CREADOPOR =  'SYSTEM';
+    	$empleador->TIEM_OBSERVACIONES =  NULL;
+    	$empleador->TIEM_CREADOPOR =  'admin';
     	$empleador->save();
     }
 }

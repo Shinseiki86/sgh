@@ -44,6 +44,9 @@ class CreateTurnosTable extends Migration
                 ->nullable()
                 ->comment('hora de finalización del turno de trabajo del segundo intervalo');
 
+            $table->string('TURN_TIPOTURNO', 20)
+                ->comment('tipo de turno de trabajo (operativo, administrativo)');
+
             $table->string('TURN_OBSERVACIONES', 300)
                 ->nullable()
                 ->comment('observaciones del turno de trabajo');

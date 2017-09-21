@@ -14,26 +14,26 @@ class TipoEntidadesTableSeeder extends Seeder
     {
        TipoEntidad::create([
             'TIEN_CODIGO' => 'ARL',
-            'TIEN_DESCRIPCION' => 'Administradora de Riesgos Laborales',
-            'TIEN_OBSERVACIONES' => 'Empresas que administran los Riesgos del Empleado',
+            'TIEN_DESCRIPCION' => 'ADMINISTRADORA DE RIESGOS LABORALES',
+            'TIEN_OBSERVACIONES' => NULL,
         ]);
 
         TipoEntidad::create([
             'TIEN_CODIGO' => 'EPS',
-            'TIEN_DESCRIPCION' => 'Entidad Promotora de Salud',
-            'TIEN_OBSERVACIONES' => 'Empresas que administran la salud del Empleado',
+            'TIEN_DESCRIPCION' => 'ENTIDADES PROMOTORAS DE SALUD',
+            'TIEN_OBSERVACIONES' => NULL,
         ]);
 
         TipoEntidad::create([
             'TIEN_CODIGO' => 'CCF',
-            'TIEN_DESCRIPCION' => 'Cajas de Compensacion',
-            'TIEN_OBSERVACIONES' => 'Empresas orientadas a la Recreacion de los Empleados',
+            'TIEN_DESCRIPCION' => 'CAJAS DE COMPENSACIÓN',
+            'TIEN_OBSERVACIONES' => NULL,
         ]);
 
         TipoEntidad::create([
             'TIEN_CODIGO' => 'AFP',
-            'TIEN_DESCRIPCION' => 'Fondos de Pensiones',
-            'TIEN_OBSERVACIONES' => 'Empresas administradoras de pensiones de los Empleados',
+            'TIEN_DESCRIPCION' => 'FONDOS DE PENSIONES',
+            'TIEN_OBSERVACIONES' => NULL,
         ]);
     }
 }
