@@ -93,6 +93,7 @@ use SGH\Models\Permission;
                 $this->createPermissions(ConceptoAusencia::class, 'Concepto Ausencia');
                 $this->createPermissions(Diagnostico::class, 'Diagnostico');
                 $this->createPermissions(TipoAusentismo::class, 'Tipo de Ausentismo');
+                $this->createPermissions(ProrrogaAusentismo::class, 'Prorroga Ausentismo');
                 
                 $perms = $this->createPermissions(Ticket::class, 'tickets');
                 $rolSuperOper->attachPermissions([
