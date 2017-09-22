@@ -39,6 +39,7 @@ class TurnoController extends Controller
 			//'TURN_HORAFINALSI' => ['required'],
 			'TURN_CODIGO' => ['required','max:10'],
 			'TURN_OBSERVACIONES' => ['max:300'],
+			'TURN_TIPOTURNO' => ['max:20'],
 		]);
 	}
 
@@ -66,7 +67,12 @@ class TurnoController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
-		return view($this->route.'.create', compact('arrEmpleadores'));
+		$arrTipoTurnos = array(
+			'OPERATIVO' => 'OPERATIVO',
+			'ADMINISTRATIVO' => 'ADMINISTRATIVO'
+		);
+
+		return view($this->route.'.create', compact('arrEmpleadores','arrTipoTurnos'));
 	}
 
 	/**
@@ -94,8 +100,13 @@ class TurnoController extends Controller
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
 
+		$arrTipoTurnos = array(
+			'OPERATIVO' => 'OPERATIVO',
+			'ADMINISTRATIVO' => 'ADMINISTRATIVO'
+		);
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('turno','arrEmpleadores'));
+		return view($this->route.'.edit', compact('turno','arrEmpleadores','arrTipoTurnos'));
 	}
 
 

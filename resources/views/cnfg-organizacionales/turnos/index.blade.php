@@ -22,6 +22,7 @@
 			<tr>
 				<th class="col-md-2">Codigo</th>
 				<th class="col-md-4">Descripción</th>
+				<th class="col-md-4">Tipo de Turno</th>
 				<th class="col-md-2">Inicio P.I</th>
 				<th class="col-md-2">Fin P.I</th>
 				<th class="col-md-2">Inicio S.I</th>
@@ -36,6 +37,7 @@
 			<tr>
 				<td>{{ $turno -> TURN_CODIGO }}</td>
 				<td>{{ $turno -> TURN_DESCRIPCION }}</td>
+				<td>{{ $turno -> TURN_TIPOTURNO }}</td>
 				<td>{{ $turno -> TURN_HORAINICIOPI }}</td>
 				<td>{{ $turno -> TURN_HORAFINALPI }}</td>
 				<td>{{ $turno -> TURN_HORAINICIOSI }}</td>
