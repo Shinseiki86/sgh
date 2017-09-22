@@ -50,20 +50,10 @@ class SendEmailRejectedTicket extends Job implements ShouldQueue
                 $TICK_ID = str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT);
                 $message->subject('Ticket '.$TICK_ID.' rechazado');
 
-                //Correo al usuario que rechazó el ticket y al responsable de GH
-                $empleador = $ticket->contrato->empleador;
-                $to = [ $userRejects->email ];
-                if(isset($empleador->EMPL_CORREO))
-                    $to[] = $empleador->EMPL_CORREO;
+                //Correo al usuario que rechazó el ticket y al creador del ticket
+                $to = [ $userRejects->email, $ticket->usuario->email ];
                 $message->to($to);
 
-                //Copia al usuario que creó el ticket y al jefe
-                $owner = $ticket->usuario;
-                $jefe =  Prospecto::getJefe($owner->cedula);
-                $cc = [ $owner->email ];
-                if(isset($jefe->PROS_CORREO))
-                    $cc[] = $jefe->PROS_CORREO;
-                $message->cc($cc);
             });
         } catch(\Exception $e){
             flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID, 'danger' );

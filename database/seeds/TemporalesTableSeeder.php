@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use SGH\Models\Temporal;
+use Faker\Factory as Faker;
 
 class TemporalesTableSeeder extends Seeder
 {
@@ -13,6 +14,7 @@ class TemporalesTableSeeder extends Seeder
      public function run()
 	{
 		//$this->command->info('---Seeder Temporales');
+        $faker = Faker::create();
 		
 		$temporal = new Temporal;
         $temporal->TEMP_RAZONSOCIAL = 'PROSERVIS TEMPORALES SAS';
@@ -20,7 +22,7 @@ class TemporalesTableSeeder extends Seeder
         $temporal->TEMP_DIRECCION = 'CALLE 39 E BIS 89';
         $temporal->TEMP_OBSERVACIONES =  'TEMPORAL DE PRUEBA';
         $temporal->PROS_ID =  5;
-        $temporal->TEMP_CREADOPOR =  'SYSTEM';
+        $temporal->TEMP_CREADOPOR =  'PRUEBA';
         $temporal->save();
 
         $temporal = new Temporal;
@@ -29,7 +31,7 @@ class TemporalesTableSeeder extends Seeder
         $temporal->TEMP_DIRECCION = 'CALLE 39 E BIS 89';
         $temporal->TEMP_OBSERVACIONES =  'TEMPORAL DE PRUEBA';
         $temporal->PROS_ID =  6;
-        $temporal->TEMP_CREADOPOR =  'SYSTEM';
+        $temporal->TEMP_CREADOPOR =  'PRUEBA';
         $temporal->save();
 
 	}

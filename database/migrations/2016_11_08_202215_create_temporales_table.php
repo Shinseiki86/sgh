@@ -23,17 +23,17 @@ class CreateTemporalesTable extends Migration
                 ->comment('Valor autonumérico, llave primaria de la tabla empleadores.');
 
             $table->string('TEMP_RAZONSOCIAL', 300)
-                ->comment('razon social del empleador');
+                ->comment('Razón social de la temporal');
 
             $table->string('TEMP_NOMBRECOMERCIAL', 300)
-                ->comment('nombre comercial del empleador');
+                ->comment('Nombre comercial de la temporal');
 
             $table->string('TEMP_DIRECCION', 300)
-                ->comment('dirección de la empresa');
+                ->comment('Dirección de la temporal');
 
             $table->unsignedInteger('PROS_ID')
                 ->nullable()
-                ->comment('persona encargada del manejo de gestión humana de la temporal.');
+                ->comment('Persona encargada del manejo de gestión humana de la temporal.');
 
             $table->string('TEMP_OBSERVACIONES', 300)
                 ->comment('observaciones del tipo de contrato')->nullable();

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use SGH\Models\Empleador;
+use Faker\Factory as Faker;
 
 class EmpleadoresTableSeeder extends Seeder
 {
@@ -13,6 +14,7 @@ class EmpleadoresTableSeeder extends Seeder
     public function run()
     {
     	//$this->command->info('---Seeder Empleadores');
+        $faker = Faker::create();
     	
     	$empleador = new Empleador;
     	$empleador->EMPL_RAZONSOCIAL = 'SERVICIOS AMBIENTALES S.A E.S.P.';
@@ -23,10 +25,10 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'CARLOS ROBERTO BONILLA MELENDRO';
         $empleador->EMPL_NOMBRECOMERCIAL = 'SERAMBIENTAL';
         $empleador->EMPL_DIRECCION = 'CL 21A No. 2-07';
-        $empleador->EMPL_CORREO = NULL;
+        $empleador->EMPL_CORREO = $faker->email;
     	$empleador->EMPL_OBSERVACIONES =  NULL;
         $empleador->PROS_ID =  NULL;
-    	$empleador->EMPL_CREADOPOR =  'SYSTEM';
+    	$empleador->EMPL_CREADOPOR =  'PRUEBA';
     	$empleador->save();
 
     	$empleador = new Empleador;
@@ -38,10 +40,10 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'CARLOS ANDRES GAITAN ANZOLA';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOCARIBE';
         $empleador->EMPL_DIRECCION = 'LOS ALPES TV 73 No 31I 140';
-        $empleador->EMPL_CORREO = NULL;
+        $empleador->EMPL_CORREO = $faker->email;
     	$empleador->EMPL_OBSERVACIONES =  NULL;
         $empleador->PROS_ID =  NULL;
-    	$empleador->EMPL_CREADOPOR =  'SYSTEM';
+    	$empleador->EMPL_CREADOPOR =  'PRUEBA';
     	$empleador->save();
 
         $empleador = new Empleador;
@@ -53,10 +55,10 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'TOMAS SALVADOR MENDOZA PARDO';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOVALLE';
         $empleador->EMPL_DIRECCION = 'CL 70 7E BIS 04';
-        $empleador->EMPL_CORREO = NULL;
+        $empleador->EMPL_CORREO = $faker->email;
         $empleador->EMPL_OBSERVACIONES =  NULL;
         $empleador->PROS_ID =  NULL;
-        $empleador->EMPL_CREADOPOR =  'SYSTEM';
+        $empleador->EMPL_CREADOPOR =  'PRUEBA';
         $empleador->save();
 
         $empleador = new Empleador;
@@ -68,10 +70,10 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'TOMAS SALVADOR MENDOZA PARDO';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOCALI';
         $empleador->EMPL_DIRECCION = 'CL 70 7E BIS 04';
-        $empleador->EMPL_CORREO = NULL;
+        $empleador->EMPL_CORREO = $faker->email;
         $empleador->EMPL_OBSERVACIONES =  NULL;
         $empleador->PROS_ID =  NULL;
-        $empleador->EMPL_CREADOPOR =  'SYSTEM';
+        $empleador->EMPL_CREADOPOR =  'PRUEBA';
         $empleador->save();
 
         $empleador = new Empleador;
@@ -83,10 +85,10 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'MANUEL GUILLERMO VALLECILLA PERDOMO';
         $empleador->EMPL_NOMBRECOMERCIAL = 'SURASEO';
         $empleador->EMPL_DIRECCION = 'CL 11A 32 108';
-        $empleador->EMPL_CORREO = NULL;
+        $empleador->EMPL_CORREO = $faker->email;
         $empleador->EMPL_OBSERVACIONES =  NULL;
         $empleador->PROS_ID =  NULL;
-        $empleador->EMPL_CREADOPOR =  'SYSTEM';
+        $empleador->EMPL_CREADOPOR =  'PRUEBA';
         $empleador->save();
 
         $empleador = new Empleador;
@@ -98,10 +100,10 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'CARLOS ANDRES GAITAN ANZOLA';
         $empleador->EMPL_NOMBRECOMERCIAL = 'PROMOAMBIENTAL';
         $empleador->EMPL_DIRECCION = 'LOS ALPES TV 73 No 31I 140';
-        $empleador->EMPL_CORREO = NULL;
+        $empleador->EMPL_CORREO = $faker->email;
         $empleador->EMPL_OBSERVACIONES =  NULL;
         $empleador->PROS_ID =  NULL;
-        $empleador->EMPL_CREADOPOR =  'SYSTEM';
+        $empleador->EMPL_CREADOPOR =  'PRUEBA';
         $empleador->save();
 
         $empleador = new Empleador;
@@ -113,10 +115,10 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'JAIME ALBERTO CANO CAÑAS';
         $empleador->EMPL_NOMBRECOMERCIAL = 'CENCOASEO';
         $empleador->EMPL_DIRECCION = 'CRA 9 No.1 - 26';
-        $empleador->EMPL_CORREO = NULL;
+        $empleador->EMPL_CORREO = $faker->email;
         $empleador->EMPL_OBSERVACIONES =  NULL;
         $empleador->PROS_ID =  NULL;
-        $empleador->EMPL_CREADOPOR =  'SYSTEM';
+        $empleador->EMPL_CREADOPOR =  'PRUEBA';
         $empleador->save();
 
         $empleador = new Empleador;
@@ -128,10 +130,10 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_NOMBREREPRESENTANTE = 'FABIAN MARRUGO GOMEZ';
         $empleador->EMPL_NOMBRECOMERCIAL = 'METALMECANICA';
         $empleador->EMPL_DIRECCION = 'CRA 54 27 116 BARIO EL BOSQUE';
-        $empleador->EMPL_CORREO = NULL;
+        $empleador->EMPL_CORREO = $faker->email;
         $empleador->EMPL_OBSERVACIONES =  NULL;
         $empleador->PROS_ID =  NULL;
-        $empleador->EMPL_CREADOPOR =  'SYSTEM';
+        $empleador->EMPL_CREADOPOR =  'PRUEBA';
         $empleador->save();
 
     }

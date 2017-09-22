@@ -50,19 +50,25 @@ class SendEmailAuthorizedTicket extends Job implements ShouldQueue
                 $TICK_ID = str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT);
                 $message->subject('Ticket '.$TICK_ID.' autorizado');
 
-                //Correo al usuario que autorizó el ticket y al responsable de GH
-                $empleador = $ticket->contrato->empleador;
-                $to = [ $userAuthorizes->email ];
-                if(isset($empleador->EMPL_CORREO))
-                    $to[] = $empleador->EMPL_CORREO;
-                $message->to($to);
+                $to = [];
+                //Copia al usuario que creó el ticket y al usuario que autorizó el ticket. Si es temporal, copia al responsable de la temporal.
+                $cc = [ $ticket->usuario->email, $userAuthorizes->email ];
 
-                //Copia al usuario que creó el ticket y al jefe
-                $owner = $ticket->usuario;
-                $jefe =  Prospecto::getJefe($owner->cedula);
-                $cc = [ $owner->email ];
-                if(isset($jefe->PROS_CORREO))
-                    $cc[] = $jefe->PROS_CORREO;
+                $responsableTemp = $ticket->contrato->temporal;
+                //Si es temporal, entonces se envía correo al responsable de la temporal.
+                if(isset($responsableTemp))
+                    $to[] = $responsableTemp->prospecto->PROS_CORREO;
+
+                $responsableGH = $ticket->contrato->empleador;
+                if(isset($responsableGH)){
+                    //Si es temporal, entonces se envía copia al responsable del empleador.
+                    if(isset($responsableTemp))
+                        $cc[] = $responsableGH->EMPL_CORREO;
+                    else
+                        $to[] = $responsableGH->EMPL_CORREO;
+                }
+
+                $message->to($to);
                 $message->cc($cc);
             });
         } catch(\Exception $e){
