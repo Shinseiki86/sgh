@@ -55,9 +55,8 @@ class DiagnosticoController extends Controller
 						->get();
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
-				$ruta = route('cnfg-ausentismos.diagnosticos.edit', [ 'DIAG_ID'=>$model->DIAG_ID ]);
-				return parent::buttonEdit($ruta).
-					parent::buttonDelete($model, 'DIAG_ID', 'DIAG_DESCRIPCION', 'diagnosticos');
+				return parent::buttonEdit($model).
+					parent::buttonDelete($model, 'DIAG_DESCRIPCION');
 			})->make(true);
 	}
 

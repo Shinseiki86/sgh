@@ -67,9 +67,8 @@ class DepartamentoController extends Controller
 				return $model->ciudades->count();
 			})
 			->addColumn('action', function($model){
-				$ruta = route('cnfg-geograficos.departamentos.edit', [ 'DEPA_ID'=>$model->DEPA_ID ]);
-				return parent::buttonEdit($ruta).
-					parent::buttonDelete($model, 'DEPA_ID', 'DEPA_NOMBRE', 'departamentos');
+				return parent::buttonEdit($model).
+					parent::buttonDelete($model, 'DEPA_NOMBRE');
 			})->make(true);
 	}
 

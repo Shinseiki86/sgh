@@ -69,9 +69,8 @@ class CiudadController extends Controller
 
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
-				$ruta = route($this->route.'.edit', [ 'CIUD_ID'=>$model->CIUD_ID ]);
-				return parent::buttonEdit($ruta).
-					parent::buttonDelete($model, 'CIUD_ID', 'CIUD_NOMBRE', 'ciudades');
+				return parent::buttonEdit($model).
+					parent::buttonDelete($model, 'CIUD_NOMBRE');
 			})->make(true);
 	}
 

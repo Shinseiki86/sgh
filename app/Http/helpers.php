@@ -27,13 +27,13 @@ if (! function_exists('expression_concat')) {
      */
     function expression_concat($columns = [], $alias = 'concat')
     {
-        if(env('DB_CONNECTION') == 'pgsql'){
+        if(config('database.default') == 'pgsql'){
             foreach ($columns as $key => $column) {
                 $columns[$key] = '"'.$column.'"';
             }
             $alias = '"'.$alias.'"';
         }
-
+        
         $sqlIni = 'CONCAT_WS(\' \',';
         $sqlEnd = ') AS '.$alias;
         $sqlColumns = null;

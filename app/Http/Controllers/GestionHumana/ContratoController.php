@@ -83,6 +83,7 @@ class ContratoController extends Controller
 		return view($this->route.'.index', compact('contratos'));
 	}
 
+
 	/**
 	 * Retorna json para Datatable.
 	 *
@@ -96,9 +97,8 @@ class ContratoController extends Controller
 
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
-				$ruta = route($this->route.'.edit', [ 'CONT_ID'=>$model->CONT_ID ]);
-				return parent::buttonEdit($ruta).
-					parent::buttonDelete($model, 'CONT_ID', 'PROS_CEDULA', 'contratos');
+				return parent::buttonEdit($model).
+					parent::buttonDelete($model, 'PROS_CEDULA');
 			})->make(true);
 	}
 

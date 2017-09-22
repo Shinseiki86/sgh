@@ -83,6 +83,7 @@ Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], functio
 	Route::resource('estadosaprobaciones', 'EstadoAprobacionController');
 	Route::resource('sanciones', 'SancionController');
 	Route::resource('tickets', 'TicketController');
+	Route::get('getTickets', 'TicketController@getData');
 	Route::get('tickets/autorizar/{TICK_ID}', 'TicketController@autorizarTicket');
 	Route::post('tickets/rechazar/{TICK_ID}', 'TicketController@rechazarTicket');
 	Route::post('tickets/cerrar/{TICK_ID}', 'TicketController@cerrarTicket');

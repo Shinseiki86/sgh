@@ -36,7 +36,7 @@
 			lengthMenu: [[5,10,25,50,100], [5,10,15,25,50,100]],
 			pagingType: 'simple_numbers',
 			bScrollCollapse: true,
-			sScrollY: '350px',
+			sScrollY: '500px',
 			rowReorder: false,
 			responsive: true,
 			language: { 

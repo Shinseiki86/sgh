@@ -61,26 +61,25 @@ class ProspectoController extends Controller
 	public function getData()
 	{
 		$model = Prospecto::select([
-							'PROS_ID',
-							'PROS_CEDULA',
-							'PROS_FECHAEXPEDICION',
-							'PROS_PRIMERNOMBRE',
-							'PROS_SEGUNDONOMBRE',
-							'PROS_PRIMERAPELLIDO',
-							'PROS_SEGUNDOAPELLIDO',
-							'PROS_SEXO',
-							'PROS_DIRECCION',
-							'PROS_TELEFONO',
-							'PROS_CELULAR',
-							'PROS_CORREO',
-							'PROS_MARCA',
-						])->get();
+			'PROS_ID',
+			'PROS_CEDULA',
+			'PROS_FECHAEXPEDICION',
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_SEXO',
+			'PROS_DIRECCION',
+			'PROS_TELEFONO',
+			'PROS_CELULAR',
+			'PROS_CORREO',
+			'PROS_MARCA',
+		])->get();
 
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
-				$ruta = route($this->route.'.edit', [ 'PROS_ID'=>$model->PROS_ID ]);
-				return parent::buttonEdit($ruta).
-					parent::buttonDelete($model, 'PROS_ID', 'PROS_CEDULA', 'prospectos');
+				return parent::buttonEdit($model).
+					parent::buttonDelete($model, 'PROS_CEDULA');
 			})->make(true);
 	}
 

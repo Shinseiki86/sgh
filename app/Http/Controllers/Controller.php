@@ -200,24 +200,34 @@ class Controller extends BaseController
 		return $hasRelations;
 	}
 
-	protected function buttonEdit($ruta)
+	protected function buttonShow($model)
 	{
-		return \Html::link($ruta, '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', [
-			'class'=>'btn btn-small btn-info btn-xs',
-			'title'=>'Editar',
-			'data-tooltip'=>'tooltip'
-		],null,false).' ';
+		return $this->button($model, 'show', 'Ver', 'default', 'eye');
 	}
 
-	protected function buttonDelete($model, $modelId, $modelDescrip, $action)
+	protected function buttonEdit($model)
 	{
-		return \Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
+		return $this->button($model, 'edit', 'Editar', 'info', 'pencil-square-o');
+	}
+
+	private function button($model, $type, $title, $class, $icon)
+	{
+		return \Html::link(route($this->route.'.'.$type, [ $model->getKeyName() => $model->getKey() ]), '<i class="fa fa-'.$icon.' fa-fw" aria-hidden="true"></i>', [
+			'class'=>'btn btn-xs btn-'.$class,
+			'title'=>$title,
+			'data-tooltip'=>'tooltip'
+		],null,false);
+	}
+
+	protected function buttonDelete($model, $modelDescrip)
+	{
+		return \Form::button('<i class="fa fa-trash fa-fw" aria-hidden="true"></i>',[
 			'class'=>'btn btn-xs btn-danger btn-delete',
 			'data-toggle'=>'modal',
-			'data-id'=> $model->$modelId,
+			'data-id'=> $model->getKey(),
 			'data-modelo'=> str_upperspace(class_basename($model)),
 			'data-descripcion'=> $model->$modelDescrip,
-			'data-action'=> $action.'/'.$model->$modelId,
+			'data-action'=> route( $this->route.'.destroy', [ $model->getKeyName() => $model->getKey() ]),
 			'data-target'=>'#pregModalDelete',
 			'data-tooltip'=>'tooltip',
 			'title'=>'Borrar',

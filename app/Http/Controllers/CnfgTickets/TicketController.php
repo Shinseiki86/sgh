@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
+use Yajra\Datatables\Facades\Datatables;
 
 use SGH\Jobs\SendEmailNewTicket;
 use SGH\Jobs\SendEmailAuthorizedTicket;
@@ -67,7 +68,7 @@ class TicketController extends Controller
 	{
 
 		//Se obtienen todos los registros.
-		$tickets = Ticket::all();
+		//$tickets = Ticket::all();
 		//Se carga la vista y se pasan los registros
 		return view($this->route.'.index', compact('tickets'));
 	}
@@ -81,6 +82,55 @@ class TicketController extends Controller
 
         // Muestra la vista y pasa el registro
 		return view($this->route.'.show', compact('ticket','arrSanciones'));
+	}
+
+
+	/**
+	 * Retorna json para Datatable.
+	 *
+	 * @return json
+	 */
+	public function getData()
+	{
+		$PROS_NOMBRESAPELLIDOS = expression_concat([
+				'PROS_PRIMERNOMBRE',
+				'PROS_SEGUNDONOMBRE',
+				'PROS_PRIMERAPELLIDO',
+				'PROS_SEGUNDOAPELLIDO',
+			], 'PROS_NOMBRESAPELLIDOS');
+
+		$model = Ticket::join('CONTRATOS', 'CONTRATOS.CONT_ID', '=', 'TICKETS.CONT_ID')
+			->join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+			->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+			->join('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
+			->join('TIPOSINCIDENTES', 'TIPOSINCIDENTES.TIIN_ID', '=', 'TICKETS.TIIN_ID')
+			->join('PRIORIDADES', 'PRIORIDADES.PRIO_ID', '=', 'TICKETS.PRIO_ID')
+			->join('CATEGORIAS', 'CATEGORIAS.CATE_ID', '=', 'TICKETS.CATE_ID')
+			->join('ESTADOSAPROBACIONES', 'ESTADOSAPROBACIONES.ESAP_ID', '=', 'TICKETS.ESAP_ID')
+			->join('GRUPOS', 'GRUPOS.GRUP_ID', '=', 'TICKETS.GRUP_ID')
+			->join('TURNOS', 'TURNOS.TURN_ID', '=', 'TICKETS.TURN_ID')
+			->select([
+				'TICK_ID',
+				'EMPL_NOMBRECOMERCIAL',
+				$PROS_NOMBRESAPELLIDOS,
+				'ESTI_DESCRIPCION',
+				'TIIN_DESCRIPCION',
+				'PRIO_DESCRIPCION',
+				'CATE_DESCRIPCION',
+				'TICK_FECHAEVENTO',
+				'TICK_FECHASOLICITUD',
+				'TICK_FECHACIERRE',
+				'ESAP_DESCRIPCION',
+				'GRUP_DESCRIPCION',
+				'TURN_DESCRIPCION',
+				'TICK_CREADOPOR',
+			])->get();
+
+		return Datatables::collection($model)
+			->addColumn('action', function($model){
+				return parent::buttonShow($model).parent::buttonEdit($model).
+					parent::buttonDelete($model, 'TICK_ID');
+			})->make(true);
 	}
 
 	/**

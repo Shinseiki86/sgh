@@ -62,9 +62,8 @@ class PaisController extends Controller
 				return $model->departamentos->count();
 			})
 			->addColumn('action', function($model){
-				$ruta = route($this->route.'.edit', [ 'PAIS_ID'=>$model->PAIS_ID ]);
-				return parent::buttonEdit($ruta).
-					parent::buttonDelete($model, 'PAIS_ID', 'PAIS_NOMBRE', 'paises');
+				return parent::buttonEdit($model).
+					parent::buttonDelete($model, 'PAIS_NOMBRE');
 			})->make(true);
 	}
 
