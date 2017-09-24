@@ -21,6 +21,14 @@ class Pais extends ModelWithSoftDeletes
 		'PAIS_CODIGO',
 		'PAIS_NOMBRE',
 	];
+
+	public static function rules($id = 0){
+		$rules = [
+			'PAIS_CODIGO' => ['required','numeric',static::unique($id,'PAIS_CODIGO')],
+			'PAIS_NOMBRE' => ['required','max:300',static::unique($id,'PAIS_NOMBRE')],
+		];
+		return $rules;
+	}
 	
 	public function departamentos()
 	{

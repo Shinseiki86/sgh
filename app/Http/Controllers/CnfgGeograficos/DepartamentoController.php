@@ -22,22 +22,6 @@ class DepartamentoController extends Controller
 		parent::__construct();
 	}
 
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'DEPA_CODIGO' => ['required', 'numeric', 'unique:DEPARTAMENTOS,DEPA_CODIGO,'.$id.',DEPA_ID'],
-			'DEPA_NOMBRE' => ['required', 'max:300', 'unique:DEPARTAMENTOS,DEPA_NOMBRE,'.$id.',DEPA_ID'],
-			'PAIS_ID'     => ['required', 'numeric']//, 'exists:PAISES'],
-		]);
-
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

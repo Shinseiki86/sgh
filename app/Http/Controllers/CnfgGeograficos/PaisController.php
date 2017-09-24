@@ -23,20 +23,6 @@ class PaisController extends Controller
 	}
 
 	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'PAIS_CODIGO' => ['required', 'numeric', 'unique:PAISES,PAIS_CODIGO,'.$id.',PAIS_ID'],
-			'PAIS_NOMBRE' => ['required', 'max:300', 'unique:PAISES,PAIS_NOMBRE,'.$id.',PAIS_ID'],
-		]);
-	}
-
-	/**
 	 * Muestra una lista de los registros.
 	 *
 	 * @return Response

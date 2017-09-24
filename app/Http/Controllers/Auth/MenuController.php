@@ -23,21 +23,6 @@ class MenuController extends Controller
 	}
 
 	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  array $data
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'MENU_LABEL' => ['required','max:20'],
-			'MENU_ICON'  => ['required','max:50'],
-			'MENU_URL'   => ['max:250'],
-		]);
-	}
-
-	/**
 	 * Muestra una lista de los registros.
 	 *
 	 * @return Response
@@ -168,7 +153,7 @@ class MenuController extends Controller
 		//Se crea un array con los Role disponibles
 		//$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
 
-		$arrRoutes = $this->getRoutes();
+		$arrRoutes = [$menu->MENU_URL => $menu->MENU_URL] + $this->getRoutes();
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->route.'.edit', compact('menu', 'arrRoutes'));

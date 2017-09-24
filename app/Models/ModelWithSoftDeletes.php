@@ -35,6 +35,12 @@ class ModelWithSoftDeletes extends Model
         //$deleted_by => (\Auth::id()) ?: null
     }
 
+    protected static function unique($id, $column, $table = null){
+        $instance = new static;
+        if(!isset($table))
+            $table = $instance->table;
+        return 'unique:'.$table.','.$column.','.$id.','.$instance->getKeyName();
+    }
 
     protected static function boot() {
         parent::boot();

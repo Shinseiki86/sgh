@@ -24,23 +24,6 @@ class CiudadController extends Controller
 	}
 
 	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return validator::make($data, [
-			'CIUD_CODIGO' => ['required', 'numeric', 'unique:CIUDADES,CIUD_CODIGO,'.$id.',CIUD_CODIGO'],
-			'CIUD_NOMBRE' => ['required', 'max:300', 'unique:CIUDADES,CIUD_NOMBRE,'.$id.',CIUD_CODIGO'],
-			'DEPA_ID'     => ['required', 'numeric']
-		]);
-
-	}
-	
-
-	/**
 	 * Muestra una lista de los registros.
 	 *
 	 * @return Response

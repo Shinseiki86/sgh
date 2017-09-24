@@ -27,15 +27,14 @@ class Menu extends ModelWithSoftDeletes
 		'MENU_ENABLED',
 	];
 
-	public static $rules = [
-		'MENU_LABEL'  => ['required', 'max:20', ],//'unique:MENUS,MENU_LABEL,'.$this->getKey().',MENU_ID'],
-		'MENU_URL'    => ['max:300', ],//'unique:MENUS,MENU_URL,'.$this->getKey().',MENU_ID'],
-		'MENU_ICON'   => ['string', 'max:300'],
-		'MENU_PARENT' => 'numeric',
-		'MENU_ORDER'  => ['required', 'numeric'],
-		'MENU_POSITION'  => ['string'],
-		'MENU_ENABLED'=> 'bolean',
-	];
+	public static function rules(){
+		$rules = [
+			'MENU_LABEL'  => ['required', 'max:20', ],//'unique:MENUS,MENU_LABEL,'.$this->getKey().',MENU_ID'],
+			'MENU_URL'    => ['max:300', ],//'unique:MENUS,MENU_URL,'.$this->getKey().',MENU_ID'],
+			'MENU_ICON'   => ['string', 'max:300'],
+		];
+		return $rules;
+	}
 
 	public function getChildren($data, $line)
 	{

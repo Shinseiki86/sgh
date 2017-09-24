@@ -23,6 +23,15 @@ class Departamento extends ModelWithSoftDeletes
 		'PAIS_ID',
 	];
 
+	public static function rules($id = 0){
+		$rules = [
+			'DEPA_CODIGO' => ['required','numeric',static::unique($id,'DEPA_CODIGO')],
+			'DEPA_NOMBRE' => ['required','max:300',static::unique($id,'DEPA_NOMBRE')],
+			'PAIS_ID'     => ['required','numeric']//, 'exists:PAISES'],
+		];
+		return $rules;
+	}
+
 	public function ciudades()
 	{
 		$foreingKey = 'DEPA_ID';

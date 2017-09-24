@@ -23,6 +23,15 @@ class Ciudad extends ModelWithSoftDeletes
 		'DEPA_ID',
 	];
 
+	public static function rules($id = 0){
+		$rules = [
+			'CIUD_CODIGO' => ['required','numeric',static::unique($id,'CIUD_CODIGO')],
+			'CIUD_NOMBRE' => ['required','max:300',static::unique($id,'CIUD_NOMBRE')],
+			'DEPA_ID'     => ['required','numeric']
+		];
+		return $rules;
+	}
+
 	public function departamento()
 	{
 		$foreingKey = 'DEPA_ID';

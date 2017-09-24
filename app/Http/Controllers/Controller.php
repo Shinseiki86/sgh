@@ -38,6 +38,17 @@ class Controller extends BaseController
     }
 
 	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  Request $request
+	 * @return void
+	 */
+	protected function validator($data, $id = 0)
+	{
+		return validator::make($data, $class::rules($id));
+	}
+
+	/**
 	 * Guarda el registro nuevo en la base de datos.
 	 *
 	 * @param  array  $relations
