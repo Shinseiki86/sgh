@@ -2,20 +2,16 @@
 
 namespace SGH\Http\Controllers;
 
+use Validator;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 
-use Illuminate\Contracts\Validation\Validator;
-
-
 class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
-
-    public static $modeloCreado;
 
     public function __construct($requireAuth=true)
 	{
@@ -43,9 +39,9 @@ class Controller extends BaseController
 	 * @param  Request $request
 	 * @return void
 	 */
-	protected function validator($data, $id = 0)
+	protected function validateRules($data, $id = 0)
 	{
-		return validator::make($data, $class::rules($id));
+		return Validator::make($data, call_user_func($this->class.'::rules', $id));
 	}
 
 	/**
@@ -60,7 +56,7 @@ class Controller extends BaseController
 		$data = $this->getRequest();
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$validator = $this->validator($data);
+		$validator = $this->validateRules($data);
 
 		if($validator->passes()){
 			$class = $this->getClass($this->class);
@@ -94,7 +90,7 @@ class Controller extends BaseController
 		$data = $this->getRequest();
 
 		//Se valida que los datos recibidos cumplan los requerimientos necesarios.
-		$validator = $this->validator($data, $id);
+		$validator = $this->validateRules($data, $id);
 
 		if($validator->passes()){
 			$class = $this->getClass($this->class);

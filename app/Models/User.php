@@ -19,7 +19,6 @@ class User extends Authenticatable
 	const DELETED_AT = 'deleted_at';
 	protected $dates = ['created_at', 'modified_at', 'deleted_at'];
 
-
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -44,19 +43,36 @@ class User extends Authenticatable
 		'remember_token',
 	];
 
+	public static function rules($id = 0){
+		$rules = [
+			'name'      => 'required|max:255',
+			'username'  => ['required','max:15',static::unique($id,'username')],
+			'cedula'    => ['required','max:15',static::unique($id,'cedula')],
+			'email'     => ['required','email','max:320',static::unique($id,'email')],
+			'roles_ids' => 'required|array',
+			'password'  => 'required|min:6|confirmed',
+		];
+		return $rules;
+	}
+
+    protected static function unique($id, $column, $table = null){
+        $instance = new static;
+        if(!isset($table))
+            $table = $instance->table;
+        return 'unique:'.$table.','.$column.','.$id.','.$instance->getKeyName();
+    }
+
 	//establecemos las relaciones con el modelo Role, ya que un usuario puede tener varios roles
 	//y un rol lo pueden tener varios usuarios
 	public function roles(){
 		return $this->belongsToMany(Role::class);
 	}
 
-
 	public function tickets()
 	{
 		$foreingKey = 'USER_id';
 		return $this->hasMany(Ticket::class, $foreingKey);
 	}
-
 
     /**
      * Perform the actual delete query on this model instance.

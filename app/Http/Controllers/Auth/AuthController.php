@@ -92,7 +92,6 @@ class AuthController extends Controller
 		]);
 	}
 
-
 	/**
 	 * Show the application registration form.
 	 *
@@ -100,10 +99,6 @@ class AuthController extends Controller
 	 */
 	public function showRegistrationForm()
 	{
-		if (property_exists($this, 'registerView')) {
-			return view($this->registerView);
-		}
-
 		//Se crea un array con los Role disponibles
 		$arrRoles = model_to_array(Role::class, 'display_name');
 
@@ -138,7 +133,6 @@ class AuthController extends Controller
 			'created_by' => auth()->user()->username,
 		]);
 	}
-
 
 	/**
 	 * Get the login username to be used by the controller.
