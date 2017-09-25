@@ -4,20 +4,20 @@
 <style type="text/css">
 	html, body {height: 100%;}
 	body { 
-		background-image: url('{{asset('assets/images/logo.jpg')}}');
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-		background-position: center;
+		background: url('{{ File::exists('assets/images/logo-user.png') ? asset('assets/images/logo-user.png') : asset('assets/images/logo-default.png') }}') no-repeat fixed center;
+	}
+	.panel, #page-wrapper { 
+		background: rgba(255, 255, 255, 0.91) !important;
 	}
 	.container {
-	    height: 100%;
-	    width: 100%;
-	    display: table;
+		height: 100%;
+		width: 100%;
+		display: table;
 	}
 	.row {
-	    display: table-cell;
-	    height: 100%;
-	    vertical-align: middle;
+		display: table-cell;
+		height: 100%;
+		vertical-align: middle;
 	}
 </style>
 @endpush

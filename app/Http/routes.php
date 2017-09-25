@@ -22,6 +22,10 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'middleware' => ['auth'
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
+	Route::get('parameters', 'ParametersController@index')->name('admin.parameters');
+});
+
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/',  function(){return view('dashboard/index');});
 });

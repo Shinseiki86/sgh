@@ -224,7 +224,7 @@ var getOptionsChart = function ($type) {
 					yAxes: [{ticks: {
 							beginAtZero: true,
 							min: 0,
-							stepSize: 1,
+							//stepSize: 1,
 							fontSize: 16
 					}}],
 					xAxes: [{ticks: {fontSize: 16}}]
