@@ -23,6 +23,15 @@ class Cargo extends ModelWithSoftDeletes
 		'CARG_OBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		$rules = [
+			'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+			'CNOS_ID' => 'required',
+			'CARG_OBSERVACIONES' => 'max:300',
+		];
+		return $rules;
+	}
+
 	public function cno()
 	{
 		$foreingKey = 'CNOS_ID';

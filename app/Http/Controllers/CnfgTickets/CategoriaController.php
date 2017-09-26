@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgTickets;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Categoria;
@@ -21,22 +14,6 @@ class CategoriaController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return Validator::make($data, [
-			'CATE_DESCRIPCION' => ['required','max:100'],
-			'CATE_OBSERVACIONES' => ['max:300'],
-			'CATE_ids' => ['array'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

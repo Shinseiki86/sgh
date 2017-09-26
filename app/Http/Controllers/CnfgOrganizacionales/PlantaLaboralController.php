@@ -1,15 +1,7 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
-
 use SGH\Models\PlantaLaboral;
 
 class PlantaLaboralController extends Controller
@@ -20,22 +12,6 @@ class PlantaLaboralController extends Controller
 	public function __construct()
 	{
 		parent::__construct();
-	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return Validator
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'CARG_ID' => ['numeric', 'required'],
-			'GERE_ID' => ['numeric', 'required'],
-			'EMPL_ID' => 'required|unique_with:PLANTASLABORALES,CARG_ID,GERE_ID',
-			'PALA_CANTIDAD' => ['numeric','required'],
-		]);
 	}
 
 
