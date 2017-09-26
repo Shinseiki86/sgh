@@ -2,13 +2,7 @@
 
 namespace SGH\Http\Controllers\CnfgContratos;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 use SGH\Models\TipoContrato;
 
@@ -22,20 +16,6 @@ class TipoContratoController extends Controller
 		parent::__construct();
 	}
 	
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'TICO_DESCRIPCION' => ['required','max:100','unique:TIPOSCONTRATOS,TICO_DESCRIPCION,'.$id.',TICO_ID'],
-			'TICO_OBSERVACIONES' => ['max:300'],
-		]);
-	}
-
 	/**
 	 * Muestra una lista de los registros.
 	 *

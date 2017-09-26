@@ -2,13 +2,7 @@
 
 namespace SGH\Http\Controllers\Auth;
 
-use SGH\Http\Requests;
-use Validator;
 use SGH\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 
 use SGH\Models\Permission;
 
@@ -21,23 +15,6 @@ class PermissionController extends Controller
 	{
 		parent::__construct();
 	}
-
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  array $data
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'name'         => ['required','max:15','unique:permissions,name,'.$id.',id'],
-			'display_name' => ['required','max:50','unique:permissions,display_name,'.$id.',id'],
-			'description'  => ['required','max:100'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.
@@ -104,7 +81,7 @@ class PermissionController extends Controller
 	 */
 	public function update($id)
 	{
-		parent::updateModel($id, Permission::class, ['roles'=>'roles_ids']);
+		parent::updateModel($id, ['roles'=>'roles_ids']);
 	}
 
 	/**

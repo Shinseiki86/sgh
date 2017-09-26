@@ -22,6 +22,13 @@ class TipoEmpleador extends ModelWithSoftDeletes
 		'TIEM_OBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		return [
+			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+		
+		];
+	}
+
 	public function contratos()
 	{
 		$foreingKey = 'TIEM_ID';

@@ -22,6 +22,13 @@ class TipoContrato extends ModelWithSoftDeletes
 		'TICO_OBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		return [
+			'TICO_DESCRIPCION' => 'required|max:100|'.static::unique($id,'TICO_DESCRIPCION'),
+			'TICO_OBSERVACIONES' => ['max:300'],
+		];
+	}
+
 	public function contratos()
 	{
 		$foreingKey = 'TICO_ID';

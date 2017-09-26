@@ -15,34 +15,15 @@ use SGH\Models\ConceptoAusencia;
 use SGH\Models\Entidad;
 use Yajra\Datatables\Facades\Datatables;
 
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
-
 class AusentismoController extends Controller
 {
-
-
 	protected $route='cnfg-ausentismos.ausentismos';
 	protected $class = Ausentismo::class;
+	
 	public function __construct()
 	{	
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return validator::make($data, Ausentismo::$rules);
-
-	}
-
 	
 	/**
 	 * Display a listing of the Ausentismo.

@@ -2,43 +2,21 @@
 
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
-use Validator;
-use SGH\Http\Requests;
-use Flash;
-use Illuminate\Support\Facades\Session;
-use Redirect;
 use SGH\Http\Controllers\Controller;
-use Response;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
-use SGH\Models\ProrrogaAusentismo;
-use Yajra\Datatables\Facades\Datatables;                    
+use Yajra\Datatables\Facades\Datatables;
 
+use SGH\Models\ProrrogaAusentismo;                  
 
 class ProrrogaAusentismoController extends Controller
 {
-
 	protected $route='cnfg-ausentismos.prorrogaausentismos';
 	protected $class = ProrrogaAusentismo::class;
+
 	public function __construct()
 	{
 		parent::__construct();
 	}
 
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return validator::make($data, ProrrogaAusentismo::$rules);
-
-	}
-
-	
 	/**
 	 * Display a listing of the ProrrogaAusentismo.
 	 *
@@ -49,9 +27,6 @@ class ProrrogaAusentismoController extends Controller
 		$prorrogaAusentismos = ProrrogaAusentismo::all();
 		return view($this->route.'.index', compact('prorrogaAusentismos'));
 	}
-
-	
-
 
 	/**
 	 * Show the form for creating a new ProrrogaAusentismo.

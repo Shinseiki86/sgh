@@ -31,6 +31,13 @@ class Entidad extends ModelWithSoftDeletes
 		"ENTI_RAZONSOCIAL" => "unique:ENTIDADES|required",
 		"TIEN_ID" => "required|numeric"
     ];
+    public static function rules($id = 0){
+        return [
+            //'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+        
+        ];
+    }
+
 
 
     public function tipoentidad()

@@ -2,13 +2,7 @@
 
 namespace SGH\Http\Controllers\CnfgContratos;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 use SGH\Models\Temporal;
 
@@ -21,23 +15,6 @@ class TemporalController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'TEMP_RAZONSOCIAL' => ['required', 'max:300'],
-			'TEMP_NOMBRECOMERCIAL' => ['required', 'max:300'],
-			'TEMP_DIRECCION' => ['required', 'max:300'],
-			'TEMP_OBSERVACIONES' => ['required', 'max:300'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

@@ -2,13 +2,7 @@
 
 namespace SGH\Http\Controllers\CnfgContratos;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 use SGH\Models\Cno;
 
@@ -20,20 +14,6 @@ class CnosController extends Controller
 	public function __construct()
 	{
 		parent::__construct();
-	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'CNOS_CODIGO' => ['required','numeric','unique:CNOS,CNOS_CODIGO,'.$id.',CNOS_ID'],
-			'CNOS_DESCRIPCION' => ['required','max:300','unique:CNOS,CNOS_DESCRIPCION,'.$id.',CNOS_ID'],
-		]);
 	}
 
 	/**

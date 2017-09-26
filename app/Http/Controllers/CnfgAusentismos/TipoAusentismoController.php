@@ -1,40 +1,19 @@
 <?php 
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
-use Validator;
-use SGH\Http\Requests;
-use Flash;
-use Session;
-use Redirect;
 use SGH\Http\Controllers\Controller;
-use Response;
-use SGH\Models\TipoAusentismo;
 use Yajra\Datatables\Facades\Datatables;
+
+use SGH\Models\TipoAusentismo;
 
 class TipoAusentismoController extends Controller
 {
-
-	
-
 	protected $route='cnfg-ausentismos.tipoausentismos';
 	protected $class = TipoAusentismo::class;
 	public function __construct()
 	{	
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return validator::make($data, TipoAusentismo::$rules);
-
-	}
-
 	
 	/**
 	 * Display a listing of the TipoAusentismo.

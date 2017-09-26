@@ -24,14 +24,14 @@ class ConceptoAusencia extends ModelWithSoftDeletes
 		"TIEN_ID"
     ];
 
-
-    public static $rules = [
-        "COAU_CODIGO" => "unique:CONCEPTOAUSENCIAS|required",
-		"COAU_DESCRIPCION" => "unique:CONCEPTOAUSENCIAS|required",
-		"TIAU_ID" => "required",
-		"TIEN_ID" => "required"
-    ];
-
+    public static function rules($id = 0){
+        return [
+            'COAU_CODIGO' => 'required|'.static::unique($id,'COAU_CODIGO'),
+            'COAU_DESCRIPCION' => 'required|'.static::unique($id,'COAU_DESCRIPCION'),
+            "TIAU_ID" => "required",
+            "TIEN_ID" => "required"
+        ];
+    }
 
     public function tipoausentismo()
     {

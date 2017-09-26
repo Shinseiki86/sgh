@@ -23,6 +23,13 @@ class EstadoAprobacion extends ModelWithSoftDeletes
 		'ESAP_OBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		return [
+			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+		
+		];
+	}
+
 	//Constantes para referenciar los estados de aprobación
 	const REVISION	 = 1;
 	const ENVIADO    = 2;
