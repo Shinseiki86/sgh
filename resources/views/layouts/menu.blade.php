@@ -26,11 +26,5 @@
 
 	</div><!-- /.wrapper -->
 
-	<footer class="footer navbar-default navbar-fixed-bottom">
-		<div class="text-right text-muted">
-			<small>Powered by <i>diheke</i></small>
-		</div>
-	</footer>
-
 @stop
 
