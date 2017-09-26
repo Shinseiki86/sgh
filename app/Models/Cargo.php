@@ -24,12 +24,11 @@ class Cargo extends ModelWithSoftDeletes
 	];
 
 	public static function rules($id = 0){
-		$rules = [
+		return [
 			'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
 			'CNOS_ID' => 'required',
 			'CARG_OBSERVACIONES' => 'max:300',
 		];
-		return $rules;
 	}
 
 	public function cno()

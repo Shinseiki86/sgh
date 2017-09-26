@@ -53,10 +53,12 @@ class SendEmailNewTicket extends Job implements ShouldQueue
                 //Copia del correo al jefe
                 $prosJefe = Prospecto::getJefe($user->cedula);
                 $jefe_email = $prosJefe->PROS_CORREO;
-                $message->cc($jefe_email, $name = null);
+
+                if(isset($jefe_email))
+                	$message->cc($jefe_email, $name = null);
             });
         } catch(\Exception $e){
-            flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID, 'danger' );
+            flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID'. Error: '.$e->getMessage(), 'danger' );
         }
     }
 }

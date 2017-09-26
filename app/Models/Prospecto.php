@@ -35,6 +35,24 @@ class Prospecto extends ModelWithSoftDeletes
 		'PROS_MARCAOBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		return [
+			'PROS_CEDULA'          => ['numeric', 'required', static::unique($id,'PROS_CEDULA')],
+			'PROS_FECHAEXPEDICION' => ['required'],
+			'PROS_PRIMERNOMBRE'    => ['required', 'max:100'],
+			'PROS_SEGUNDONOMBRE'   => ['max:100'],	
+			'PROS_PRIMERAPELLIDO'  => ['required', 'max:100'],
+			'PROS_SEGUNDOAPELLIDO' => ['max:100'],
+			'PROS_SEXO'            => ['required', 'max:1'],
+			'PROS_DIRECCION'       => ['required', 'max:100'],
+			'PROS_TELEFONO'        => ['numeric'],
+			'PROS_CELULAR'         => ['numeric'],
+			'PROS_CORREO'           => ['max:100'],
+			'PROS_MARCA'           => ['required', 'max:2'],
+			'PROS_MARCAOBSERVACIONES' => ['max:300'],
+		];
+	}
+
 	public function scopeActivos($query)
 	{
 		$query = $query 
@@ -65,7 +83,11 @@ class Prospecto extends ModelWithSoftDeletes
 	public static function getJefe($PROS_CEDULA)
 	{
 		$model = new static;
-        $prosJefe = $model->activos()->where('PROS_CEDULA', $PROS_CEDULA)->first();
+        $prospecto = $model->activos()->where('PROS_CEDULA', $PROS_CEDULA)->first();
+
+        //dd($prospecto->contratos);
+
+
         return $prosJefe;
     }
 
