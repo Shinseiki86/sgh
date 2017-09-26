@@ -19,11 +19,10 @@ class EstadosTickectsTableSeeder extends Seeder
         $estadoticket->ESTI_COLOR =  'blue';
         $estadoticket->ESTI_CREADOPOR =  'SYSTEM';
         $estadoticket->save();
-
         
         $estadoticket = new EstadoTicket;
-        $estadoticket->ESTI_DESCRIPCION = 'REASIGNADO';
-        $estadoticket->ESTI_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA REASIGNADO';
+        $estadoticket->ESTI_DESCRIPCION = 'CADUCADO';
+        $estadoticket->ESTI_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA CADUCADO';
         $estadoticket->ESTI_COLOR =  'yellow';
         $estadoticket->ESTI_CREADOPOR =  'SYSTEM';
         $estadoticket->save();
