@@ -3,6 +3,8 @@
 namespace SGH\Http\Controllers;
 
 use Validator;
+use Illuminate\Contracts\Validation\Validator as ValidatorMessages;
+
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -28,7 +30,7 @@ class Controller extends BaseController
     /**
      * {@inheritdoc}
      */
-    protected function formatValidationErrors(Validator $validator)
+    protected function formatValidationErrors(ValidatorMessages $validator)
     {
         return $validator->errors()->all();
     }

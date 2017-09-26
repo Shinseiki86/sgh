@@ -43,6 +43,37 @@ class Contrato extends ModelWithSoftDeletes
 		'CONT_OBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		return [
+			'EMPL_ID' => ['numeric', 'required'],
+			'TEMP_ID' => ['numeric',],
+			'TIEM_ID' => ['numeric', 'required'],
+			'CECO_ID' => ['numeric', 'required'],
+			'ESCO_ID' => ['numeric', 'required'],
+			'TICO_ID' => ['numeric', 'required'],
+			'CLCO_ID' => ['numeric', 'required'],
+			'RIES_ID' => ['numeric', 'required'],
+			'PROS_ID' => ['numeric', 'required'],
+			'GRUP_ID' => ['numeric', 'required'],
+			'TURN_ID' => ['numeric', 'required'],
+			'CIUD_CONTRATA' => ['numeric', 'required'],
+			'CIUD_SERVICIO' => ['numeric', 'required'],
+			'JEFE_ID' => ['numeric'],
+			'CARG_ID' => ['numeric', 'required'],
+			'CONT_FECHAINGRESO' => ['date', 'required'],
+			'CONT_FECHARETIRO' => ['date'],
+			'MORE_ID' => ['numeric'],
+			'CONT_SALARIO'      => ['numeric','required'],
+			'CONT_VARIABLE'     => ['numeric'],
+			'CONT_RODAJE'       => ['numeric'],
+			'CONT_CASOMEDICO'   => ['required', 'max:2'],
+			'CONT_OBSERVACIONES'=> ['max:300'],
+			'ENTI_ID_eps' => ['required'],
+			'ENTI_ID_arl' => ['required'],
+			'ENTI_ID_ccf' => ['required'],
+		];
+	}
+
 	public function prospecto()
 	{
 		$foreingKey = 'PROS_ID';

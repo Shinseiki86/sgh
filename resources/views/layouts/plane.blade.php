@@ -42,5 +42,11 @@
 
 		@stack('modals')
 		@include('widgets.modal-loading')
+
+		<footer class="footer navbar-default navbar-fixed-bottom" style="margin-right: 10px">
+			<div class="text-right text-muted">
+				<small>SGH&copy; powered by <i>diheke</i></small>
+			</div>
+		</footer>
 	</body>
 </html>

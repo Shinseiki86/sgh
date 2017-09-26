@@ -56,7 +56,7 @@ class SendEmailRejectedTicket extends Job implements ShouldQueue
 
             });
         } catch(\Exception $e){
-            flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID, 'danger' );
+            flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID'. Error: '.$e->getMessage(), 'danger' );
         }
     }
 }

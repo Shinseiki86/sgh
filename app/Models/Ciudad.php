@@ -25,8 +25,8 @@ class Ciudad extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		$rules = [
-			'CIUD_CODIGO' => ['required','numeric',static::unique($id,'CIUD_CODIGO')],
-			'CIUD_NOMBRE' => ['required','max:300',static::unique($id,'CIUD_NOMBRE')],
+			'CIUD_CODIGO' => ['required','numeric'],
+			'CIUD_NOMBRE' => ['required','max:300','unique_with:CIUDADES,CIUD_CODIGO'],
 			'DEPA_ID'     => ['required','numeric']
 		];
 		return $rules;

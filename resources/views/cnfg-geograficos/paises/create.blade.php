@@ -3,13 +3,10 @@
 @section('page_heading', 'Nuevo País')
 
 @section('section')
-	{{ Form::open(['route' => 'cnfg-geograficos.paises.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'cnfg-geograficos.paises.store', 'class' => 'form-horizontal']) }}
 
-		<!-- Elementos del formulario -->
-		@rinclude('form-inputs')
+	<!-- Elementos del formulario -->
+	@rinclude('form-inputs')
 
-		<!-- Botones -->
-		@include('widgets.forms.buttons', ['url' => 'cnfg-geograficos/paises'])
-
-	{{ Form::close() }}
+{{ Form::close() }}
 @endsection

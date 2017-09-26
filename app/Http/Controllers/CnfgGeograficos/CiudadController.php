@@ -2,11 +2,6 @@
 
 namespace SGH\Http\Controllers\CnfgGeograficos;
 
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 use Yajra\Datatables\Facades\Datatables;
 

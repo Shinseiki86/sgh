@@ -211,6 +211,9 @@ return [
         'ENTI_CODIGO' => 'Codigo Entidad',
         'ENTI_NIT' => 'Nit Entidad',
         'ENTI_RAZONSOCIAL' => 'Razon Social',
+
+        'AUSE_FECHAINICIO' => 'Fecha inicial',
+        'AUSE_FECHAFINAL' => 'Fecha final',
     ],
 
 ];

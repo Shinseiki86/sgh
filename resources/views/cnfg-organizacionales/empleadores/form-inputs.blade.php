@@ -32,4 +32,7 @@
 	<div class="row">
 		@include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'EMPL_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
 	</div>
+
+	<!-- Botones -->
+	@include('widgets.forms.buttons', ['url' => 'cnfg-organizacionales/empleadores'])
 </div>

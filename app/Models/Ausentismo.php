@@ -31,17 +31,18 @@ class Ausentismo extends ModelWithSoftDeletes
 		"AUSE_OBSERVACIONES"
     ];
 
-
-    public static $rules = [
-        "COAU_ID" => "required",
-		"CONT_ID" => "required",
-		"AUSE_FECHAINICIO" => "required|date",
-		"AUSE_FECHAFINAL" => "date|required|after:AUSE_FECHAINICIO",
-		"AUSE_DIAS" => "required",
-		"AUSE_FECHAACCIDENTE" => "date",
-		"ENTI_ID" => "required",
-    ];
-
+	public static function rules($id = 0){
+		$rules = [
+	        "COAU_ID" => "required",
+			"CONT_ID" => "required",
+			"AUSE_FECHAINICIO" => "required|date",
+			"AUSE_FECHAFINAL" => "date|required|after:AUSE_FECHAINICIO",
+			"AUSE_DIAS" => "required",
+			"AUSE_FECHAACCIDENTE" => "date",
+			"ENTI_ID" => "required",
+		];
+		return $rules;
+	}
 
     public function diagnostico()
     {

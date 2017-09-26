@@ -21,7 +21,7 @@
 				serverSide: true,
 				ajax: '{{$urlAjax}}',
 				pagingType: 'simple_numbers',
-	 			lengthMenu: [[5,10,25,50,100], [5,10,15,25,50,100]],
+				lengthMenu: [[5,10,25,50,-1], [5,10,25,50,'Todos']],
 				bScrollCollapse: true,
 				sScrollY: '350px',
 				rowReorder: false,

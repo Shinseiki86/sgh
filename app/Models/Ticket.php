@@ -39,6 +39,22 @@ class Ticket extends ModelWithSoftDeletes
 		'TICK_CREADOPOR',
 	];
 
+	public static function rules($id = 0){
+		return [
+			'TICK_DESCRIPCION' => ['required','max:3000'],
+			'CONT_ID' => ['required'],
+			'ESTI_ID' => ['required'],
+			'ESAP_ID' => ['required'],
+			'PRIO_ID' => ['required'],
+			'GRUP_ID' => ['required'],
+			'TURN_ID' => ['required'],
+			'CATE_ID' => ['required'],
+			'TIIN_ID' => ['required'],
+			'TICK_FECHAEVENTO' => ['required'],
+			'TICK_OBSERVACIONES' => ['max:3000'],
+		];
+	}
+
 	public function contrato()
 	{
 		$foreingKey = 'CONT_ID';

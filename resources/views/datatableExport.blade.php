@@ -52,7 +52,7 @@
       	*/
       	//alert(fecha());
 	 	var table = $('#tabla').DataTable({ 
-	 		"lengthMenu": [[5, 10, 15, 25,50,100], [5, 10, 15, 25,50,100]],
+			lengthMenu: [[5,10,25,50,-1], [5,10,25,50,'Todos']],
 	 		//"sScrollY": "350px",
 	        "pagingType": "simple_numbers",
 	        "bScrollCollapse": true,

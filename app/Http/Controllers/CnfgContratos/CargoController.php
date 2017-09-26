@@ -2,13 +2,7 @@
 
 namespace SGH\Http\Controllers\CnfgContratos;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 use SGH\Models\Cno;
 use SGH\Models\Cargo;
@@ -21,21 +15,6 @@ class CargoController extends Controller
 	public function __construct()
 	{
 		parent::__construct();
-	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'CARG_DESCRIPCION' => ['required','max:100','unique:CARGOS,CARG_DESCRIPCION,'.$id.',CARG_ID'],
-			'CNOS_ID' => ['required'],
-			'CARG_OBSERVACIONES' => ['max:300'],
-		]);
 	}
 
 	/**

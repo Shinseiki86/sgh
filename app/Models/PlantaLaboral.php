@@ -24,6 +24,16 @@ class PlantaLaboral extends ModelWithSoftDeletes
 		'PALA_CANTIDAD',
 	];
 
+	public static function rules($id = 0){
+		$rules = [
+			'CARG_ID' => ['numeric', 'required'],
+			'GERE_ID' => ['numeric', 'required'],
+			'EMPL_ID' => 'required|unique_with:PLANTASLABORALES,CARG_ID,GERE_ID',
+			'PALA_CANTIDAD' => ['numeric','required'],
+		];
+		return $rules;
+	}
+
 	public function empleador()
 	{
 		$foreingKey = 'EMPL_ID';
