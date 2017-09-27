@@ -15,6 +15,7 @@ use Illuminate\Support\Arr;
 use SGH\Prospecto;
 
 
+
 if (! function_exists('expression_concat')) {
     /**
      * Crea un array con la llave primaria y una columna a partir de un Model.

@@ -1,14 +1,20 @@
-<?php namespace $NAMESPACE_CONTROLLER$;
+<?php 
+
+namespace $NAMESPACE_CONTROLLER$;
 
 use Validator;
 use $NAMESPACE_REQUEST$;
 use Flash;
-use Session;
+use Illuminate\Support\Facades\Session;
 use Redirect;
 use $NAMESPACE_CONTROLLER$\Controller;
 use Response;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Redirector;
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
-use Yajra\Datatables\Facades\Datatables;
+use Yajra\Datatables\Facades\Datatables;                    
+
 
 class $MODEL_NAME$Controller extends Controller
 {
@@ -17,7 +23,7 @@ class $MODEL_NAME$Controller extends Controller
 	protected $class = $MODEL_NAME$::class;
 	public function __construct()
 	{
-		$this->middleware('auth');
+		parent::__construct();
 	}
 
 	/**
@@ -41,7 +47,7 @@ class $MODEL_NAME$Controller extends Controller
 	public function index()
 	{
 		//$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::all();
-		//return view('$MODEL_NAME_PLURAL_CAMEL$/index2', compact('$MODEL_NAME_PLURAL_CAMEL$'));
+		//return view($this->route.'.index2', compact('$MODEL_NAME_PLURAL_CAMEL$'));
 		return view($this->route.'.index');
 	}
 
@@ -117,7 +123,7 @@ class $MODEL_NAME$Controller extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel();
+		parent::updateModel($ID);
 	}
 
 	/**
@@ -129,6 +135,6 @@ class $MODEL_NAME$Controller extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel();
+		parent::destroyModel($ID);
 	}
 }

@@ -2,6 +2,7 @@
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
 use Validator;
+use Illuminate\Http\Request;
 use SGH\Http\Requests;
 use Flash;
 use Session;
@@ -11,13 +12,17 @@ use Response;
 use SGH\Models\Diagnostico;
 use Yajra\Datatables\Facades\Datatables;
 
+use SGH\Repositories\DiagnosticoRepository;
+
 class DiagnosticoController extends Controller
 {
 
 	protected $route='cnfg-ausentismos.diagnosticos';
 	protected $class = Diagnostico::class;
-	public function __construct()
+	protected $reposDiagnostico;
+	public function __construct(DiagnosticoRepository $reposDiagnostico)
 	{	
+		$this->reposDiagnostico = $reposDiagnostico;
 		parent::__construct();
 	}
 
@@ -44,6 +49,26 @@ class DiagnosticoController extends Controller
 		return view($this->route.'.index');
 	}
 
+	public function buscaDx(Request $request)
+	{
+		$data=$this->reposDiagnostico->buscaDx($request->CIE10);
+		return response()->json($data);
+	}
+
+	public function autoComplete(Request $request) {
+	    $term = $request->term;
+	    $data=$this->reposDiagnostico->autoComplete($term);
+	    $results=array();
+	    foreach ($data as $v) {
+	            $results[]=['id'=>$v->DIAG_ID,'value'=>$v->DIAG_DESCRIPCION,'cod'=>$v->DIAG_CODIGO];
+	    }
+	    if(count($results))
+	         return $results;
+	    else
+	        return ['value'=>'No se encontró ningun Resultado','id'=>''];
+	}
+
+
 	/**
 	 * Retorna json para Datatable.
 	 *
@@ -51,8 +76,7 @@ class DiagnosticoController extends Controller
 	 */
 	public function getData()
 	{
-		$model = Diagnostico::select(['DIAG_ID','DIAG_CODIGO','DIAG_DESCRIPCION'])
-						->get();
+		$model = $this->reposDiagnostico->getData();
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
 				return parent::buttonEdit($model).
