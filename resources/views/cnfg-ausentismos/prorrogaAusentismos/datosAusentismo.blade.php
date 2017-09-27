@@ -1,19 +1,14 @@
-@include('chosen')
-@include('datepicker')
-@include('utilidades.autocomplete',['first'=>'DX_DESCRIPCION','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
-@include('utilidades.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCION','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
-<div class='col-md-8 col-md-offset-2'>
-
+<div class="row">
 	<div class="row">
-		@include('widgets.forms.input', ['type'=>'select', 'name'=>'CONT_ID', 'label'=>'Prospecto', 'data'=>$arrContratos,'value','placeholder'=>'Seleccione un Prospecto','allowClear'=>true])
-		
+		@include('widgets.forms.input', ['type'=>'select','column'=>6, 'name'=>'CONT_ID', 'label'=>'Prospecto', 'data'=>$arrContratos,'value','placeholder'=>'Seleccione un Prospecto','allowClear'=>true])
+		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/prorrogaausentismos'])
 	</div>
 
 	<!-- Diagnostico -->
 	<div class="row">
 		{{ Form::hidden('DIAG_ID', null, array('id' => 'DIAG_ID')) }}
-		@include('widgets.forms.input', ['type'=>'text', 'column'=>2, 'name'=>'CIE10', 'label'=>'CIE10'])
-		@include('widgets.forms.input', ['type'=>'text', 'column'=>10, 'name'=>'DX_DESCRIPCION', 'label'=>'Descripcion Dx'])
+		@include('widgets.forms.input', ['type'=>'text', 'column'=>3, 'name'=>'CIE10', 'label'=>'CIE10'])
+		@include('widgets.forms.input', ['type'=>'text', 'column'=>9, 'name'=>'DX_DESCRIPCION', 'label'=>'Descripcion Dx'])
 	</div>
 
 	<div class="row">
@@ -37,9 +32,4 @@
 		<!-- Ause Observaciones Field -->
 		@include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'AUSE_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
 	</div>
-
 </div>
-<!-- Submit Field 
-<div class="form-group col-sm-12">
-    {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
-</div>-->

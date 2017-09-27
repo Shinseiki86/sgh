@@ -2,9 +2,14 @@
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
 use SGH\Http\Controllers\Controller;
-use Yajra\Datatables\Facades\Datatables;
+use Yajra\Datatables\Facades\Datatables;     
 
-use SGH\Models\ProrrogaAusentismo;                  
+use SGH\Models\Ausentismo;
+use SGH\Models\Diagnostico;
+use SGH\Models\Contrato;
+use SGH\Models\ConceptoAusencia;
+use SGH\Models\Entidad;               
+use SGH\Models\ProrrogaAusentismo;
 
 class ProrrogaAusentismoController extends Controller
 {
@@ -15,7 +20,7 @@ class ProrrogaAusentismoController extends Controller
 	{
 		parent::__construct();
 	}
-
+	
 	/**
 	 * Display a listing of the ProrrogaAusentismo.
 	 *
@@ -34,7 +39,34 @@ class ProrrogaAusentismoController extends Controller
 	 */
 	public function create()
 	{
-		return view($this->route.'.create');
+		$CONT_PROSPECTOS = expression_concat([
+		'PROS_PRIMERNOMBRE',
+		'PROS_SEGUNDONOMBRE',
+		'PROS_PRIMERAPELLIDO',
+		'PROS_SEGUNDOAPELLIDO',
+		'PROS_CEDULA',
+		'CONT_FECHAINGRESO',
+		], 'CONT_PROSPECTOS');
+
+		$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+					->join('AUSENTISMOS', 'AUSENTISMOS.CONT_ID', '=', 'CONTRATOS.PROS_ID')
+					->select(['AUSENTISMOS.CONT_ID', $CONT_PROSPECTOS])
+					->where('CONTRATOS.ESCO_ID', '=', '1')
+					->get();
+
+		//Se crea un array con los prospectos disponibles
+		$arrContratos = model_to_array($contratos, 'CONT_PROSPECTOS');
+				$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')->get();
+		//Se crea un array con los conceptos de Ausentismos
+		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
+		
+		//Se crea un array con las Entidades Responsables
+		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
+
+
+		return view($this->route.'.create',compact('arrContratos','arrConceptoAusentismo','arrEntidad'));
+
+		
 	}
 
 	/**

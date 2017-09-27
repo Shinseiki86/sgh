@@ -11,15 +11,32 @@ use SGH\Models\Contrato;
 use SGH\Models\ConceptoAusencia;
 use SGH\Models\Entidad;
 
+use SGH\Repositories\AusentismoRepository;
+
 class AusentismoController extends Controller
 {
 	protected $route='cnfg-ausentismos.ausentismos';
 	protected $class = Ausentismo::class;
-	
-	public function __construct()
-	{	
+	protected $reposAusentismo;
+
+	public function __construct(AusentismoRepository $reposAusentismo)
+	{
+		$this->reposAusentismo = $reposAusentismo;	
 		parent::__construct();
 	}
+
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  Request $request
+	 * @return void
+	 */
+	protected function validator($data)
+	{
+		return validator::make($data, Ausentismo::$rules);
+
+	}
+
 	
 	/**
 	 * Display a listing of the Ausentismo.
@@ -28,36 +45,12 @@ class AusentismoController extends Controller
 	 */
 	public function index()
 	{
-		$ausentismos = Ausentismo::all();
+		$ausentismos = findAll("Ausentismo");
 		return view($this->route.'.index', compact('ausentismos'));
 		
 	}
 
-	public function buscaDx(Request $request)
-	{
-		$data=Diagnostico::select('DIAG_ID','DIAG_DESCRIPCION')->where('DIAG_CODIGO',$request->CIE10)->get();
-		return response()->json($data);
-	}
-
 	
-
-	public function autoComplete(Request $request) {
-	    $term = $request->term;
-	    $data=Diagnostico::where('DIAG_DESCRIPCION','LIKE','%'.$term.'%')
-	 		->take(10)
-	 		->get();
-	    $results=array();
-	    foreach ($data as $v) {
-	            $results[]=['id'=>$v->DIAG_ID,'value'=>$v->DIAG_DESCRIPCION,'cod'=>$v->DIAG_CODIGO];
-	    }
-	    if(count($results))
-	         return $results;
-	    else
-	        return ['value'=>'No se encontró ningun Resultado','id'=>''];
-	}
-
-
-
 	public function buscaContrato(Request $request)
 	{ 
 		$data = Prospecto::join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
