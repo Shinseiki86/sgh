@@ -1,10 +1,10 @@
 <table class="table table-striped" id="tabla">
     <thead>
         <th>Codigo</th>
-		<th>Descripcion</th>
+		<th>Descripción</th>
 		<th>Observaciones</th>
-		<th>Tipo Ausetismo</th>
-		<th>Tipo Entidad</th>
+		<th>Tipo de Ausentismo</th>
+		<th>Tipo de Entidad</th>
         <th class="col-md-1 all" width="50px">Acciones</th>
     </thead>
     <tbody>

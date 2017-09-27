@@ -20,7 +20,6 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="hidden-xs col-md-1">ID</th>
 				<th class="col-md-1">Código</th>
 				<th class="col-md-5">Descripción</th>
 				<th class="col-md-5">Observaciones</th>
@@ -32,7 +31,6 @@
 		<tbody>
 			@foreach($cnos as $cno)
 			<tr>
-				<td>{{ $cno -> CNOS_ID }}</td>
 				<td>{{ $cno -> CNOS_CODIGO }}</td>
 				<td>{{ $cno -> CNOS_DESCRIPCION }}</td>
 				<td>{{ $cno -> CNOS_OBSERVACIONES }}</td>
