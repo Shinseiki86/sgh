@@ -1,4 +1,5 @@
-<?php namespace SGH\Models;
+<?php
+namespace SGH\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
 use SGH\Models\ModelWithSoftDeletes;
@@ -24,21 +25,14 @@ class Entidad extends ModelWithSoftDeletes
 		"TIEN_ID"
     ];
 
-
-    public static $rules = [
-        "ENTI_CODIGO" => "unique:ENTIDADES|required",
-		"ENTI_NIT" => "unique:ENTIDADES|required",
-		"ENTI_RAZONSOCIAL" => "unique:ENTIDADES|required",
-		"TIEN_ID" => "required|numeric"
-    ];
     public static function rules($id = 0){
         return [
-            //'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-        
+            'ENTI_CODIGO' => 'required|'.static::unique($id,'ENTI_CODIGO'),
+            'ENTI_NIT' => 'required|'.static::unique($id,'ENTI_NIT'),
+            'ENTI_RAZONSOCIAL' => 'required|'.static::unique($id,'ENTI_RAZONSOCIAL'),
+            "TIEN_ID" => "required|numeric"
         ];
     }
-
-
 
     public function tipoentidad()
     {

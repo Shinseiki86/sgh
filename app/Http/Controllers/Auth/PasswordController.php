@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Http\Controllers\Auth;
 
 use SGH\Http\Controllers\Controller;

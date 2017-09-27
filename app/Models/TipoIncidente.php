@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -23,8 +22,8 @@ class TipoIncidente extends ModelWithSoftDeletes
 	];
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'TIIN_DESCRIPCION' => 'required|max:100|'.static::unique($id,'TIIN_DESCRIPCION'),
+			'TIIN_OBSERVACIONES' => ['max:300'],
 		];
 	}
 

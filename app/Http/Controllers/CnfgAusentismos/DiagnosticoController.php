@@ -8,7 +8,6 @@ use SGH\Models\Diagnostico;
 
 class DiagnosticoController extends Controller
 {
-
 	protected $route='cnfg-ausentismos.diagnosticos';
 	protected $class = Diagnostico::class;
 

@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Gerencia;
@@ -22,23 +15,6 @@ class GerenciaController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $GERE_ID = 0)
-	{
-		return Validator::make($data, [
-			'GERE_DESCRIPCION' => ['required','max:100','unique:GERENCIAS,GERE_DESCRIPCION,'.$GERE_ID.',GERE_ID'],
-			'GERE_OBSERVACIONES' => ['max:300'],
-			'PROC_ids' => ['array'],
-			'CECO_ids' => ['array'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

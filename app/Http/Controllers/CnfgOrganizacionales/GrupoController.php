@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Grupo;
@@ -21,21 +14,6 @@ class GrupoController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return Validator
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'GRUP_DESCRIPCION' => ['required', 'max:300', 'unique:GRUPOS,GRUP_DESCRIPCION,'.$id.',GRUP_ID'],
-			'GRUP_OBSERVACIONES' => ['max:300'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

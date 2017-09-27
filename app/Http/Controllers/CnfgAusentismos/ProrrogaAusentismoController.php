@@ -1,5 +1,4 @@
 <?php 
-
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
 use SGH\Http\Controllers\Controller;

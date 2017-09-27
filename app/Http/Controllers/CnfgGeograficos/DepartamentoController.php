@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgGeograficos;
 
 use SGH\Http\Controllers\Controller;

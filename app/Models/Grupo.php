@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -25,8 +24,8 @@ class Grupo extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'GRUP_DESCRIPCION' => 'required|max:100|'.static::unique($id,'GRUP_DESCRIPCION'),
+			'GRUP_OBSERVACIONES' => ['max:300'],
 		];
 	}
 

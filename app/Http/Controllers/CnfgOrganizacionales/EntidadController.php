@@ -1,39 +1,20 @@
 <?php 
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use Validator;
-use SGH\Http\Requests;
-use Flash;
-use Session;
-use Redirect;
 use SGH\Http\Controllers\Controller;
-use Response;
-use SGH\Models\Entidad;
 use Yajra\Datatables\Facades\Datatables;
+
+use SGH\Models\Entidad;
 
 class EntidadController extends Controller
 {
-
-	
-	protected $route='organizacionales.entidades';
+	protected $route='cnfg-organizacionales.entidades';
 	protected $class = Entidad::class;
+
 	public function __construct()
 	{	
-		
+		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return validator::make($data, Entidad::$rules);
-
-	}
-
 	
 	/**
 	 * Display a listing of the Entidad.
@@ -68,7 +49,7 @@ class EntidadController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(Entidad::class,  $this->routeIndex);
+		parent::storeModel();
 	}
 
 	/**
@@ -104,7 +85,7 @@ class EntidadController extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel($ID, Entidad::class,  $this->routeIndex);
+		parent::updateModel($ID);
 	}
 
 	/**
@@ -116,6 +97,6 @@ class EntidadController extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel($ID, Entidad::class, $this->routeIndex);
+		parent::destroyModel($ID);
 	}
 }

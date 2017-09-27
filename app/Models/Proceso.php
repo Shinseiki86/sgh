@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -24,8 +23,9 @@ class Proceso extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'PROC_DESCRIPCION' => 'required|max:100|'.static::unique($id,'PROC_DESCRIPCION'),
+			'PROC_OBSERVACIONES' => ['max:300'],
+			'GERE_ids' => ['array'],
 		];
 	}
 

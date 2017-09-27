@@ -8,7 +8,6 @@ use SGH\Models\ConceptoAusencia;
 
 class ConceptoAusenciaController extends Controller
 {
-
 	protected $route='cnfg-ausentismos.conceptoausencias';
 	protected $class = ConceptoAusencia::class;
 	

@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Http\Controllers;
 
 use SGH\Http\Controllers\Controller;

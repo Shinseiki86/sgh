@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Riesgo;
@@ -21,22 +14,6 @@ class RiesgoController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'RIES_DESCRIPCION' => ['required', 'max:100', 'unique:RIESGOS,RIES_DESCRIPCION,'.$id.',RIES_ID'],
-			'RIES_FACTOR' => ['required', 'numeric'],
-			'RIES_OBSERVACIONES' => ['max:300'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

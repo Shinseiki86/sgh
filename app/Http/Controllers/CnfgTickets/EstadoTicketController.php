@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgTickets;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\EstadoTicket;
@@ -21,22 +14,6 @@ class EstadoTicketController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'ESTI_DESCRIPCION' => ['required', 'max:100', 'unique:ESTADOSTICKETS,ESTI_DESCRIPCION,'.$id.',ESTI_ID'],
-			'ESTI_COLOR' => ['required', 'max:100'],
-			'ESTI_OBSERVACIONES' => ['max:300'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

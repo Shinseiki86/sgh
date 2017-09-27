@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -33,8 +32,18 @@ class Empleador extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'EMPL_RAZONSOCIAL' => 'required|max:300|'.static::unique($id,'EMPL_RAZONSOCIAL'),
+			'EMPL_NOMBRECOMERCIAL' => 'required|max:300|'.static::unique($id,'EMPL_NOMBRECOMERCIAL'),
+			'EMPL_NIT' => 'required|max:15|'.static::unique($id,'EMPL_NIT'),
+			'EMPL_DIRECCION' => ['required', 'max:300'],
+			'EMPL_OBSERVACIONES' => ['max:300'],
+			'EMPL_NOMBREREPRESENTANTE' => ['required','max:300'],
+			'EMPL_CEDULAREPRESENTANTE' => ['required'],
+			'CIUD_CEDULA' => ['required'],
+			'CIUD_DOMICILIO' => ['required'],
+			'GERE_ids' => ['array'],
+			'TURN_ids' => ['array'],
+			'GRUP_ids' => ['array'],
 		];
 	}
 

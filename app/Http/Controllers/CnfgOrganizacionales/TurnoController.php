@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Turno;
@@ -21,28 +14,6 @@ class TurnoController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return Validator
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'TURN_DESCRIPCION' => ['required', 'max:300', 'unique:TURNOS,TURN_DESCRIPCION,'.$id.',TURN_ID'],
-			'TURN_CODIGO' => ['required','max:10'],
-			'TURN_HORAINICIOPI' => ['required'],
-			'TURN_HORAFINALPI' => ['required'],
-			//'TURN_HORAINICIOSI' => ['required'],
-			//'TURN_HORAFINALSI' => ['required'],
-			'TURN_CODIGO' => ['required','max:10'],
-			'TURN_OBSERVACIONES' => ['max:300'],
-			'TURN_TIPOTURNO' => ['max:20'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

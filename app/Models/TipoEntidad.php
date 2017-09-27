@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -28,19 +27,13 @@ class TipoEntidad extends ModelWithSoftDeletes
 		"TIEN_OBSERVACIONES"
     ];
 
-
-    public static $rules = [
-        "TIEN_CODIGO" => "unique:TIPOENTIDADES|required",
-		"TIEN_DESCRIPCION" => "unique:TIPOENTIDADES|required",
-    ];
     public static function rules($id = 0){
         return [
-            //'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-        
+            'TIEN_CODIGO' => 'required|max:100|'.static::unique($id,'TIEN_CODIGO'),
+            'TIEN_DESCRIPCION' => 'required|max:300|'.static::unique($id,'TIEN_DESCRIPCION'),
         ];
     }
 
-  
     public function entidades()
     {
         $foreingKey = 'TIEN_ID';

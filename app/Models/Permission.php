@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use Zizaco\Entrust\EntrustPermission;

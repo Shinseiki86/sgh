@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -24,8 +23,10 @@ class Gerencia extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'GERE_DESCRIPCION' => 'required|max:100|'.static::unique($id,'GERE_DESCRIPCION'),
+			'GERE_OBSERVACIONES' => ['max:300'],
+			'PROC_ids' => ['array'],
+			'CECO_ids' => ['array'],
 		];
 	}
 

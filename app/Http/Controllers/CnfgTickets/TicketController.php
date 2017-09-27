@@ -13,10 +13,10 @@ use SGH\Models\Ticket;
 use SGH\Models\EstadoTicket;
 use SGH\Models\EstadoAprobacion;
 use SGH\Models\User;
-use SGH\Models\Mail;
 use SGH\Models\Prospecto;
 
 use Carbon\Carbon;
+// use SGH\Models\Mail;
 
 class TicketController extends Controller
 {

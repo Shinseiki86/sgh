@@ -1,19 +1,15 @@
 <?php 
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Http\Request;
-use Flash;
 use SGH\Http\Controllers\Controller;
-use Response;
+use Yajra\Datatables\Facades\Datatables;
+
 use SGH\Models\Ausentismo;
 use SGH\Models\Diagnostico;
 use SGH\Models\Prospecto;
 use SGH\Models\Contrato;
 use SGH\Models\ConceptoAusencia;
 use SGH\Models\Entidad;
-use Yajra\Datatables\Facades\Datatables;
 
 class AusentismoController extends Controller
 {

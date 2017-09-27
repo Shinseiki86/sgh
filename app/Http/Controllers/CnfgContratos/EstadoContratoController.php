@@ -1,14 +1,7 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgContratos;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 use SGH\Models\EstadoContrato;
 

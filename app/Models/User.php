@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
