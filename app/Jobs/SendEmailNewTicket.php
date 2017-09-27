@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Jobs;
 
 use SGH\Jobs\Job;

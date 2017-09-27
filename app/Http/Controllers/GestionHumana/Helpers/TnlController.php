@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Http\Controllers\GestionHumana\Helpers;
 
 use SGH\Http\Requests;

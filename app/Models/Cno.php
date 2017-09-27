@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -22,6 +21,13 @@ class Cno extends ModelWithSoftDeletes
 		'CNOS_DESCRIPCION',
 		'CNOS_OBSERVACIONES',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'CNOS_CODIGO' => 'required|'.static::unique($id,'CNOS_CODIGO'),
+			'CNOS_DESCRIPCION' => 'required|max:300|'.static::unique($id,'CNOS_DESCRIPCION'),
+		];
+	}
 
 	public function cargos()
 	{

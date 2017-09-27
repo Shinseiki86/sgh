@@ -1,12 +1,6 @@
 <?php
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\CentroCosto;
@@ -20,22 +14,6 @@ class CentroCostoController extends Controller
 	public function __construct()
 	{
 		parent::__construct();
-	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'CECO_CODIGO'        => ['numeric', 'required', 'unique:CENTROSCOSTOS,CECO_CODIGO,'.$id.',CECO_ID'],//forma para validar un campo unique
-			'CECO_DESCRIPCION'   => ['required', 'max:100'],
-			'GERE_ID'            => ['required'],
-			'CECO_OBSERVACIONES' => ['max:300'],
-		]);
 	}
 
 	/**

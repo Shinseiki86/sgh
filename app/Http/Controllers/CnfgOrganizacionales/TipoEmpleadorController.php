@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\TipoEmpleador;
@@ -15,27 +8,12 @@ use SGH\Models\TipoEmpleador;
 class TipoEmpleadorController extends Controller
 {
 	protected $route = 'cnfg-organizacionales.tiposempleadores';
-	protected $class = Riesgo::class;
+	protected $class = TipoEmpleador::class;
 
 	public function __construct()
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id)
-	{
-		return Validator::make($data, [
-			'TIEM_DESCRIPCION' => ['required', 'max:100', 'unique:TIPOSEMPLEADORES,TIEM_DESCRIPCION,'.$id.',TIEM_ID'],
-			'TIEM_OBSERVACIONES' => ['max:300'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

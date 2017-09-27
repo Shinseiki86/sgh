@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -21,6 +20,13 @@ class Sancion extends ModelWithSoftDeletes
 		'SANC_DESCRIPCION',
 		'SANC_OBSERVACIONES',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'SANC_DESCRIPCION' => 'required|max:100|'.static::unique($id,'SANC_DESCRIPCION'),
+			'SANC_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 	public function tickets()
 	{

@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgTickets;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Prioridad;
@@ -21,23 +14,6 @@ class PrioridadController extends Controller
 	{
 		parent::__construct();
 	}
-
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'PRIO_DESCRIPCION' => ['required', 'max:100', 'unique:PRIORIDADES,PRIO_DESCRIPCION,'.$id.',PRIO_ID'],
-			'PRIO_COLOR' => ['required', 'max:100'],
-			'PRIO_OBSERVACIONES' => ['max:300'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

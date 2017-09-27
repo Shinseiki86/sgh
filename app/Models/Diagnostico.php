@@ -22,12 +22,12 @@ class Diagnostico extends ModelWithSoftDeletes
 		"DIAG_DESCRIPCION"
     ];
 
-
-    public static $rules = [
-        "DIAG_CODIGO" => "unique:DIAGNOSTICOS|required",
-		"DIAG_DESCRIPCION" => "unique:DIAGNOSTICOS|required"
-    ];
-
+    public static function rules($id = 0){
+        return [
+            'DIAG_CODIGO' => 'required|'.static::unique($id,'DIAG_CODIGO'),
+            'DIAG_DESCRIPCION' => 'required|'.static::unique($id,'DIAG_DESCRIPCION'),
+        ];
+    }
 
     // public function ausentismos()
     // {

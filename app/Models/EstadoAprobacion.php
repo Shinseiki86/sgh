@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -22,6 +21,14 @@ class EstadoAprobacion extends ModelWithSoftDeletes
 		'ESAP_COLOR',
 		'ESAP_OBSERVACIONES',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'ESAP_DESCRIPCION' => 'required|max:100|'.static::unique($id,'ESAP_DESCRIPCION'),
+			'ESAP_COLOR' => ['required', 'max:100'],
+			'ESAP_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 	//Constantes para referenciar los estados de aprobación
 	const REVISION	 = 1;

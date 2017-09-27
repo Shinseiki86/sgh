@@ -1,39 +1,20 @@
 <?php 
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
-use Validator;
-use SGH\Http\Requests;
-use Flash;
-use Session;
-use Redirect;
 use SGH\Http\Controllers\Controller;
-use Response;
-use SGH\Models\ConceptoAusencia;
 use Yajra\Datatables\Facades\Datatables;
+
+use SGH\Models\ConceptoAusencia;
 
 class ConceptoAusenciaController extends Controller
 {
-
 	protected $route='cnfg-ausentismos.conceptoausencias';
 	protected $class = ConceptoAusencia::class;
+	
 	public function __construct()
 	{	
 		parent::__construct();
 	}
-
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return validator::make($data, ConceptoAusencia::$rules);
-
-	}
-
 	
 	/**
 	 * Display a listing of the conceptoausencia.

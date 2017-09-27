@@ -1,14 +1,7 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgContratos;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 use SGH\Models\EstadoContrato;
 
@@ -20,20 +13,6 @@ class EstadoContratoController extends Controller
 	public function __construct()
 	{
 		parent::__construct();
-	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'ESCO_DESCRIPCION' => ['required','max:100','unique:ESTADOSCONTRATOS,ESCO_DESCRIPCION,'.$id.',ESCO_ID'],
-			'ESCO_OBSERVACIONES' => ['max:300'],
-		]);
 	}
 
 	/**

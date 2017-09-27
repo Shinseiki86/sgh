@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -21,6 +20,13 @@ class TipoEmpleador extends ModelWithSoftDeletes
 		'TIEM_DESCRIPCION',
 		'TIEM_OBSERVACIONES',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'TIEM_DESCRIPCION' => 'required|max:100|'.static::unique($id,'TIEM_DESCRIPCION'),
+			'TIEM_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 	public function contratos()
 	{

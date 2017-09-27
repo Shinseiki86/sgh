@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -25,12 +24,11 @@ class Categoria extends ModelWithSoftDeletes
 	];
 
 	public static function rules($id = 0){
-		$rules = [
+		return [
 			'CATE_DESCRIPCION' => ['required','max:100'],
 			'CATE_OBSERVACIONES' => ['max:300'],
 			'CATE_ids' => ['array'],
 		];
-		return $rules;
 	}
 
 	public function procesos()

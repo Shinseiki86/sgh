@@ -2,6 +2,7 @@
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
 use SGH\Http\Controllers\Controller;
+
 use SGH\Models\PlantaLaboral;
 
 class PlantaLaboralController extends Controller

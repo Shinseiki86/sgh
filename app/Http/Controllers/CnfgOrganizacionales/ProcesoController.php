@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Proceso;
@@ -21,22 +14,6 @@ class ProcesoController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'PROC_DESCRIPCION' => ['required','max:100','unique:PROCESOS,PROC_DESCRIPCION,'.$id.',PROC_ID'],
-			'PROC_OBSERVACIONES' => ['max:300'],
-			'GERE_ids' => ['array'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.

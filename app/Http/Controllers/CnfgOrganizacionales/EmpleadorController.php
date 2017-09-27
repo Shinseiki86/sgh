@@ -1,13 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use SGH\Http\Requests;
-use Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Empleador;
@@ -20,30 +13,6 @@ class EmpleadorController extends Controller
 	public function __construct()
 	{
 		parent::__construct();
-	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'EMPL_RAZONSOCIAL' => ['required', 'max:300', 'unique:EMPLEADORES,EMPL_RAZONSOCIAL,'.$id.',EMPL_ID'],
-			'EMPL_NOMBRECOMERCIAL' => ['required', 'max:300', 'unique:EMPLEADORES,EMPL_NOMBRECOMERCIAL,'.$id.',EMPL_ID'],
-			'EMPL_NIT' => ['required', 'max:15', 'unique:EMPLEADORES,EMPL_NIT,'.$id.',EMPL_ID'],
-			'EMPL_DIRECCION' => ['required', 'max:300'],
-			'EMPL_OBSERVACIONES' => ['max:300'],
-			'EMPL_NOMBREREPRESENTANTE' => ['required','max:300'],
-			'EMPL_CEDULAREPRESENTANTE' => ['required'],
-			'CIUD_CEDULA' => ['required'],
-			'CIUD_DOMICILIO' => ['required'],
-			'GERE_ids' => ['array'],
-			'TURN_ids' => ['array'],
-			'GRUP_ids' => ['array'],
-		]);
 	}
 
 	/**

@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -22,5 +21,13 @@ class Prioridad extends ModelWithSoftDeletes
 		'PRIO_COLOR',
 		'PRIO_OBSERVACIONES',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'PRIO_DESCRIPCION' => 'required|max:100|'.static::unique($id,'PRIO_DESCRIPCION'),
+			'PRIO_COLOR' => ['required', 'max:100'],
+			'PRIO_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 }

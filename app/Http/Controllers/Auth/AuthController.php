@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Http\Controllers\Auth;
 
 use Validator;
@@ -83,10 +82,10 @@ class AuthController extends Controller
 	protected function validator(array $data)
 	{
 		return Validator::make($data, [
-			'name' => 'required|max:255',
+			'name' => 'required|max:320',
 			'username' => 'required|max:15|unique:USERS',
 			'cedula' => 'required|max:15|unique:USERS',
-			'email' => 'required|email|max:255|unique:USERS',
+			'email' => 'required|email|max:320|unique:USERS',
 			'roles_ids' => 'required|array',
 			'password' => 'required|min:6|confirmed',
 		]);
@@ -205,7 +204,7 @@ class AuthController extends Controller
 		//Validación de datos
 		$validator = Validator::make(request()->all(), [
 			'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:USERS,email,'.$usuario->USER_id.',USER_id',
+			'email' => 'required|email|max:320|unique:USERS,email,'.$usuario->USER_id.',USER_id',
 			'cedula' => 'required|numeric|unique:USERS,cedula,'.$usuario->USER_id.',USER_id',
 		]);
 

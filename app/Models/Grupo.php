@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -22,6 +21,13 @@ class Grupo extends ModelWithSoftDeletes
 		'GRUP_OBSERVACIONES',
 		'EMPL_ID',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'GRUP_DESCRIPCION' => 'required|max:100|'.static::unique($id,'GRUP_DESCRIPCION'),
+			'GRUP_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 	public function contratos()
 	{

@@ -1,8 +1,6 @@
 <?php
-
 namespace SGH\Http\Controllers\GestionHumana;
 
-use Validator;
 use SGH\Http\Controllers\Controller;
 use Yajra\Datatables\Facades\Datatables;
 

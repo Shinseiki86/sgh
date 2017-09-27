@@ -1,7 +1,7 @@
 @include('chosen')
+@include('datepicker')
 @include('utilidades.autocomplete',['first'=>'DX_DESCRIPCION','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
 @include('utilidades.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCION','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
-@include('datepicker')
 <div class='col-md-8 col-md-offset-2'>
 
 	<div class="row">

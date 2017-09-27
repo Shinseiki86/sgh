@@ -31,7 +31,35 @@
 		$(function () {
 
 
+            $.ajax(url, {
+                type: 'post',
+                data: data,
+                processData: false,
+                contentType: false,
+
+                beforeSend: function () {
+                    _this.submitStart();
+                },
+
+                success: function (data) {
+                    _this.submitDone(data);
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    this.showNotice('error', XMLHttpRequest.responseJSON);
+                    _this.submitFail(XMLHttpRequest.responseJSON, textStatus || errorThrown);
+                },
+
+                complete: function () {
+                    _this.submitEnd();
+                }
+            });
+
+
 			function changeParameter($parameter, $value){
+                data = new FormData(this.$avatarForm[0]),
+                _this = this;
+
 				$.ajax({
 					//async: false, 
 					url: 'admin/changeParameter',

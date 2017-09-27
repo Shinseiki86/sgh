@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -21,6 +20,13 @@ class MotivoRetiro extends ModelWithSoftDeletes
 		'MORE_DESCRIPCION',
 		'MORE_OBSERVACIONES',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'MORE_DESCRIPCION' => 'required|max:100|'.static::unique($id,'MORE_DESCRIPCION'),
+			'MORE_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 	public function contratos()
 	{

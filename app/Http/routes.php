@@ -22,8 +22,8 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'middleware' => ['auth'
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
-	Route::get('parameters', 'ParametersController@index')->name('admin.parameters');
+Route::group(['prefix' => 'app', 'middleware' => ['auth', 'role:admin']], function() {
+	Route::get('parameters', 'ParametersController@index')->name('app.parameters');
 });
 
 Route::group(['middleware' => 'auth'], function() {
@@ -101,8 +101,8 @@ Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'],
 	Route::resource('tipoausentismos', 'TipoAusentismoController');
 	Route::resource('ausentismos', 'AusentismoController');
 	Route::get('/buscaContrato','AusentismoController@buscaContrato');
-	Route::get('/buscaDx', 'AusentismoController@buscaDx');
-	Route::get('/autocomplete',array('as'=>'autocomplete','uses'=>'AusentismoController@autocomplete'));
+	Route::get('/buscaDx', 'DiagnosticoController@buscaDx');
+	Route::get('/autocomplete',array('as'=>'autocomplete','uses'=>'DiagnosticoController@autocomplete'));
 	Route::resource('prorrogaausentismos', 'ProrrogaAusentismoController');
 });
 

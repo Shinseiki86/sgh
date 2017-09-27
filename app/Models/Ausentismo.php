@@ -1,7 +1,6 @@
 <?php 
 namespace SGH\Models;
 
-
 use SGH\Models\ModelWithSoftDeletes;
 
 class Ausentismo extends ModelWithSoftDeletes

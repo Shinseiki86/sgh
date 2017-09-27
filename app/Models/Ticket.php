@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -41,7 +40,7 @@ class Ticket extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			'TICK_DESCRIPCION' => ['required','max:3000'],
+			'TICK_DESCRIPCION' => ['required','max:100'],
 			'CONT_ID' => ['required'],
 			'ESTI_ID' => ['required'],
 			'ESAP_ID' => ['required'],
@@ -51,7 +50,7 @@ class Ticket extends ModelWithSoftDeletes
 			'CATE_ID' => ['required'],
 			'TIIN_ID' => ['required'],
 			'TICK_FECHAEVENTO' => ['required'],
-			'TICK_OBSERVACIONES' => ['max:3000'],
+			'TICK_OBSERVACIONES' => ['max:600'],
 		];
 	}
 

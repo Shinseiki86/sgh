@@ -1,33 +1,27 @@
 <?php 
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
-use Validator;
-use SGH\Http\Requests;
-use Illuminate\Http\Request;
-use Flash;
 use SGH\Http\Controllers\Controller;
-use Response;
+use Yajra\Datatables\Facades\Datatables;
+
 use SGH\Models\Ausentismo;
 use SGH\Models\Diagnostico;
 use SGH\Models\Prospecto;
 use SGH\Models\Contrato;
 use SGH\Models\ConceptoAusencia;
 use SGH\Models\Entidad;
-use Yajra\Datatables\Facades\Datatables;
 
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
+use SGH\Repositories\AusentismoRepository;
 
 class AusentismoController extends Controller
 {
-
-
 	protected $route='cnfg-ausentismos.ausentismos';
 	protected $class = Ausentismo::class;
-	public function __construct()
-	{	
+	protected $reposAusentismo;
+
+	public function __construct(AusentismoRepository $reposAusentismo)
+	{
+		$this->reposAusentismo = $reposAusentismo;	
 		parent::__construct();
 	}
 
@@ -51,36 +45,12 @@ class AusentismoController extends Controller
 	 */
 	public function index()
 	{
-		$ausentismos = Ausentismo::all();
+		$ausentismos = findAll("Ausentismo");
 		return view($this->route.'.index', compact('ausentismos'));
 		
 	}
 
-	public function buscaDx(Request $request)
-	{
-		$data=Diagnostico::select('DIAG_ID','DIAG_DESCRIPCION')->where('DIAG_CODIGO',$request->CIE10)->get();
-		return response()->json($data);
-	}
-
 	
-
-	public function autoComplete(Request $request) {
-	    $term = $request->term;
-	    $data=Diagnostico::where('DIAG_DESCRIPCION','LIKE','%'.$term.'%')
-	 		->take(10)
-	 		->get();
-	    $results=array();
-	    foreach ($data as $v) {
-	            $results[]=['id'=>$v->DIAG_ID,'value'=>$v->DIAG_DESCRIPCION,'cod'=>$v->DIAG_CODIGO];
-	    }
-	    if(count($results))
-	         return $results;
-	    else
-	        return ['value'=>'No se encontró ningun Resultado','id'=>''];
-	}
-
-
-
 	public function buscaContrato(Request $request)
 	{ 
 		$data = Prospecto::join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')

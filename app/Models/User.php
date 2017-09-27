@@ -1,13 +1,13 @@
 <?php
-
 namespace SGH\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use SGH\Traits\RelationshipsTrait;
 
 class User extends Authenticatable
 {
-	use EntrustUserTrait;
+	use EntrustUserTrait, RelationshipsTrait;
 
 	//Nombre de la tabla en la base de datos
 	protected $table = 'USERS';
@@ -44,7 +44,7 @@ class User extends Authenticatable
 	];
 
 	public static function rules($id = 0){
-		$rules = [
+		return [
 			'name'      => 'required|max:255',
 			'username'  => ['required','max:15',static::unique($id,'username')],
 			'cedula'    => ['required','max:15',static::unique($id,'cedula')],
@@ -52,7 +52,6 @@ class User extends Authenticatable
 			'roles_ids' => 'required|array',
 			'password'  => 'required|min:6|confirmed',
 		];
-		return $rules;
 	}
 
     protected static function unique($id, $column, $table = null){

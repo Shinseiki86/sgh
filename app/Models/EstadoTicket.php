@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -28,5 +27,12 @@ class EstadoTicket extends ModelWithSoftDeletes
 	const REASIGNADO = 2;
 	const CERRADO    = 3;
 
+	public static function rules($id = 0){
+		return [
+			'ESTI_DESCRIPCION' => 'required|max:100|'.static::unique($id,'ESTI_DESCRIPCION'),
+			'ESTI_COLOR' => ['required', 'max:100'],
+			'ESTI_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 }

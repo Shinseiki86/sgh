@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -23,6 +22,15 @@ class Temporal extends ModelWithSoftDeletes
 		'TEMP_OBSERVACIONES',
 		'PROS_ID',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'TEMP_RAZONSOCIAL' => ['required', 'max:300'],
+			'TEMP_NOMBRECOMERCIAL' => ['required', 'max:300'],
+			'TEMP_DIRECCION' => ['required', 'max:300'],
+			'TEMP_OBSERVACIONES' => ['required', 'max:300'],
+		];
+	}
 
 	public function contratos()
 	{

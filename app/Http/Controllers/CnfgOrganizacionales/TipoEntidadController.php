@@ -1,36 +1,19 @@
 <?php 
 namespace SGH\Http\Controllers\CnfgOrganizacionales;
 
-use Validator;
-use SGH\Http\Requests;
-use Flash;
-use Session;
-use Redirect;
 use SGH\Http\Controllers\Controller;
-use SGH\Models\TipoEntidad;
 use Yajra\Datatables\Facades\Datatables;
+
+use SGH\Models\TipoEntidad;
 
 class TipoEntidadController extends Controller
 {
+	protected $route = 'cnfg-organizacionales.tipoentidades';
+	protected $class = TipoEntidad::class;
 
-	private $groupUrl='cnfg-organizacionales.';
-	private $routeIndex = 'cnfg-organizacionales.tipoentidades.index';
 	public function __construct()
 	{
-		$this->routeIndex=$this->groupUrl .'tipoentidades.index';
-		$this->middleware('auth');
-	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return validator::make($data, TipoEntidad::$rules);
-
+		parent::__construct();
 	}
 
 	
@@ -42,7 +25,7 @@ class TipoEntidadController extends Controller
 	public function index()
 	{
 		$tipoentidades = TipoEntidad::all();
-		return view($this->routeIndex, compact('tipoentidades'));
+		return view($this->route.'.index', compact('tipoentidades'));
 	}
 
 	
@@ -53,7 +36,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function create()
 	{
-		return view('cnfg-organizacionales.tipoentidades.create');
+		return view($this->route.'.create');
 	}
 
 	/**
@@ -65,7 +48,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel(TipoEntidad::class,  $this->routeIndex);
+		parent::storeModel();
 	}
 
 	/**
@@ -87,7 +70,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function edit(TipoEntidad $tipoentidades)
 	{
-		return view('cnfg-organizacionales.tipoentidades.edit',['tipoEntidad'=>$tipoentidades]);
+		return view($this->route.'.edit',['tipoEntidad'=>$tipoentidades]);
 	}
 
 	/**
@@ -100,7 +83,7 @@ class TipoEntidadController extends Controller
 	 */
 	public function update($ID)
 	{
-		parent::updateModel($ID, TipoEntidad::class,  $this->routeIndex);
+		parent::updateModel($ID);
 	}
 
 	/**
@@ -112,6 +95,6 @@ class TipoEntidadController extends Controller
 	 */
 	public function destroy($ID)
 	{
-		parent::destroyModel($ID, TipoEntidad::class, $this->routeIndex);
+		parent::destroyModel($ID);
 	}
 }

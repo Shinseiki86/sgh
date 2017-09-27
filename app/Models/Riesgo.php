@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -22,6 +21,14 @@ class Riesgo extends ModelWithSoftDeletes
 		'RIES_FACTOR',
 		'RIES_OBSERVACIONES',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'RIES_DESCRIPCION' => 'required|max:100|'.static::unique($id,'RIES_DESCRIPCION'),
+			'RIES_FACTOR' => ['required', 'numeric'],
+			'RIES_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 	public function contratos()
 	{

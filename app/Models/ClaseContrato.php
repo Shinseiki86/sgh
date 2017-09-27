@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -21,6 +20,13 @@ class ClaseContrato extends ModelWithSoftDeletes
 		'CLCO_DESCRIPCION',
 		'CLCO_OBSERVACIONES',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'CLCO_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CLCO_DESCRIPCION'),
+			'CLCO_OBSERVACIONES' => ['max:300'],
+		];
+	}
 
 	public function contratos()
 	{

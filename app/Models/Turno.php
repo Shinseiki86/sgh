@@ -1,5 +1,4 @@
 <?php
-
 namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
@@ -27,6 +26,20 @@ class Turno extends ModelWithSoftDeletes
 		'TURN_HORAFINALSI',
 		'TURN_TIPOTURNO',
 	];
+
+	public static function rules($id = 0){
+		return [
+			'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'TURN_DESCRIPCION'),
+			'TURN_CODIGO' => ['required','max:10'],
+			'TURN_HORAINICIOPI' => ['required'],
+			'TURN_HORAFINALPI' => ['required'],
+			//'TURN_HORAINICIOSI' => ['required'],
+			//'TURN_HORAFINALSI' => ['required'],
+			'TURN_CODIGO' => ['required','max:10'],
+			'TURN_OBSERVACIONES' => ['max:300'],
+			'TURN_TIPOTURNO' => ['max:20'],
+		];
+	}
 
 	public function contratos()
 	{
