@@ -33,7 +33,14 @@ class TipoEntidad extends ModelWithSoftDeletes
         "TIEN_CODIGO" => "unique:TIPOENTIDADES|required",
 		"TIEN_DESCRIPCION" => "unique:TIPOENTIDADES|required",
     ];
-   
+    public static function rules($id = 0){
+        return [
+            //'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+        
+        ];
+    }
+
+  
     public function entidades()
     {
         $foreingKey = 'TIEN_ID';

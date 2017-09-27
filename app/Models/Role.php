@@ -3,11 +3,13 @@
 namespace SGH\Models;
 
 use Zizaco\Entrust\EntrustRole;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use SGH\Traits\ModelRulesTrait;
+//use SGH\Traits\SoftDeletesTrait;
+use SGH\Traits\RelationshipsTrait;
 
 class Role extends EntrustRole
 {
-    use SoftDeletes;
+    use RelationshipsTrait, ModelRulesTrait;
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -19,6 +21,13 @@ class Role extends EntrustRole
 		'description',
 	];
 
+	public static function rules($id = 0){
+		return [
+			'name' => 'required|max:15|'.static::unique($id,'name'),
+			'display_name' => 'required|max:50|'.static::unique($id,'display_name'),
+			'description'  => ['required','max:100'],
+		];
+	}
 
 	//establecemos las relacion de muchos a muchos con el modelo User, ya que un rol 
 	//lo pueden tener varios usuarios y un usuario puede tener varios roles

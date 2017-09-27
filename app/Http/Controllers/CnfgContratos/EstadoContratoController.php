@@ -23,20 +23,6 @@ class EstadoContratoController extends Controller
 	}
 
 	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id = 0)
-	{
-		return Validator::make($data, [
-			'ESCO_DESCRIPCION' => ['required','max:100','unique:ESTADOSCONTRATOS,ESCO_DESCRIPCION,'.$id.',ESCO_ID'],
-			'ESCO_OBSERVACIONES' => ['max:300'],
-		]);
-	}
-
-	/**
 	 * Muestra una lista de los registros.
 	 *
 	 * @return Response

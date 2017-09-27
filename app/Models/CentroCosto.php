@@ -24,6 +24,15 @@ class CentroCosto extends ModelWithSoftDeletes
 		'CECO_OBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		return [
+			'CECO_CODIGO' => 'numeric|required|'.static::unique($id,'CECO_CODIGO'),
+			'CECO_DESCRIPCION'   => ['required', 'max:100'],
+			'GERE_ID'            => ['required'],
+			'CECO_OBSERVACIONES' => ['max:300'],
+		];
+	}
+
 	public function gerencia()
 	{
 		$foreingKey = 'GERE_ID';

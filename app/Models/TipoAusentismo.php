@@ -22,12 +22,12 @@ class TipoAusentismo extends ModelWithSoftDeletes
 		"TIAU_OBSERVACIONES"
     ];
 
-
-    public static $rules = [
-        "TIAU_CODIGO" => "required|unique:TIPOAUSENTISMOS",
-		"TIAU_DESCRIPCION" => "unique:TIPOAUSENTISMOS|required"
-    ];
-
+    public static function rules($id = 0){
+        return [
+            'TIAU_CODIGO' => 'required|'.static::unique($id,'TIAU_CODIGO'),
+            'TIAU_DESCRIPCION' => 'required|'.static::unique($id,'TIAU_DESCRIPCION'),
+        ];
+    }
 
     public function conceptoausencias()
     {

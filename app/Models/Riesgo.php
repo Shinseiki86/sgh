@@ -23,6 +23,13 @@ class Riesgo extends ModelWithSoftDeletes
 		'RIES_OBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		return [
+			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+		
+		];
+	}
+
 	public function contratos()
 	{
 		$foreingKey = 'RIES_ID';

@@ -23,4 +23,11 @@ class Prioridad extends ModelWithSoftDeletes
 		'PRIO_OBSERVACIONES',
 	];
 
+	public static function rules($id = 0){
+		return [
+			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+		
+		];
+	}
+
 }

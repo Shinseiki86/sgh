@@ -23,6 +23,13 @@ class Grupo extends ModelWithSoftDeletes
 		'EMPL_ID',
 	];
 
+	public static function rules($id = 0){
+		return [
+			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+		
+		];
+	}
+
 	public function contratos()
 	{
 		$foreingKey = 'GRUP_ID';

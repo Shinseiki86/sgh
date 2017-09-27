@@ -19,12 +19,14 @@ class Controller extends BaseController
 	{
 		if($requireAuth)
 			$this->middleware('auth');
-		
-		$name = basename($this->class);
-		$this->middleware('permission:'.$name.'-index',  ['only' => ['index']]);
-		$this->middleware('permission:'.$name.'-create', ['only' => ['create', 'store']]);
-		$this->middleware('permission:'.$name.'-edit',   ['only' => ['edit', 'update']]);
-		$this->middleware('permission:'.$name.'-delete', ['only' => ['destroy']]);
+
+		if(property_exists($this, 'class')){
+			$name = basename($this->class);
+			$this->middleware('permission:'.$name.'-index',  ['only' => ['index']]);
+			$this->middleware('permission:'.$name.'-create', ['only' => ['create', 'store']]);
+			$this->middleware('permission:'.$name.'-edit',   ['only' => ['edit', 'update']]);
+			$this->middleware('permission:'.$name.'-delete', ['only' => ['destroy']]);
+		}
 	}
 
     /**

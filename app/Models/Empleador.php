@@ -31,6 +31,13 @@ class Empleador extends ModelWithSoftDeletes
 		'PROS_ID'
 	];
 
+	public static function rules($id = 0){
+		return [
+			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+		
+		];
+	}
+
 	public function ciudad_expedicion()
 	{
 		$foreingKey = 'CIUD_CEDULA';

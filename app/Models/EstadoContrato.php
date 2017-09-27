@@ -26,6 +26,13 @@ class EstadoContrato extends ModelWithSoftDeletes
 	const ACTIVO	= 1;
 	const RETIRADO	= 2;
 
+	public static function rules($id = 0){
+		return [
+			'ESCO_DESCRIPCION' => 'required|max:100|'.static::unique($id,'ESCO_DESCRIPCION'),
+			'ESCO_OBSERVACIONES' => ['max:300'],
+		];
+	}
+
 	public function contratos()
 	{
 		$foreingKey = 'ESCO_ID';
