@@ -12,18 +12,30 @@ class MotivosRetirosTableSeeder extends Seeder
      */
     public function run()
     {
-    	//$this->command->info('---Seeder Motivosretiros');
+    	$this->command->info('---Seeder Motivosretiros');
     	
     	$motivoretiro = new MotivoRetiro;
     	$motivoretiro->MORE_DESCRIPCION = 'RENUNCIA VOLUNTARIA';
-    	$motivoretiro->MORE_OBSERVACIONES =  'MOTIVO RETIRO DE PRUEBA';
-    	$motivoretiro->MORE_CREADOPOR =  'SYSTEM';
+    	$motivoretiro->MORE_OBSERVACIONES =  NULL;
+    	$motivoretiro->MORE_CREADOPOR =  'admin';
     	$motivoretiro->save();
 
     	$motivoretiro = new MotivoRetiro;
     	$motivoretiro->MORE_DESCRIPCION = 'DESPIDO SIN JUSTA CAUSA';
-    	$motivoretiro->MORE_OBSERVACIONES =  'MOREEADOR DE PRUEBA';
-    	$motivoretiro->MORE_CREADOPOR =  'SYSTEM';
+    	$motivoretiro->MORE_OBSERVACIONES =  NULL;
+    	$motivoretiro->MORE_CREADOPOR =  'admin';
     	$motivoretiro->save();
+
+        $motivoretiro = new MotivoRetiro;
+        $motivoretiro->MORE_DESCRIPCION = 'DESPIDO CON JUSTA CAUSA';
+        $motivoretiro->MORE_OBSERVACIONES =  NULL;
+        $motivoretiro->MORE_CREADOPOR =  'admin';
+        $motivoretiro->save();
+
+        $motivoretiro = new MotivoRetiro;
+        $motivoretiro->MORE_DESCRIPCION = 'FINALIZACIÓN DE CONTRATO A TERMINO FIJO';
+        $motivoretiro->MORE_OBSERVACIONES =  NULL;
+        $motivoretiro->MORE_CREADOPOR =  'admin';
+        $motivoretiro->save();
     }
 }

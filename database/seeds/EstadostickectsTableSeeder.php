@@ -17,22 +17,22 @@ class EstadosTickectsTableSeeder extends Seeder
         $estadoticket->ESTI_DESCRIPCION = 'ABIERTO';
         $estadoticket->ESTI_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA ABIERTO';
         $estadoticket->ESTI_COLOR =  'blue';
-        $estadoticket->ESTI_CREADOPOR =  'SYSTEM';
+        $estadoticket->ESTI_CREADOPOR =  'admin';
         $estadoticket->save();
 
         
         $estadoticket = new EstadoTicket;
-        $estadoticket->ESTI_DESCRIPCION = 'REASIGNADO';
-        $estadoticket->ESTI_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA REASIGNADO';
+        $estadoticket->ESTI_DESCRIPCION = 'CADUCADO';
+        $estadoticket->ESTI_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA CADUCADO';
         $estadoticket->ESTI_COLOR =  'yellow';
-        $estadoticket->ESTI_CREADOPOR =  'SYSTEM';
+        $estadoticket->ESTI_CREADOPOR =  'admin';
         $estadoticket->save();
         
         $estadoticket = new EstadoTicket;
         $estadoticket->ESTI_DESCRIPCION = 'CERRADO';
         $estadoticket->ESTI_OBSERVACIONES =  'INDICA QUE EL TICKET SE ENCUENTRA CERRADO';
         $estadoticket->ESTI_COLOR =  'grey';
-        $estadoticket->ESTI_CREADOPOR =  'SYSTEM';
+        $estadoticket->ESTI_CREADOPOR =  'admin';
         $estadoticket->save();
     }
 }

@@ -21,6 +21,7 @@
 		<thead>
 			<tr>
 				<th class="col-md-4">Descripción</th>
+				<th class="col-md-4">Clasificación</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
@@ -31,6 +32,7 @@
 			@foreach($cargos as $cargo)
 			<tr>
 				<td>{{ $cargo -> CARG_DESCRIPCION }}</td>
+				<td>{{ $cargo -> cno -> CNOS_DESCRIPCION }}</td>
 				<td>{{ $cargo -> CARG_OBSERVACIONES }}</td>
 				<td>{{ $cargo -> CARG_CREADOPOR }}</td>
 				<td>
