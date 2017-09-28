@@ -13,24 +13,90 @@ class GruposTableSeeder extends Seeder
     public function run()
     {
     	$this->command->info('---Seeder Grupos');
-    	
+
+        //PROMOCALI    	
     	$grupo = new Grupo;
-    	$grupo->GRUP_DESCRIPCION = 'CUARTELILLO CHIMINANGOS';
-    	$grupo->GRUP_OBSERVACIONES =  'GRUPO DE PRUEBA';
-    	$grupo->GRUP_CREADOPOR =  'SYSTEM';
+    	$grupo->GRUP_DESCRIPCION = 'AVENIDA DEL RIO';
+    	$grupo->GRUP_OBSERVACIONES =  NULL;
+    	$grupo->GRUP_CREADOPOR =  'admin';
     	$grupo->save();
 
-    	$grupo = new Grupo;
-    	$grupo->GRUP_DESCRIPCION = 'CUARTELILLO PRADOS DEL NORTE';
-    	$grupo->GRUP_OBSERVACIONES =  'GRUPO DE PRUEBA';
-    	$grupo->GRUP_CREADOPOR =  'SYSTEM';
-    	$grupo->save();
+        $empleadores = array(4);
+        $grupo->empleadores()->sync($empleadores);
 
         $grupo = new Grupo;
-        $grupo->GRUP_DESCRIPCION = 'CUARTELILLO VALLE DEL LILI';
-        $grupo->GRUP_OBSERVACIONES =  'GRUPO DE PRUEBA';
-        $grupo->GRUP_CREADOPOR =  'SYSTEM';
+        $grupo->GRUP_DESCRIPCION = 'PRADOS DEL NORTE';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
         $grupo->save();
+
+        $empleadores = array(4);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'CALIMA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(4);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'SENA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(4);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'CHAPINERO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(4);
+        $grupo->empleadores()->sync($empleadores);
+
+        //PROMOVALLE
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'LIMONAR';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(3);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'EL INGENIO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(3);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'NAPOLES';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(3);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'VALLE DEL LILI';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(3);
+        $grupo->empleadores()->sync($empleadores);
+    	
 
     }
 }

@@ -20,6 +20,7 @@ class Sancion extends ModelWithSoftDeletes
 	protected $fillable = [
 		'SANC_DESCRIPCION',
 		'SANC_OBSERVACIONES',
+		'SANC_CREADOPOR'
 	];
 
 	public static function rules($id = 0){
