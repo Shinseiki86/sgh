@@ -21,6 +21,12 @@
 		    case "Entidad":
 		        return new SGH\Models\Entidad;
 		        break;
+		    case "TipoAusentismo":
+		        return new SGH\Models\TipoAusentismo;
+		        break;
+		    case "ProrrogaAusentismo":
+		        return new SGH\Models\ProrrogaAusentismo;
+		        break;
 		} 		 
 	}
 
@@ -47,18 +53,42 @@
 		} 		 
 	}
 
+	function repositorio($modelo){ 
+		$repositori=$modelo."Repository"	;
+		switch ($repositori) {
+		    case "AusentismoRepository":
+		        return new SGH\Repositories\AusentismoRepository;
+		        break;
+		    case "DiagnosticoRepository":
+		        return new SGH\Repositories\DiagnosticoRepository;
+		        break;
+		    case "ProspectoRepository":
+		        return new SGH\Repositories\ProspectoRepository;
+		        break;
+		   	case "ContratoRepository":
+		        return new SGH\Repositories\ContratoRepository;
+		        break;
+		    case "ConceptoAusenciaRepository":
+		        return new SGH\Repositories\ConceptoAusenciaRepository;
+		        break;
+		    case "EntidadRepository":
+		        return new SGH\Repositories\EntidadRepository;
+		        break;
+		} 		 
+	}
+
 	function findAll($modelo){
 		return modelo($modelo)->all();
 	}  
 
 	function findId($modelo,$id)
     {
-      return modelo($modelo)->find($id);
+      return modelo($modelo)->find($id)->get();
     }
 
     
     function findBy($modelo,$column, $value)
     {
-      return modelo($modelo)->where($column, $value);
+      return modelo($modelo)->where($column, $value)->get();
     }
 ?>

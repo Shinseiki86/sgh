@@ -19,11 +19,7 @@
 @section('section')
 
    <div class="row">
-        @if($prorrogaAusentismos->isEmpty())
-            <div class="well text-center">No se encontró ningun ProrrogaAusentismos.</div>
-        @else
-            @include('cnfg-ausentismos.prorrogaausentismos.table')
-        @endif
+        @include('cnfg-ausentismos.prorrogaausentismos.table')
     </div>
 
     @include('widgets/modal-delete')

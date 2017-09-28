@@ -24,16 +24,7 @@ class ConceptoAusenciaController extends Controller
 	 */
 	public function index()
 	{
-		$conceptoausencias = ConceptoAusencia::join('TIPOAUSENTISMOS', 'TIPOAUSENTISMOS.TIAU_ID', '=', 'CONCEPTOAUSENCIAS.TIAU_ID')
-						->join('TIPOENTIDADES', 'TIPOENTIDADES.TIEN_ID', '=', 'CONCEPTOAUSENCIAS.TIEN_ID')
-						->select(['COAU_ID',
-							'COAU_CODIGO',
-							'COAU_DESCRIPCION',
-							'COAU_OBSERVACIONES',
-							'TIPOAUSENTISMOS.TIAU_DESCRIPCION',
-							'TIPOENTIDADES.TIEN_DESCRIPCION',
-						])->get();
-		//$conceptoausencias = ConceptoAusencia::all();
+		$conceptoausencias = repositorio("ConceptoAusencia")->conceptosAusencias();
 		return view($this->route.'.index', compact('conceptoausencias'));
 	}
 

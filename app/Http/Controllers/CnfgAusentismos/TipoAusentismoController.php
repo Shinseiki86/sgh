@@ -22,7 +22,7 @@ class TipoAusentismoController extends Controller
 	 */
 	public function index()
 	{		
-		$tipoausentismos = TipoAusentismo::all();
+		$tipoausentismos = findAll("TipoAusentismo");
 		return view($this->route.'.index', compact('tipoausentismos'));
 	}
 

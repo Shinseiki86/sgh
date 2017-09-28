@@ -1,44 +1,22 @@
 <?php
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
-use Validator;
 use Illuminate\Http\Request;
-use SGH\Http\Requests;
-use Flash;
-use Session;
-use Redirect;
 use SGH\Http\Controllers\Controller;
-use Response;
 use SGH\Models\Diagnostico;
 use Yajra\Datatables\Facades\Datatables;
-
-use SGH\Repositories\DiagnosticoRepository;
 
 class DiagnosticoController extends Controller
 {
 
 	protected $route='cnfg-ausentismos.diagnosticos';
 	protected $class = Diagnostico::class;
-	protected $reposDiagnostico;
-	public function __construct(DiagnosticoRepository $reposDiagnostico)
+	public function __construct()
 	{	
-		$this->reposDiagnostico = $reposDiagnostico;
 		parent::__construct();
 	}
 
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return validator::make($data, Diagnostico::$rules);
-
-	}
-
-	
+		
 	/**
 	 * Display a listing of the Diagnostico.
 	 *
@@ -51,13 +29,13 @@ class DiagnosticoController extends Controller
 
 	public function buscaDx(Request $request)
 	{
-		$data=$this->reposDiagnostico->buscaDx($request->CIE10);
+		$data=repositorio("Diagnostico")->buscaDx($request->CIE10);
 		return response()->json($data);
 	}
 
 	public function autoComplete(Request $request) {
 	    $term = $request->term;
-	    $data=$this->reposDiagnostico->autoComplete($term);
+	    $data=repositorio("Diagnostico")->autoComplete($term);
 	    $results=array();
 	    foreach ($data as $v) {
 	            $results[]=['id'=>$v->DIAG_ID,'value'=>$v->DIAG_DESCRIPCION,'cod'=>$v->DIAG_CODIGO];
@@ -76,7 +54,7 @@ class DiagnosticoController extends Controller
 	 */
 	public function getData()
 	{
-		$model = $this->reposDiagnostico->getData();
+		$model = repositorio("Diagnostico")->getData();
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
 				return parent::buttonEdit($model).

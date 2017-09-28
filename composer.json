@@ -47,8 +47,8 @@
             "tests/TestCase.php"
         ],
         "files": [
-            "app/Http/helpers.php",
-            "app/Http/helperModels.php"
+            "app/Http/Helpers/helpers.php",
+            "app/Http/Helpers/helperModels.php"
         ]
     },
     "scripts": {

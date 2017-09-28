@@ -2,24 +2,10 @@
 
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
-use Validator;
-use SGH\Http\Requests;
-use Flash;
-use Illuminate\Support\Facades\Session;
-use Redirect;
 use SGH\Http\Controllers\Controller;
-use Response;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
-use SGH\Models\ProrrogaAusentismo;
 use Yajra\Datatables\Facades\Datatables;     
 
-use SGH\Models\Ausentismo;
-use SGH\Models\Diagnostico;
-use SGH\Models\Contrato;
-use SGH\Models\ConceptoAusencia;
-use SGH\Models\Entidad;               
+use SGH\Models\ProrrogaAusentismo;
 
 
 class ProrrogaAusentismoController extends Controller
@@ -31,20 +17,7 @@ class ProrrogaAusentismoController extends Controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data)
-	{
-		return validator::make($data, ProrrogaAusentismo::$rules);
-
-	}
-
-	
+		
 	/**
 	 * Display a listing of the ProrrogaAusentismo.
 	 *
@@ -52,7 +25,7 @@ class ProrrogaAusentismoController extends Controller
 	 */
 	public function index()
 	{
-		$prorrogaAusentismos = ProrrogaAusentismo::all();
+		$prorrogaAusentismos = findAll("ProrrogaAusentismo");
 		return view($this->route.'.index', compact('prorrogaAusentismos'));
 	}
 
@@ -66,24 +39,11 @@ class ProrrogaAusentismoController extends Controller
 	 */
 	public function create()
 	{
-		$CONT_PROSPECTOS = expression_concat([
-		'PROS_PRIMERNOMBRE',
-		'PROS_SEGUNDONOMBRE',
-		'PROS_PRIMERAPELLIDO',
-		'PROS_SEGUNDOAPELLIDO',
-		'PROS_CEDULA',
-		'CONT_FECHAINGRESO',
-		], 'CONT_PROSPECTOS');
-
-		$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
-					->join('AUSENTISMOS', 'AUSENTISMOS.CONT_ID', '=', 'CONTRATOS.PROS_ID')
-					->select(['AUSENTISMOS.CONT_ID', $CONT_PROSPECTOS])
-					->where('CONTRATOS.ESCO_ID', '=', '1')
-					->get();
+		$prospectosActivos = repositorio("Prospecto")->prospectoContratoActivo();
 
 		//Se crea un array con los prospectos disponibles
-		$arrContratos = model_to_array($contratos, 'CONT_PROSPECTOS');
-				$contratos = Contrato::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')->get();
+		$arrContratos = model_to_array($prospectosActivos, 'CONT_PROSPECTOS');
+
 		//Se crea un array con los conceptos de Ausentismos
 		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
 		
