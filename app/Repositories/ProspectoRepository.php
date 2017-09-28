@@ -11,10 +11,9 @@ class ProspectoRepository
      {
              $this->modelo =  modelo("Prospecto");
      }
-     
-     public function prospectoContratoActivo()
-     {
-         $CONT_PROSPECTOS = expression_concat([
+
+     public function cont_prospectos(){
+     	return expression_concat([
 							'PROS_PRIMERNOMBRE',
 							'PROS_SEGUNDONOMBRE',
 							'PROS_PRIMERAPELLIDO',
@@ -22,12 +21,23 @@ class ProspectoRepository
 							'PROS_CEDULA',
 							'CONT_FECHAINGRESO',
 							], 'CONT_PROSPECTOS');
-
-							$prospecto = modelo("Contrato")->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
-										->select(['CONT_ID', $CONT_PROSPECTOS])
+     }
+     
+     public function prospectoContratoActivo()
+     {
+	     return modelo("Contrato")->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+										->select(['CONT_ID', $this->cont_prospectos()])
 										->where('CONTRATOS.ESCO_ID', '=', '1')
-										->get();
-		return $prospecto;
+										->get();		
+     }
+
+     public function prospectoConAusentismo()
+     {
+		return modelo("Contrato")->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+					->join('AUSENTISMOS', 'AUSENTISMOS.CONT_ID', '=', 'CONTRATOS.PROS_ID')
+					->select(['AUSENTISMOS.CONT_ID', $this->cont_prospectos()])
+					->where('CONTRATOS.ESCO_ID', '=', '1')
+					->get();
      }
 }
 ?>

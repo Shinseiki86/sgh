@@ -39,7 +39,7 @@ class ProrrogaAusentismoController extends Controller
 	 */
 	public function create()
 	{
-		$prospectosActivos = repositorio("Prospecto")->prospectoContratoActivo();
+		$prospectosActivos = repositorio("Prospecto")->prospectoConAusentismo();
 
 		//Se crea un array con los prospectos disponibles
 		$arrContratos = model_to_array($prospectosActivos, 'CONT_PROSPECTOS');
