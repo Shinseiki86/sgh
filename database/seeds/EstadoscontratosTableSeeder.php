@@ -12,18 +12,24 @@ class EstadosContratosTableSeeder extends Seeder
      */
     public function run()
     {
-    	//$this->command->info('---Seeder Estadoscontratos');
-    	
-    	$estadocontrato = new EstadoContrato;
-    	$estadocontrato->ESCO_DESCRIPCION = 'ACTIVO';
-    	$estadocontrato->ESCO_OBSERVACIONES =  'ESTADO CONTRATO DE PRUEBA';
-    	$estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
-    	$estadocontrato->save();
+        $this->command->info('---Seeder Estadoscontratos');
+        
+        $estadocontrato = new EstadoContrato;
+        $estadocontrato->ESCO_DESCRIPCION = 'ACTIVO';
+        $estadocontrato->ESCO_OBSERVACIONES =  NULL;
+        $estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
+        $estadocontrato->save();
 
-    	$estadocontrato = new EstadoContrato;
-    	$estadocontrato->ESCO_DESCRIPCION = 'RETIRADO';
-    	$estadocontrato->ESCO_OBSERVACIONES =  'ESTADO CONTRATO DE PRUEBA';
-    	$estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
-    	$estadocontrato->save();
+        $estadocontrato = new EstadoContrato;
+        $estadocontrato->ESCO_DESCRIPCION = 'RETIRADO';
+        $estadocontrato->ESCO_OBSERVACIONES =  NULL;
+        $estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
+        $estadocontrato->save();
+
+        $estadocontrato = new EstadoContrato;
+        $estadocontrato->ESCO_DESCRIPCION = 'VACACIONES';
+        $estadocontrato->ESCO_OBSERVACIONES =  NULL;
+        $estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
+        $estadocontrato->save();
     }
 }

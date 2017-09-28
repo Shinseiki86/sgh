@@ -35,5 +35,11 @@ class TipoEntidadesTableSeeder extends Seeder
             'TIEN_DESCRIPCION' => 'FONDOS DE PENSIONES',
             'TIEN_OBSERVACIONES' => NULL,
         ]);
+
+        TipoEntidad::create([
+            'TIEN_CODIGO' => 'EMP',
+            'TIEN_DESCRIPCION' => 'EMPLEADOR',
+            'TIEN_OBSERVACIONES' => NULL,
+        ]);
     }
 }

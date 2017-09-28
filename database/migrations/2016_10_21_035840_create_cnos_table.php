@@ -31,10 +31,8 @@ class CreateCnosTable extends Migration
             $table->string('CNOS_CODIGO', 5)
                 ->comment('codigo de clasificación Ej: 1-directivos, 2-ejecutivos, 3-operativos');
 
-
-            $table->string('CNOS_DESCRIPCION', 100)
+            $table->string('CNOS_DESCRIPCION', 150)
                 ->comment('descripción de clasificación Ej: directivos, ejecutivos, operativos');
-
 
             $table->string('CNOS_OBSERVACIONES', 300)
                 ->comment('observaciones de clasificación nacional de ocupaciones')->nullable();
