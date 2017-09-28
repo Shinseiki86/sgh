@@ -12,20 +12,16 @@ class ProcesosTableSeeder extends Seeder
      */
     public function run()
 	{
-		//$this->command->info('---Seeder Gerencias');
-		
-        Proceso::create([
-            'PROC_DESCRIPCION' => 'SOLICITUD DE PROCESOS DISCIPLINARIOS',
-            'PROC_OBSERVACIONES' =>  'DISCIPLINARIOS',
-        ]);
-        Proceso::create([
-            'PROC_DESCRIPCION' => 'PROCESO 1',
-            'PROC_OBSERVACIONES' =>  'PRUEBAS',
-        ]);
-        Proceso::create([
-            'PROC_DESCRIPCION' => 'PROCESO 2',
-            'PROC_OBSERVACIONES' =>  'PRUEBAS',
-        ]);
+		$this->command->info('---Seeder Procesos');
+
+        $proceso = new Proceso;
+        $proceso->PROC_DESCRIPCION = 'SOLICITUD DE PROCESO DISCIPLINARIO';
+        $proceso->PROC_OBSERVACIONES = NULL;
+        $proceso->PROC_CREADOPOR = 'admin';
+        $proceso->save();
+
+        $gerencias = array(8);
+        $proceso->gerencias()->sync($gerencias);
 
 	}
 
