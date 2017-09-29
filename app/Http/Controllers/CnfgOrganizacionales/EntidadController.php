@@ -15,7 +15,7 @@ class EntidadController extends Controller
 {
 
 	
-	protected $route='organizacionales.entidades';
+	protected $route='cnfg-organizacionales.entidades';
 	protected $class = Entidad::class;
 	public function __construct()
 	{	
