@@ -77,7 +77,10 @@
 		} 		 
 	}
 
-	function findAll($modelo){
+	function findAll($modelo,$relacion=[]){
+		if (count($relacion)>0) {
+			return modelo($modelo)::with($relacion)->get();			
+		}
 		return modelo($modelo)->all();
 	}  
 
