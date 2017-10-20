@@ -17,6 +17,10 @@ class ProrrogaAusentismoController extends Controller
 	{
 		parent::__construct();
 	}
+
+	public function buscaAuse(){
+		return $ausentismos = findAll("Ausentismo",['diagnostico','conceptoausencia','enitdad']);
+	}
 		
 	/**
 	 * Display a listing of the ProrrogaAusentismo.

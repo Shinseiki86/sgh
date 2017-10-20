@@ -1,6 +1,31 @@
 @extends('layouts.menu')
 
 @section('page_heading', 'Nueva Prorroga')
+@push('scripts')
+    {!! Html::script('assets/js/angular/angular.min.js') !!}
+	{!! Html::script('assets/js/angular/ui-bootstrap-tpls-2.5.0.min.js') !!}
+
+    <script>
+    	var app = angular.module('app', ['ui.bootstrap'], function($interpolateProvider) {
+			$interpolateProvider.startSymbol('{%');
+			$interpolateProvider.endSymbol('%}');
+		});
+		
+		app.controller('buscaAusentismo', function($scope, $http) {
+		    
+		    $scope.cargaAusentismo = function() {
+		        $http.get("http://localhost:8083/sgh/public/cnfg-ausentismos/buscaAuse")
+		    	.then(function (response) {
+		    		$scope.ausentismo = response.data;
+		    		console.log($scope.ausentismo);
+		    	});
+
+
+		    }
+		});
+	</script>
+
+@endpush
 
 @section('section')
 {{-- <div class="col-md-6 col-md-offset-4"> --}}

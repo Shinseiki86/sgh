@@ -15,3 +15,5 @@ public function buscaContrato(Request $request)
 	}
 
  ?>
+
+ <span ng-bind="ausentismo[0].AUSE_OBSERVACIONES"></span>
