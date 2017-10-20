@@ -33,6 +33,7 @@ class Contrato extends ModelWithSoftDeletes
 		'EMPL_ID',
 		'RIES_ID',
 		'TIEM_ID',
+		'GERE_ID',
 		'CECO_ID',
 		'TURN_ID',
 		'GRUP_ID',
@@ -48,6 +49,7 @@ class Contrato extends ModelWithSoftDeletes
 			'EMPL_ID' => ['numeric', 'required'],
 			'TEMP_ID' => ['numeric',],
 			'TIEM_ID' => ['numeric', 'required'],
+			'GERE_ID' => ['numeric', 'required'],
 			'CECO_ID' => ['numeric', 'required'],
 			'ESCO_ID' => ['numeric', 'required'],
 			'TICO_ID' => ['numeric', 'required'],
@@ -132,6 +134,12 @@ class Contrato extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'TIEM_ID';
 		return $this->belongsTo(TipoEmpleador::class, $foreingKey);
+	}
+
+	public function gerencia()
+	{
+		$foreingKey = 'GERE_ID';
+		return $this->belongsTo(Gerencia::class, $foreingKey);
 	}
 
 	public function centrocosto()

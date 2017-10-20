@@ -35,6 +35,12 @@ class Gerencia extends ModelWithSoftDeletes
 		return $this->hasMany(PlantaLaboral::class, $foreingKey);
 	}
 
+	public function contratos()
+	{
+		$foreingKey = 'GERE_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
 	/*
 	 * Relación PROCESOS-GERENCIAS (muchos a muchos). 
 	 */
@@ -64,5 +70,6 @@ class Gerencia extends ModelWithSoftDeletes
 		$otherKey   = 'EMPL_ID';
 		return $this->belongsToMany(Empleador::class, 'EMPLEADORES_GERENCIAS', $foreingKey,  $otherKey);
 	}
+
 
 }

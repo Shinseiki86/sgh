@@ -8,6 +8,8 @@
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'TEMP_ID', 'label'=>'Temporal', 'data'=>$arrTemporales])
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'TIEM_ID', 'label'=>'Tipo de empleador', 'data'=>$arrTiposempleadores])
+@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'GERE_ID', 'label'=>'Gerencia', 'data'=>$arrGerencias])
+
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'CECO_ID', 'label'=>'Centro de costo', 'data'=>$arrCentroscostos])
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'ESCO_ID', 'label'=>'Estado de contrato', 'data'=>$arrEstadoscontrato])

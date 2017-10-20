@@ -32,7 +32,7 @@ class EmpleadoresTableSeeder extends Seeder
     	$empleador->save();
 
     	$empleador = new Empleador;
-    	$empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL CARIBES.A. E.S.P. ';
+    	$empleador->EMPL_RAZONSOCIAL = 'PROMOAMBIENTAL CARIBE S.A. E.S.P. ';
         $empleador->EMPL_NIT = 900074102;
         $empleador->EMPL_CEDULAREPRESENTANTE = 79944512;
         $empleador->CIUD_CEDULA = 149;

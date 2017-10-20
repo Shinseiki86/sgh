@@ -4,6 +4,8 @@ namespace SGH\Http\Controllers\GestionHumana;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Contrato;
+use SGH\Models\PlantaLaboral;
+use SGH\Models\CentroCosto;
 use SGH\Models\Prospecto;
 use SGH\Models\Jefe;
 use SGH\Models\Cargo;
@@ -67,6 +69,9 @@ class ContratoController extends Controller
 
 		//Se crea un array con los tipos de empleadores
 		$arrTiposempleadores = model_to_array(TipoEmpleador::class, 'TIEM_DESCRIPCION');
+
+		//Se crea un array con las gerencias
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 
 		//Se crea un array con los centros de costos
 		$arrCentroscostos = model_to_array(CentroCosto::class, 'CECO_DESCRIPCION');
@@ -134,7 +139,7 @@ class ContratoController extends Controller
 							->get();
 		$arrJefes = model_to_array($arrJefes, $columnName, $primaryKey);
 
-		return view($this->route.'.create' , compact('arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
+		return view($this->route.'.create' , compact('arrEmpleadores','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
 	}
 
 	/**
@@ -150,7 +155,18 @@ class ContratoController extends Controller
 				$entidades_id[] = request()->get('ENTI_ID_'.$entidad);
 		}
 
-		parent::storeModel(['entidades'=>$entidades_id]);		
+		//variables para llamar al metodo que extrae la planta autorizada y el conteo de contratos
+		$empleador = request()->get('EMPL_ID');
+		$gerencia  = request()->get('GERE_ID');
+		$cargo 	   = request()->get('CARG_ID');
+
+		if($this->validarPlanta($empleador, $gerencia, $cargo)){
+			parent::storeModel(['entidades'=>$entidades_id]);
+		}else{
+			flash_modal('No se puede crear contrato: La planta autorizada se encuentra completa', 'info' );
+			return redirect()->route($this->route.'.create')->send();
+		}				
+		
 	}
 
 
@@ -170,6 +186,9 @@ class ContratoController extends Controller
 
 		//Se crea un array con los tipos de empleadores
 		$arrTiposempleadores = model_to_array(TipoEmpleador::class, 'TIEM_DESCRIPCION');
+
+		//Se crea un array con las gerencias
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 
 		//Se crea un array con los centros de costos
 		$arrCentroscostos = model_to_array(CentroCosto::class, 'CECO_DESCRIPCION');
@@ -238,7 +257,7 @@ class ContratoController extends Controller
 		$arrJefes = model_to_array($arrJefes, $columnName, $primaryKey);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
+		return view($this->route.'.edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
 	}
 
 	/**
@@ -254,7 +273,19 @@ class ContratoController extends Controller
 			if(request()->get('ENTI_ID_'.$entidad)!=null)
 				$entidades_id[] = request()->get('ENTI_ID_'.$entidad);
 		}
-		parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);	
+
+		//variables para llamar al metodo que extrae la planta autorizada y el conteo de contratos
+		$empleador = request()->get('EMPL_ID');
+		$gerencia  = request()->get('GERE_ID');
+		$cargo 	   = request()->get('CARG_ID');
+
+		if($this->validarPlanta($empleador, $gerencia, $cargo)){
+			parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);	
+		}else{
+			flash_modal('No se puede crear contrato: La planta autorizada se encuentra completa', 'info' );
+			return redirect()->route($this->route.'.edit')->send();
+		}				
+		
 
 	}
 
@@ -289,6 +320,60 @@ class ContratoController extends Controller
 								->get();
 		return $data->toJson();
 	}
+
+	public function getPlantaLaboral($empleador, $gerencia, $cargo){
+
+		$data = PlantaLaboral::select('PALA_CANTIDAD')
+		->where('EMPL_ID', $empleador)
+		->where('GERE_ID', $gerencia)
+		->where('CARG_ID', $cargo)
+		->get();
+
+		if(count($data)==0){
+			return 0;
+		}else{
+			return $data[0]['PALA_CANTIDAD'];
+		}
+
+		
+
+	}
+
+	public function getContratosPorEstructura($empleador, $gerencia, $cargo)
+	{
+		$data = Contrato::select('CONT_ID')
+		->where('EMPL_ID', $empleador)
+		->where('GERE_ID', $gerencia)
+		->where('CARG_ID', $cargo)
+		->count();
+
+		return $data;
+	}
+
+	
+	public function validarPlanta($empleador, $gerencia, $cargo){
+
+		if($empleador!=null && $gerencia!=null && $cargo!=null){
+
+			//se extrae la planta laboral autorizada
+			$plantalaboral = $this->getPlantaLaboral($empleador, $gerencia, $cargo);
+
+			//contar los contratos activos con la misma estructura
+			$contratos = $this->getContratosPorEstructura($empleador, $gerencia, $cargo);
+
+			//dd($plantalaboral);
+
+			// 2<=1
+			if($contratos<$plantalaboral){
+				return true;
+			}else{
+				return false;
+			}
+
+		}
+
+	}
+	
 
 	
 }

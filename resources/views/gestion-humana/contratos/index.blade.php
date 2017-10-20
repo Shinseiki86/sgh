@@ -36,6 +36,7 @@
 				<th class="col-md-5">Rodaje</th>
 				<th class="col-md-5">Tipo Empleador</th>
 				<th class="col-md-5">Riesgo</th>
+				<th class="col-md-5">Gerencia</th>
 				<th class="col-md-5">Centro Costo</th>
 				<th class="col-md-5">Caso Médico</th>
 				<th class="col-md-5">Jefe</th>
@@ -65,6 +66,7 @@
 				<td>{{ $contrato -> CONT_RODAJE }}</td>
 				<td>{{ $contrato -> tipoempleador -> TIEM_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> riesgo -> RIES_DESCRIPCION  }}</td>
+				<td>{{ $contrato -> gerencia -> GERE_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> centrocosto -> CECO_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> CONT_CASOMEDICO }}</td>
 				<td>{{ nombre_empleado($contrato->JEFE_ID) }}</td>

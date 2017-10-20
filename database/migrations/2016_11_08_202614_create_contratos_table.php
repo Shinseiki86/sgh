@@ -78,6 +78,9 @@ class CreateContratosTable extends Migration
             $table->unsignedInteger('TIEM_ID')
                 ->comment('tipo de empleador del colaborador');
 
+            $table->unsignedInteger('GERE_ID')
+                ->comment('gerencia del contrato');
+
             $table->unsignedInteger('CECO_ID')
                 ->comment('centro de costos del contrato');
 
@@ -166,7 +169,6 @@ class CreateContratosTable extends Migration
                 ->on('TEMPORALES')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
             
             $table->foreign('RIES_ID')
                 ->references('RIES_ID')
@@ -174,10 +176,15 @@ class CreateContratosTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             
-
             $table->foreign('TIEM_ID')
                 ->references('TIEM_ID')
                 ->on('TIPOSEMPLEADORES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('GERE_ID')
+                ->references('GERE_ID')
+                ->on('GERENCIAS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

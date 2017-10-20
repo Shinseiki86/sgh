@@ -30,6 +30,7 @@ class ContratosTableSeeder extends Seeder
     	$contrato->EMPL_ID = 1;
     	$contrato->RIES_ID = 1;
     	$contrato->TIEM_ID = 1;
+        $contrato->GERE_ID = 1;
     	$contrato->CECO_ID = 1;
         $contrato->CIUD_CONTRATA = 1004;
         $contrato->CIUD_SERVICIO = 1004;
@@ -54,6 +55,7 @@ class ContratosTableSeeder extends Seeder
         $contrato->EMPL_ID = 2;
         $contrato->RIES_ID = 1;
         $contrato->TIEM_ID = 2;
+        $contrato->GERE_ID = 1;
         $contrato->CECO_ID = 2;
         $contrato->CIUD_CONTRATA = 1004;
         $contrato->CIUD_SERVICIO = 1004;
@@ -78,6 +80,7 @@ class ContratosTableSeeder extends Seeder
         $contrato->TEMP_ID = 2;
         $contrato->RIES_ID = 1;
         $contrato->TIEM_ID = 1;
+        $contrato->GERE_ID = 1;
         $contrato->CECO_ID = 3;
         $contrato->CIUD_CONTRATA = 1004;
         $contrato->CIUD_SERVICIO = 1004;
@@ -102,6 +105,7 @@ class ContratosTableSeeder extends Seeder
     	$contrato->TEMP_ID = 1;
     	$contrato->RIES_ID = 1;
     	$contrato->TIEM_ID = 1;
+        $contrato->GERE_ID = 1;
     	$contrato->CECO_ID = 3;
         $contrato->CIUD_CONTRATA = 1004;
         $contrato->CIUD_SERVICIO = 1004;
