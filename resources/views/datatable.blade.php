@@ -37,7 +37,7 @@
 			pagingType: 'simple_numbers',
 			bScrollCollapse: true,
 			sScrollY: '500px',
-			rowReorder: false,
+			//lengthChange: false,
 			responsive: true,
 			language: { 
 				sProcessing:     'Procesando...', 

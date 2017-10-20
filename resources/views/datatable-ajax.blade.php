@@ -23,7 +23,7 @@
 				pagingType: 'simple_numbers',
 				lengthMenu: [[5,10,25,50,-1], [5,10,25,50,'Todos']],
 				bScrollCollapse: true,
-				sScrollY: '350px',
+				sScrollY: '500px',
 				rowReorder: false,
 				columns: [
 				@foreach($columns as $col)
