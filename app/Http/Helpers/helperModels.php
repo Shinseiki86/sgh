@@ -2,32 +2,33 @@
 
 
 	function modelo($modelo){ 	
-		switch ($modelo) {
-		    case "Ausentismo":
-		        return new SGH\Models\Ausentismo;
-		        break;
-		    case "Diagnostico":
-		        return new SGH\Models\Diagnostico;
-		        break;
-		    case "Prospecto":
-		        return new SGH\Models\Prospecto;
-		        break;
-		   	case "Contrato":
-		        return new SGH\Models\Contrato;
-		        break;
-		    case "ConceptoAusencia":
-		        return new SGH\Models\ConceptoAusencia;
-		        break;
-		    case "Entidad":
-		        return new SGH\Models\Entidad;
-		        break;
-		    case "TipoAusentismo":
-		        return new SGH\Models\TipoAusentismo;
-		        break;
-		    case "ProrrogaAusentismo":
-		        return new SGH\Models\ProrrogaAusentismo;
-		        break;
-		} 		 
+		 return class_exists($modelo) ? $modelo : '\\SGH\\Models\\'.basename($modelo);
+		// switch ($modelo) {
+		//     case "Ausentismo":
+		//         return '\\SGH\\Models\\'.basename($modelo);
+		//         break;
+		//     case "Diagnostico":
+		//         return new SGH\Models\Diagnostico;
+		//         break;
+		//     case "Prospecto":
+		//         return new SGH\Models\Prospecto;
+		//         break;
+		//    	case "Contrato":
+		//         return new SGH\Models\Contrato;
+		//         break;
+		//     case "ConceptoAusencia":
+		//         return new SGH\Models\ConceptoAusencia;
+		//         break;
+		//     case "Entidad":
+		//         return new SGH\Models\Entidad;
+		//         break;
+		//     case "TipoAusentismo":
+		//         return new SGH\Models\TipoAusentismo;
+		//         break;
+		//     case "ProrrogaAusentismo":
+		//         return new SGH\Models\ProrrogaAusentismo;
+		//         break;
+		// } 		 
 	}
 
 	function modeloClass($modelo){ 	
@@ -81,17 +82,20 @@
 		if (count($relacion)>0) {
 			return modelo($modelo)::with($relacion)->get();			
 		}
-		return modelo($modelo)->all();
+		return modelo($modelo)::all();
 	}  
 
-	function findId($modelo,$id)
+	function findId($modelo,$id,$relacion=[])
     {
-      return modelo($modelo)->find($id)->get();
+    	if (count($relacion)>0) {
+			return modelo($modelo)::with($relacion)->find($id);			
+		}
+      	return modelo($modelo)::find($id);
     }
 
     
     function findBy($modelo,$column, $value)
     {
-      return modelo($modelo)->where($column, $value)->get();
+      return modelo($modelo)::where($column, $value)->get();
     }
 ?>

@@ -62,7 +62,7 @@ class Ausentismo extends ModelWithSoftDeletes
         return $this->belongsTo(Contrato::class, $foreingKey);
     }
 
-     public function enitdad()
+     public function entidad()
     {
         $foreingKey = 'ENTI_ID';
         return $this->belongsTo(Entidad::class, $foreingKey);

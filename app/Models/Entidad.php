@@ -52,5 +52,11 @@ class Entidad extends ModelWithSoftDeletes
         return $this->belongsToMany(Contrato::class, 'CONTRATO_ENTIDAD', $foreingKey, $otherKey);
     }
 
+    public function ausentismos()
+    {
+        $foreingKey = 'AUSE_ID';
+        return $this->hasMany(Ausentismo::class, $foreingKey);
+    }
+
 
 }

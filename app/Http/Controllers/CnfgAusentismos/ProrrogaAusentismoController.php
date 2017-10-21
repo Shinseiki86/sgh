@@ -1,7 +1,7 @@
 <?php 
-
 namespace SGH\Http\Controllers\CnfgAusentismos;
 
+use Illuminate\Http\Request;
 use SGH\Http\Controllers\Controller;
 use Yajra\Datatables\Facades\Datatables;     
 
@@ -18,8 +18,8 @@ class ProrrogaAusentismoController extends Controller
 		parent::__construct();
 	}
 
-	public function buscaAuse(){
-		return $ausentismos = findAll("Ausentismo",['diagnostico','conceptoausencia','enitdad']);
+	public function buscaAuse($id){
+		return $ausentismos = findId("Ausentismo",$id,['entidad','contrato','conceptoausencia','diagnostico']);
 	}
 		
 	/**
@@ -43,8 +43,7 @@ class ProrrogaAusentismoController extends Controller
 	 */
 	public function create()
 	{
-		$prospectosActivos = repositorio("Prospecto")->prospectoConAusentismo();
-
+		$prospectosActivos = repositorio("Ausentismo")->prospectoConAusentismo();
 		//Se crea un array con los prospectos disponibles
 		$arrContratos = model_to_array($prospectosActivos, 'CONT_PROSPECTOS');
 
@@ -52,10 +51,10 @@ class ProrrogaAusentismoController extends Controller
 		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
 		
 		//Se crea un array con las Entidades Responsables
-		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
+		//$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
 
 
-		return view($this->route.'.create',compact('arrContratos','arrConceptoAusentismo','arrEntidad'));
+		return view($this->route.'.create',compact('arrContratos','arrConceptoAusentismo'));
 
 		
 	}
@@ -89,9 +88,13 @@ class ProrrogaAusentismoController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function edit(ProrrogaAusentismo $prorrogaAusentismos)
+	public function edit(ProrrogaAusentismo $prorrogaausentismos)
 	{
-		return view($this->route.'.edit',['prorrogaAusentismo'=>$prorrogaAusentismos]);
+		//Se crea un array con los conceptos de Ausentismos
+		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
+		$diagnostico= findBy('Diagnostico','DIAG_ID',$prorrogaausentismos->DIAG_ID);
+
+		return view($this->route.'.edit',['prorrogaausentismos'=>$prorrogaausentismos,'diagnostico'=>$diagnostico],compact('arrConceptoAusentismo'));
 	}
 
 	/**
