@@ -41,4 +41,5 @@ public function buscaDx(Request $request)
 	$data=Diagnostico::select('DIAG_ID','DIAG_DESCRIPCION')->where('DIAG_CODIGO',$request->CIE10)->get();
 	return response()->json($data);
 }
+http://codeseven.github.io/toastr/demo.html
 --}}

@@ -14,7 +14,7 @@ class ConceptoAusenciaRepository
      
      public function conceptosAusencias()
      {
-         $conceptoausencias = $this->modelo->join('TIPOAUSENTISMOS', 'TIPOAUSENTISMOS.TIAU_ID', '=', 'CONCEPTOAUSENCIAS.TIAU_ID')
+         $conceptoausencias = $this->modelo::join('TIPOAUSENTISMOS', 'TIPOAUSENTISMOS.TIAU_ID', '=', 'CONCEPTOAUSENCIAS.TIAU_ID')
 						->join('TIPOENTIDADES', 'TIPOENTIDADES.TIEN_ID', '=', 'CONCEPTOAUSENCIAS.TIEN_ID')
 						->select(['COAU_ID',
 							'COAU_CODIGO',
