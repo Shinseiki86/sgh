@@ -29,11 +29,11 @@ class Diagnostico extends ModelWithSoftDeletes
         ];
     }
 
-    // public function ausentismos()
-    // {
-    //     $foreingKey = 'AUSE_ID';
-    //     return $this->hasMany(Ausentismo::class, $foreingKey);
-    // }
+    public function ausentismos()
+    {
+        $foreingKey = 'AUSE_ID';
+        return $this->hasMany(Ausentismo::class, $foreingKey);
+    }
 
 
 }

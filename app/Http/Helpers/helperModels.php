@@ -27,6 +27,8 @@
 		    case "ProrrogaAusentismo":
 		        return new SGH\Models\ProrrogaAusentismo;
 		        break;
+		    default:
+		    	return false;
 		} 		 
 	}
 
@@ -78,8 +80,9 @@
 	}
 
 	function findAll($modelo,$relacion=[]){
-		if (count($relacion)>0) {
-			return modelo($modelo)::with($relacion)->get();			
+		if (count($relacion)>0 ) {
+			if($modelo = modelo($modelo))
+				return $modelo::with($relacion)->get();
 		}
 		return modelo($modelo)->all();
 	}  

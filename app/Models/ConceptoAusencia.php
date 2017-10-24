@@ -48,7 +48,7 @@ class ConceptoAusencia extends ModelWithSoftDeletes
     public function ausentismos()
     {
         $foreingKey = 'COAU_ID';
-        //return $this->hasMany(Ausentismo::class, $foreingKey);
+        return $this->hasMany(Ausentismo::class, $foreingKey);
     }
 
     public function prorrogaausentismos()

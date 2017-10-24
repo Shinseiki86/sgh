@@ -16,17 +16,17 @@
     <tbody>
     @foreach($ausentismos as $ausentismo)
         <tr>
-            <td>{!! $ausentismo->diagnostico->DIAG_DESCRIPCION !!}</td>
-			<td>{!! $ausentismo->conceptoausencia->COAU_DESCRIPCION !!}</td>
-			<td>{!! nombre_empleado($ausentismo->contrato->PROS_ID) !!}</td>
-			<td>{!! $ausentismo -> AUSE_FECHAINICIO !!}</td>
-			<td>{!! $ausentismo->AUSE_FECHAFINAL !!}</td>
-			<td>{!! $ausentismo->AUSE_DIAS !!}</td>
-			<td>{!! $ausentismo->AUSE_FECHAACCIDENTE !!}</td>
-			<td>{!! $ausentismo->enitdad->ENTI_RAZONSOCIAL !!}</td>
-			<td>{!! number_format($ausentismo->AUSE_IBC, 0) !!}</td>
-			<td>{!! number_format($ausentismo->AUSE_VALOR, 0) !!}</td>
-			<td>{!! $ausentismo->AUSE_OBSERVACIONES !!}</td>
+            <td>{{ $ausentismo->diagnostico->DIAG_DESCRIPCION }}</td>
+			<td>{{ $ausentismo->conceptoausencia->COAU_DESCRIPCION }}</td>
+			<td>{{ nombre_empleado($ausentismo->contrato->PROS_ID) }}</td>
+			<td>{{ $ausentismo -> AUSE_FECHAINICIO }}</td>
+			<td>{{ $ausentismo->AUSE_FECHAFINAL }}</td>
+			<td>{{ $ausentismo->AUSE_DIAS }}</td>
+			<td>{{ $ausentismo->AUSE_FECHAACCIDENTE }}</td>
+			<td>{{ $ausentismo->entidad->ENTI_RAZONSOCIAL }}</td>
+			<td>{{ number_format($ausentismo->AUSE_IBC, 0) }}</td>
+			<td>{{ number_format($ausentismo->AUSE_VALOR, 0) }}</td>
+			<td>{{ $ausentismo->AUSE_OBSERVACIONES }}</td>
              <td>
                 <!-- Botón Editar (edit) -->
                 <a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-ausentismos.ausentismos.edit', [ $ausentismo->AUSE_ID ] ) }}" data-tooltip="tooltip" title="Editar">
