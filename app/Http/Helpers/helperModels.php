@@ -87,14 +87,18 @@
 		return modelo($modelo)->all();
 	}  
 
-	function findId($modelo,$id)
+	function findId($modelo,$id,$relacion=[])
     {
-      return modelo($modelo)->find($id)->get();
+    	if (count($relacion)>0 ) {
+			if($modelo = modelo($modelo))
+				return $modelo::with($relacion)->find($id);
+		}
+      	return modelo($modelo)->find($id);
     }
 
     
     function findBy($modelo,$column, $value)
     {
-      return modelo($modelo)->where($column, $value)->get();
+      return modelo($modelo)->where($column, $value);
     }
 ?>
