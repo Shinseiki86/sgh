@@ -41,7 +41,7 @@ class AusentismoController extends Controller
 	public function buscaEnidadResp(Request $request)
 	{ 
 		$concepto=findId("ConceptoAusencia",$request->COAU_ID,"tipoentidad");
-	    $data=modelo("Entidad")->select('ENTI_RAZONSOCIAL','ENTI_ID')->where('TIEN_ID',$concepto->TIEN_ID)->take(100)->get();
+	    $data=modelo("Entidad")::select('ENTI_RAZONSOCIAL','ENTI_ID')->where('TIEN_ID',$concepto->TIEN_ID)->take(100)->get();
 	    return response()->json($data);
 	}
 
