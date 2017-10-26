@@ -7,7 +7,7 @@ class DiagnosticoRepository
 
     public function __construct()
     {
-    	$this->modelo =  modelo("Diagnostico");
+    	$this->modelo = modelo("Diagnostico");
     }
 
     public function buscaDx($cie10)
@@ -23,7 +23,7 @@ class DiagnosticoRepository
 
 	public function getData()
 	{
-			return $this->modelo->select(['DIAG_ID','DIAG_CODIGO','DIAG_DESCRIPCION'])->get();
+		return $this->modelo->select(['DIAG_ID','DIAG_CODIGO','DIAG_DESCRIPCION'])->get();
 	}
 
 }

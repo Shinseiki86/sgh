@@ -37,17 +37,17 @@ class AusentismoController extends Controller
 	 */
 	public function create()
 	{
-		
-		$prospectosActivos = repositorio("Prospecto")->prospectoContratoActivo();
+		$repProspecto = repositorio("Prospecto");
+		$prospectosActivos = (new $repProspecto)->prospectoContratoActivo();
 
 		//Se crea un array con los prospectos disponibles
 		$arrContratos = model_to_array($prospectosActivos, 'CONT_PROSPECTOS');
 		
 		//Se crea un array con los conceptos de Ausentismos
-		$arrConceptoAusentismo= model_to_array(modeloClass("ConceptoAusencia"), 'COAU_DESCRIPCION');
+		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
 		
 		//Se crea un array con las Entidades Responsables
-		$arrEntidad= model_to_array(modeloClass("Entidad"), 'ENTI_RAZONSOCIAL');
+		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
 		
 
 		return view($this->route.'.create',compact('arrContratos','arrConceptoAusentismo','arrEntidad'));
@@ -92,10 +92,10 @@ class AusentismoController extends Controller
 		$arrContratos = model_to_array($prospectosActivos, 'CONT_PROSPECTOS');
 
 		//Se crea un array con los conceptos de Ausentismos
-		$arrConceptoAusentismo= model_to_array(modeloClass("ConceptoAusencia"), 'COAU_DESCRIPCION');
+		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
 		
 		//Se crea un array con las Entidades Responsables
-		$arrEntidad= model_to_array(modeloClass("Entidad"), 'ENTI_RAZONSOCIAL');
+		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
 		
 		$diagnostico= findBy('Diagnostico','DIAG_ID',$ausentismos->DIAG_ID);
 

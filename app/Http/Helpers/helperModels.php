@@ -1,100 +1,75 @@
 <?php 
 
-
+if (! function_exists('modelo')) {
+    /**
+     * info
+     * 
+     *
+     * @param  type  $obj
+     * @return 
+     */
 	function modelo($modelo){ 	
-		switch ($modelo) {
-		    case "Ausentismo":
-		        return new SGH\Models\Ausentismo;
-		        break;
-		    case "Diagnostico":
-		        return new SGH\Models\Diagnostico;
-		        break;
-		    case "Prospecto":
-		        return new SGH\Models\Prospecto;
-		        break;
-		   	case "Contrato":
-		        return new SGH\Models\Contrato;
-		        break;
-		    case "ConceptoAusencia":
-		        return new SGH\Models\ConceptoAusencia;
-		        break;
-		    case "Entidad":
-		        return new SGH\Models\Entidad;
-		        break;
-		    case "TipoAusentismo":
-		        return new SGH\Models\TipoAusentismo;
-		        break;
-		    case "ProrrogaAusentismo":
-		        return new SGH\Models\ProrrogaAusentismo;
-		        break;
-		    default:
-		    	return false;
-		} 		 
+		$class = class_exists($modelo) ? $modelo : '\\SGH\\Models\\'.basename($modelo);
+		return (new $class);
 	}
+}
 
-	function modeloClass($modelo){ 	
-		switch ($modelo) {
-		    case "Ausentismo":
-		        return SGH\Models\Ausentismo::class;
-		        break;
-		    case "Diagnostico":
-		        return SGH\Models\Diagnostico::class;
-		        break;
-		    case "Prospecto":
-		        return SGH\Models\Prospecto::class;
-		        break;
-		   	case "Contrato":
-		        return SGH\Models\Contrato::class;
-		        break;
-		    case "ConceptoAusencia":
-		        return SGH\Models\ConceptoAusencia::class;
-		        break;
-		    case "Entidad":
-		        return SGH\Models\Entidad::class;
-		        break;
-		} 		 
-	}
 
+if (! function_exists('repositorio')) {
+    /**
+     * info
+     * 
+     *
+     * @param  type  $obj
+     * @return 
+     */
 	function repositorio($modelo){ 
-		$repositori=$modelo."Repository"	;
-		switch ($repositori) {
-		    case "AusentismoRepository":
-		        return new SGH\Repositories\AusentismoRepository;
-		        break;
-		    case "DiagnosticoRepository":
-		        return new SGH\Repositories\DiagnosticoRepository;
-		        break;
-		    case "ProspectoRepository":
-		        return new SGH\Repositories\ProspectoRepository;
-		        break;
-		   	case "ContratoRepository":
-		        return new SGH\Repositories\ContratoRepository;
-		        break;
-		    case "ConceptoAusenciaRepository":
-		        return new SGH\Repositories\ConceptoAusenciaRepository;
-		        break;
-		    case "EntidadRepository":
-		        return new SGH\Repositories\EntidadRepository;
-		        break;
-		} 		 
+		$repositori = $modelo."Repository";
+		$class = class_exists($repositori) ? $repositori : '\\SGH\\Repositories\\'.$repositori;
+		return (new $class);
 	}
+}
 
+if (! function_exists('findAll')) {
+    /**
+     * info
+     * 
+     *
+     * @param  type  $obj
+     * @return 
+     */
 	function findAll($modelo,$relacion=[]){
-		if (count($relacion)>0 ) {
-			if($modelo = modelo($modelo))
-				return $modelo::with($relacion)->get();
-		}
-		return modelo($modelo)->all();
-	}  
+		$modelo = modelo($modelo);
+		if (count($relacion)>0 )
+			return $modelo::with($relacion)->get();
+		return $modelo::all();
+	}
+}
 
+if (! function_exists('findId')) {
+    /**
+     * info
+     * 
+     *
+     * @param  type  $obj
+     * @return 
+     */
 	function findId($modelo,$id)
     {
       return modelo($modelo)->find($id)->get();
     }
-
+}
     
+if (! function_exists('findBy')) {
+    /**
+     * info
+     * 
+     *
+     * @param  type  $obj
+     * @return 
+     */
     function findBy($modelo,$column, $value)
     {
       return modelo($modelo)->where($column, $value)->get();
     }
-?>
+}
