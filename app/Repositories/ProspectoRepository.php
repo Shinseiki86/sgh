@@ -23,7 +23,7 @@ class ProspectoRepository
 
 	public function prospectoContratoActivo()
 	{
-		return modelo("Contrato")::join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+		return modelo("Contrato")->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
 					->select(['CONT_ID', $this->cont_prospectos()])
 					->where([['CONTRATOS.ESCO_ID', '=', '1'],
 					])->get();		

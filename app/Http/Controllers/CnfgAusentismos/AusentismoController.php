@@ -28,22 +28,7 @@ class AusentismoController extends Controller
 		$ausentismos = findAll("Ausentismo");
 		return view($this->route.'.index', compact('ausentismos'));
 		
-	}
-
-	public function buscaEnidadRespNO(Request $request)
-	{
-		dd($request->TIEN_ID);
-		$concepto=findId("ConceptoAusencia",$request->COAU_ID,"tipoentidad");
-		$entidades=findBy("Entidad","TIEN_ID",$request->TIEN_ID);
-
-	}
-
-	public function buscaEnidadResp(Request $request)
-	{ 
-		$concepto=findId("ConceptoAusencia",$request->COAU_ID,"tipoentidad");
-	    $data=modelo("Entidad")::select('ENTI_RAZONSOCIAL','ENTI_ID')->where('TIEN_ID',$concepto->TIEN_ID)->take(100)->get();
-	    return response()->json($data);
-	}
+	}	
 
 	/**
 	 * Show the form for creating a new Ausentismo.
