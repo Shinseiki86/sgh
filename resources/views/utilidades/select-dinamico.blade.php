@@ -17,6 +17,8 @@
 					success:function(data){;
 						if (data.length==0) {
 							toastr.error('No se Encontro ningun Resultado','No Hay Datos',{"hideMethod": "fadeOut","timeOut": "2000","progressBar": true,"closeButton": true,"positionClass": "toast-top-left",});
+							op='<option value="0" selected disabled>No se encontro ningun resultado</option>';
+							$('#{{$selectHijo}}').append(op);
 						} else {
 							op+='<option value="0" selected disabled>{{isset($prepend)?$prepend:''}}</option>';
 							for(var i=0;i<data.length;i++){
@@ -36,9 +38,7 @@
 @endpush
 
 {{-- Ejemplo de como incluirlo
- @section('selectDinamico')
 	@include('select-dinamico', ['url'=>'buscaCiudad', 'selectPadre'=>'departamentos', 'selectHijo'=>'ciudades', 'idBusqueda'=>'CIUD_ID', 'nombreBusqueda'=>'CIUD_NOMBRE', 'prepend'=>'Seleccione una Ciudad'])
-@endsection 
 
 public function llenaSelectPadre()
 {

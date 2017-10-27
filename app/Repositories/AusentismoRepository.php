@@ -17,7 +17,8 @@ class AusentismoRepository
     {
     return modelo("Contrato")->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
     			->join('AUSENTISMOS','AUSENTISMOS.CONT_ID','=','CONTRATOS.CONT_ID')
-    			->select(['CONTRATOS.CONT_ID', repositorio("Prospecto")->cont_prospectos()])
+    			->select(['CONTRATOS.CONT_ID', repositorio("Prospecto")->cont_prospectos(['PROS_CEDULA',
+               'CONT_FECHAINGRESO'])])
     			->get();
     }
 

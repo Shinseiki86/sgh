@@ -2,6 +2,7 @@
 @include('datepicker')
 @include('utilidades.autocomplete',['first'=>'DX_DESCRIPCION','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
 @include('utilidades.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCION','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
+@include('utilidades.select-dinamico', ['url'=>'cnfg-ausentismos/buscaEntRes', 'selectPadre'=>'COAU_ID', 'selectHijo'=>'ENTI_ID', 'idBusqueda'=>'ENTI_ID', 'nombreBusqueda'=>'ENTI_RAZONSOCIAL', 'prepend'=>'Seleccione una Entidad'])
 <div class='col-md-8 col-md-offset-2'>
 
 	<div class="row">

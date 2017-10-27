@@ -10,15 +10,18 @@ class ProspectoRepository
 	    $this->modelo =  modelo("Prospecto");
 	}
 
-	public function cont_prospectos(){
-		return expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
-				'PROS_CEDULA',
-				'CONT_FECHAINGRESO',
-			], 'CONT_PROSPECTOS');
+	public function cont_prospectos($complementos=null){
+		$datos=array('PROS_PRIMERNOMBRE',
+					'PROS_SEGUNDONOMBRE',
+					'PROS_PRIMERAPELLIDO',
+					'PROS_SEGUNDOAPELLIDO');
+		if (isset($complementos))
+		{
+			for ($i=0; $i < count($complementos); $i++) { 
+				$datos[$i+4]=$complementos[$i];
+			}
+		}
+		return expression_concat($datos, 'CONT_PROSPECTOS');
 	}
 
 	public function prospectoContratoActivo()

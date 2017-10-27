@@ -38,9 +38,9 @@ if (! function_exists('findAll')) {
      * @param  type  $obj
      * @return 
      */
-	function findAll($modelo,$relacion=[]){
+	function findAll($modelo,$relacion=null){
 		$modelo = modelo($modelo);
-		if (count($relacion)>0 )
+        if (isset($relacion))
 			return $modelo::with($relacion)->get();
 		return $modelo::all();
 	}
@@ -54,9 +54,12 @@ if (! function_exists('findId')) {
      * @param  type  $obj
      * @return 
      */
-	function findId($modelo,$id)
+	function findId($modelo,$id,$relacion=null)
     {
-      return modelo($modelo)->find($id)->get();
+		//$modelo = modelo($modelo);
+        if (isset($relacion))
+            return modelo($modelo)->with($relacion)->find($id);
+        return modelo($modelo)->find($id);
     }
 }
     
@@ -70,6 +73,6 @@ if (! function_exists('findBy')) {
      */
     function findBy($modelo,$column, $value)
     {
-      return modelo($modelo)->where($column, $value)->get();
+      return modelo($modelo)->where($column, $value);
     }
 }
