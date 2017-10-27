@@ -67,10 +67,13 @@ if (! function_exists('model_to_array')) {
         }
 
         if($class instanceof Illuminate\Database\Eloquent\Collection){
-            //Si es un Modelo, no se aplican las clausulas where.
-            $model = $class;
-            $primaryKey = isset($primaryKey) ? $primaryKey : $model->first()->getKeyName();
-
+            if($class->isEmpty()){
+                return [];
+            } else {
+                //Si es un Modelo, no se aplican las clausulas where.
+                $model = $class;
+                $primaryKey = isset($primaryKey) ? $primaryKey : $model->first()->getKeyName();
+            }
         } else {
 
             $class = class_exists($class) ? $class : '\\SGH\\Models\\'.basename($class);
