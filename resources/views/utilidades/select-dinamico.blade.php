@@ -24,7 +24,6 @@
 							for(var i=0;i<data.length;i++){
 							op+='<option value="'+data[i].{{$idBusqueda}}+'">'+data[i].{{$nombreBusqueda}}+'</option>';
 						   }
-						   $('#{{$selectHijo}}').html(" ");
 						   $('#{{$selectHijo}}').append(op);
 						}
 					},
