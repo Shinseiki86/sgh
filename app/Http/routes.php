@@ -69,6 +69,8 @@ Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], fun
 	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
 	Route::get('getContratos', 'ContratoController@getData');
 	Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');
+	Route::get('/buscaGerencia','ContratoController@buscaGerencia');
+	Route::get('/buscaCentroCosto','ContratoController@buscaCentroCosto');
 
 	Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {
 		//upload tablas de TNL

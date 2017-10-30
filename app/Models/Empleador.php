@@ -73,8 +73,8 @@ class Empleador extends ModelWithSoftDeletes
 	 */
 	public function gerencias()
 	{
-		$foreingKey = 'GERE_ID';
-		$otherKey   = 'EMPL_ID';
+		$foreingKey = 'EMPL_ID';
+		$otherKey   = 'GERE_ID';
 		return $this->belongsToMany(Gerencia::class, 'EMPLEADORES_GERENCIAS', $foreingKey,  $otherKey);
 	}
 
