@@ -1,14 +1,9 @@
 @include('datepicker')
 @include('chosen')
-<<<<<<< HEAD
-@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaGerencia', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GERE_ID', 'idBusqueda'=>'EMPL_ID', 'nombreBusqueda'=>'GERE_DESCRIPCION', 'prepend'=>'Seleccione una Gerencia'])
 
-@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaCentroCosto', 'selectPadre'=>'GERE_ID', 'selectHijo'=>'CECO_ID', 'idBusqueda'=>'GERE_ID', 'nombreBusqueda'=>'CECO_DESCRIPCION', 'prepend'=>'Seleccione un Centro de Costo'])
-
-=======
 @include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaGerencia', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GERE_ID', 'idBusqueda'=>'GERE_ID', 'nombreBusqueda'=>'GERE_DESCRIPCION', 'prepend'=>'Seleccione una Gerencia'])
 @include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaCentroCosto', 'selectPadre'=>'GERE_ID', 'selectHijo'=>'CECO_ID', 'idBusqueda'=>'CECO_ID', 'nombreBusqueda'=>'CECO_DESCRIPCION', 'prepend'=>'Seleccione un Centro de Costo'])
->>>>>>> 975b6f443114d7c2487521fb0f3e282579ff173c
+
 <div class='col-md-8 col-md-offset-2'>
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])
 

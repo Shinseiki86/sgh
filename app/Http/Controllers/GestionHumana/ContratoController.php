@@ -385,17 +385,8 @@ class ContratoController extends Controller
 	}
 
 	public function buscaCentroCosto(){
-<<<<<<< HEAD
 		$gerencia = findId("Gerencia",request()->get('GERE_ID'));
 		
-=======
-		$gerencia = findId("Gerencia",request()->get('GERE_ID'));		/*
-		 $data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.GERE_ID')
-		 ->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
-		 ->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
-		 ->where('GERENCIAS.GERE_ID', $gerencia->GERE_ID)->take(100)->get();
-		 */
->>>>>>> 975b6f443114d7c2487521fb0f3e282579ff173c
 		 $data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.CECO_ID')
 		 ->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
 		 ->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
