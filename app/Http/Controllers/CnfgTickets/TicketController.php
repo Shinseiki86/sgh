@@ -3,6 +3,8 @@ namespace SGH\Http\Controllers\CnfgTickets;
 
 use SGH\Http\Controllers\Controller;
 use Yajra\Datatables\Facades\Datatables;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 use SGH\Jobs\SendEmailNewTicket;
 use SGH\Jobs\SendEmailAuthorizedTicket;
@@ -26,6 +28,23 @@ class TicketController extends Controller
 	public function __construct()
 	{
 		parent::__construct();
+	}
+
+	protected function validator($data, $GERE_ID = 0)
+	{
+		return Validator::make($data, [
+			'TICK_DESCRIPCION' => ['required','max:3000'],
+			'CONT_ID' => ['required'],
+			'ESTI_ID' => ['required'],
+			'ESAP_ID' => ['required'],
+			'PRIO_ID' => ['required'],
+			'GRUP_ID' => ['required'],
+			'TURN_ID' => ['required'],
+			'CATE_ID' => ['required'],
+			'TIIN_ID' => ['required'],
+			'TICK_FECHAEVENTO' => ['required'],
+			'TICK_OBSERVACIONES' => ['max:3000'],
+		]);
 	}
 
 	/**
@@ -136,7 +155,9 @@ class TicketController extends Controller
 
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
 
-		return view($this->route.'.create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
+		return view($this->route.'.create', compact('arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos','arrEmpleadores'));
 	}
 
 	/**
@@ -243,8 +264,10 @@ class TicketController extends Controller
 
 		$arrProcesos = model_to_array(Proceso::class, 'PROC_DESCRIPCION');
 
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('ticket','arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos'));
+		return view($this->route.'.edit', compact('ticket','arrContratos','arrEstados','arrPrioridad','arrCategorias','arrTiposIncidentes','arrEstadosAprobacion','arrGrupos','arrTurnos','arrEmpleadores'));
 	}
 
 

@@ -85,10 +85,7 @@ class Prospecto extends ModelWithSoftDeletes
 		$model = new static;
         $prospecto = $model->activos()->where('PROS_CEDULA', $PROS_CEDULA)->first();
 
-        //dd($prospecto->contratos);
-
-
-        return $prosJefe;
+        return $prospecto;
     }
 
 }

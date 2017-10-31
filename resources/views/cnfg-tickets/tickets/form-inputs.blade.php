@@ -2,6 +2,8 @@
 @include('chosen')
 <div class='col-md-8 col-md-offset-2'>
 
+@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'EMPL_ID', 'label'=>'Empleador', 'data'=>$arrEmpleadores])
+
 @include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'TICK_FECHAEVENTO', 'label'=>'Fecha del Evento' ])
 
 {{-- DISABLED EN CREATE, SELECT DEFAULT 1 --}}

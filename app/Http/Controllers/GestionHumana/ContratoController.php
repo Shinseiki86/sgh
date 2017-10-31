@@ -385,21 +385,13 @@ class ContratoController extends Controller
 	    return response()->json($data);
 	}
 
-	public function buscaCentroCosto(Request $request){
-
-		dd($request->GERE_ID);
-		//$gerencia = findId("Gerencia",request()->get('GERE_ID'));
-		//$gerencia = findId("Gerencia",$request->GERE_ID);
-		/*
-		 $data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.GERE_ID')
-		 ->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
-		 ->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
-		 ->where('GERENCIAS.GERE_ID', $gerencia->GERE_ID)->take(100)->get();
-		 */
+	public function buscaCentroCosto(){
+		$gerencia = findId("Gerencia",request()->get('GERE_ID'));
+		
 		 $data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.CECO_ID')
 		 ->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
 		 ->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
-		 ->where('GERENCIAS.GERE_ID', 1)->take(100)->get();
+		 ->where('GERENCIAS.GERE_ID', $gerencia->GERE_ID)->take(100)->get();
 	    return response()->json($data);
 	}	
 	

@@ -96,6 +96,215 @@ class GruposTableSeeder extends Seeder
 
         $empleadores = array(3);
         $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS CALI';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(3,4,5);
+        $grupo->empleadores()->sync($empleadores);
+
+        //===================================SERAMBIENTAL==============================//
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE GIRARDOT';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE RICAURTE';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE ESPINAL';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE MELGAR';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE TOCAIMA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE ARBELAEZ';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE FLANDES';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE COELLO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE GUAMO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE FUSAGASUGA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE AGUA DE DIOS';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1,7); //TAMBIEN PARA CENCOASEO
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE SALDANA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE NILO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'CORFERIAS BOGOTA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ZIPAQUIRA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ESTACION DE TRASFERENCIA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'BRL ZIPAQUIRA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'RELLENO UBATE';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        //===================================CENTRAL COLOMBIANA DE ASEO==============================//
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'RELLENO SANITARIO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(7);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE CHIQUINQUIRA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(7);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'RELLENO CHIQUINQUIRA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(7);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE TOCAIMA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(7);
+        $grupo->empleadores()->sync($empleadores);
     	
 
     }
