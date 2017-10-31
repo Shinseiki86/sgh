@@ -13,8 +13,6 @@ use SGH\Models\Riesgo;
 use SGH\Models\Empleador;
 use SGH\Models\TipoEntidad;
 
-use Illuminate\Http\Request;
-
 class ContratoController extends Controller
 {
 	protected $route = 'gestion-humana.contratos';
@@ -382,15 +380,12 @@ class ContratoController extends Controller
 		 ->join('EMPLEADORES_GERENCIAS','GERENCIAS.GERE_ID','=','EMPLEADORES_GERENCIAS.GERE_ID')
 		 ->join('EMPLEADORES','EMPLEADORES_GERENCIAS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
 		 ->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->take(100)->get();
+		 //dd($data);
 	    return response()->json($data);
 	}
 
-	public function buscaCentroCosto(Request $request){
-
-		dd($request->GERE_ID);
-		//$gerencia = findId("Gerencia",request()->get('GERE_ID'));
-		//$gerencia = findId("Gerencia",$request->GERE_ID);
-		/*
+	public function buscaCentroCosto(){
+		$gerencia = findId("Gerencia",request()->get('GERE_ID'));		/*
 		 $data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.GERE_ID')
 		 ->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
 		 ->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
@@ -399,7 +394,7 @@ class ContratoController extends Controller
 		 $data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.CECO_ID')
 		 ->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
 		 ->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
-		 ->where('GERENCIAS.GERE_ID', 1)->take(100)->get();
+		 ->where('GERENCIAS.GERE_ID', $gerencia->GERE_ID)->take(100)->get();
 	    return response()->json($data);
 	}	
 	
