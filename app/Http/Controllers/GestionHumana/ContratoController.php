@@ -379,7 +379,7 @@ class ContratoController extends Controller
 		 $data=modelo("Gerencia")->select('GERENCIAS.GERE_DESCRIPCION','GERENCIAS.GERE_ID')
 		 ->join('EMPLEADORES_GERENCIAS','GERENCIAS.GERE_ID','=','EMPLEADORES_GERENCIAS.GERE_ID')
 		 ->join('EMPLEADORES','EMPLEADORES_GERENCIAS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
-		 ->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->take(100)->get();
+		 ->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
 		 //dd($data);
 	    return response()->json($data);
 	}
@@ -390,7 +390,27 @@ class ContratoController extends Controller
 		 $data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.CECO_ID')
 		 ->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
 		 ->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
-		 ->where('GERENCIAS.GERE_ID', $gerencia->GERE_ID)->take(100)->get();
+		 ->where('GERENCIAS.GERE_ID', $gerencia->GERE_ID)->get();
+	    return response()->json($data);
+	}	
+
+	public function buscaGrupo(){
+		$empleador = findId("Empleador",request()->get('EMPL_ID'));
+		
+		 $data=modelo("Grupo")->select('GRUPOS.GRUP_DESCRIPCION','GRUPOS.GRUP_ID')
+		 ->join('EMPLEADORES_GRUPOS','GRUPOS.GRUP_ID','=','EMPLEADORES_GRUPOS.GRUP_ID')
+		 ->join('EMPLEADORES','EMPLEADORES_GRUPOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
+		 ->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
+	    return response()->json($data);
+	}	
+
+	public function buscaTurno(){
+		$empleador = findId("Empleador",request()->get('EMPL_ID'));
+		
+		 $data=modelo("Turno")->select('TURNOS.TURN_DESCRIPCION','TURNOS.TURN_ID')
+		 ->join('EMPLEADORES_TURNOS','TURNOS.TURN_ID','=','EMPLEADORES_TURNOS.TURN_ID')
+		 ->join('EMPLEADORES','EMPLEADORES_TURNOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
+		 ->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
 	    return response()->json($data);
 	}	
 	

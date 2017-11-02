@@ -1,18 +1,24 @@
 @include('datepicker')
 @include('chosen')
+@include('utilidades.validacion-contratos')
 
 @include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaGerencia', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GERE_ID', 'idBusqueda'=>'GERE_ID', 'nombreBusqueda'=>'GERE_DESCRIPCION', 'prepend'=>'Seleccione una Gerencia'])
+
+@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaGrupo', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GRUP_ID', 'idBusqueda'=>'GRUP_ID', 'nombreBusqueda'=>'GRUP_DESCRIPCION', 'prepend'=>'Seleccione un Grupo'])
+
+@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaTurno', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'TURN_ID', 'idBusqueda'=>'TURN_ID', 'nombreBusqueda'=>'TURN_DESCRIPCION', 'prepend'=>'Seleccione un Turno'])
+
 @include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaCentroCosto', 'selectPadre'=>'GERE_ID', 'selectHijo'=>'CECO_ID', 'idBusqueda'=>'CECO_ID', 'nombreBusqueda'=>'CECO_DESCRIPCION', 'prepend'=>'Seleccione un Centro de Costo'])
 
 <div class='col-md-8 col-md-offset-2'>
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])
-
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'EMPL_ID', 'label'=>'Empleador', 'data'=>$arrEmpleadores])
 
-@include('widgets.forms.input', ['type'=>'select', 'name'=>'TEMP_ID', 'label'=>'Temporal', 'data'=>$arrTemporales])
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'TIEM_ID', 'label'=>'Tipo de empleador', 'data'=>$arrTiposempleadores])
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'GERE_ID', 'label'=>'Gerencia', 'data'=>$arrGerencias])
+
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'TEMP_ID', 'label'=>'Temporal', 'data'=>$arrTemporales])
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'CECO_ID', 'label'=>'Centro de costo', 'data'=>$arrCentroscostos])
 

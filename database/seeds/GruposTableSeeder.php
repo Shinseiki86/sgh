@@ -97,15 +97,6 @@ class GruposTableSeeder extends Seeder
         $empleadores = array(3);
         $grupo->empleadores()->sync($empleadores);
 
-        $grupo = new Grupo;
-        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS CALI';
-        $grupo->GRUP_OBSERVACIONES =  NULL;
-        $grupo->GRUP_CREADOPOR =  'admin';
-        $grupo->save();
-
-        $empleadores = array(3,4,5);
-        $grupo->empleadores()->sync($empleadores);
-
         //===================================SERAMBIENTAL==============================//
         $grupo = new Grupo;
         $grupo->GRUP_DESCRIPCION = 'MUNICIPIO DE GIRARDOT';
@@ -305,7 +296,135 @@ class GruposTableSeeder extends Seeder
 
         $empleadores = array(7);
         $grupo->empleadores()->sync($empleadores);
+
+        //=================================PROMOAMBIENTAL CARIBE=========================//
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'BOCAGRANDE';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(2);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'CENTRO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(2);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'CANAPOTE';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(2);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ALCIBIA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(2);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ALPES';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(2);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'POZON';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(2);
+        $grupo->empleadores()->sync($empleadores);
+
     	
+        //===================================ADMINISTRATIVOS==============================//
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS PROMOCALI';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(4);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS PROMOVALLE';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(3);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS SURASEO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+
+        $empleadores = array(5);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS SERAMBIENTAL';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+        
+        $empleadores = array(1);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS CENCOASEO';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+        
+        $empleadores = array(7);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS PACARIBE';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+        
+        $empleadores = array(2);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS PROMOAMBIENTAL';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+        
+        $empleadores = array(6);
+        $grupo->empleadores()->sync($empleadores);
+
+        $grupo = new Grupo;
+        $grupo->GRUP_DESCRIPCION = 'ADMINISTRATIVOS METALMECANICA';
+        $grupo->GRUP_OBSERVACIONES =  NULL;
+        $grupo->GRUP_CREADOPOR =  'admin';
+        $grupo->save();
+        
+        $empleadores = array(8);
+        $grupo->empleadores()->sync($empleadores);
 
     }
 }

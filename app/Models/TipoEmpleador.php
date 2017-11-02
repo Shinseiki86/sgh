@@ -17,6 +17,10 @@ class TipoEmpleador extends ModelWithSoftDeletes
 	const DELETED_AT = 'TIEM_FECHAELIMINADO';
 	protected $dates = ['TIEM_FECHACREADO', 'TIEM_FECHAMODIFICADO', 'TIEM_FECHAELIMINADO'];
 
+	//Constantes para referenciar los tipos de empleador
+	const  DIRECTO	 = 1;
+	const  TEMPORAL   = 2;
+
 	protected $fillable = [
 		'TIEM_DESCRIPCION',
 		'TIEM_OBSERVACIONES',
