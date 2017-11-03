@@ -163,7 +163,7 @@ class ContratoController extends Controller
 		if($this->validarPlanta($empleador, $gerencia, $cargo)){
 			parent::storeModel(['entidades'=>$entidades_id]);
 		}else{
-			flash_modal('No se puede crear contrato: La planta autorizada se encuentra completa', 'info' );
+			flash_alert('No se puede crear contrato: La planta autorizada se encuentra completa o no se ha definido para el cargo', 'danger' );
 			return redirect()->route($this->route.'.create')->send();
 		}				
 		
@@ -282,7 +282,7 @@ class ContratoController extends Controller
 		if($this->validarPlanta($empleador, $gerencia, $cargo)){
 			parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);	
 		}else{
-			flash_modal('No se puede crear contrato: La planta autorizada se encuentra completa', 'info' );
+			flash_alert('No se puede crear contrato: La planta autorizada se encuentra completa', 'info' );
 			return redirect()->route($this->route.'.edit')->send();
 		}				
 		

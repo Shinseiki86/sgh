@@ -225,7 +225,7 @@ class CargosTableSeeder extends Seeder
       $cargo->CARG_CREADOPOR = 'admin';
       $cargo->save();
       $cargo = new Cargo;
-      $cargo->CARG_DESCRIPCION = 'COORDINADOR DE COMPRAS Y ALMACEN';
+      $cargo->CARG_DESCRIPCION = 'COORDINADOR DE ALMACEN';
       $cargo->CARG_OBSERVACIONES = NULL;
       $cargo->CNOS_ID = 503;
       $cargo->CARG_CREADOPOR = 'admin';
@@ -615,7 +615,7 @@ class CargosTableSeeder extends Seeder
       $cargo->CARG_CREADOPOR = 'admin';
       $cargo->save();
       $cargo = new Cargo;
-      $cargo->CARG_DESCRIPCION = 'ASESOR JURIDICO';
+      $cargo->CARG_DESCRIPCION = 'ASESOR JURIDICO (OFICINA BOGOTA)';
       $cargo->CARG_OBSERVACIONES = NULL;
       $cargo->CNOS_ID = 107;
       $cargo->CARG_CREADOPOR = 'admin';
@@ -909,7 +909,7 @@ class CargosTableSeeder extends Seeder
       $cargo->CARG_CREADOPOR = 'admin';
       $cargo->save();
       $cargo = new Cargo;
-      $cargo->CARG_DESCRIPCION = 'MECANICO HIDRAHULICO';
+      $cargo->CARG_DESCRIPCION = 'MECANICO HIDRAULICO';
       $cargo->CARG_OBSERVACIONES = NULL;
       $cargo->CNOS_ID = 485;
       $cargo->CARG_CREADOPOR = 'admin';
@@ -939,7 +939,7 @@ class CargosTableSeeder extends Seeder
       $cargo->CARG_CREADOPOR = 'admin';
       $cargo->save();
       $cargo = new Cargo;
-      $cargo->CARG_DESCRIPCION = 'TESORERA CENTRAL';
+      $cargo->CARG_DESCRIPCION = 'TESORERA CENTRAL (BOGOTA)';
       $cargo->CARG_OBSERVACIONES = NULL;
       $cargo->CNOS_ID = 115;
       $cargo->CARG_CREADOPOR = 'admin';
@@ -956,6 +956,97 @@ class CargosTableSeeder extends Seeder
       $cargo->CNOS_ID = 485;
       $cargo->CARG_CREADOPOR = 'admin';
       $cargo->save();
+
+      $cargo->CARG_DESCRIPCION = 'ASISTENTE ADMINISTRATIVA';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'OPERARIO DE RESPEL';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 423;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR DE CUADRANTE LIMPIO';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 423;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR DE CONTROL DE LLANTAS';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 423;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'JEFE DE PLANTA';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 503;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ANALISTA DE SEGURIDAD Y SALUD EN EL TRABAJO';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 503;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'COORDINADOR DE COMPRAS';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 503;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ASISTENTE CONTABLE (BOGOTA)';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ASISTENTE DE GERENCIA (BOGOTA)';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR COMERCIAL';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 209;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ANALISTA DE RELACIONES LABORALES';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 503;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ANALISTA DE SELECCIÓN';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 503;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'CONDUCTOR (BOGOTA)';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 466;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
 
   }
 }

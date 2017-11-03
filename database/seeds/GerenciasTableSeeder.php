@@ -123,6 +123,15 @@ class GerenciasTableSeeder extends Seeder
         $empleadores = array(2,8,6);
         $gerencia->empleadores()->sync($empleadores);
 
+        $gerencia = new Gerencia;
+        $gerencia->GERE_DESCRIPCION = 'GERENCIA SERVICIO ESPECIAL DE ASEO (RESIDUOS HOSPITALARIOS)';
+        $gerencia->GERE_OBSERVACIONES =  NULL;
+        $gerencia->GERE_CREADOPOR =  'admin';
+        $gerencia->save(); 
+
+        $empleadores = array(4);
+        $gerencia->empleadores()->sync($empleadores);
+
     }
 
 }

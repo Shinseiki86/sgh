@@ -20,6 +20,7 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
+				<th class="col-md-1">Codigo</th>
 				<th class="col-md-4">Descripción</th>
 				<th class="col-md-4">Clasificación</th>
 				<th class="col-md-6">Observaciones</th>
@@ -31,6 +32,7 @@
 		<tbody>
 			@foreach($cargos as $cargo)
 			<tr>
+				<td>{{ $cargo -> CARG_ID }}</td>
 				<td>{{ $cargo -> CARG_DESCRIPCION }}</td>
 				<td>{{ $cargo -> cno -> CNOS_DESCRIPCION }}</td>
 				<td>{{ $cargo -> CARG_OBSERVACIONES }}</td>
