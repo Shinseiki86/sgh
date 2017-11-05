@@ -56,18 +56,18 @@ class SendEmailAuthorizedTicket extends Job implements ShouldQueue
 
                 $responsableTemp = $ticket->contrato->temporal;
                 //Si es temporal, entonces se envía correo al responsable de la temporal.
-                if(isset($responsableTemp))
+                if(isset($responsableTemp) and isset($responsableTemp->prospecto->PROS_CORREO))
                     $to[] = $responsableTemp->prospecto->PROS_CORREO;
 
                 $responsableGH = $ticket->contrato->empleador;
-                if(isset($responsableGH)){
+                if(isset($responsableGH) and isset($responsableGH->EMPL_CORREO)){
                     //Si es temporal, entonces se envía copia al responsable del empleador.
                     if(isset($responsableTemp))
                         $cc[] = $responsableGH->EMPL_CORREO;
                     else
                         $to[] = $responsableGH->EMPL_CORREO;
                 }
-
+                
                 $message->to($to);
                 $message->cc($cc);
             });
