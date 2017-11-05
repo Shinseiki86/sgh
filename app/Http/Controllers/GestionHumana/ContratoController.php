@@ -283,7 +283,7 @@ class ContratoController extends Controller
 			parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);	
 		}else{
 			flash_alert('No se puede crear contrato: La planta autorizada se encuentra completa', 'info' );
-			return redirect()->route($this->route.'.edit')->send();
+			return redirect()->back();
 		}				
 		
 
