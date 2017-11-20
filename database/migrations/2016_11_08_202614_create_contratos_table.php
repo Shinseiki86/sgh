@@ -29,6 +29,9 @@ class CreateContratosTable extends Migration
             $table->unsignedInteger('JEFE_ID')->nullable()
                 ->comment('referencia al prospecto que es jefe del empleado');
 
+            $table->unsignedInteger('REMP_ID')->nullable()
+                ->comment('referencia al prospecto que es remplazado por el empleado');
+
             $table->string('CONT_CASOMEDICO', 2)->nullable();
 
             $table->unsignedInteger('CARG_ID')
@@ -59,6 +62,9 @@ class CreateContratosTable extends Migration
 
             $table->unsignedInteger('MORE_ID')->nullable()
                 ->comment('motivo de retiro del contrato');
+
+            $table->string('CONT_MOREOBSERVACIONES', 300)->nullable()
+                ->comment('observaciones del tipo de contrato');
 
             $table->unsignedInteger('TICO_ID')
                 ->comment('tipo de contrato del colaborador'); // temporal, directo
@@ -123,6 +129,12 @@ class CreateContratosTable extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('JEFE_ID')
+                ->references('PROS_ID')
+                ->on('PROSPECTOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('REMP_ID')
                 ->references('PROS_ID')
                 ->on('PROSPECTOS')
                 ->onDelete('cascade')

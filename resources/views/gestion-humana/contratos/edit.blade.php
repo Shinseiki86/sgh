@@ -4,8 +4,12 @@
 @section('section')
 {{ Form::model($contrato, ['action' => ['GestionHumana\ContratoController@update', $contrato->CONT_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
+
+
+			@rinclude('form-inputs')
+
 		<!-- Elementos del formulario -->
-		@rinclude('form-inputs')
+		
 
 		<!-- Botones -->
 		@include('widgets.forms.buttons', ['url' => 'gestion-humana/contratos'])

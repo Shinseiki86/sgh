@@ -51,6 +51,8 @@
 @include('widgets.forms.input', ['type'=>'select', 'column'=>10, 'name'=>'JEFE_ID', 'label'=>'Jefe Inmediato', 'data'=>$arrJefes])
 @include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'CONT_CASOMEDICO', 'label'=>'¿R.M?', 'data'=>['NO' => 'NO', 'SI' => 'SI']])
 
+@include('widgets.forms.input', ['type'=>'select', 'column'=>12, 'name'=>'REMP_ID', 'label'=>'Remplaza a', 'data'=>$arrRetirados])
+
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'CONT_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
 
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'ENTI_ID_eps', 'label'=>'EPS', 'data'=>$arrEPS])

@@ -40,6 +40,7 @@
 				<th class="col-md-5">Centro Costo</th>
 				<th class="col-md-5">Caso Médico</th>
 				<th class="col-md-5">Jefe</th>
+				<th class="col-md-5">Remplaza a</th>
 				<th class="col-md-5">Ciudad de Contrato</th>
 				<th class="col-md-5">Ciudad de Servicio</th>
 				<th class="col-md-5">Observaciones</th>
@@ -69,7 +70,8 @@
 				<td>{{ $contrato -> gerencia -> GERE_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> centrocosto -> CECO_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> CONT_CASOMEDICO }}</td>
-				<td>{{ nombre_empleado($contrato->JEFE_ID) }}</td>
+				<td>{{ ($contrato->JEFE_ID != NULL) ? nombre_empleado($contrato->JEFE_ID) : '' }}</td>
+				<td>{{ ($contrato->REMP_ID != NULL) ? nombre_empleado($contrato->REMP_ID) : '' }}</td>
 				<td>{{ $contrato -> ciudad_contrata -> CIUD_NOMBRE }}</td>
 				<td>{{ $contrato -> ciudad_servicio -> CIUD_NOMBRE }}</td>
 				<td>{{ $contrato -> CONT_OBSERVACIONES }}</td>
@@ -98,7 +100,7 @@
 
 					<!-- Botón Cambiar estado -->
 					@if($contrato->ESCO_ID == SGH\Models\EstadoContrato::ACTIVO)
-					<a class="btn btn-xs btn-warning" href="#" data-tooltip="tooltip" title="Cambiar estado">
+					<a class="btn btn-xs btn-warning" href="{{ route(' gestion-humana.contratos.retirarContrato', [ 'CONT_ID' => $contrato->CONT_ID]) }}" data-tooltip="tooltip" title="Cambiar Estado">
 						<i class="fa fa-flag" aria-hidden="true"></i>
 					</a>
 					@endif
