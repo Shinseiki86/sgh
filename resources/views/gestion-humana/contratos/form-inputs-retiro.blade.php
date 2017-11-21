@@ -25,9 +25,18 @@
 </div>
 
 <div class="col-md-10">
+
+@include('widgets.forms.input', ['type'=>'select', 'column'=>5,'name'=>'PROS_ID', 'label'=>'Empleado', 'data'=>$arrProspectos, 'options'=>['disabled']])
+</div>
+
+<div class="col-md-10">
 @include('widgets.forms.input', ['type'=>'select', 'column'=>5, 'name'=>'MORE_ID', 'label'=>'Motivo de Retiro', 'data'=>$arrMotivosretiro, 'options'=>['required']])
 
 @include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'CONT_FECHARETIRO', 'label'=>'Fecha de Retiro', 'options'=>['required']])
+</div>
+
+<div class="col-md-10">
+@include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'CONT_CASOMEDICO', 'label'=>'¿Descartar Hoja de Vida?','value'=>'NO', 'data'=>['NO' => 'NO', 'SI' => 'SI']])
 </div>
 
 <div class="col-md-10">

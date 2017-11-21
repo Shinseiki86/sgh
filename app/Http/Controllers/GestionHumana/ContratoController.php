@@ -94,7 +94,7 @@ class ContratoController extends Controller
 		//Se crea un array con los turnos existentes
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
 
-		//Se crea un array con los prospectos disponibles
+		//Se crea un array con los prospectos disponibles (no descartados)
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
 			'PROS_PRIMERNOMBRE',
 			'PROS_SEGUNDONOMBRE',
@@ -449,7 +449,16 @@ class ContratoController extends Controller
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 
-		return view($this->route.'.retirar', compact('contrato','arrEmpleadores','arrGerencias','arrCargos','arrMotivosretiro'));
+		//Se crea un array con los prospectos disponibles
+		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA'
+			], 'PROS_NOMBRESAPELLIDOS'));
+
+		return view($this->route.'.retirar', compact('contrato','arrEmpleadores','arrGerencias','arrCargos','arrMotivosretiro','arrProspectos'));
 	}	
 
 	public function cambiarEstado()
