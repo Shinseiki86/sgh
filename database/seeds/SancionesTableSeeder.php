@@ -14,6 +14,11 @@ class SancionesTableSeeder extends Seeder
     {
         $sanciones = [
             [
+                'SANC_DESCRIPCION' => 'OPORTUNIDAD DE MEJORA',
+                'SANC_OBSERVACIONES' => 'INDICA QUE AL EMPLEADO SE LE HIZO UNA RETROALIMENTACIÓN PARA MEJORAMIENTO.',
+                'SANC_CREADOPOR' => 'admin',
+            ],
+            [
                 'SANC_DESCRIPCION' => 'LLAMADO DE ATENCIÓN',
                 'SANC_OBSERVACIONES' => 'INDICA QUE AL EMPLEADO SE LE HIZO UN LLAMADO DE ATENCIÓN POR ESCRITO.',
                 'SANC_CREADOPOR' => 'admin',

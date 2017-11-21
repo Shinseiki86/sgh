@@ -28,6 +28,7 @@ class Contrato extends ModelWithSoftDeletes
 		'CONT_RODAJE',
 		'ESCO_ID',
 		'MORE_ID',
+		'CONT_MOREOBSERVACIONES',
 		'TICO_ID',
 		'CLCO_ID',
 		'EMPL_ID',
@@ -38,6 +39,7 @@ class Contrato extends ModelWithSoftDeletes
 		'TURN_ID',
 		'GRUP_ID',
 		'JEFE_ID',
+		'REMP_ID',
 		'TEMP_ID',
 		'CIUD_CONTRATA',
 		'CIUD_SERVICIO',
@@ -61,10 +63,12 @@ class Contrato extends ModelWithSoftDeletes
 			'CIUD_CONTRATA' => ['numeric', 'required'],
 			'CIUD_SERVICIO' => ['numeric', 'required'],
 			'JEFE_ID' => ['numeric'],
+			'REMP_ID' => ['numeric'],
 			'CARG_ID' => ['numeric', 'required'],
 			'CONT_FECHAINGRESO' => ['date', 'required'],
 			'CONT_FECHARETIRO' => ['date'],
 			'MORE_ID' => ['numeric'],
+			'CONT_MOREOBSERVACIONES'=> ['max:300'],
 			'CONT_SALARIO'      => ['numeric','required'],
 			'CONT_VARIABLE'     => ['numeric'],
 			'CONT_RODAJE'       => ['numeric'],
@@ -85,7 +89,13 @@ class Contrato extends ModelWithSoftDeletes
 	public function jefe()
 	{
 		$foreingKey = 'JEFE_ID';
-		return $this->belongsTo(Jefe::class, $foreingKey);
+		return $this->belongsTo(Prospecto::class, $foreingKey);
+	}
+
+	public function remplazo()
+	{
+		$foreingKey = 'REMP_ID';
+		return $this->belongsTo(Prospecto::class, $foreingKey);
 	}
 
 	public function cargo()

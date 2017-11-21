@@ -132,6 +132,15 @@ class GerenciasTableSeeder extends Seeder
         $empleadores = array(4);
         $gerencia->empleadores()->sync($empleadores);
 
+         $gerencia = new Gerencia;
+        $gerencia->GERE_DESCRIPCION = 'GERENCIA COMERCIAL';
+        $gerencia->GERE_OBSERVACIONES =  NULL;
+        $gerencia->GERE_CREADOPOR =  'admin';
+        $gerencia->save(); 
+
+        $empleadores = array(2);
+        $gerencia->empleadores()->sync($empleadores);
+
     }
 
 }

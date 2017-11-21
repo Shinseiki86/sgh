@@ -67,8 +67,13 @@ Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], fun
 	Route::resource('prospectos', 'ProspectoController', ['parameters'=>['prospectos' => 'PROS_ID']]);
 	Route::get('getProspectos', 'ProspectoController@getData');
 	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
+
 	Route::get('getContratos', 'ContratoController@getData');
 	Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');
+
+	Route::get('/retirarContrato','ContratoController@retirarContrato')->name(' gestion-humana.contratos.retirarContrato');
+	Route::post('/cambiarEstado','ContratoController@cambiarEstado')->name(' gestion-humana.contratos.cambiarEstado');
+
 	Route::get('/buscaGerencia','ContratoController@buscaGerencia');
 	Route::get('/buscaCentroCosto','ContratoController@buscaCentroCosto');
 	Route::get('/buscaGrupo','ContratoController@buscaGrupo');

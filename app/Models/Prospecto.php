@@ -62,9 +62,30 @@ class Prospecto extends ModelWithSoftDeletes
 		return $query;
 	}
 
+	public function scopeRetirados($query)
+	{
+		$query = $query 
+			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
+			->where('ESCO_ID',2);
+
+		return $query;
+	}
+
 	public function contratos()
 	{
 		$foreingKey = 'PROS_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
+	public function jefes()
+	{
+		$foreingKey = 'JEFE_ID';
+		return $this->hasMany(Contrato::class, $foreingKey);
+	}
+
+	public function remplazos()
+	{
+		$foreingKey = 'REMP_ID';
 		return $this->hasMany(Contrato::class, $foreingKey);
 	}
 

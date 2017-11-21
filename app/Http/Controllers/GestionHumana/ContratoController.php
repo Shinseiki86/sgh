@@ -45,14 +45,14 @@ class ContratoController extends Controller
 	public function getData()
 	{
 		$model = Contrato::select([
-							'CONT_ID',
-						])->get();
+			'CONT_ID',
+			])->get();
 
 		return Datatables::collection($model)
-			->addColumn('action', function($model){
-				return parent::buttonEdit($model).
-					parent::buttonDelete($model, 'PROS_CEDULA');
-			})->make(true);
+		->addColumn('action', function($model){
+			return parent::buttonEdit($model).
+			parent::buttonDelete($model, 'PROS_CEDULA');
+		})->make(true);
 	}
 
 
@@ -96,11 +96,11 @@ class ContratoController extends Controller
 
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
-				'PROS_CEDULA',
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA',
 			], 'PROS_NOMBRESAPELLIDOS'));
 
 		//Se crea un array con los cargos disponibles
@@ -131,15 +131,22 @@ class ContratoController extends Controller
 			'PROS_SEGUNDONOMBRE',
 			'PROS_PRIMERAPELLIDO',
 			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA',
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
 		$arrJefes = Prospecto::activos()
-							->orderBy('CONTRATOS.'.$primaryKey)
-							->select([ 'PROSPECTOS.'.$primaryKey , $column ])
-							->get();
+		->orderBy('CONTRATOS.'.$primaryKey)
+		->select([ 'PROSPECTOS.'.$primaryKey , $column ])
+		->get();
 		$arrJefes = model_to_array($arrJefes, $columnName, $primaryKey);
 
-		return view($this->route.'.create' , compact('arrEmpleadores','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
+		$arrRetirados = Prospecto::retirados()
+		->orderBy('CONTRATOS.'.$primaryKey)
+		->select([ 'PROSPECTOS.'.$primaryKey , $column ])
+		->get();
+		$arrRetirados = model_to_array($arrRetirados, $columnName, $primaryKey);
+
+		return view($this->route.'.create' , compact('arrEmpleadores','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrRetirados','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
 	}
 
 	/**
@@ -204,10 +211,11 @@ class ContratoController extends Controller
 
 		//Se crea un array con los prospectos disponibles
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA'
 			], 'PROS_NOMBRESAPELLIDOS'));
 
 		//Se crea un array con los cargos disponibles
@@ -248,16 +256,23 @@ class ContratoController extends Controller
 			'PROS_SEGUNDONOMBRE',
 			'PROS_PRIMERAPELLIDO',
 			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA',
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
 		$arrJefes = Prospecto::activos()
-							->orderBy('CONTRATOS.'.$primaryKey)
-							->select([ 'PROSPECTOS.'.$primaryKey , $column ])
-							->get();
+		->orderBy('CONTRATOS.'.$primaryKey)
+		->select([ 'PROSPECTOS.'.$primaryKey , $column ])
+		->get();
 		$arrJefes = model_to_array($arrJefes, $columnName, $primaryKey);
 
+		$arrRetirados = Prospecto::retirados()
+		->orderBy('CONTRATOS.'.$primaryKey)
+		->select([ 'PROSPECTOS.'.$primaryKey , $column ])
+		->get();
+		$arrRetirados = model_to_array($arrRetirados, $columnName, $primaryKey);
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
+		return view($this->route.'.edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrRetirados','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
 	}
 
 	/**
@@ -308,16 +323,16 @@ class ContratoController extends Controller
 	public function getContratosEmpleador()
 	{
 		$data = Empleador::join('CONTRATOS', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
-								->select(
+		->select(
 									//'EMPLEADORES.EMPL_RAZONSOCIAL',
-									'EMPLEADORES.EMPL_NOMBRECOMERCIAL',
-									\DB::raw('COUNT("CONT_ID") as count')
-								)
-								->groupBy(
-									'EMPLEADORES.EMPL_RAZONSOCIAL',
-									'EMPLEADORES.EMPL_NOMBRECOMERCIAL'
-								)
-								->get();
+			'EMPLEADORES.EMPL_NOMBRECOMERCIAL',
+			\DB::raw('COUNT("CONT_ID") as count')
+			)
+		->groupBy(
+			'EMPLEADORES.EMPL_RAZONSOCIAL',
+			'EMPLEADORES.EMPL_NOMBRECOMERCIAL'
+			)
+		->get();
 		return $data->toJson();
 	}
 
@@ -376,44 +391,90 @@ class ContratoController extends Controller
 
 	public function buscaGerencia(){
 		$empleador = findId("Empleador",request()->get('EMPL_ID'));
-		 $data=modelo("Gerencia")->select('GERENCIAS.GERE_DESCRIPCION','GERENCIAS.GERE_ID')
-		 ->join('EMPLEADORES_GERENCIAS','GERENCIAS.GERE_ID','=','EMPLEADORES_GERENCIAS.GERE_ID')
-		 ->join('EMPLEADORES','EMPLEADORES_GERENCIAS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
-		 ->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
+		$data=modelo("Gerencia")->select('GERENCIAS.GERE_DESCRIPCION','GERENCIAS.GERE_ID')
+		->join('EMPLEADORES_GERENCIAS','GERENCIAS.GERE_ID','=','EMPLEADORES_GERENCIAS.GERE_ID')
+		->join('EMPLEADORES','EMPLEADORES_GERENCIAS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
+		->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
 		 //dd($data);
-	    return response()->json($data);
+		return response()->json($data);
 	}
 
 	public function buscaCentroCosto(){
 		$gerencia = findId("Gerencia",request()->get('GERE_ID'));
 		
-		 $data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.CECO_ID')
-		 ->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
-		 ->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
-		 ->where('GERENCIAS.GERE_ID', $gerencia->GERE_ID)->get();
-	    return response()->json($data);
+		$data=modelo("CentroCosto")->select('CENTROSCOSTOS.CECO_DESCRIPCION','CENTROSCOSTOS.CECO_ID')
+		->join('GERENCIAS_CENTROCOSTOS','CENTROSCOSTOS.CECO_ID','=','GERENCIAS_CENTROCOSTOS.CECO_ID')
+		->join('GERENCIAS','GERENCIAS_CENTROCOSTOS.GERE_ID','=','GERENCIAS.GERE_ID')
+		->where('GERENCIAS.GERE_ID', $gerencia->GERE_ID)->get();
+		return response()->json($data);
 	}	
 
 	public function buscaGrupo(){
 		$empleador = findId("Empleador",request()->get('EMPL_ID'));
 		
-		 $data=modelo("Grupo")->select('GRUPOS.GRUP_DESCRIPCION','GRUPOS.GRUP_ID')
-		 ->join('EMPLEADORES_GRUPOS','GRUPOS.GRUP_ID','=','EMPLEADORES_GRUPOS.GRUP_ID')
-		 ->join('EMPLEADORES','EMPLEADORES_GRUPOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
-		 ->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
-	    return response()->json($data);
+		$data=modelo("Grupo")->select('GRUPOS.GRUP_DESCRIPCION','GRUPOS.GRUP_ID')
+		->join('EMPLEADORES_GRUPOS','GRUPOS.GRUP_ID','=','EMPLEADORES_GRUPOS.GRUP_ID')
+		->join('EMPLEADORES','EMPLEADORES_GRUPOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
+		->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
+		return response()->json($data);
 	}	
 
 	public function buscaTurno(){
 		$empleador = findId("Empleador",request()->get('EMPL_ID'));
 		
-		 $data=modelo("Turno")->select('TURNOS.TURN_DESCRIPCION','TURNOS.TURN_ID')
-		 ->join('EMPLEADORES_TURNOS','TURNOS.TURN_ID','=','EMPLEADORES_TURNOS.TURN_ID')
-		 ->join('EMPLEADORES','EMPLEADORES_TURNOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
-		 ->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
-	    return response()->json($data);
-	}	
-	
+		$data=modelo("Turno")->select('TURNOS.TURN_DESCRIPCION','TURNOS.TURN_ID')
+		->join('EMPLEADORES_TURNOS','TURNOS.TURN_ID','=','EMPLEADORES_TURNOS.TURN_ID')
+		->join('EMPLEADORES','EMPLEADORES_TURNOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
+		->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
+		return response()->json($data);
+	}
 
-	
-}
+	public function retirarContrato()
+	{
+		//variables para llamar al metodo que extrae la planta autorizada y el conteo de contratos
+		$CONT_ID = request()->get('CONT_ID');
+
+		// Se obtiene el registro
+		$contrato = Contrato::findOrFail($CONT_ID);
+
+		//Se crea un array con los empleadores
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
+		//Se crea un array con las gerencias
+		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
+
+		//Se crea un array con los cargos disponibles
+		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
+
+		//Se crea un array con los motivos de retiro
+		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
+
+		return view($this->route.'.retirar', compact('contrato','arrEmpleadores','arrGerencias','arrCargos','arrMotivosretiro'));
+	}	
+
+	public function cambiarEstado()
+	{
+		// Se obtiene el registro
+		$contrato = Contrato::findOrFail(request()->get('CONT_ID'));
+
+		//variables para llamar al metodo que extrae la planta autorizada y el conteo de contratos
+		$empleador = $contrato->EMPL_ID;
+		$gerencia  = $contrato->GERE_ID;
+		$cargo 	   = $contrato->CARG_ID;
+
+		
+		$contrato->MORE_ID = request()->get('MORE_ID');
+		$contrato->CONT_FECHARETIRO = request()->get('CONT_FECHARETIRO');
+		$contrato->CONT_MOREOBSERVACIONES = request()->get('CONT_MOREOBSERVACIONES');
+			$contrato->ESCO_ID = 2; //Retirado
+			$contrato->save();
+
+			flash_alert('Contrato retirado exitosamente', 'success' );
+			return redirect()->route($this->route.'.index')->send();
+			
+			
+		}	
+		
+
+		
+	}
