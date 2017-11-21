@@ -328,7 +328,7 @@ class TnlController extends Controller
                 $sheet->fromArray($arrtnlenincap);
             });
             
-        })->export('xls');
+        })->export('xlsx');
 
 	}
 

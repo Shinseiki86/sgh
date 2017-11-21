@@ -58,7 +58,7 @@ class SendEmailNewTicket extends Job implements ShouldQueue
                 	$message->cc($jefe_email, $name = null);
             });
         } catch(\Exception $e){
-            flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID'. Error: '.$e->getMessage(), 'danger' );
+            flash_alert( 'Error enviando correo para ticket '.$ticket->TICK_ID.'. Error: '.$e->getMessage(), 'danger' );
         }
     }
 }
