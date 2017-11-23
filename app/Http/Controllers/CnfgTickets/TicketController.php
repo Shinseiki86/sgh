@@ -198,10 +198,14 @@ class TicketController extends Controller
 			//Se crea el registro.
 			$ticket = Ticket::create($data);
 
+			//dd($ticket);
+
 			//se actualiza el nombre del archivo concatenando el ID del registro para garantizar su unicidad
 			//en caso de que en el request venga un archivo
 			if($filename != null && $ticket != null){
 				$data['TICK_ARCHIVO'] = $filename[0]. "-" . $ticket->TICK_ID . "." . $filename[1];
+				$ticket->TICK_ARCHIVO = $data["TICK_ARCHIVO"];
+				$ticket->save();
 				//mueve el archivo a la ruta indicada
 				$file->move($destinationPath, $data['TICK_ARCHIVO']);
 			}
