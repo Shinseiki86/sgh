@@ -371,7 +371,7 @@ class CentrosCostosTableSeeder extends Seeder
         $centrocosto->CECO_CREADOPOR =  'admin';
         $centrocosto->save();
 
-        $gerencias = array(4);
+        $gerencias = array(4,13);
         $centrocosto->gerencias()->sync($gerencias);
 
         $centrocosto = new CentroCosto;
@@ -381,7 +381,7 @@ class CentrosCostosTableSeeder extends Seeder
         $centrocosto->CECO_CREADOPOR =  'admin';
         $centrocosto->save();
 
-        $gerencias = array(4,6);
+        $gerencias = array(4,6,13);
         $centrocosto->gerencias()->sync($gerencias);
 
         $centrocosto = new CentroCosto;

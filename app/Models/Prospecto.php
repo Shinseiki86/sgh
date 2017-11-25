@@ -71,14 +71,6 @@ class Prospecto extends ModelWithSoftDeletes
 		return $query;
 	}
 
-	public function scopeSinDescartar($query)
-	{
-		$query = $query 
-			 ->whereNull('PROS_MARCA');
-
-		return $query;
-	}
-
 	public function contratos()
 	{
 		$foreingKey = 'PROS_ID';

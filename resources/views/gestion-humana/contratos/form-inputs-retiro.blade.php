@@ -27,6 +27,8 @@
 <div class="col-md-10">
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>5,'name'=>'PROS_ID', 'label'=>'Empleado', 'data'=>$arrProspectos, 'options'=>['disabled']])
+
+@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'CONT_FECHAINGRESO', 'label'=>'Fecha de Ingreso', 'options'=>['disabled']])
 </div>
 
 <div class="col-md-10">
@@ -36,7 +38,7 @@
 </div>
 
 <div class="col-md-10">
-@include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'CONT_CASOMEDICO', 'label'=>'¿Descartar Hoja de Vida?','value'=>'NO', 'data'=>['NO' => 'NO', 'SI' => 'SI']])
+@include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'PROS_MARCA', 'label'=>'¿Descartar Hoja de Vida?','value'=>'NO', 'data'=>['NO' => 'NO', 'SI' => 'SI']])
 </div>
 
 <div class="col-md-10">

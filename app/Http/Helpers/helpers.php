@@ -13,7 +13,7 @@
 
 use Illuminate\Support\Arr;
 use SGH\Prospecto;
-
+use Carbon\Carbon;
 
 
 if (! function_exists('expression_concat')) {
@@ -332,4 +332,19 @@ if (! function_exists('get_email_user')) {
 
     }
 
+}
+
+if (! function_exists('convert_to_date')) {
+    /**
+     * Convierte una cadena de texto a una fecha
+     * @param string $fecha_string Mensaje a presentar.
+     * @return a date 
+     */
+    function convert_to_date($fecha_string) {
+        
+        $date = new Carbon($fecha_string);
+
+        return $date;
+
+    }
 }

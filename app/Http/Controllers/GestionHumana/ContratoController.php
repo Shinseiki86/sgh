@@ -168,7 +168,18 @@ class ContratoController extends Controller
 		$cargo 	   = request()->get('CARG_ID');
 
 		if($this->validarPlanta($empleador, $gerencia, $cargo)){
-			parent::storeModel(['entidades'=>$entidades_id]);
+
+			$prospecto = Prospecto::findOrFail(request()->get('PROS_ID'));
+			if($prospecto->PROS_MARCA == 'SI'){
+
+				flash_modal('No se puede crear contrato: la hoja de vida se encuentra descartada. \n consulte a gestión humana sobre este candidato', 'danger' );
+				return redirect()->back()->send();
+
+			}else{
+				parent::storeModel(['entidades'=>$entidades_id]);
+			}
+
+			
 		}else{
 			flash_alert('No se puede crear contrato: La planta autorizada se encuentra completa o no se ha definido para el cargo', 'danger' );
 			return redirect()->route($this->route.'.create')->send();
@@ -297,7 +308,7 @@ class ContratoController extends Controller
 		if($this->validarPlanta($empleador, $gerencia, $cargo)){
 			parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);	
 		}else{
-			flash_alert('No se puede crear contrato: La planta autorizada se encuentra completa', 'info' );
+			flash_alert('No se puede actualizar contrato: La planta autorizada se encuentra completa o no se ha definido', 'info' );
 			return redirect()->back();
 		}				
 		
@@ -470,16 +481,40 @@ class ContratoController extends Controller
 		$empleador = $contrato->EMPL_ID;
 		$gerencia  = $contrato->GERE_ID;
 		$cargo 	   = $contrato->CARG_ID;
-
 		
 		$contrato->MORE_ID = request()->get('MORE_ID');
 		$contrato->CONT_FECHARETIRO = request()->get('CONT_FECHARETIRO');
-		$contrato->CONT_MOREOBSERVACIONES = request()->get('CONT_MOREOBSERVACIONES');
+
+		//si la fecha de retiro es menor que la fecha de ingreso es un error de capa 8
+		if(convert_to_date(request()->get('CONT_FECHARETIRO')) < convert_to_date($contrato->CONT_FECHAINGRESO)){
+
+			flash_alert('Error: La fecha de retiro no puede ser menor que la fecha de ingreso', 'danger' );
+			return redirect()->back()->send();
+
+			
+		}else{
+
+			$contrato->CONT_MOREOBSERVACIONES = request()->get('CONT_MOREOBSERVACIONES');
 			$contrato->ESCO_ID = 2; //Retirado
 			$contrato->save();
 
+			if(request()->get('PROS_MARCA') == 'SI'){
+
+				$prospecto = Prospecto::findOrFail($contrato->PROS_ID);
+
+				$prospecto->PROS_MARCA = request()->get('PROS_MARCA');
+				$prospecto->PROS_MARCAOBSERVACIONES = 'HV descartada desde el modulo de retiros.';
+
+				$prospecto->save();
+
+			}
+
 			flash_alert('Contrato retirado exitosamente', 'success' );
 			return redirect()->route($this->route.'.index')->send();
+
+		}
+
+		
 			
 			
 		}	
