@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Categorías de Tickets')
-@include('datatable')
+@include('datatable-export')
 
 @section('page_heading')
 	<div class="row">

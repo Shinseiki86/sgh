@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Cargos')
-@include('datatable')
+@include('datatable-export')
 
 @section('page_heading')
 	<div class="row">

@@ -32,6 +32,7 @@
         'DIAG_CODIGO',
         'DIAG_DESCRIPCION',
     ]]) 
+    
 @endsection
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Tipos empleadores')
-@include('datatable')
+@include('datatable-export')
 
 
 @section('page_heading')

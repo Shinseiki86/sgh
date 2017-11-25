@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Tipo Entidades')
-@include('datatable')
+@include('datatable-export')
 
 
 @section('page_heading')
