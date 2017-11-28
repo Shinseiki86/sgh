@@ -106,6 +106,7 @@ class TicketController extends Controller
 				'CATE_DESCRIPCION',
 				'TICK_FECHAEVENTO',
 				'TICK_FECHASOLICITUD',
+				'TICK_FECHAAPROBACION',
 				'TICK_FECHACIERRE',
 				'ESAP_DESCRIPCION',
 				'GRUP_DESCRIPCION',
@@ -326,19 +327,27 @@ class TicketController extends Controller
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
 
-		$ticket->update([
-			'ESAP_ID' => EstadoAprobacion::ENVIADO, //estado ENVIADO A GESTIÓN HUMANA
-			'TICK_FECHAAPROBACION' => $currentDate
-		]);
+		if($ticket->TICK_CREADOPOR == \Auth::user()->username){
+			flash_modal( 'El Ticket no puede ser autorizado por el mismo usuario que lo creó', 'danger' );
+			return redirect()->back();
+		}else{
 
-		//===================================================================================
-		//Job para envío de notificación al correo
-		$job = (new SendEmailAuthorizedTicket($ticket, \Auth::user()))->onQueue('emails');
-		$this->dispatch($job);
-		//===================================================================================
+			$ticket->update([
+				'ESAP_ID' => EstadoAprobacion::ENVIADO, //estado ENVIADO A GESTIÓN HUMANA
+				'TICK_FECHAAPROBACION' => $currentDate
+			]);
 
-		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
-		return redirect()->route($this->route.'.index');
+			//===================================================================================
+			//Job para envío de notificación al correo
+			$job = (new SendEmailAuthorizedTicket($ticket, \Auth::user()))->onQueue('emails');
+			$this->dispatch($job);
+			//===================================================================================
+
+			flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
+			return redirect()->route($this->route.'.index');
+
+		}
+
 	}
 
 	public function rechazarTicket($TICK_ID){
@@ -350,22 +359,32 @@ class TicketController extends Controller
 
 		//encuentra el ticket
 		$ticket = Ticket::findOrFail($TICK_ID);
-		$ticket->update([
-			'ESAP_ID' => EstadoAprobacion::RECHAZADO,
-			'ESTI_ID' => EstadoTicket::CERRADO,
-			'TICK_FECHAAPROBACION' => $currentDate,
-			'TICK_FECHACIERRE' => $currentDate,
-			'TICK_MOTIVORECHAZO' => $data['TICK_MOTIVORECHAZO']
-		]);
 
-		//===================================================================================
-		//Job para envío de notificación al correo
-		$job = (new SendEmailRejectedTicket($ticket, \Auth::user()))->onQueue('emails');
-		$this->dispatch($job);
-		//===================================================================================
+		if($ticket->TICK_CREADOPOR == \Auth::user()->username){
+			flash_modal( 'El Ticket no puede ser rechazado por el mismo usuario que lo creó', 'danger' );
+			return redirect()->back();
+		}else{
 
-		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazado exitosamente.', 'success' );
-		return redirect()->route($this->route.'.index');
+			$ticket->update([
+				'ESAP_ID' => EstadoAprobacion::RECHAZADO,
+				'ESTI_ID' => EstadoTicket::CERRADO,
+				'TICK_FECHAAPROBACION' => $currentDate,
+				'TICK_FECHACIERRE' => $currentDate,
+				'TICK_MOTIVORECHAZO' => $data['TICK_MOTIVORECHAZO']
+			]);
+
+			//===================================================================================
+			//Job para envío de notificación al correo
+			$job = (new SendEmailRejectedTicket($ticket, \Auth::user()))->onQueue('emails');
+			$this->dispatch($job);
+			//===================================================================================
+
+			flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazado exitosamente.', 'success' );
+			return redirect()->route($this->route.'.index');
+
+		}
+
+		
 	}
 
 
@@ -375,21 +394,31 @@ class TicketController extends Controller
 		$data = request()->all();
 
 		$ticket = Ticket::findOrFail($TICK_ID);
-		$ticket->update([
-			'ESTI_ID' => EstadoTicket::CERRADO,
-			'ESAP_ID' => EstadoAprobacion::FINALIZADO,
-			'TICK_FECHACIERRE' =>  Carbon::now(),
-			'SANC_ID' => $data['SANC_ID'],
-			'TICK_CONCLUSION' => $data['TICK_CONCLUSION']
-		]);
 
-		//===================================================================================
-		$job = (new SendEmailClosedTicket($ticket, \Auth::user()))->onQueue('emails');
-		$this->dispatch($job);
-		//===================================================================================
+		if($ticket->TICK_CREADOPOR == \Auth::user()->username){
+			flash_modal( 'El Ticket no puede ser cerrado por el mismo usuario que lo creó', 'danger' );
+			return redirect()->back();
+		}else{
 
-		flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );
-		return redirect()->route($this->route.'.index');
+			$ticket->update([
+				'ESTI_ID' => EstadoTicket::CERRADO,
+				'ESAP_ID' => EstadoAprobacion::FINALIZADO,
+				'TICK_FECHACIERRE' =>  Carbon::now(),
+				'SANC_ID' => $data['SANC_ID'],
+				'TICK_CONCLUSION' => $data['TICK_CONCLUSION']
+			]);
+
+			//===================================================================================
+			$job = (new SendEmailClosedTicket($ticket, \Auth::user()))->onQueue('emails');
+			$this->dispatch($job);
+			//===================================================================================
+
+			flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );
+			return redirect()->route($this->route.'.index');
+
+		}
+
+		
 
 	}
 

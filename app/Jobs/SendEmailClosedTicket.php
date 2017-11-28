@@ -50,9 +50,12 @@ class SendEmailClosedTicket extends Job implements ShouldQueue
                 $TICK_ID = str_pad($ticket->TICK_ID, 6, '0', STR_PAD_LEFT);
                 $message->subject('Ticket '.$TICK_ID.' cerrado por G.H.');
 
+                //usuario que creó el Ticket
                 $to = [ $ticket->usuario->email, ];
-                //Copia al usuario que creó el ticket y al usuario que cerró el ticket. Si es temporal, copia al responsable de la temporal.
+                //usuario que cierra el Ticket
                 $cc = [ $userCloses->email ];
+
+                dd($cc);
 
                 $responsableTemp = $ticket->contrato->temporal;
                 //Si es temporal, entonces se envía correo al responsable de la temporal.

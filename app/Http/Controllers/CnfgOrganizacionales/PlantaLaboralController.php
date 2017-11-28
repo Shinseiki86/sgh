@@ -92,7 +92,31 @@ class PlantaLaboralController extends Controller
 	 */
 	public function update($PALA_ID)
 	{
-		parent::updateModel($PALA_ID);
+
+		// Se obtiene el registro
+		$plantalaboral = PlantaLaboral::findOrFail($PALA_ID);
+
+		$empl_id = request()->get('EMPL_ID');
+		$gere_id = request()->get('GERE_ID');
+		$carg_id = request()->get('CARG_ID');
+		$pala_cantidad = request()->get('PALA_CANTIDAD');
+
+		
+		if(
+			($plantalaboral->EMPL_ID == $empl_id && $plantalaboral->GERE_ID == $gere_id) &&
+			($plantalaboral->CARG_ID == $carg_id && $plantalaboral->PALA_CANTIDAD != $pala_cantidad)
+		  ){
+
+		  	$plantalaboral->PALA_CANTIDAD = $pala_cantidad;
+		    $plantalaboral->save();
+		    flash_alert('Planta laboral modificado exitosamente.', 'success' );
+			return redirect()->route($this->route.'.index')->send();
+
+		}else{
+			parent::updateModel($PALA_ID);
+		}
+
+		
 	}
 
 	/**

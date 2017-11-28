@@ -41,6 +41,7 @@ class SendEmailAuthorizedTicket extends Job implements ShouldQueue
         $userAuthorizes   = $this->userAuthorizes;
         $view   = 'layouts.emails.info_ticket_autorizado';
 
+
         //if ($this->attempts() < 3) {
         try{
             Mail::send($view, compact('ticket'), function($message) use($ticket, $userAuthorizes) {
@@ -55,17 +56,17 @@ class SendEmailAuthorizedTicket extends Job implements ShouldQueue
                 $cc = [ $ticket->usuario->email, $userAuthorizes->email ];
 
                 $responsableTemp = $ticket->contrato->temporal;
+
+
                 //Si es temporal, entonces se envía correo al responsable de la temporal.
                 if(isset($responsableTemp) and isset($responsableTemp->prospecto->PROS_CORREO))
                     $to[] = $responsableTemp->prospecto->PROS_CORREO;
 
                 $responsableGH = $ticket->contrato->empleador;
-                if(isset($responsableGH) and isset($responsableGH->EMPL_CORREO)){
-                    //Si es temporal, entonces se envía copia al responsable del empleador.
-                    if(isset($responsableTemp))
-                        $cc[] = $responsableGH->EMPL_CORREO;
-                    else
-                        $to[] = $responsableGH->EMPL_CORREO;
+                
+                if(isset($responsableGH)){
+                    //Si es directo, entonces se dirige al responsable de gestión humana del empleador
+                        $to[] = $responsableGH->prospecto->PROS_CORREO;
                 }
                 
                 $message->to($to);

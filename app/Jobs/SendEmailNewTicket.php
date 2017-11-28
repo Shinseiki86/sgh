@@ -51,9 +51,9 @@ class SendEmailNewTicket extends Job implements ShouldQueue
                 $user = $ticket->usuario;
                 $message->to($user->email, $user->name);
                 //Copia del correo al jefe
-                $prosJefe = Prospecto::getJefe($user->cedula);
+                $prospecto = Prospecto::getJefe($user->cedula);  
+                $prosJefe = Prospecto::findOrFail($prospecto->JEFE_ID);
                 $jefe_email = $prosJefe->PROS_CORREO;
-
                 if(isset($jefe_email))
                 	$message->cc($jefe_email, $name = null);
             });

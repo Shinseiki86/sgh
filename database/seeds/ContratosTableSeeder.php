@@ -12,7 +12,7 @@ class ContratosTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        /*
         $contrato = new Contrato;
     	$contrato->PROS_ID = 1;
     	$contrato->JEFE_ID = 2;
@@ -111,6 +111,8 @@ class ContratosTableSeeder extends Seeder
         $contrato->CIUD_SERVICIO = 1004;
     	$contrato->CONT_OBSERVACIONES = 'CONTRATO DE PRUEBA';
     	$contrato->save();
+
+        */
 
     }
 }

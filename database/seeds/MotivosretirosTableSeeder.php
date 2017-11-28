@@ -80,5 +80,29 @@ class MotivosRetirosTableSeeder extends Seeder
         $motivoretiro->MORE_CREADOPOR =  'SYSTEM';
         $motivoretiro->save();
 
+        $motivoretiro = new MotivoRetiro;
+        $motivoretiro->MORE_DESCRIPCION = 'PENSIÓN';
+        $motivoretiro->MORE_OBSERVACIONES =  'CUANDO EL EMPLEADO SE PENSIONA POR LA AFP';
+        $motivoretiro->MORE_CREADOPOR =  'SYSTEM';
+        $motivoretiro->save();
+
+        $motivoretiro = new MotivoRetiro;
+        $motivoretiro->MORE_DESCRIPCION = 'FORMALIZACIÓN LABORAL';
+        $motivoretiro->MORE_OBSERVACIONES =  'MIGRACION COMPAÑÍA CON CONCILIACION EN EL MINISTERIO DE TRABAJO';
+        $motivoretiro->MORE_CREADOPOR =  'SYSTEM';
+        $motivoretiro->save();
+
+        $motivoretiro = new MotivoRetiro;
+        $motivoretiro->MORE_DESCRIPCION = 'FORMALIZACIÓN DE CONTRATO DE APRENDIZAJE';
+        $motivoretiro->MORE_OBSERVACIONES =  'FINALIZACION CONTRATO APRENDICES SENA';
+        $motivoretiro->MORE_CREADOPOR =  'SYSTEM';
+        $motivoretiro->save();
+
+        $motivoretiro = new MotivoRetiro;
+        $motivoretiro->MORE_DESCRIPCION = 'CAMBIO DE E.S.T';
+        $motivoretiro->MORE_OBSERVACIONES =  'CAMBIO DE EMPRESA TEMPORAL';
+        $motivoretiro->MORE_CREADOPOR =  'SYSTEM';
+        $motivoretiro->save();
+
     }
 }

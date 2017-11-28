@@ -28,6 +28,7 @@
 				<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">ID</th>
 				<th class="col-xs-4 col-sm-4 col-md-4 col-lg-2">Nombre</th>
 				<th class="col-xs-2 col-sm-1 col-md-1 col-lg-1">Usuario</th>
+				<th class="col-xs-2 col-sm-1 col-md-1 col-lg-1">Cedula</th>
 				<th class="col-xs-2 col-sm-1 col-md-1 col-lg-1">Roles</th>
 				<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">Creado</th>
 				<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">Modificado</th>
@@ -41,6 +42,7 @@
 				<td>{{ $usuario -> USER_id }}</td>
 				<td>{{ $usuario -> name }}</td>
 				<td>{{ $usuario -> username }}</td>
+				<td>{{ $usuario -> cedula }}</td>
 				<td>{{ $usuario -> roles ->implode('display_name', ',') }}</td>
 				<td class="hidden-xs">{{ $usuario -> USER_CREADOPOR }}</td>
 				<td class="hidden-xs">{{ $usuario -> USER_MODIFICADOPOR }}</td>

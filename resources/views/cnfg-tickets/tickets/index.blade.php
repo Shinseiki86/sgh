@@ -27,6 +27,7 @@
 				<th class="col-md-5"> Categoria </th>
 				<th class="col-md-1"> Fecha Evento </th>
 				<th class="col-md-1"> Fecha Solicitud </th>
+				<th class="col-md-1"> Fecha Aprobación o Rechazo </th>
 				<th class="col-md-1"> Fecha Cierre </th>
 				<th class="col-md-1"> Estado Aprobación </th>
 				<th class="col-md-1"> Grupo </th>
@@ -48,6 +49,7 @@
 		'CATE_DESCRIPCION',
 		'TICK_FECHAEVENTO',
 		'TICK_FECHASOLICITUD',
+		'TICK_FECHAAPROBACION',
 		'TICK_FECHACIERRE',
 		'ESAP_DESCRIPCION',
 		'GRUP_DESCRIPCION',

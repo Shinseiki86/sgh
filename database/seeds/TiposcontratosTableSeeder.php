@@ -16,13 +16,13 @@ class TiposContratosTableSeeder extends Seeder
 		
 		$tipocontrato = new TipoContrato;
         $tipocontrato->TICO_DESCRIPCION = 'CONTRATACIÓN DIRECTA';
-        $tipocontrato->TICO_OBSERVACIONES =  'TIPO DE CONTRATO DE PRUEBA';
+        $tipocontrato->TICO_OBSERVACIONES =  'TIPO DE CONTRATO DIRECTO POR COMPAÑÍA';
         $tipocontrato->TICO_CREADOPOR =  'SYSTEM';
         $tipocontrato->save();
 
         $tipocontrato = new TipoContrato;
         $tipocontrato->TICO_DESCRIPCION = 'CONTRATACIÓN INDIRECTA';
-        $tipocontrato->TICO_OBSERVACIONES =  'TIPO DE CONTRATO DE PRUEBA';
+        $tipocontrato->TICO_OBSERVACIONES =  'TIPO DE CONTRATO INDIRECTO';
         $tipocontrato->TICO_CREADOPOR =  'SYSTEM';
         $tipocontrato->save();
 	}

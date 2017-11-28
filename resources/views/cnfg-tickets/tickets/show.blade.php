@@ -111,12 +111,24 @@
 				'value'=>$ticket->TICK_FECHAEVENTO
 			])
 			@include('widgets.list-group-item', [
+				'label'=>'Fecha de Autorización o Rechazo',
+				'value'=>$ticket->TICK_FECHAAPROBACION
+			])
+			@include('widgets.list-group-item', [
+				'label'=>'Fecha de Cierre',
+				'value'=>$ticket->TICK_FECHACIERRE
+			])
+			@include('widgets.list-group-item', [
 				'label'=>'Observaciones',
 				'value'=>$ticket->TICK_OBSERVACIONES
 			])
 			@include('widgets.list-group-item', [
 				'label'=>'Estado Aprobación',
 				'value'=>$ticket->estadoaprobacion->ESAP_DESCRIPCION
+			])
+			@include('widgets.list-group-item', [
+				'label'=>'Decisión Administrativa',
+				'value'=>$ticket->estadoaprobacion->SANC_DESCRIPCION
 			])
 		</ul>
 	@endsection
