@@ -53,7 +53,6 @@ class CreateEmpleadoresTable extends Migration
                 ->comment('correo electronico del encargado en el empleador');
 
             $table->unsignedInteger('PROS_ID')
-                ->nullable()
                 ->comment('persona encargada del manejo de gestión humana del empleador.');
 
             $table->string('EMPL_OBSERVACIONES', 300)

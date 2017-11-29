@@ -55,21 +55,25 @@ class SendEmailClosedTicket extends Job implements ShouldQueue
                 //usuario que cierra el Ticket
                 $cc = [ $userCloses->email ];
 
-                dd($cc);
-
                 $responsableTemp = $ticket->contrato->temporal;
+
+                /*
                 //Si es temporal, entonces se envía correo al responsable de la temporal.
                 if(isset($responsableTemp) and isset($responsableTemp->prospecto->PROS_CORREO))
                     $to[] = $responsableTemp->prospecto->PROS_CORREO;
 
                 $responsableGH = $ticket->contrato->empleador;
-                if(isset($responsableGH) and isset($responsableGH->EMPL_CORREO)){
-                    //Si es temporal, entonces se envía copia al responsable del empleador.
-                    if(isset($responsableTemp))
-                        $cc[] = $responsableGH->EMPL_CORREO;
-                    else
-                        $to[] = $responsableGH->EMPL_CORREO;
+                
+                if(isset($responsableGH)){
+                    //Si es directo, entonces se dirige al responsable de gestión humana del empleador
+                    $to[] = $responsableGH->prospecto->PROS_CORREO;
                 }
+                */
+                $prospecto = Prospecto::getJefe($ticket->usuario->cedula);  
+                $prosJefe = Prospecto::findOrFail($prospecto->JEFE_ID);
+                $jefe_email = $prosJefe->PROS_CORREO;
+
+                $to[] = $jefe_email;
 
                 $message->to($to);
                 $message->cc($cc);

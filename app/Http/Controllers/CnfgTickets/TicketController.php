@@ -17,6 +17,8 @@ use SGH\Models\EstadoAprobacion;
 use SGH\Models\User;
 use SGH\Models\Mail;
 use SGH\Models\Prospecto;
+use SGH\Models\Empleador;
+use SGH\Models\Contrato;
 
 use Carbon\Carbon;
 
@@ -332,19 +334,41 @@ class TicketController extends Controller
 			return redirect()->back();
 		}else{
 
-			$ticket->update([
-				'ESAP_ID' => EstadoAprobacion::ENVIADO, //estado ENVIADO A GESTIÓN HUMANA
-				'TICK_FECHAAPROBACION' => $currentDate
-			]);
+			 //prospecto que creó el Ticket
+			 $prospecto = Prospecto::getJefe($ticket->usuario->cedula);  
+			 //jefe del prospecto que creo el Ticket
+             $prosJefe = Prospecto::findOrFail($prospecto->JEFE_ID);
+             $prosJefeId = $prosJefe->PROS_ID;
+             
+             //usuario actual del sistema (validar si es el jefe)
+             $prosUser = Prospecto::getJefe(\Auth::user()->cedula);
+             if(isset($prosUser)){
+             	$prosUserId = $prosUser->PROS_ID;
+             }else{
+             	$prosUserId = null;
+             }
+             	
 
-			//===================================================================================
-			//Job para envío de notificación al correo
-			$job = (new SendEmailAuthorizedTicket($ticket, \Auth::user()))->onQueue('emails');
-			$this->dispatch($job);
-			//===================================================================================
+             if($prosUserId == $prosJefeId or $prosUserId == null){
+             	flash_modal( 'El Ticket solo puede ser autorizado por el jefe inmediato de quien lo creó', 'danger' );
+				return redirect()->back();
+             }else{
 
-			flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
-			return redirect()->route($this->route.'.index');
+             	$ticket->update([
+					'ESAP_ID' => EstadoAprobacion::ENVIADO, //estado ENVIADO A GESTIÓN HUMANA
+					'TICK_FECHAAPROBACION' => $currentDate
+				]);
+
+				//===================================================================================
+				//Job para envío de notificación al correo
+				$job = (new SendEmailAuthorizedTicket($ticket, \Auth::user()))->onQueue('emails');
+				$this->dispatch($job);
+				//===================================================================================
+
+				flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido enviado a G.H exitosamente.', 'success' );
+				return redirect()->route($this->route.'.index');
+
+             }
 
 		}
 
@@ -365,22 +389,46 @@ class TicketController extends Controller
 			return redirect()->back();
 		}else{
 
-			$ticket->update([
-				'ESAP_ID' => EstadoAprobacion::RECHAZADO,
-				'ESTI_ID' => EstadoTicket::CERRADO,
-				'TICK_FECHAAPROBACION' => $currentDate,
-				'TICK_FECHACIERRE' => $currentDate,
-				'TICK_MOTIVORECHAZO' => $data['TICK_MOTIVORECHAZO']
-			]);
+			 //prospecto que creó el Ticket
+			 $prospecto = Prospecto::getJefe($ticket->usuario->cedula);  
+			 //jefe del prospecto que creo el Ticket
+             $prosJefe = Prospecto::findOrFail($prospecto->JEFE_ID);
+             $prosJefeId = $prosJefe->PROS_ID;
+             
+             //usuario actual del sistema (validar si es el jefe)
+             $prosUser = Prospecto::getJefe(\Auth::user()->cedula);
+             if(isset($prosUser)){
+             	$prosUserId = $prosUser->PROS_ID;
+             }else{
+             	$prosUserId = null;
+             }
+             	
 
-			//===================================================================================
-			//Job para envío de notificación al correo
-			$job = (new SendEmailRejectedTicket($ticket, \Auth::user()))->onQueue('emails');
-			$this->dispatch($job);
-			//===================================================================================
+             if($prosUserId == $prosJefeId or $prosUserId == null){
+             	flash_modal( 'El Ticket solo puede ser rechazado por el jefe inmediato de quien lo creó', 'danger' );
+				return redirect()->back();
+             }else{
 
-			flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazado exitosamente.', 'success' );
-			return redirect()->route($this->route.'.index');
+             	$ticket->update([
+					'ESAP_ID' => EstadoAprobacion::RECHAZADO,
+					'ESTI_ID' => EstadoTicket::CERRADO,
+					'TICK_FECHAAPROBACION' => $currentDate,
+					'TICK_FECHACIERRE' => $currentDate,
+					'TICK_MOTIVORECHAZO' => $data['TICK_MOTIVORECHAZO']
+				]);
+
+				//===================================================================================
+				//Job para envío de notificación al correo
+				$job = (new SendEmailRejectedTicket($ticket, \Auth::user()))->onQueue('emails');
+				$this->dispatch($job);
+				//===================================================================================
+
+				flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazado exitosamente.', 'success' );
+				return redirect()->route($this->route.'.index');
+
+             }
+
+			
 
 		}
 
@@ -399,6 +447,17 @@ class TicketController extends Controller
 			flash_modal( 'El Ticket no puede ser cerrado por el mismo usuario que lo creó', 'danger' );
 			return redirect()->back();
 		}else{
+
+			//prospecto responsable de gestión humana del Empleador
+			$prosIdEmpleador = $ticket->contrato->empleador->prospecto->PROS_ID;
+			$prosResponEmple = Prospecto::find($prosIdEmpleador);
+			
+			$contratoTicket = Contrato::findOrFail($ticket->contrato->CONT_ID);
+			if(isset($contratoTicket->TEMP_ID)){
+				//prospecto responsable de gestión humana de la Temporal
+				$prosIdTemporal = $ticket->contrato->temporal->prospecto->PROS_ID;
+				$prosResponTempo = Prospecto::find($prosIdTemporal);
+			}
 
 			$ticket->update([
 				'ESTI_ID' => EstadoTicket::CERRADO,
@@ -420,6 +479,26 @@ class TicketController extends Controller
 
 		
 
+	}
+
+	public function buscaGrupo(){
+		$empleador = findId("Empleador",request()->get('EMPL_ID'));
+		
+		$data=modelo("Grupo")->select('GRUPOS.GRUP_DESCRIPCION','GRUPOS.GRUP_ID')
+		->join('EMPLEADORES_GRUPOS','GRUPOS.GRUP_ID','=','EMPLEADORES_GRUPOS.GRUP_ID')
+		->join('EMPLEADORES','EMPLEADORES_GRUPOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
+		->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
+		return response()->json($data);
+	}	
+
+	public function buscaTurno(){
+		$empleador = findId("Empleador",request()->get('EMPL_ID'));
+		
+		$data=modelo("Turno")->select('TURNOS.TURN_DESCRIPCION','TURNOS.TURN_ID')
+		->join('EMPLEADORES_TURNOS','TURNOS.TURN_ID','=','EMPLEADORES_TURNOS.TURN_ID')
+		->join('EMPLEADORES','EMPLEADORES_TURNOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
+		->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
+		return response()->json($data);
 	}
 
 }

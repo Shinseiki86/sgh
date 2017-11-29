@@ -39,6 +39,7 @@ class EmpleadorController extends Controller
 			'EMPL_NOMBREREPRESENTANTE' => ['required','max:300'],
 			'EMPL_CEDULAREPRESENTANTE' => ['required'],
 			'CIUD_CEDULA' => ['required'],
+			'PROS_ID' => ['required'],
 			'CIUD_DOMICILIO' => ['required'],
 			'GERE_ids' => ['array'],
 			'TURN_ids' => ['array'],

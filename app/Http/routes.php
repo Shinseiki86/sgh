@@ -101,6 +101,9 @@ Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], functio
 	Route::post('tickets/rechazar/{TICK_ID}', 'TicketController@rechazarTicket');
 	Route::post('tickets/cerrar/{TICK_ID}', 'TicketController@cerrarTicket');
 	Route::get('getTicketsPorEstado', 'TicketController@getTicketsPorEstado');
+
+	Route::get('/buscaGrupo','TicketController@buscaGrupo');
+	Route::get('/buscaTurno','TicketController@buscaTurno');
 });
 
 Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'], function() {

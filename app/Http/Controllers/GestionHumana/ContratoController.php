@@ -176,8 +176,21 @@ class ContratoController extends Controller
 				return redirect()->back()->send();
 
 			}else{
-				parent::storeModel(['entidades'=>$entidades_id]);
+
+				$pros_id  = request()->get('PROS_ID');
+				$jefe_id  = request()->get('JEFE_ID');
+
+				if($pros_id == $jefe_id){
+					flash_modal('El Jefe inmediato no puede ser el mismo empleado', 'danger' );
+					return redirect()->back()->send();
+				}else{
+					parent::storeModel(['entidades'=>$entidades_id]);
+				}
+
+				
 			}
+
+
 
 			
 		}else{
@@ -306,7 +319,18 @@ class ContratoController extends Controller
 		$cargo 	   = request()->get('CARG_ID');
 
 		if($this->validarPlanta($empleador, $gerencia, $cargo)){
-			parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);	
+
+			$pros_id  = request()->get('PROS_ID');
+			$jefe_id  = request()->get('JEFE_ID');
+
+			if($pros_id == $jefe_id){
+				flash_modal('El Jefe inmediato no puede ser el mismo empleado', 'danger' );
+				return redirect()->back()->send();
+			}else{
+				parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);
+			}
+
+				
 		}else{
 			flash_alert('No se puede actualizar contrato: La planta autorizada se encuentra completa o no se ha definido', 'info' );
 			return redirect()->back();
@@ -515,10 +539,10 @@ class ContratoController extends Controller
 		}
 
 		
-			
-			
-		}	
-		
 
-		
-	}
+
+	}	
+
+
+
+}

@@ -32,7 +32,6 @@ class CreateTemporalesTable extends Migration
                 ->comment('Dirección de la temporal');
 
             $table->unsignedInteger('PROS_ID')
-                ->nullable()
                 ->comment('Persona encargada del manejo de gestión humana de la temporal.');
 
             $table->string('TEMP_OBSERVACIONES', 300)

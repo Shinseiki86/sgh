@@ -128,7 +128,7 @@
 			])
 			@include('widgets.list-group-item', [
 				'label'=>'Decisión Administrativa',
-				'value'=>$ticket->estadoaprobacion->SANC_DESCRIPCION
+				'value'=>$ticket->sancion->SANC_DESCRIPCION
 			])
 		</ul>
 	@endsection

@@ -1,5 +1,10 @@
 @include('datepicker')
 @include('chosen')
+
+@include('utilidades.select-dinamico', ['url'=>'cnfg-tickets/buscaGrupo', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GRUP_ID', 'idBusqueda'=>'GRUP_ID', 'nombreBusqueda'=>'GRUP_DESCRIPCION', 'prepend'=>'Seleccione un Grupo'])
+
+@include('utilidades.select-dinamico', ['url'=>'cnfg-tickets/buscaTurno', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'TURN_ID', 'idBusqueda'=>'TURN_ID', 'nombreBusqueda'=>'TURN_DESCRIPCION', 'prepend'=>'Seleccione un Turno'])
+
 <div class='col-md-8 col-md-offset-2'>
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'EMPL_ID', 'label'=>'Empleador', 'data'=>$arrEmpleadores])

@@ -27,7 +27,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_DIRECCION = 'CL 21A No. 2-07';
         $empleador->EMPL_CORREO = NULL;
     	$empleador->EMPL_OBSERVACIONES =  NULL;
-        $empleador->PROS_ID =  NULL;
+        $empleador->PROS_ID =  4;
     	$empleador->EMPL_CREADOPOR =  'admin';
     	$empleador->save();
 
@@ -42,7 +42,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_DIRECCION = 'LOS ALPES TV 73 No 31I 140';
         $empleador->EMPL_CORREO = NULL;
     	$empleador->EMPL_OBSERVACIONES =  NULL;
-        $empleador->PROS_ID =  NULL;
+        $empleador->PROS_ID =  4;
     	$empleador->EMPL_CREADOPOR =  'admin';
     	$empleador->save();
 
@@ -57,7 +57,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_DIRECCION = 'CL 70 7E BIS 04';
         $empleador->EMPL_CORREO = NULL;
         $empleador->EMPL_OBSERVACIONES =  NULL;
-        $empleador->PROS_ID =  NULL;
+        $empleador->PROS_ID =  4;
         $empleador->EMPL_CREADOPOR =  'admin';
         $empleador->save();
 
@@ -72,7 +72,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_DIRECCION = 'CL 70 7E BIS 04';
         $empleador->EMPL_CORREO = NULL;
         $empleador->EMPL_OBSERVACIONES =  NULL;
-        $empleador->PROS_ID =  NULL;
+        $empleador->PROS_ID =  4;
         $empleador->EMPL_CREADOPOR =  'admin';
         $empleador->save();
 
@@ -87,7 +87,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_DIRECCION = 'CL 11A 32 108';
         $empleador->EMPL_CORREO = NULL;
         $empleador->EMPL_OBSERVACIONES =  NULL;
-        $empleador->PROS_ID =  NULL;
+        $empleador->PROS_ID =  4;
         $empleador->EMPL_CREADOPOR =  'admin';
         $empleador->save();
 
@@ -102,7 +102,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_DIRECCION = 'LOS ALPES TV 73 No 31I 140';
         $empleador->EMPL_CORREO = NULL;
         $empleador->EMPL_OBSERVACIONES =  NULL;
-        $empleador->PROS_ID =  NULL;
+        $empleador->PROS_ID =  4;
         $empleador->EMPL_CREADOPOR =  'admin';
         $empleador->save();
 
@@ -117,7 +117,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_DIRECCION = 'CRA 9 No.1 - 26';
         $empleador->EMPL_CORREO = NULL;
         $empleador->EMPL_OBSERVACIONES =  NULL;
-        $empleador->PROS_ID =  NULL;
+        $empleador->PROS_ID =  4;
         $empleador->EMPL_CREADOPOR =  'admin';
         $empleador->save();
 
@@ -132,7 +132,7 @@ class EmpleadoresTableSeeder extends Seeder
         $empleador->EMPL_DIRECCION = 'CRA 54 27 116 BARIO EL BOSQUE';
         $empleador->EMPL_CORREO = NULL;
         $empleador->EMPL_OBSERVACIONES =  NULL;
-        $empleador->PROS_ID =  NULL;
+        $empleador->PROS_ID =  4;
         $empleador->EMPL_CREADOPOR =  'admin';
         $empleador->save();
 
