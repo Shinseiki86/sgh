@@ -5,7 +5,8 @@
 	[
 		'id'=>$name,
 		'class'=>'form-control selectpicker '.(!isset($class)?:$class),
-		'data-allow-clear'=>isset($allowClear) && $allowClear ?'true':'false',
+		//'data-allow-clear'=>isset($allowClear) && $allowClear ?'true':'false',
+		'data-allow-clear'=>'true',
 		'data-placeholder'=>isset($placeholder) ?$placeholder:'Seleccione una opción',
 	] + 
 	(isset($options)?$options:[]) +

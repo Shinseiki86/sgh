@@ -23,6 +23,7 @@ class Contrato extends ModelWithSoftDeletes
 		'CARG_ID',
 		'CONT_FECHAINGRESO',
 		'CONT_FECHARETIRO',
+		'CONT_FECHAGRABARETIRO',
 		'CONT_SALARIO',
 		'CONT_VARIABLE',
 		'CONT_RODAJE',

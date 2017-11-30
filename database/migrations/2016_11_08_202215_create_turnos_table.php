@@ -44,6 +44,14 @@ class CreateTurnosTable extends Migration
                 ->nullable()
                 ->comment('hora de finalización del turno de trabajo del segundo intervalo');
 
+            $table->time('TURN_HORAINICIOTI')
+                ->nullable()
+                ->comment('hora de inicio del turno de trabajo del tercer intervalo');
+
+            $table->time('TURN_HORAFINALTI')
+                ->nullable()
+                ->comment('hora de finalización del turno de trabajo del tercer intervalo');
+
             $table->string('TURN_TIPOTURNO', 20)
                 ->comment('tipo de turno de trabajo (operativo, administrativo)');
 

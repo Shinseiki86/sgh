@@ -29,7 +29,7 @@ class Temporal extends ModelWithSoftDeletes
 			'TEMP_RAZONSOCIAL' => ['required', 'max:300'],
 			'TEMP_NOMBRECOMERCIAL' => ['required', 'max:300'],
 			'TEMP_DIRECCION' => ['required', 'max:300'],
-			'TEMP_OBSERVACIONES' => ['required', 'max:300'],
+			'TEMP_OBSERVACIONES' => ['max:300'],
 			'PROS_ID' => ['required'],
 		];
 	}

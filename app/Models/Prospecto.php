@@ -109,4 +109,12 @@ class Prospecto extends ModelWithSoftDeletes
         return $prospecto;
     }
 
+    public static function getProspectoPorCedula($PROS_CEDULA)
+	{
+		$model = new static;
+        $prospecto = $model->where('PROS_CEDULA', $PROS_CEDULA)->first();
+
+        return $prospecto;
+    }
+
 }

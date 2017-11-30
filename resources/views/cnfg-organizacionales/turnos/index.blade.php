@@ -27,6 +27,8 @@
 				<th class="col-md-2">Fin P.I</th>
 				<th class="col-md-2">Inicio S.I</th>
 				<th class="col-md-2">Fin S.I</th>
+				<th class="col-md-2">Inicio T.I</th>
+				<th class="col-md-2">Fin T.I</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
@@ -42,6 +44,8 @@
 				<td>{{ $turno -> TURN_HORAFINALPI }}</td>
 				<td>{{ $turno -> TURN_HORAINICIOSI }}</td>
 				<td>{{ $turno -> TURN_HORAFINALSI }}</td>
+				<td>{{ $turno -> TURN_HORAINICIOTI }}</td>
+				<td>{{ $turno -> TURN_HORAFINALTI }}</td>
 				<td>{{ $turno -> TURN_OBSERVACIONES }}</td>
 				<td>{{ $turno -> TURN_CREADOPOR }}</td>
 				<td>

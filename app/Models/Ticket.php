@@ -26,6 +26,8 @@ class Ticket extends ModelWithSoftDeletes
 		'TICK_FECHACIERRE',
 		'TICK_FECHACUMPLIMIENTO',
 		'TICK_ARCHIVO',
+		'TICK_CONCLUSION',
+		'TICK_MOTIVORECHAZO',
 		'CONT_ID',
 		'ESTI_ID',
 		'ESAP_ID',

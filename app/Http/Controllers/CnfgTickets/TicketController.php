@@ -109,6 +109,8 @@ class TicketController extends Controller
 				'TICK_FECHAEVENTO',
 				'TICK_FECHASOLICITUD',
 				'TICK_FECHAAPROBACION',
+				'TICK_MOTIVORECHAZO',
+				'TICK_CONCLUSION',
 				'TICK_FECHACIERRE',
 				'ESAP_DESCRIPCION',
 				'GRUP_DESCRIPCION',
@@ -401,13 +403,9 @@ class TicketController extends Controller
              	$prosUserId = $prosUser->PROS_ID;
              }else{
              	$prosUserId = null;
-             }
-             	
+             }            	
 
-             if($prosUserId == $prosJefeId or $prosUserId == null){
-             	flash_modal( 'El Ticket solo puede ser rechazado por el jefe inmediato de quien lo creó', 'danger' );
-				return redirect()->back();
-             }else{
+             if($prosUserId == $prosJefeId){
 
              	$ticket->update([
 					'ESAP_ID' => EstadoAprobacion::RECHAZADO,
@@ -425,6 +423,11 @@ class TicketController extends Controller
 
 				flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido rechazado exitosamente.', 'success' );
 				return redirect()->route($this->route.'.index');
+             	
+             }else{
+
+				flash_modal( 'El Ticket solo puede ser rechazado por el jefe inmediato de quien lo creó', 'danger' );
+				return redirect()->back();
 
              }
 
@@ -448,32 +451,62 @@ class TicketController extends Controller
 			return redirect()->back();
 		}else{
 
-			//prospecto responsable de gestión humana del Empleador
+			//id de prospecto responsable de gestión humana del Empleador
 			$prosIdEmpleador = $ticket->contrato->empleador->prospecto->PROS_ID;
+			//prospecto responsable de gestión humana del Empleador
 			$prosResponEmple = Prospecto::find($prosIdEmpleador);
 			
+			//encuentra el contrato que tiene asociado el ticket
 			$contratoTicket = Contrato::findOrFail($ticket->contrato->CONT_ID);
+
+			//variable para almacenar el reponsable de gestión humana (directo o temporal)
+			$responsableGh = $prosResponEmple;
+
 			if(isset($contratoTicket->TEMP_ID)){
-				//prospecto responsable de gestión humana de la Temporal
+				//id de prospecto responsable de gestión humana de la Temporal
 				$prosIdTemporal = $ticket->contrato->temporal->prospecto->PROS_ID;
+				//prospecto responsable de gestión humana de la Temporal
 				$prosResponTempo = Prospecto::find($prosIdTemporal);
+
+				$responsableGh = $prosResponTempo;
 			}
 
-			$ticket->update([
-				'ESTI_ID' => EstadoTicket::CERRADO,
-				'ESAP_ID' => EstadoAprobacion::FINALIZADO,
-				'TICK_FECHACIERRE' =>  Carbon::now(),
-				'SANC_ID' => $data['SANC_ID'],
-				'TICK_CONCLUSION' => $data['TICK_CONCLUSION']
-			]);
+			$prosUser = Prospecto::getProspectoPorCedula(\Auth::user()->cedula);
 
-			//===================================================================================
-			$job = (new SendEmailClosedTicket($ticket, \Auth::user()))->onQueue('emails');
-			$this->dispatch($job);
-			//===================================================================================
+			
+			
+			if(isset($prosUser)){
+				if($responsableGh->PROS_ID == $prosUser->PROS_ID){
 
-			flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );
-			return redirect()->route($this->route.'.index');
+					$ticket->update([
+						'ESTI_ID' => EstadoTicket::CERRADO,
+						'ESAP_ID' => EstadoAprobacion::FINALIZADO,
+						'TICK_FECHACIERRE' =>  Carbon::now(),
+						'SANC_ID' => $data['SANC_ID'],
+						'TICK_CONCLUSION' => $data['TICK_CONCLUSION']
+					]);
+
+					//===================================================================================
+					$job = (new SendEmailClosedTicket($ticket, \Auth::user()))->onQueue('emails');
+					$this->dispatch($job);
+					//===================================================================================
+
+					flash_alert( 'Ticket '.$ticket->TICK_ID.' ha sido cerrado exitosamente.', 'success' );
+					return redirect()->route($this->route.'.index');
+
+				}else{
+
+					flash_modal( 'El Ticket solo puede ser cerrado por el rresponsable de gestión humana o de la temporal', 'danger' );
+					return redirect()->back();
+				}
+			}else{
+
+				flash_modal( 'El rresponsable de gestión humana no tiene hoja de vida en el sistema', 'danger' );
+					return redirect()->back();
+			}
+			
+
+			
 
 		}
 

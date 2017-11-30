@@ -48,6 +48,10 @@ class CreateContratosTable extends Migration
                 ->nullable()
                 ->comment('fecha de retiro del contrato');
 
+            $table->date('CONT_FECHAGRABARETIRO')
+                ->nullable()
+                ->comment('fecha de retiro del contrato');
+
             $table->unsignedInteger('CONT_SALARIO')
                 ->comment('asignacion salarial del colaborador en el contrato');
 

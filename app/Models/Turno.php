@@ -25,6 +25,8 @@ class Turno extends ModelWithSoftDeletes
 		'TURN_HORAFINALPI',
 		'TURN_HORAINICIOSI',
 		'TURN_HORAFINALSI',
+		'TURN_HORAINICIOTI',
+		'TURN_HORAFINALTI',
 		'TURN_TIPOTURNO',
 	];
 

@@ -29,7 +29,7 @@
 						}
 					},
 					error:function(){
-						alert('ha ocurrido un error');
+						toastr.error('No hay datos disponibles para las listas dependientes','No Hay Datos',{"hideMethod": "fadeOut","timeOut": "2000","progressBar": true,"closeButton": true,"positionClass": "toast-top-left",});
 					}
 				});			
 			});	

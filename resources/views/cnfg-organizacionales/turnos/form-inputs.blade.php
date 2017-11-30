@@ -11,6 +11,9 @@
 @include('widgets.forms.input', ['type'=>'date', 'name'=>'TURN_HORAINICIOSI', 'label'=>'Hora Inicial Segundo Intervalo' ])
 @include('widgets.forms.input', ['type'=>'date', 'name'=>'TURN_HORAFINALSI', 'label'=>'Hora Final Segundo Intervalo' ])
 
+@include('widgets.forms.input', ['type'=>'date', 'name'=>'TURN_HORAINICIOTI', 'label'=>'Hora Inicial Tercer Intervalo' ])
+@include('widgets.forms.input', ['type'=>'date', 'name'=>'TURN_HORAFINALTI', 'label'=>'Hora Inicial Tercer Intervalo' ])
+
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'TURN_TIPOTURNO', 'label'=>'Tipo de Turno', 'data'=>$arrTipoTurnos, 'options'=>['data-live-search'=>'true']])
 
 @include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'TURN_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])

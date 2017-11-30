@@ -13,6 +13,8 @@ use SGH\Models\Riesgo;
 use SGH\Models\Empleador;
 use SGH\Models\TipoEntidad;
 
+use Carbon\Carbon;
+
 class ContratoController extends Controller
 {
 	protected $route = 'gestion-humana.contratos';
@@ -155,7 +157,7 @@ class ContratoController extends Controller
 	 * @return Response
 	 */
 	public function store()
-	{
+	{	
 		$entidades_id = [];
 		foreach (['eps','arl','ccf'] as $entidad) {
 			if(request()->get('ENTI_ID_'.$entidad)!=null)
@@ -317,6 +319,8 @@ class ContratoController extends Controller
 		$empleador = request()->get('EMPL_ID');
 		$gerencia  = request()->get('GERE_ID');
 		$cargo 	   = request()->get('CARG_ID');
+
+		//dd($this->validarPlanta($empleador, $gerencia, $cargo));
 
 		if($this->validarPlanta($empleador, $gerencia, $cargo)){
 
@@ -520,6 +524,7 @@ class ContratoController extends Controller
 
 			$contrato->CONT_MOREOBSERVACIONES = request()->get('CONT_MOREOBSERVACIONES');
 			$contrato->ESCO_ID = 2; //Retirado
+			$contrato->CONT_FECHAGRABARETIRO = Carbon::now();
 			$contrato->save();
 
 			if(request()->get('PROS_MARCA') == 'SI'){
