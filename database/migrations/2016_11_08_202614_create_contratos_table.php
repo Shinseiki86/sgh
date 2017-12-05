@@ -79,6 +79,9 @@ class CreateContratosTable extends Migration
             $table->unsignedInteger('EMPL_ID')
                 ->comment('empleador del colaborador');
 
+            $table->unsignedInteger('NEGO_ID')
+                ->comment('negocio del colaborador');
+
             $table->unsignedInteger('TEMP_ID')->nullable()
                 ->comment('temporal del colaborador');
 
@@ -232,6 +235,12 @@ class CreateContratosTable extends Migration
             $table->foreign('CIUD_SERVICIO')
                 ->references('CIUD_ID')
                 ->on('CIUDADES')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('NEGO_ID')
+                ->references('NEGO_ID')
+                ->on('NEGOCIOS')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

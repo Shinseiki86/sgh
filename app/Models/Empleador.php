@@ -98,4 +98,20 @@ class Empleador extends ModelWithSoftDeletes
 		return $this->belongsToMany(Grupo::class, 'EMPLEADORES_GRUPOS', $foreingKey,  $otherKey);
 	}
 
+	public function negocios()
+	{
+		$foreingKey = 'NEGO_ID';
+		return $this->hasMany(Negocio::class, $foreingKey);
+	}
+
+	/*
+	 * Relación USERS-EMPLEADORES (muchos a muchos). 
+	 */
+	public function users()
+	{
+		$foreingKey = 'EMPL_ID';
+		$otherKey   = 'USER_id';
+		return $this->belongsToMany(User::class, 'USUARIOS_EMPLEADORES', $foreingKey,  $otherKey);
+	}
+
 }

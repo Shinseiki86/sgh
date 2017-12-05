@@ -22,6 +22,7 @@
 			<tr>
 				<th class="col-md-5">Empleador</th>
 				<th class="col-md-5">E.S.T</th>
+				<th class="col-md-5">Negocio</th>
 				<th class="col-md-5">Tipo Contrato</th>
 				<th class="col-md-5">Clase de Contrato</th>
 				<th class="col-md-5">Cedula</th>
@@ -30,6 +31,7 @@
 				<th class="col-md-5">Cargo</th>
 				<th class="col-md-5">Estado</th>
 				<th class="col-md-5">Fecha Ingreso</th>
+				<th class="col-md-5">Fecha Fin</th>
 				<th class="col-md-5">Fecha Retiro</th>
 				<th class="col-md-5">Motivo Retiro</th>
 				<th class="col-md-5">Variable</th>
@@ -53,6 +55,7 @@
 			<tr class="{{ ($contrato->ESCO_ID == 1) ? '' : 'danger' }}">
 				<td>{{ $contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $contrato -> temporal -> TEMP_NOMBRECOMERCIAL or null }}</td>
+				<td>{{ $contrato -> negocio -> NEGO_DESCRIPCION or null }}</td>
 				<td>{{ $contrato -> tipocontrato -> TICO_DESCRIPCION }}</td>
 				<td>{{ $contrato -> clasecontrato -> CLCO_DESCRIPCION }}</td>
 				<td>{{ $contrato -> prospecto -> PROS_CEDULA }}</td>
@@ -61,6 +64,7 @@
 				<td>{{ $contrato -> cargo -> CARG_DESCRIPCION }}</td>
 				<td>{{ $contrato -> estadocontrato -> ESCO_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> CONT_FECHAINGRESO }}</td>
+				<td>{{ $contrato -> CONT_FECHATERMINACION }}</td>
 				<td>{{ $contrato -> CONT_FECHARETIRO }}</td>
 				<td>{{ $contrato-> motivoretiro -> MORE_DESCRIPCION or null }}</td>
 				<td>{{ $contrato -> CONT_VARIABLE }}</td>

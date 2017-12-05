@@ -68,6 +68,16 @@ class User extends Authenticatable
 		return $this->belongsToMany(Role::class);
 	}
 
+	/*
+	 * Relación USERS-EMPLEADORES (muchos a muchos). 
+	 */
+	public function empleadores()
+	{
+		$foreingKey = 'USER_id';
+		$otherKey   = 'EMPL_ID';
+		return $this->belongsToMany(Empleador::class, 'USUARIOS_EMPLEADORES', $foreingKey,  $otherKey);
+	}
+
 	public function tickets()
 	{
 		$foreingKey = 'USER_id';

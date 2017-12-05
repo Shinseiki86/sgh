@@ -1,6 +1,6 @@
 @include('datepicker')
 @include('chosen')
-@include('utilidades.validacion-contratos')
+@rinclude('validacion-contratos')
 
 @include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaGerencia', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GERE_ID', 'idBusqueda'=>'GERE_ID', 'nombreBusqueda'=>'GERE_DESCRIPCION', 'prepend'=>'Seleccione una Gerencia'])
 
@@ -12,6 +12,8 @@
 
 <div class='col-md-8 col-md-offset-2'>
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'EMPL_ID', 'label'=>'Empleador', 'data'=>$arrEmpleadores])
+
+@include('widgets.forms.input', ['type'=>'select', 'name'=>'NEGO_ID', 'label'=>'Negocio', 'data'=>$arrNegocios])
 
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'PROS_ID', 'label'=>'Prospecto', 'data'=>$arrProspectos])
 
@@ -28,8 +30,17 @@
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'CLCO_ID', 'label'=>'Clase de contrato', 'data'=>$arrClasescontrato])
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'RIES_ID', 'label'=>'Riesgo ARL', 'data'=>$arrRiesgos])
 
-@include('widgets.forms.input', ['type'=>'select', 'column'=>8, 'name'=>'CARG_ID', 'label'=>'Cargo', 'data'=>$arrCargos])
-@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'CONT_FECHAINGRESO', 'label'=>'Fecha de Ingreso' ])
+@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'CARG_ID', 'label'=>'Cargo', 'data'=>$arrCargos])
+
+<div class="col-md-13">
+@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'CONT_FECHAINGRESO', 'label'=>'Fecha de Ingreso' ])
+</div>
+
+<div class="col-md-13" id="DIVFECHAFIN">
+@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'CONT_FECHATERMINACION', 'label'=>'Fecha Fin de Contrato' ])
+</div>
+
+<div class="col-md-13 ">
 
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'CIUD_CONTRATA', 'label'=>'Ciudad de Contratación', 'data'=>$arrCiudades])
 @include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'CIUD_SERVICIO', 'label'=>'Ciudad de Servicio', 'data'=>$arrCiudades])

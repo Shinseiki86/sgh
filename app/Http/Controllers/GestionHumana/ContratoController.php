@@ -12,6 +12,7 @@ use SGH\Models\Cargo;
 use SGH\Models\Riesgo;
 use SGH\Models\Empleador;
 use SGH\Models\TipoEntidad;
+use SGH\Models\Negocio;
 
 use Carbon\Carbon;
 
@@ -68,6 +69,9 @@ class ContratoController extends Controller
 
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
+		//Se crea un array con los negocios
+		$arrNegocios = model_to_array(Negocio::class, 'NEGO_DESCRIPCION');
 
 		//Se crea un array con los tipos de empleadores
 		$arrTiposempleadores = model_to_array(TipoEmpleador::class, 'TIEM_DESCRIPCION');
@@ -148,7 +152,7 @@ class ContratoController extends Controller
 		->get();
 		$arrRetirados = model_to_array($arrRetirados, $columnName, $primaryKey);
 
-		return view($this->route.'.create' , compact('arrEmpleadores','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrRetirados','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
+		return view($this->route.'.create' , compact('arrEmpleadores','arrNegocios','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrRetirados','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
 	}
 
 	/**
@@ -169,7 +173,7 @@ class ContratoController extends Controller
 		$gerencia  = request()->get('GERE_ID');
 		$cargo 	   = request()->get('CARG_ID');
 
-		if($this->validarPlanta($empleador, $gerencia, $cargo)){
+		if($this->validarPlanta($empleador, $gerencia, $cargo, 'new')){
 
 			$prospecto = Prospecto::findOrFail(request()->get('PROS_ID'));
 			if($prospecto->PROS_MARCA == 'SI'){
@@ -216,6 +220,9 @@ class ContratoController extends Controller
 
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
+
+		//Se crea un array con los negocios
+		$arrNegocios = model_to_array(Negocio::class, 'NEGO_DESCRIPCION');
 
 		//Se crea un array con los tipos de empleadores
 		$arrTiposempleadores = model_to_array(TipoEmpleador::class, 'TIEM_DESCRIPCION');
@@ -298,7 +305,7 @@ class ContratoController extends Controller
 		$arrRetirados = model_to_array($arrRetirados, $columnName, $primaryKey);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('contrato','arrEmpleadores','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrRetirados','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
+		return view($this->route.'.edit', compact('contrato','arrEmpleadores','arrNegocios','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrRetirados','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF', 'ENTI_ID_eps', 'ENTI_ID_arl', 'ENTI_ID_ccf'));
 	}
 
 	/**
@@ -322,7 +329,7 @@ class ContratoController extends Controller
 
 		//dd($this->validarPlanta($empleador, $gerencia, $cargo));
 
-		if($this->validarPlanta($empleador, $gerencia, $cargo)){
+		if($this->validarPlanta($empleador, $gerencia, $cargo, 'update')){
 
 			$pros_id  = request()->get('PROS_ID');
 			$jefe_id  = request()->get('JEFE_ID');
@@ -405,7 +412,7 @@ class ContratoController extends Controller
 	}
 
 	
-	public function validarPlanta($empleador, $gerencia, $cargo){
+	public function validarPlanta($empleador, $gerencia, $cargo, $opcion){
 
 		if($empleador!=null && $gerencia!=null && $cargo!=null){
 
@@ -415,13 +422,23 @@ class ContratoController extends Controller
 			//contar los contratos activos con la misma estructura
 			$contratos = $this->getContratosPorEstructura($empleador, $gerencia, $cargo);
 
-			//dd($plantalaboral);
+			if($opcion == 'new'){
 
-			// 2<=1
-			if($contratos<$plantalaboral){
-				return true;
-			}else{
-				return false;
+				// 2<=1
+				if($contratos<$plantalaboral){
+					return true;
+				}else{
+					return false;
+				}
+
+			}else if($opcion == 'update'){
+
+				if($contratos<=$plantalaboral){
+					return true;
+				}else{
+					return false;
+				}
+
 			}
 
 		}

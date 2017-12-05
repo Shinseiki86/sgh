@@ -32,5 +32,11 @@ class ClasesContratosTableSeeder extends Seeder
         $clasecontrato->CLCO_CREADOPOR =  'SYSTEM';
         $clasecontrato->save();
 
+        $clasecontrato = new ClaseContrato;
+        $clasecontrato->CLCO_DESCRIPCION = 'CONTRATO DE APRENDIZAJE';
+        $clasecontrato->CLCO_OBSERVACIONES =  NULL;
+        $clasecontrato->CLCO_CREADOPOR =  'SYSTEM';
+        $clasecontrato->save();
+
     }
 }

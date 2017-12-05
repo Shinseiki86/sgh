@@ -22,6 +22,7 @@ class Contrato extends ModelWithSoftDeletes
 		'CONT_CASOMEDICO',
 		'CARG_ID',
 		'CONT_FECHAINGRESO',
+		'CONT_FECHATERMINACION',
 		'CONT_FECHARETIRO',
 		'CONT_FECHAGRABARETIRO',
 		'CONT_SALARIO',
@@ -33,6 +34,7 @@ class Contrato extends ModelWithSoftDeletes
 		'TICO_ID',
 		'CLCO_ID',
 		'EMPL_ID',
+		'NEGO_ID',
 		'RIES_ID',
 		'TIEM_ID',
 		'GERE_ID',
@@ -50,6 +52,7 @@ class Contrato extends ModelWithSoftDeletes
 	public static function rules($id = 0){
 		return [
 			'EMPL_ID' => ['numeric', 'required'],
+			'NEGO_ID' => ['numeric', 'required'],
 			'TEMP_ID' => ['numeric',],
 			'TIEM_ID' => ['numeric', 'required'],
 			'GERE_ID' => ['numeric', 'required'],
@@ -133,6 +136,12 @@ class Contrato extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'EMPL_ID';
 		return $this->belongsTo(Empleador::class, $foreingKey);
+	}
+
+	public function negocio()
+	{
+		$foreingKey = 'NEGO_ID';
+		return $this->belongsTo(Negocio::class, $foreingKey);
 	}
 
 	public function riesgo()

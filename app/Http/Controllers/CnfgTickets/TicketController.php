@@ -44,6 +44,7 @@ class TicketController extends Controller
 			'TURN_ID' => ['required'],
 			'CATE_ID' => ['required'],
 			'TIIN_ID' => ['required'],
+			'TICK_ARCHIVO' => ['mimes:rar|max:5120'],
 			'TICK_FECHAEVENTO' => ['required'],
 			'TICK_OBSERVACIONES' => ['max:3000'],
 		]);

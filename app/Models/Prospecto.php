@@ -64,9 +64,10 @@ class Prospecto extends ModelWithSoftDeletes
 
 	public function scopeRetirados($query)
 	{
+		//se modifica el metodo debido a que no necesariamente el empleado debe estar retirado para ser remplazado
 		$query = $query 
-			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
-			->where('ESCO_ID',2);
+			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID');
+			//->where('ESCO_ID',2);
 
 		return $query;
 	}
@@ -116,5 +117,11 @@ class Prospecto extends ModelWithSoftDeletes
 
         return $prospecto;
     }
+
+    public function negocios()
+	{
+		$foreingKey = 'PROS_ID';
+		return $this->hasMany(Negocio::class, $foreingKey);
+	}
 
 }

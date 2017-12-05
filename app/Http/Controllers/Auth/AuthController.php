@@ -13,6 +13,8 @@ use SGH\Models\User;
 use SGH\Models\Rol;
 use SGH\Models\Menu;
 
+use SGH\Models\Empleador;
+
 class AuthController extends Controller
 {
 	protected $username = 'username';
@@ -102,8 +104,11 @@ class AuthController extends Controller
 		//Se crea un array con los Role disponibles
 		$arrRoles = model_to_array(Role::class, 'display_name');
 
+		//Se crea un array con los Empleadores disponibles
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_NOMBRECOMERCIAL');
+
 		// Muestra el formulario de creación y los array para los 'select'
-		return view('auth.register', compact('arrRoles'));
+		return view('auth.register', compact('arrRoles','arrEmpleadores'));
 	}
 
 	/**
@@ -114,7 +119,8 @@ class AuthController extends Controller
 	 */
 	public function register(Request $request)
 	{
-		parent::storeModel(['roles'=>'roles_ids']);
+		
+		parent::storeModel(['roles'=>'roles_ids','empleadores'=>'EMPL_ids']);
 	}
 
 	/**
@@ -187,8 +193,12 @@ class AuthController extends Controller
 		$arrRoles = model_to_array(Role::class, 'display_name');
 		$roles_ids = $usuario->roles->pluck('id')->toJson();
 
+		//Se crea un array con los Empleadores disponibles
+		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_NOMBRECOMERCIAL');
+		$EMPL_ids = $usuario->empleadores->pluck('EMPL_ID')->toJson();
+
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('auth/edit', compact('usuario', 'arrRoles', 'roles_ids'));
+		return view('auth/edit', compact('usuario','arrRoles','roles_ids','arrEmpleadores','EMPL_ids'));
 	}
 
 	/**
@@ -220,6 +230,10 @@ class AuthController extends Controller
 			//Relación con roles
 			$roles_ids = Input::has('roles_ids') ? Input::get('roles_ids') : [];
 			$usuario->roles()->sync($roles_ids, true);
+
+			//Relación con empleadores
+			$empl_ids = Input::has('EMPL_ids') ? Input::get('EMPL_ids') : [];
+			$usuario->empleadores()->sync($empl_ids, true);
 
 			// redirecciona al index de controlador
 			flash_alert( 'Usuario '.$usuario->username.' modificado exitosamente!', 'success' );

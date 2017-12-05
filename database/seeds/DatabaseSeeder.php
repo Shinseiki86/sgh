@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ConceptoAusenciasTableSeeder::class);
         $this->call(TicketsTableSeeder::class);
         $this->call(PlantasLaboralesTableSeeder::class);
+        $this->call(NegociosTableSeeder::class);
         
     }
 }

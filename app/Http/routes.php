@@ -38,6 +38,7 @@ Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], fun
 	Route::resource('clasescontratos', 'ClaseContratoController');
 	Route::resource('estadoscontratos', 'EstadoContratoController');
 	Route::resource('motivosretiros', 'MotivoRetiroController');
+	Route::resource('negocios', 'NegocioController');
 });
 
 Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizacionales'], function() {

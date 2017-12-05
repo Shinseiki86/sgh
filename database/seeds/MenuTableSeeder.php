@@ -136,6 +136,13 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
+            Menu::create([
+                'MENU_LABEL' => 'Negocios',
+                'MENU_URL' => 'cnfg-contratos/negocios',
+                'MENU_ICON' => 'fa fa-list-ol',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
 
         $orderItem = 0;
         $parent = Menu::create([
