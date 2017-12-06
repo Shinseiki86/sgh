@@ -337,7 +337,7 @@ if (! function_exists('get_email_user')) {
 if (! function_exists('convert_to_date')) {
     /**
      * Convierte una cadena de texto a una fecha
-     * @param string $fecha_string Mensaje a presentar.
+     * @param string $fecha_string fecha en formato de texto
      * @return a date 
      */
     function convert_to_date($fecha_string) {
@@ -345,6 +345,42 @@ if (! function_exists('convert_to_date')) {
         $date = new Carbon($fecha_string);
 
         return $date;
+
+    }
+}
+
+if (! function_exists('get_permisosempresas_user')) {
+    /**
+     * Devuelve los empleadores para los que tiene permiso el usuario
+     * @param int $user_id id del usuario
+     * @return un arreglo con el resultado 
+     */
+    function get_permisosempresas_user($user_id) {
+        
+        $result = \Auth::user()->empleadores()->where('USER_id', $user_id)->get()->pluck('EMPL_ID');
+
+        return $result;
+
+    }
+}
+
+if (! function_exists('get_is_admin')) {
+    /**
+     * Devuelve una confirmación de si el usuario es o no administrador
+     * @param int $user_id id del usuario
+     * @return un arreglo con el resultado 
+     */
+    function get_is_admin($user_id) {
+        
+        $result = \Auth::user()->roles()->where('user_id', $user_id)->get()->pluck('name')->toArray();
+
+        $flag = false;
+        for($i=0; $i<count($result); $i++) { 
+            if($result[$i] == 'admin')
+                $flag = true;
+        }
+
+        return $flag;
 
     }
 }

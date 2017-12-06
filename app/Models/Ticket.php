@@ -117,5 +117,20 @@ class Ticket extends ModelWithSoftDeletes
 		return $this->belongsTo(User::class, $foreingKey);
 	}
 
+	public function scopeTicketsPorEmpleador($query)
+	{
+		$query = $query 
+			->join('CONTRATOS', 'CONTRATOS.CONT_ID', '=', 'TICKETS.CONT_ID')
+			->join('USERS', 'USERS.USER_id', '=', 'TICKETS.USER_id')
+			->join('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
+			->join('ESTADOSAPROBACIONES', 'ESTADOSAPROBACIONES.ESAP_ID', '=', 'TICKETS.ESAP_ID')
+			->join('PRIORIDADES', 'PRIORIDADES.PRIO_ID', '=', 'TICKETS.PRIO_ID')
+			->join('CATEGORIAS', 'CATEGORIAS.CATE_ID', '=', 'TICKETS.CATE_ID')
+			->join('TIPOSINCIDENTES', 'TIPOSINCIDENTES.TIIN_ID', '=', 'TICKETS.TIIN_ID')
+			->join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID');
+
+		return $query;
+	}
+
 
 }

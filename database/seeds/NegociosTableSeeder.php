@@ -24,7 +24,23 @@ class NegociosTableSeeder extends Seeder
 	    $negocio->save();
 
 	    $negocio = new Negocio;
-	    $negocio->NEGO_DESCRIPCION = 'PROMOCALI R1';
+	    $negocio->NEGO_DESCRIPCION = 'PROMOVALLE R1';
+	    $negocio->NEGO_OBSERVACIONES = NULL;
+	    $negocio->EMPL_ID = 3;
+	    $negocio->PROS_ID = 1;
+	    $negocio->NEGO_CREADOPOR = 'admin';
+	    $negocio->save();
+
+	    $negocio = new Negocio;
+	    $negocio->NEGO_DESCRIPCION = 'SURASEO R5';
+	    $negocio->NEGO_OBSERVACIONES = NULL;
+	    $negocio->EMPL_ID = 3;
+	    $negocio->PROS_ID = 1;
+	    $negocio->NEGO_CREADOPOR = 'admin';
+	    $negocio->save();
+
+	    $negocio = new Negocio;
+	    $negocio->NEGO_DESCRIPCION = 'SERAMBIENTAL R2';
 	    $negocio->NEGO_OBSERVACIONES = NULL;
 	    $negocio->EMPL_ID = 3;
 	    $negocio->PROS_ID = 1;

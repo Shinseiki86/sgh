@@ -126,10 +126,14 @@
 				'label'=>'Estado Aprobación',
 				'value'=>$ticket->estadoaprobacion->ESAP_DESCRIPCION
 			])
-			@include('widgets.list-group-item', [
+
+			@if($ticket->SANC_ID != NULL)
+				@include('widgets.list-group-item', [
 				'label'=>'Decisión Administrativa',
 				'value'=>$ticket->sancion->SANC_DESCRIPCION
-			])
+				])
+			@endif				
+			
 		</ul>
 	@endsection
 	@include('widgets.panel', ['as'=>'generales', 'header'=>true])

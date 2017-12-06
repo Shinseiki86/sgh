@@ -22,7 +22,6 @@
 			<tr>
 				<th class="col-md-5">Empleador</th>
 				<th class="col-md-5">E.S.T</th>
-				<th class="col-md-5">Negocio</th>
 				<th class="col-md-5">Tipo Contrato</th>
 				<th class="col-md-5">Clase de Contrato</th>
 				<th class="col-md-5">Cedula</th>
@@ -45,6 +44,7 @@
 				<th class="col-md-5">Remplaza a</th>
 				<th class="col-md-5">Ciudad de Contrato</th>
 				<th class="col-md-5">Ciudad de Servicio</th>
+				<th class="col-md-5">Negocio</th>
 				<th class="col-md-5">Observaciones</th>
 				<th class="col-md-1 all"></th>
 			</tr>
@@ -55,7 +55,6 @@
 			<tr class="{{ ($contrato->ESCO_ID == 1) ? '' : 'danger' }}">
 				<td>{{ $contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $contrato -> temporal -> TEMP_NOMBRECOMERCIAL or null }}</td>
-				<td>{{ $contrato -> negocio -> NEGO_DESCRIPCION or null }}</td>
 				<td>{{ $contrato -> tipocontrato -> TICO_DESCRIPCION }}</td>
 				<td>{{ $contrato -> clasecontrato -> CLCO_DESCRIPCION }}</td>
 				<td>{{ $contrato -> prospecto -> PROS_CEDULA }}</td>
@@ -78,6 +77,7 @@
 				<td>{{ ($contrato->REMP_ID != NULL) ? nombre_empleado($contrato->REMP_ID) : '' }}</td>
 				<td>{{ $contrato -> ciudad_contrata -> CIUD_NOMBRE }}</td>
 				<td>{{ $contrato -> ciudad_servicio -> CIUD_NOMBRE }}</td>
+				<td>{{ $contrato -> negocio -> NEGO_DESCRIPCION or null }}</td>
 				<td>{{ $contrato -> CONT_OBSERVACIONES }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->

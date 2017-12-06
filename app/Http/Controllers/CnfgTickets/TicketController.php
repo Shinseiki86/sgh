@@ -57,8 +57,17 @@ class TicketController extends Controller
 	 */
 	public function index()
 	{
+		//obtiene los empleadores sobre los cuales el usuario tiene permiso
+		$empleadores = get_permisosempresas_user(\Auth::user()->USER_id);
+		//obtiene la confirmación de si es un administrador
+		$is_admin = get_is_admin(\Auth::user()->USER_id);
+
 		//Se obtienen todos los registros.
-		//$tickets = Ticket::all();
+		$tickets = Ticket::TicketsPorEmpleador()->whereIn('EMPLEADORES.EMPL_ID',$empleadores)->get();
+
+		if($is_admin)
+			$tickets = Ticket::all();
+
 		//Se carga la vista y se pasan los registros
 		return view($this->route.'.index', compact('tickets'));
 	}

@@ -84,6 +84,13 @@ class Contrato extends ModelWithSoftDeletes
 		];
 	}
 
+	public function scopeActivos($query)
+	{
+		$query = $query->whereIn('EMPL_ID',1);
+
+		return $query;
+	}
+
 	public function prospecto()
 	{
 		$foreingKey = 'PROS_ID';

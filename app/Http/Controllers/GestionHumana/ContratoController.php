@@ -33,8 +33,17 @@ class ContratoController extends Controller
 	 */
 	public function index()
 	{
-		//Se obtienen todos los registros.
-		$contratos = Contrato::all();
+		//obtiene los empleadores sobre los cuales el usuario tiene permiso
+		$empleadores = get_permisosempresas_user(\Auth::user()->USER_id);
+		//obtiene la confirmación de si es un administrador
+		$is_admin = get_is_admin(\Auth::user()->USER_id);
+
+		//Se obtienen los registros con los empleadores a los cuales tiene permiso
+		$contratos = Contrato::whereIn('EMPL_ID',$empleadores)->get();
+
+		if($is_admin)
+			$contratos = Contrato::all();
+
 		//Se carga la vista y se pasan los registros
 		return view($this->route.'.index', compact('contratos'));
 	}

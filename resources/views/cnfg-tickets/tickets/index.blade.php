@@ -1,6 +1,8 @@
 @extends('layouts.menu')
 @section('title', '/ Tickets')
 
+@include('datatable-export')
+
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
@@ -36,10 +38,50 @@
 				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
-		<tbody></tbody>
+		<tbody>
+			@foreach($tickets as $ticket)
+			<tr>
+			 <td>{{ $ticket -> contrato-> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
+				<td>{{ nombre_empleado($ticket -> contrato -> prospecto -> PROS_ID)  }}</td>
+				<td>{{ $ticket -> estadoticket -> ESTI_DESCRIPCION }}</td>
+				<td>{{ $ticket -> tipoincidente -> TIIN_DESCRIPCION }}</td>
+				<td>{{ $ticket -> prioridad -> PRIO_DESCRIPCION }}</td>
+				<td>{{ $ticket -> categoria -> CATE_DESCRIPCION }}</td>
+				<td>{{ $ticket -> TICK_FECHAEVENTO }}</td>
+				<td>{{ $ticket -> TICK_FECHASOLICITUD }}</td>
+				<td>{{ $ticket -> TICK_FECHAAPROBACION }}</td>
+				<td>{{ $ticket -> TICK_FECHACIERRE }}</td>
+				<td>{{ $ticket -> estadoaprobacion -> ESAP_DESCRIPCION }}</td>
+				<td>{{ $ticket -> grupo -> GRUP_DESCRIPCION or null }}</td>
+				<td>{{ $ticket -> turno -> TURN_DESCRIPCION or null}}</td>
+
+				<td>
+					<!-- Botón Editar (edit) -->
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-tickets.tickets.edit', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</a>
+
+					<!-- carga botón de borrar -->
+					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
+						'class'=>'btn btn-xs btn-danger btn-delete',
+						'data-toggle'=>'modal',
+						'data-id'=> $ticket->TICK_ID,
+						'data-modelo'=> str_upperspace(class_basename($ticket)),
+						'data-descripcion'=> $ticket->TICK_ID,
+						'data-action'=>'tickets/'. $ticket->TICK_ID,
+						'data-target'=>'#pregModalDelete',
+						'data-tooltip'=>'tooltip',
+						'title'=>'Borrar',
+					])}}
+				</td>	
+			</tr>
+			@endforeach
+		</tbody>
+
 	</table>
 
 	@include('widgets/modal-delete')
+	{{--
 	@include('datatable-ajax', ['urlAjax'=>'getTickets', 'columns'=>[
 		'EMPL_NOMBRECOMERCIAL',
 		'PROS_NOMBRESAPELLIDOS',
@@ -55,5 +97,6 @@
 		'GRUP_DESCRIPCION',
 		'TURN_DESCRIPCION',
 		'TICK_CREADOPOR',
-	]])	
+	]])
+	--}}
 @endsection
