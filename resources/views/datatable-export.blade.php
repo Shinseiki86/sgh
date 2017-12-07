@@ -51,13 +51,11 @@
 						sPrevious: 'Anterior'
 					}
 				},
-				dom: "<'row'<'form-inline' <'col-sm-offset-5'B>>>"
-						 +"<'row' <'form-inline' <'col-sm-2'f>>>"
+				dom: "<'row' <'col-sm-2' f> <'col-sm-10 text-right' B> >"
 						 +"<rt>"
 						 +"<'row'<'form-inline'"
 						 +" <'col-sm-6 col-md-6 col-lg-6'l>"
 						 +"<'col-sm-6 col-md-6 col-lg-6'p>>>",//'Bfrtip',
-				
 				buttons: [{
 						extend: 'csvHtml5',
 						//exportOptions: {columns: columnss},
