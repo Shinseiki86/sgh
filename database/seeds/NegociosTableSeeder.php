@@ -18,7 +18,7 @@ class NegociosTableSeeder extends Seeder
        	$negocio = new Negocio;
 	    $negocio->NEGO_DESCRIPCION = 'PROMOCALI R3';
 	    $negocio->NEGO_OBSERVACIONES = NULL;
-	    $negocio->EMPL_ID = 3;
+	    $negocio->EMPL_ID = 4;
 	    $negocio->PROS_ID = 1;
 	    $negocio->NEGO_CREADOPOR = 'admin';
 	    $negocio->save();
@@ -34,7 +34,7 @@ class NegociosTableSeeder extends Seeder
 	    $negocio = new Negocio;
 	    $negocio->NEGO_DESCRIPCION = 'SURASEO R5';
 	    $negocio->NEGO_OBSERVACIONES = NULL;
-	    $negocio->EMPL_ID = 3;
+	    $negocio->EMPL_ID = 5;
 	    $negocio->PROS_ID = 1;
 	    $negocio->NEGO_CREADOPOR = 'admin';
 	    $negocio->save();
@@ -42,7 +42,7 @@ class NegociosTableSeeder extends Seeder
 	    $negocio = new Negocio;
 	    $negocio->NEGO_DESCRIPCION = 'SERAMBIENTAL R2';
 	    $negocio->NEGO_OBSERVACIONES = NULL;
-	    $negocio->EMPL_ID = 3;
+	    $negocio->EMPL_ID = 1;
 	    $negocio->PROS_ID = 1;
 	    $negocio->NEGO_CREADOPOR = 'admin';
 	    $negocio->save();

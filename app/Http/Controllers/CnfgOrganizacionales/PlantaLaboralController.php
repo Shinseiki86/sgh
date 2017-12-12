@@ -83,6 +83,25 @@ class PlantaLaboralController extends Controller
 		return view($this->route.'.edit', compact('plantalaboral','arrEmpleadores','arrCargos','arrGerencias'));
 	}
 
+	/**
+	 * Muestra el formulario para realizar el movimiento de planta necesario
+	 *
+	 * @param  int  $PALA_ID
+	 * @return Response
+	 */
+	/*
+	public function variacionPlanta()
+	{
+		//variables para llamar al metodo que extrae la planta autorizada y el conteo de contratos
+		$PALA_ID = request()->get('PALA_ID');
+
+		// Se obtiene el registro
+		$plantalaboral = PlantaLaboral::findOrFail($PALA_ID);
+
+		// Muestra el formulario de edición y pasa el registro a editar
+		return view($this->route.'.variacion', compact('plantalaboral'));
+	}
+	*/
 
 	/**
 	 * Actualiza un registro en la base de datos.

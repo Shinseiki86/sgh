@@ -383,6 +383,30 @@ class ContratoController extends Controller
 			'EMPLEADORES.EMPL_NOMBRECOMERCIAL',
 			\DB::raw('COUNT("CONT_ID") as count')
 			)
+		->whereIn('CONTRATOS.ESCO_ID', [1,3])
+		->groupBy(
+			'EMPLEADORES.EMPL_RAZONSOCIAL',
+			'EMPLEADORES.EMPL_NOMBRECOMERCIAL'
+			)
+		->get();
+		return $data->toJson();
+	}
+
+	/**
+	 * Participación en contratos
+	 *
+	 * @return json
+	 */
+	public function getContratosParticipacion()
+	{
+		$data = Empleador::join('CONTRATOS', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+		->leftJoin('TEMPORALES', 'TEMPORALES.TEMP_ID', '=', 'CONTRATOS.TEMP_ID')
+		->select(
+									//'EMPLEADORES.EMPL_RAZONSOCIAL',
+			'EMPLEADORES.EMPL_NOMBRECOMERCIAL',
+			\DB::raw('COUNT("CONT_ID") as count')
+			)
+		->whereIn('CONTRATOS.ESCO_ID', [1,3])
 		->groupBy(
 			'EMPLEADORES.EMPL_RAZONSOCIAL',
 			'EMPLEADORES.EMPL_NOMBRECOMERCIAL'
@@ -491,6 +515,15 @@ class ContratoController extends Controller
 		->join('EMPLEADORES_TURNOS','TURNOS.TURN_ID','=','EMPLEADORES_TURNOS.TURN_ID')
 		->join('EMPLEADORES','EMPLEADORES_TURNOS.EMPL_ID','=','EMPLEADORES.EMPL_ID')
 		->where('EMPLEADORES.EMPL_ID', $empleador->EMPL_ID)->get();
+		return response()->json($data);
+	}
+
+	public function buscaNegocio(){
+		$empleador = findId("Empleador",request()->get('EMPL_ID'));
+		
+		$data=modelo("Negocio")->select('NEGOCIOS.NEGO_DESCRIPCION','NEGOCIOS.NEGO_ID')
+		->where('NEGOCIOS.EMPL_ID', $empleador->EMPL_ID)->get();
+		
 		return response()->json($data);
 	}
 

@@ -35,7 +35,6 @@
 				<th class="col-md-1"> Grupo </th>
 				<th class="col-md-1"> Turno </th>
 				<th class="hidden-xs col-md-1">Creado</th>
-				<th class="col-md-1 all"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -56,6 +55,11 @@
 				<td>{{ $ticket -> turno -> TURN_DESCRIPCION or null}}</td>
 
 				<td>
+					<!-- Botón Ver (show) -->
+ 					<a class="btn btn-small btn-basic btn-xs" href="{{ route('cnfg-tickets.tickets.show', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Ver">
+ 						<i class="fa fa-eye" aria-hidden="true"></i>
+ 					</a>
+
 					<!-- Botón Editar (edit) -->
 					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-tickets.tickets.edit', [ 'TICK_ID' => $ticket->TICK_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>

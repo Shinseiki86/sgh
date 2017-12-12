@@ -1,6 +1,6 @@
 @include('datepicker')
 @include('chosen')
-@include('utilidades.validacion-contratos')
+@rinclude('validacion-contratos')
 
 
 

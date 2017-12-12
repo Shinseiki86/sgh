@@ -332,6 +332,23 @@ class TicketController extends Controller
 								->get();
 		return $data->toJson();
 	}
+
+	public function getTicketsAbiertosPorEmpresa()
+	{
+		$data = Ticket::join('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
+						->join('CONTRATOS', 'CONTRATOS.CONT_ID', '=', 'TICKETS.CONT_ID')
+						->join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+								->select(
+									'EMPL_NOMBRECOMERCIAL',
+									\DB::raw('COUNT("TICK_ID") as count')
+								)
+								->where('TICKETS.ESTI_ID', 1) //ABIERTO
+								->groupBy(
+									'EMPL_NOMBRECOMERCIAL'
+								)
+								->get();
+		return $data->toJson();
+	}
 	
 	public function autorizarTicket($TICK_ID){
 

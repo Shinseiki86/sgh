@@ -38,5 +38,11 @@ class ClasesContratosTableSeeder extends Seeder
         $clasecontrato->CLCO_CREADOPOR =  'SYSTEM';
         $clasecontrato->save();
 
+        $clasecontrato = new ClaseContrato;
+        $clasecontrato->CLCO_DESCRIPCION = 'COOPERATIVA';
+        $clasecontrato->CLCO_OBSERVACIONES =  'EXCLUSIVO PARA EMPLEADOS DE LAS COOPERATIVAS';
+        $clasecontrato->CLCO_CREADOPOR =  'SYSTEM';
+        $clasecontrato->save();
+
     }
 }

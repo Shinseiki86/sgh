@@ -53,6 +53,9 @@ Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizac
 	Route::resource('plantaslaborales', 'PlantaLaboralController');
 	Route::resource('tipoentidades', 'TipoEntidadController');
 	Route::resource('entidades', 'EntidadController');
+
+	Route::get('variacionPlanta', 'PlantaLaboralController@variacionPlanta')->name('cnfg-organizacionales.plantaslaborales.variacionPlanta');
+
 });
 
 Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
@@ -71,14 +74,16 @@ Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], fun
 
 	Route::get('getContratos', 'ContratoController@getData');
 	Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');
+	Route::get('getContratosParticipacion', 'ContratoController@getContratosParticipacion');
 
-	Route::get('/retirarContrato','ContratoController@retirarContrato')->name(' gestion-humana.contratos.retirarContrato');
-	Route::post('/cambiarEstado','ContratoController@cambiarEstado')->name(' gestion-humana.contratos.cambiarEstado');
+	Route::get('/retirarContrato','ContratoController@retirarContrato')->name('gestion-humana.contratos.retirarContrato');
+	Route::post('/cambiarEstado','ContratoController@cambiarEstado')->name('gestion-humana.contratos.cambiarEstado');
 
 	Route::get('/buscaGerencia','ContratoController@buscaGerencia');
 	Route::get('/buscaCentroCosto','ContratoController@buscaCentroCosto');
 	Route::get('/buscaGrupo','ContratoController@buscaGrupo');
 	Route::get('/buscaTurno','ContratoController@buscaTurno');
+	Route::get('/buscaNegocio','ContratoController@buscaNegocio');
 
 	Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {
 		//upload tablas de TNL
@@ -102,6 +107,7 @@ Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], functio
 	Route::post('tickets/rechazar/{TICK_ID}', 'TicketController@rechazarTicket');
 	Route::post('tickets/cerrar/{TICK_ID}', 'TicketController@cerrarTicket');
 	Route::get('getTicketsPorEstado', 'TicketController@getTicketsPorEstado');
+	Route::get('getTicketsAbiertosPorEmpresa', 'TicketController@getTicketsAbiertosPorEmpresa');
 
 	Route::get('/buscaGrupo','TicketController@buscaGrupo');
 	Route::get('/buscaTurno','TicketController@buscaTurno');

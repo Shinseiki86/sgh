@@ -17,6 +17,7 @@
 
 	@include('widgets.charts.panelchart', ['idCanvas' => 'chart1', 'title' => 'Contratos x Empleador' ])
 	@include('widgets.charts.panelchart', ['idCanvas' => 'chart2', 'title' => 'Tickets x Estado' ])
+	@include('widgets.charts.panelchart', ['idCanvas' => 'chart3', 'title' => 'Tickets abiertos x Empresa' ])
 
 @endsection
 
@@ -28,7 +29,7 @@
 		$(function () {
 			newChart(
 				'gestion-humana/getContratosEmpleador',
-				'Contratos por Empleador',
+				'Personal Activo Por Empresa',
 				'EMPL_NOMBRECOMERCIAL',
 				'count',
 				'chart1',
@@ -40,6 +41,22 @@
 				'ESTI_DESCRIPCION',
 				'count',
 				'chart2',
+				'bar'
+			);
+			newChart(
+				'cnfg-tickets/getTicketsAbiertosPorEmpresa',
+				'Tickets Abiertos Por Empresa',
+				'EMPL_NOMBRECOMERCIAL',
+				'count',
+				'chart3',
+				'bar'
+			);
+			newChart(
+				'gestion-humana/getContratosParticipacion',
+				'Participación',
+				'EMPL_NOMBRECOMERCIAL',
+				'count',
+				'chart1',
 				'bar'
 			);
 			$('.typeChart').removeClass('disabled');

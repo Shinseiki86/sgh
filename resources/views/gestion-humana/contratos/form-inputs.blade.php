@@ -10,6 +10,9 @@
 
 @include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaCentroCosto', 'selectPadre'=>'GERE_ID', 'selectHijo'=>'CECO_ID', 'idBusqueda'=>'CECO_ID', 'nombreBusqueda'=>'CECO_DESCRIPCION', 'prepend'=>'Seleccione un Centro de Costo'])
 
+@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaNegocio', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'NEGO_ID', 'idBusqueda'=>'NEGO_ID', 'nombreBusqueda'=>'NEGO_DESCRIPCION', 'prepend'=>'Seleccione un Negocio'])
+
+
 <div class='col-md-8 col-md-offset-2'>
 @include('widgets.forms.input', ['type'=>'select', 'name'=>'EMPL_ID', 'label'=>'Empleador', 'data'=>$arrEmpleadores])
 

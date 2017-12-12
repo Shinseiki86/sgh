@@ -104,7 +104,7 @@
 
 					<!-- Botón Cambiar estado -->
 					@if($contrato->ESCO_ID == SGH\Models\EstadoContrato::ACTIVO)
-					<a class="btn btn-xs btn-warning" href="{{ route(' gestion-humana.contratos.retirarContrato', [ 'CONT_ID' => $contrato->CONT_ID]) }}" data-tooltip="tooltip" title="Cambiar Estado">
+					<a class="btn btn-xs btn-warning" href="{{ route('gestion-humana.contratos.retirarContrato', [ 'CONT_ID' => $contrato->CONT_ID]) }}" data-tooltip="tooltip" title="Cambiar Estado">
 						<i class="fa fa-flag" aria-hidden="true"></i>
 					</a>
 					@endif

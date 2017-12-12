@@ -37,6 +37,13 @@
 				<td>{{ $plantalaboral -> PALA_CANTIDAD }}</td>
 				<td>{{ $plantalaboral -> PALA_CREADOPOR }}</td>
 				<td>
+					<!-- Botón variacion de planta (show) -->
+					{{--
+ 					<a class="btn btn-small btn-basic btn-xs" href="{{ route('cnfg-organizacionales.plantaslaborales.variacionPlanta', [ 'PALA_ID' => $plantalaboral->PALA_ID ] ) }}" data-tooltip="tooltip" title="Variación de Planta">
+ 						<i class="fa fa-arrows" aria-hidden="true"></i>
+ 					</a>
+ 					--}}
+
 					<!-- Botón Editar (edit) -->
 					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-organizacionales.plantaslaborales.edit', [ 'PALA_ID' => $plantalaboral->PALA_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
