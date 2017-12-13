@@ -36,7 +36,7 @@ class Ausentismo extends ModelWithSoftDeletes
 	        "COAU_ID" => "required",
 			"CONT_ID" => "required",
 			"AUSE_FECHAINICIO" => "required|date",
-			"AUSE_FECHAFINAL" => "date|required|after:AUSE_FECHAINICIO",
+			"AUSE_FECHAFINAL" => "date|required",
 			"AUSE_DIAS" => "required",
 			"AUSE_FECHAACCIDENTE" => "date",
 			"ENTI_ID" => "required",

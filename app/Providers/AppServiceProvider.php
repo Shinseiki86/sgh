@@ -4,6 +4,7 @@ namespace SGH\Providers;
 
 use Blade;
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {

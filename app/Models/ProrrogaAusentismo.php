@@ -30,7 +30,7 @@ class ProrrogaAusentismo extends ModelWithSoftDeletes
         return [
             "AUSE_ID" => "required",
             "COAU_ID" => "required",
-            "PROR_FECHAINICIO" => "date|required",
+            "PROR_FECHAINICIO" => "date|required|before:PROR_FECHAFINAL",
             "PROR_FECHAFINAL" => "date|required",
             "PROR_DIAS" => "required|numeric"
         ];
