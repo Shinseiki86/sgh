@@ -1,14 +1,15 @@
 @extends('layouts.menu')
-@section('title', '/ Cargos')
+@section('title', '/ Estados de Restricción')
 @include('datatable-export')
+
 
 @section('page_heading')
 	<div class="row">
 		<div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-			Cargos
+			Estados de Restricción
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ route('cnfg-contratos.cargos.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
+			<a class='btn btn-primary' role='button' href="{{ route('cnfg-casosmedicos.estadosrestriccion.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -21,7 +22,6 @@
 		<thead>
 			<tr>
 				<th class="col-md-4">Descripción</th>
-				<th class="col-md-4">Clasificación</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
 				<th class="col-md-1 all"></th>
@@ -29,15 +29,14 @@
 		</thead>
 
 		<tbody>
-			@foreach($cargos as $cargo)
+			@foreach($estadosrestricciones as $estadorestriccion)
 			<tr>
-				<td>{{ $cargo -> CARG_DESCRIPCION }}</td>
-				<td>{{ $cargo -> cno -> CNOS_DESCRIPCION }}</td>
-				<td>{{ $cargo -> CARG_OBSERVACIONES }}</td>
-				<td>{{ $cargo -> CARG_CREADOPOR }}</td>
+				<td>{{ $estadorestriccion -> ESRE_DESCRIPCION }}</td>
+				<td>{{ $estadorestriccion -> ESRE_OBSERVACIONES }}</td>
+				<td>{{ $estadorestriccion -> ESRE_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
-					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-contratos.cargos.edit', [ 'CARG_ID' => $cargo->CARG_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-casosmedicos.estadosrestriccion.edit', [ 'ESRE_ID' => $estadorestriccion->ESRE_ID ] ) }}" data-tooltip="tooltip" title="Editar">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</a>
 
@@ -45,10 +44,10 @@
 					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
 						'class'=>'btn btn-xs btn-danger btn-delete',
 						'data-toggle'=>'modal',
-						'data-id'=> $cargo->CARG_ID,
-						'data-modelo'=> str_upperspace(class_basename($cargo)),
-						'data-descripcion'=> $cargo->CARG_DESCRIPCION,
-						'data-action'=>'cargos/'. $cargo->CARG_ID,
+						'data-id'=> $estadorestriccion->ESRE_ID,
+						'data-modelo'=> str_upperspace(class_basename($estadorestriccion)),
+						'data-descripcion'=> $estadorestriccion->ESRE_DESCRIPCION,
+						'data-action'=>'estadosrestriccion/'. $estadorestriccion->ESRE_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',
 						'title'=>'Borrar',

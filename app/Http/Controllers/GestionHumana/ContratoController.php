@@ -13,6 +13,7 @@ use SGH\Models\Riesgo;
 use SGH\Models\Empleador;
 use SGH\Models\TipoEntidad;
 use SGH\Models\Negocio;
+use SGH\Models\MovimientoPlanta;
 
 use Carbon\Carbon;
 
@@ -350,7 +351,7 @@ class ContratoController extends Controller
 				parent::updateModel($CONT_ID, ['entidades'=>$entidades_id]);
 			}
 
-				
+
 		}else{
 			flash_alert('No se puede actualizar contrato: La planta autorizada se encuentra completa o no se ha definido', 'info' );
 			return redirect()->back();
@@ -417,16 +418,40 @@ class ContratoController extends Controller
 
 	public function getPlantaLaboral($empleador, $gerencia, $cargo){
 
-		$data = PlantaLaboral::select('PALA_CANTIDAD')
+		$plantasautorizada = PlantaLaboral::select('PALA_CANTIDAD')
 		->where('EMPL_ID', $empleador)
 		->where('GERE_ID', $gerencia)
 		->where('CARG_ID', $cargo)
 		->get();
 
-		if(count($data)==0){
+		$plantaaux = PlantaLaboral::select('PALA_ID')
+		->where('EMPL_ID', $empleador)
+		->where('GERE_ID', $gerencia)
+		->where('CARG_ID', $cargo)
+		->get();
+
+		if(isset($plantaaux)){
+
+			$movplanta = \DB::table("MOVIMIENTOS_PLANTAS")
+			->join('PLANTASLABORALES','PLANTASLABORALES.PALA_ID','=','MOVIMIENTOS_PLANTAS.PALA_ID')
+			->where('MOVIMIENTOS_PLANTAS.PALA_ID', $plantaaux[0]['PALA_ID'])
+			->sum('MOPL_CANTIDAD');
+
+			$movplanta2 = \DB::table("MOVIMIENTOS_PLANTAS")
+			->join('PLANTASLABORALES','PLANTASLABORALES.PALA_ID','=','MOVIMIENTOS_PLANTAS.PALA_ID')
+			->select('MOVIMIENTOS_PLANTAS.MOPL_MOTIVO')
+			->where('MOVIMIENTOS_PLANTAS.PALA_ID', $plantaaux[0]['PALA_ID']);		
+
+			$movintplanta = intval($movplanta);
+
+			$plantasautorizada[0]['PALA_CANTIDAD']+=$movplanta;			
+
+		}
+
+		if(count($plantasautorizada)==0){
 			return 0;
 		}else{
-			return $data[0]['PALA_CANTIDAD'];
+			return $plantasautorizada[0]['PALA_CANTIDAD'];
 		}
 
 		

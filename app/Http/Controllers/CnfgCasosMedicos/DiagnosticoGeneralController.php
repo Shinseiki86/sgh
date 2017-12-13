@@ -1,6 +1,6 @@
 <?php
 
-namespace SGH\Http\Controllers\CnfgOrganizacionales;
+namespace SGH\Http\Controllers\CnfgCasosMedicos;
 
 use SGH\Http\Requests;
 use Validator;
@@ -10,32 +10,17 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
-use SGH\Models\TipoEmpleador;
+use SGH\Models\DiagnosticoGeneral;
 
-class TipoEmpleadorController extends Controller
+class DiagnosticoGeneralController extends Controller
 {
-	protected $route = 'cnfg-organizacionales.tiposempleadores';
-	protected $class = TipoEmpleador::class;
+	protected $route = 'cnfg-casosmedicos.diagnosticosgenerales';
+	protected $class = DiagnosticoGeneral::class;
 
 	public function __construct()
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $id)
-	{
-		return Validator::make($data, [
-			'TIEM_DESCRIPCION' => ['required', 'max:100', 'unique:TIPOSEMPLEADORES,TIEM_DESCRIPCION,'.$id.',TIEM_ID'],
-			'TIEM_OBSERVACIONES' => ['max:300'],
-		]);
-	}
-
 
 	/**
 	 * Muestra una lista de los registros.
@@ -45,9 +30,9 @@ class TipoEmpleadorController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$tiposempleadores = TipoEmpleador::all();
+		$diagnosticosgenerales = DiagnosticoGeneral::all();
 		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('tiposempleadores'));
+		return view($this->route.'.index', compact('diagnosticosgenerales'));
 	}
 
 	/**
@@ -74,39 +59,39 @@ class TipoEmpleadorController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $TIEM_ID
+	 * @param  int  $DIGE_ID
 	 * @return Response
 	 */
-	public function edit($TIEM_ID)
+	public function edit($DIGE_ID)
 	{
 		// Se obtiene el registro
-		$tipoempleador = TipoEmpleador::findOrFail($TIEM_ID);
+		$diagnosticogeneral = DiagnosticoGeneral::findOrFail($DIGE_ID);
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('tipoempleador'));
+		return view($this->route.'.edit', compact('diagnosticogeneral'));
 	}
 
 
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $TIEM_ID
+	 * @param  int  $DIGE_ID
 	 * @return Response
 	 */
-	public function update($TIEM_ID)
+	public function update($DIGE_ID)
 	{
-		parent::updateModel($TIEM_ID);
+		parent::updateModel($DIGE_ID);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $TIEM_ID
+	 * @param  int  $DIGE_ID
 	 * @return Response
 	 */
-	public function destroy($TIEM_ID)
+	public function destroy($DIGE_ID)
 	{
-		parent::destroyModel($TIEM_ID);
+		parent::destroyModel($DIGE_ID);
 	}
 	
 }
