@@ -17,10 +17,6 @@ class DiagnosticoGeneral extends ModelWithSoftDeletes
 	const DELETED_AT = 'DIGE_FECHAELIMINADO';
 	protected $dates = ['DIGE_FECHACREADO', 'DIGE_FECHAMODIFICADO', 'DIGE_FECHAELIMINADO'];
 
-	//Constantes para referenciar los tipos de empleador
-	const  DIRECTO	 = 1;
-	const  TEMPORAL   = 2;
-
 	protected $fillable = [
 		'DIGE_DESCRIPCION',
 		'DIGE_OBSERVACIONES',
@@ -34,6 +30,10 @@ class DiagnosticoGeneral extends ModelWithSoftDeletes
 		];
 	}
 
-	
+	public function casosmedicos()
+	{
+		$foreingKey = 'DIGE_ID';
+		return $this->hasMany(CasoMedico::class, $foreingKey);
+	}
 
 }

@@ -99,6 +99,7 @@ use SGH\Models\Permission;
 
                 $this->createPermissions(DiagnosticoGeneral::class, 'DX Generales');
                 $this->createPermissions(EstadoRestriccion::class, 'Estados de Restricción');
+                $this->createPermissions(CasoMedico::class, 'Casos Médicos');
                 
                 $perms = $this->createPermissions(Ticket::class, 'tickets');
                 $rolSuperOper->attachPermissions([

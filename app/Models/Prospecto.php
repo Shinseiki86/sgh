@@ -22,6 +22,7 @@ class Prospecto extends ModelWithSoftDeletes
 	protected $fillable = [
 		'PROS_CEDULA',
 		'PROS_FECHAEXPEDICION',
+		'PROS_FECHANACIMIENTO',
 		'PROS_PRIMERNOMBRE',
 		'PROS_SEGUNDONOMBRE',
 		'PROS_PRIMERAPELLIDO',
@@ -39,6 +40,7 @@ class Prospecto extends ModelWithSoftDeletes
 		return [
 			'PROS_CEDULA'          => ['numeric', 'required', static::unique($id,'PROS_CEDULA')],
 			'PROS_FECHAEXPEDICION' => ['required'],
+			'PROS_FECHANACIMIENTO' => ['required'],
 			'PROS_PRIMERNOMBRE'    => ['required', 'max:100'],
 			'PROS_SEGUNDONOMBRE'   => ['max:100'],	
 			'PROS_PRIMERAPELLIDO'  => ['required', 'max:100'],

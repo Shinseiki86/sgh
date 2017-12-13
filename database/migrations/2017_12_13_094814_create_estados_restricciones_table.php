@@ -20,7 +20,7 @@ class CreateEstadosRestriccionesTable extends Migration
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
             $table->increments('ESRE_ID')
-                ->comment('Valor autonumérico, llave primaria de la tabla tipos de empleadores.');
+                ->comment('Valor autonumérico, llave primaria de la tabla estados de restriccion.');
 
             $table->string('ESRE_DESCRIPCION', 300)
                 ->comment('descripción del estado de restricción.');

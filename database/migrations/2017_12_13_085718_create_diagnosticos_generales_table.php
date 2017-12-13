@@ -20,7 +20,7 @@ class CreateDiagnosticosGeneralesTable extends Migration
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
             $table->increments('DIGE_ID')
-                ->comment('Valor autonumérico, llave primaria de la tabla tipos de empleadores.');
+                ->comment('Valor autonumérico, llave primaria de la tabla diagnosticos generales.');
 
             $table->string('DIGE_DESCRIPCION', 300)
                 ->comment('descripción del diagnostico general.');

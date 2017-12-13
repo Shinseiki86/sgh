@@ -29,7 +29,7 @@ class ContratosTableSeeder extends Seeder
         $contrato->GERE_ID = 1;
         $contrato->CECO_ID = 17;
         $contrato->GRUP_ID = 39;
-        $contrato->GRUP_ID = 40;
+        $contrato->TURN_ID = 40;
         $contrato->CIUD_CONTRATA = 1004;
         $contrato->CIUD_SERVICIO = 1004;
         $contrato->CONT_CREADOPOR = 'admin';
@@ -53,7 +53,7 @@ class ContratosTableSeeder extends Seeder
         $contrato->GERE_ID = 4;
         $contrato->CECO_ID = 22;
         $contrato->GRUP_ID = 39;
-        $contrato->GRUP_ID = 40;
+        $contrato->TURN_ID = 40;
         $contrato->CIUD_CONTRATA = 1004;
         $contrato->CIUD_SERVICIO = 1004;
         $contrato->CONT_CREADOPOR = 'admin';
@@ -77,7 +77,7 @@ class ContratosTableSeeder extends Seeder
         $contrato->GERE_ID = 4;
         $contrato->CECO_ID = 22;
         $contrato->GRUP_ID = 1;
-        $contrato->GRUP_ID = 1;
+        $contrato->TURN_ID = 1;
         $contrato->CIUD_CONTRATA = 1004;
         $contrato->CIUD_SERVICIO = 1004;
         $contrato->CONT_CREADOPOR = 'admin';
@@ -100,7 +100,7 @@ class ContratosTableSeeder extends Seeder
         $contrato->GERE_ID = 4;
         $contrato->CECO_ID = 24;
         $contrato->GRUP_ID = 10;
-        $contrato->GRUP_ID = 1;
+        $contrato->TURN_ID = 1;
         $contrato->CIUD_CONTRATA = 492;
         $contrato->CIUD_SERVICIO = 492;
         $contrato->CONT_CREADOPOR = 'admin';
