@@ -73,6 +73,7 @@ use SGH\Models\Permission;
                 $this->createPermissions(Gerencia::class, 'gerencias');
                 $this->createPermissions(Proceso::class, 'procesos');
                 $this->createPermissions(PlantaLaboral::class, 'plantas laborales');
+                $this->createPermissions(MovimientoPlanta::class, 'movimientos de plantas');
                 $this->createPermissions(CentroCosto::class, 'centros de costo');
                 $this->createPermissions(TipoEmpleador::class, 'tipos de empleador');
                 $this->createPermissions(Riesgo::class, 'riesgos de ARL');
@@ -95,6 +96,9 @@ use SGH\Models\Permission;
                 $this->createPermissions(Diagnostico::class, 'Diagnostico');
                 $this->createPermissions(TipoAusentismo::class, 'Tipo de Ausentismo');
                 $this->createPermissions(ProrrogaAusentismo::class, 'Prorroga Ausentismo');
+
+                $this->createPermissions(DiagnosticoGeneral::class, 'DX Generales');
+                $this->createPermissions(EstadoRestriccion::class, 'Estados de Restricción');
                 
                 $perms = $this->createPermissions(Ticket::class, 'tickets');
                 $rolSuperOper->attachPermissions([

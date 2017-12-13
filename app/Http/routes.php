@@ -53,8 +53,7 @@ Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizac
 	Route::resource('plantaslaborales', 'PlantaLaboralController');
 	Route::resource('tipoentidades', 'TipoEntidadController');
 	Route::resource('entidades', 'EntidadController');
-
-	Route::get('variacionPlanta', 'PlantaLaboralController@variacionPlanta')->name('cnfg-organizacionales.plantaslaborales.variacionPlanta');
+	Route::resource('movimientosplantas', 'MovimientoPlantaController');
 
 });
 
@@ -127,5 +126,9 @@ Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'],
 	Route::get('/buscaAuse/{id?}', 'ProrrogaAusentismoController@buscaAuse');
 });
 
+Route::group(['prefix' => 'cnfg-casosmedicos', 'namespace' => 'CnfgCasosMedicos'], function() {
+	Route::resource('diagnosticosgenerales', 'DiagnosticoGeneralController');
+	Route::resource('estadosrestriccion', 'EstadoRestriccionController');
+});
 
 

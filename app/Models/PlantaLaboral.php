@@ -52,4 +52,10 @@ class PlantaLaboral extends ModelWithSoftDeletes
 		return $this->belongsTo(Gerencia::class, $foreingKey);
 	}
 
+	public function movimientosplantas()
+	{
+		$foreingKey = 'PALA_ID';
+		return $this->hasMany(MovimientoPlanta::class, $foreingKey);
+	}
+
 }

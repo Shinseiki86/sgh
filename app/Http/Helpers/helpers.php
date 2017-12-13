@@ -401,6 +401,7 @@ if (! function_exists('validaFecha')) {
         return $cant;
     }
 }
+
 if (! function_exists('fechaActual')) {
     /**
      * Retorna la fecha actul

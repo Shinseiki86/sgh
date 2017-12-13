@@ -214,6 +214,13 @@ class MenuTableSeeder extends Seeder
                 'MENU_ORDER' => $orderItem++,
             ]);
             Menu::create([
+                'MENU_LABEL' => 'Movimientos de Plantas',
+                'MENU_URL' => 'cnfg-organizacionales/movimientosplantas',
+                'MENU_ICON' => 'fa fa-sort-amount-desc',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
+            Menu::create([
                 'MENU_LABEL' => 'Tipo Entidades',
                 'MENU_URL' => 'cnfg-organizacionales/tipoentidades',
                 'MENU_ICON' => 'fa-institution',
@@ -323,6 +330,31 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
+
+        $orderItem = 0;
+        $parent = Menu::create([
+            'MENU_LABEL' => 'Casos Médicos',
+            'MENU_ICON' => 'fa fa-stethoscope',
+            'MENU_ORDER' => $orderMenuLeft++,
+        ]);
+
+            Menu::create([
+                'MENU_LABEL' => 'DX Generales',
+                'MENU_URL' => 'cnfg-casosmedicos/diagnosticosgenerales',
+                'MENU_ICON' => 'fa fa-hospital-o',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
+
+            Menu::create([
+                'MENU_LABEL' => 'Estados de Restricción',
+                'MENU_URL' => 'cnfg-casosmedicos/estadosrestriccion',
+                'MENU_ICON' => 'fa fa-heart',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
+
+            
 
 
         //TOP
