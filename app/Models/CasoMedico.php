@@ -65,6 +65,10 @@ class CasoMedico extends ModelWithSoftDeletes
 		return $this->belongsTo(EstadoRestriccion::class, $foreingKey);
 	}
 
-	
+	public function novedadesmedicas()
+	{
+		$foreingKey = 'CAME_ID';
+		return $this->hasMany(NovedadMedica::class, $foreingKey);
+	}
 
 }

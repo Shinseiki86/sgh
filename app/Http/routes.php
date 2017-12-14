@@ -130,6 +130,7 @@ Route::group(['prefix' => 'cnfg-casosmedicos', 'namespace' => 'CnfgCasosMedicos'
 	Route::resource('diagnosticosgenerales', 'DiagnosticoGeneralController');
 	Route::resource('estadosrestriccion', 'EstadoRestriccionController');
 	Route::resource('casosmedicos', 'CasoMedicoController');
+	Route::resource('novedadesmedicas', 'NovedadMedicaController');
 });
 
 

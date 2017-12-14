@@ -362,8 +362,13 @@ class MenuTableSeeder extends Seeder
                 'MENU_ORDER' => $orderItem++,
             ]);
 
-            
-
+            Menu::create([
+                'MENU_LABEL' => 'Novedades Médicas',
+                'MENU_URL' => 'cnfg-casosmedicos/novedadesmedicas',
+                'MENU_ICON' => 'fa fa-medkit',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
 
         //TOP
         Menu::create([

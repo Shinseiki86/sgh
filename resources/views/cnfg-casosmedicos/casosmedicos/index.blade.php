@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Casos Médicos')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 
 @section('page_heading')
@@ -26,6 +26,7 @@
 				<th class="col-md-1">Cedula</th>
 				<th class="col-md-3">Empleado</th>
 				<th class="col-md-2">Cargo</th>
+				<th class="col-md-2">Salario</th>
 				<th class="col-md-2">Turno</th>
 				<th class="col-md-1">Fecha de Restricción</th>
 				<th class="col-md-1">Estado</th>
@@ -51,6 +52,7 @@
 				<td>{{ $casomedico -> contrato -> prospecto -> PROS_CEDULA }}</td>
 				<td>{{ nombre_empleado($casomedico -> contrato -> prospecto -> PROS_ID) }}</td>
 				<td>{{ $casomedico -> contrato -> cargo -> CARG_DESCRIPCION }}</td>
+				<td>{{ number_format($casomedico -> contrato -> CONT_SALARIO, 0) }}</td>
 				<td>{{ $casomedico -> contrato -> turno -> TURN_DESCRIPCION or null}}</td>
 				<td>{{ $casomedico -> CAME_FECHARESTRICCION }}</td>
 				<td>{{ $casomedico -> estadorestriccion -> ESRE_DESCRIPCION }}</td>

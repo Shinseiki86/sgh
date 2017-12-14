@@ -64,6 +64,15 @@ class Prospecto extends ModelWithSoftDeletes
 		return $query;
 	}
 
+	public function scopeCasosMedicos($query)
+	{
+		$query = $query
+			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
+			->join('CASOSMEDICOS', 'CASOSMEDICOS.CONT_ID', '=', 'CONTRATOS.CONT_ID');
+
+		return $query;
+	}
+
 	public function scopeRetirados($query)
 	{
 		//se modifica el metodo debido a que no necesariamente el empleado debe estar retirado para ser remplazado
