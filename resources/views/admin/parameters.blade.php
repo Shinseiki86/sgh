@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Dashboard')
-@include('datatable')
+@include('widgets.datatable.datatable')
 
 @section('page_heading')
 	<div class="row">
