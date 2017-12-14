@@ -8,7 +8,7 @@
 
 		<!-- Elementos del formulario -->
 		@include('cnfg-ausentismos.prorrogaausentismos.fields')
-		@include('utilidades.rellena',['columns'=>['DX_DESCRIPCIONP'=>$diagnostico[0]->DIAG_DESCRIPCION,'CIE10'=>$diagnostico[0]->DIAG_CODIGO]])
+		@include('widgets.rellena',['columns'=>['DX_DESCRIPCIONP'=>$diagnostico[0]->DIAG_DESCRIPCION,'CIE10'=>$diagnostico[0]->DIAG_CODIGO]])
 
 		<!-- Botones -->
 		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/prorrogaausentismos'])

@@ -7,7 +7,7 @@
 		<th>Fecha Final Prorroga</th>
 		<th>Dias de Prorroga</th>
 		<th>Observaciones</th>
-        <th class="col-md-1 all" width="50px">Acciones</th>
+        <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
     <tbody>
     @foreach($prorrogaAusentismos as $prorrogaAusentismo)

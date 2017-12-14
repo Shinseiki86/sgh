@@ -1,11 +1,11 @@
 <table class="table table-striped" id="tabla">
     <thead>
-        <th>Codigo</th>
+        <th>Código</th>
 		<th>Nit</th>
-		<th>Razonsocial</th>
+		<th>Razón social</th>
 		<th>Tipo de Entidad</th>
 		<th>Observaciones</th>
-        <th class="col-md-1 all" width="50px">Acciones</th>
+        <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
     <tbody>
     @foreach($entidades as $entidad)

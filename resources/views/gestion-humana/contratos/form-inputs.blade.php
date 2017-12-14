@@ -2,15 +2,15 @@
 @include('chosen')
 @rinclude('validacion-contratos')
 
-@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaGerencia', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GERE_ID', 'idBusqueda'=>'GERE_ID', 'nombreBusqueda'=>'GERE_DESCRIPCION', 'prepend'=>'Seleccione una Gerencia'])
+@include('widgets.select-dinamico', ['url'=>'gestion-humana/buscaGerencia', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GERE_ID', 'idBusqueda'=>'GERE_ID', 'nombreBusqueda'=>'GERE_DESCRIPCION', 'prepend'=>'Seleccione una Gerencia'])
 
-@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaGrupo', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GRUP_ID', 'idBusqueda'=>'GRUP_ID', 'nombreBusqueda'=>'GRUP_DESCRIPCION', 'prepend'=>'Seleccione un Grupo'])
+@include('widgets.select-dinamico', ['url'=>'gestion-humana/buscaGrupo', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'GRUP_ID', 'idBusqueda'=>'GRUP_ID', 'nombreBusqueda'=>'GRUP_DESCRIPCION', 'prepend'=>'Seleccione un Grupo'])
 
-@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaTurno', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'TURN_ID', 'idBusqueda'=>'TURN_ID', 'nombreBusqueda'=>'TURN_DESCRIPCION', 'prepend'=>'Seleccione un Turno'])
+@include('widgets.select-dinamico', ['url'=>'gestion-humana/buscaTurno', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'TURN_ID', 'idBusqueda'=>'TURN_ID', 'nombreBusqueda'=>'TURN_DESCRIPCION', 'prepend'=>'Seleccione un Turno'])
 
-@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaCentroCosto', 'selectPadre'=>'GERE_ID', 'selectHijo'=>'CECO_ID', 'idBusqueda'=>'CECO_ID', 'nombreBusqueda'=>'CECO_DESCRIPCION', 'prepend'=>'Seleccione un Centro de Costo'])
+@include('widgets.select-dinamico', ['url'=>'gestion-humana/buscaCentroCosto', 'selectPadre'=>'GERE_ID', 'selectHijo'=>'CECO_ID', 'idBusqueda'=>'CECO_ID', 'nombreBusqueda'=>'CECO_DESCRIPCION', 'prepend'=>'Seleccione un Centro de Costo'])
 
-@include('utilidades.select-dinamico', ['url'=>'gestion-humana/buscaNegocio', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'NEGO_ID', 'idBusqueda'=>'NEGO_ID', 'nombreBusqueda'=>'NEGO_DESCRIPCION', 'prepend'=>'Seleccione un Negocio'])
+@include('widgets.select-dinamico', ['url'=>'gestion-humana/buscaNegocio', 'selectPadre'=>'EMPL_ID', 'selectHijo'=>'NEGO_ID', 'idBusqueda'=>'NEGO_ID', 'nombreBusqueda'=>'NEGO_DESCRIPCION', 'prepend'=>'Seleccione un Negocio'])
 
 
 <div class='col-md-8 col-md-offset-2'>

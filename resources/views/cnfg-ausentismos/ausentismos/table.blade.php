@@ -1,17 +1,17 @@
 <table class="table table-striped" id="tabla">   
     <thead>
-        <th>Diagnostico</th>
+        <th>Diagnóstico</th>
 		<th>Concepto Ausentismo</th>
 		<th>Prospecto</th>
 		<th>Fecha Inicio</th>
 		<th>Fecha Final</th>
-		<th>Total Dias</th>
+		<th>Total Días</th>
 		<th>Fecha Accidente</th>
 		<th>Entidad</th>
 		<th>IBC</th>
 		<th>Valor Total</th>
 		<th>Observaciones</th>
-        <th class="col-md-1 all" width="50px">Acciones</th>
+        <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
     <tbody>
     @foreach($ausentismos as $ausentismo)

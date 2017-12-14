@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Clases contratos')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 
 @section('page_heading')
@@ -24,7 +24,7 @@
 				<th class="col-md-4">Descripción</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 

@@ -8,7 +8,7 @@
 
 <!-- Diag Descripcion Field -->
 <div class="form-group  {{ $errors->has('DIAG_DESCRIPCION') ? ' has-error' : '' }}">
-    {!! Form::label('DIAG_DESCRIPCION', 'Diag Descripcion:', ['class' => 'control-label Diag Descripcion']) !!}
+    {!! Form::label('DIAG_DESCRIPCION', 'Diag Descripción:', ['class' => 'control-label Diag Descripcion']) !!}
 	{!! Form::text('DIAG_DESCRIPCION', null, ['class' => 'form-control ']) !!}
 	@include('widgets.forms.alerta',['name'=>'DIAG_DESCRIPCION'])
 </div>

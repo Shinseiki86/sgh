@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Negocios')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 @section('page_heading')
 	<div class="row">
@@ -20,13 +20,13 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-1">Codigo</th>
+				<th class="col-md-1">Código</th>
 				<th class="col-md-4">Descripción</th>
 				<th class="col-md-4">Empresa</th>
 				<th class="col-md-4">Responsable</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 

@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Contratos')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 @section('page_heading')
 	<div class="row">
@@ -46,7 +46,7 @@
 				<th class="col-md-5">Ciudad de Servicio</th>
 				<th class="col-md-5">Negocio</th>
 				<th class="col-md-5">Observaciones</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 

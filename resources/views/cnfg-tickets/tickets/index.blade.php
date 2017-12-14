@@ -1,7 +1,7 @@
 @extends('layouts.menu')
 @section('title', '/ Tickets')
 
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 @section('page_heading')
 	<div class="row">
@@ -86,7 +86,7 @@
 
 	@include('widgets/modal-delete')
 	{{--
-	@include('datatable-ajax', ['urlAjax'=>'getTickets', 'columns'=>[
+	@include('widgets.datatable.datatable-ajax', ['urlAjax'=>'getTickets', 'columns'=>[
 		'EMPL_NOMBRECOMERCIAL',
 		'PROS_NOMBRESAPELLIDOS',
 		'ESTI_DESCRIPCION',

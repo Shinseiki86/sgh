@@ -10,7 +10,7 @@
 		<!-- Diagnostico -->
 		<div class="row" >			
 			@include('widgets.forms.input', ['type'=>'text', 'column'=>3, 'name'=>'CIE10A', 'label'=>'CIE10','options'=>['ng-model'=>'ausentismo.diagnostico.DIAG_CODIGO','disabled'=>true]])
-			@include('widgets.forms.input', ['type'=>'text', 'column'=>9, 'name'=>'DX_DESCRIPCION', 'label'=>'Descripcion Dx','options'=>['ng-model'=>'ausentismo.diagnostico.DIAG_DESCRIPCION','disabled'=>true]])
+			@include('widgets.forms.input', ['type'=>'text', 'column'=>9, 'name'=>'DX_DESCRIPCION', 'label'=>'Descripción Dx','options'=>['ng-model'=>'ausentismo.diagnostico.DIAG_DESCRIPCION','disabled'=>true]])
 		</div>
 		<div class="row">
 			@include('widgets.forms.input', ['type'=>'text', 'column'=>6, 'name'=>'COAU_ID', 'label'=>'Concepto Ausencia','options'=>['ng-model'=>'ausentismo.conceptoausencia.COAU_DESCRIPCION','disabled'=>true]])

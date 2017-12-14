@@ -16,7 +16,9 @@
 
 	<script>
 		$(document).ready(function(){
-			$('#tabla').DataTable({
+			@rinclude('datatable-footer')
+
+			var tbIndex = $('#tabla').DataTable({
 				processing: true,
 				serverSide: true,
 				ajax: '{{$urlAjax}}',
@@ -73,6 +75,8 @@
 						tooltips.tooltip();
 			  	}
 			});
+
+			@rinclude('datatable-filters')
 		});
 	</script>
 @endpush

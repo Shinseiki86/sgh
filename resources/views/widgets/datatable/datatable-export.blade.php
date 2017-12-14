@@ -24,7 +24,9 @@
 	{!! Html::script('assets/scripts/datatable/responsive.bootstrap.min.js') !!}
 	<script>
 		$(function () {
-			$('#tabla').DataTable({
+			@rinclude('datatable-footer')
+
+			var tbIndex = $('#tabla').DataTable({
 				lengthMenu: [[5,10,25,50,-1], [5,10,25,50,'Todos']],
 				pagingType: 'simple_numbers',
 				bScrollCollapse: true,
@@ -95,6 +97,8 @@
 				]
 
 			});
+
+			@rinclude('datatable-filters')
 		});
 	</script>
 @endpush
