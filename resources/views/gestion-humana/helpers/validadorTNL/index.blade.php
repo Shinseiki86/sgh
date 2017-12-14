@@ -32,7 +32,7 @@
 				<th class="col-md-5">Conting.</th>
 				<th class="col-md-5">Primer día at</th>
 				<th class="col-md-1">Documento</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 

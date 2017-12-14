@@ -24,14 +24,14 @@
 				<th class="col-md-3">País</th>
 				<th class="col-md-1">Ciudades</th>
 				<th class="hidden-xs col-md-1">Creado</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 		<tbody></tbody>
 	</table>
 
 	@include('widgets/modal-delete')
-	@include('datatable-ajax', ['urlAjax'=>'getDepartamentos', 'columns'=>[
+	@include('widgets.datatable.datatable-ajax', ['urlAjax'=>'getDepartamentos', 'columns'=>[
 		'DEPA_CODIGO',
 		'DEPA_NOMBRE',
 		'PAIS_NOMBRE',

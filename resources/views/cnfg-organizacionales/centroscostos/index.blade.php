@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Centro costos')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 
 @section('page_heading')
@@ -21,10 +21,10 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-1">Codigo</th>
+				<th class="col-md-1">Código</th>
 				<th class="col-md-3">Descripción</th>
 				<th class="hidden-xs col-md-1">Creado por</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 

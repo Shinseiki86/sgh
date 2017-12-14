@@ -1,14 +1,14 @@
 @include('chosen')
 @include('datepicker')
-@include('utilidades.autocomplete',['first'=>'DX_DESCRIPCIONP','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
-@include('utilidades.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCIONP','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
+@include('widgets.autocomplete',['first'=>'DX_DESCRIPCIONP','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
+@include('widgets.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCIONP','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
 <div class='row'>	
 	<!-- Diagnostico -->
 	<div class="row">
 		{{ Form::hidden('AUSE_ID', null, array('id' => 'AUSE_ID')) }}
 		{{ Form::hidden('DIAG_ID', null, array('id' => 'DIAG_ID')) }}
 		@include('widgets.forms.input', ['type'=>'text', 'column'=>2, 'name'=>'CIE10', 'label'=>'CIE10'])
-		@include('widgets.forms.input', ['type'=>'text', 'column'=>6, 'name'=>'DX_DESCRIPCIONP', 'label'=>'Descripcion Dx'])
+		@include('widgets.forms.input', ['type'=>'text', 'column'=>6, 'name'=>'DX_DESCRIPCIONP', 'label'=>'Descripción Dx'])
 		@include('widgets.forms.input', ['type'=>'select', 'column'=>4, 'name'=>'COAU_ID', 'label'=>'Concepto Ausencia', 'data'=>$arrConceptoAusentismo, 'placeholder'=>'Seleccione un Concepto','allowClear'=>true])
 	</div>	
 	<div class="row">

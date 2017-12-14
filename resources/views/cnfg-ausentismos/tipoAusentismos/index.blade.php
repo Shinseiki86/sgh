@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Tipo Ausentismos')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 
 @section('page_heading')

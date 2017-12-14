@@ -23,14 +23,14 @@
 				<th class="col-md-5">Nombre</th>
 				<th class="col-md-1">Departamentos</th>
 				<th class="hidden-xs col-md-1">Creado</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 		<tbody></tbody>
 	</table>
 
 	@include('widgets/modal-delete')
-	@include('datatable-ajax', ['urlAjax'=>'getPaises', 'columns'=>[
+	@include('widgets.datatable.datatable-ajax', ['urlAjax'=>'getPaises', 'columns'=>[
 		'PAIS_CODIGO',
 		'PAIS_NOMBRE',
 		'DEPARTAMENTOS_COUNT',

@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Turnos')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 @section('page_heading')
 	<div class="row">
@@ -20,7 +20,7 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-2">Codigo</th>
+				<th class="col-md-2">Código</th>
 				<th class="col-md-4">Descripción</th>
 				<th class="col-md-4">Tipo de Turno</th>
 				<th class="col-md-2">Inicio P.I</th>
@@ -31,7 +31,7 @@
 				<th class="col-md-2">Fin T.I</th>
 				<th class="col-md-6">Observaciones</th>
 				<th class="hidden-xs col-md-1">Creado</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 		<tbody>

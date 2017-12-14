@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Ciudades')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 
 @section('page_heading')

@@ -31,8 +31,10 @@
 		son configuraciones de presentación
 		HFG--Se Realiza ajuste de texto, otros atributos
 		*/
+			
+		@rinclude('datatable-footer')
 		
-		$('.table').DataTable({  
+		var tbIndex = $('#tabla').DataTable({  
 			lengthMenu: [[5,10,25,50,-1], [5,10,25,50,'Todos']],
 			pagingType: 'simple_numbers',
 			bScrollCollapse: true,
@@ -62,6 +64,8 @@
 		$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
 			$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust().draw();
 		});
+
+		@rinclude('datatable-filters')
 
 	  });
 	</script>

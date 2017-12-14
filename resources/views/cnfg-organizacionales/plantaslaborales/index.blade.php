@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Plantas de Personal')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 @section('page_heading')
 	<div class="row">
@@ -25,7 +25,7 @@
 				<th class="col-md-4">Cargo</th>
 				<th class="col-md-4">Cantidad</th>
 				<th class="hidden-xs col-md-1">Creado</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 		<tbody>

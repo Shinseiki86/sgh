@@ -5,7 +5,7 @@
     @include('cnfg-ausentismos.diagnosticos.modal')
     <div class="row">
         <div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
-            Diagnosticos
+            Diagnósticos
         </div>
         <div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
         <button class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Editar</button>
@@ -20,15 +20,15 @@
 
     <table class="table table-striped" id="tabla">
         <thead>
-        <th>Codigo CIE10</th>
-        <th>Descripcion</th>
-        <th class="col-md-1 all" width="50px">Acciones</th>
+        <th>Código CIE10</th>
+        <th>Descripción</th>
+        <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
         <tbody></tbody>
     </table>
 
     @include('widgets/modal-delete')
-    @include('datatable-ajax', ['urlAjax'=>'getDiagnostico', 'columns'=>[
+    @include('widgets.datatable.datatable-ajax', ['urlAjax'=>'getDiagnostico', 'columns'=>[
         'DIAG_CODIGO',
         'DIAG_DESCRIPCION',
     ]]) 

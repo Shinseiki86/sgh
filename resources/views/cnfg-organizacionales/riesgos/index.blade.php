@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Riesgos')
-@include('datatable-export')
+@include('widgets.datatable.datatable-export')
 
 @section('page_heading')
 	<div class="row">

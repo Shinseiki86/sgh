@@ -1,9 +1,9 @@
 <table class="table table-striped" id="tabla">
     <thead>
-        <th>Codigo</th>
-		<th>Descripcion</th>
+        <th>Código</th>
+		<th>Descripción</th>
 		<th>Observaciones</th>
-        <th class="col-md-1 all" width="50px">Acciones</th>
+        <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
     <tbody>
     @foreach($tipoentidades as $tipoEntidad)

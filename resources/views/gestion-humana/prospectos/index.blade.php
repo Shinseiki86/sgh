@@ -30,14 +30,14 @@
 				<th class="col-md-5">Celular</th>
 				<th class="col-md-5">Correo</th>
 				<th class="col-md-5">¿Descartada?</th>
-				<th class="col-md-1 all"></th>
+				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 		<tbody></tbody>
 	</table>
 
 	@include('widgets/modal-delete')
-	@include('datatable-ajax', ['urlAjax'=>'getProspectos', 'columns'=>[
+	@include('widgets.datatable.datatable-ajax', ['urlAjax'=>'getProspectos', 'columns'=>[
 		'PROS_CEDULA',
 		'PROS_FECHAEXPEDICION',
 		'PROS_PRIMERNOMBRE',

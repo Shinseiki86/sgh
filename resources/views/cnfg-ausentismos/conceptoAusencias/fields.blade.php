@@ -12,7 +12,7 @@
 		<!-- Coau Descripcion Field -->
 		<div class="col-xs-8"> 
 			<div class="form-group  {{ $errors->has('COAU_DESCRIPCION') ? ' has-error' : '' }}">
-			    {!! Form::label('COAU_DESCRIPCION', 'Descripcion:', ['class' => 'control-label Coau Descripcion']) !!}
+			    {!! Form::label('COAU_DESCRIPCION', 'Descripción:', ['class' => 'control-label Coau Descripcion']) !!}
 				{!! Form::text('COAU_DESCRIPCION', null, ['class' => 'form-control ']) !!}
 				@include('widgets.forms.alerta',['name'=>'COAU_DESCRIPCION'])
 			</div>
