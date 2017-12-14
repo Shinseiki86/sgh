@@ -1,6 +1,7 @@
 @include('chosen')
 @include('datepicker')
 @include('utilidades.autocomplete',['first'=>'DX_DESCRIPCION','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
+@include('utilidades.validaFecha',['FechaI'=>'AUSE_FECHAINICIO','FechaF'=>'AUSE_FECHAFINAL'])
 @include('utilidades.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCION','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
 @include('utilidades.select-dinamico', ['url'=>'cnfg-ausentismos/buscaEntRes', 'selectPadre'=>'COAU_ID', 'selectHijo'=>'ENTI_ID', 'idBusqueda'=>'ENTI_ID', 'nombreBusqueda'=>'ENTI_RAZONSOCIAL', 'prepend'=>'Seleccione una Entidad'])
 <div class='col-md-8 col-md-offset-2'>
@@ -31,7 +32,7 @@
 	<div class="row">
 		@include('widgets.forms.input', ['type'=>'number', 'column'=>3, 'name'=>'AUSE_DIAS', 'label'=>'Total Dias'])
 		@include('widgets.forms.input', ['type'=>'number', 'column'=>5, 'name'=>'AUSE_IBC', 'label'=>'Ingreso Base de Cotizacion'])
-		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'AUSE_VALOR', 'label'=>'VAlor Total'])
+		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'AUSE_VALOR', 'label'=>'Valor Total'])
 	</div>
 
 	<div class="row">

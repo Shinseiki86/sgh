@@ -70,7 +70,14 @@ class AusentismoController extends Controller
 	 */
 	public function store()
 	{
-		parent::storeModel();
+		$ini=request()->get('AUSE_FECHAINICIO');
+		$fin=request()->get('AUSE_FECHAFINAL');
+		if (validaFecha($ini,$fin)) {
+			parent::storeModel();
+		}else{
+			flash_alert( 'La fecha de inicio no puede ser mayor', 'success' );
+		}
+		
 	}
 
 	/**

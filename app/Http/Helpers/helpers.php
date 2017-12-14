@@ -384,3 +384,32 @@ if (! function_exists('get_is_admin')) {
 
     }
 }
+
+if (! function_exists('validaFecha')) {
+    /**
+     * Convierte una cadena de texto a una fecha
+     * @param string $fecha_string Mensaje a presentar.
+     * @return a date 
+     */
+    function validaFecha($fechaI,$fechaF) {
+        $dtI = Carbon::parse($fechaI);
+        $dtF = Carbon::parse($fechaF);
+        $cant="true";
+        if ($dtI>$dtF) {
+            $cant="false";
+        }
+        return $cant;
+    }
+}
+
+if (! function_exists('fechaActual')) {
+    /**
+     * Retorna la fecha actul
+     
+     */
+    function fechaActual() {  
+        $date = Carbon::now();   
+        return $date->toDateString(); 
+    }
+}
+
