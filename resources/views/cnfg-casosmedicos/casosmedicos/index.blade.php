@@ -25,11 +25,12 @@
 				<th class="col-md-1">Temporal</th>
 				<th class="col-md-1">Cedula</th>
 				<th class="col-md-3">Empleado</th>
+				<th class="col-md-3">Estado de Contrato</th>
 				<th class="col-md-2">Cargo</th>
 				<th class="col-md-2">Salario</th>
 				<th class="col-md-2">Turno</th>
 				<th class="col-md-1">Fecha de Restricción</th>
-				<th class="col-md-1">Estado</th>
+				<th class="col-md-1">Estado Restricción</th>
 				<th class="col-md-3">DX General</th>
 				<th class="col-md-3">DX Especifico</th>
 				<th class="col-md-3">PCL</th>
@@ -51,6 +52,7 @@
 				<td>{{ $casomedico -> contrato -> temporal -> TEMP_NOMBRECOMERCIAL or null }}</td>
 				<td>{{ $casomedico -> contrato -> prospecto -> PROS_CEDULA }}</td>
 				<td>{{ nombre_empleado($casomedico -> contrato -> prospecto -> PROS_ID) }}</td>
+				<td>{{ $casomedico -> contrato -> estadocontrato -> ESCO_DESCRIPCION }}</td>
 				<td>{{ $casomedico -> contrato -> cargo -> CARG_DESCRIPCION }}</td>
 				<td>{{ number_format($casomedico -> contrato -> CONT_SALARIO, 0) }}</td>
 				<td>{{ $casomedico -> contrato -> turno -> TURN_DESCRIPCION or null}}</td>
