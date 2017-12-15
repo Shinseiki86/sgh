@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DiagnosticosTableSeeder::class);
         $this->call(TipoAusentismosTableSeeder::class);
         $this->call(ConceptoAusenciasTableSeeder::class);
-        $this->call(TicketsTableSeeder::class);
+        //$this->call(TicketsTableSeeder::class);
         $this->call(PlantasLaboralesTableSeeder::class);
         $this->call(DiagnosticoGeneralTableSeeder::class);
         $this->call(EstadoRestriccionTableSeeder::class);

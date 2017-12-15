@@ -121,7 +121,7 @@ class Controller extends BaseController
 	 *
 	 * @return array
 	 */
-	private function getRequest()
+	protected function getRequest()
 	{
 		$data = request()->all();
 		foreach ($data as $input => $value) {

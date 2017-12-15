@@ -30,6 +30,12 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/',  function(){return view('dashboard/index');});
 });
 
+Route::group(['prefix' => 'reportes', 'middleware' => 'auth'], function() {
+	Route::get('/', 'ReporteController@index');
+	Route::post('contratoActPorFecha', 'ReporteController@contratoActPorFecha');
+	Route::post('ticketsPorFecha', 'ReporteController@ticketsPorFecha');
+});
+
 Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], function() {
 	Route::resource('cnos', 'CnosController', ['parameters'=>['cnos' => 'CNOS_ID']]);
 	Route::resource('cargos', 'CargoController', ['parameters'=>['cargos' => 'CARG_ID']]);

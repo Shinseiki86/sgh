@@ -298,7 +298,6 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
-
             Menu::create([
                 'MENU_LABEL' => 'Tipo Ausentismos',
                 'MENU_URL' => 'cnfg-ausentismos/tipoausentismos',
@@ -306,7 +305,6 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
-
             Menu::create([
                 'MENU_LABEL' => 'Concepto Ausencias',
                 'MENU_URL' => 'cnfg-ausentismos/conceptoausencias',
@@ -314,7 +312,6 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
-
             Menu::create([
                 'MENU_LABEL' => 'Ausentismo',
                 'MENU_URL' => 'cnfg-ausentismos/ausentismos',
@@ -322,8 +319,7 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
-
-             Menu::create([
+            Menu::create([
                 'MENU_LABEL' => 'Prorroga Ausentismo',
                 'MENU_URL' => 'cnfg-ausentismos/prorrogaausentismos',
                 'MENU_ICON' => 'fa-wheelchair',
@@ -337,7 +333,6 @@ class MenuTableSeeder extends Seeder
             'MENU_ICON' => 'fa fa-stethoscope',
             'MENU_ORDER' => $orderMenuLeft++,
         ]);
-
             Menu::create([
                 'MENU_LABEL' => 'DX Generales',
                 'MENU_URL' => 'cnfg-casosmedicos/diagnosticosgenerales',
@@ -345,7 +340,6 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
-
             Menu::create([
                 'MENU_LABEL' => 'Estados de Restricción',
                 'MENU_URL' => 'cnfg-casosmedicos/estadosrestriccion',
@@ -353,7 +347,6 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
-
             Menu::create([
                 'MENU_LABEL' => 'Casos Médicos',
                 'MENU_URL' => 'cnfg-casosmedicos/casosmedicos',
@@ -361,7 +354,6 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
-
             Menu::create([
                 'MENU_LABEL' => 'Novedades Médicas',
                 'MENU_URL' => 'cnfg-casosmedicos/novedadesmedicas',
@@ -369,6 +361,15 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
+
+        $orderItem = 0;
+        $parent = Menu::create([
+            'MENU_LABEL' => 'Reportes',
+            'MENU_ICON' => 'fa fa-filter',
+            'MENU_URL' => 'reportes',
+            'MENU_ORDER' => $orderMenuLeft++,
+        ]);
+
 
         //TOP
         Menu::create([

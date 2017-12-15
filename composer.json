@@ -23,7 +23,7 @@
         "laravelcollective/html": "5.2.*",
         "bosnadev/repositories": "dev-master",
         "mitulgolakiya/laravel-api-generator": "dev-master",
-        "felixkiss/uniquewith-validator": "^3.1",
+        "felixkiss/uniquewith-validator": "^3.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
