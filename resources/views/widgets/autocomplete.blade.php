@@ -1,6 +1,6 @@
 @push('head')
     {!! Html::style('assets/jqueryui/jquery-ui.css') !!}
-     {!! Html::style('assets/jqueryui/jquery.ui.autocomplete.css') !!}
+    {!! Html::style('assets/jqueryui/jquery.ui.autocomplete.css') !!}
 @endpush
 
 @push('scripts')

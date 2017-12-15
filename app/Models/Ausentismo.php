@@ -28,7 +28,8 @@ class Ausentismo extends ModelWithSoftDeletes
 		"ENTI_ID",
 		"AUSE_IBC",
 		"AUSE_VALOR",
-		"AUSE_OBSERVACIONES"
+		"AUSE_OBSERVACIONES",
+        "AUSE_ESTADO"
     ];
 
 	public static function rules($id = 0){
@@ -40,6 +41,7 @@ class Ausentismo extends ModelWithSoftDeletes
 			"AUSE_DIAS" => "required",
 			"AUSE_FECHAACCIDENTE" => "date",
 			"ENTI_ID" => "required",
+            "AUSE_ESTADO" => "required",
 		];
 		return $rules;
 	}

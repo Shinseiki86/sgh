@@ -44,9 +44,10 @@ class ProrrogaAusentismoController extends Controller
 	public function create()
 	{
 		$prospectosActivos = repositorio("Ausentismo")->prospectoConAusentismo();
+		//dd($prospectosActivos);
 		//Se crea un array con los prospectos disponibles
 		$arrContratos = model_to_array($prospectosActivos, 'CONT_PROSPECTOS');
-
+		//dd($arrContratos);
 		//Se crea un array con los conceptos de Ausentismos
 		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
 		
@@ -92,7 +93,7 @@ class ProrrogaAusentismoController extends Controller
 	{
 		//Se crea un array con los conceptos de Ausentismos
 		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
-		$diagnostico= findBy('Diagnostico','DIAG_ID',$prorrogaausentismos->DIAG_ID);
+		$diagnostico= findBy('Diagnostico','DIAG_ID',$prorrogaausentismos->DIAG_ID)->get();
 
 		return view($this->route.'.edit',['prorrogaausentismos'=>$prorrogaausentismos,'diagnostico'=>$diagnostico],compact('arrConceptoAusentismo'));
 	}

@@ -1,6 +1,12 @@
 @extends('layouts.menu')
 @section('title', '/ Roles')
 @include('widgets.datatable.datatable-export')
+<<<<<<< HEAD
+@include('widgets.datatable.datatable-export')
+@include('widgets.datatable.datatable-export')
+@include('widgets.datatable.datatable')
+=======
+>>>>>>> a7c8df3ab085ca7e918a888e852534b2171f00a7
 
 @section('page_heading')
 	<div class="row">
