@@ -1,6 +1,6 @@
 @extends('layouts.menu')
 @section('title', '/ Usuarios Locales')
-@include('datatable')
+@include('widgets.datatable.datatable-export')
 
 @section('page_heading')
 	<div class="row">

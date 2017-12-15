@@ -1,6 +1,9 @@
 @extends('layouts.menu')
 @section('title', '/ TNL - Incapacidades')
-@include('datatable')
+@include('widgets.datatable.datatable-export')
+@include('widgets.datatable.datatable-export')
+@include('widgets.datatable.datatable-export')
+@include('widgets.datatable.datatable')
 
 @section('page_heading')
 	<div class="row">

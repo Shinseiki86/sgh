@@ -1,7 +1,7 @@
 @include('chosen')
 @include('datepicker')
 @include('widgets.autocomplete',['first'=>'DX_DESCRIPCION','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
-@include('widgets.validaFecha',['FechaI'=>'AUSE_FECHAINICIO','FechaF'=>'AUSE_FECHAFINAL'])
+@include('widgets.validaFecha',['fecha1'=>'AUSE_FECHAINICIO','fecha2'=>'AUSE_FECHAFINAL','mensaje'=>'La fecha inicial no puede ser mayor a la fecha final'])
 @include('widgets.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCION','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
 @include('widgets.select-dinamico', ['url'=>'cnfg-ausentismos/buscaEntRes', 'selectPadre'=>'COAU_ID', 'selectHijo'=>'ENTI_ID', 'idBusqueda'=>'ENTI_ID', 'nombreBusqueda'=>'ENTI_RAZONSOCIAL', 'prepend'=>'Seleccione una Entidad'])
 <div class='col-md-8 col-md-offset-2'>
@@ -26,13 +26,15 @@
 	<div class="row">
 		@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'AUSE_FECHAINICIO', 'label'=>'Fecha de Inicio' ])
 		@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'AUSE_FECHAFINAL', 'label'=>'Fecha Final' ])
-		@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'AUSE_FECHAACCIDENTE', 'label'=>'Fecha de Accidente' ])		
+		@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'AUSE_FECHAACCIDENTE', 'label'=>'Fecha de Accidente' ])
 	</div>
 
 	<div class="row">
-		@include('widgets.forms.input', ['type'=>'number', 'column'=>3, 'name'=>'AUSE_DIAS', 'label'=>'Total Días'])
-		@include('widgets.forms.input', ['type'=>'number', 'column'=>5, 'name'=>'AUSE_IBC', 'label'=>'Ingreso Base de Cotización'])
-		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'AUSE_VALOR', 'label'=>'Valor Total'])
+		@include('widgets.forms.input', ['type'=>'number', 'column'=>2, 'name'=>'AUSE_DIAS', 'label'=>'Total Días'])
+		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'AUSE_IBC', 'label'=>'Ingreso Base de Cotización'])
+		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'AUSE_VALOR', 'label'=>'Valor Total'])			
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'AUSE_ESTADO', 'label'=>'Estado', 'data'=>['Abierto'=>'Abierto','Cerrado'=>'Cerrado'], 'placeholder'=>'Seleccione...','allowClear'=>true])	
+
 	</div>
 
 	<div class="row">

@@ -48,6 +48,7 @@ class AusentismoController extends Controller
 
 		//Se crea un array con los prospectos disponibles
 		$arrContratos = model_to_array($prospectosActivos, 'CONT_PROSPECTOS');
+		//dd($arrContratos);
 		
 		//Se crea un array con los conceptos de Ausentismos
 		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
@@ -70,14 +71,7 @@ class AusentismoController extends Controller
 	 */
 	public function store()
 	{
-		$ini=request()->get('AUSE_FECHAINICIO');
-		$fin=request()->get('AUSE_FECHAFINAL');
-		if (validaFecha($ini,$fin)) {
-			parent::storeModel();
-		}else{
-			flash_alert( 'La fecha de inicio no puede ser mayor', 'success' );
-		}
-		
+		parent::storeModel();
 	}
 
 	/**
@@ -109,8 +103,8 @@ class AusentismoController extends Controller
 		
 		//Se crea un array con las Entidades Responsables
 		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
-		
-		$diagnostico= findBy('Diagnostico','DIAG_ID',$ausentismos->DIAG_ID);
+		//dd($ausentismos->DIAG_ID);
+		$diagnostico= findBy('Diagnostico','DIAG_ID',$ausentismos->DIAG_ID)->get();
 
 		return view($this->route.'.edit',['ausentismo'=>$ausentismos,'diagnostico'=>$diagnostico],compact('arrContratos','arrConceptoAusentismo','arrEntidad'));
 	}

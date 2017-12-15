@@ -10,6 +10,7 @@
 		<th>Entidad</th>
 		<th>IBC</th>
 		<th>Valor Total</th>
+        <th>Estado</th>
 		<th>Observaciones</th>
         <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
@@ -26,7 +27,8 @@
 			<td>{{ $ausentismo->entidad->ENTI_RAZONSOCIAL }}</td>
 			<td>{{ number_format($ausentismo->AUSE_IBC, 0) }}</td>
 			<td>{{ number_format($ausentismo->AUSE_VALOR, 0) }}</td>
-			<td>{{ $ausentismo->AUSE_OBSERVACIONES }}</td>
+			<td>{{ $ausentismo->AUSE_ESTADO }}</td>
+            <td>{{ $ausentismo->AUSE_OBSERVACIONES }}</td>
              <td>
                 <!-- Botón Editar (edit) -->
                 <a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-ausentismos.ausentismos.edit', [ $ausentismo->AUSE_ID ] ) }}" data-tooltip="tooltip" title="Editar">

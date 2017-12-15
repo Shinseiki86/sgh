@@ -1,5 +1,6 @@
 @include('chosen')
 @include('datepicker')
+@include('widgets.validaFecha',['FechaI'=>'PROR_FECHAINICIO','FechaF'=>'PROR_FECHAFINAL'])
 @include('widgets.autocomplete',['first'=>'DX_DESCRIPCIONP','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
 @include('widgets.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCIONP','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
 <div class='row'>	
@@ -14,7 +15,7 @@
 	<div class="row">
 		@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'PROR_FECHAINICIO', 'label'=>'Fecha de Inicio' ])
 		@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'PROR_FECHAFINAL', 'label'=>'Fecha Final' ])
-		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'PROR_DIAS', 'label'=>'Total Dias'])
+		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'PROR_DIAS', 'label'=>'Total Dias'])		
 	</div>
 	<div class="row">
 		<!-- Ause Observaciones Field -->
