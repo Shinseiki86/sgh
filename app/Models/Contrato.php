@@ -205,6 +205,18 @@ class Contrato extends ModelWithSoftDeletes
 		return $this->belongsTo(Ciudad::class, $foreingKey);
 	}
 
+	public function tickets()
+	{
+		$foreingKey = 'CONT_ID';
+		return $this->hasMany(Ticket::class, $foreingKey);
+	}
+
+	public function casosmedicos()
+	{
+		$foreingKey = 'CONT_ID';
+		return $this->hasMany(CasoMedico::class, $foreingKey);
+	}
+
 	public function entidades(){
 		$foreingKey = 'CONT_ID';
 		$otherKey   = 'ENTI_ID';

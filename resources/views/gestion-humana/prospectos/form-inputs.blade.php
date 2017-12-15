@@ -5,6 +5,8 @@
 
 @include('widgets.forms.input', ['type'=>'date', 'name'=>'PROS_FECHAEXPEDICION', 'label'=>'Fecha Expedición' ])
 
+@include('widgets.forms.input', ['type'=>'date', 'name'=>'PROS_FECHANACIMIENTO', 'label'=>'Fecha de Nacimiento' ])
+
 @include('widgets.forms.input', ['type'=>'text', 'name'=>'PROS_PRIMERNOMBRE', 'label'=>'Primer Nombre', 'options'=>['maxlength' => '100'] ])
 
 @include('widgets.forms.input', ['type'=>'text', 'name'=>'PROS_SEGUNDONOMBRE', 'label'=>'Segundo Nombre', 'options'=>['maxlength' => '100'] ])

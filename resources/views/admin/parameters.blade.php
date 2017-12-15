@@ -1,8 +1,11 @@
 @extends('layouts.menu')
 @section('title', '/ Dashboard')
+<<<<<<< HEAD
 @include('widgets.datatable.datatable-export')
 @include('widgets.datatable.datatable-export')
 @include('widgets.datatable.datatable-export')
+=======
+>>>>>>> a7c8df3ab085ca7e918a888e852534b2171f00a7
 @include('widgets.datatable.datatable')
 
 @section('page_heading')

@@ -97,10 +97,10 @@ class CreateContratosTable extends Migration
             $table->unsignedInteger('CECO_ID')
                 ->comment('centro de costos del contrato');
 
-            $table->unsignedInteger('GRUP_ID')->nullable()
+            $table->unsignedInteger('GRUP_ID')
                 ->comment('Grupo del empleado');
 
-            $table->unsignedInteger('TURN_ID')->nullable()
+            $table->unsignedInteger('TURN_ID')
                 ->comment('Turno del empleado');
 
             $table->unsignedInteger('CIUD_CONTRATA')

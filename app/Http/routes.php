@@ -129,6 +129,8 @@ Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'],
 Route::group(['prefix' => 'cnfg-casosmedicos', 'namespace' => 'CnfgCasosMedicos'], function() {
 	Route::resource('diagnosticosgenerales', 'DiagnosticoGeneralController');
 	Route::resource('estadosrestriccion', 'EstadoRestriccionController');
+	Route::resource('casosmedicos', 'CasoMedicoController');
+	Route::resource('novedadesmedicas', 'NovedadMedicaController');
 });
 
 

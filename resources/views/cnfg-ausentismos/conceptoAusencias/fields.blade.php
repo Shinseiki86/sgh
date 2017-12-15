@@ -4,7 +4,7 @@
 	<div class="col-md-13 ">
 		<div class="col-xs-4"> 
 			<div class="form-group  {{ $errors->has('COAU_CODIGO') ? ' has-error' : '' }}">
-			    {!! Form::label('COAU_CODIGO', 'Codigo:', ['class' => 'control-label Coau Codigo']) !!}
+			    {!! Form::label('COAU_CODIGO', 'Código:', ['class' => 'control-label Coau Codigo']) !!}
 				{!! Form::text('COAU_CODIGO', null, ['class' => 'form-control ']) !!}
 				@include('widgets.forms.alerta',['name'=>'COAU_CODIGO'])
 			</div>

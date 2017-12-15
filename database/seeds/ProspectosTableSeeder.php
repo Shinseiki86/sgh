@@ -17,6 +17,7 @@ class ProspectosTableSeeder extends Seeder
     	$prospecto = new Prospecto;
     	$prospecto->PROS_CEDULA = 1144173746;
     	$prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
+        $prospecto->PROS_FECHANACIMIENTO =  '1993-12-22';
     	$prospecto->PROS_PRIMERNOMBRE =  'KEVIN';
     	$prospecto->PROS_SEGUNDONOMBRE =  'FABIAN';
     	$prospecto->PROS_PRIMERAPELLIDO =  'RODRIGUEZ';
@@ -32,6 +33,7 @@ class ProspectosTableSeeder extends Seeder
         $prospecto = new Prospecto;
         $prospecto->PROS_CEDULA = 1144173745;
         $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
+        $prospecto->PROS_FECHANACIMIENTO =  '1993-01-24';
         $prospecto->PROS_PRIMERNOMBRE =  'HECTOR';
         $prospecto->PROS_SEGUNDONOMBRE =  'FABIO';
         $prospecto->PROS_PRIMERAPELLIDO =  'GONZALEZ';
@@ -47,6 +49,7 @@ class ProspectosTableSeeder extends Seeder
         $prospecto = new Prospecto;
         $prospecto->PROS_CEDULA = 123456789;
         $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
+        $prospecto->PROS_FECHANACIMIENTO =  '1992-09-17';
         $prospecto->PROS_PRIMERNOMBRE =  'DIEGO';
         $prospecto->PROS_SEGUNDONOMBRE =  'ARMANDO';
         $prospecto->PROS_PRIMERAPELLIDO =  'CORTES';
@@ -62,6 +65,7 @@ class ProspectosTableSeeder extends Seeder
         $prospecto = new Prospecto;
         $prospecto->PROS_CEDULA = 94378421;
         $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
+        $prospecto->PROS_FECHANACIMIENTO =  '1992-09-17';
         $prospecto->PROS_PRIMERNOMBRE =  'MARIA';
         $prospecto->PROS_SEGUNDONOMBRE =  'DEL PILAR';
         $prospecto->PROS_PRIMERAPELLIDO =  'JARAMILLO';
@@ -77,6 +81,7 @@ class ProspectosTableSeeder extends Seeder
         $prospecto = new Prospecto;
         $prospecto->PROS_CEDULA = 94378041;
         $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
+        $prospecto->PROS_FECHANACIMIENTO =  '1992-09-17';
         $prospecto->PROS_PRIMERNOMBRE =  'DIANA';
         $prospecto->PROS_SEGUNDONOMBRE =  'MILENA';
         $prospecto->PROS_PRIMERAPELLIDO =  'VARGAS';
@@ -92,6 +97,7 @@ class ProspectosTableSeeder extends Seeder
         $prospecto = new Prospecto;
         $prospecto->PROS_CEDULA = 94378140;
         $prospecto->PROS_FECHAEXPEDICION =  '2011-12-26';
+        $prospecto->PROS_FECHANACIMIENTO =  '1992-09-17';
         $prospecto->PROS_PRIMERNOMBRE =  'MAURICIO';
         //$prospecto->PROS_SEGUNDONOMBRE =  'MILENA';
         $prospecto->PROS_PRIMERAPELLIDO =  'JIMENEZ';

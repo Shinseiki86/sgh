@@ -1,5 +1,9 @@
 @extends('layouts.menu')
 @section('title', '/ Dashboard')
+<<<<<<< HEAD
+=======
+
+>>>>>>> a7c8df3ab085ca7e918a888e852534b2171f00a7
 
 @section('page_heading')
 	<div class="row">

@@ -21,20 +21,20 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
-				<th class="col-md-5"> Empleador </th>
-				<th class="col-md-5"> Empleado </th>
-				<th class="col-md-5"> Estado </th>
-				<th class="col-md-5"> Tipo de Incidente </th>
-				<th class="col-md-5"> Prioridad </th>
-				<th class="col-md-5"> Categoria </th>
-				<th class="col-md-1"> Fecha Evento </th>
-				<th class="col-md-1"> Fecha Solicitud </th>
-				<th class="col-md-1"> Fecha Aprobación o Rechazo </th>
-				<th class="col-md-1"> Fecha Cierre </th>
-				<th class="col-md-1"> Estado Aprobación </th>
-				<th class="col-md-1"> Grupo </th>
-				<th class="col-md-1"> Turno </th>
-				<th class="hidden-xs col-md-1">Creado</th>
+				<th class="col-md-5 all">Empleador</th>
+				<th class="col-md-5 all">Empleado</th>
+				<th class="col-md-5 all">Estado</th>
+				<th class="col-md-5">Tipo de Incidente</th>
+				<th class="col-md-5">Prioridad</th>
+				<th class="col-md-5">Categoria</th>
+				<th class="col-md-1 all">Fecha Evento</th>
+				<th class="col-md-1">Fecha Solicitud</th>
+				<th class="col-md-1">Fecha Aprobación o Rechazo</th>
+				<th class="col-md-1">Fecha Cierre</th>
+				<th class="col-md-1">Estado Aprobación</th>
+				<th class="col-md-1">Grupo</th>
+				<th class="col-md-1">Turno</th>
+        		<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
 		<tbody>

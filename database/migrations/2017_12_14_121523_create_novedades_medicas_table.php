@@ -3,9 +3,9 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiagnosticosGeneralesTable extends Migration
+class CreateNovedadesMedicasTable extends Migration
 {
-    private $nomTabla = 'DIAGNOSTICOSGENERALES';
+    private $nomTabla = 'NOVEDADESMEDICAS';
 
     /**
      * Run the migrations.
@@ -14,33 +14,46 @@ class CreateDiagnosticosGeneralesTable extends Migration
      */
     public function up()
     {
-        $commentTabla = 'DIAGNOSTICOS GENERALES: contien la información de diagnosticos generales del personal con restricciones médicas';
+        $commentTabla = 'NOVEDADESMEDICAS: contiene las novedades del personal con restricciones medicas';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
             
-            $table->increments('DIGE_ID')
-                ->comment('Valor autonumérico, llave primaria de la tabla diagnosticos generales.');
+            $table->increments('NOME_ID')
+                ->comment('Valor autonumérico, llave primaria de la tabla novedades medicas.');
 
-            $table->string('DIGE_DESCRIPCION', 300)
-                ->comment('descripción del diagnostico general.');
+            $table->date('NOME_FECHANOVEDAD')
+                ->comment('fecha de la novedad');
 
-            $table->string('DIGE_OBSERVACIONES', 300)
-                ->comment('observaciones del diagnostico general')->nullable();
+            $table->string('NOME_DESCRIPCION', 300)
+                ->comment('descripción de la novedad médica');
+
+            $table->string('NOME_OBSERVACIONES', 300)
+                ->comment('observaciones del caso medico')->nullable();
+
+            $table->unsignedInteger('CAME_ID')
+                ->comment('referencia al caso médico');
             
             //Traza
-            $table->string('DIGE_CREADOPOR')
+            $table->string('NOME_CREADOPOR')
                 ->comment('Usuario que creó el registro en la tabla');
-            $table->timestamp('DIGE_FECHACREADO')
+            $table->timestamp('NOME_FECHACREADO')
                 ->comment('Fecha en que se creó el registro en la tabla.');
-            $table->string('DIGE_MODIFICADOPOR')->nullable()
+            $table->string('NOME_MODIFICADOPOR')->nullable()
                 ->comment('Usuario que realizó la última modificación del registro en la tabla.');
-            $table->timestamp('DIGE_FECHAMODIFICADO')->nullable()
+            $table->timestamp('NOME_FECHAMODIFICADO')->nullable()
                 ->comment('Fecha de la última modificación del registro en la tabla.');
-            $table->string('DIGE_ELIMINADOPOR')->nullable()
+            $table->string('NOME_ELIMINADOPOR')->nullable()
                 ->comment('Usuario que eliminó el registro en la tabla.');
-            $table->timestamp('DIGE_FECHAELIMINADO')->nullable()
+            $table->timestamp('NOME_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
+
+            //Relaciones
+            $table->foreign('CAME_ID')
+                ->references('CAME_ID')
+                ->on('CASOSMEDICOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
         });
         

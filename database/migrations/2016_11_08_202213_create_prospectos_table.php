@@ -29,6 +29,9 @@ class CreateProspectosTable extends Migration
             $table->date('PROS_FECHAEXPEDICION')
                 ->comment('fecha de expedición del documento de identificación de la persona');
 
+            $table->date('PROS_FECHANACIMIENTO')
+                ->comment('fecha de nacimiento de la persona');
+
             $table->string('PROS_PRIMERNOMBRE', 100)
                 ->comment('primer nombre de la persona');
 

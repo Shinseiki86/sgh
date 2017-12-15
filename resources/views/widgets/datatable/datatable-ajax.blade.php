@@ -73,7 +73,40 @@
 					tooltips = $('[data-tooltip="tooltip"]');
 					if(tooltips.length > 0)
 						tooltips.tooltip();
-			  	}
+			  	},
+			  	dom: "<'col-sm-2' f> <'col-sm-offset-9' B>"
+					 +"<rt>"
+					 +"<'row'<'form-inline'"
+					 +" <'col-sm-6 col-md-6 col-lg-6'l>"
+					 +"<'col-sm-6 col-md-6 col-lg-6'p>>>",//'Bfrtip',
+				buttons: [{
+						extend: 'csvHtml5',
+						//exportOptions: {columns: columnss},
+						text:  '<i class="fa fa-file-text-o"></i>',
+						titleAttr: 'CSV',
+						//filename:name+fecha()
+					},{
+						extend: 'excelHtml5',
+						//exportOptions: {columns: columnss},
+						text:   '<i class="fa fa-file-excel-o"></i>',
+						titleAttr: 'Excel',
+						//filename:name+fecha()
+					},{
+						extend: 'pdfHtml5',
+						//exportOptions: {columns: columnss},
+						text:    '<i class="fa fa-file-pdf-o"></i>',
+						titleAttr: 'PDF',
+					},{
+						extend: 'print',
+						//exportOptions: {columns: [ 0, 1, 2, 3,4,5 ]},
+						text:    '<i class="fa fa-print"></i>',
+						titleAttr: 'Imprimir',
+					},{
+						extend: 'colvis',
+						text:  '<i class="fa fa-columns"></i>',
+						titleAttr: 'Ver Columnas'
+					}
+				]
 			});
 
 			@rinclude('datatable-filters')

@@ -17,10 +17,6 @@ class EstadoRestriccion extends ModelWithSoftDeletes
 	const DELETED_AT = 'ESRE_FECHAELIMINADO';
 	protected $dates = ['ESRE_FECHACREADO', 'ESRE_FECHAMODIFICADO', 'ESRE_FECHAELIMINADO'];
 
-	//Constantes para referenciar los tipos de empleador
-	const  DIRECTO	 = 1;
-	const  TEMPORAL   = 2;
-
 	protected $fillable = [
 		'ESRE_DESCRIPCION',
 		'ESRE_OBSERVACIONES',
@@ -34,6 +30,10 @@ class EstadoRestriccion extends ModelWithSoftDeletes
 		];
 	}
 
-	
+	public function casosmedicos()
+	{
+		$foreingKey = 'ESRE_ID';
+		return $this->hasMany(CasoMedico::class, $foreingKey);
+	}
 
 }

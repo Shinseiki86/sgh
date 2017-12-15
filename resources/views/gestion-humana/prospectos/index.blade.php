@@ -20,6 +20,7 @@
 			<tr>
 				<th class="col-md-5">Cedula</th>
 				<th class="col-md-5">Fecha de Expedición CC.</th>
+				<th class="col-md-5">Fecha de Nacimiento</th>
 				<th class="col-md-5">Primer Nombre</th>
 				<th class="col-md-5">Segundo Nombre</th>
 				<th class="col-md-5">Primer Apellido</th>
@@ -40,6 +41,7 @@
 	@include('widgets.datatable.datatable-ajax', ['urlAjax'=>'getProspectos', 'columns'=>[
 		'PROS_CEDULA',
 		'PROS_FECHAEXPEDICION',
+		'PROS_FECHANACIMIENTO',
 		'PROS_PRIMERNOMBRE',
 		'PROS_SEGUNDONOMBRE',
 		'PROS_PRIMERAPELLIDO',
