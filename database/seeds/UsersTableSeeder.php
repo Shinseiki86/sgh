@@ -66,6 +66,8 @@ use SGH\Models\Permission;
                 $this->createPermissions(EstadoContrato::class, 'estados de contratos');
                 $this->createPermissions(MotivoRetiro::class, 'motivo de retiro');
                 $this->createPermissions(Negocio::class, 'negocios');
+                $this->createPermissions(Atributo::class, 'atributos');
+                $this->createPermissions(EmpleadoAtributo::class, 'atributos x empleado');
 
                 $this->createPermissions(Grupo::class, 'grupos');
                 $this->createPermissions(Turno::class, 'turnos');

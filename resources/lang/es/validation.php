@@ -214,6 +214,9 @@ return [
 
         'AUSE_FECHAINICIO' => 'Fecha inicial',
         'AUSE_FECHAFINAL' => 'Fecha final',
+
+        'CONT_ID' => 'Contrato',
+        'ATRI_ID' => 'Atributo',
     ],
 
 ];

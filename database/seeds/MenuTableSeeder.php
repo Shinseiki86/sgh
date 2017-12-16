@@ -143,6 +143,20 @@ class MenuTableSeeder extends Seeder
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);
+            Menu::create([
+                'MENU_LABEL' => 'Atributos',
+                'MENU_URL' => 'cnfg-contratos/atributos',
+                'MENU_ICON' => 'fa fa-linode',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
+            Menu::create([
+                'MENU_LABEL' => 'Atributos Empl.',
+                'MENU_URL' => 'cnfg-contratos/empleadoatributo',
+                'MENU_ICON' => 'fa fa-id-badge',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
 
         $orderItem = 0;
         $parent = Menu::create([
