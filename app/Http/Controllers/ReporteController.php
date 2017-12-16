@@ -14,8 +14,8 @@ class ReporteController extends Controller
 	private $data = null;
 
 	private $reportes = [
-		'Contratos activos por fecha',
-		'Tickets por fecha',
+		'ContratosActPorFecha' => 'Contratos activos por fecha',
+		'TicketsActPorFecha' => 'Tickets abiertos por fecha',
 	];
 
 	public function __construct()
@@ -41,16 +41,16 @@ class ReporteController extends Controller
 	 *
 	 * @return Json
 	 */
-	public function contratoActPorFecha()
+	public function contratosActPorFecha()
 	{
 		$queryCollect = Contrato::leftJoin('PROSPECTOS as JEFE', 'JEFE.PROS_ID', '=', 'CONTRATOS.JEFE_ID')
 							->leftJoin('PROSPECTOS as PROSPECTO', 'PROSPECTO.PROS_ID', '=', 'CONTRATOS.PROS_ID')
 							->where('ESCO_ID', EstadoContrato::ACTIVO)
 							->select([
-								'JEFE.PROS_CEDULA',
-								'PROSPECTO.PROS_CEDULA',
-								'CONT_FECHAINGRESO',
-								'CONT_FECHATERMINACION',
+								'JEFE.PROS_CEDULA as Jefe_Ced',
+								'PROSPECTO.PROS_CEDULA as Prospecto_Ced',
+								'CONT_FECHAINGRESO as Fecha_Ingreso',
+								'CONT_FECHATERMINACION as Fecha_Terminación',
 							]);
 
 		if(isset($this->data['fchaIniContrato']))
@@ -58,24 +58,32 @@ class ReporteController extends Controller
 		if(isset($this->data['fchaFinContrato']))
 			$queryCollect->whereDate('CONT_FECHATERMINACION', '<=', Carbon::parse($this->data['fchaFinContrato']));
 
-		return $queryCollect->get()->toJson();
+		return response()->json($queryCollect->get());
 	}
 
 	/**
 	 * 
 	 *
-	 * @return Response
+	 * @return Json
 	 */
-	public function ticketsPorFecha()
+	public function ticketsActPorFecha()
 	{
-		$queryCollect = Ticket::whereIn('ESTI_ID', [EstadoTicket::ABIERTO, EstadoTicket::REASIGNADO]);
+		$queryCollect = Ticket::leftJoin('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
+							->whereIn('TICKETS.ESTI_ID', [EstadoTicket::ABIERTO, EstadoTicket::REASIGNADO])
+							->select([
+								'TICK_ID as ID',
+								'TICK_DESCRIPCION as Descripción',
+								'TICK_FECHASOLICITUD as Fecha_Solicitud',
+								'TICK_FECHAAPROBACION as Fecha_Aprobación',
+								'ESTI_DESCRIPCION as Estado',
+							]);
 
 		if(isset($this->data['fchaIniSolicitud']))
 			$queryCollect->whereDate('TICK_FECHASOLICITUD', '>=', Carbon::parse($this->data['fchaIniSolicitud']));
 		if(isset($this->data['fchaFinSolicitud']))
 			$queryCollect->whereDate('TICK_FECHASOLICITUD', '<=', Carbon::parse($this->data['fchaFinSolicitud']));
 
-		return $queryCollect->get()->toJson();
+		return response()->json($queryCollect->get());
 	}
 
 }
