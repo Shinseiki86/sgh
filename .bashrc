@@ -12,6 +12,7 @@ alias art:sch="php artisan schedule:run"
 alias art:cmpl="php artisan clear-compiled"
 alias seed="php artisan make:seeder"
 alias ejeseed="php artisan db:seed --class="
+alias art:mig:seed "php artisan migrate --seed"
 
 alias art:jobs="art queue:work --sleep=3 --tries=3 --daemon"
 

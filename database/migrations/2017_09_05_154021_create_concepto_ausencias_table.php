@@ -32,6 +32,8 @@ class CreateConceptoAusenciasTable extends Migration
 			
 			$table->integer('TIEN_ID')->unsignedInteger('TIEN_ID')->foreign('TIEN_ID')->references('TIEN_ID')->on('TIPOENTIDADES')->onDelete('cascade')->onUpdate('cascade')->comment('Id del Tipo de Entidad');
 
+			$table->enum('COAU_REMUNERADO', ['SI', 'NO'])->nullable()->comment('Indica si el Concepto de Ausencia es remunerado o no');
+
 
 			//Traza
 			$table->string('COAU_CREADOPOR')

@@ -21,11 +21,13 @@
 	
 	<!-- Tiau Id Field -->
 	<div class="col-md-13 ">
-		@include('widgets.forms.input', ['type'=>'select', 'name'=>'TIAU_ID', 'label'=>'Tipo Ausentismo', 'data'=>$arrTipoAusentismo,'column'=>5,'placeholder'=>'Seleccione un Tipo de Ausentismo','allowClear'=>true])
+		@include('widgets.forms.input', ['type'=>'select', 'name'=>'TIAU_ID', 'label'=>'Tipo Ausentismo', 'data'=>$arrTipoAusentismo,'column'=>4,'placeholder'=>'Seleccione un Tipo de Ausentismo','allowClear'=>true])
 
 		<!-- Tien Id Field -->
 
-		@include('widgets.forms.input', ['type'=>'select', 'name'=>'TIEN_ID', 'label'=>'Tipo Entidad', 'data'=>$arrTipoEntidad,'placeholder'=>'Seleccione un Tipo de Entidad','allowClear'=>true,'column'=>7])
+		@include('widgets.forms.input', ['type'=>'select', 'name'=>'TIEN_ID', 'label'=>'Tipo Entidad', 'data'=>$arrTipoEntidad,'placeholder'=>'Seleccione un Tipo de Entidad','allowClear'=>true,'column'=>6])
+
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'COAU_REMUNERADO', 'label'=>'Remunerado', 'data'=>['SI'=>'SI','NO'=>'NO'], 'placeholder'=>'Seleccione...','allowClear'=>true])
 	</div>
 	<!-- Coau Observaciones Field -->
 	<div class="col-xs-12"> 

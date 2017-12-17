@@ -4,27 +4,43 @@
 
 @push('scripts')
 	{!! Html::script('assets/toast/toastr.min.js') !!}
-	<script>
-		var f = new Date();
-		var now=f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate();
-		$("#{{$fecha1}}").val(now);
-		$("#{{$fecha2}}").val(now);
+	{!! Html::script('assets/scripts/metodosVarios.js') !!}
+	<script>		
+		var fecha = new Fecha();
+		fecha.elementoFechaActual('{{$fecha1}}');
+		fecha.elementoFechaActual('{{$fecha2}}');
+		var adicionoal="{{isset($fecha3) ? $fechaAdicional=$fecha3 : $fechaAdicional='NO_APLICA'}}";
+		var fechaIniAuse="{{isset($fechaIn) ? $fechaIniAuse=$fechaIn : $fechaIniAuse='NO_APLICA'}}";
 
-		$(document).on('blur','#{{$fecha1}}',function(){	
-			validaF("{{$fecha1}}");
+		$(document).on('blur','#{{$fecha1}}',function(){			
+			if (fecha.validaFecha("{{$fecha1}}","{{$fecha2}}")) {
+				fecha.mensaje("La fecha inicial no puede ser mayor a la fecha final");
+				fecha.limpiaElemento('{{$fecha1}}');
+			}
+			if (fechaIniAuse!='NO_APLICA') {				
+				if (fecha.validaFecha("{{$fecha1}}","<?php echo $fechaIniAuse; ?>")) {			
+				}else{
+					fecha.mensaje("La fecha inicial no puede ser menor a la fecha final del ausentismo");
+					fecha.limpiaElemento('{{$fecha1}}');
+				}
+				
+			};
 		});	
 
-		$(document).on('blur','#{{$fecha2}}',function(){	
-			validaF("{{$fecha2}}");;
+		$(document).on('blur','#{{$fecha2}}',function(){
+			if (fecha.validaFecha("{{$fecha1}}","{{$fecha2}}")) {
+				fecha.mensaje("La fecha inicial no puede ser mayor a la fecha final");
+				fecha.limpiaElemento('{{$fecha2}}');
+			} 
+		});	
+
+		$(document).on('blur',"#<?php echo $fechaAdicional; ?>",function(){	
+			if (fecha.validaFecha('<?php echo $fechaAdicional; ?>',"{{$fecha1}}")) {
+				fecha.mensaje("La fecha del Accidente no puede ser mayor a la fecha final");
+				fecha.limpiaElemento('<?php echo $fechaAdicional; ?>');
+			} 
 		});	
 		
-		function validaF(fecha){
-			var fi=new Date($("#{{$fecha1}}").val());
-			var ff=new Date($("#{{$fecha2}}").val());
-			if (fi>ff) {
-				$('#'+ fecha).val("");
-				toastr.error('{{ $mensaje }}','Error en la fecha',{"hideMethod": "fadeOut","timeOut": "2000","progressBar": true,"closeButton": true,"positionClass": "toast-top-left",});					
-			}
-		};
+		
 	</script>
 @endpush

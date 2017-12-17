@@ -18,6 +18,7 @@ class ConceptoAusenciaRepository
 						'COAU_CODIGO',
 						'COAU_DESCRIPCION',
 						'COAU_OBSERVACIONES',
+						'COAU_REMUNERADO',
 						'TIPOAUSENTISMOS.TIAU_DESCRIPCION',
 						'TIPOENTIDADES.TIEN_DESCRIPCION',
 					])->get();

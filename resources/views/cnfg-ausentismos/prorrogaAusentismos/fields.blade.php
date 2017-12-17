@@ -1,6 +1,6 @@
 @include('chosen')
 @include('datepicker')
-@include('widgets.validaFecha',['FechaI'=>'PROR_FECHAINICIO','FechaF'=>'PROR_FECHAFINAL'])
+@include('widgets.validaFecha',['fecha1'=>'PROR_FECHAINICIO','fecha2'=>'PROR_FECHAFINAL','fechaIn'=>'AUSE_FECHAFINAL'])
 @include('widgets.autocomplete',['first'=>'DX_DESCRIPCIONP','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
 @include('widgets.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCIONP','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
 <div class='row'>	

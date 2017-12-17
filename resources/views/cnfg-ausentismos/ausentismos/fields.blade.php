@@ -1,7 +1,7 @@
 @include('chosen')
 @include('datepicker')
 @include('widgets.autocomplete',['first'=>'DX_DESCRIPCION','ruta'=>'autocomplete','cod'=>'CIE10','id'=>'DIAG_ID'])
-@include('widgets.validaFecha',['fecha1'=>'AUSE_FECHAINICIO','fecha2'=>'AUSE_FECHAFINAL','mensaje'=>'La fecha inicial no puede ser mayor a la fecha final'])
+@include('widgets.validaFecha',['fecha1'=>'AUSE_FECHAINICIO','fecha2'=>'AUSE_FECHAFINAL','fecha3'=>'AUSE_FECHAACCIDENTE'])
 @include('widgets.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCION','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
 @include('widgets.select-dinamico', ['url'=>'cnfg-ausentismos/buscaEntRes', 'selectPadre'=>'COAU_ID', 'selectHijo'=>'ENTI_ID', 'idBusqueda'=>'ENTI_ID', 'nombreBusqueda'=>'ENTI_RAZONSOCIAL', 'prepend'=>'Seleccione una Entidad'])
 <div class='col-md-8 col-md-offset-2'>

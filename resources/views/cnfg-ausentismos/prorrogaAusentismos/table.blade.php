@@ -1,9 +1,10 @@
 <table class="table table-striped" id="tabla">
     <thead>
-        <th>Id Ausentismo</th>
-		<th>Diagnostico</th>
+        <th>Prospecto</th>
+		<th>Diagnostico Prorroga</th>
 		<th>Consepto Ausentismo</th>
-		<th>Fecha Inicio Prorroga</th>
+		<th>Fecha Inicio Ausentismo</th>
+        <th>Fecha Inicio Prorroga</th>
 		<th>Fecha Final Prorroga</th>
 		<th>Dias de Prorroga</th>
 		<th>Observaciones</th>
@@ -12,10 +13,11 @@
     <tbody>
     @foreach($prorrogaAusentismos as $prorrogaAusentismo)
         <tr>
-            <td>{!! $prorrogaAusentismo->AUSE_ID !!}</td>
-			<td>{!! $prorrogaAusentismo->DIAG_ID !!}</td>
-			<td>{!! $prorrogaAusentismo->COAU_ID !!}</td>
-			<td>{!! $prorrogaAusentismo->PROR_FECHAINICIO !!}</td>
+            <td>{!! nombre_empleado($prorrogaAusentismo->ausentismo->contrato->PROS_ID) !!}</td>
+			<td>{!! $prorrogaAusentismo->diagnostico->DIAG_DESCRIPCION !!}</td>
+			<td>{!! $prorrogaAusentismo->conceptoausencia->COAU_DESCRIPCION !!}</td>
+			<td>{!! $prorrogaAusentismo->ausentismo->AUSE_FECHAINICIO !!}</td>
+            <td>{!! $prorrogaAusentismo->PROR_FECHAINICIO !!}</td>
 			<td>{!! $prorrogaAusentismo->PROR_FECHAFINAL !!}</td>
 			<td>{!! $prorrogaAusentismo->PROR_DIAS !!}</td>
 			<td>{!! $prorrogaAusentismo->PROR_OBSERVACIONES !!}</td>

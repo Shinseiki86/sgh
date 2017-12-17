@@ -5,6 +5,7 @@
 		<th>Observaciones</th>
 		<th>Tipo Ausetismo</th>
 		<th>Tipo Entidad</th>
+        <th>Remunerado</th>
         <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
 			<td>{!! $conceptoausencia->COAU_OBSERVACIONES !!}</td>
 			<td>{!! $conceptoausencia->TIAU_DESCRIPCION !!}</td>
 			<td>{!! $conceptoausencia->TIEN_DESCRIPCION !!}</td>
+            <td>{!! $conceptoausencia->COAU_REMUNERADO !!}</td>
             <td>
                 <!-- Botón Editar (edit) -->
                 <a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-ausentismos.conceptoausencias.edit', [ $conceptoausencia->COAU_ID ] ) }}" data-tooltip="tooltip" title="Editar">

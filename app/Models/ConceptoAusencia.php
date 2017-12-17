@@ -21,7 +21,8 @@ class ConceptoAusencia extends ModelWithSoftDeletes
 		"COAU_DESCRIPCION",
 		"COAU_OBSERVACIONES",
 		"TIAU_ID",
-		"TIEN_ID"
+		"TIEN_ID",
+        "COAU_REMUNERADO"
     ];
 
     public static function rules($id = 0){
@@ -29,7 +30,8 @@ class ConceptoAusencia extends ModelWithSoftDeletes
             'COAU_CODIGO' => 'required|'.static::unique($id,'COAU_CODIGO'),
             'COAU_DESCRIPCION' => 'required|'.static::unique($id,'COAU_DESCRIPCION'),
             "TIAU_ID" => "required",
-            "TIEN_ID" => "required"
+            "TIEN_ID" => "required",
+            "COAU_REMUNERADO" => "required"
         ];
     }
 
