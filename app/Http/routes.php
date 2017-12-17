@@ -32,8 +32,8 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'reportes', 'middleware' => 'auth'], function() {
 	Route::get('/', 'ReporteController@index');
-	Route::post('contratoActPorFecha', 'ReporteController@contratoActPorFecha');
-	Route::post('ticketsPorFecha', 'ReporteController@ticketsPorFecha');
+	Route::post('ContratosActPorFecha', 'ReporteController@contratosActPorFecha');
+	Route::post('TicketsActPorFecha', 'ReporteController@ticketsActPorFecha');
 });
 
 Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], function() {
@@ -45,6 +45,8 @@ Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], fun
 	Route::resource('estadoscontratos', 'EstadoContratoController');
 	Route::resource('motivosretiros', 'MotivoRetiroController');
 	Route::resource('negocios', 'NegocioController');
+	Route::resource('atributos', 'AtributoController');
+	Route::resource('empleadoatributo', 'EmpleadoAtributoController');
 });
 
 Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizacionales'], function() {

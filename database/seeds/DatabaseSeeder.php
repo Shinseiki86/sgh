@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PlantasLaboralesTableSeeder::class);
         $this->call(DiagnosticoGeneralTableSeeder::class);
         $this->call(EstadoRestriccionTableSeeder::class);
-        
+        $this->call(AtributosTableSeeder::class);
         
         
     }

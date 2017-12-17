@@ -217,6 +217,12 @@ class Contrato extends ModelWithSoftDeletes
 		return $this->hasMany(CasoMedico::class, $foreingKey);
 	}
 
+	public function empleadoatributos()
+	{
+		$foreingKey = 'CONT_ID';
+		return $this->hasMany(EmpleadoAtributo::class, $foreingKey);
+	}
+
 	public function entidades(){
 		$foreingKey = 'CONT_ID';
 		$otherKey   = 'ENTI_ID';

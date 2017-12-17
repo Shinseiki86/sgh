@@ -32,20 +32,25 @@
 				<th class="col-md-5">Fecha Ingreso</th>
 				<th class="col-md-5">Fecha Fin</th>
 				<th class="col-md-5">Fecha Retiro</th>
+				<th class="col-md-5">Fecha Graba Retiro</th>
 				<th class="col-md-5">Motivo Retiro</th>
 				<th class="col-md-5">Variable</th>
 				<th class="col-md-5">Rodaje</th>
 				<th class="col-md-5">Tipo Empleador</th>
 				<th class="col-md-5">Riesgo</th>
 				<th class="col-md-5">Gerencia</th>
+				<th class="col-md-5">Negocio</th>
 				<th class="col-md-5">Centro Costo</th>
+				<th class="col-md-5">Grupo de Empleado</th>
+				<th class="col-md-5">Turno</th>
 				<th class="col-md-5">Caso Médico</th>
 				<th class="col-md-5">Jefe</th>
 				<th class="col-md-5">Remplaza a</th>
 				<th class="col-md-5">Ciudad de Contrato</th>
 				<th class="col-md-5">Ciudad de Servicio</th>
-				<th class="col-md-5">Negocio</th>
 				<th class="col-md-5">Observaciones</th>
+				<th class="col-md-5">Observaciones de Retiro</th>
+				<th class="col-md-5">Creado</th>
 				<th class="col-md-1 all notFilter"></th>
 			</tr>
 		</thead>
@@ -65,20 +70,25 @@
 				<td>{{ $contrato -> CONT_FECHAINGRESO }}</td>
 				<td>{{ $contrato -> CONT_FECHATERMINACION }}</td>
 				<td>{{ $contrato -> CONT_FECHARETIRO }}</td>
+				<td>{{ $contrato -> CONT_FECHAGRABARETIRO }}</td>
 				<td>{{ $contrato-> motivoretiro -> MORE_DESCRIPCION or null }}</td>
 				<td>{{ $contrato -> CONT_VARIABLE }}</td>
 				<td>{{ $contrato -> CONT_RODAJE }}</td>
 				<td>{{ $contrato -> tipoempleador -> TIEM_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> riesgo -> RIES_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> gerencia -> GERE_DESCRIPCION  }}</td>
+				<td>{{ $contrato -> negocio -> NEGO_DESCRIPCION or null }}</td>
 				<td>{{ $contrato -> centrocosto -> CECO_DESCRIPCION  }}</td>
+				<td>{{ $contrato -> grupo -> GRUP_DESCRIPCION  }}</td>
+				<td>{{ $contrato -> turno -> TURN_DESCRIPCION  }}</td>
 				<td>{{ $contrato -> CONT_CASOMEDICO }}</td>
 				<td>{{ ($contrato->JEFE_ID != NULL) ? nombre_empleado($contrato->JEFE_ID) : '' }}</td>
 				<td>{{ ($contrato->REMP_ID != NULL) ? nombre_empleado($contrato->REMP_ID) : '' }}</td>
 				<td>{{ $contrato -> ciudad_contrata -> CIUD_NOMBRE }}</td>
 				<td>{{ $contrato -> ciudad_servicio -> CIUD_NOMBRE }}</td>
-				<td>{{ $contrato -> negocio -> NEGO_DESCRIPCION or null }}</td>
 				<td>{{ $contrato -> CONT_OBSERVACIONES }}</td>
+				<td>{{ $contrato -> CONT_MOREOBSERVACIONES }}</td>
+				<td>{{ $contrato -> CONT_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->
 					@if($contrato->ESCO_ID == SGH\Models\EstadoContrato::ACTIVO)
