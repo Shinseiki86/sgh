@@ -37,8 +37,20 @@ class MovimientoPlantaController extends Controller
 	 */
 	public function create()
 	{
-		//Se crea un array con las plantas autorizadas
-		$arrPlantas = model_to_array(PlantaLaboral::class, 'PALA_ID');
+		//Se crea un array con las plantas de personal
+		$primaryKey = 'PALA_ID';
+		$column = expression_concat([
+			'EMPL_NOMBRECOMERCIAL',
+			'GERE_DESCRIPCION',
+			'CARG_DESCRIPCION',
+			'PALA_CANTIDAD',
+			], 'PALA_ESTRUCTURA');
+		$columnName = 'PALA_ESTRUCTURA';
+		$arrPlantas = PlantaLaboral::plantas()
+		->orderBy('PLANTASLABORALES.'.$primaryKey)
+		->select([ 'PLANTASLABORALES.'.$primaryKey , $column ])
+		->get();
+		$arrPlantas = model_to_array($arrPlantas, $columnName, $primaryKey);
 
 		return view($this->route.'.create', compact('arrPlantas'));
 	}
@@ -65,8 +77,20 @@ class MovimientoPlantaController extends Controller
 		// Se obtiene el registro
 		$movimientoplanta = MovimientoPlanta::findOrFail($PALA_ID);
 
-		//Se crea un array con las plantas autorizadas
-		$arrPlantas = model_to_array(PlantaLaboral::class, 'PALA_ID');
+		//Se crea un array con las plantas de personal
+		$primaryKey = 'PALA_ID';
+		$column = expression_concat([
+			'EMPL_NOMBRECOMERCIAL',
+			'GERE_DESCRIPCION',
+			'CARG_DESCRIPCION',
+			'PALA_CANTIDAD',
+			], 'PALA_ESTRUCTURA');
+		$columnName = 'PALA_ESTRUCTURA';
+		$arrPlantas = PlantaLaboral::plantas()
+		->orderBy('PLANTASLABORALES.'.$primaryKey)
+		->select([ 'PLANTASLABORALES.'.$primaryKey , $column ])
+		->get();
+		$arrPlantas = model_to_array($arrPlantas, $columnName, $primaryKey);
 
 		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->route.'.edit', compact('movimientoplanta','arrPlantas'));
