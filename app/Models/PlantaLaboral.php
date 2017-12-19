@@ -34,6 +34,16 @@ class PlantaLaboral extends ModelWithSoftDeletes
 		return $rules;
 	}
 
+	public function scopePlantas($query)
+	{
+		$query = $query 
+			->join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'PLANTASLABORALES.EMPL_ID')
+			->join('GERENCIAS', 'GERENCIAS.GERE_ID', '=', 'PLANTASLABORALES.GERE_ID')
+			->join('CARGOS', 'CARGOS.CARG_ID', '=', 'PLANTASLABORALES.CARG_ID');
+
+		return $query;
+	}
+
 	public function empleador()
 	{
 		$foreingKey = 'EMPL_ID';

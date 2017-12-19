@@ -2,7 +2,7 @@
 @section('page_heading', 'Actualizar Movimiento de Planta')
 
 @section('section')
-{{ Form::model($plantalaboral, ['action' => ['CnfgOrganizacionales\MovimientoPlantaController@update', $plantalaboral->PALA_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
+{{ Form::model($movimientoplanta, ['action' => ['CnfgOrganizacionales\MovimientoPlantaController@update', $movimientoplanta->PALA_ID ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')
