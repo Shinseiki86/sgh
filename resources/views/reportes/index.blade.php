@@ -31,7 +31,7 @@
 		</div>
 	</div>
 
-	<table id="tabla" class="table table-striped">
+	<table id="tbQuery" class="table table-striped">
 		<thead><tr><th></th></tr></thead>
 		<tbody><tr><td></td></tr></tbody>
 	</table>
@@ -45,8 +45,7 @@
 
 	$(function () {
 		var forms = $('form');
-		var tbQuery = $('#tabla');
-		//tbQuery.wrap('<div id="hide" style="display:none"/>');
+		var tbQuery = $('#tbQuery');
 		var divErr = $('#err');
 
 		//Select para formularios
@@ -66,16 +65,15 @@
 		$("form").submit(function(e) {
 			e.preventDefault(); // avoid to execute the actual submit of the form.
 			clearTable();
-
 			var thisForm = $(this);
-		    var url = thisForm.attr('action');
+			var url = thisForm.attr('action');
 
-		    $.ajax({
+			$.ajax({
 				type: 'POST',
 				url: url,
 				data: thisForm.serialize(), // serializes the form's elements.
 				dataType: 'json',
-		    }).done(function( data, textStatus, jqXHR ) {
+			}).done(function( data, textStatus, jqXHR ) {
 				//console.log('Response: '+JSON.stringify(textStatus));
 				//$('#response').html(data);
 				if ( data.length != 0 )
@@ -107,34 +105,26 @@
 
 		//Construye la tabla con el Json recibido
 		function buildDataTable(dataJson){
-			var columns = Object.keys(dataJson[0]);
-			var thead = tbQuery.find('thead');
-			var tbody = tbQuery.find('tbody');
+			clearTable();
 
-			var tr = $('<tr>');
-		    $.each(columns, function(i, item) {
-		        tr.append( $('<th>').text(item));
-		    });
-		    tr.appendTo(thead);
+			var columns = [];
+			for(var i in dataJson.keys){
+			    columns.push({title: dataJson.keys[i]});
+			}
 
-		    $.each(dataJson, function(i, row) {
-		    	var tr = $('<tr>');
-				$.each(row, function(j, cel) {
-		            $('<td>').text(cel).appendTo(tr);
-				});
-				tr.appendTo(tbody);
-		    });
-		    tbQuery.DataTable();
-
-		    //$('#hide').css( 'display', 'block' );
-		    //$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust().draw();
-		    //$.fn.dataTable.tables( { visible: true, api: true } ).buttons.resize();
+			tbQuery = $('#tbQuery').DataTable({
+				data: dataJson.data,
+				columns: columns
+			});
 		}
 
 
 		function clearTable(){
 			//$('#hide').css( 'display', 'hide' );
-			tbQuery.find('tr').remove();
+			if ( $.fn.dataTable.isDataTable( '#tbQuery' ) ) {
+			    tbQuery = $('#tbQuery').DataTable().destroy();
+			}
+			$('#tbQuery').empty();
 			divErr.html('');
 		}
 

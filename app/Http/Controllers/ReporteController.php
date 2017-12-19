@@ -110,9 +110,15 @@ class ReporteController extends Controller
 		if(isset($this->data['fchaFinContrato']))
 			$queryCollect->whereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaFinContrato']));
 
-		
+		$colletion = $queryCollect->get();
 
-		return response()->json($queryCollect->get());
+		$keys = array_keys($colletion->first()->toArray());
+
+		$data = array_map(function ($arr){
+				return array_flatten($arr);
+			}, $colletion->toArray());
+
+		return response()->json(['keys'=>$keys, 'data'=>$data]);
 	}
 
 	/**
@@ -137,7 +143,15 @@ class ReporteController extends Controller
 		if(isset($this->data['fchaFinSolicitud']))
 			$queryCollect->whereDate('TICK_FECHASOLICITUD', '<=', Carbon::parse($this->data['fchaFinSolicitud']));
 
-		return response()->json($queryCollect->get());
+		$colletion = $queryCollect->get();
+
+		$keys = array_keys($colletion->first()->toArray());
+
+		$data = array_map(function ($arr){
+				return array_flatten($arr);
+			}, $colletion->toArray());
+
+		return response()->json(['keys'=>$keys, 'data'=>$data]);
 	}
 
 }
