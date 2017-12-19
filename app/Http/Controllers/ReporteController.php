@@ -32,8 +32,31 @@ class ReporteController extends Controller
 	public function index()
 	{
 		$arrReportes = $this->reportes;
+
+		
+		$arrEstados = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
+
 		//Se carga la vista y se pasan los registros
-		return view('reportes.index', compact('arrReportes'));
+		return view('reportes.index', compact('arrReportes', 'arrEstados'));
+	}
+
+	/**
+	 * 
+	 *
+	 * @return Response
+	 */
+	public function buildJson($queryCollect)
+	{
+		$colletion = $queryCollect->get();
+		$keys = $data = [];
+
+		if(!$colletion->isEmpty()){
+			$keys = array_keys($colletion->first()->toArray());
+			$data = array_map(function ($arr){
+					return array_flatten($arr);
+				}, $colletion->toArray());
+		}
+		return response()->json(['keys'=>$keys, 'data'=>$data]);
 	}
 
 	/**
@@ -43,10 +66,9 @@ class ReporteController extends Controller
 	 */
 	public function contratosActPorFecha()
 	{
-
 		$queryCollect = Contrato::leftJoin('TEMPORALES', 'TEMPORALES.TEMP_ID', '=', 'CONTRATOS.TEMP_ID')
 							->leftJoin('MOTIVOSRETIROS', 'MOTIVOSRETIROS.MORE_ID', '=', 'CONTRATOS.MORE_ID')
-							->join('PROSPECTOS AS PRO', 'PRO.PROS_ID', '=', 'CONTRATOS.PROS_ID')		
+							->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')		
 							->join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
 							->join('TIPOSCONTRATOS', 'TIPOSCONTRATOS.TICO_ID', '=', 'CONTRATOS.TICO_ID')
 							->join('CLASESCONTRATOS', 'CLASESCONTRATOS.CLCO_ID', '=', 'CONTRATOS.CLCO_ID')
@@ -67,13 +89,13 @@ class ReporteController extends Controller
 								'TEMPORALES.TEMP_NOMBRECOMERCIAL as E.S.T',
 								'TIPOSCONTRATOS.TICO_DESCRIPCION as TIPO_CONTRATO',
 								'CLASESCONTRATOS.CLCO_DESCRIPCION as CLASE_CONTRATO',
-								'PRO.PROS_CEDULA as CEDULA',
+								'PROSPECTOS.PROS_CEDULA as CEDULA',
 								expression_concat([
 									'PROS_PRIMERNOMBRE',
 									'PROS_SEGUNDONOMBRE',
 									'PROS_PRIMERAPELLIDO',
 									'PROS_SEGUNDOAPELLIDO'
-								], 'PROS_NOMBRESAPELLIDOS', 'PRO'),
+								], 'PROS_NOMBRESAPELLIDOS', 'PROSPECTOS'),
 								'CONTRATOS.CONT_SALARIO AS SALARIO',
 								'CARGOS.CARG_DESCRIPCION AS CARGO',
 								'ESTADOSCONTRATOS.ESCO_DESCRIPCION AS ESTADO',
@@ -92,12 +114,6 @@ class ReporteController extends Controller
 								'GRUPOS.GRUP_DESCRIPCION AS GRUPO_EMPLEADO',
 								'TURNOS.TURN_DESCRIPCION AS TURNO_EMPLEADO',
 								'CONTRATOS.CONT_CASOMEDICO AS CASO_MEDICO',
-								/*
-								\DB::raw("CONCAT(CLASESCONTRATOS.CLCO_DESCRIPCION,TIPOSCONTRATOS.TICO_DESCRIPCION) as full_name"),
-								*/
-								/*
-								\DB::raw("CONCAT(CLASESCONTRATOS.CLCO_DESCRIPCION,TIPOSCONTRATOS.TICO_DESCRIPCION) as full_name"),
-								*/
 								'CIUDADES_CONTRATA.CIUD_NOMBRE AS CIUDAD_CONTRATO',
 								'CIUDADES_SERVICIO.CIUD_NOMBRE AS CIUDAD_SERVICIO',
 								'CONTRATOS.CONT_OBSERVACIONES AS OBSERVACIONES',
@@ -105,20 +121,12 @@ class ReporteController extends Controller
 
 							]);
 
-		if(isset($this->data['fchaIniContrato']))
-			$queryCollect->whereDate('CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIniContrato']));
-		if(isset($this->data['fchaFinContrato']))
-			$queryCollect->whereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaFinContrato']));
+		if(isset($this->data['fchaIngresoDesde']))
+			$queryCollect->whereDate('CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']));
+		if(isset($this->data['fchaIngresoHasta']))
+			$queryCollect->whereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']));
 
-		$colletion = $queryCollect->get();
-
-		$keys = array_keys($colletion->first()->toArray());
-
-		$data = array_map(function ($arr){
-				return array_flatten($arr);
-			}, $colletion->toArray());
-
-		return response()->json(['keys'=>$keys, 'data'=>$data]);
+		return $this->buildJson($queryCollect);
 	}
 
 	/**
@@ -129,7 +137,7 @@ class ReporteController extends Controller
 	public function ticketsActPorFecha()
 	{
 		$queryCollect = Ticket::leftJoin('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
-							->whereIn('TICKETS.ESTI_ID', [EstadoTicket::ABIERTO, EstadoTicket::REASIGNADO])
+							//->whereIn('TICKETS.ESTI_ID', [EstadoTicket::ABIERTO, EstadoTicket::REASIGNADO])
 							->select([
 								'TICK_ID as ID',
 								'TICK_DESCRIPCION as Descripción',
@@ -138,20 +146,20 @@ class ReporteController extends Controller
 								'ESTI_DESCRIPCION as Estado',
 							]);
 
-		if(isset($this->data['fchaIniSolicitud']))
-			$queryCollect->whereDate('TICK_FECHASOLICITUD', '>=', Carbon::parse($this->data['fchaIniSolicitud']));
-		if(isset($this->data['fchaFinSolicitud']))
-			$queryCollect->whereDate('TICK_FECHASOLICITUD', '<=', Carbon::parse($this->data['fchaFinSolicitud']));
+		if(isset($this->data['fchaSolicitudDesde']))
+			$queryCollect->whereDate('TICK_FECHASOLICITUD', '>=', Carbon::parse($this->data['fchaSolicitudDesde']));
+		if(isset($this->data['fchaSolicitudHasta']))
+			$queryCollect->whereDate('TICK_FECHASOLICITUD', '<=', Carbon::parse($this->data['fchaSolicitudHasta']));
 
-		$colletion = $queryCollect->get();
+		if(isset($this->data['fchaAprobDesde']))
+			$queryCollect->whereDate('TICK_FECHAAPROBACION', '>=', Carbon::parse($this->data['fchaAprobDesde']));
+		if(isset($this->data['fchaAprobHasta']))
+			$queryCollect->whereDate('TICK_FECHAAPROBACION', '<=', Carbon::parse($this->data['fchaAprobHasta']));
 
-		$keys = array_keys($colletion->first()->toArray());
+		if(isset($this->data['estado']))
+			$queryCollect->where('TICKETS.ESTI_ID', '=', $this->data['estado']);
 
-		$data = array_map(function ($arr){
-				return array_flatten($arr);
-			}, $colletion->toArray());
-
-		return response()->json(['keys'=>$keys, 'data'=>$data]);
+		return $this->buildJson($queryCollect);
 	}
 
 }

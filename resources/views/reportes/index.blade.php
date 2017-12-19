@@ -63,7 +63,7 @@
 		});
 
 		$("form").submit(function(e) {
-			e.preventDefault(); // avoid to execute the actual submit of the form.
+			e.preventDefault();
 			clearTable();
 			var thisForm = $(this);
 			var url = thisForm.attr('action');
@@ -71,12 +71,10 @@
 			$.ajax({
 				type: 'POST',
 				url: url,
-				data: thisForm.serialize(), // serializes the form's elements.
+				data: thisForm.serialize(),
 				dataType: 'json',
 			}).done(function( data, textStatus, jqXHR ) {
-				//console.log('Response: '+JSON.stringify(textStatus));
-				//$('#response').html(data);
-				if ( data.length != 0 )
+				if ( data.data.length > 0 )
 					buildDataTable(data);
 				else
 					divErr.html('No se encontraron registros.');
@@ -84,17 +82,15 @@
 			})
 			.fail(function( jqXHR, textStatus, errorThrown ) {
 				//console.log('Err: '+JSON.stringify(jqXHR));
-				$('#err').html(event.responseText);
+				if (jqXHR.statusText === 'Forbidden')
+					msgErr = 'Error en la conexión con el servidor. Presione F5.';
+				else if (jqXHR.statusText === 'Unauthorized')
+					msgErr = 'Sesión ha caducado. Presione F5.';
+				else
+					msgErr = 'Error: '+jqXHR.responseText;
+				divErr.html(msgErr);
 			})
 			.always(function( data, textStatus, jqXHR ) {
-				/*var msgErr = $('#err').html();
-				//console.log('proc: '+i+' de '+cantRows+'('+porcent+'%)');
-				if (jqXHR === 'Forbidden') {
-					msgErr = 'Error en la conexión con el servidor. Presione F5.';
-				}else if (typeof jqXHR.responseJSON === 'undefined')
-					msgErr = 'NetworkError: 500 Internal Server Error.';
-				divErr.html(msgErr);*/
-
 				thisForm.find("button[type=submit]").attr('disabled', false);
 				$('body').css('cursor', 'auto');
 				$('#msgModalLoading').modal('hide');
