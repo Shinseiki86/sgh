@@ -5,38 +5,49 @@
 {!! Html::script('assets/js/angular/ui-bootstrap-tpls-2.5.0.min.js') !!}
 <script>
 	var app = angular.module('app', ['ui.bootstrap'], function($interpolateProvider) {
-			$interpolateProvider.startSymbol('{%');
-			$interpolateProvider.endSymbol('%}');
-				});
-				app.controller('buscaAusentismo', function($scope, $http) {
+		$interpolateProvider.startSymbol('{%');
+		$interpolateProvider.endSymbol('%}');
+	});
+
+	app.controller('buscaAusentismo', function($scope, $http) {
+
 		$scope.cargaAusentismo = function() {
 			if ($("#CONT_ID").val()=="") {
-				toastr.error('Para continuar debe seleccionar un Prospecto','Seleccione un prospecto',{"hideMethod": "fadeOut","timeOut": "5000","progressBar": true,"closeButton": true,"positionClass": "toast-top-right","preventDuplicates": true});
+				toastr.error(
+					'Para continuar debe seleccionar un Prospecto','Seleccione un prospecto',
+					{
+						"hideMethod": "fadeOut",
+						"timeOut": "5000",
+						"progressBar": true,
+						"closeButton": true,
+						"positionClass": "toast-top-right","preventDuplicates": true}
+					);
 				return;
 			} else {
 				$http({
-	        method : "GET",
-	        r:"2",
-	        url : '{!!URL::to('cnfg-ausentismos/buscaAuse')!!}'+'/'+$("#CONT_ID").val()
-	    }).then(function (response) {
-				$scope.ausentismo = response.data;
-				$("#AUSE_ID").val($scope.ausentismo.AUSE_ID);
-				$scope.showHide = "Ocultar Informacion";
-				$scope.showResult = true;
-			});
+			        method : "GET",
+			        r:"2",
+			        url : '{!!URL::to('cnfg-ausentismos/buscaAuse')!!}'+'/'+$("#CONT_ID").val()
+			    }).then(function (response) {
+					$scope.ausentismo = response.data;
+					$("#AUSE_ID").val($scope.ausentismo.AUSE_ID);
+					$('.viewInfoAusentismo').removeClass('hidden');
+					$scope.showHide = "Ocultar Información";
+					$scope.showResult = true;
+				});
 			}
-		
 		}
+
 		$scope.mostrarOcultar = function() {
-			if ($scope.showHide=="Ocultar Informacion") {
-				$scope.showHide = "Mostrar Informacion";
-			$scope.showResult = false;
+			if ($scope.showHide=="Ocultar Información") {
+				$scope.showHide = "Mostrar Información";
+				$scope.showResult = false;
 			} else {
-				$scope.showHide = "Ocultar Informacion";
-			$scope.showResult = true;
+				$scope.showHide = "Ocultar Información";
+				$scope.showResult = true;
 			}
 		}
-		});
+	});
 </script>
 @endpush
 @section('section')

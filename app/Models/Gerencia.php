@@ -23,10 +23,13 @@ class Gerencia extends ModelWithSoftDeletes
 	];
 
 	public static function rules($id = 0){
-		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+		$rules = [
+			'GERE_DESCRIPCION' => ['required','max:100'],
+			'GERE_OBSERVACIONES' => ['max:300'],
+			'CECO_ids' => ['array'],
+			'PROC_ids' => ['array'],
 		];
+		return $rules;
 	}
 
 	public function plantaslaborales()

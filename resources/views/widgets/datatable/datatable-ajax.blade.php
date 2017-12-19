@@ -9,7 +9,14 @@
 @push('scripts')
 	{!! Html::script('assets/scripts/datatable/jquery.dataTables.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/dataTables.buttons.min.js') !!}
+	{!! Html::script('assets/scripts/datatable/jszip.min.js') !!}
+	{!! Html::script('assets/scripts/datatable/pdfmake.min.js') !!}
+	{!! Html::script('assets/scripts/datatable/vfs_fonts.js') !!}
+	{!! Html::script('assets/scripts/datatable/buttons.html5.min.js') !!}
+	{!! Html::script('assets/scripts/datatable/buttons.colVis.min.js') !!}
+	{!! Html::script('assets/scripts/datatable/buttons.print.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/dataTables.responsive.min.js') !!}
+	{!! Html::script('assets/scripts/datatable/buttons.flash.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/buttons.bootstrap4.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/dataTables.bootstrap4.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/responsive.bootstrap.min.js') !!}

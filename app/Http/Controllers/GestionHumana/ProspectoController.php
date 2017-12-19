@@ -38,6 +38,7 @@ class ProspectoController extends Controller
 		$model = Prospecto::select([
 			'PROS_ID',
 			'PROS_CEDULA',
+			'PROS_FECHANACIMIENTO',
 			'PROS_FECHAEXPEDICION',
 			'PROS_PRIMERNOMBRE',
 			'PROS_SEGUNDONOMBRE',

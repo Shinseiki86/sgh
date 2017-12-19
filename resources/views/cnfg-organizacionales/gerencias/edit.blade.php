@@ -7,8 +7,5 @@
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')
 
-	<!-- Botones -->
-	@include('widgets.forms.buttons', ['url' => 'cnfg-organizacionales/gerencias'])
-
 {{ Form::close() }}
 @endsection

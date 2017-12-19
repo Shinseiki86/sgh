@@ -24,23 +24,6 @@ class GerenciaController extends Controller
 	}
 
 	/**
-	 * Get a validator for an incoming registration request.
-	 *
-	 * @param  Request $request
-	 * @return void
-	 */
-	protected function validator($data, $GERE_ID = 0)
-	{
-		return Validator::make($data, [
-			'GERE_DESCRIPCION' => ['required','max:100','unique:GERENCIAS,GERE_DESCRIPCION,'.$GERE_ID.',GERE_ID'],
-			'GERE_OBSERVACIONES' => ['max:300'],
-			'PROC_ids' => ['array'],
-			'CECO_ids' => ['array'],
-		]);
-	}
-
-
-	/**
 	 * Muestra una lista de los registros.
 	 *
 	 * @return Response
