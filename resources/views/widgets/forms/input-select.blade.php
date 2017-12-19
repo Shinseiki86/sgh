@@ -1,10 +1,10 @@
 {{ Form::select(
-	isset($multiple) && $multiple ?$name.'[]':$name,
+	isset($multiple) && $multiple ? $name.'[]':$name,
 	(isset($multiple) && $multiple ? []:[''=>'']) + (isset($data)?$data:[]) , 
 	isset($value)? $value:old($name),
 	[
 		'id'=>$name,
-		'class'=>'form-control selectpicker '.(!isset($class)?:$class),
+		'class'=>'form-control selectpicker '.(isset($class)?$class:''),
 		//'data-allow-clear'=>isset($allowClear) && $allowClear ?'true':'false',
 		'data-allow-clear'=>'true',
 		'data-placeholder'=>isset($placeholder) ?$placeholder:'Seleccione una opción',

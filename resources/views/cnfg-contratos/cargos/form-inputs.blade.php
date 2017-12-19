@@ -6,7 +6,7 @@
 
 	@include('widgets.forms.input', ['type'=>'select', 'name'=>'CNOS_ID', 'label'=>'C.N.O', 'data'=>$arrCnos])
 
-	@include('widgets.forms.input', [ 'type'=>'textarea', 'name'=>'CARG_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
+	@include('widgets.forms.input', ['type'=>'textarea', 'name'=>'CARG_OBSERVACIONES', 'label'=>'Observaciones', 'options'=>['maxlength' => '300'] ])
 
 	<!-- Botones -->
 	@include('widgets.forms.buttons', ['url' => 'cnfg-contratos/cargos'])

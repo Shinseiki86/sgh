@@ -3,6 +3,15 @@
 		<a class="btn btn-warning" role="button" href="{{ isset($url) ? url()->to($url) : ( url()->previous() ==  url()->previous() ? url()->to('/') : url()->previous()) }}" data-tooltip="tooltip" title="Regresar">
 			<i class="fa fa-arrow-left" aria-hidden="true"></i>
 		</a>
+
+		@if(isset($reset) and $reset=false)
+		@else
+		{{ Form::button('<i class="fa fa-undo" aria-hidden="true"></i> Reset', [
+			'class'=>'btn btn-warning',
+			'type'=>'reset',
+		]) }}
+		@endif
+
 		{{ Form::button('<i class="fa fa-'.(isset($icon)?$icon:'floppy-o').'" aria-hidden="true"></i> '.(isset($text)?$text:'Guardar'), [
 			'class'=>'btn btn-primary',
 			'type'=>'submit',
