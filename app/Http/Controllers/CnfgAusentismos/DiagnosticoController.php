@@ -54,7 +54,10 @@ class DiagnosticoController extends Controller
 	 */
 	public function getData()
 	{
-		$model = repositorio("Diagnostico")->getData();
+		//$model = repositorio("Diagnostico")->getData();
+		$model = Diagnostico::select([
+							'DIAG_ID','DIAG_CODIGO','DIAG_DESCRIPCION'])->get();
+
 		return Datatables::collection($model)
 			->addColumn('action', function($model){
 				return parent::buttonEdit($model).

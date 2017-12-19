@@ -5,7 +5,6 @@
 @include('widgets.buscarV',['FieldClave'=>'CIE10','FieldDescripcion'=>'DX_DESCRIPCIONP','ruta'=>'cnfg-ausentismos/buscaDx','colDescripcion'=>'DIAG_DESCRIPCION','FieldId'=>'DIAG_ID','colId'=>'DIAG_ID'])
 	<!-- Diagnostico -->
 <div class="row">
-	{{ Form::hidden('AUSE_ID', null, array('id' => 'AUSE_ID')) }}
 	{{ Form::hidden('DIAG_ID', null, array('id' => 'DIAG_ID')) }}
 	@include('widgets.forms.input', ['type'=>'text', 'column'=>2, 'name'=>'CIE10', 'label'=>'CIE10'])
 	@include('widgets.forms.input', ['type'=>'text', 'column'=>6, 'name'=>'DX_DESCRIPCIONP', 'label'=>'Descripción Dx'])

@@ -15,10 +15,14 @@ class AusentismoRepository
 
     public function prospectoConAusentismo()
     {
+      //dd(repositorio("Prospecto")->cont_prospectos(['PROS_CEDULA','CONT_FECHAINGRESO']));
       $ausentismo = modelo("Ausentismo");
       return $ausentismo::join('CONTRATOS', 'CONTRATOS.CONT_ID', '=', 'AUSENTISMOS.CONT_ID')
         ->join('PROSPECTOS','PROSPECTOS.PROS_ID','=','CONTRATOS.PROS_ID')
-        ->select(['AUSE_ID', repositorio("Prospecto")->cont_prospectos(['PROS_CEDULA','CONT_FECHAINGRESO'])])
+        ->select([
+          'AUSE_ID',
+          repositorio("Prospecto")->cont_prospectos(['PROS_CEDULA','CONT_FECHAINGRESO'])
+        ])
         ->where('AUSE_ESTADO', '=', 'Abierto')
         ->get();   
 

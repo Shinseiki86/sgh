@@ -336,7 +336,7 @@ class MenuTableSeeder extends Seeder
             Menu::create([
                 'MENU_LABEL' => 'Prorroga Ausentismo',
                 'MENU_URL' => 'cnfg-ausentismos/prorrogaausentismos',
-                'MENU_ICON' => 'fa-wheelchair',
+                'MENU_ICON' => 'fa-wheelchair-alt',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
             ]);

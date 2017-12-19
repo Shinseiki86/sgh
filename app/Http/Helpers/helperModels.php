@@ -71,8 +71,10 @@ if (! function_exists('findBy')) {
      * @param  type  $obj
      * @return 
      */
-    function findBy($modelo,$column, $value)
+    function findBy($modelo,$column, $value,$relacion=null)
     {
-      return modelo($modelo)->where($column, $value);
+        if (isset($relacion))
+            return modelo($modelo)->where($column, $value)->with($relacion)->get();
+      return modelo($modelo)->where($column, $value)->get();
     }
 }

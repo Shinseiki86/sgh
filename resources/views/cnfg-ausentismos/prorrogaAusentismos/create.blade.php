@@ -12,7 +12,7 @@
 	app.controller('buscaAusentismo', function($scope, $http) {
 
 		$scope.cargaAusentismo = function() {
-			if ($("#CONT_ID").val()=="") {
+			if ($("#AUSE_ID").val()=="") {
 				toastr.error(
 					'Para continuar debe seleccionar un Prospecto','Seleccione un prospecto',
 					{
@@ -27,10 +27,9 @@
 				$http({
 			        method : "GET",
 			        r:"2",
-			        url : '{!!URL::to('cnfg-ausentismos/buscaAuse')!!}'+'/'+$("#CONT_ID").val()
+			        url : '{!!URL::to('cnfg-ausentismos/buscaAuse')!!}'+'/'+$("#AUSE_ID").val()
 			    }).then(function (response) {
 					$scope.ausentismo = response.data;
-					$("#AUSE_ID").val($scope.ausentismo.AUSE_ID);
 					$('.viewInfoAusentismo').removeClass('hidden');
 					$scope.showHide = "Ocultar Información";
 					$scope.showResult = true;
