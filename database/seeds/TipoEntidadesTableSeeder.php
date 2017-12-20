@@ -38,7 +38,7 @@ class TipoEntidadesTableSeeder extends Seeder
 
         TipoEntidad::create([
             'TIEN_CODIGO' => 'EMP',
-            'TIEN_DESCRIPCION' => 'EMPLEADOR',
+            'TIEN_DESCRIPCION' => 'EMPRESA',
             'TIEN_OBSERVACIONES' => NULL,
         ]);
     }

@@ -18,7 +18,7 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_DESCRIPCION' => 'INCAPACIDAD POR ENFERMEDAD GENERAL (EMPLEADOR)',
             'COAU_OBSERVACIONES' => 'CORESPONDE A LAS INCAPACIDADES POR ENFERMEDAD GENERAL QUE SE ENCUENTRAN A CARGO DEL EMPLEADOR',
             'TIAU_ID' => 2,
-            'TIEN_ID' => 2,
+            'TIEN_ID' => 5,
             'COAU_REMUNERADO' => 'SI',
         ]);
 
@@ -27,8 +27,8 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_DESCRIPCION' => 'INCAPACIDAD POR ENFERMEDAD GENERAL (EMPRESA)',
             'COAU_OBSERVACIONES' => 'CORESPONDE A LAS INCAPACIDADES POR ENFERMEDAD GENERAL QUE SE ENCUENTRAN A CARGO DE LA EPS',
             'TIAU_ID' => 2,
-            'TIEN_ID' => 2,
-            'COAU_REMUNERADO' => 'NO',
+            'TIEN_ID' => 5,
+            'COAU_REMUNERADO' => 'SI',
         ]);
 
         ConceptoAusencia::create([
@@ -46,7 +46,7 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_OBSERVACIONES' => 'CORESPONDE A LAS INCAPACIDADES LICENCIAS DE MATERNIDADES OTORGADAS AL EMPLEADO',
             'TIAU_ID' => 2,
             'TIEN_ID' => 2,
-            'COAU_REMUNERADO' => 'NO',
+            'COAU_REMUNERADO' => 'SI',
         ]);
 
         //TIPO DE ENTIDAD ARL - TIPO DE AUSENTISMOS INCAP. POR ACCIDENTE DE TRABAJO
@@ -67,7 +67,7 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_OBSERVACIONES' => 'CORESPONDE A LAS DILIGENCIAS PERSONALES DEL COLABORADOR QUE SE OTORGAN COMO REMUNERADAS',
             'TIAU_ID' => 4,
             'TIEN_ID' => 5,
-            'COAU_REMUNERADO' => 'NO',
+            'COAU_REMUNERADO' => 'SI',
         ]);
 
         ConceptoAusencia::create([
@@ -76,7 +76,7 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_OBSERVACIONES' => 'CORESPONDE A LOS PERMISOS QUE SE OTORGAN AL EMPLEADO EN FUNCIÓN DE UNA ACTIVIDAD REQUERIDA POR LA EMPRESA (CAPACITACIÓN, DILIGENCIAS ADMINISTRATIVAS, ETC.)',
             'TIAU_ID' => 4,
             'TIEN_ID' => 5,
-            'COAU_REMUNERADO' => 'NO',
+            'COAU_REMUNERADO' => 'SI',
         ]);
 
         ConceptoAusencia::create([
@@ -103,15 +103,6 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_OBSERVACIONES' => 'CORESPONDE A LOS PERMISOS QUE SE OTORGAN AL EMPLEADO EN FORMA REMUNERADA',
             'TIAU_ID' => 4,
             'TIEN_ID' => 5,
-            'COAU_REMUNERADO' => 'NO',
-        ]);
-
-        ConceptoAusencia::create([
-            'COAU_CODIGO' => 'LCL',
-            'COAU_DESCRIPCION' => 'LICENCIA DE LUTO',
-            'COAU_OBSERVACIONES' => 'CORESPONDE A LAS LICENCIAS QUE SE OTORGAN AL EMPLEADO POR LICENCIA DE LUTO SEGUN ESTABLECE LA NORMA VIGENTE',
-            'TIAU_ID' => 4,
-            'TIEN_ID' => 5,
             'COAU_REMUNERADO' => 'SI',
         ]);
 
@@ -121,7 +112,7 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_OBSERVACIONES' => 'CORESPONDE A LAS LICENCIAS QUE SE OTORGAN AL EMPLEADO POR LICENCIA DE LUTO SEGUN ESTABLECE LA NORMA VIGENTE',
             'TIAU_ID' => 4,
             'TIEN_ID' => 5,
-            'COAU_REMUNERADO' => 'NO',
+            'COAU_REMUNERADO' => 'SI',
         ]);
 
         ConceptoAusencia::create([
@@ -158,7 +149,7 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_OBSERVACIONES' => 'CORESPONDE A LOS PERMISOS QUE SE OTORGAN AL EMPLEADO EN FORMA NO REMUNERADA',
             'TIAU_ID' => 5,
             'TIEN_ID' => 5,
-            'COAU_REMUNERADO' => 'SI',
+            'COAU_REMUNERADO' => 'NO',
         ]);
 
         ConceptoAusencia::create([
@@ -174,15 +165,6 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_CODIGO' => 'ATEM',
             'COAU_DESCRIPCION' => 'INCAPACIDAD POR ACCIDENTE DE TRABAJO (EMPLEADOR)',
             'COAU_OBSERVACIONES' => 'CORESPONDE A LAS INCAPACIDADES POR ACCIDENTE DE TRABAJO A CARGO DEL EMPLEADOR, ES DECIR EL PRIMER DÍA',
-            'TIAU_ID' => 5,
-            'TIEN_ID' => 5,
-            'COAU_REMUNERADO' => 'SI',
-        ]);
-
-        ConceptoAusencia::create([
-            'COAU_CODIGO' => 'EGEM',
-            'COAU_DESCRIPCION' => 'INCAPACIDAD POR ENFERMEDAD GENERAL (EMPLEADOR)',
-            'COAU_OBSERVACIONES' => 'CORESPONDE A LAS INCAPACIDADES POR ENFERMEDAD GENERAL A CARGO DEL EMPLEADOR',
             'TIAU_ID' => 5,
             'TIEN_ID' => 5,
             'COAU_REMUNERADO' => 'SI',
@@ -205,7 +187,7 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_OBSERVACIONES' => 'CORESPONDE A LAS SANCIONES PUESTAS AL EMPLEADO',
             'TIAU_ID' => 7,
             'TIEN_ID' => 5,
-            'COAU_REMUNERADO' => 'SI',
+            'COAU_REMUNERADO' => 'NO',
         ]);
 
         //TIPO DE ENTIDAD EMPRESA COMODIN - TIPO DE AUSENTISMO VACACIONES
@@ -234,7 +216,7 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_OBSERVACIONES' => 'CORESPONDE A LA NO PRESTACIÓN DEL SERVICIO POR PARTE DE UN EMPLEADO YA QUE NO CUENTA CON LA DOTACIÓN PARA LA LABOR',
             'TIAU_ID' => 9,
             'TIEN_ID' => 5,
-            'COAU_REMUNERADO' => 'SI',
+            'COAU_REMUNERADO' => 'NO',
         ]);
 
         ConceptoAusencia::create([

@@ -1,5 +1,5 @@
 <div class="row form-horizontal">
-	@include('widgets.forms.input', ['type'=>'select','column'=>10, 'name'=>'AUSE_ID', 'label'=>'Prospecto', 'data'=>$arrContratos,'value','placeholder'=>'Seleccione un Prospecto','allowClear'=>true])
+	@include('widgets.forms.input', ['type'=>'select','column'=>10, 'name'=>'AUSE_ID', 'label'=>'Ausentismo Inicial', 'data'=>$arrContratos,'value','placeholder'=>'Seleccione un Ausentismo','allowClear'=>true])
 	<div class="col-xs-2 pull-right" style="margin-top: 25px;padding-left: 30px;">
 		{{ Form::button('<i class="fa fa-search" aria-hidden="true"></i> Buscar', [
 		'class'=>'btn btn-primary ',

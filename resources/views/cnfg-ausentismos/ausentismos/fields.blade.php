@@ -7,7 +7,7 @@
 <div class='col-md-8 col-md-offset-2'>
 
 	<div class="row">
-		@include('widgets.forms.input', ['type'=>'select', 'name'=>'CONT_ID', 'label'=>'Prospecto', 'data'=>$arrContratos,'value','placeholder'=>'Seleccione un Prospecto','allowClear'=>true])
+		@include('widgets.forms.input', ['type'=>'select', 'name'=>'CONT_ID', 'label'=>'Empleado', 'data'=>$arrContratos,'value','placeholder'=>'Seleccione un Prospecto','allowClear'=>true])
 		
 	</div>
 
