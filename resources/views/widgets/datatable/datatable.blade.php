@@ -13,7 +13,7 @@
 	{!! Html::script('assets/scripts/datatable/pdfmake.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/vfs_fonts.js') !!}
 	{!! Html::script('assets/scripts/datatable/buttons.html5.min.js') !!}
-	{!! Html::script('assets/scripts/datatable/buttons.colVis.min.js') !!}
+	{{-- {!! Html::script('assets/scripts/datatable/buttons.colVis.min.js') !!} --}}
 	{!! Html::script('assets/scripts/datatable/buttons.print.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/dataTables.responsive.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/buttons.flash.min.js') !!}
@@ -68,11 +68,11 @@
 				extend: 'print',
 				text:    '<i class="fa fa-print"></i>',
 				titleAttr: 'Imprimir',
-			},{
+			}/*,{
 				extend: 'colvis',
 				text:  '<i class="fa fa-columns"></i>',
 				titleAttr: 'Ver Columnas'
-			}
+			}*/
 		]
 	});
 </script>

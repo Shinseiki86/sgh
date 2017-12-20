@@ -49,16 +49,15 @@
 	});
 </script>
 @endpush
+
 @section('section')
-{{-- <div class="col-md-6 col-md-offset-4"> --}}
-	<div class='col-md-8 col-md-offset-2' ng-app="app" ng-controller="buscaAusentismo">
+<div class='col-md-8 col-md-offset-2' ng-app="app" ng-controller="buscaAusentismo">
+	{{ Form::open(['route' => 'cnfg-ausentismos.prorrogaausentismos.store', 'class' => 'form-horizontal']) }}
 		@include('cnfg-ausentismos.prorrogaausentismos.datosAusentismo')
-		{{ Form::open(['route' => 'cnfg-ausentismos.prorrogaausentismos.store', 'class' => 'form-horizontal']) }}
 		<!-- Elementos del formulario -->
 		@include('cnfg-ausentismos.prorrogaausentismos.fields')
 		<!-- Botones -->
 		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/prorrogaausentismos'])
-		{{ Form::close() }}
-	</div>
-{{-- </div> --}}
+	{{ Form::close() }}
+</div>
 @endsection
