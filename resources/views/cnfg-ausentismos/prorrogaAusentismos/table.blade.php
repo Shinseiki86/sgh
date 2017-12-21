@@ -14,7 +14,7 @@
     @foreach($prorrogaAusentismos as $prorrogaAusentismo)
         <tr>
             <td>{!! nombre_empleado($prorrogaAusentismo->ausentismo->contrato->PROS_ID) !!}</td>
-			<td>{!! $prorrogaAusentismo->diagnostico->DIAG_DESCRIPCION !!}</td>
+			<td>{!! $prorrogaAusentismo->diagnostico->DIAG_DESCRIPCION or null!!}</td>
 			<td>{!! $prorrogaAusentismo->conceptoausencia->COAU_DESCRIPCION !!}</td>
 			<td>{!! $prorrogaAusentismo->ausentismo->AUSE_FECHAINICIO !!}</td>
             <td>{!! $prorrogaAusentismo->PROR_FECHAINICIO !!}</td>

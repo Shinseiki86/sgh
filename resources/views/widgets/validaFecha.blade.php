@@ -9,37 +9,59 @@
 		var fecha = new Fecha();
 		fecha.elementoFechaActual('{{$fecha1}}');
 		fecha.elementoFechaActual('{{$fecha2}}');
-		var adicionoal="{{isset($fecha3) ? $fechaAdicional=$fecha3 : $fechaAdicional='NO_APLICA'}}";
-		var fechaIniAuse="{{isset($fechaIn) ? $fechaIniAuse=$fechaIn : $fechaIniAuse='NO_APLICA'}}";
+		llenaDias('{{$fecha2}}');
+		//Variable para validad Fecha Accidente
+		var fechaAccidente="{{isset($fecha3) ? $Fecha3=$fecha3 : $Fecha3='NO_APLICA'}}";
+		//Variable necesaria para prorroga ausentismo
+		var FechaFinAuse="{{isset($fechaFin) ? $FechaFinAuse=$fechaFin : $FechaFinAuse='NO_APLICA'}}";
 
 		$(document).on('blur','#{{$fecha1}}',function(){			
 			if (fecha.validaFecha("{{$fecha1}}","{{$fecha2}}")) {
 				fecha.mensaje("La fecha inicial no puede ser mayor a la fecha final");
 				fecha.limpiaElemento('{{$fecha1}}');
+				limpiaDias();
+			}else{
+				llenaDias('{{$fecha2}}');
 			}
-			if (fechaIniAuse!='NO_APLICA') {				
-				if (fecha.validaFecha("{{$fecha1}}","<?php echo $fechaIniAuse; ?>")) {			
-				}else{
-					fecha.mensaje("La fecha inicial no puede ser menor a la fecha final del ausentismo");
+			if (FechaFinAuse=='FECHA_ADICIONAL') {				
+				if (fecha.validaFecha("{{$fecha1}}","<?php echo $FechaFinAuse; ?>")) {	
+					fecha.mensaje("La fecha inicial no puede ser menor a la fecha final del ausentismo o prorroga");
 					fecha.limpiaElemento('{{$fecha1}}');
-				}
-				
-			};
+					limpiaDias();		
+				}else{
+					llenaDias('{{$fecha2}}');
+				}				
+			}
 		});	
 
 		$(document).on('blur','#{{$fecha2}}',function(){
 			if (fecha.validaFecha("{{$fecha1}}","{{$fecha2}}")) {
 				fecha.mensaje("La fecha inicial no puede ser mayor a la fecha final");
 				fecha.limpiaElemento('{{$fecha2}}');
+				limpiaDias();
+			}else{
+				llenaDias('{{$fecha2}}');
+			} 
+		});	
+		//La fecha del accidente no puede ser mayor la de la fecha inicial del ausentismo
+		$(document).on('blur',"#<?php echo $Fecha3; ?>",function(){	
+			if (fecha.validaFecha('<?php echo $Fecha3; ?>',"{{$fecha1}}")) {
+				fecha.mensaje("La fecha del Accidente no puede ser mayor a la fecha final");
+				fecha.limpiaElemento('<?php echo $Fecha3; ?>');
+				limpiaDias();
+			}else{
+				llenaDias('<?php echo $Fecha3; ?>');
 			} 
 		});	
 
-		$(document).on('blur',"#<?php echo $fechaAdicional; ?>",function(){	
-			if (fecha.validaFecha('<?php echo $fechaAdicional; ?>',"{{$fecha1}}")) {
-				fecha.mensaje("La fecha del Accidente no puede ser mayor a la fecha final");
-				fecha.limpiaElemento('<?php echo $fechaAdicional; ?>');
-			} 
-		});	
+		function llenaDias(fechaFinal){
+				$('#AUSE_DIAS').val(fecha.cantDias(fecha.fechaElemento('{{$fecha1}}'),fecha.fechaElemento(fechaFinal)));
+				$('#PROR_DIAS').val(fecha.cantDias(fecha.fechaElemento('{{$fecha1}}'),fecha.fechaElemento(fechaFinal)));
+		}
+		function limpiaDias(){
+			$('#AUSE_DIAS').val("");
+			$('#PROR_DIAS').val("");
+		}
 		
 		
 	</script>

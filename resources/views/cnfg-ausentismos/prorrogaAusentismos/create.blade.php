@@ -31,6 +31,12 @@
 			    }).then(function (response) {
 					$scope.ausentismo = response.data;
 					$('.viewInfoAusentismo').removeClass('hidden');
+					var cantProrroga=$scope.ausentismo.prorroga.length;
+					if (cantProrroga==0) {
+						$("#FECHA_ADICIONAL").val($scope.ausentismo.ausentismo.AUSE_FECHAFINAL);
+					} else {
+						$("#FECHA_ADICIONAL").val($scope.ausentismo.prorroga[cantProrroga-1].PROR_FECHAFINAL);
+					}
 					$scope.showHide = "Ocultar Información";
 					$scope.showResult = true;
 				});

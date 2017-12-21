@@ -19,6 +19,7 @@
 <div class="row form-horizontal hidden viewInfoAusentismo panel panel-default" ng-show="showResult" style="margin-top: 0px;padding-left: 20px;padding-right: 20px;">
 	<!-- Diagnostico -->
 	<div class="row" >
+		<p>Datos del Ausentismo:</p>
 		@include('widgets.forms.input', ['type'=>'text', 'column'=>4, 'name'=>'CIE10A', 'label'=>'CIE10','options'=>['ng-model'=>'ausentismo.ausentismo.diagnostico.DIAG_CODIGO','disabled'=>true]])
 		@include('widgets.forms.input', ['type'=>'text', 'column'=>8, 'name'=>'DX_DESCRIPCION', 'label'=>'Descripción Dx','options'=>['ng-model'=>'ausentismo.ausentismo.diagnostico.DIAG_DESCRIPCION','disabled'=>true]])
 	</div>
@@ -45,18 +46,22 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
+					<th>Numero</th>
 					<th>Fecha Inicio</th>
 					<th>Fecha Final</th>
 					<th>Cantidad Dias</th>
 					<th>Diagnostico</th>
+					<th>Observaciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="prorroga in ausentismo.prorroga">
+					<td>{%$index + 1%}</td>
 					<td>{%prorroga.PROR_FECHAINICIO%}</td>
 					<td>{%prorroga.PROR_FECHAFINAL%}</td>
 					<td>{%prorroga.PROR_DIAS%}</td>
 					<td>{%prorroga.diagnostico.DIAG_DESCRIPCION%}</td>
+					<td>{%prorroga.PROR_OBSERVACIONES%}</td>
 				</tr>
 			</tbody>
 		</table>

@@ -17,7 +17,7 @@
     <tbody>
     @foreach($ausentismos as $ausentismo)
         <tr>
-            <td>{{ $ausentismo->diagnostico->DIAG_DESCRIPCION }}</td>
+            <td>{{ $ausentismo->diagnostico->DIAG_DESCRIPCION or null}}</td>
 			<td>{{ $ausentismo->conceptoausencia->COAU_DESCRIPCION }}</td>
 			<td>{{ nombre_empleado($ausentismo->contrato->PROS_ID) }}</td>
 			<td>{{ $ausentismo -> AUSE_FECHAINICIO }}</td>

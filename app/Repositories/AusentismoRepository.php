@@ -21,7 +21,7 @@ class AusentismoRepository
         ->join('PROSPECTOS','PROSPECTOS.PROS_ID','=','CONTRATOS.PROS_ID')
         ->select([
           'AUSE_ID',
-          repositorio("Prospecto")->cont_prospectos(['PROS_CEDULA','CONT_FECHAINGRESO'])
+          repositorio("Prospecto")->cont_prospectos(['PROS_CEDULA','AUSE_FECHAINICIO'])
         ])
         ->where('AUSE_ESTADO', '=', 'Abierto')
         ->get();   

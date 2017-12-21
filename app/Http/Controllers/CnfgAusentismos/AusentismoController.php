@@ -103,8 +103,11 @@ class AusentismoController extends Controller
 		
 		//Se crea un array con las Entidades Responsables
 		$arrEntidad= model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL');
-		//dd($ausentismos->DIAG_ID);
-		$diagnostico= findBy('Diagnostico','DIAG_ID',$ausentismos->DIAG_ID)->get();
+		$diagnostico=null;
+		if ($ausentismos->DIAG_ID!=0) {
+			$diagnostico= findBy('Diagnostico','DIAG_ID',$ausentismos->DIAG_ID);
+		}	
+		
 
 		return view($this->route.'.edit',['ausentismo'=>$ausentismos,'diagnostico'=>$diagnostico],compact('arrContratos','arrConceptoAusentismo','arrEntidad'));
 	}

@@ -5,11 +5,11 @@
 @section('section')
 	<div class='col-md-8 col-md-offset-2'>
 	{{ Form::model($prorrogaausentismos, ['route' => ['cnfg-ausentismos.prorrogaausentismos.update', $prorrogaausentismos ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
-
 		<!-- Elementos del formulario -->
 		@include('cnfg-ausentismos.prorrogaausentismos.fields')
-		@include('widgets.rellena',['columns'=>['DX_DESCRIPCIONP'=>$diagnostico[0]->DIAG_DESCRIPCION,'CIE10'=>$diagnostico[0]->DIAG_CODIGO]])
-
+		@if (count($diagnostico)) {
+			@include('widgets.rellena',['columns'=>['DX_DESCRIPCION'=>$diagnostico[0]->DIAG_DESCRIPCION,'CIE10'=>$diagnostico[0]->DIAG_CODIGO]])
+		@endif	
 		<!-- Botones -->
 		@include('widgets.forms.buttons', ['url' => 'cnfg-ausentismos/prorrogaausentismos'])
 
