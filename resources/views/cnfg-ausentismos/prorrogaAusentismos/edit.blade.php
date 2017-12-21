@@ -3,7 +3,7 @@
 @section('page_heading', 'Actualizar Prorroga')
 
 @section('section')
-	<div class='col-md-8 col-md-offset-2'>
+<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
 	{{ Form::model($prorrogaausentismos, ['route' => ['cnfg-ausentismos.prorrogaausentismos.update', $prorrogaausentismos ], 'method' => 'PUT', 'class' => 'form-horizontal' ]) }}
 		<!-- Elementos del formulario -->
 		@include('cnfg-ausentismos.prorrogaausentismos.fields')

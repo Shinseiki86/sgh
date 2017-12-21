@@ -16,19 +16,30 @@
 
 @section('section')
 
-	@include('widgets.forms.input', ['type'=>'select', 'column'=>4, 'name'=>'REPO_ID', 'label'=>'Seleccionar reporte', 'data'=>$arrReportes])
 	
 	<div class="row">
-		<div class="col-sm-12">
+			@include('widgets.forms.input', ['type'=>'select', 'column'=>8, 'name'=>'REPO_ID', 'label'=>'Seleccionar reporte', 'data'=>$arrReportes])
+
 			@foreach($arrReportes as $key => $reporte)
-				{{ Form::open(['url' => 'reportes/'.$key, 'id'=>'form_'.$key, 'class' => 'form-horizontal hide']) }}
-					<div class="col-sm-8 col-offset-2" >
+
+				<div class="col-xs-4 hide">
+					<button type="button" id="btnViewForm{{$key}}" class="btn btn-link pull-right btnViewForm">
+						<span class="fa fa-caret-down iconBtn"></span>
+						<span class="textBtn">Filtros</span>
+					</button>
+				</div>
+
+				{{ Form::open(['url' => 'reportes/'.$key, 'id'=>'form'.$key, 'class' => 'form-horizontal hide']) }}
+					<div class="col-xs-8 col-offset-2" >
+						<div class="fields hide">
 						@rinclude('formRep'.$key.'')
+						</div>
 						@rinclude('formRepBotones')
 					</div>
 				{{ Form::close() }}
+
+
 			@endforeach
-		</div>
 	</div>
 
 	<table id="tbQuery" class="table table-striped">
@@ -50,12 +61,30 @@
 
 		//Select para formularios
 		$('#REPO_ID').change(function() {
-			$(document).attr("title", $(this).find(':selected').text());
-			forms.addClass('hide');
+			//título de ventana, afecta nombre de archivo exportado
+			$(document).attr("title", 'SGH / Rep '+$(this).find(':selected').text());
+			//se ocultan todos los forms
+			$('.btnViewForm').parent().addClass('hide'); //div botón show
+			forms.addClass('hide'); //form
+			//Se muestra el form seleccionado
 			var id_selected = $(this).val();
-			$('#form_'+id_selected).removeClass('hide');
+			$('#btnViewForm'+id_selected).parent().removeClass('hide');
+			$('#form'+id_selected).removeClass('hide');
 			clearTable();
 		});
+
+		//
+		$('.btnViewForm').click(function() {
+			var btn = $(this);
+			var form = btn.parent().next();
+
+			btn.find('.iconBtn')
+				.toggleClass('fa-caret-up')
+				.toggleClass('fa-caret-down');
+
+			form.find('.fields').toggleClass('hide');
+		});
+
 
 		//Reset de formulario
 		$('form').on('reset', function() {
@@ -126,4 +155,10 @@
 
 	});
 </script>
+@endpush
+
+@push('head')
+<style type="text/css">
+	.row{margin: 0px 0px;}
+</style>
 @endpush
