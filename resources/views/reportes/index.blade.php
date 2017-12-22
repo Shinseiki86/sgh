@@ -3,6 +3,7 @@
 
 @include('widgets.datatable.datatable-export')
 @include('datepicker')
+@include('chosen')
 
 @section('page_heading')
 	<div class="row">
@@ -17,30 +18,27 @@
 @section('section')
 
 	
-	<div class="row">
-			@include('widgets.forms.input', ['type'=>'select', 'column'=>8, 'name'=>'REPO_ID', 'label'=>'Seleccionar reporte', 'data'=>$arrReportes])
+	@include('widgets.forms.input', ['type'=>'select', 'column'=>10, 'name'=>'REPO_ID', 'label'=>'Seleccionar reporte', 'data'=>$arrReportes])
 
-			@foreach($arrReportes as $key => $reporte)
+	@foreach($arrReportes as $key => $reporte)
 
-				<div class="col-xs-4 hide">
-					<button type="button" id="btnViewForm{{$key}}" class="btn btn-link pull-right btnViewForm">
-						<span class="fa fa-caret-down iconBtn"></span>
-						<span class="textBtn">Filtros</span>
-					</button>
+		<div class="col-xs-2 hide" style="margin-top: 25px;">
+			<button type="button" id="btnViewForm{{$key}}" class="btn btn-link pull-right btnViewForm">
+				<span class="fa fa-caret-down iconBtn"></span>
+				<span class="textBtn">Filtros</span>
+			</button>
+		</div>
+
+		{{ Form::open(['url' => 'reportes/'.$key, 'id'=>'form'.$key, 'class' => 'form-horizontal hide']) }}
+			<div class="col-xs-12" >
+				<div class="fields hide">
+				@rinclude('formRep'.$key.'')
 				</div>
+				@rinclude('formRepBotones')
+			</div>
+		{{ Form::close() }}
 
-				{{ Form::open(['url' => 'reportes/'.$key, 'id'=>'form'.$key, 'class' => 'form-horizontal hide']) }}
-					<div class="col-xs-8 col-offset-2" >
-						<div class="fields hide">
-						@rinclude('formRep'.$key.'')
-						</div>
-						@rinclude('formRepBotones')
-					</div>
-				{{ Form::close() }}
-
-
-			@endforeach
-	</div>
+	@endforeach
 
 	<table id="tbQuery" class="table table-striped">
 		<thead><tr><th></th></tr></thead>

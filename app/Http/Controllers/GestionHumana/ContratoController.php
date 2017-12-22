@@ -2,8 +2,10 @@
 namespace SGH\Http\Controllers\GestionHumana;
 
 use SGH\Http\Controllers\Controller;
+use Yajra\Datatables\Facades\Datatables;
 
 use SGH\Models\Contrato;
+use SGH\Models\EstadoContrato;
 use SGH\Models\PlantaLaboral;
 use SGH\Models\CentroCosto;
 use SGH\Models\Prospecto;
@@ -13,7 +15,6 @@ use SGH\Models\Riesgo;
 use SGH\Models\Empleador;
 use SGH\Models\TipoEntidad;
 use SGH\Models\Negocio;
-use SGH\Models\MovimientoPlanta;
 
 use Carbon\Carbon;
 
@@ -34,17 +35,14 @@ class ContratoController extends Controller
 	 */
 	public function index()
 	{
-		//obtiene los empleadores sobre los cuales el usuario tiene permiso
-		$empleadores = get_permisosempresas_user(\Auth::user()->USER_id);
-		//obtiene la confirmación de si es un administrador
-		$is_admin = get_is_admin(\Auth::user()->USER_id);
-
-		//Se obtienen los registros con los empleadores a los cuales tiene permiso
-		$contratos = Contrato::whereIn('EMPL_ID',$empleadores)->get();
-
-		if($is_admin)
+		if(\Auth::user()->hasRole('admin')) //si es un administrador...
 			$contratos = Contrato::all();
-
+		else {
+			//obtiene los empleadores sobre los cuales el usuario tiene permiso
+			$empleadores = get_permisosempresas_user(\Auth::user()->USER_id);
+			//Se obtienen los registros con los empleadores a los cuales tiene permiso
+			$contratos = Contrato::whereIn('EMPL_ID', $empleadores)->get();
+		}
 		//Se carga la vista y se pasan los registros
 		return view($this->route.'.index', compact('contratos'));
 	}
@@ -57,17 +55,130 @@ class ContratoController extends Controller
 	 */
 	public function getData()
 	{
-		$model = Contrato::select([
-			'CONT_ID',
+		$PROS_NOMBRESAPELLIDOS = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+		], 'PROS_NOMBRESAPELLIDOS', 'PROS');
+
+		$JEFE_NOMBRESAPELLIDOS = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO'
+		], 'JEFE_NOMBRESAPELLIDOS', 'JEFE');
+
+		$REMP_NOMBRESAPELLIDOS = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO'
+		], 'REMP_NOMBRESAPELLIDOS', 'REMP');
+
+		$model = Contrato::leftJoin('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+			->leftJoin('TEMPORALES', 'TEMPORALES.TEMP_ID', '=', 'CONTRATOS.TEMP_ID')
+			->leftJoin('PROSPECTOS as PROS', 'PROS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+			->leftJoin('PROSPECTOS as JEFE', 'JEFE.PROS_ID', '=', 'CONTRATOS.JEFE_ID')
+			->leftJoin('PROSPECTOS as REMP', 'REMP.PROS_ID', '=', 'CONTRATOS.REMP_ID')
+			->leftJoin('TIPOSCONTRATOS', 'TIPOSCONTRATOS.TICO_ID', '=', 'CONTRATOS.TICO_ID')
+			->leftJoin('CLASESCONTRATOS', 'CLASESCONTRATOS.CLCO_ID', '=', 'CONTRATOS.CLCO_ID')
+			->leftJoin('CARGOS', 'CARGOS.CARG_ID', '=', 'CONTRATOS.CARG_ID')
+			->leftJoin('ESTADOSCONTRATOS', 'ESTADOSCONTRATOS.ESCO_ID', '=', 'CONTRATOS.ESCO_ID')
+			->leftJoin('MOTIVOSRETIROS', 'MOTIVOSRETIROS.MORE_ID', '=', 'CONTRATOS.MORE_ID')
+			->leftJoin('TIPOSEMPLEADORES', 'TIPOSEMPLEADORES.TIEM_ID', '=', 'CONTRATOS.TIEM_ID')
+			->leftJoin('RIESGOS', 'RIESGOS.RIES_ID', '=', 'CONTRATOS.RIES_ID')
+			->leftJoin('GERENCIAS', 'GERENCIAS.GERE_ID', '=', 'CONTRATOS.GERE_ID')
+			->leftJoin('NEGOCIOS', 'NEGOCIOS.NEGO_ID', '=', 'CONTRATOS.NEGO_ID')
+			->leftJoin('CENTROSCOSTOS', 'CENTROSCOSTOS.CECO_ID', '=', 'CONTRATOS.CECO_ID')
+			->leftJoin('GRUPOS', 'GRUPOS.GRUP_ID', '=', 'CONTRATOS.GRUP_ID')
+			->leftJoin('TURNOS', 'TURNOS.TURN_ID', '=', 'CONTRATOS.TURN_ID')
+			->leftJoin('CIUDADES as CIUD_CONT', 'CIUD_CONT.CIUD_ID', '=', 'CONTRATOS.CIUD_CONTRATA')
+			->leftJoin('CIUDADES as CIUD_SERV', 'CIUD_SERV.CIUD_ID', '=', 'CONTRATOS.CIUD_SERVICIO')
+			->select([
+				'CONT_ID',
+				'EMPL_NOMBRECOMERCIAL',
+				'TEMP_NOMBRECOMERCIAL',
+				'TICO_DESCRIPCION',
+				'CLCO_DESCRIPCION',
+				'PROS.PROS_CEDULA',
+				$PROS_NOMBRESAPELLIDOS,
+				'CONT_SALARIO',
+				'CARG_DESCRIPCION',
+				'CONTRATOS.ESCO_ID', //No se tabula, pero define el color de la fila.
+				'ESCO_DESCRIPCION',
+				'CONT_FECHAINGRESO',
+				'CONT_FECHATERMINACION',
+				'CONT_FECHAGRABARETIRO',
+				'MORE_DESCRIPCION',
+				'CONT_VARIABLE',
+				'CONT_RODAJE',
+				'TIEM_DESCRIPCION',
+				'RIES_DESCRIPCION',
+				'GERE_DESCRIPCION',
+				'NEGO_DESCRIPCION',
+				'CECO_DESCRIPCION',
+				'GRUP_DESCRIPCION',
+				'TURN_DESCRIPCION',
+				'CONT_CASOMEDICO',
+				$JEFE_NOMBRESAPELLIDOS,
+				$REMP_NOMBRESAPELLIDOS,
+				'CIUD_CONT.CIUD_NOMBRE as CIUD_CONTRATO',
+				'CIUD_SERV.CIUD_NOMBRE as CIUD_SERVICIO',
+				'CONT_OBSERVACIONES',
+				'CONT_MOREOBSERVACIONES',
+				'CONT_CREADOPOR',
 			])->get();
 
 		return Datatables::collection($model)
 		->addColumn('action', function($model){
-			return parent::buttonEdit($model).
-			parent::buttonDelete($model, 'PROS_CEDULA');
-		})->make(true);
+			return $this->buttonEdit($model).
+			$this->buttonCambiarEstado($model).
+			$this->buttonDelete($model, 'PROS_CEDULA');
+		})
+		->setRowClass(function ($model) {
+			$class = '';
+			switch ($model->ESCO_ID) {
+				case EstadoContrato::ACTIVO:
+					$class = 'success';
+					break;
+				case EstadoContrato::VACACIONES:
+					$class = 'warning';
+					break;
+				case EstadoContrato::RETIRADO:
+					$class = 'danger';
+					break;
+			}
+			return $class;
+		})
+		->make(true);
 	}
 
+	/**
+	 * Contruye el botón para editar un registro.
+	 *
+	 * @return Html|string
+	 */
+	protected function buttonEdit($model)
+	{
+		if($model->ESCO_ID == EstadoContrato::ACTIVO)
+			return parent::buttonEdit($model);
+		return '';
+	}
+
+	/**
+	 * Contruye el botón para cambiar el estado de un registro.
+	 *
+	 * @return Html|string
+	 */
+	protected function buttonCambiarEstado($model)
+	{
+		if($model->ESCO_ID == EstadoContrato::ACTIVO)
+			return parent::button($model,
+				'gestion-humana.contratos.retirarContrato',
+				'Cambiar Estado', 'warning', 'flag');
+		return '';
+	}
 
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
@@ -79,37 +190,26 @@ class ContratoController extends Controller
 
 		//Se crea un array con los empleadores
 		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_RAZONSOCIAL');
-
 		//Se crea un array con los negocios
 		$arrNegocios = model_to_array(Negocio::class, 'NEGO_DESCRIPCION');
-
 		//Se crea un array con los tipos de empleadores
 		$arrTiposempleadores = model_to_array(TipoEmpleador::class, 'TIEM_DESCRIPCION');
-
 		//Se crea un array con las gerencias
 		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
-
 		//Se crea un array con los centros de costos
 		$arrCentroscostos = model_to_array(CentroCosto::class, 'CECO_DESCRIPCION');
-
 		//Se crea un array con los estados de contrato
 		$arrEstadoscontrato = model_to_array(EstadoContrato::class, 'ESCO_DESCRIPCION');
-
 		//Se crea un array con los tipos de contrato
 		$arrTiposcontrato = model_to_array(TipoContrato::class, 'TICO_DESCRIPCION');
-
 		//Se crea un array con las clases de contrato
 		$arrClasescontrato = model_to_array(ClaseContrato::class, 'CLCO_DESCRIPCION');
-
 		//Se crea un array con los riesgos existentes
 		$arrRiesgos = model_to_array(Riesgo::class, 'RIES_DESCRIPCION');
-
 		//Se crea un array con los grupos existentes
 		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
-
 		//Se crea un array con los turnos existentes
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
-
 		//Se crea un array con los prospectos disponibles (no descartados)
 		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
 			'PROS_PRIMERNOMBRE',
@@ -121,19 +221,14 @@ class ContratoController extends Controller
 
 		//Se crea un array con los cargos disponibles
 		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
-
 		//Se crea un array con las temporales disponibles
 		$arrTemporales = model_to_array(Temporal::class, 'TEMP_RAZONSOCIAL');
-
 		//Se crea un array con los motivos de retiro
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
-
 		//Se crea un array con las ciudades disponibles
 		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
-
 		//Se crea un array con las Entidades EPS
 		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',2]]);
-
 		//Se crea un array con las Entidades ARL
 		$arrARL = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',1]]);
 
@@ -165,6 +260,7 @@ class ContratoController extends Controller
 		return view($this->route.'.create' , compact('arrEmpleadores','arrNegocios','arrTiposempleadores','arrGerencias','arrCentroscostos','arrEstadoscontrato','arrTiposcontrato','arrClasescontrato','arrProspectos','arrCargos','arrMotivosretiro', 'arrRiesgos','arrGrupos','arrTurnos','arrJefes','arrRetirados','arrTemporales','arrCiudades','arrEPS','arrARL','arrCCF'));
 	}
 
+
 	/**
 	 * Guarda el registro nuevo en la base de datos.
 	 *
@@ -191,7 +287,7 @@ class ContratoController extends Controller
 				flash_modal('No se puede crear contrato: la hoja de vida se encuentra descartada. \n consulte a gestión humana sobre este candidato', 'danger' );
 				return redirect()->back()->send();
 
-			}else{
+			} else {
 
 				$pros_id  = request()->get('PROS_ID');
 				$jefe_id  = request()->get('JEFE_ID');
@@ -199,17 +295,11 @@ class ContratoController extends Controller
 				if($pros_id == $jefe_id){
 					flash_modal('El Jefe inmediato no puede ser el mismo empleado', 'danger' );
 					return redirect()->back()->send();
-				}else{
+				} else {
 					parent::storeModel(['entidades'=>$entidades_id]);
 				}
-
-				
 			}
-
-
-
-			
-		}else{
+		} else {
 			flash_alert('No se puede crear contrato: La planta autorizada se encuentra completa o no se ha definido para el cargo', 'danger' );
 			return redirect()->route($this->route.'.create')->send();
 		}				
@@ -355,10 +445,9 @@ class ContratoController extends Controller
 		}else{
 			flash_alert('No se puede actualizar contrato: La planta autorizada se encuentra completa o no se ha definido', 'info' );
 			return redirect()->back();
-		}				
-		
-
+		}
 	}
+
 
 	/**
 	 * Elimina un registro de la base de datos.
@@ -370,6 +459,7 @@ class ContratoController extends Controller
 	{
 		parent::destroyModel($CONT_ID);
 	}
+
 
 	/**
 	 * Contratos activos por empleador.
@@ -384,7 +474,7 @@ class ContratoController extends Controller
 			'EMPLEADORES.EMPL_NOMBRECOMERCIAL',
 			\DB::raw('COUNT("CONT_ID") as count')
 			)
-		->whereIn('CONTRATOS.ESCO_ID', [1,3])
+		->whereIn('CONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO, EstadoContrato::VACACIONES])
 		->groupBy(
 			'EMPLEADORES.EMPL_RAZONSOCIAL',
 			'EMPLEADORES.EMPL_NOMBRECOMERCIAL'
@@ -392,6 +482,7 @@ class ContratoController extends Controller
 		->get();
 		return $data->toJson();
 	}
+
 
 	/**
 	 * Participación en contratos
@@ -407,7 +498,7 @@ class ContratoController extends Controller
 			'EMPLEADORES.EMPL_NOMBRECOMERCIAL',
 			\DB::raw('COUNT("CONT_ID") as count')
 			)
-		->whereIn('CONTRATOS.ESCO_ID', [1,3])
+		->whereIn('CONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO, EstadoContrato::VACACIONES])
 		->groupBy(
 			'EMPLEADORES.EMPL_RAZONSOCIAL',
 			'EMPLEADORES.EMPL_NOMBRECOMERCIAL'
@@ -419,53 +510,46 @@ class ContratoController extends Controller
 	public function getPlantaLaboral($empleador, $gerencia, $cargo){
 
 		$plantasautorizada = PlantaLaboral::select('PALA_CANTIDAD')
-		->where('EMPL_ID', $empleador)
-		->where('GERE_ID', $gerencia)
-		->where('CARG_ID', $cargo)
-		->get();
+			->where('EMPL_ID', $empleador)
+			->where('GERE_ID', $gerencia)
+			->where('CARG_ID', $cargo)
+			->get();
 
 		$plantaaux = PlantaLaboral::select('PALA_ID')
-		->where('EMPL_ID', $empleador)
-		->where('GERE_ID', $gerencia)
-		->where('CARG_ID', $cargo)
-		->get();
+			->where('EMPL_ID', $empleador)
+			->where('GERE_ID', $gerencia)
+			->where('CARG_ID', $cargo)
+			->get();
 
 		if(isset($plantaaux)){
-
 			$movplanta = \DB::table("MOVIMIENTOS_PLANTAS")
-			->join('PLANTASLABORALES','PLANTASLABORALES.PALA_ID','=','MOVIMIENTOS_PLANTAS.PALA_ID')
-			->where('MOVIMIENTOS_PLANTAS.PALA_ID', $plantaaux[0]['PALA_ID'])
-			->sum('MOPL_CANTIDAD');
+				->join('PLANTASLABORALES','PLANTASLABORALES.PALA_ID','=','MOVIMIENTOS_PLANTAS.PALA_ID')
+				->where('MOVIMIENTOS_PLANTAS.PALA_ID', $plantaaux[0]['PALA_ID'])
+				->sum('MOPL_CANTIDAD');
 
 			$movplanta2 = \DB::table("MOVIMIENTOS_PLANTAS")
-			->join('PLANTASLABORALES','PLANTASLABORALES.PALA_ID','=','MOVIMIENTOS_PLANTAS.PALA_ID')
-			->select('MOVIMIENTOS_PLANTAS.MOPL_MOTIVO')
-			->where('MOVIMIENTOS_PLANTAS.PALA_ID', $plantaaux[0]['PALA_ID']);		
+				->join('PLANTASLABORALES','PLANTASLABORALES.PALA_ID','=','MOVIMIENTOS_PLANTAS.PALA_ID')
+				->select('MOVIMIENTOS_PLANTAS.MOPL_MOTIVO')
+				->where('MOVIMIENTOS_PLANTAS.PALA_ID', $plantaaux[0]['PALA_ID']);		
 
 			$movintplanta = intval($movplanta);
-
-			$plantasautorizada[0]['PALA_CANTIDAD']+=$movplanta;			
-
+			$plantasautorizada[0]['PALA_CANTIDAD']+=$movplanta;
 		}
 
-		if(count($plantasautorizada)==0){
+		if(count($plantasautorizada)==0)
 			return 0;
-		}else{
+		else
 			return $plantasautorizada[0]['PALA_CANTIDAD'];
-		}
-
-		
-
 	}
+
 
 	public function getContratosPorEstructura($empleador, $gerencia, $cargo)
 	{
 		$data = Contrato::select('CONT_ID')
-		->where('EMPL_ID', $empleador)
-		->where('GERE_ID', $gerencia)
-		->where('CARG_ID', $cargo)
-		->count();
-
+			->where('EMPL_ID', $empleador)
+			->where('GERE_ID', $gerencia)
+			->where('CARG_ID', $cargo)
+			->count();
 		return $data;
 	}
 
@@ -607,7 +691,7 @@ class ContratoController extends Controller
 		}else{
 
 			$contrato->CONT_MOREOBSERVACIONES = request()->get('CONT_MOREOBSERVACIONES');
-			$contrato->ESCO_ID = 2; //Retirado
+			$contrato->ESCO_ID = EstadoContrato::RETIRADO;
 			$contrato->CONT_FECHAGRABARETIRO = Carbon::now();
 			$contrato->save();
 

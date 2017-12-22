@@ -221,9 +221,12 @@ class Controller extends BaseController
 		return $this->button($model, 'edit', 'Editar', 'info', 'pencil-square-o');
 	}
 
-	private function button($model, $type, $title, $class, $icon)
+	protected function button($model, $route, $title, $class, $icon)
 	{
-		return \Html::link(route($this->route.'.'.$type, [ $model->getKeyName() => $model->getKey() ]), '<i class="fa fa-'.$icon.' fa-fw" aria-hidden="true"></i>', [
+		if(!\Route::has($route))
+			$route = $this->route.'.'.$route;
+
+		return \Html::link(route($route, [ $model->getKeyName() => $model->getKey() ]), '<i class="fa fa-'.$icon.' fa-fw" aria-hidden="true"></i>', [
 			'class'=>'btn btn-xs btn-'.$class,
 			'title'=>$title,
 			'data-tooltip'=>'tooltip'
@@ -232,17 +235,19 @@ class Controller extends BaseController
 
 	protected function buttonDelete($model, $modelDescrip)
 	{
-		return \Form::button('<i class="fa fa-trash fa-fw" aria-hidden="true"></i>',[
-			'class'=>'btn btn-xs btn-danger btn-delete',
-			'data-toggle'=>'modal',
-			'data-id'=> $model->getKey(),
-			'data-modelo'=> str_upperspace(class_basename($model)),
-			'data-descripcion'=> $model->$modelDescrip,
-			'data-action'=> route( $this->route.'.destroy', [ $model->getKeyName() => $model->getKey() ]),
-			'data-target'=>'#pregModalDelete',
-			'data-tooltip'=>'tooltip',
-			'title'=>'Borrar',
-		]);
+		if(\Entrust::hasRole(['owner', 'admin']))
+			return \Form::button('<i class="fa fa-trash fa-fw" aria-hidden="true"></i>',[
+				'class'=>'btn btn-xs btn-danger btn-delete',
+				'data-toggle'=>'modal',
+				'data-id'=> $model->getKey(),
+				'data-modelo'=> str_upperspace(class_basename($model)),
+				'data-descripcion'=> $model->$modelDescrip,
+				'data-action'=> route( $this->route.'.destroy', [ $model->getKeyName() => $model->getKey() ]),
+				'data-target'=>'#pregModalDelete',
+				'data-tooltip'=>'tooltip',
+				'title'=>'Borrar',
+			]);
+		return '';
 	}
 
 	private function getClass($class)

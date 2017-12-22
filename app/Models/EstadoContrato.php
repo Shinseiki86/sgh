@@ -24,7 +24,8 @@ class EstadoContrato extends ModelWithSoftDeletes
 
 	//Constantes para referenciar los estados de un contrato
 	const ACTIVO	= 1;
-	const RETIRADO	= 2;
+	const VACACIONES= 2;
+	const RETIRADO	= 3;
 
 	public static function rules($id = 0){
 		return [

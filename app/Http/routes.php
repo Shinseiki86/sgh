@@ -77,15 +77,14 @@ Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'],
 Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
 	Route::resource('prospectos', 'ProspectoController', ['parameters'=>['prospectos' => 'PROS_ID']]);
 	Route::get('getProspectos', 'ProspectoController@getData');
-	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
 
+	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
 	Route::get('getContratos', 'ContratoController@getData');
+
 	Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');
 	Route::get('getContratosParticipacion', 'ContratoController@getContratosParticipacion');
-
 	Route::get('/retirarContrato','ContratoController@retirarContrato')->name('gestion-humana.contratos.retirarContrato');
 	Route::post('/cambiarEstado','ContratoController@cambiarEstado')->name('gestion-humana.contratos.cambiarEstado');
-
 	Route::get('/buscaGerencia','ContratoController@buscaGerencia');
 	Route::get('/buscaCentroCosto','ContratoController@buscaCentroCosto');
 	Route::get('/buscaGrupo','ContratoController@buscaGrupo');
@@ -93,7 +92,6 @@ Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], fun
 	Route::get('/buscaNegocio','ContratoController@buscaNegocio');
 
 	Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {
-		//upload tablas de TNL
 		Route::get('validadorTNL', 'TnlController@index')->name('tnl.index');
 		Route::get('validadorTNL/upload', 'TnlController@create')->name('tnl.create');
 		Route::post('validadorTNL/upload', 'TnlController@store')->name('tnl.store');
@@ -109,7 +107,7 @@ Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], functio
 	Route::resource('estadosaprobaciones', 'EstadoAprobacionController');
 	Route::resource('sanciones', 'SancionController');
 	Route::resource('tickets', 'TicketController');
-	//Route::get('getTickets', 'TicketController@getData');
+	Route::get('getTickets', 'TicketController@getData');
 	Route::get('tickets/autorizar/{TICK_ID}', 'TicketController@autorizarTicket');
 	Route::post('tickets/rechazar/{TICK_ID}', 'TicketController@rechazarTicket');
 	Route::post('tickets/cerrar/{TICK_ID}', 'TicketController@cerrarTicket');

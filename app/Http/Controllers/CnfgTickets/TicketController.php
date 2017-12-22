@@ -57,19 +57,8 @@ class TicketController extends Controller
 	 */
 	public function index()
 	{
-		//obtiene los empleadores sobre los cuales el usuario tiene permiso
-		$empleadores = get_permisosempresas_user(\Auth::user()->USER_id);
-		//obtiene la confirmación de si es un administrador
-		$is_admin = get_is_admin(\Auth::user()->USER_id);
-
-		//Se obtienen todos los registros.
-		$tickets = Ticket::TicketsPorEmpleador()->whereIn('EMPLEADORES.EMPL_ID',$empleadores)->get();
-
-		if($is_admin)
-			$tickets = Ticket::all();
-
-		//Se carga la vista y se pasan los registros
-		return view($this->route.'.index', compact('tickets'));
+		//Se carga la vista 
+		return view($this->route.'.index');
 	}
 
 	public function show($TICK_ID)
@@ -91,23 +80,33 @@ class TicketController extends Controller
 	 */
 	public function getData()
 	{
-		$PROS_NOMBRESAPELLIDOS = expression_concat([
-				'PROS_PRIMERNOMBRE',
-				'PROS_SEGUNDONOMBRE',
-				'PROS_PRIMERAPELLIDO',
-				'PROS_SEGUNDOAPELLIDO',
-			], 'PROS_NOMBRESAPELLIDOS');
+		if(\Auth::user()->hasRole('admin')) //si es un administrador...
+			//Se obtienen todos los registros.
+			$tickets = Ticket::all();
+		else {
+			//obtiene los empleadores sobre los cuales el usuario tiene permiso
+			$empleadores = get_permisosempresas_user(\Auth::user()->USER_id);
+			//obtiene la confirmación de si es un administrador
+			$tickets = Ticket::TicketsPorEmpleador()->whereIn('EMPLEADORES.EMPL_ID', $empleadores)->get();
+		}
 
-		$model = Ticket::join('CONTRATOS', 'CONTRATOS.CONT_ID', '=', 'TICKETS.CONT_ID')
-			->join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
-			->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
-			->join('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
-			->join('TIPOSINCIDENTES', 'TIPOSINCIDENTES.TIIN_ID', '=', 'TICKETS.TIIN_ID')
-			->join('PRIORIDADES', 'PRIORIDADES.PRIO_ID', '=', 'TICKETS.PRIO_ID')
-			->join('CATEGORIAS', 'CATEGORIAS.CATE_ID', '=', 'TICKETS.CATE_ID')
-			->join('ESTADOSAPROBACIONES', 'ESTADOSAPROBACIONES.ESAP_ID', '=', 'TICKETS.ESAP_ID')
-			->join('GRUPOS', 'GRUPOS.GRUP_ID', '=', 'TICKETS.GRUP_ID')
-			->join('TURNOS', 'TURNOS.TURN_ID', '=', 'TICKETS.TURN_ID')
+		$PROS_NOMBRESAPELLIDOS = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+		], 'PROS_NOMBRESAPELLIDOS');
+
+		$model = Ticket::leftJoin('CONTRATOS', 'CONTRATOS.CONT_ID', '=', 'TICKETS.CONT_ID')
+			->leftJoin('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+			->leftJoin('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')
+			->leftJoin('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
+			->leftJoin('TIPOSINCIDENTES', 'TIPOSINCIDENTES.TIIN_ID', '=', 'TICKETS.TIIN_ID')
+			->leftJoin('PRIORIDADES', 'PRIORIDADES.PRIO_ID', '=', 'TICKETS.PRIO_ID')
+			->leftJoin('CATEGORIAS', 'CATEGORIAS.CATE_ID', '=', 'TICKETS.CATE_ID')
+			->leftJoin('ESTADOSAPROBACIONES', 'ESTADOSAPROBACIONES.ESAP_ID', '=', 'TICKETS.ESAP_ID')
+			->leftJoin('GRUPOS', 'GRUPOS.GRUP_ID', '=', 'TICKETS.GRUP_ID')
+			->leftJoin('TURNOS', 'TURNOS.TURN_ID', '=', 'TICKETS.TURN_ID')
 			->select([
 				'TICK_ID',
 				'EMPL_NOMBRECOMERCIAL',

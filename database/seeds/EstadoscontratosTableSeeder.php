@@ -21,15 +21,16 @@ class EstadosContratosTableSeeder extends Seeder
         $estadocontrato->save();
 
         $estadocontrato = new EstadoContrato;
+        $estadocontrato->ESCO_DESCRIPCION = 'VACACIONES';
+        $estadocontrato->ESCO_OBSERVACIONES =  NULL;
+        $estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
+        $estadocontrato->save();
+        
+        $estadocontrato = new EstadoContrato;
         $estadocontrato->ESCO_DESCRIPCION = 'RETIRADO';
         $estadocontrato->ESCO_OBSERVACIONES =  NULL;
         $estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
         $estadocontrato->save();
 
-        $estadocontrato = new EstadoContrato;
-        $estadocontrato->ESCO_DESCRIPCION = 'VACACIONES';
-        $estadocontrato->ESCO_OBSERVACIONES =  NULL;
-        $estadocontrato->ESCO_CREADOPOR =  'SYSTEM';
-        $estadocontrato->save();
     }
 }

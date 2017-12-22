@@ -164,6 +164,7 @@ if (! function_exists('img_to_base64')) {
     }
 }
 
+
 if (! function_exists('delete_tree')) {
     /**
      * Borra archivos en el servidor.
@@ -182,6 +183,7 @@ if (! function_exists('delete_tree')) {
     }
 }
 
+
 if (! function_exists('str_upperspace')) {
     /**
      * Convierte un string sin espacios, en donde cada palabra inicia con mayúscula.
@@ -197,6 +199,7 @@ if (! function_exists('str_upperspace')) {
         return $str_space; 
     }
 }
+
 
 if (! function_exists('flash_alert')) {
     /**
@@ -214,6 +217,7 @@ if (! function_exists('flash_alert')) {
         session()->flash('alert-'.$type, $msg);
     }
 }
+
 
 if (! function_exists('flash_modal')) {
     /**
@@ -235,16 +239,10 @@ if (! function_exists('datetime')) {
      * @return string Fecha formateada
      */
     function datetime( $date , $showTime=false) {
-        //if()
-        //new DateTime($date)
-
         $format = $showTime ? 'd/m/Y h:i A' : 'd/m/Y';
-
         return $date->format($format);
     }
 }
-
-
 
 
 if (! function_exists('nombre_empleado')) {
@@ -258,9 +256,7 @@ if (! function_exists('nombre_empleado')) {
      * @return string The imploded array
      */
     function nombre_empleado($PROS_ID) {
-        
         $prospecto = \SGH\Models\Prospecto::findOrFail($PROS_ID);
-        
         $nombre = "";
 
         if($prospecto->PROS_SEGUNDONOMBRE != null && $prospecto->PROS_SEGUNDOAPELLIDO != null){
@@ -278,61 +274,11 @@ if (! function_exists('nombre_empleado')) {
         if($prospecto->PROS_SEGUNDONOMBRE == null && $prospecto->PROS_SEGUNDOAPELLIDO == null){
             $nombre = $prospecto->PROS_PRIMERNOMBRE . " " . $prospecto->PROS_PRIMERAPELLIDO ;
         }
-        
         return strtoupper($nombre);
-
     }
 
 }
 
-
-if (! function_exists('get_email_empleador')) {
-    /**
-     * @param int $EMPL_ID 
-     * @return string
-     */
-    function get_email_empleador($EMPL_ID) {
-
-        $empleador = \SGH\Models\Empleador::where('EMPL_ID', $EMPL_ID)->pluck('EMPL_CORREO');
-
-
-        $empl_email = null;
-
-        if($empleador != null) {
-            $empl_email = $empleador[0];
-        }else{
-            $empl_email = "sghmasterpromo@gmail.com";
-        }
-        
-        return $empl_email;
-
-    }
-
-}
-
-if (! function_exists('get_email_user')) {
-    /**
-     * @param int $USER_ID 
-     * @return string
-     */
-    function get_email_user($USER_ID) {
-
-        $usuario = \SGH\Models\User::where('USER_id', $USER_ID)->pluck('email');
-
-
-        $user_email = null;
-
-        if ($usuario != null) {
-            $user_email = $usuario[0];
-        }else{
-            $user_email = "sghmasterpromo@gmail.com";
-        }
-        
-        return $user_email;
-
-    }
-
-}
 
 if (! function_exists('convert_to_date')) {
     /**
@@ -341,13 +287,11 @@ if (! function_exists('convert_to_date')) {
      * @return a date 
      */
     function convert_to_date($fecha_string) {
-        
         $date = new Carbon($fecha_string);
-
         return $date;
-
     }
 }
+
 
 if (! function_exists('get_permisosempresas_user')) {
     /**
@@ -356,34 +300,11 @@ if (! function_exists('get_permisosempresas_user')) {
      * @return un arreglo con el resultado 
      */
     function get_permisosempresas_user($user_id) {
-        
         $result = \Auth::user()->empleadores()->where('USER_id', $user_id)->get()->pluck('EMPL_ID');
-
         return $result;
-
     }
 }
 
-if (! function_exists('get_is_admin')) {
-    /**
-     * Devuelve una confirmación de si el usuario es o no administrador
-     * @param int $user_id id del usuario
-     * @return un arreglo con el resultado 
-     */
-    function get_is_admin($user_id) {
-        
-        $result = \Auth::user()->roles()->where('user_id', $user_id)->get()->pluck('name')->toArray();
-
-        $flag = false;
-        for($i=0; $i<count($result); $i++) { 
-            if($result[$i] == 'admin')
-                $flag = true;
-        }
-
-        return $flag;
-
-    }
-}
 
 if (! function_exists('validaFecha')) {
     /**
@@ -402,10 +323,11 @@ if (! function_exists('validaFecha')) {
     }
 }
 
+
 if (! function_exists('fechaActual')) {
     /**
-     * Retorna la fecha actul
-     
+     * Retorna la fecha actual
+     * @return string 
      */
     function fechaActual() {  
         $date = Carbon::now();   
