@@ -18,7 +18,13 @@ function Fecha(){
 	}
 
 	this.mensaje=function(msj){
-		toastr.error(msj,'Error en la fecha',{"hideMethod": "fadeOut","timeOut": "2000","progressBar": true,"closeButton": true,"positionClass": "toast-top-left",});
+		toastr.error(msj,'Error en la fecha',
+			{"hideMethod": "fadeOut",
+			"timeOut": "2000",
+			"progressBar": true,
+			"closeButton": true,
+			"positionClass": "toast-top-left",
+		});
 	};
 	
 	this.cantDias=function(fechaIni,fechaFin){

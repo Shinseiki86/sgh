@@ -14,8 +14,7 @@
 		$scope.cargaAusentismo = function() {
 			if ($("#AUSE_ID").val()=="") {
 				toastr.error(
-					'Para continuar debe seleccionar un ausentismo inicial','Seleccione un ausentismo',
-					{
+					'Para continuar debe seleccionar un ausentismo inicial','Seleccione un ausentismo',{
 						"hideMethod": "fadeOut",
 						"timeOut": "5000",
 						"progressBar": true,

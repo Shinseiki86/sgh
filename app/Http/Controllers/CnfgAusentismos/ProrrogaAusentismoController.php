@@ -96,7 +96,11 @@ class ProrrogaAusentismoController extends Controller
 		//Se crea un array con los conceptos de Ausentismos
 		$arrConceptoAusentismo= model_to_array(ConceptoAusencia::class, 'COAU_DESCRIPCION');
 		$diagnostico= findBy('Diagnostico','DIAG_ID',$prorrogaausentismos->DIAG_ID);
-
+		$diagnostico=null;
+		if ($prorrogaausentismos->DIAG_ID!=0) {
+			$diagnostico= findBy('Diagnostico','DIAG_ID',$prorrogaausentismos->DIAG_ID);
+			//dd($diagnostico);
+		}	
 		return view($this->route.'.edit',['prorrogaausentismos'=>$prorrogaausentismos,'diagnostico'=>$diagnostico],compact('arrConceptoAusentismo'));
 	}
 

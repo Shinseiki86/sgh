@@ -16,7 +16,7 @@
 					data:{'{{$selectPadre}}':cat_id},
 					success:function(data){;
 						if (data.length==0) {
-							toastr.error('No se Encontro ningun Resultado','No Hay Datos',{"hideMethod": "fadeOut","timeOut": "2000","progressBar": true,"closeButton": true,"positionClass": "toast-top-left",});
+							toastr.error('El item seleccionado no tiene datos asociados','Datos No Encontrados',{"hideMethod": "fadeOut","timeOut": "2000","progressBar": true,"closeButton": true,"positionClass": "toast-top-left",});
 							op='<option value="0" selected disabled>No se encontro ningun resultado</option>';
 							$('#{{$selectHijo}}').append(op);
 						} else {
