@@ -33,7 +33,7 @@
 		@include('widgets.forms.input', ['type'=>'number', 'column'=>2, 'name'=>'AUSE_DIAS', 'label'=>'Total Días'])
 		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'AUSE_IBC', 'label'=>'Ingreso Base de Cotización'])
 		@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'AUSE_VALOR', 'label'=>'Valor Total'])			
-		@include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'AUSE_ESTADO', 'label'=>'Estado', 'data'=>['Abierto'=>'Abierto','Cerrado'=>'Cerrado'], 'placeholder'=>'Seleccione...','allowClear'=>true])	
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>2, 'name'=>'AUSE_ESTADO', 'label'=>'Estado', 'data'=>['ABIERTO'=>'ABIERTO','CERRADO'=>'CERRADO'], 'placeholder'=>'Seleccione...','allowClear'=>true])	
 
 	</div>
 

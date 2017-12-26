@@ -19,11 +19,13 @@
 <div class="row">
 	@include('widgets.forms.input', ['type'=>'select', 'column'=>3, 'name'=>'turno', 'label'=>'Turno', 'data'=>$arrTurnos])
 
+	@include('widgets.forms.input', ['type'=>'select', 'column'=>3, 'name'=>'estado', 'label'=>'Estado de Contrato', 'data'=>$arrEstadosContratos])
+
 </div>
 
 <div class="row">
-	@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'fchaIngresoDesde', 'label'=>'Fecha ingreso desde' ])
-	@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'fchaIngresoHasta', 'label'=>'Fecha ingreso hasta' ])
+	@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'fchaRetiroDesde', 'label'=>'Fecha retiro desde' ])
+	@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'fchaRetiroHasta', 'label'=>'Fecha retiro hasta' ])
 </div>
 
 

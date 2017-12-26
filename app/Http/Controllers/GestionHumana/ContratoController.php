@@ -161,7 +161,7 @@ class ContratoController extends Controller
 	 */
 	protected function buttonEdit($model)
 	{
-		if($model->ESCO_ID == EstadoContrato::ACTIVO)
+		if($model->ESCO_ID == EstadoContrato::ACTIVO || $model->ESCO_ID == EstadoContrato::VACACIONES)
 			return parent::buttonEdit($model);
 		return '';
 	}
@@ -173,7 +173,7 @@ class ContratoController extends Controller
 	 */
 	protected function buttonCambiarEstado($model)
 	{
-		if($model->ESCO_ID == EstadoContrato::ACTIVO)
+		if($model->ESCO_ID == EstadoContrato::ACTIVO || $model->ESCO_ID == EstadoContrato::VACACIONES)
 			return parent::button($model,
 				'gestion-humana.contratos.retirarContrato',
 				'Cambiar Estado', 'warning', 'flag');

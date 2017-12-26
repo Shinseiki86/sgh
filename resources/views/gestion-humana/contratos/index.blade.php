@@ -31,6 +31,7 @@
 				{{-- <th class="col-md-5">Estado ID</th> --}}
 				<th class="col-md-5">Estado</th>
 				<th class="col-md-5">Fecha Ingreso</th>
+				<th class="col-md-5">Fecha Fin</th>
 				<th class="col-md-5">Fecha Retiro</th>
 				<th class="col-md-5">Fecha Graba Retiro</th>
 				<th class="col-md-5">Motivo Retiro</th>
@@ -75,6 +76,7 @@
 		//'CONTRATOS.ESCO_ID',
 		'ESCO_DESCRIPCION',
 		'CONT_FECHAINGRESO',
+		'CONT_FECHATERMINACION',
 		'CONT_FECHATERMINACION',
 		'CONT_FECHAGRABARETIRO',
 		'MORE_DESCRIPCION',

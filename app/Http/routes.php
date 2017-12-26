@@ -34,6 +34,9 @@ Route::group(['prefix' => 'reportes', 'middleware' => 'auth'], function() {
 	Route::get('/', 'ReporteController@index');
 	Route::post('ContratosActPorFecha', 'ReporteController@contratosActPorFecha');
 	Route::post('TicketsActPorFecha', 'ReporteController@ticketsActPorFecha');
+	Route::post('HistoricoContratos', 'ReporteController@historicoContratos');
+	Route::post('IngresosPorFecha', 'ReporteController@ingresosPorFecha');
+	Route::post('RetirosPorFecha', 'ReporteController@retirosPorFecha');
 });
 
 Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], function() {
