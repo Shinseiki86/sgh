@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DiagnosticoGeneralTableSeeder::class);
         $this->call(EstadoRestriccionTableSeeder::class);
         $this->call(AtributosTableSeeder::class);
+        $this->call(ParametrosGeneralesTableSeeder::class);
         
         
     }

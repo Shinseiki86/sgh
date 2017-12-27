@@ -22,6 +22,13 @@ class ClaseContrato extends ModelWithSoftDeletes
 		'CLCO_OBSERVACIONES',
 	];
 
+	//Constantes para referenciar las clases de un contrato
+	const INDEFINIDO	= 1;
+	const FIJO = 2;
+	const OBRALABOR = 3;
+	const APRENDIZAJE = 4;
+	const COOPERATIVA = 5;
+
 	public static function rules($id = 0){
 		return [
 			'CLCO_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CLCO_DESCRIPCION'),

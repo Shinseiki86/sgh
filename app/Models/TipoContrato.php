@@ -22,6 +22,10 @@ class TipoContrato extends ModelWithSoftDeletes
 		'TICO_OBSERVACIONES',
 	];
 
+	//Constantes para referenciar los tipos de un contrato
+	const DIRECTO	= 1;
+	const INDIRECTO = 2;
+
 	public static function rules($id = 0){
 		return [
 			'TICO_DESCRIPCION' => 'required|max:100|'.static::unique($id,'TICO_DESCRIPCION'),

@@ -22,7 +22,10 @@ class CreateParametrosGeneralesTable extends Migration
                 ->comment('Valor autonumérico, llave primaria de la tabla.');
 
             $table->string('PAGE_DESCRIPCION', 100)
-                ->comment('descripción del parametro');
+                ->comment('descripcion del parametro');
+
+            $table->string('PAGE_VALOR', 100)
+                ->comment('valor del parametro');
 
             $table->string('PAGE_OBSERVACIONES', 300)
                 ->comment('observaciones del parametro')->nullable();

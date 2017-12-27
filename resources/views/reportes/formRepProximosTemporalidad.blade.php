@@ -19,13 +19,6 @@
 <div class="row">
 	@include('widgets.forms.input', ['type'=>'select', 'column'=>3, 'name'=>'turno', 'label'=>'Turno', 'data'=>$arrTurnos])
 
-	
-
-</div>
-
-<div class="row">
-	@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'fchaRetiroDesde', 'label'=>'Fecha retiro desde' ])
-	@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'fchaRetiroHasta', 'label'=>'Fecha retiro hasta' ])
 </div>
 
 
