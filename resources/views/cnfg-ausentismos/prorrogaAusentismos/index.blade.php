@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('title', '/ Ciudades')
+@section('title', '/ Prorrogas')
 @include('widgets.datatable.datatable-export')
 
 

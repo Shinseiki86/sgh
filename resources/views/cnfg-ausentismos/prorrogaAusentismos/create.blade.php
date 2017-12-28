@@ -1,8 +1,9 @@
 @extends('layouts.menu')
+@section('title', '/ Prorrogas')
 @section('page_heading', 'Nueva Prorroga')
 @push('scripts')
-{!! Html::script('assets/js/angular/angular.min.js') !!}
-{!! Html::script('assets/js/angular/ui-bootstrap-tpls-2.5.0.min.js') !!}
+{!! Html::script('assets/scripts/angular/angular.min.js') !!}
+{!! Html::script('assets/scripts/angular/ui-bootstrap-tpls-2.5.0.min.js') !!}
 <script>
 	var app = angular.module('app', ['ui.bootstrap'], function($interpolateProvider) {
 		$interpolateProvider.startSymbol('{%');

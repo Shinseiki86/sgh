@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-
+@section('title', '/ Prorrogas')
 @section('page_heading', 'Actualizar Prorroga')
 
 @section('section')

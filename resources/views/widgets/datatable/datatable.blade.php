@@ -13,7 +13,7 @@
 	{!! Html::script('assets/scripts/datatable/pdfmake.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/vfs_fonts.js') !!}
 	{!! Html::script('assets/scripts/datatable/buttons.html5.min.js') !!}
-	{{-- {!! Html::script('assets/scripts/datatable/buttons.colVis.min.js') !!} --}}
+	{!! Html::script('assets/scripts/datatable/buttons.colVis.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/buttons.print.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/dataTables.responsive.min.js') !!}
 	{!! Html::script('assets/scripts/datatable/buttons.flash.min.js') !!}
@@ -55,24 +55,29 @@
 		buttons: [{
 				extend: 'csvHtml5',
 				text:  '<i class="fa fa-file-text-o"></i>',
+                exportOptions: { columns: ':visible' },
 				titleAttr: 'CSV',
 			},{
 				extend: 'excelHtml5',
 				text:   '<i class="fa fa-file-excel-o"></i>',
+                exportOptions: { columns: ':visible' },
 				titleAttr: 'Excel',
 			},{
 				extend: 'pdfHtml5',
 				text:    '<i class="fa fa-file-pdf-o"></i>',
+                exportOptions: { columns: ':visible' },
 				titleAttr: 'PDF',
 			},{
 				extend: 'print',
 				text:    '<i class="fa fa-print"></i>',
+                exportOptions: { columns: ':visible' },
 				titleAttr: 'Imprimir',
-			}/*,{
+			},{
 				extend: 'colvis',
 				text:  '<i class="fa fa-columns"></i>',
+                exportOptions: { columns: ':visible' },
 				titleAttr: 'Ver Columnas'
-			}*/
+			}
 		]
 	});
 </script>

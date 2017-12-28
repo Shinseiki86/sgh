@@ -1,9 +1,9 @@
 @push('head')
-	{!! Html::style('assets/toast/toastr.css') !!}
+	{!! Html::style('assets/stylesheets/toastr.min.css') !!}
 @endpush
 
 @push('scripts')
-	{!! Html::script('assets/toast/toastr.min.js') !!}
+	{!! Html::script('assets/scripts/toastr.min.js') !!}
 	<script>
 		$(document).ready(function(){
 			$(document).on('blur','#{{$FieldClave}}',function(){
