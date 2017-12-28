@@ -40,20 +40,38 @@
 
 	@endforeach
 
-	<table id="tbQuery" class="table table-striped">
-		<thead><tr><th></th></tr></thead>
-		<tbody><tr><td></td></tr></tbody>
-	</table>
+<div class="col-xs-12">
+	<div id="tabsReport" class="hide">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#tabTable" data-toggle="tab">Reporte</a></li>
+			<li><a href="#tabGraf" data-toggle="tab">Gráfico</a></li>
+		</ul>
 
-	<code id="err"></code>
+		<div class="tab-content">
+			<div class="tab-pane active" id="tabTable">
+				<table id="tbQuery" class="table table-striped">
+					<thead><tr><th></th></tr></thead>
+					<tbody><tr><td></td></tr></tbody>
+				</table>        	
+			</div>
+			<div class="tab-pane" id="tabGraf">
+				<canvas class="canvas-chart" id="chart"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<code id="err" class="hide"></code>
+</div>
 @endsection
 
-
 @push('scripts')
-<script type="text/javascript">
-
+	{!! Html::script('assets/scripts/chart.js/Chart.min.js') !!}
+	{!! Html::script('assets/scripts/momentjs/moment-with-locales.min.js') !!}
+	{!! Html::script('assets/scripts/chart.js/dashboard.js') !!}
+	<script type="text/javascript">
 	$(function () {
 		var forms = $('form');
+		var tabsReport = $('#tabsReport');
 		var tbQuery = $('#tbQuery');
 		var divErr = $('#err');
 
@@ -71,7 +89,7 @@
 			clearTable();
 		});
 
-		//
+		//Oculta/muestra el formulario para filtrar los resultados.
 		$('.btnViewForm').click(function() {
 			var btn = $(this);
 			var form = btn.parent().next();
@@ -89,6 +107,7 @@
 			clearTable();
 		});
 
+		//Realiza la solicitud del formulario via ajax y construye el datatable.
 		$("form").submit(function(e) {
 			e.preventDefault();
 			clearTable();
@@ -104,7 +123,7 @@
 				if ( data.data.length > 0 )
 					buildDataTable(data);
 				else
-					divErr.html('No se encontraron registros.');
+					divErr.html('No se encontraron registros.').removeClass('hide');
 
 			})
 			.fail(function( jqXHR, textStatus, errorThrown ) {
@@ -115,7 +134,7 @@
 					msgErr = 'Sesión ha caducado. Presione F5.';
 				else
 					msgErr = 'Error: '+jqXHR.responseText;
-				divErr.html(msgErr);
+				divErr.html(msgErr).removeClass('hide');
 			})
 			.always(function( data, textStatus, jqXHR ) {
 				thisForm.find("button[type=submit]").attr('disabled', false);
@@ -132,31 +151,52 @@
 
 			var columns = [];
 			for(var i in dataJson.keys){
-			    columns.push({title: dataJson.keys[i]});
+				columns.push({title: dataJson.keys[i]});
 			}
+			
+			tabsReport.removeClass('hide');
 
 			tbQuery = $('#tbQuery').DataTable({
 				data: dataJson.data,
 				columns: columns
 			});
+
+			buildChart(
+				'',//title
+				[1,2,3,4,5], //labels
+				[Math.random()*100,Math.random()*100,Math.random()*100,Math.random()*100,Math.random()*100],
+				[]//colores
+				, 'chart', 'bar');
 		}
 
-
+		//Destruye la tabla y limpia el log de errores.
 		function clearTable(){
 			//$('#hide').css( 'display', 'hide' );
 			if ( $.fn.dataTable.isDataTable( '#tbQuery' ) ) {
-			    tbQuery = $('#tbQuery').DataTable().destroy();
+				tbQuery = $('#tbQuery').DataTable().destroy();
 			}
 			$('#tbQuery').empty();
-			divErr.html('');
+			tabsReport.addClass('hide');
+			divErr.html('').addClass('hide');
 		}
 
+		//Reajusta el ancho de las columnas al activar #tabTable
+		//(Al redimensionar la ventana, thead no se redimensiona).
+		$('a[href="#tabTable"]').on( 'shown.bs.tab', function (e) {
+			tbQuery.columns.adjust().draw();
+		});
+		//Cambia el alto del canvas al activar #tabGraf
+		//(al ocultar el tab, el canvas queda con height=0).
+		$('a[href="#tabGraf"]').on( 'shown.bs.tab', function (e) {
+			$('#chart').css('height', '300px')
+		});
+
 	});
-</script>
+	</script>
 @endpush
 
 @push('head')
-<style type="text/css">
-	.row{margin: 0px 0px;}
-</style>
+	<style type="text/css">
+		.row{margin: 0px 0px;}
+	</style>
 @endpush

@@ -43,7 +43,7 @@ Route::group(['prefix' => 'reportes', 'namespace' => 'Reportes', 'middleware' =>
 	Route::post('HistoricoRm', 'RptContratosController@historicoRm');
 	Route::post('NovedadesRm', 'RptContratosController@novedadesRm');
 
-	Route::post('TicketsActPorFecha', 'ReporteController@ticketsActPorFecha');
+	Route::post('TicketsActPorFecha', 'RptTicketsController@ticketsActPorFecha');
 
 	Route::post('HojasDeVida', 'RptProspectosController@hojasDeVida');
 	Route::post('HojasDeVidaDescartadas', 'RptProspectosController@hojasDeVidaDescartadas');
