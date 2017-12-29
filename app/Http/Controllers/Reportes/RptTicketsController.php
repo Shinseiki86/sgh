@@ -45,7 +45,7 @@ class RptTicketsController extends ReporteController
 		if(isset($this->data['estado']))
 			$queryCollect->where('TICKETS.ESTI_ID', '=', $this->data['estado']);
 
-		return $this->buildJson($queryCollect);
+		return $this->buildJson($queryCollect, 'Estado');
 	}
 
 

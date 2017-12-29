@@ -77,6 +77,13 @@ function buildChart($title, $labels, $data, $colors, $idCanvas, $type){
 	
 }
 
+//Genera colores aleatorios.
+var randomColorFactor = function() {
+	return Math.round(Math.random() * 255);
+};
+var randomColor = function() {
+	return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',0.8)';
+};
 
 //Función para validar si un número es entero (Compatibilidad para IE11 e inferiores)
 var isNumber = function(x) {

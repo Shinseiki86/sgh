@@ -29,22 +29,33 @@
 			</button>
 		</div>
 
-		{{ Form::open(['url' => 'reportes/'.$key, 'id'=>'form'.$key, 'class' => 'form-horizontal hide']) }}
+		{{ Form::open(['url' => 'reportes/'.$key, 'id'=>'form'.$key, 'class'=>'form-horizontal hide']) }}
 			<div class="col-xs-12" >
+
 				<div class="fields hide">
 				@rinclude('formRep'.$key.'')
 				</div>
+
 				@rinclude('formRepBotones')
 			</div>
 		{{ Form::close() }}
 
 	@endforeach
 
+
 <div class="col-xs-12">
 	<div id="tabsReport" class="hide">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#tabTable" data-toggle="tab">Reporte</a></li>
 			<li><a href="#tabGraf" data-toggle="tab">Gráfico</a></li>
+			<div class="col-xs-4 col-sm-6 hide" >
+				{{ Form::select('columnChart', [''=>''], null, [
+					'id'=>'columnChart',
+					'class'=>'form-control',
+					'data-allow-clear'=>'true',
+					'data-placeholder'=>'Seleccione una columna',
+				])}}
+			</div>
 		</ul>
 
 		<div class="tab-content">
@@ -74,6 +85,14 @@
 		var tabsReport = $('#tabsReport');
 		var tbQuery = $('#tbQuery');
 		var divErr = $('#err');
+		window.chart['chart'] = null;
+		var columnChart = $('#columnChart');
+		var dataJson = null;
+
+		//Select para formularios
+		columnChart.change(function() {
+			buildChartFromJson();
+		});
 
 		//Select para formularios
 		$('#REPO_ID').change(function() {
@@ -120,9 +139,11 @@
 				data: thisForm.serialize(),
 				dataType: 'json',
 			}).done(function( data, textStatus, jqXHR ) {
-				if ( data.data.length > 0 )
-					buildDataTable(data);
-				else
+				if ( data.data.length > 0 ){
+					dataJson = data;
+					buildDataTable();
+					$('a[href="#tabTable"]').tab('show');
+				} else
 					divErr.html('No se encontraron registros.').removeClass('hide');
 
 			})
@@ -146,14 +167,28 @@
 
 
 		//Construye la tabla con el Json recibido
-		function buildDataTable(dataJson){
+		function buildDataTable(){
 			clearTable();
 
 			var columns = [];
 			for(var i in dataJson.keys){
 				columns.push({title: dataJson.keys[i]});
 			}
-			
+
+			columnChart.find('option').remove();
+			$.each(columns, function(i, col) {   
+				columnChart
+					.append($("<option/>", {
+						value: i,
+						text: col.title
+					}));
+
+				if(dataJson.columnChart == col.title)
+					columnChart.val(i);
+
+				//debugger;
+			});
+
 			tabsReport.removeClass('hide');
 
 			tbQuery = $('#tbQuery').DataTable({
@@ -161,12 +196,39 @@
 				columns: columns
 			});
 
+		}
+
+		function buildChartFromJson() {
+			columnChart.parent().removeClass('hide');
+			if(window.chart['chart'] != null)
+				window.chart['chart'].destroy();
+
+			var arr = jQuery.map( dataJson.data, function( n, i ) {
+			  return n[columnChart.val()];
+			});
+
+			var labelsChart = $.grep(arr,function(v,k){
+								return $.inArray(v,arr) === k;
+							});
+			var dataChart = [];
+
+			$(labelsChart).each(function (index, value) {
+				var nbOcc = 0;
+				for (var i = 0; i < arr.length; i++) {
+				  if (arr[i] == value) {
+					nbOcc++;
+				  }
+				}
+				dataChart.push(nbOcc);
+			});
+
 			buildChart(
-				'',//title
-				[1,2,3,4,5], //labels
-				[Math.random()*100,Math.random()*100,Math.random()*100,Math.random()*100,Math.random()*100],
-				[]//colores
-				, 'chart', 'bar');
+				'', //title
+				labelsChart, //labels
+				dataChart, //data
+				[], //colores
+				'chart', 'bar'
+			);
 		}
 
 		//Destruye la tabla y limpia el log de errores.
@@ -176,19 +238,27 @@
 				tbQuery = $('#tbQuery').DataTable().destroy();
 			}
 			$('#tbQuery').empty();
+
 			tabsReport.addClass('hide');
+
+			columnChart.parent().addClass('hide');
+			if(window.chart['chart'] != null)
+				window.chart['chart'].destroy();
+
 			divErr.html('').addClass('hide');
 		}
 
 		//Reajusta el ancho de las columnas al activar #tabTable
 		//(Al redimensionar la ventana, thead no se redimensiona).
 		$('a[href="#tabTable"]').on( 'shown.bs.tab', function (e) {
+			columnChart.parent().addClass('hide');
 			tbQuery.columns.adjust().draw();
 		});
 		//Cambia el alto del canvas al activar #tabGraf
 		//(al ocultar el tab, el canvas queda con height=0).
 		$('a[href="#tabGraf"]').on( 'shown.bs.tab', function (e) {
 			$('#chart').css('height', '300px')
+			buildChartFromJson();
 		});
 
 	});

@@ -83,7 +83,7 @@ class ReporteController extends Controller
 	 *
 	 * @return Response
 	 */
-	protected function buildJson($queryCollect)
+	protected function buildJson($queryCollect, $columnChart = null)
 	{
 		$colletion = $queryCollect->get();
 		$keys = $data = [];
@@ -94,7 +94,7 @@ class ReporteController extends Controller
 					return array_flatten($arr);
 				}, $colletion->toArray());
 		}
-		return response()->json(['keys'=>$keys, 'data'=>$data]);
+		return response()->json(compact('keys', 'data', 'columnChart'));
 	}
 
 
