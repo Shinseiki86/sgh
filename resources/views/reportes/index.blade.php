@@ -1,6 +1,10 @@
 @extends('layouts.menu')
 @section('title', '/ Reportes')
 
+@push('head')
+	{!! Html::style('assets/stylesheets/toastr.min.css') !!}
+@endpush
+
 @include('widgets.datatable.datatable-export')
 @include('datepicker')
 @include('chosen')
@@ -17,7 +21,6 @@
 
 @section('section')
 
-	
 	@include('widgets.forms.input', ['type'=>'select', 'column'=>10, 'name'=>'REPO_ID', 'label'=>'Seleccionar reporte', 'data'=>$arrReportes])
 
 	@foreach($arrReportes as $key => $reporte)
@@ -42,19 +45,26 @@
 
 	@endforeach
 
-
 <div class="col-xs-12">
 	<div id="tabsReport" class="hide">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#tabTable" data-toggle="tab">Reporte</a></li>
 			<li><a href="#tabGraf" data-toggle="tab">Gráfico</a></li>
-			<div class="col-xs-4 col-sm-6 hide" >
-				{{ Form::select('columnChart', [''=>''], null, [
-					'id'=>'columnChart',
-					'class'=>'form-control',
-					'data-allow-clear'=>'true',
-					'data-placeholder'=>'Seleccione una columna',
-				])}}
+			<div class="ctrlChart hide">
+				<div class="col-xs-4 col-sm-5">
+					{{ Form::select('columnChart', [''=>''], null, [
+						'id'=>'columnChart',
+						'class'=>'form-control selectpicker',
+						'data-allow-clear'=>'true',
+						'data-placeholder'=>'Seleccione una columna',
+					])}}
+				</div>
+				<div class="col-xs-3 col-sm-2" >
+					{{ Form::select('typeChart', ['bar'=>'Barras','pie'=>'Torta'], 'bar', [
+						'id'=>'typeChart',
+						'class'=>'form-control',
+					])}}
+				</div>
 			</div>
 		</ul>
 
@@ -73,25 +83,35 @@
 
 	<code id="err" class="hide"></code>
 </div>
+
 @endsection
 
 @push('scripts')
 	{!! Html::script('assets/scripts/chart.js/Chart.min.js') !!}
 	{!! Html::script('assets/scripts/momentjs/moment-with-locales.min.js') !!}
 	{!! Html::script('assets/scripts/chart.js/dashboard.js') !!}
+	{!! Html::script('assets/scripts/toastr.min.js') !!}
 	<script type="text/javascript">
+
 	$(function () {
+
 		var forms = $('form');
 		var tabsReport = $('#tabsReport');
 		var tbQuery = $('#tbQuery');
 		var divErr = $('#err');
 		window.chart['chart'] = null;
 		var columnChart = $('#columnChart');
+		var typeChart = $('#typeChart');
 		var dataJson = null;
 
-		//Select para formularios
+		//Selects para formularios
 		columnChart.change(function() {
-			buildChartFromJson();
+			if($(this).val() != null)
+				buildChartFromJson();
+		});
+		typeChart.change(function() {
+			if($(this).val() != null)
+				buildChartFromJson();
 		});
 
 		//Select para formularios
@@ -145,10 +165,8 @@
 					$('a[href="#tabTable"]').tab('show');
 				} else
 					divErr.html('No se encontraron registros.').removeClass('hide');
-
 			})
 			.fail(function( jqXHR, textStatus, errorThrown ) {
-				//console.log('Err: '+JSON.stringify(jqXHR));
 				if (jqXHR.statusText === 'Forbidden')
 					msgErr = 'Error en la conexión con el servidor. Presione F5.';
 				else if (jqXHR.statusText === 'Unauthorized')
@@ -184,9 +202,7 @@
 					}));
 
 				if(dataJson.columnChart == col.title)
-					columnChart.val(i);
-
-				//debugger;
+					columnChart.val(i).trigger('change');
 			});
 
 			tabsReport.removeClass('hide');
@@ -195,11 +211,10 @@
 				data: dataJson.data,
 				columns: columns
 			});
-
 		}
 
 		function buildChartFromJson() {
-			columnChart.parent().removeClass('hide');
+			$('.ctrlChart').removeClass('hide');
 			if(window.chart['chart'] != null)
 				window.chart['chart'].destroy();
 
@@ -227,7 +242,7 @@
 				labelsChart, //labels
 				dataChart, //data
 				[], //colores
-				'chart', 'bar'
+				'chart', typeChart.val()
 			);
 		}
 
@@ -241,7 +256,7 @@
 
 			tabsReport.addClass('hide');
 
-			columnChart.parent().addClass('hide');
+			$('.ctrlChart').addClass('hide');
 			if(window.chart['chart'] != null)
 				window.chart['chart'].destroy();
 
@@ -251,7 +266,7 @@
 		//Reajusta el ancho de las columnas al activar #tabTable
 		//(Al redimensionar la ventana, thead no se redimensiona).
 		$('a[href="#tabTable"]').on( 'shown.bs.tab', function (e) {
-			columnChart.parent().addClass('hide');
+			$('.ctrlChart').addClass('hide');
 			tbQuery.columns.adjust().draw();
 		});
 		//Cambia el alto del canvas al activar #tabGraf

@@ -10,19 +10,22 @@ class ReporteController extends Controller
 
 	private $reportes = [
 		'ContratosActPorFecha' => '100 - CONTRATOS ACTIVOS',
-		'HistoricoContratos' => '101 - HISTORICO DE CONTRATOS',
-		'IngresosPorFecha' => '102 - INGRESOS POR FECHA',
-		'RetirosPorFecha' => '103 - RETIROS POR FECHA',
-		'HistoriaPorCedula' => '104 - HISTORIA LABORAL POR CEDULA',
-		'ProximosTemporalidad' => '105 - PROXIMOS A TEMPORALIDAD',
-		'HojasDeVida' => '106 - HOJAS DE VIDA BÁSICA',
-		'HojasDeVidaDescartadas' => '107 - HOJAS DE VIDA DESCARTADAS',
-		'HeadcountRm' => '108 - HEADCOUNT DE R.M',
-		'HistoricoRm' => '109 - HISTORICO DE R.M',
-		'NovedadesRm' => '110 - NOVEDADES DE SEGUIMIENTO A R.M',
+		'ContratosHistorico' => '101 - HISTÓRICO DE CONTRATOS',
+		'ContratosIngresosPorFecha' => '102 - INGRESOS POR FECHA',
+		'ContratosRetirosPorFecha' => '103 - RETIROS POR FECHA',
+		'ContratosHistoriaPorCedula' => '104 - HISTORIA LABORAL POR CÉDULA',
+		'ContratosProximosTemporalidad' => '105 - PRÓXIMOS A TEMPORALIDAD',
+		'ContratosHeadcountRm' => '108 - HEADCOUNT DE R.M',
+		'ContratosHistoricoRm' => '109 - HISTÓRICO DE R.M',
+		'ContratosNovedadesRm' => '110 - NOVEDADES DE SEGUIMIENTO A R.M',
+
+		'ProspectosSinContrato' => '106 - HOJAS DE VIDA BÁSICAS',
+		'ProspectosDescartados' => '107 - HOJAS DE VIDA DESCARTADAS',
+
 		'PlantasAutorizadas' => '111 - PLANTAS DE PERSONAL AUTORIZADAS',
-		'MovimientosPlantas' => '112 - MOVIMIENTOS DE PLANTAS DE PERSONAL',
-		'TicketsActPorFecha' => 'TICKETS POR FECHA Y ESTADO',
+		'PlantasMovimientos' => '112 - MOVIMIENTOS DE PLANTAS DE PERSONAL',
+
+		'TicketsActPorFecha' => '999 - TICKETS POR FECHA Y ESTADO',
 	];
 
 	public function __construct()
@@ -40,18 +43,6 @@ class ReporteController extends Controller
 	{
 		$arrReportes = $this->reportes;
 
-		
-		$arrEstados = model_to_array(EstadoTicket::class, 'ESTI_DESCRIPCION');
-		$arrEmpresas = model_to_array(Empleador::class, 'EMPL_NOMBRECOMERCIAL');
-		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
-		$arrCentros = model_to_array(CentroCosto::class, 'CECO_DESCRIPCION');
-		$arrTemporales = model_to_array(Temporal::class, 'TEMP_NOMBRECOMERCIAL');
-		$arrCargos = model_to_array(Cargo::class, 'CARG_DESCRIPCION');
-		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
-		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
-		$arrEstadosContratos = model_to_array(EstadoContrato::class, 'ESCO_DESCRIPCION');
-		$arrEstadosRestriccion = model_to_array(EstadoRestriccion::class, 'ESRE_DESCRIPCION');
-
 		//Se crea un array con los prospectos que han tenido contratos
 		$primaryKey = 'PROS_ID';
 		$column = expression_concat([
@@ -62,7 +53,6 @@ class ReporteController extends Controller
 			'PROS_CEDULA',
 			], 'PROS_NOMBRESAPELLIDOS');
 		$columnName = 'PROS_NOMBRESAPELLIDOS';
-
 		$arrProspectos = Prospecto::retirados()
 			->orderBy('CONTRATOS.'.$primaryKey)
 			->select([ 'PROSPECTOS.'.$primaryKey , $column ])
@@ -75,8 +65,9 @@ class ReporteController extends Controller
 		$arrProspectosSinContrato = model_to_array($arrProspectosSinContrato, $columnName, $primaryKey);
 
 		//Se carga la vista y se pasan los registros
-		return view('reportes.index', compact('arrReportes', 'arrEstados','arrEmpresas','arrGerencias','arrCentros','arrTemporales','arrCargos','arrGrupos','arrTurnos','arrEstadosContratos','arrProspectos','arrEstadosRestriccion','arrProspectosSinContrato'));
+		return view('reportes.index', compact('arrReportes','arrProspectos','arrProspectosSinContrato'));
 	}
+
 
 	/**
 	 * 

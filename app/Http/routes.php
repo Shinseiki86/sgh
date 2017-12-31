@@ -28,28 +28,29 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'role:admin']], functi
 
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/',  function(){return view('dashboard/index');});
+	Route::get('getArrModel', 'Controller@ajax');
 });
 
 Route::group(['prefix' => 'reportes', 'namespace' => 'Reportes', 'middleware' => 'auth'], function() {
 	Route::get('/', 'ReporteController@index');
 	
 	Route::post('ContratosActPorFecha', 'RptContratosController@contratosActPorFecha');
-	Route::post('HistoricoContratos', 'RptContratosController@historicoContratos');
-	Route::post('IngresosPorFecha', 'RptContratosController@ingresosPorFecha');
-	Route::post('RetirosPorFecha', 'RptContratosController@retirosPorFecha');
-	Route::post('HistoriaPorCedula', 'RptContratosController@historiaPorCedula');
-	Route::post('ProximosTemporalidad', 'RptContratosController@proximosTemporalidad');
-	Route::post('HeadcountRm', 'RptContratosController@headcountRm');
-	Route::post('HistoricoRm', 'RptContratosController@historicoRm');
-	Route::post('NovedadesRm', 'RptContratosController@novedadesRm');
+	Route::post('ContratosHistorico', 'RptContratosController@historicoContratos');
+	Route::post('ContratosIngresosPorFecha', 'RptContratosController@ingresosPorFecha');
+	Route::post('ContratosRetirosPorFecha', 'RptContratosController@retirosPorFecha');
+	Route::post('ContratosHistoriaPorCedula', 'RptContratosController@historiaPorCedula');
+	Route::post('ContratosProximosTemporalidad', 'RptContratosController@proximosTemporalidad');
+	Route::post('ContratosHeadcountRm', 'RptContratosController@headcountRm');
+	Route::post('ContratosHistoricoRm', 'RptContratosController@historicoRm');
+	Route::post('ContratosNovedadesRm', 'RptContratosController@novedadesRm');
 
 	Route::post('TicketsActPorFecha', 'RptTicketsController@ticketsActPorFecha');
 
-	Route::post('HojasDeVida', 'RptProspectosController@hojasDeVida');
-	Route::post('HojasDeVidaDescartadas', 'RptProspectosController@hojasDeVidaDescartadas');
+	Route::post('ProspectosSinContrato', 'RptProspectosController@hojasDeVida');
+	Route::post('ProspectosDescartados', 'RptProspectosController@hojasDeVidaDescartadas');
 
 	Route::post('PlantasAutorizadas', 'RptPlantasController@plantasAutorizadas');
-	Route::post('MovimientosPlantas', 'RptPlantasController@movimientosPlantas');
+	Route::post('PlantasMovimientos', 'RptPlantasController@movimientosPlantas');
 });
 
 Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], function() {

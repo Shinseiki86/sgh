@@ -5,6 +5,7 @@ namespace SGH\Http\Controllers;
 use Validator;
 use Illuminate\Contracts\Validation\Validator as ValidatorMessages;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -28,6 +29,16 @@ class Controller extends BaseController
 			$this->middleware('permission:'.$name.'-delete', ['only' => ['destroy']]);
 		}
 	}
+
+
+	public function ajax(Request $request)
+	{
+		$model = $request->input('model');
+		$column = $request->input('column');
+		$arrModel = model_to_array($model, $column);
+		return response()->json($arrModel);
+	}
+
 
     /**
      * {@inheritdoc}
@@ -117,7 +128,7 @@ class Controller extends BaseController
 	}
 
 	/**
-	 * Obtiene los datos recibidos por request y elimina los input vacíos
+	 * Obtiene los datos recibidos por request, convierte a mayúsculas y elimina los input vacíos
 	 *
 	 * @return array
 	 */
@@ -126,7 +137,9 @@ class Controller extends BaseController
 		$data = request()->all();
 		foreach ($data as $input => $value) {
 			if($value=='')
-		 		$data[$input] = null;
+				$data[$input] = null;
+			else
+				$data[$input] = mb_strtoupper($value);
 		};
 		return $data;
 	}
@@ -249,6 +262,7 @@ class Controller extends BaseController
 			]);
 		return '';
 	}
+
 
 	private function getClass($class)
 	{

@@ -4,12 +4,16 @@
 	isset($value)? $value:old($name),
 	[
 		'id'=>$name,
-		'class'=>'form-control selectpicker '.(isset($class)?$class:''),
+		'class'=>'form-control '.(isset($ajax)?'selectpickerAjax':'selectpicker').(isset($class)?' '.$class:''),
 		//'data-allow-clear'=>isset($allowClear) && $allowClear ?'true':'false',
 		'data-allow-clear'=>'true',
 		'data-placeholder'=>isset($placeholder) ?$placeholder:'Seleccione una opción',
 	] + 
 	(isset($options)?$options:[]) +
+	(isset($ajax) && is_array($ajax) ? [
+		'data-ajax--url'=>'getArrModel?model='.$ajax['model'].'&column='.$ajax['column'],
+		'data-ajax--cache'=>'true',
+	]:[]) +
 	(isset($multiple) && $multiple ? ['multiple']:[]) +
 	(isset($allowNew) && $allowNew ? ['data-tags'=>'true', 'data-select-on-close'=>'true']:[])
 ) }}
