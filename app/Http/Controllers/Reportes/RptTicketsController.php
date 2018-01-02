@@ -15,37 +15,45 @@ class RptTicketsController extends ReporteController
 		parent::__construct();
 	}
 
+
+	private function getQuery()
+	{
+		$query = Ticket::leftJoin('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
+			->select([
+				'TICK_ID as ID',
+				'TICK_DESCRIPCION as Descripción',
+				'TICK_FECHASOLICITUD as Fecha_Solicitud',
+				'TICK_FECHAAPROBACION as Fecha_Aprobación',
+				'ESTI_DESCRIPCION as Estado',
+			]);
+		return $query;
+	}
+
+
 	/**
 	 * 
 	 *
 	 * @return Json
 	 */
-	public function ticketsActPorFecha()
+	public function ticketsPorFecha()
 	{
-		$queryCollect = Ticket::leftJoin('ESTADOSTICKETS', 'ESTADOSTICKETS.ESTI_ID', '=', 'TICKETS.ESTI_ID')
-							//->whereIn('TICKETS.ESTI_ID', [EstadoTicket::ABIERTO, EstadoTicket::REASIGNADO])
-							->select([
-								'TICK_ID as ID',
-								'TICK_DESCRIPCION as Descripción',
-								'TICK_FECHASOLICITUD as Fecha_Solicitud',
-								'TICK_FECHAAPROBACION as Fecha_Aprobación',
-								'ESTI_DESCRIPCION as Estado',
-							]);
+		$query = $this->getQuery();
+			//->whereIn('TICKETS.ESTI_ID', [EstadoTicket::ABIERTO, EstadoTicket::REASIGNADO]);
 
 		if(isset($this->data['fchaSolicitudDesde']))
-			$queryCollect->whereDate('TICK_FECHASOLICITUD', '>=', Carbon::parse($this->data['fchaSolicitudDesde']));
+			$query->whereDate('TICK_FECHASOLICITUD', '>=', Carbon::parse($this->data['fchaSolicitudDesde']));
 		if(isset($this->data['fchaSolicitudHasta']))
-			$queryCollect->whereDate('TICK_FECHASOLICITUD', '<=', Carbon::parse($this->data['fchaSolicitudHasta']));
+			$query->whereDate('TICK_FECHASOLICITUD', '<=', Carbon::parse($this->data['fchaSolicitudHasta']));
 
 		if(isset($this->data['fchaAprobDesde']))
-			$queryCollect->whereDate('TICK_FECHAAPROBACION', '>=', Carbon::parse($this->data['fchaAprobDesde']));
+			$query->whereDate('TICK_FECHAAPROBACION', '>=', Carbon::parse($this->data['fchaAprobDesde']));
 		if(isset($this->data['fchaAprobHasta']))
-			$queryCollect->whereDate('TICK_FECHAAPROBACION', '<=', Carbon::parse($this->data['fchaAprobHasta']));
+			$query->whereDate('TICK_FECHAAPROBACION', '<=', Carbon::parse($this->data['fchaAprobHasta']));
 
 		if(isset($this->data['estado']))
-			$queryCollect->where('TICKETS.ESTI_ID', '=', $this->data['estado']);
+			$query->where('TICKETS.ESTI_ID', '=', $this->data['estado']);
 
-		return $this->buildJson($queryCollect, 'Estado');
+		return $this->buildJson($query, $columnChart='Estado');
 	}
 
 

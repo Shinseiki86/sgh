@@ -21,29 +21,24 @@
 
 @section('section')
 
-	@include('widgets.forms.input', ['type'=>'select', 'column'=>10, 'name'=>'REPO_ID', 'label'=>'Seleccionar reporte', 'data'=>$arrReportes])
-
-	@foreach($arrReportes as $key => $reporte)
+	@include('widgets.forms.input', ['type'=>'select', 'column'=>10, 'name'=>'REPO_ID', 'label'=>'Seleccionar reporte', 'data'=>array_pluck($arrReportes, 'title', 'id')])
 
 		<div class="col-xs-2 hide" style="margin-top: 25px;">
-			<button type="button" id="btnViewForm{{$key}}" class="btn btn-link pull-right btnViewForm">
+			<button type="button" id="btnViewForm" class="btn btn-link pull-right">
 				<span class="fa fa-caret-down iconBtn"></span>
 				<span class="textBtn">Filtros</span>
 			</button>
 		</div>
 
-		{{ Form::open(['url' => 'reportes/'.$key, 'id'=>'form'.$key, 'class'=>'form-horizontal hide']) }}
+		{{ Form::open(['url' => '#', 'id'=>'formRep', 'class'=>'form-horizontal ']) }}
 			<div class="col-xs-12" >
 
-				<div class="fields hide">
-				@rinclude('formRep'.$key.'')
-				</div>
+				<div id="fieldsForm" class="hide">Filtros</div>
 
 				@rinclude('formRepBotones')
 			</div>
 		{{ Form::close() }}
 
-	@endforeach
 
 <div class="col-xs-12">
 	<div id="tabsReport" class="hide">
@@ -95,14 +90,20 @@
 
 	$(function () {
 
-		var forms = $('form');
+		var formRep = $('#formRep');
+		var fieldsForm = $('#fieldsForm');
+		var filterRequired = {!!json_encode(array_column($arrReportes, 'filterRequired', 'id'), JSON_NUMERIC_CHECK) !!};
+
+		var dataJson = null;
+
 		var tabsReport = $('#tabsReport');
 		var tbQuery = $('#tbQuery');
+
 		var divErr = $('#err');
+
 		window.chart['chart'] = null;
 		var columnChart = $('#columnChart');
 		var typeChart = $('#typeChart');
-		var dataJson = null;
 
 		//Selects para formularios
 		columnChart.change(function() {
@@ -116,28 +117,78 @@
 
 		//Select para formularios
 		$('#REPO_ID').change(function() {
-			//título de ventana, afecta nombre de archivo exportado
-			$(document).attr("title", 'SGH / Rep '+$(this).find(':selected').text());
-			//se ocultan todos los forms
-			$('.btnViewForm').parent().addClass('hide'); //div botón show
-			forms.addClass('hide'); //form
-			//Se muestra el form seleccionado
 			var id_selected = $(this).val();
-			$('#btnViewForm'+id_selected).parent().removeClass('hide');
-			$('#form'+id_selected).removeClass('hide');
-			clearTable();
+			if(id_selected != null && id_selected != ''){
+				//título de ventana, afecta nombre de archivo exportado
+				$(document).attr("title", 'SGH / Rep '+$(this).find(':selected').text());
+				clearTable();
+
+				$('#btnViewForm').parent().removeClass('hide');
+				formRep
+					.attr('action', 'reportes/'+id_selected)
+					.removeClass('hide');
+
+				var btnViewForm = $('#btnViewForm');
+
+				if(filterRequired[id_selected] === true){
+					btnViewForm
+						.addClass('disabled')
+						.find('.iconBtn')
+						.addClass('fa-caret-up')
+						.removeClass('fa-caret-down');
+					fieldsForm.removeClass('hide');
+				} else {
+					btnViewForm
+						.removeClass('disabled');
+					//fieldsForm.addClass('hide');
+				}
+
+				$.ajax({
+					type: 'GET',
+					url: 'reportes/viewForm',
+					data: {form: id_selected},
+					dataType: 'json',
+				}).done(function( data, textStatus, jqXHR ) {
+					fieldsForm.html(data);
+					$('.selectpicker').select2();
+					$('.selectpickerAjax').select2({
+						ajax: {
+							processResults: function (data) {
+								data = $.map( data, function( value, index ) {
+									return {id: index, text: value};
+								});
+								return {results: data};
+							}
+						}
+					});
+				})
+				.fail(function( jqXHR, textStatus, errorThrown ) {
+					if (jqXHR.statusText === 'Forbidden')
+						msgErr = 'Error en la conexión con el servidor. Presione F5.';
+					else if (jqXHR.statusText === 'Unauthorized')
+						msgErr = 'Sesión ha caducado. Presione F5.';
+					else
+						msgErr = 'Error: '+jqXHR.responseText;
+					divErr.html(msgErr).removeClass('hide');
+				})
+				.always(function( data, textStatus, jqXHR ) {
+				});
+
+			} else {
+				formRep.addClass('hide'); //form
+			}
 		});
 
 		//Oculta/muestra el formulario para filtrar los resultados.
-		$('.btnViewForm').click(function() {
+		$('#btnViewForm').click(function() {
 			var btn = $(this);
-			var form = btn.parent().next();
+			if(!btn.hasClass('disabled')){
+				btn.find('.iconBtn')
+					.toggleClass('fa-caret-up')
+					.toggleClass('fa-caret-down');
 
-			btn.find('.iconBtn')
-				.toggleClass('fa-caret-up')
-				.toggleClass('fa-caret-down');
-
-			form.find('.fields').toggleClass('hide');
+				fieldsForm.toggleClass('hide');
+			}
 		});
 
 
@@ -165,6 +216,7 @@
 					$('a[href="#tabTable"]').tab('show');
 				} else
 					divErr.html('No se encontraron registros.').removeClass('hide');
+					fieldsForm.html('');
 			})
 			.fail(function( jqXHR, textStatus, errorThrown ) {
 				if (jqXHR.statusText === 'Forbidden')
@@ -248,7 +300,9 @@
 
 		//Destruye la tabla y limpia el log de errores.
 		function clearTable(){
-			//$('#hide').css( 'display', 'hide' );
+			$(document).attr("title", 'SGH / Reportes');
+			fieldsForm.html('<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i>Cargando filtros...');
+
 			if ( $.fn.dataTable.isDataTable( '#tbQuery' ) ) {
 				tbQuery = $('#tbQuery').DataTable().destroy();
 			}

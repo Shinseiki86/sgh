@@ -10,10 +10,11 @@
 		'data-placeholder'=>isset($placeholder) ?$placeholder:'Seleccione una opción',
 	] + 
 	(isset($options)?$options:[]) +
-	(isset($ajax) && is_array($ajax) ? [
-		'data-ajax--url'=>'getArrModel?model='.$ajax['model'].'&column='.$ajax['column'],
-		'data-ajax--cache'=>'true',
-	]:[]) +
+	(isset($ajax) && is_array($ajax)
+		? ( isset($ajax['model']) ? ['data-ajax--url'=> 'getArrModel?model='.$ajax['model'].'&column='.$ajax['column']]
+								: ['data-ajax--url'=> $ajax['url']] )
+		: []
+	) +
 	(isset($multiple) && $multiple ? ['multiple']:[]) +
 	(isset($allowNew) && $allowNew ? ['data-tags'=>'true', 'data-select-on-close'=>'true']:[])
 ) }}

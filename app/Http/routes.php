@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'reportes', 'namespace' => 'Reportes', 'middleware' => 'auth'], function() {
 	Route::get('/', 'ReporteController@index');
+	Route::get('/viewForm', 'ReporteController@viewForm');
 	
 	Route::post('ContratosActPorFecha', 'RptContratosController@contratosActPorFecha');
 	Route::post('ContratosHistorico', 'RptContratosController@historicoContratos');
@@ -44,7 +45,7 @@ Route::group(['prefix' => 'reportes', 'namespace' => 'Reportes', 'middleware' =>
 	Route::post('ContratosHistoricoRm', 'RptContratosController@historicoRm');
 	Route::post('ContratosNovedadesRm', 'RptContratosController@novedadesRm');
 
-	Route::post('TicketsActPorFecha', 'RptTicketsController@ticketsActPorFecha');
+	Route::post('ticketsPorFecha', 'RptTicketsController@ticketsPorFecha');
 
 	Route::post('ProspectosSinContrato', 'RptProspectosController@hojasDeVida');
 	Route::post('ProspectosDescartados', 'RptProspectosController@hojasDeVidaDescartadas');
@@ -94,6 +95,8 @@ Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'],
 Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
 	Route::resource('prospectos', 'ProspectoController', ['parameters'=>['prospectos' => 'PROS_ID']]);
 	Route::get('getProspectos', 'ProspectoController@getData');
+	Route::get('getArrProspectosRetirados', 'ProspectoController@getArrProspectosRetirados');
+	Route::get('getArrProspectos', 'ProspectoController@getArrProspectos');
 
 	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
 	Route::get('getContratos', 'ContratoController@getData');

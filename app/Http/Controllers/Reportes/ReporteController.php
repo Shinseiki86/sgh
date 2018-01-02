@@ -1,6 +1,7 @@
 <?php
 namespace SGH\Http\Controllers\Reportes;
 use SGH\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use SGH\Models\Prospecto;
 
@@ -9,23 +10,23 @@ class ReporteController extends Controller
 	protected $data = null;
 
 	private $reportes = [
-		'ContratosActPorFecha' => '100 - CONTRATOS ACTIVOS',
-		'ContratosHistorico' => '101 - HISTÓRICO DE CONTRATOS',
-		'ContratosIngresosPorFecha' => '102 - INGRESOS POR FECHA',
-		'ContratosRetirosPorFecha' => '103 - RETIROS POR FECHA',
-		'ContratosHistoriaPorCedula' => '104 - HISTORIA LABORAL POR CÉDULA',
-		'ContratosProximosTemporalidad' => '105 - PRÓXIMOS A TEMPORALIDAD',
-		'ContratosHeadcountRm' => '108 - HEADCOUNT DE R.M',
-		'ContratosHistoricoRm' => '109 - HISTÓRICO DE R.M',
-		'ContratosNovedadesRm' => '110 - NOVEDADES DE SEGUIMIENTO A R.M',
+		['id'=>'ContratosActPorFecha', 'title'=>'100 - CONTRATOS ACTIVOS'],
+		['id'=>'ContratosHistorico', 'title'=>'101 - HISTÓRICO DE CONTRATOS'],
+		['id'=>'ContratosIngresosPorFecha', 'title'=>'102 - INGRESOS POR FECHA'],
+		['id'=>'ContratosRetirosPorFecha', 'title'=>'103 - RETIROS POR FECHA'],
+		['id'=>'ContratosHistoriaPorCedula', 'title'=>'104 - HISTORIA LABORAL POR CÉDULA', 'filterRequired' => true],
+		['id'=>'ContratosProximosTemporalidad', 'title'=>'105 - PRÓXIMOS A TEMPORALIDAD'],
+		['id'=>'ContratosHeadcountRm', 'title'=>'108 - HEADCOUNT DE R.M'],
+		['id'=>'ContratosHistoricoRm', 'title'=>'109 - HISTÓRICO DE R.M'],
+		['id'=>'ContratosNovedadesRm', 'title'=>'110 - NOVEDADES DE SEGUIMIENTO A R.M'],
 
-		'ProspectosSinContrato' => '106 - HOJAS DE VIDA BÁSICAS',
-		'ProspectosDescartados' => '107 - HOJAS DE VIDA DESCARTADAS',
+		['id'=>'ProspectosSinContrato', 'title'=>'106 - HOJAS DE VIDA BÁSICAS', 'filterRequired' => true],
+		['id'=>'ProspectosDescartados', 'title'=>'107 - HOJAS DE VIDA DESCARTADAS', 'filterRequired' => true],
 
-		'PlantasAutorizadas' => '111 - PLANTAS DE PERSONAL AUTORIZADAS',
-		'PlantasMovimientos' => '112 - MOVIMIENTOS DE PLANTAS DE PERSONAL',
+		['id'=>'PlantasAutorizadas', 'title'=>'111 - PLANTAS DE PERSONAL AUTORIZADAS'],
+		['id'=>'PlantasMovimientos', 'title'=>'112 - MOVIMIENTOS DE PLANTAS DE PERSONAL'],
 
-		'TicketsActPorFecha' => '999 - TICKETS POR FECHA Y ESTADO',
+		['id'=>'ticketsPorFecha', 'title'=>'999 - TICKETS POR FECHA Y ESTADO'],
 	];
 
 	public function __construct()
@@ -42,30 +43,14 @@ class ReporteController extends Controller
 	public function index()
 	{
 		$arrReportes = $this->reportes;
+		return view('reportes.index', compact('arrReportes'));
+	}
 
-		//Se crea un array con los prospectos que han tenido contratos
-		$primaryKey = 'PROS_ID';
-		$column = expression_concat([
-			'PROS_PRIMERNOMBRE',
-			'PROS_SEGUNDONOMBRE',
-			'PROS_PRIMERAPELLIDO',
-			'PROS_SEGUNDOAPELLIDO',
-			'PROS_CEDULA',
-			], 'PROS_NOMBRESAPELLIDOS');
-		$columnName = 'PROS_NOMBRESAPELLIDOS';
-		$arrProspectos = Prospecto::retirados()
-			->orderBy('CONTRATOS.'.$primaryKey)
-			->select([ 'PROSPECTOS.'.$primaryKey , $column ])
-			->get();
-		$arrProspectos = model_to_array($arrProspectos, $columnName, $primaryKey);
+	public function viewForm(Request $request)
+	{
+		$form = $request->input('form');
 
-		$arrProspectosSinContrato = Prospecto::orderBy('PROSPECTOS.'.$primaryKey)
-			->select([ 'PROSPECTOS.'.$primaryKey , $column ])
-			->get();
-		$arrProspectosSinContrato = model_to_array($arrProspectosSinContrato, $columnName, $primaryKey);
-
-		//Se carga la vista y se pasan los registros
-		return view('reportes.index', compact('arrReportes','arrProspectos','arrProspectosSinContrato'));
+		return response()->json(view('reportes.formRep'.$form)->render());
 	}
 
 
@@ -74,9 +59,9 @@ class ReporteController extends Controller
 	 *
 	 * @return Response
 	 */
-	protected function buildJson($queryCollect, $columnChart = null)
+	protected function buildJson($query, $columnChart = null)
 	{
-		$colletion = $queryCollect->get();
+		$colletion = $query->get();
 		$keys = $data = [];
 
 		if(!$colletion->isEmpty()){
@@ -87,6 +72,5 @@ class ReporteController extends Controller
 		}
 		return response()->json(compact('keys', 'data', 'columnChart'));
 	}
-
 
 }

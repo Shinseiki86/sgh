@@ -61,6 +61,49 @@ class ProspectoController extends Controller
 
 
 	/**
+	 * Retorna prospectos que han tenido contratos
+	 *
+	 * @return json
+	 */
+	public function getArrProspectosRetirados()
+	{
+		$column = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA',
+			], 'PROS_NOMBRESAPELLIDOS');
+
+		$arrProspectos = Prospecto::retirados()->select(['PROSPECTOS.PROS_ID', $column])->get();
+
+		$arrProspectos = model_to_array($arrProspectos, 'PROS_NOMBRESAPELLIDOS');
+		
+		return response()->json($arrProspectos);
+	}
+	
+
+	/**
+	 * Retorna prospectos
+	 *
+	 * @return json
+	 */
+	public function getArrProspectos()
+	{
+		$column = expression_concat([
+			'PROS_PRIMERNOMBRE',
+			'PROS_SEGUNDONOMBRE',
+			'PROS_PRIMERAPELLIDO',
+			'PROS_SEGUNDOAPELLIDO',
+			'PROS_CEDULA',
+			], 'PROS_NOMBRESAPELLIDOS');
+		$arrProspectos = model_to_array(Prospecto::class, $column);
+		
+		return response()->json($arrProspectos);
+	}
+
+
+	/**
 	 * Muestra el formulario para crear un nuevo registro.
 	 *
 	 * @return Response
