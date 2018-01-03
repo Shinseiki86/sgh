@@ -30,7 +30,7 @@
 			</button>
 		</div>
 
-		{{ Form::open(['url' => '#', 'id'=>'formRep', 'class'=>'form-horizontal ']) }}
+		{{ Form::open(['url' => '#', 'id'=>'formRep', 'class'=>'form-horizontal hide']) }}
 			<div class="col-xs-12" >
 
 				<div id="fieldsForm" class="hide">Filtros</div>
@@ -117,11 +117,12 @@
 
 		//Select para formularios
 		$('#REPO_ID').change(function() {
+			clearTable();
+			fieldsForm.html('<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i>Cargando filtros...');
 			var id_selected = $(this).val();
 			if(id_selected != null && id_selected != ''){
 				//título de ventana, afecta nombre de archivo exportado
 				$(document).attr("title", 'SGH / Rep '+$(this).find(':selected').text());
-				clearTable();
 
 				$('#btnViewForm').parent().removeClass('hide');
 				formRep
@@ -130,6 +131,7 @@
 
 				var btnViewForm = $('#btnViewForm');
 
+				//Si el formulario tiene filtros obligatorios, muestra campos de filtro y no permite ocultarlos.
 				if(filterRequired[id_selected] === true){
 					btnViewForm
 						.addClass('disabled')
@@ -143,6 +145,7 @@
 					//fieldsForm.addClass('hide');
 				}
 
+				//Ajax para obtener campos de filtro
 				$.ajax({
 					type: 'GET',
 					url: 'reportes/viewForm',
@@ -163,12 +166,7 @@
 					});
 				})
 				.fail(function( jqXHR, textStatus, errorThrown ) {
-					if (jqXHR.statusText === 'Forbidden')
-						msgErr = 'Error en la conexión con el servidor. Presione F5.';
-					else if (jqXHR.statusText === 'Unauthorized')
-						msgErr = 'Sesión ha caducado. Presione F5.';
-					else
-						msgErr = 'Error: '+jqXHR.responseText;
+					var msgErr = 'Error: '+jqXHR.responseText;
 					divErr.html(msgErr).removeClass('hide');
 				})
 				.always(function( data, textStatus, jqXHR ) {
@@ -198,25 +196,24 @@
 		});
 
 		//Realiza la solicitud del formulario via ajax y construye el datatable.
-		$("form").submit(function(e) {
+		formRep.submit(function(e) {
 			e.preventDefault();
 			clearTable();
-			var thisForm = $(this);
-			var url = thisForm.attr('action');
+			var url = formRep.attr('action');
 
 			$.ajax({
 				type: 'POST',
 				url: url,
-				data: thisForm.serialize(),
+				data: formRep.serialize(),
 				dataType: 'json',
 			}).done(function( data, textStatus, jqXHR ) {
 				if ( data.data.length > 0 ){
 					dataJson = data;
 					buildDataTable();
 					$('a[href="#tabTable"]').tab('show');
-				} else
+				} else {
 					divErr.html('No se encontraron registros.').removeClass('hide');
-					fieldsForm.html('');
+				}
 			})
 			.fail(function( jqXHR, textStatus, errorThrown ) {
 				if (jqXHR.statusText === 'Forbidden')
@@ -228,8 +225,9 @@
 				divErr.html(msgErr).removeClass('hide');
 			})
 			.always(function( data, textStatus, jqXHR ) {
-				thisForm.find("button[type=submit]").attr('disabled', false);
+				formRep.find("button[type=submit]").attr('disabled', false);
 				$('body').css('cursor', 'auto');
+				fieldsForm.addClass('hide');
 				$('#msgModalLoading').modal('hide');
 			});
 
@@ -301,7 +299,6 @@
 		//Destruye la tabla y limpia el log de errores.
 		function clearTable(){
 			$(document).attr("title", 'SGH / Reportes');
-			fieldsForm.html('<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i>Cargando filtros...');
 
 			if ( $.fn.dataTable.isDataTable( '#tbQuery' ) ) {
 				tbQuery = $('#tbQuery').DataTable().destroy();
