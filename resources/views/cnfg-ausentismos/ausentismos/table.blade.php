@@ -11,6 +11,7 @@
 		<th>IBC</th>
 		<th>Valor Total</th>
         <th>Estado</th>
+        <th>Periodo Causado</th>
 		<th>Observaciones</th>
         <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
@@ -28,6 +29,7 @@
 			<td>{{ number_format($ausentismo->AUSE_IBC, 0) }}</td>
 			<td>{{ number_format($ausentismo->AUSE_VALOR, 0) }}</td>
 			<td>{{ $ausentismo->AUSE_ESTADO }}</td>
+            <td>{{ $ausentismo->AUSE_PERIODO }}</td>
             <td>{{ $ausentismo->AUSE_OBSERVACIONES }}</td>
              <td>
                 <!-- Botón Editar (edit) -->

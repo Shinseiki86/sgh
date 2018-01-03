@@ -23,7 +23,8 @@ class ProrrogaAusentismo extends ModelWithSoftDeletes
 		"PROR_FECHAINICIO",
 		"PROR_FECHAFINAL",
 		"PROR_DIAS",
-		"PROR_OBSERVACIONES"
+		"PROR_OBSERVACIONES",
+        "PROR_PERIODO"
     ];
 
     public static function rules($id = 0){
@@ -32,7 +33,8 @@ class ProrrogaAusentismo extends ModelWithSoftDeletes
             "COAU_ID" => "required",
             "PROR_FECHAINICIO" => "date|required",
             "PROR_FECHAFINAL" => "date|required",
-            "PROR_DIAS" => "required|numeric"
+            "PROR_DIAS" => "required|numeric",
+            "PROR_PERIODO" => "required"
         ];
     }
 

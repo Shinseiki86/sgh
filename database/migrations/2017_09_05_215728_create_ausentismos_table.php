@@ -33,6 +33,7 @@ class CreateAusentismosTable extends Migration
 			$table->integer('AUSE_VALOR')->nullable()->comment('Valor Total del Ausentismo');
 			$table->string('AUSE_OBSERVACIONES')->nullable()->comment('Observaciones del Ausentismo');
 			$table->enum('AUSE_ESTADO', ['ABIERTO', 'CERRADO'])->nullable()->comment('Indica si el Ausentismo se encuentra Abierto o Cerrado');
+			$table->enum('AUSE_PERIODO', ['ENERO', 'FEBRERO','MARZO', 'ABRIL','MAYO', 'JUNIO','JULIO', 'AGOSTO','SEPTIEMBRE', 'OCTUBRE','NOVIEMBRE', 'DICIEMBRE'])->nullable()->comment('Indica el periodo en el que se causa el Ausentismo');
 
 
 			//Traza

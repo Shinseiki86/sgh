@@ -7,6 +7,7 @@
         <th>Fecha Inicio Prorroga</th>
 		<th>Fecha Final Prorroga</th>
 		<th>Dias de Prorroga</th>
+        <th>Periodo Causado</th>
 		<th>Observaciones</th>
         <th class="col-md-1 all notFilter" width="50px"></th>
     </thead>
@@ -20,6 +21,7 @@
             <td>{!! $prorrogaAusentismo->PROR_FECHAINICIO !!}</td>
 			<td>{!! $prorrogaAusentismo->PROR_FECHAFINAL !!}</td>
 			<td>{!! $prorrogaAusentismo->PROR_DIAS !!}</td>
+            <td>{!! $prorrogaAusentismo->PROR_PERIODO !!}</td>
 			<td>{!! $prorrogaAusentismo->PROR_OBSERVACIONES !!}</td>
              <td>
                 <!-- Botón Editar (edit) -->

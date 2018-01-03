@@ -45,6 +45,7 @@ class ProrrogaAusentismoController extends Controller
 	 */
 	public function create()
 	{
+		
 		$prospectosActivos = repositorio("Ausentismo")->prospectoConAusentismo();
 	//dd($prospectosActivos);
 		//Se crea un array con los prospectos disponibles

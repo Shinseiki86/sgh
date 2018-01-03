@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use SGH\Http\Controllers\Controller;
 use SGH\Models\Ausentismo;
 use Yajra\Datatables\Facades\Datatables;
+use Illuminate\Support\Facades\DB;
 
 class AusentismoController extends Controller
 {
@@ -36,6 +37,7 @@ class AusentismoController extends Controller
 	    return response()->json($data);
 	}	
 
+   
 	/**
 	 * Show the form for creating a new Ausentismo.
 	 *
@@ -43,6 +45,7 @@ class AusentismoController extends Controller
 	 */
 	public function create()
 	{
+		
 		$repProspecto = repositorio("Prospecto");
 		$prospectosActivos = (new $repProspecto)->prospectoContratoActivo();
 
