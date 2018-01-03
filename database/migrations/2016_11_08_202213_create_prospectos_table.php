@@ -23,7 +23,7 @@ class CreateProspectosTable extends Migration
             $table->increments('PROS_ID')
                 ->comment('id de la persona llave primaria de la tabla prospectos.');
 
-            $table->unsignedInteger('PROS_CEDULA')->unique()
+            $table->bigInteger('PROS_CEDULA')->unique()
                 ->comment('id de la persona llave primaria de la tabla prospectos.');
 
             $table->date('PROS_FECHAEXPEDICION')
@@ -60,11 +60,11 @@ class CreateProspectosTable extends Migration
             $table->string('PROS_DIRECCION', 100)
                 ->comment('dirección de domicilio de la persona');
 
-            $table->string('PROS_TELEFONO', 10)
+            $table->string('PROS_TELEFONO', 20)
                 ->nullable()
                 ->comment('numero de telefono de domicilio de la persona');
 
-            $table->string('PROS_CELULAR', 15)
+            $table->string('PROS_CELULAR', 20)
                 ->nullable()
                 ->comment('numero de celular de la persona');
 

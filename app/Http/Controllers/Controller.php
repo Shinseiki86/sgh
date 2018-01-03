@@ -139,7 +139,7 @@ class Controller extends BaseController
 			if($value=='')
 				$data[$input] = null;
 			else {
-				$data[$input] = $this->route == 'app.menu'
+				$data[$input] = isset($this->route) and $this->route=='app.menu'
 					? $value
 					: mb_strtoupper($value);
 			}
