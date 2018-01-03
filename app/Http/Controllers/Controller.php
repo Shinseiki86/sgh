@@ -138,8 +138,11 @@ class Controller extends BaseController
 		foreach ($data as $input => $value) {
 			if($value=='')
 				$data[$input] = null;
-			else
-				$data[$input] = mb_strtoupper($value);
+			else {
+				$data[$input] = $this->route == 'app.menu'
+					? $value
+					: mb_strtoupper($value);
+			}
 		};
 		return $data;
 	}

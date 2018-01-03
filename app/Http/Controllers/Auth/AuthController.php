@@ -6,6 +6,7 @@ use Validator;
 use Illuminate\Http\Request;
 use SGH\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use SGH\Http\Controllers\App\MenuController;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

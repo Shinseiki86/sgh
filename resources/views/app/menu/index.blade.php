@@ -8,7 +8,7 @@
 			Menú
 		</div>
 		<div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
-			<a class='btn btn-primary' role='button' href="{{ URL::to('auth/menu/create') }}" data-tooltip="tooltip" title="Crear Nuevo">
+			<a class='btn btn-primary' role='button' href="{{ URL::to('app/menu/create') }}" data-tooltip="tooltip" title="Crear Nuevo">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</a>
 		</div>
@@ -26,7 +26,7 @@
 						@if ($item['MENU_PARENT'] != 0)
 							@break
 						@endif
-						@include('auth.menu.menu-list', ['item' => $item])
+						@include('app.menu.menu-list', ['item' => $item])
 				@endforeach
 				@endif
 				<li class="dd-item dd3-item">{{-- Requerido para no perder el dom al quedar vacío --}}</li>
@@ -43,7 +43,7 @@
 						@if ($item['MENU_PARENT'] != 0)
 							@break
 						@endif
-						@include('auth.menu.menu-list', ['item' => $item])
+						@include('app.menu.menu-list', ['item' => $item])
 				@endforeach
 				@endif
 				<li class="dd-item dd3-item">{{-- Requerido para no perder el dom al quedar vacío --}}</li>

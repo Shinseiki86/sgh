@@ -12,26 +12,28 @@
 
 //Autenticación
 Route::auth();
-Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'middleware' => ['auth', 'role:admin']], function() {
+Route::group(['prefix'=>'auth', 'namespace'=>'Auth', 'middleware'=>['auth', 'role:admin']], function() {
 	Route::resource('usuarios', 'AuthController');
 	Route::resource('roles', 'RoleController');
 	Route::resource('permisos', 'PermissionController');
-	Route::resource('menu', 'MenuController', ['parameters'=>['menu' => 'MENU_ID']]);
-	Route::post('menu/reorder', 'MenuController@reorder')->name('auth.menu.reorder');
 });
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 
-Route::group(['prefix' => 'app', 'middleware' => ['auth', 'role:admin']], function() {
+Route::group(['prefix'=>'app', 'namespace'=>'App', 'middleware'=>['auth', 'role:admin']], function() {
+	Route::resource('menu', 'MenuController', ['parameters'=>['menu'=>'MENU_ID']]);
+	Route::post('menu/reorder', 'MenuController@reorder')->name('auth.menu.reorder');
 	Route::get('parameters', 'ParametersController@index')->name('app.parameters');
+	Route::get('upload', 'UploadDataController@index')->name('app.upload.index');
+	Route::post('upload', 'UploadDataController@upload')->name('app.upload');
 });
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware'=>'auth'], function() {
 	Route::get('/',  function(){return view('dashboard/index');});
 	Route::get('getArrModel', 'Controller@ajax');
 });
 
-Route::group(['prefix' => 'reportes', 'namespace' => 'Reportes', 'middleware' => 'auth'], function() {
+Route::group(['prefix'=>'reportes', 'namespace'=>'Reportes', 'middleware'=>'auth'], function() {
 	Route::get('/', 'ReporteController@index');
 	Route::get('/viewForm', 'ReporteController@viewForm');
 	
@@ -54,10 +56,10 @@ Route::group(['prefix' => 'reportes', 'namespace' => 'Reportes', 'middleware' =>
 	Route::post('PlantasMovimientos', 'RptPlantasController@movimientosPlantas');
 });
 
-Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], function() {
-	Route::resource('cnos', 'CnosController', ['parameters'=>['cnos' => 'CNOS_ID']]);
-	Route::resource('cargos', 'CargoController', ['parameters'=>['cargos' => 'CARG_ID']]);
-	Route::resource('tiposcontratos', 'TipoContratoController', ['parameters'=>['tiposcontratos' => 'TICO_ID']]);
+Route::group(['prefix'=>'cnfg-contratos', 'namespace'=>'CnfgContratos'], function() {
+	Route::resource('cnos', 'CnosController', ['parameters'=>['cnos'=>'CNOS_ID']]);
+	Route::resource('cargos', 'CargoController', ['parameters'=>['cargos'=>'CARG_ID']]);
+	Route::resource('tiposcontratos', 'TipoContratoController', ['parameters'=>['tiposcontratos'=>'TICO_ID']]);
 	Route::resource('temporales', 'TemporalController');
 	Route::resource('clasescontratos', 'ClaseContratoController');
 	Route::resource('estadoscontratos', 'EstadoContratoController');
@@ -67,7 +69,7 @@ Route::group(['prefix' => 'cnfg-contratos', 'namespace' => 'CnfgContratos'], fun
 	Route::resource('empleadoatributo', 'EmpleadoAtributoController');
 });
 
-Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizacionales'], function() {
+Route::group(['prefix'=>'cnfg-organizacionales', 'namespace'=>'CnfgOrganizacionales'], function() {
 	Route::resource('empleadores', 'EmpleadorController');
 	Route::resource('gerencias', 'GerenciaController');
 	Route::resource('procesos', 'ProcesoController');
@@ -83,22 +85,22 @@ Route::group(['prefix' => 'cnfg-organizacionales', 'namespace' => 'CnfgOrganizac
 
 });
 
-Route::group(['prefix' => 'cnfg-geograficos', 'namespace' => 'CnfgGeograficos'], function() {
-	Route::resource('paises', 'PaisController', ['parameters'=>['pais' => 'PAIS_ID']]);
+Route::group(['prefix'=>'cnfg-geograficos', 'namespace'=>'CnfgGeograficos'], function() {
+	Route::resource('paises', 'PaisController', ['parameters'=>['pais'=>'PAIS_ID']]);
 	Route::get('getPaises', 'PaisController@getData');
-	Route::resource('departamentos', 'DepartamentoController', ['parameters'=>['departamento' => 'DEPA_ID']]);
+	Route::resource('departamentos', 'DepartamentoController', ['parameters'=>['departamento'=>'DEPA_ID']]);
 	Route::get('getDepartamentos', 'DepartamentoController@getData');
-	Route::resource('ciudades', 'CiudadController', ['parameters'=>['ciudad' => 'CIUD_ID']]);
+	Route::resource('ciudades', 'CiudadController', ['parameters'=>['ciudad'=>'CIUD_ID']]);
 	Route::get('getCiudades', 'CiudadController@getData');
 });
 
-Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], function() {
-	Route::resource('prospectos', 'ProspectoController', ['parameters'=>['prospectos' => 'PROS_ID']]);
+Route::group(['prefix'=>'gestion-humana', 'namespace'=>'GestionHumana'], function() {
+	Route::resource('prospectos', 'ProspectoController', ['parameters'=>['prospectos'=>'PROS_ID']]);
 	Route::get('getProspectos', 'ProspectoController@getData');
 	Route::get('getArrProspectosRetirados', 'ProspectoController@getArrProspectosRetirados');
 	Route::get('getArrProspectos', 'ProspectoController@getArrProspectos');
 
-	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos' => 'CONT_ID']]);
+	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos'=>'CONT_ID']]);
 	Route::get('getContratos', 'ContratoController@getData');
 
 	Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');
@@ -111,7 +113,7 @@ Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], fun
 	Route::get('/buscaTurno','ContratoController@buscaTurno');
 	Route::get('/buscaNegocio','ContratoController@buscaNegocio');
 
-	Route::group(['prefix' => 'helpers', 'namespace' => 'Helpers'], function() {
+	Route::group(['prefix'=>'helpers', 'namespace'=>'Helpers'], function() {
 		Route::get('validadorTNL', 'TnlController@index')->name('tnl.index');
 		Route::get('validadorTNL/upload', 'TnlController@create')->name('tnl.create');
 		Route::post('validadorTNL/upload', 'TnlController@store')->name('tnl.store');
@@ -119,7 +121,7 @@ Route::group(['prefix' => 'gestion-humana', 'namespace' => 'GestionHumana'], fun
 	});
 });
 
-Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], function() {
+Route::group(['prefix'=>'cnfg-tickets', 'namespace'=>'CnfgTickets'], function() {
 	Route::resource('prioridades', 'PrioridadController');
 	Route::resource('estadostickets', 'EstadoTicketController');
 	Route::resource('categorias', 'CategoriaController');
@@ -138,7 +140,7 @@ Route::group(['prefix' => 'cnfg-tickets', 'namespace' => 'CnfgTickets'], functio
 	Route::get('/buscaTurno','TicketController@buscaTurno');
 });
 
-Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'], function() {
+Route::group(['prefix'=>'cnfg-ausentismos', 'namespace'=>'CnfgAusentismos'], function() {
 	Route::resource('diagnosticos', 'DiagnosticoController');
 	Route::get('getDiagnostico', 'DiagnosticoController@getData');
 	Route::resource('conceptoausencias', 'ConceptoAusenciaController');
@@ -152,7 +154,7 @@ Route::group(['prefix' => 'cnfg-ausentismos', 'namespace' => 'CnfgAusentismos'],
 	Route::get('/buscaAuse/{id?}', 'ProrrogaAusentismoController@buscaAuse');
 });
 
-Route::group(['prefix' => 'cnfg-casosmedicos', 'namespace' => 'CnfgCasosMedicos'], function() {
+Route::group(['prefix'=>'cnfg-casosmedicos', 'namespace'=>'CnfgCasosMedicos'], function() {
 	Route::resource('diagnosticosgenerales', 'DiagnosticoGeneralController');
 	Route::resource('estadosrestriccion', 'EstadoRestriccionController');
 	Route::resource('casosmedicos', 'CasoMedicoController');

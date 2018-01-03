@@ -16,14 +16,34 @@ class MenuTableSeeder extends Seeder
         $orderMenuTop = 0;
 
 
-        Menu::create([
-            'MENU_LABEL' => 'Menú',
-            'MENU_URL' => 'auth/menu',
-            'MENU_ICON' => 'fa-bars',
+        $orderItem = 0;
+        $parent = Menu::create([
+            'MENU_LABEL' => 'Admin',
+            'MENU_ICON' => 'fa-cogs',
             'MENU_ORDER' => $orderMenuLeft++,
-            'MENU_ENABLED' => true,
         ]);
-
+            Menu::create([
+                'MENU_LABEL' => 'Menú',
+                'MENU_URL' => 'app/menu',
+                'MENU_ICON' => 'fa-bars',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+                'MENU_ENABLED' => true,
+            ]);
+            Menu::create([
+                'MENU_LABEL' => 'Parámetrizaciones generales',
+                'MENU_URL' => 'app/parameters',
+                'MENU_ICON' => 'fa-cog',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
+            Menu::create([
+                'MENU_LABEL' => 'Carga másiva',
+                'MENU_URL' => 'app/upload',
+                'MENU_ICON' => 'fa-cog',
+                'MENU_PARENT' => $parent->MENU_ID,
+                'MENU_ORDER' => $orderItem++,
+            ]);
 
         $orderItem = 0;
         $parent = Menu::create([

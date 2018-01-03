@@ -1,12 +1,11 @@
 <?php
-
-namespace SGH\Http\Controllers;
+namespace SGH\Http\Controllers\App;
 
 use SGH\Http\Controllers\Controller;
 
 class ParametersController extends Controller
 {
-	protected $route = 'admin';
+	protected $route = 'app.parameters';
 
 	public function __construct()
 	{
@@ -20,7 +19,7 @@ class ParametersController extends Controller
 	 */
 	public function index()
 	{
-		return view($this->route.'.parameters');
+		return view($this->route.'.index');
 	}
 
 	/**

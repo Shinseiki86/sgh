@@ -4,7 +4,7 @@
 	{{ $item['MENU_LABEL'] }} @if(!$item['MENU_ENABLED'])(DESHABILITADO)@endif
 	<div class="pull-right">
 		<!-- Botón Editar (edit) -->
-		<a class="btn btn-small btn-info btn-xs" href="{{ URL::to('auth/menu/'.$item['MENU_ID'].'/edit') }}" data-tooltip="tooltip" title="Editar">
+		<a class="btn btn-small btn-info btn-xs" href="{{ URL::to('app/menu/'.$item['MENU_ID'].'/edit') }}" data-tooltip="tooltip" title="Editar">
 			<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 		</a>
 		<!-- carga botón de borrar -->

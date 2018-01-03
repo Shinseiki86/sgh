@@ -1,20 +1,15 @@
 <?php
+namespace SGH\Http\Controllers\App;
 
-namespace SGH\Http\Controllers\Auth;
-
-use SGH\Http\Requests;
-use Validator;
 use SGH\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Redirector;
 
 use SGH\Models\Menu;
 
 class MenuController extends Controller
 {
-	protected $route = 'auth.menu';
+	protected $route = 'app.menu';
 	protected $class = Menu::class;
 
 	public function __construct()

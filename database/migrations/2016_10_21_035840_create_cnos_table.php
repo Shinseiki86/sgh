@@ -28,7 +28,7 @@ class CreateCnosTable extends Migration
             $table->increments('CNOS_ID')
                 ->comment('Valor autonumérico, llave primaria de la tabla CNOS.');
 
-            $table->string('CNOS_CODIGO', 5)
+            $table->string('CNOS_CODIGO', 5)->unique()
                 ->comment('codigo de clasificación Ej: 1-directivos, 2-ejecutivos, 3-operativos');
 
             $table->string('CNOS_DESCRIPCION', 150)

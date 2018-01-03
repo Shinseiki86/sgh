@@ -27,7 +27,7 @@
 				}
 				
 				$.ajax({
-					url: '{{url("auth/menu/reorder")}}',
+					url: '{{url("app/menu/reorder")}}',
 					data: {
 						source:      details.sourceId, 
 						destination: details.destId, 
