@@ -28,6 +28,7 @@ class CreateProrrogaAusentismosTable extends Migration
 			$table->datetime('PROR_FECHAFINAL')->comment('Fecha Final de la Prorroga');
 			$table->integer('PROR_DIAS')->unsigned();
 			$table->string('PROR_OBSERVACIONES')->nullable()->comment('Observaciones de la Prorroga');
+			$table->enum('PROR_PERIODO', ['ENERO', 'FEBRERO','MARZO', 'ABRIL','MAYO', 'JUNIO','JULIO', 'AGOSTO','SEPTIEMBRE', 'OCTUBRE','NOVIEMBRE', 'DICIEMBRE'])->nullable()->comment('Indica el periodo en el que se causa la prorroga de  Ausentismo');
 
 
 			//Traza

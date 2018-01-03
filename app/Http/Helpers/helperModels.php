@@ -77,4 +77,28 @@ if (! function_exists('findBy')) {
             return modelo($modelo)->where($column, $value)->with($relacion)->get();
       return modelo($modelo)->where($column, $value)->get();
     }
+   
+}
+
+if (! function_exists('getEnumValues')) {
+    /**
+     * Funcion para obtener los posibles datos de una columna en la base de datos
+     * 
+     *
+     * @param  type  $obj
+     * @return 
+     */ 
+
+    function getEnumValues($table, $column)
+    {
+      $type = DB::select(DB::raw("SHOW COLUMNS FROM $table WHERE Field = '{$column}'"))[0]->Type ;
+      preg_match('/^enum\((.*)\)$/', $type, $matches);
+      $enum = array();
+      foreach( explode(',', $matches[1]) as $value )
+      {
+        $v = trim( $value, "'" );
+        $enum = array_add($enum, $v, $v);
+      }
+      return $enum;
+    }
 }

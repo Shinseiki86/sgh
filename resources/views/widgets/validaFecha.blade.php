@@ -48,10 +48,7 @@
 			if (fecha.validaFecha('<?php echo $Fecha3; ?>',"{{$fecha1}}")) {
 				fecha.mensaje("La fecha del Accidente no puede ser mayor a la fecha final");
 				fecha.limpiaElemento('<?php echo $Fecha3; ?>');
-				limpiaDias();
-			}else{
-				llenaDias('<?php echo $Fecha3; ?>');
-			} 
+			}
 		});	
 
 		function llenaDias(fechaFinal){

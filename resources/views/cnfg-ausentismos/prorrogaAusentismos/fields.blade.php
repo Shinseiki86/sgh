@@ -14,9 +14,10 @@
 </div>
 
 <div class="row">
-	@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'PROR_FECHAINICIO', 'label'=>'Fecha de Inicio' ])
-	@include('widgets.forms.input', ['type'=>'date', 'column'=>4, 'name'=>'PROR_FECHAFINAL', 'label'=>'Fecha Final' ])
-	@include('widgets.forms.input', ['type'=>'number', 'column'=>4, 'name'=>'PROR_DIAS', 'label'=>'Total Dias'])
+	@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'PROR_FECHAINICIO', 'label'=>'Fecha de Inicio' ])
+	@include('widgets.forms.input', ['type'=>'date', 'column'=>3, 'name'=>'PROR_FECHAFINAL', 'label'=>'Fecha Final' ])
+	@include('widgets.forms.input', ['type'=>'number', 'column'=>3, 'name'=>'PROR_DIAS', 'label'=>'Total Dias'])
+	@include('widgets.forms.input', ['type'=>'select', 'column'=>3, 'name'=>'PROR_PERIODO', 'label'=>'Periodo', 'data'=>getEnumValues("PRORROGAAUSENTISMOS", "PROR_PERIODO"), 'placeholder'=>'Seleccione...','allowClear'=>true])
 </div>
 
 <div class="row">
