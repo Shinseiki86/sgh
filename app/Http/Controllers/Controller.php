@@ -134,12 +134,16 @@ class Controller extends BaseController
 	 */
 	protected function getRequest()
 	{
+		$exceptions = (isset($this->route) && $this->route=='app.menu');
+
 		$data = request()->all();
+
 		foreach ($data as $input => $value) {
+			$exceptions = ($exceptions || ($input == '_token') || is_array($value));
 			if($value=='')
 				$data[$input] = null;
 			else {
-				$data[$input] = isset($this->route) and $this->route=='app.menu'
+				$data[$input] = $exceptions 
 					? $value
 					: mb_strtoupper($value);
 			}

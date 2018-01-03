@@ -20,7 +20,7 @@ class ReporteController extends Controller
 		['id'=>'ContratosHistoricoRm', 'title'=>'109 - HISTÓRICO DE R.M'],
 		['id'=>'ContratosNovedadesRm', 'title'=>'110 - NOVEDADES DE SEGUIMIENTO A R.M'],
 
-		['id'=>'ProspectosSinContrato', 'title'=>'106 - HOJAS DE VIDA BÁSICAS', 'filterRequired' => true],
+		['id'=>'ProspectosSinContrato', 'title'=>'106 - HOJAS DE VIDA BÁSICAS'],
 		['id'=>'ProspectosDescartados', 'title'=>'107 - HOJAS DE VIDA DESCARTADAS', 'filterRequired' => true],
 
 		['id'=>'PlantasAutorizadas', 'title'=>'111 - PLANTAS DE PERSONAL AUTORIZADAS'],

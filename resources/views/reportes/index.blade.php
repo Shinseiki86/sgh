@@ -32,9 +32,7 @@
 
 		{{ Form::open(['url' => '#', 'id'=>'formRep', 'class'=>'form-horizontal hide']) }}
 			<div class="col-xs-12" >
-
 				<div id="fieldsForm" class="hide">Filtros</div>
-
 				@rinclude('formRepBotones')
 			</div>
 		{{ Form::close() }}
@@ -91,6 +89,7 @@
 	$(function () {
 
 		var formRep = $('#formRep');
+		var btnViewForm = $('#btnViewForm');
 		var fieldsForm = $('#fieldsForm');
 		var filterRequired = {!!json_encode(array_column($arrReportes, 'filterRequired', 'id'), JSON_NUMERIC_CHECK) !!};
 
@@ -124,14 +123,14 @@
 				//título de ventana, afecta nombre de archivo exportado
 				$(document).attr("title", 'SGH / Rep '+$(this).find(':selected').text());
 
-				$('#btnViewForm').parent().removeClass('hide');
+
 				formRep
 					.attr('action', 'reportes/'+id_selected)
 					.removeClass('hide');
 
-				var btnViewForm = $('#btnViewForm');
 
 				//Si el formulario tiene filtros obligatorios, muestra campos de filtro y no permite ocultarlos.
+				btnViewForm.parent().removeClass('hide');
 				if(filterRequired[id_selected] === true){
 					btnViewForm
 						.addClass('disabled')
@@ -227,8 +226,11 @@
 			.always(function( data, textStatus, jqXHR ) {
 				formRep.find("button[type=submit]").attr('disabled', false);
 				$('body').css('cursor', 'auto');
-				fieldsForm.addClass('hide');
+				if(filterRequired[$('#REPO_ID').val()] != true){
+					fieldsForm.addClass('hide');
+				}
 				$('#msgModalLoading').modal('hide');
+				$('[data-tooltip="tooltip"]').tooltip('hide');
 			});
 
 		});

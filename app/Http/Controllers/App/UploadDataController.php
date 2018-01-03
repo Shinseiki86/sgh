@@ -60,11 +60,11 @@ class UploadDataController extends Controller
 	protected function crearRegistros($sheet)
 	{
 		$table = strtoupper($sheet->getTitle());
-		$files = $sheet->toArray();
+		$rows = $sheet->toArray();
 
 		try {
-			\DB::table($table)->insert($files);
-			$this->logs['success'][] = count($files).' registros creados en '.$table.'.';
+			\DB::table($table)->insert($rows);
+			$this->logs['success'][] = count($rows).' registros creados en '.$table.'.';
 		} catch (\Exception $e){
 			$strErr = 'Tabla '.$table.' > ';
 			if ($e instanceof \Illuminate\Database\QueryException OR $e instanceof \PDOException)
