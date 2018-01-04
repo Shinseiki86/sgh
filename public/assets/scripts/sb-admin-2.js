@@ -26,6 +26,18 @@ $(function() {
 		//}
 		//return false;
 	});
+
+	//If #search-menu is focused, it does not allow it to hide when losing focus.
+	$('#search-menu').focus(function() {
+		$(this)
+			.parent().css('display', 'table')
+			.parent().css('width', '250px');
+	});
+	$('#search-menu').blur(function() {
+		$(this)
+			.parent().removeAttr('style')
+			.parent().removeAttr('style');
+	});
 	
 	handleSidebarToggler();
 });
