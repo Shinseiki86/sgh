@@ -121,13 +121,11 @@
 			var id_selected = $(this).val();
 			if(id_selected != null && id_selected != ''){
 				//título de ventana, afecta nombre de archivo exportado
-				$(document).attr("title", 'SGH / Rep '+$(this).find(':selected').text());
-
+				$(document).attr('title', 'SGH / Rep '+$(this).find(':selected').text());
 
 				formRep
 					.attr('action', 'reportes/'+id_selected)
 					.removeClass('hide');
-
 
 				//Si el formulario tiene filtros obligatorios, muestra campos de filtro y no permite ocultarlos.
 				btnViewForm.parent().removeClass('hide');
@@ -141,7 +139,6 @@
 				} else {
 					btnViewForm
 						.removeClass('disabled');
-					//fieldsForm.addClass('hide');
 				}
 
 				//Ajax para obtener campos de filtro
@@ -173,6 +170,8 @@
 
 			} else {
 				formRep.addClass('hide'); //form
+				btnViewForm.parent().addClass('hide');
+				$(document).attr('title', 'SGH / Reportes');
 			}
 		});
 
@@ -187,7 +186,6 @@
 				fieldsForm.toggleClass('hide');
 			}
 		});
-
 
 		//Reset de formulario
 		$('form').on('reset', function() {
@@ -300,7 +298,6 @@
 
 		//Destruye la tabla y limpia el log de errores.
 		function clearTable(){
-			$(document).attr("title", 'SGH / Reportes');
 
 			if ( $.fn.dataTable.isDataTable( '#tbQuery' ) ) {
 				tbQuery = $('#tbQuery').DataTable().destroy();

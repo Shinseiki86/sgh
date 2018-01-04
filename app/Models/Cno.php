@@ -25,7 +25,7 @@ class Cno extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			'CNOS_CODIGO' => 'required|'.static::unique($id,'CNOS_CODIGO'),
+			'CNOS_CODIGO' => 'required|max:5|'.static::unique($id,'CNOS_CODIGO'),
 			'CNOS_DESCRIPCION' => 'required|max:300|'.static::unique($id,'CNOS_DESCRIPCION'),
 		];
 	}
