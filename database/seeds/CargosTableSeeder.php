@@ -195,7 +195,7 @@ class CargosTableSeeder extends Seeder
       $cargo->CARG_CREADOPOR = 'admin';
       $cargo->save();
       $cargo = new Cargo;
-      $cargo->CARG_DESCRIPCION = 'JEFE DE CONTABILIAD';
+      $cargo->CARG_DESCRIPCION = 'JEFE DE CONTABILIDAD';
       $cargo->CARG_OBSERVACIONES = NULL;
       $cargo->CNOS_ID = 5;
       $cargo->CARG_CREADOPOR = 'admin';
@@ -867,7 +867,7 @@ class CargosTableSeeder extends Seeder
       $cargo->CARG_CREADOPOR = 'admin';
       $cargo->save();
       $cargo = new Cargo;
-      $cargo->CARG_DESCRIPCION = 'INGENERIO DE PROYECTOS';
+      $cargo->CARG_DESCRIPCION = 'INGENIERO DE PROYECTOS';
       $cargo->CARG_OBSERVACIONES = NULL;
       $cargo->CNOS_ID = 485;
       $cargo->CARG_CREADOPOR = 'admin';
@@ -1291,6 +1291,168 @@ class CargosTableSeeder extends Seeder
       $cargo->CNOS_ID = 503;
       $cargo->CARG_CREADOPOR = 'admin';
       $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ANALISTA DE GESTION HUMANA';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 6;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ANALISTA DE CALIDAD';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 264;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ANALISTA DE SISTEMAS';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 264;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ANALISTA DIBUJANTE';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 264;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ASISTENTE DE SISTEMAS';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'ASISTENTE DE LOGISTICA';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR DE OFICINA';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR AMBIENTAL';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR DE NOMINA';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR DE CONTROL';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR DE RECLASIFICACION';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR DE SEGURIDAD Y SALUD EN EL TRABAJO';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AYUDANTE DE MANTENIMIENTO';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 369;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AYUDANTE ELECTRICISTA';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 369;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'COORDINADOR DE COMPRAS Y ALMACEN';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 503;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'SECRETARIA DE MANTENIMIENTO';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'COORDINADOR JURIDICO Y PQR';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 503;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'GERENTE DE SERVICIOS ESPECIALES DE ASEO';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 5;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'LIDER COMERCIAL';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 253;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'SUPERVISOR COMERCIAL';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 253;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'COORDINADOR SISTEMA DE GESTION DE SEGURIDAD';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 503;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'DIRECTOR NACIONAL DE SELECCION Y DESAROLLO';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 7;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
+      $cargo = new Cargo;
+      $cargo->CARG_DESCRIPCION = 'AUXILIAR DE CONTABILIDAD';
+      $cargo->CARG_OBSERVACIONES = NULL;
+      $cargo->CNOS_ID = 221;
+      $cargo->CARG_CREADOPOR = 'admin';
+      $cargo->save();
+
 
   }
 }

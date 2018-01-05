@@ -105,6 +105,42 @@ class TemporalesTableSeeder extends Seeder
         $temporal->TEMP_CREADOPOR =  'admin';
         $temporal->save();
 
+        $temporal = new Temporal;
+        $temporal->TEMP_RAZONSOCIAL = 'ASOCIACION MUNICIPAL DE RECICLADORES LA CARRETA EMPRESARIAL';
+        $temporal->TEMP_NOMBRECOMERCIAL = 'LA CARETA';
+        $temporal->TEMP_DIRECCION = 'CARERA. 13 # 43-24 B/CHAPINERO';
+        $temporal->TEMP_OBSERVACIONES =  NULL;
+        $temporal->PROS_ID =  5;
+        $temporal->TEMP_CREADOPOR =  'admin';
+        $temporal->save();
+
+        $temporal = new Temporal;
+        $temporal->TEMP_RAZONSOCIAL = 'COOPERATIVA DE TRABAJO ASOCIADO UNIDOS HACIA EL FUTURO PROTEGIENDO EL MEDIO AMBIENTE';
+        $temporal->TEMP_NOMBRECOMERCIAL = 'UFPRAME';
+        $temporal->TEMP_DIRECCION = 'CRA 8 D # 72B84 2PISO B/7 AGOSTO';
+        $temporal->TEMP_OBSERVACIONES =  NULL;
+        $temporal->PROS_ID =  5;
+        $temporal->TEMP_CREADOPOR =  'admin';
+        $temporal->save();
+
+        $temporal = new Temporal;
+        $temporal->TEMP_RAZONSOCIAL = 'ACCION S.A.S';
+        $temporal->TEMP_NOMBRECOMERCIAL = 'ACCION';
+        $temporal->TEMP_DIRECCION = 'AVENIDA 6 BIS # 26-14';
+        $temporal->TEMP_OBSERVACIONES =  NULL;
+        $temporal->PROS_ID =  5;
+        $temporal->TEMP_CREADOPOR =  'admin';
+        $temporal->save();
+
+        $temporal = new Temporal;
+        $temporal->TEMP_RAZONSOCIAL = 'EMPRESA DE SERVICIOS TEMPORALES DINAMICOS S A';
+        $temporal->TEMP_NOMBRECOMERCIAL = 'DINAMICOS';
+        $temporal->TEMP_DIRECCION = 'SIN DIRECCION EN CALI';
+        $temporal->TEMP_OBSERVACIONES =  NULL;
+        $temporal->PROS_ID =  5;
+        $temporal->TEMP_CREADOPOR =  'admin';
+        $temporal->save();
+
     }
 
 }

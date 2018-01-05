@@ -226,7 +226,7 @@ class CentrosCostosTableSeeder extends Seeder
 
         $centrocosto = new CentroCosto;
         $centrocosto->CECO_CODIGO = '32130';
-        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERARIVO DE RECOLECCION';
+        $centrocosto->CECO_DESCRIPCION = 'PROCESO OPERATIVO DE RECOLECCION';
         $centrocosto->CECO_OBSERVACIONES =  NULL;
         $centrocosto->CECO_CREADOPOR =  'admin';
         $centrocosto->save();

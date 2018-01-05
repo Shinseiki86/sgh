@@ -12,6 +12,7 @@ class ContratosTableSeeder extends Seeder
      */
     public function run()
     {
+        
         $contrato = new Contrato;
         $contrato->PROS_ID = 1;
         $contrato->CONT_CASOMEDICO = 'NO';
@@ -105,6 +106,8 @@ class ContratosTableSeeder extends Seeder
         $contrato->CIUD_SERVICIO = 492;
         $contrato->CONT_CREADOPOR = 'admin';
         $contrato->save();
+
+        
 
        
     }
