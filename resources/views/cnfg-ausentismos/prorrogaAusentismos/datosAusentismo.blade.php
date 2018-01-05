@@ -4,7 +4,7 @@
 		{{ Form::button('<i class="fa fa-search" aria-hidden="true"></i> Buscar', [
 		'class'=>'btn btn-primary ',
 		'type'=>'button',
-		'ng-click'=>'cargaAusentismo()'
+		'ng-click'=>'cargaAusentismo()'		
 		]) }}
 	</div>
 </div>

@@ -101,4 +101,34 @@ if (! function_exists('getEnumValues')) {
       }
       return $enum;
     }
+
+
+}
+
+if (! function_exists('meses')) {
+    /**
+     * Funcion para retornar los meses del año
+     * 
+     *
+     * 
+     * @return 
+     */ 
+
+    function meses()
+    {
+        return ['ENERO'=>'ENERO',
+                'FEBRERO'=>'FEBRERO',
+                'MARZO'=>'MARZO',
+                'ABRIL'=>'ABRIL',
+                'MAYO'=>'MAYO',
+                'JUNIO'=>'JUNIO',
+                'JULIO'=>'JULIO',
+                'AGOSTO'=>'AGOSTO',
+                'SEPTIEMBRE'=>'SEPTIEMBRE',
+                'OCTUBRE'=>'OCTUBRE',
+                'NOVIEMBRE'=>'NOVIEMBRE',
+                'DICIEMBRE'=>'DICIEMBRE'];
+    }
+
+    
 }

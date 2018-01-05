@@ -39,6 +39,7 @@
 					}
 					$scope.showHide = "Ocultar Información";
 					$scope.showResult = true;
+					$scope.mySwitch = false;
 				});
 			}
 		}
@@ -57,7 +58,7 @@
 @endpush
 
 @section('section')
-<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" ng-app="app" ng-controller="buscaAusentismo">
+<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" ng-app="app" ng-controller="buscaAusentismo" ng-init="mySwitch=true">
 	{{ Form::open(['route' => 'cnfg-ausentismos.prorrogaausentismos.store', 'class' => 'form-horizontal']) }}
 		@include('cnfg-ausentismos.prorrogaausentismos.datosAusentismo')
 		<!-- Elementos del formulario -->

@@ -1,8 +1,8 @@
 <table class="table table-striped" id="tabla">   
     <thead>
+        <th>Prospecto</th>
         <th>Diagnóstico</th>
-		<th>Concepto Ausentismo</th>
-		<th>Prospecto</th>
+		<th>Concepto Ausentismo</th>		
 		<th>Fecha Inicio</th>
 		<th>Fecha Final</th>
 		<th>Total Días</th>
@@ -18,9 +18,9 @@
     <tbody>
     @foreach($ausentismos as $ausentismo)
         <tr>
+            <td>{{ nombre_empleado($ausentismo->contrato->PROS_ID) }}</td>
             <td>{{ $ausentismo->diagnostico->DIAG_DESCRIPCION or null}}</td>
 			<td>{{ $ausentismo->conceptoausencia->COAU_DESCRIPCION }}</td>
-			<td>{{ nombre_empleado($ausentismo->contrato->PROS_ID) }}</td>
 			<td>{{ $ausentismo -> AUSE_FECHAINICIO }}</td>
 			<td>{{ $ausentismo->AUSE_FECHAFINAL }}</td>
 			<td>{{ $ausentismo->AUSE_DIAS }}</td>
