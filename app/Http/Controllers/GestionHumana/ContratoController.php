@@ -549,6 +549,7 @@ class ContratoController extends Controller
 			->where('EMPL_ID', $empleador)
 			->where('GERE_ID', $gerencia)
 			->where('CARG_ID', $cargo)
+			->whereIn('ESCO_ID', [EstadoContrato::ACTIVO, EstadoContrato::VACACIONES])
 			->count();
 		return $data;
 	}

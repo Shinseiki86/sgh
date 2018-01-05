@@ -23,7 +23,7 @@ class AusentismoRepository
           'AUSE_ID',
           repositorio("Prospecto")->cont_prospectos(['PROS_CEDULA','AUSE_FECHAINICIO'])
         ])
-        ->where('AUSE_ESTADO', '=', 'Abierto')
+        ->where('AUSE_ESTADO', '=', 'ABIERTO')
         ->get();   
 
       // $dato= modelo("Ausentismo")->join('CONTRATOS', 'CONTRATOS.CONT_ID', '=', 'AUSENTISMOS.CONT_ID')

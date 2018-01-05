@@ -35,7 +35,7 @@
 	<div class="row">
 		@include('widgets.forms.input', ['type'=>'number', 'column'=>3, 'name'=>'AUSE_DIAS', 'label'=>'Total Dias','options'=>['ng-model'=>'ausentismo.ausentismo.AUSE_DIAS','disabled'=>true]])
 		@include('widgets.forms.input', ['type'=>'number', 'column'=>6, 'name'=>'AUSE_IBC', 'label'=>'Ingreso Base de Cotizacion','options'=>['ng-model'=>'ausentismo.ausentismo.AUSE_IBC','disabled'=>true]])
-		@include('widgets.forms.input', ['type'=>'number', 'column'=>3, 'name'=>'AUSE_VALOR', 'label'=>'VAlor Total','options'=>['ng-model'=>'ausentismo.ausentismo.AUSE_VALOR','disabled'=>true]])
+		@include('widgets.forms.input', ['type'=>'number', 'column'=>3, 'name'=>'AUSE_VALOR', 'label'=>'Valor Total','options'=>['ng-model'=>'ausentismo.ausentismo.AUSE_VALOR','disabled'=>true]])
 	</div>
 	<div class="row">
 		<!-- Ause Observaciones Field -->

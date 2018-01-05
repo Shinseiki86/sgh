@@ -50,8 +50,6 @@ class CreateAusentismosTable extends Migration
             $table->timestamp('AUSE_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
 
-            //Relaciones
-
 		});
 		if(env('DB_CONNECTION') == 'pgsql')
             DB::statement("COMMENT ON TABLE ".env('DB_SCHEMA').".\"".$this->nomTabla."\" IS '".$commentTabla."'");
