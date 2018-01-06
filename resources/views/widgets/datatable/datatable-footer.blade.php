@@ -4,7 +4,7 @@ tfoot
 		return (className.match (/\bcol-\S+/g) || []).join(' ');
 	})
 	.html( function (index, oldhtml) {
-		var text = 'Buscar por '+oldhtml;
+		var text = 'Buscar '+oldhtml;
 		return '<input type="text" class="form-control input-sm" style="width:98%" title="'+text+'" placeholder="'+text+'"  />';
 	})
 	.css('padding','8px 0px');
