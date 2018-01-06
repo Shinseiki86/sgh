@@ -65,12 +65,16 @@ class UploadDataController extends Controller
 
 
 	/**
-	 * 
-	 *
+	 * Crea registros en la tabla masivamente. Almacena el log en la variable $logs
+	 * @param  string  $table
+	 * @param  array  $rows[][]
+	 * @return void
 	 */
 	protected function crearRegistros($table, $rows)
 	{
-		//dump($table);
+		$countColumns = count(array_keys($rows[0]));
+		$chunk =  count($rows) / ($countColumns/1.5);
+
 		foreach (array_chunk($rows, 500) as $rows_chunk) {
 			//dump($rows_chunk);
 			try {
@@ -85,9 +89,8 @@ class UploadDataController extends Controller
 
 				$this->logs['error'][] = $strErr;
 			}
-
 		}
-		return $this->logs;
 	}
+
 
 }
