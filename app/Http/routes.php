@@ -50,6 +50,7 @@ Route::group(['prefix'=>'reportes', 'namespace'=>'Reportes', 'middleware'=>'auth
 	Route::post('ContratosHeadcountRm', 'RptContratosController@headcountRm');
 	Route::post('ContratosHistoricoRm', 'RptContratosController@historicoRm');
 	Route::post('ContratosNovedadesRm', 'RptContratosController@novedadesRm');
+	Route::post('ContratosActivosPorPeriodo', 'RptContratosController@activosPorPeriodo');
 
 	Route::post('ticketsPorFecha', 'RptTicketsController@ticketsPorFecha');
 

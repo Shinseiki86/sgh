@@ -15,6 +15,7 @@ class ReporteController extends Controller
 		['id'=>'ContratosIngresosPorFecha', 'title'=>'102 - INGRESOS POR FECHA'],
 		['id'=>'ContratosRetirosPorFecha', 'title'=>'103 - RETIROS POR FECHA'],
 		['id'=>'ContratosHistoriaPorCedula', 'title'=>'104 - HISTORIA LABORAL POR CÉDULA', 'filterRequired' => true],
+		['id'=>'ContratosActivosPorPeriodo', 'title'=>'100 - ACTIVOS POR PERIODO'],
 		['id'=>'ContratosProximosTemporalidad', 'title'=>'105 - PRÓXIMOS A TEMPORALIDAD'],
 		['id'=>'ContratosHeadcountRm', 'title'=>'108 - HEADCOUNT DE R.M'],
 		['id'=>'ContratosHistoricoRm', 'title'=>'109 - HISTÓRICO DE R.M'],

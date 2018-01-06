@@ -166,7 +166,50 @@ class RptContratosController extends ReporteController
 	 */
 	public function activosPorPeriodo()
 	{
-		$query = $this->getQuery();
+		$query = $this->getQuery()
+					->orWhere(function($query){
+			        $query->where('ESTADOSCONTRATOS.ESCO_ID', EstadoContrato::RETIRADO)
+
+			        	->where(function($query){
+
+			        		$query->where('CONTRATOS.CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoDesde']))
+			       		   ->where('CONTRATOS.CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoDesde']))
+			        		->where('CONTRATOS.CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoHasta']));
+			        	});
+			        	  
+			        })
+
+					
+			        ->orwhere(function($query){
+
+			        	$query->where('CONTRATOS.CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoHasta']))
+
+			        	->where(function($query){
+
+			        		$query->where('ESTADOSCONTRATOS.ESCO_ID', EstadoContrato::RETIRADO)
+			        	  	->where('CONTRATOS.CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']))
+			       		   ->where('CONTRATOS.CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']));
+
+			        	});
+			        	   
+			        	  
+			        })
+
+			        ->orwhere(function($query){
+
+			        	$query->whereIn('ESTADOSCONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO,EstadoContrato::VACACIONES])
+			        	->where('CONTRATOS.CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']))
+
+
+			        	->where(function($query){
+
+			        		$query->where('CONTRATOS.CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoDesde']))
+			       		   ->orWhere('CONTRATOS.CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']));
+
+			        	});
+
+			        });
+
 
 		if(isset($this->data['fchaIngresoDesde']))
 			$query->whereDate('CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']));
