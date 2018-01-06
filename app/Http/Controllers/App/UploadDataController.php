@@ -43,7 +43,6 @@ class UploadDataController extends Controller
 		]);
 
 		if (Input::file('archivo')->isValid()) {
-
 			$archivo = Input::file('archivo');
 			$path = $archivo->getRealPath();
 
@@ -59,19 +58,23 @@ class UploadDataController extends Controller
 				$this->crearRegistros($table, $results->toArray());
 			}
 		}
-		//dd($this->logs);
 		return redirect()->back()->with($this->logs)->withInput()->send();
 	}
 
 
 	/**
-	 * 
-	 *
+	 * Crea registros en la tabla masivamente. Almacena el log en la variable $logs
+	 * @param  string  $table
+	 * @param  array  $rows[][]
+	 * @return void
 	 */
 	protected function crearRegistros($table, $rows)
 	{
-		//dump($table);
-		foreach (array_chunk($rows, 500) as $rows_chunk) {
+		$countColumns = count(array_keys($rows[0]));
+		$chunk =  count($rows) / ($countColumns/1.5);
+		//ini_set('max_execution_time', $countRows/30);
+
+		foreach (array_chunk($rows, $chunk) as $rows_chunk) {
 			//dump($rows_chunk);
 			try {
 				\DB::table($table)->insert($rows_chunk);
@@ -85,9 +88,8 @@ class UploadDataController extends Controller
 
 				$this->logs['error'][] = $strErr;
 			}
-
 		}
-		return $this->logs;
 	}
+
 
 }
