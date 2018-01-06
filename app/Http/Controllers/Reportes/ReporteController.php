@@ -31,6 +31,8 @@ class ReporteController extends Controller
 
 	public function __construct()
 	{
+		$this->middleware('auth');
+		$this->middleware('permission:reportes');
 		//Datos recibidos desde la vista.
 		$this->data = parent::getRequest();
 	}

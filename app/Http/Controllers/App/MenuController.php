@@ -14,7 +14,9 @@ class MenuController extends Controller
 
 	public function __construct()
 	{
-		parent::__construct();
+		//parent::__construct();
+		$this->middleware('auth');
+		$this->middleware('permission:app-menu');
 	}
 
 	/**
@@ -101,12 +103,12 @@ class MenuController extends Controller
 	 */
 	public function create()
 	{
-		//Se crea un array con los Role disponibles
-		//$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
+		//Se crea un array con los Permission disponibles
+		$arrPermisos = model_to_array(Permission::class, 'display_name');
 
 		$arrRoutes = $this->getRoutes();
 
-		return view($this->route.'.create', compact('arrRoutes'));
+		return view($this->route.'.create', compact('arrPermisos', 'arrRoutes'));
 	}
 
 	private function getRoutes()
@@ -145,13 +147,13 @@ class MenuController extends Controller
 		// Se obtiene el registro
 		$menu = Menu::findOrFail($id);
 
-		//Se crea un array con los Role disponibles
-		//$arrMenus = model_to_array(Menu::class, 'MENU_LABEL');
+		//Se crea un array con los Permission disponibles
+		$arrPermisos = model_to_array(Permission::class, 'display_name');
 
 		$arrRoutes = [$menu->MENU_URL => $menu->MENU_URL] + $this->getRoutes();
 
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('menu', 'arrRoutes'));
+		return view($this->route.'.edit', compact('menu', 'arrRoutes', 'arrPermisos'));
 	}
 
 	/**

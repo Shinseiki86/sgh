@@ -48,10 +48,36 @@ use SGH\Models\Permission;
 
             $this->command->info('--- Seeder Creación de Permisos');
 
+
+                $menu = Permission::create([
+                    'name'         => 'app-menu',
+                    'display_name' => 'Administrar menú',
+                    'description'  => 'Permite crear, eliminar y ordenar el menú del sistema.',
+                ]);
+                $parameters = Permission::create([
+                    'name'         => 'app-parameters',
+                    'display_name' => 'Administrar parámetros',
+                    'description'  => 'Permite crear, eliminar y ordenar los parámetros del sistema.',
+                ]);
+                $uploads = Permission::create([
+                    'name'         => 'app-upload',
+                    'display_name' => 'Cargas masivas',
+                    'description'  => '¡CUIDADO! Permite realizar cargas masivas de datos en el sistema.',
+                ]);
+                $this->rolOwner->attachPermissions([$menu, $parameters, $uploads]);
+
+                $reportes = Permission::create([
+                    'name'         => 'reportes',
+                    'display_name' => 'Reportes',
+                    'description'  => 'Permite ejecutar reportes y exportarlos.',
+                ]);
+                $this->rolOwner->attachPermission($reportes);
+                $this->rolAdmin->attachPermission($reportes);
+                $this->rolGestHum->attachPermission($reportes);
+
                 $this->createPermissions(User::class, 'usuarios', null,  true, false);
                 $this->createPermissions(Permission::class, 'permisos', null, true, false);
                 $this->createPermissions(Role::class, 'roles', null, true, false);
-                $this->createPermissions(Menu::class, 'opciones del menú', null, true, false);
 
                 $this->createPermissions(Pais::class, 'países');
                 $this->createPermissions(Departamento::class, 'departamentos');
@@ -84,7 +110,12 @@ use SGH\Models\Permission;
 
                 $this->createPermissions(Prospecto::class, 'hojas de vida');
                 $this->createPermissions(Contrato::class, 'contratos');
-                //$this->createPermissions('VALIDADOR DE TNL', 'VALIDADOR DE TNL');
+                $tnl = Permission::create([
+                    'name'         => 'tnl',
+                    'display_name' => 'Validador de TNL',
+                    'description'  => 'Permite realizar ...',
+                ]);
+                $this->rolGestHum->attachPermissions([$tnl]);
 
                 $this->createPermissions(Prioridad::class, 'prioridades ticket');
                 $this->createPermissions(EstadoTicket::class, 'estados ticket');
@@ -128,10 +159,7 @@ use SGH\Models\Permission;
                     'email' => 'sghmasterpromo@gmail.com',
                     'password'  => \Hash::make($pass)
                 ]);
-                // role attach alias
-                $admin->attachRole($this->rolAdmin); // parameter can be an Role object, array, or id
-                // or eloquent's original technique
-                //$admin->roles()->attach($this->rolAdmin->id); // id only
+                $admin->attachRole($this->rolAdmin); 
 
                 //Owner
                 $owner = User::create( [
@@ -163,14 +191,23 @@ use SGH\Models\Permission;
                 ]);
                 $gesthum1->attachRole($this->rolGestHum);
 
-                $gesthum2 = User::create( [
-                    'name' => 'Gestión humana 2 de prueba',
-                    'cedula' => 1144173742,
-                    'username' => 'gesthum2',
-                    'email' => 'sgh@gmail.com',
+                $super = User::create( [
+                    'name' => 'Supervisor de prueba',
+                    'cedula' => 12235,
+                    'username' => 'superoper',
+                    'email' => 'superoper@gmail.com',
                     'password'  => \Hash::make($pass)
                 ]);
-                $gesthum2->attachRole($this->rolGestHum);
+                $super->attachRole($rolSuperOper);
+
+                $coordi = User::create( [
+                    'name' => 'Coordinador de prueba',
+                    'cedula' => 12236,
+                    'username' => 'coordi',
+                    'email' => 'coordi@gmail.com',
+                    'password'  => \Hash::make($pass)
+                ]);
+                $coordi->attachRole($rolCoorOper);
 
                 //5 usuarios faker
                 //$USERS = factory(SGH\User::class)->times(5)->create();
@@ -179,7 +216,7 @@ use SGH\Models\Permission;
 
         private function createPermissions($name, $display_name, $description = null, $attachAdmin=true, $attachGestHum=true)
         {
-            $name = basename($name);
+            $name = strtolower(basename($name));
 
             if($description == null)
                 $description = $display_name;

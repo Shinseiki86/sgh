@@ -5,6 +5,8 @@ use SGH\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Input;
 
+use SGH\Http\Controllers\App\MenuController;
+
 class UploadDataController extends Controller
 {
 	protected $route = 'app.upload';
@@ -12,7 +14,9 @@ class UploadDataController extends Controller
 
 	public function __construct()
 	{
+		//parent::__construct();
 		$this->middleware('auth');
+		$this->middleware('permission:app-upload');
 	}
 
 	/**

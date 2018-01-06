@@ -12,7 +12,7 @@
 
 //Autenticación
 Route::auth();
-Route::group(['prefix'=>'auth', 'namespace'=>'Auth', 'middleware'=>['auth', 'role:admin']], function() {
+Route::group(['prefix'=>'auth', 'namespace'=>'Auth', 'middleware'=>['auth']], function() {
 	Route::resource('usuarios', 'AuthController');
 	Route::resource('roles', 'RoleController');
 	Route::resource('permisos', 'PermissionController');
@@ -20,7 +20,7 @@ Route::group(['prefix'=>'auth', 'namespace'=>'Auth', 'middleware'=>['auth', 'rol
 Route::get('password/email/{USER_id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{USER_id}', 'Auth\PasswordController@showResetForm');
 
-Route::group(['prefix'=>'app', 'namespace'=>'App', 'middleware'=>['auth', 'role:admin']], function() {
+Route::group(['prefix'=>'app', 'namespace'=>'App'], function() {
 	Route::resource('menu', 'MenuController', ['parameters'=>['menu'=>'MENU_ID']]);
 	Route::post('menu/reorder', 'MenuController@reorder')->name('auth.menu.reorder');
 	Route::get('parameters', 'ParametersController@index')->name('app.parameters');
@@ -29,7 +29,11 @@ Route::group(['prefix'=>'app', 'namespace'=>'App', 'middleware'=>['auth', 'role:
 });
 
 Route::group(['middleware'=>'auth'], function() {
-	Route::get('/',  function(){return view('dashboard/index');});
+	Route::get('/', function(){
+		if(Entrust::hasRole(['owner','admin','gesthum']))
+			return view('dashboard/charts');
+		return view('layouts.menu');
+	});
 	Route::get('getArrModel', 'Controller@ajax');
 });
 

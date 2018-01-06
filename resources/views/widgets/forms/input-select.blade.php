@@ -11,7 +11,7 @@
 	] + 
 	(isset($options)?$options:[]) +
 	(isset($ajax) && is_array($ajax)
-		? ( isset($ajax['model']) ? ['data-ajax--url'=> 'getArrModel?model='.$ajax['model'].'&column='.$ajax['column']]
+		? ( isset($ajax['model']) ? ['data-ajax--url'=> url('getArrModel').'?model='.$ajax['model'].'&column='.$ajax['column']]
 								: ['data-ajax--url'=> $ajax['url']] )
 		: []
 	) +

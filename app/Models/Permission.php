@@ -35,4 +35,11 @@ class Permission extends EntrustPermission
 	public function roles(){
 		return $this->belongsToMany(Role::class);
 	}
+
+	public function menu()
+	{
+		$foreingKey = 'PERM_ID';
+		return $this->hasOne(Menu::class, $foreingKey);
+	}
+
 }

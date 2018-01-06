@@ -22,7 +22,7 @@ class Controller extends BaseController
 			$this->middleware('auth');
 
 		if(property_exists($this, 'class')){
-			$name = basename($this->class);
+			$name = strtolower(basename($this->class));
 			$this->middleware('permission:'.$name.'-index',  ['only' => ['index']]);
 			$this->middleware('permission:'.$name.'-create', ['only' => ['create', 'store']]);
 			$this->middleware('permission:'.$name.'-edit',   ['only' => ['edit', 'update']]);
