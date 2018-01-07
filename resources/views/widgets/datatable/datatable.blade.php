@@ -36,7 +36,7 @@
 		lengthMenu: [[5,10,25,50,-1], [5,10,25,50,'Todos']],
 		//retrieve: true,
 		pagingType: 'simple_numbers',
-		bScrollCollapse: true,
+		//bScrollCollapse: true,
 		//sScrollY: '300px',
 		responsive: true,
 		stateSave:  true,
