@@ -184,6 +184,7 @@
 					.toggleClass('fa-caret-down');
 
 				fieldsForm.toggleClass('hide');
+				initComponents();
 			}
 		});
 
@@ -227,8 +228,12 @@
 				if(filterRequired[$('#REPO_ID').val()] != true){
 					fieldsForm.addClass('hide');
 				}
+
+				//Init all components
+				initComponents();
+
+				//hide modal
 				$('#msgModalLoading').modal('hide');
-				$('[data-tooltip="tooltip"]').tooltip('hide');
 			});
 
 		});
@@ -294,6 +299,12 @@
 				[], //colores
 				'chart', typeChart.val()
 			);
+		}
+
+		//Destruye la tabla y limpia el log de errores.
+		function initComponents(){
+			$('[data-tooltip="tooltip"]').tooltip('hide');
+			window.initDateTimePicker();
 		}
 
 		//Destruye la tabla y limpia el log de errores.

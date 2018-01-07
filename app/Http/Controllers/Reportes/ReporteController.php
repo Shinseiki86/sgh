@@ -10,24 +10,24 @@ class ReporteController extends Controller
 	protected $data = null;
 
 	private $reportes = [
-		['id'=>'ContratosActPorFecha', 'title'=>'100 - CONTRATOS ACTIVOS'],
+		['id'=>'ContratosActivosPorFecha', 'title'=>'100 - CONTRATOS ACTIVOS'],
 		['id'=>'ContratosHistorico', 'title'=>'101 - HISTÓRICO DE CONTRATOS'],
 		['id'=>'ContratosIngresosPorFecha', 'title'=>'102 - INGRESOS POR FECHA'],
 		['id'=>'ContratosRetirosPorFecha', 'title'=>'103 - RETIROS POR FECHA'],
 		['id'=>'ContratosHistoriaPorCedula', 'title'=>'104 - HISTORIA LABORAL POR CÉDULA', 'filterRequired' => true],
-		['id'=>'ContratosActivosPorPeriodo', 'title'=>'100 - ACTIVOS POR PERIODO'],
-		['id'=>'ContratosProximosTemporalidad', 'title'=>'105 - PRÓXIMOS A TEMPORALIDAD'],
-		['id'=>'ContratosHeadcountRm', 'title'=>'108 - HEADCOUNT DE R.M'],
-		['id'=>'ContratosHistoricoRm', 'title'=>'109 - HISTÓRICO DE R.M'],
-		['id'=>'ContratosNovedadesRm', 'title'=>'110 - NOVEDADES DE SEGUIMIENTO A R.M'],
+		['id'=>'ContratosActivosPorPeriodo', 'title'=>'105 - ACTIVOS POR PERIODO'],
+		['id'=>'ContratosProximosTemporalidad', 'title'=>'106 - PRÓXIMOS A TEMPORALIDAD'],
+		['id'=>'ContratosHeadcountRm', 'title'=>'107 - HEADCOUNT DE R.M'],
+		['id'=>'ContratosHistoricoRm', 'title'=>'108 - HISTÓRICO DE R.M'],
+		['id'=>'ContratosNovedadesRm', 'title'=>'109 - NOVEDADES DE SEGUIMIENTO A R.M'],
 
-		['id'=>'ProspectosSinContrato', 'title'=>'106 - HOJAS DE VIDA BÁSICAS'],
-		['id'=>'ProspectosDescartados', 'title'=>'107 - HOJAS DE VIDA DESCARTADAS', 'filterRequired' => true],
+		['id'=>'ProspectosSinContrato', 'title'=>'200 - HOJAS DE VIDA BÁSICAS'],
+		['id'=>'ProspectosDescartados', 'title'=>'201 - HOJAS DE VIDA DESCARTADAS', 'filterRequired' => true],
 
-		['id'=>'PlantasAutorizadas', 'title'=>'111 - PLANTAS DE PERSONAL AUTORIZADAS'],
-		['id'=>'PlantasMovimientos', 'title'=>'112 - MOVIMIENTOS DE PLANTAS DE PERSONAL'],
+		['id'=>'PlantasAutorizadas', 'title'=>'300 - PLANTAS DE PERSONAL AUTORIZADAS'],
+		['id'=>'PlantasMovimientos', 'title'=>'301 - MOVIMIENTOS DE PLANTAS DE PERSONAL'],
 
-		['id'=>'ticketsPorFecha', 'title'=>'999 - TICKETS POR FECHA Y ESTADO'],
+		['id'=>'ticketsPorFecha', 'title'=>'400 - TICKETS POR FECHA Y ESTADO'],
 	];
 
 	public function __construct()

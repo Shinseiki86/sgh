@@ -167,54 +167,33 @@ class RptContratosController extends ReporteController
 	public function activosPorPeriodo()
 	{
 		$query = $this->getQuery()
-					->orWhere(function($query){
-			        $query->where('ESTADOSCONTRATOS.ESCO_ID', EstadoContrato::RETIRADO)
+			//Solución #1 cuando el empleado se encuentra retirado (fecha de retiro diferente de nulo):
+			//(CONT_FECHAINGRESO <= fchaIngresoDesde) AND (CONT_FECHARETIRO >= fchaIngresoDesde) AND (CONT_FECHARETIRO >= fchaIngresoHasta)
+			->orWhere(function($query){
+				$query->where('ESTADOSCONTRATOS.ESCO_ID', EstadoContrato::RETIRADO)
+					->whereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoDesde']))
+					->whereDate('CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoDesde']))
+					->whereDate('CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoHasta']));
+			})
+			//Solución #2 cuando el empleado se encuentra retirado (fecha de retiro diferente de nulo):
+			//(CONT_FECHAINGRESO >= fchaIngresoDesde) AND (CONT_FECHAINGRESO <= fchaIngresoHasta) AND (CONT_FECHARETIRO >= fchaIngresoHasta)
+			->orwhere(function($query){
+				$query->where('ESTADOSCONTRATOS.ESCO_ID', EstadoContrato::RETIRADO)
+					->whereDate('CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']))
+					->whereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']))
+					->whereDate('CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoHasta']));
+			})
+			//Solución #3 cuando el empleado se encuentra activo (fecha de retiro es nula):
+			//((CONT_FECHAINGRESO <= fchaIngresoDesde) OR (CONT_FECHAINGRESO == fchaIngresoDesde)) AND (CONT_FECHAINGRESO <= fchaIngresoHasta)
+			->orwhere(function($query){
+				$query->whereIn('ESTADOSCONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO,EstadoContrato::VACACIONES])
+					->whereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']))
+					->where(function($query){
+						$query->orWhereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoDesde']))
+							->orWhereDate('CONT_FECHAINGRESO', '=', Carbon::parse($this->data['fchaIngresoDesde']));
+					});
+			});
 
-			        	->where(function($query){
-
-			        		$query->where('CONTRATOS.CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoDesde']))
-			       		   ->where('CONTRATOS.CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoDesde']))
-			        		->where('CONTRATOS.CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoHasta']));
-			        	});
-			        	  
-			        })
-
-					
-			        ->orwhere(function($query){
-
-			        	$query->where('CONTRATOS.CONT_FECHARETIRO', '>=', Carbon::parse($this->data['fchaIngresoHasta']))
-
-			        	->where(function($query){
-
-			        		$query->where('ESTADOSCONTRATOS.ESCO_ID', EstadoContrato::RETIRADO)
-			        	  	->where('CONTRATOS.CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']))
-			       		   ->where('CONTRATOS.CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']));
-
-			        	});
-			        	   
-			        	  
-			        })
-
-			        ->orwhere(function($query){
-
-			        	$query->whereIn('ESTADOSCONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO,EstadoContrato::VACACIONES])
-			        	->where('CONTRATOS.CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']))
-
-
-			        	->where(function($query){
-
-			        		$query->where('CONTRATOS.CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoDesde']))
-			       		   ->orWhere('CONTRATOS.CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']));
-
-			        	});
-
-			        });
-
-
-		if(isset($this->data['fchaIngresoDesde']))
-			$query->whereDate('CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']));
-		if(isset($this->data['fchaIngresoHasta']))
-			$query->whereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']));
 		if(isset($this->data['empresa']))
 			$query->where('CONTRATOS.EMPL_ID', '=', $this->data['empresa']);
 		if(isset($this->data['gerencia']))
