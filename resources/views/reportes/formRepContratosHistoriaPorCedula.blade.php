@@ -1,3 +1,3 @@
 <div class="row">
-	@include('widgets.forms.input', [ 'type'=>'select', 'column'=>8, 'name'=>'prospecto', 'label'=>'Empleado', 'ajax'=>['url'=>'gestion-humana/getArrProspectosRetirados'], 'options'=>['required'] ] )
+	@include('widgets.forms.input', [ 'type'=>'select', 'column'=>8, 'name'=>'prospecto', 'label'=>'Empleado', 'ajax'=>['url'=>'gestion-humana/getArrProspectosRetirados'], 'options'=>['required'] ])
 </div>

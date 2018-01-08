@@ -12,10 +12,10 @@ class ReporteController extends Controller
 	private $reportes = [
 		['id'=>'ContratosActivosPorFecha', 'title'=>'100 - CONTRATOS ACTIVOS'],
 		['id'=>'ContratosHistorico', 'title'=>'101 - HISTÓRICO DE CONTRATOS'],
-		['id'=>'ContratosIngresosPorFecha', 'title'=>'102 - INGRESOS POR FECHA'],
-		['id'=>'ContratosRetirosPorFecha', 'title'=>'103 - RETIROS POR FECHA'],
+		['id'=>'ContratosIngresosPorFecha', 'title'=>'102 - INGRESOS POR FECHA', 'filterRequired' => true],
+		['id'=>'ContratosRetirosPorFecha', 'title'=>'103 - RETIROS POR FECHA', 'filterRequired' => true],
 		['id'=>'ContratosHistoriaPorCedula', 'title'=>'104 - HISTORIA LABORAL POR CÉDULA', 'filterRequired' => true],
-		['id'=>'ContratosActivosPorPeriodo', 'title'=>'105 - ACTIVOS POR PERIODO'],
+		['id'=>'ContratosActivosPorPeriodo', 'title'=>'105 - ACTIVOS POR PERIODO', 'filterRequired' => true],
 		['id'=>'ContratosProximosTemporalidad', 'title'=>'106 - PRÓXIMOS A TEMPORALIDAD'],
 		['id'=>'ContratosHeadcountRm', 'title'=>'107 - HEADCOUNT DE R.M'],
 		['id'=>'ContratosHistoricoRm', 'title'=>'108 - HISTÓRICO DE R.M'],
@@ -27,7 +27,7 @@ class ReporteController extends Controller
 		['id'=>'PlantasAutorizadas', 'title'=>'300 - PLANTAS DE PERSONAL AUTORIZADAS'],
 		['id'=>'PlantasMovimientos', 'title'=>'301 - MOVIMIENTOS DE PLANTAS DE PERSONAL'],
 
-		['id'=>'ticketsPorFecha', 'title'=>'400 - TICKETS POR FECHA Y ESTADO'],
+		['id'=>'ticketsPorFecha', 'title'=>'400 - TICKETS POR FECHA Y ESTADO', 'filterRequired' => true],
 	];
 
 	public function __construct()

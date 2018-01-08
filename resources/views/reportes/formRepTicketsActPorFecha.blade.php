@@ -14,6 +14,6 @@
 
 <div class="row">
 	<div class="col-xs-12 col-sm-12">
-		@include('widgets.forms.input', ['type'=>'select', 'column'=>12, 'name'=>'estado', 'label'=>'Estado', 'ajax'=>['model'=>'EstadoTicket','column'=>'ESTI_DESCRIPCION']])
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>12, 'name'=>'estado', 'label'=>'Estado', 'ajax'=>['model'=>'EstadoTicket','column'=>'ESTI_DESCRIPCION'], 'options'=>['required'] ])
 	</div>
 </div>

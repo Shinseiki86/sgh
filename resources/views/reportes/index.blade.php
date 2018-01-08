@@ -149,6 +149,7 @@
 					dataType: 'json',
 				}).done(function( data, textStatus, jqXHR ) {
 					fieldsForm.html(data);
+					initComponents();
 					$('.selectpicker').select2();
 					$('.selectpickerAjax').select2({
 						ajax: {

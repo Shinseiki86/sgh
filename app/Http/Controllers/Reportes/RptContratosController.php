@@ -302,12 +302,14 @@ class RptContratosController extends ReporteController
 	 */
 	public function proximosTemporalidad()
 	{
-		$fechaactual = Carbon::now();
+		$days = 300; //Se debe leer desde la parametrización del sistema
+		$filterDate = Carbon::now()->subDays($days);
 
 		$query = $this->getQuery()
 			->whereIn('ESTADOSCONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO, EstadoContrato::VACACIONES])
 			->where('CONTRATOS.TICO_ID', TipoContrato::INDIRECTO)
-			->where('CONTRATOS.CLCO_ID', ClaseContrato::OBRALABOR);
+			->where('CONTRATOS.CLCO_ID', ClaseContrato::OBRALABOR)
+			->whereDate('CONT_FECHAINGRESO', '<=', $filterDate);
 
 		if(isset($this->data['empresa']))
 			$query->where('CONTRATOS.EMPL_ID', '=', $this->data['empresa']);
@@ -324,7 +326,7 @@ class RptContratosController extends ReporteController
 		if(isset($this->data['turno']))
 			$query->where('CONTRATOS.TURN_ID', '=', $this->data['turno']);
 
-		return $this->buildJson($query);
+		return $this->buildJson($query, $columnChart='E.S.T');
 	}
 
 
