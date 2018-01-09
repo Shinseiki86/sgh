@@ -4,7 +4,9 @@
 @push('scripts')
 {!! Html::script('assets/scripts/angular/angular.min.js') !!}
 {!! Html::script('assets/scripts/angular/ui-bootstrap-tpls-2.5.0.min.js') !!}
+{!! Html::script('assets/scripts/metodosVarios.js') !!}
 <script>
+	var fecha = new Fecha();
 	var app = angular.module('app', ['ui.bootstrap'], function($interpolateProvider) {
 		$interpolateProvider.startSymbol('{%');
 		$interpolateProvider.endSymbol('%}');
@@ -37,6 +39,10 @@
 					} else {
 						$("#FECHA_ADICIONAL").val($scope.ausentismo.prorroga[cantProrroga-1].PROR_FECHAFINAL);
 					}
+					var f=fecha.varFecha($("#FECHA_ADICIONAL").val());
+					var fechaAdd=fecha.sumaDias(f,1);
+					$("#PROR_FECHAINICIO").val(fecha.formatoFecha(f));
+					$("#PROR_FECHAFINAL").val(fecha.formatoFecha(f));
 					$scope.showHide = "Ocultar Información";
 					$scope.showResult = true;
 					$scope.mySwitch = false;

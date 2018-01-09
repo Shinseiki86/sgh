@@ -24,7 +24,7 @@
 				llenaDias('{{$fecha2}}');
 			}
 			if (FechaFinAuse=='FECHA_ADICIONAL') {				
-				if (fecha.validaFecha("{{$fecha1}}","<?php echo $FechaFinAuse; ?>")) {	
+				if (!fecha.validaFecha("{{$fecha1}}","<?php echo $FechaFinAuse; ?>")) {	
 					fecha.mensaje("La fecha inicial no puede ser menor a la fecha final del ausentismo o prorroga");
 					fecha.limpiaElemento('{{$fecha1}}');
 					limpiaDias();		

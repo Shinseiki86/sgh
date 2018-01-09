@@ -1,6 +1,21 @@
 function Fecha(){
 	this.f = new Date();
-	this.hoy=this.f.getFullYear() + "-" + (this.f.getMonth() +1) + "-" + this.f.getDate();
+	this.dia=function(f){
+		return f.getDate() < 10 ? "0" + f.getDate() : f.getDate();
+	}
+
+	this.mes=function(f){
+		return f.getMonth() < 9 ? "0" + (f.getMonth() + 1) : (f.getMonth() + 1); 
+	}	
+
+	this.hoy="".concat(this.f.getFullYear()).concat(this.mes(this.f)).concat(this.dia(this.f));
+
+	this.varFecha=function(fechaP){
+		return new Date(fechaP);
+	}
+	this.formatoFecha=function(f){
+   		return "".concat(f.getFullYear()).concat("-"+this.mes(f)).concat("-"+this.dia(f));
+	}
 	this.validaFecha = function (fechaMenor,FechaMayor) {
 		var f1=new Date($("#"+fechaMenor).val());
 		var f2=new Date($("#"+FechaMayor).val());
@@ -34,6 +49,10 @@ function Fecha(){
 	}
 	this.fechaElemento=function(elemento){
 		return $('#'+ elemento).val();
+	}
+	this.sumaDias=function(fecha, dias){
+	  fecha.setDate(fecha.getDate() + dias);
+	  return fecha;
 	}
 	
 }

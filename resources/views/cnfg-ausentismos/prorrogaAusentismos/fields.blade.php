@@ -7,7 +7,7 @@
 <!-- Diagnostico -->
 <div class="row">
 	{{ Form::hidden('DIAG_ID', null, array('id' => 'DIAG_ID')) }}
-	{{ Form::hidden('FECHA_ADICIONAL', null, array('id' => 'FECHA_VALIDA')) }}
+	{{ Form::hidden('FECHA_ADICIONAL', null, array('id' => 'FECHA_ADICIONAL')) }}
 	@include('widgets.forms.input', ['type'=>'text', 'column'=>2, 'name'=>'CIE10', 'label'=>'CIE10','options'=>['ng-disabled'=>"mySwitch"]])
 	@include('widgets.forms.input', ['type'=>'text', 'column'=>6, 'name'=>'DX_DESCRIPCIONP', 'label'=>'Descripción Dx','options'=>['ng-disabled'=>"mySwitch"]])
 	@include('widgets.forms.input', ['type'=>'select', 'column'=>4, 'name'=>'COAU_ID', 'label'=>'Concepto Ausencia', 'data'=>$arrConceptoAusentismo, 'placeholder'=>'Seleccione un Concepto','allowClear'=>true,'options'=>['ng-disabled'=>"mySwitch"]])
