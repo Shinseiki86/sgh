@@ -26,7 +26,6 @@ class RptPlantasController extends ReporteController
 		return $query;
 	}
 
-
 	/**
 	 * 
 	 *
@@ -37,11 +36,11 @@ class RptPlantasController extends ReporteController
 		$query = $this->getQuery();
 
 		if(isset($this->data['empresa']))
-			$query->where('CONTRATOS.EMPL_ID', '=', $this->data['empresa']);
+			$query->where('EMPLEADORES.EMPL_ID', '=', $this->data['empresa']);
 		if(isset($this->data['gerencia']))
-			$query->where('CONTRATOS.GERE_ID', '=', $this->data['gerencia']);
+			$query->where('GERENCIAS.GERE_ID', '=', $this->data['gerencia']);
 		if(isset($this->data['cargo']))
-			$query->where('CONTRATOS.CARG_ID', '=', $this->data['cargo']);
+			$query->where('CARGOS.CARG_ID', '=', $this->data['cargo']);
 
 		return $this->buildJson($query);
 	}

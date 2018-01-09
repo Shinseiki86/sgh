@@ -8,6 +8,7 @@ use SGH\Models\Contrato;
 use SGH\Models\EstadoContrato;
 use SGH\Models\TipoContrato;
 use SGH\Models\ClaseContrato;
+use SGH\Models\ParametroGeneral;
 
 class RptContratosController extends ReporteController
 {
@@ -87,6 +88,52 @@ class RptContratosController extends ReporteController
 				'CIUDADES_SERVICIO.CIUD_NOMBRE AS CIUDAD_SERVICIO',
 				'CONTRATOS.CONT_OBSERVACIONES AS OBSERVACIONES',
 				'CONTRATOS.CONT_MOREOBSERVACIONES AS OBSERVACIONES_RETIRO',
+			]);
+
+		return $query;
+	}
+
+	private function getQueryAtributos()
+	{
+		$query = Contrato::leftJoin('TEMPORALES', 'TEMPORALES.TEMP_ID', '=', 'CONTRATOS.TEMP_ID')
+			->leftJoin('MOTIVOSRETIROS', 'MOTIVOSRETIROS.MORE_ID', '=', 'CONTRATOS.MORE_ID')
+			->leftJoin('PROSPECTOS AS JEFES', 'JEFES.PROS_ID', '=', 'CONTRATOS.JEFE_ID')
+			->leftJoin('PROSPECTOS AS REMPLAZOS', 'REMPLAZOS.PROS_ID', '=', 'CONTRATOS.REMP_ID')
+			->join('PROSPECTOS', 'PROSPECTOS.PROS_ID', '=', 'CONTRATOS.PROS_ID')		
+			->join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+			->join('TIPOSCONTRATOS', 'TIPOSCONTRATOS.TICO_ID', '=', 'CONTRATOS.TICO_ID')
+			->join('CLASESCONTRATOS', 'CLASESCONTRATOS.CLCO_ID', '=', 'CONTRATOS.CLCO_ID')
+			->join('CARGOS', 'CARGOS.CARG_ID', '=', 'CONTRATOS.CARG_ID')
+			->join('ESTADOSCONTRATOS', 'ESTADOSCONTRATOS.ESCO_ID', '=', 'CONTRATOS.ESCO_ID')
+			->join('TIPOSEMPLEADORES', 'TIPOSEMPLEADORES.TIEM_ID', '=', 'CONTRATOS.TIEM_ID')
+			->join('RIESGOS', 'RIESGOS.RIES_ID', '=', 'CONTRATOS.RIES_ID')
+			->join('GERENCIAS', 'GERENCIAS.GERE_ID', '=', 'CONTRATOS.GERE_ID')
+			->join('NEGOCIOS', 'NEGOCIOS.NEGO_ID', '=', 'CONTRATOS.NEGO_ID')
+			->join('CENTROSCOSTOS', 'CENTROSCOSTOS.CECO_ID', '=', 'CONTRATOS.CECO_ID')
+			->join('GRUPOS', 'GRUPOS.GRUP_ID', '=', 'CONTRATOS.GRUP_ID')
+			->join('TURNOS', 'TURNOS.TURN_ID', '=', 'CONTRATOS.TURN_ID')
+			->join('CIUDADES AS CIUDADES_CONTRATA', 'CIUDADES_CONTRATA.CIUD_ID', '=', 'CONTRATOS.CIUD_CONTRATA')
+			->join('CIUDADES AS CIUDADES_SERVICIO', 'CIUDADES_SERVICIO.CIUD_ID', '=', 'CONTRATOS.CIUD_SERVICIO')
+			->join('EMPLEADOATRIBUTO', 'EMPLEADOATRIBUTO.CONT_ID', '=', 'CONTRATOS.CONT_ID')
+			->join('ATRIBUTOS', 'ATRIBUTOS.ATRI_ID', '=', 'EMPLEADOATRIBUTO.ATRI_ID')
+			->select([
+				'EMPLEADORES.EMPL_NOMBRECOMERCIAL as EMPRESA',
+				'TEMPORALES.TEMP_NOMBRECOMERCIAL as E.S.T',
+				'TIPOSCONTRATOS.TICO_DESCRIPCION as TIPO_CONTRATO',
+				'CLASESCONTRATOS.CLCO_DESCRIPCION as CLASE_CONTRATO',
+				'PROSPECTOS.PROS_CEDULA as CEDULA',
+				expression_concat([
+					'PROS_PRIMERNOMBRE',
+					'PROS_SEGUNDONOMBRE',
+					'PROS_PRIMERAPELLIDO',
+					'PROS_SEGUNDOAPELLIDO'
+				], 'NOMBRE_EMPLEADO', 'PROSPECTOS'),
+				'ESTADOSCONTRATOS.ESCO_DESCRIPCION AS ESTADO',
+				'TIPOSEMPLEADORES.TIEM_DESCRIPCION AS TIPO_EMPLEADOR',
+				'GERENCIAS.GERE_DESCRIPCION AS GERENCIA',
+				'ATRIBUTOS.ATRI_DESCRIPCION AS DESC_ATRIBUTO',
+				'EMPLEADOATRIBUTO.EMAT_FECHA AS FECHA_ATRIBUTO',
+				'EMPLEADOATRIBUTO.EMAT_OBSERVACIONES AS OBSERVACIONES_ATRIBUTO',
 			]);
 
 		return $query;
@@ -302,7 +349,7 @@ class RptContratosController extends ReporteController
 	 */
 	public function proximosTemporalidad()
 	{
-		$days = 300; //Se debe leer desde la parametrización del sistema
+		$days = $this->data['dias']; //Se debe leer desde la parametrización del sistema
 		$filterDate = Carbon::now()->subDays($days);
 
 		$query = $this->getQuery()
@@ -430,6 +477,40 @@ class RptContratosController extends ReporteController
 			$query->where('CONTRATOS.TURN_ID', '=', $this->data['turno']);
 		if(isset($this->data['estadorestriccion']))
 			$query->where('CASOSMEDICOS.ESRE_ID', '=', $this->data['estadorestriccion']);
+
+		return $this->buildJson($query);
+	}
+
+	/**
+	 * 
+	 *
+	 * @return Json
+	 */
+	public function atributosPorEmpleado()
+	{
+		$query = $this->getQueryAtributos()
+			->whereIn('ESTADOSCONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO, EstadoContrato::VACACIONES,EstadoContrato::RETIRADO]);
+
+		if(isset($this->data['fchaIngresoDesde']))
+			$query->whereDate('CONT_FECHAINGRESO', '>=', Carbon::parse($this->data['fchaIngresoDesde']));
+		if(isset($this->data['fchaIngresoHasta']))
+			$query->whereDate('CONT_FECHAINGRESO', '<=', Carbon::parse($this->data['fchaIngresoHasta']));
+		if(isset($this->data['empresa']))
+			$query->where('CONTRATOS.EMPL_ID', '=', $this->data['empresa']);
+		if(isset($this->data['gerencia']))
+			$query->where('CONTRATOS.GERE_ID', '=', $this->data['gerencia']);
+		if(isset($this->data['centrocosto']))
+			$query->where('CONTRATOS.CECO_ID', '=', $this->data['centrocosto']);
+		if(isset($this->data['temporal']))
+			$query->where('CONTRATOS.TEMP_ID', '=', $this->data['temporal']);
+		if(isset($this->data['cargo']))
+			$query->where('CONTRATOS.CARG_ID', '=', $this->data['cargo']);
+		if(isset($this->data['grupo']))
+			$query->where('CONTRATOS.GRUP_ID', '=', $this->data['grupo']);
+		if(isset($this->data['turno']))
+			$query->where('CONTRATOS.TURN_ID', '=', $this->data['turno']);
+		if(isset($this->data['atributo']))
+			$query->where('ATRIBUTOS.ATRI_ID', '=', $this->data['atributo']);
 
 		return $this->buildJson($query);
 	}

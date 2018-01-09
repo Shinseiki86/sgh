@@ -36,7 +36,7 @@ class Ausentismo extends ModelWithSoftDeletes
 	public static function rules($id = 0){
 		$rules = [
 	        "COAU_ID" => "required",
-			"CONT_ID" => "required",
+			"CONT_ID" => 'required|unique_with:AUSENTISMOS,AUSE_FECHAINICIO,AUSE_FECHAFINAL',
 			"AUSE_FECHAINICIO" => "required|date",
 			"AUSE_FECHAFINAL" => "date|required",
 			"AUSE_DIAS" => "required",

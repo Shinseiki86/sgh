@@ -16,6 +16,7 @@ class ReporteController extends Controller
 		['id'=>'ContratosRetirosPorFecha', 'title'=>'103 - RETIROS POR FECHA', 'filterRequired' => true],
 		['id'=>'ContratosHistoriaPorCedula', 'title'=>'104 - HISTORIA LABORAL POR CÉDULA', 'filterRequired' => true],
 		['id'=>'ContratosActivosPorPeriodo', 'title'=>'105 - ACTIVOS POR PERIODO', 'filterRequired' => true],
+		['id'=>'ContratosAtributosPorEmpleado', 'title'=>'105 - ATRIBUTOS POR EMPLEADO', 'filterRequired' => true],
 		['id'=>'ContratosProximosTemporalidad', 'title'=>'106 - PRÓXIMOS A TEMPORALIDAD'],
 		['id'=>'ContratosHeadcountRm', 'title'=>'107 - HEADCOUNT DE R.M'],
 		['id'=>'ContratosHistoricoRm', 'title'=>'108 - HISTÓRICO DE R.M'],
@@ -28,6 +29,9 @@ class ReporteController extends Controller
 		['id'=>'PlantasMovimientos', 'title'=>'301 - MOVIMIENTOS DE PLANTAS DE PERSONAL'],
 
 		['id'=>'ticketsPorFecha', 'title'=>'400 - TICKETS POR FECHA Y ESTADO', 'filterRequired' => true],
+
+		['id'=>'AusentismosListadoAusentismos', 'title'=>'LISTADO DE AUSENTISMOS INICIALES', 'filterRequired' => true],
+		['id'=>'AusentismosListadoAusentismosProrrogas', 'title'=>'LISTADO DE AUSENTISMOS PROROGAS', 'filterRequired' => true],
 	];
 
 	public function __construct()

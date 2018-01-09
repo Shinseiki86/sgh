@@ -15,20 +15,20 @@
 		@include('widgets.forms.input', ['type'=>'select', 'column'=>12, 'name'=>'cargo', 'label'=>'Cargo', 'ajax'=>['model'=>'Cargo','column'=>'CARG_DESCRIPCION']])
 	</div>
 	<div class="col-xs-12 col-sm-6">
-		@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'grupo', 'label'=>'Grupo de Empleado', 'ajax'=>['model'=>'Grupo','column'=>'GRUP_DESCRIPCION']])
-		@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'turno', 'label'=>'Turno', 'ajax'=>['model'=>'Turno','column'=>'TURN_DESCRIPCION']])
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'periodo', 'label'=>'Periodo', 'data'=>meses(), 'placeholder'=>'Seleccione...','allowClear'=>true])
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'tipo', 'label'=>'Tipo de Ausentismo', 'ajax'=>['model'=>'TipoAusentismo','column'=>'TIAU_DESCRIPCION']])
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-xs-12 col-sm-12">
-	@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaIngresoDesde', 'label'=>'Fecha ingreso desde', 'options'=>['required'] ])
-	@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaIngresoHasta', 'label'=>'Fecha ingreso hasta', 'options'=>['required'] ])
+	<div class="col-xs-12 col-sm-6">
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>12, 'name'=>'concepto', 'label'=>'Concepto', 'ajax'=>['model'=>'ConceptoAusencia','column'=>'COAU_DESCRIPCION']])
 	</div>
+
+	<div class="col-xs-6 col-sm-6">
+	@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaGrabacionDesde', 'label'=>'Fecha grabación desde' ])
+	@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaGrabacionHasta', 'label'=>'Fecha grabación hasta' ])
+	</div>
+
 </div>
-
-
-
-
-
 

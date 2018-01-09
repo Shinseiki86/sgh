@@ -21,11 +21,15 @@ class CreateProrrogaAusentismosTable extends Migration
 		{
 			
 			$table->increments('PROR_ID')->comment('Valor autonumérico, llave primaria de la tabla.');
-			$table->integer('AUSE_ID')->unsignedInteger('AUSE_ID')->foreign('AUSE_ID')->references('AUSE_ID')->on('AUSENTISMOS')->onDelete('cascade')->onUpdate('cascade')->comment('Id del Ausentismo');
-			$table->integer('DIAG_ID')->unsignedInteger('DIAG_ID')->foreign('DIAG_ID')->references('DIAG_ID')->on('DIAGNOSTICOS')->onDelete('cascade')->onUpdate('cascade')->nullable()->comment('Id del Dianostico');
-			$table->integer('COAU_ID')->unsignedInteger('COAU_ID')->foreign('COAU_ID')->references('COAU_ID')->on('CONCEPTOAUSENCIAS')->onDelete('cascade')->onUpdate('cascade')->comment('Ide del Consecpto Ausentismo');
-			$table->datetime('PROR_FECHAINICIO')->comment('Fecha de Inicio de la Prorroga');
-			$table->datetime('PROR_FECHAFINAL')->comment('Fecha Final de la Prorroga');
+
+			$table->unsignedInteger('AUSE_ID')->comment('Id del Ausentismo');
+
+			$table->unsignedInteger('DIAG_ID')->nullable()->comment('Id del Diagnostico');
+
+			$table->unsignedInteger('COAU_ID')->comment('Ide del Consecpto Ausentismo');
+
+			$table->date('PROR_FECHAINICIO')->comment('Fecha de Inicio de la Prorroga');
+			$table->date('PROR_FECHAFINAL')->comment('Fecha Final de la Prorroga');
 			$table->integer('PROR_DIAS')->unsigned();
 			$table->string('PROR_OBSERVACIONES')->nullable()->comment('Observaciones de la Prorroga');
 			$table->enum('PROR_PERIODO', ['ENERO', 'FEBRERO','MARZO', 'ABRIL','MAYO', 'JUNIO','JULIO', 'AGOSTO','SEPTIEMBRE', 'OCTUBRE','NOVIEMBRE', 'DICIEMBRE'])->nullable()->comment('Indica el periodo en el que se causa la prorroga de  Ausentismo');
@@ -46,6 +50,23 @@ class CreateProrrogaAusentismosTable extends Migration
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
 
             //Relaciones
+            $table->foreign('AUSE_ID')
+                ->references('AUSE_ID')
+                ->on('AUSENTISMOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('DIAG_ID')
+                ->references('DIAG_ID')
+                ->on('DIAGNOSTICOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('COAU_ID')
+                ->references('COAU_ID')
+                ->on('CONCEPTOAUSENCIAS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
 		});
 		if(env('DB_CONNECTION') == 'pgsql')

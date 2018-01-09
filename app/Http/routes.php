@@ -51,6 +51,7 @@ Route::group(['prefix'=>'reportes', 'namespace'=>'Reportes', 'middleware'=>'auth
 	Route::post('ContratosHistoricoRm', 'RptContratosController@historicoRm');
 	Route::post('ContratosNovedadesRm', 'RptContratosController@novedadesRm');
 	Route::post('ContratosActivosPorPeriodo', 'RptContratosController@activosPorPeriodo');
+	Route::post('ContratosAtributosPorEmpleado', 'RptContratosController@atributosPorEmpleado');
 
 	Route::post('ticketsPorFecha', 'RptTicketsController@ticketsPorFecha');
 
@@ -59,6 +60,9 @@ Route::group(['prefix'=>'reportes', 'namespace'=>'Reportes', 'middleware'=>'auth
 
 	Route::post('PlantasAutorizadas', 'RptPlantasController@plantasAutorizadas');
 	Route::post('PlantasMovimientos', 'RptPlantasController@movimientosPlantas');
+
+	Route::post('AusentismosListadoAusentismos', 'RptAusentismosController@listadoAusentismos');
+	Route::post('AusentismosListadoAusentismosProrrogas', 'RptAusentismosController@listadoAusentismosProrrogas');
 });
 
 Route::group(['prefix'=>'cnfg-contratos', 'namespace'=>'CnfgContratos'], function() {

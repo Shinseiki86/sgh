@@ -24,10 +24,10 @@ class ConceptoAusenciasTableSeeder extends Seeder
 
         ConceptoAusencia::create([
             'COAU_CODIGO' => 'INCEPS',
-            'COAU_DESCRIPCION' => 'INCAPACIDAD POR ENFERMEDAD GENERAL (EMPRESA)',
+            'COAU_DESCRIPCION' => 'INCAPACIDAD POR ENFERMEDAD GENERAL (EPS)',
             'COAU_OBSERVACIONES' => 'CORESPONDE A LAS INCAPACIDADES POR ENFERMEDAD GENERAL QUE SE ENCUENTRAN A CARGO DE LA EPS',
             'TIAU_ID' => 2,
-            'TIEN_ID' => 5,
+            'TIEN_ID' => 2,
             'COAU_REMUNERADO' => 'SI',
         ]);
 
@@ -233,6 +233,15 @@ class ConceptoAusenciasTableSeeder extends Seeder
             'COAU_DESCRIPCION' => 'DEVUELTO A LA TEMPORAL',
             'COAU_OBSERVACIONES' => 'CORESPONDE A LA NO PRESTACIÓN DEL SERVICIO POR PARTE DE UN EMPLEADO AL CUAL SE LE INDICA QUE SE PRESENTE A LA TEMPORAL',
             'TIAU_ID' => 9,
+            'TIEN_ID' => 5,
+            'COAU_REMUNERADO' => 'NO',
+        ]);
+
+        ConceptoAusencia::create([
+            'COAU_CODIGO' => 'PED',
+            'COAU_DESCRIPCION' => 'PERDIDA DE DOMINICAL',
+            'COAU_OBSERVACIONES' => 'CORESPONDE A LA PERDIDA DE DOMINICAL COMPENSADO DE ACUERDO A LAS CONDICIONES QUE ESTABLECE LA LEY PARA ELLO',
+            'TIAU_ID' => 6,
             'TIEN_ID' => 5,
             'COAU_REMUNERADO' => 'NO',
         ]);

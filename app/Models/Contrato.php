@@ -61,7 +61,7 @@ class Contrato extends ModelWithSoftDeletes
 			'TICO_ID' => ['numeric', 'required'],
 			'CLCO_ID' => ['numeric', 'required'],
 			'RIES_ID' => ['numeric', 'required'],
-			'PROS_ID' => ['numeric', 'required'],
+			'PROS_ID' => 'required|unique_with:CONTRATOS,CONT_FECHAINGRESO',
 			'GRUP_ID' => ['numeric', 'required'],
 			'TURN_ID' => ['numeric', 'required'],
 			'CIUD_CONTRATA' => ['numeric', 'required'],

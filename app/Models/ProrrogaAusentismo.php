@@ -29,7 +29,7 @@ class ProrrogaAusentismo extends ModelWithSoftDeletes
 
     public static function rules($id = 0){
         return [
-            "AUSE_ID" => "required",
+            "AUSE_ID" => 'required|unique_with:PRORROGAAUSENTISMOS,PROR_FECHAINICIO,PROR_FECHAFINAL',
             "COAU_ID" => "required",
             "PROR_FECHAINICIO" => "date|required",
             "PROR_FECHAFINAL" => "date|required",

@@ -21,11 +21,15 @@ class CreateAusentismosTable extends Migration
 		{
 			
 			$table->increments('AUSE_ID')->comment('Valor autonumérico, llave primaria de la tabla.');
-			$table->integer('DIAG_ID')->unsignedInteger('DIAG_ID')->foreign('DIAG_ID')->references('DIAG_ID')->on('DIAGNOSTICOS')->onDelete('cascade')->onUpdate('cascade')->nullable()->comment('Id de la tabla Diagnostico');
-			$table->integer('COAU_ID')->unsignedInteger('COAU_ID')->foreign('COAU_ID')->references('COAU_ID')->on('CONCEPTOAUSENTISMOS')->onDelete('cascade')->onUpdate('cascade')->comment('Id de la tabla Concepto Ausentismo');
-			$table->integer('CONT_ID')->unsignedInteger('CONT_ID')->foreign('CONT_ID')->references('CONT_ID')->on('CONTRATOS')->onDelete('cascade')->onUpdate('cascade')->comment('Id d ela tabla Contrato');
-			$table->datetime('AUSE_FECHAINICIO')->comment('Fecha de Inicio del Ausentismo');
-			$table->datetime('AUSE_FECHAFINAL')->comment('Fecha Final del Ausentismo');
+
+			$table->unsignedInteger('DIAG_ID')->nullable()->comment('Id de la tabla Diagnostico');
+
+			$table->unsignedInteger('COAU_ID')->comment('Id de la tabla Concepto Ausentismo');
+
+			$table->unsignedInteger('CONT_ID')->comment('Id d ela tabla Contrato');
+
+			$table->date('AUSE_FECHAINICIO')->comment('Fecha de Inicio del Ausentismo');
+			$table->date('AUSE_FECHAFINAL')->comment('Fecha Final del Ausentismo');
 			$table->integer('AUSE_DIAS')->unsigned();
 			$table->date('AUSE_FECHAACCIDENTE')->nullable()->comment('Fecha del Accidente de Trabajo');
 			$table->integer('ENTI_ID')->unsignedInteger('ENTI_ID')->foreign('ENTI_ID')->references('ENTI_ID')->on('ENTIDADES')->onDelete('cascade')->onUpdate('cascade')->comment('Id de la entidad Responsable del Ausentismo');
@@ -49,6 +53,25 @@ class CreateAusentismosTable extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('AUSE_FECHAELIMINADO')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
+
+            //Relaciones
+            $table->foreign('DIAG_ID')
+                ->references('DIAG_ID')
+                ->on('DIAGNOSTICOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('COAU_ID')
+                ->references('COAU_ID')
+                ->on('CONCEPTOAUSENCIAS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('CONT_ID')
+                ->references('CONT_ID')
+                ->on('CONTRATOS')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
 		});
 		if(env('DB_CONNECTION') == 'pgsql')
