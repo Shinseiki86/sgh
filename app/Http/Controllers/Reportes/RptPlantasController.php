@@ -3,6 +3,8 @@ namespace SGH\Http\Controllers\Reportes;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\PlantaLaboral;
+use SGH\Models\Contrato;
+use SGH\Models\EstadoContrato;
 
 class RptPlantasController extends ReporteController
 {
@@ -25,6 +27,7 @@ class RptPlantasController extends ReporteController
 					]);
 		return $query;
 	}
+
 
 	/**
 	 * 
@@ -71,4 +74,50 @@ class RptPlantasController extends ReporteController
 		return $this->buildJson($query);
 	}
 
+
+	/**
+	 * 
+	 *
+	 * @return Json
+	 */
+	public function plantasVrsActivos()
+	{
+		//https://laracasts.com/discuss/channels/eloquent/add-a-left-join-in-laravel-querysubquery-builder
+		/*$subQuery = \DB::table('CONTRATOS')
+					->select(\DB::raw('COUNT(*)'))
+					->join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'CONTRATOS.EMPL_ID')
+					->join('GERENCIAS', 'GERENCIAS.GERE_ID', '=', 'CONTRATOS.GERE_ID')
+					->join('CARGOS', 'CARGOS.CARG_ID', '=', 'CONTRATOS.CARG_ID')
+					->whereIn('ESCO_ID', [EstadoContrato::ACTIVO,EstadoContrato::VACACIONES]);
+		$subQuerySQL = $subQuery->toSql();
+
+		$query = $this->getQuery()
+			->addselect(\DB::raw("({$subQuerySQL}) as CANTIDAD_CONTRATOS"))
+        	->mergeBindings($subQuery->getBindings());*/
+        	
+
+       	//Subquery para Postgres para cruzar contratos con Plantas
+		$sqlCantContratos = '(SELECT COUNT(*) FROM "CONTRATOS"
+			WHERE "CONTRATOS"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
+			AND "CONTRATOS"."GERE_ID" = "GERENCIAS"."GERE_ID"
+			AND "CONTRATOS"."CARG_ID" = "CARGOS"."CARG_ID"
+			AND "CONTRATOS"."ESCO_ID" IN ('.EstadoContrato::ACTIVO.','.EstadoContrato::VACACIONES.'.)
+		) AS "CANTIDAD_CONTRATOS"';
+		//En Mysql, el query no debe tener comillas dobles.
+        if(config('database.default') == 'mysql'){
+    		$sqlCantContratos = str_replace('"', '', $sqlCantContratos);
+        }
+
+		$query = $this->getQuery()
+		->addSelect([\DB::raw($sqlCantContratos)]);
+
+		if(isset($this->data['empresa']))
+			$query->where('EMPLEADORES.EMPL_ID', '=', $this->data['empresa']);
+		if(isset($this->data['gerencia']))
+			$query->where('GERENCIAS.GERE_ID', '=', $this->data['gerencia']);
+		if(isset($this->data['cargo']))
+			$query->where('CARGOS.CARG_ID', '=', $this->data['cargo']);
+
+		return $this->buildJson($query);
+	}
 }

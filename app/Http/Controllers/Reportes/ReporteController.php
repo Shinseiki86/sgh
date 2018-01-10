@@ -10,7 +10,7 @@ class ReporteController extends Controller
 	protected $data = null;
 
 	private $reportes = [
-		['id'=>'ContratosActivosPorFecha', 'title'=>'100 - CONTRATOS ACTIVOS'],
+		['id'=>'ContratosActivos', 'title'=>'100 - CONTRATOS ACTIVOS'],
 		['id'=>'ContratosHistorico', 'title'=>'101 - HISTÓRICO DE CONTRATOS'],
 		['id'=>'ContratosIngresosPorFecha', 'title'=>'102 - INGRESOS POR FECHA', 'filterRequired' => true],
 		['id'=>'ContratosRetirosPorFecha', 'title'=>'103 - RETIROS POR FECHA', 'filterRequired' => true],
@@ -27,6 +27,7 @@ class ReporteController extends Controller
 
 		['id'=>'PlantasAutorizadas', 'title'=>'300 - PLANTAS DE PERSONAL AUTORIZADAS'],
 		['id'=>'PlantasMovimientos', 'title'=>'301 - MOVIMIENTOS DE PLANTAS DE PERSONAL'],
+		['id'=>'PlantasVrsActivos', 'title'=>'302 - PLANTAS Vr ACTIVOS'],
 
 		['id'=>'ticketsPorFecha', 'title'=>'400 - TICKETS POR FECHA Y ESTADO', 'filterRequired' => true],
 

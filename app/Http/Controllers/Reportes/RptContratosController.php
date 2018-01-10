@@ -145,7 +145,7 @@ class RptContratosController extends ReporteController
 	 *
 	 * @return Json
 	 */
-	public function contratosActPorFecha()
+	public function contratosActivos()
 	{
 		$query = $this->getQuery()
 					->whereIn('ESTADOSCONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO, EstadoContrato::VACACIONES]);

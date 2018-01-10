@@ -41,7 +41,7 @@ Route::group(['prefix'=>'reportes', 'namespace'=>'Reportes', 'middleware'=>'auth
 	Route::get('/', 'ReporteController@index');
 	Route::get('/viewForm', 'ReporteController@viewForm');
 	
-	Route::post('ContratosActPorFecha', 'RptContratosController@contratosActPorFecha');
+	Route::post('ContratosActivos', 'RptContratosController@contratosActivos');
 	Route::post('ContratosHistorico', 'RptContratosController@historicoContratos');
 	Route::post('ContratosIngresosPorFecha', 'RptContratosController@ingresosPorFecha');
 	Route::post('ContratosRetirosPorFecha', 'RptContratosController@retirosPorFecha');
@@ -60,6 +60,7 @@ Route::group(['prefix'=>'reportes', 'namespace'=>'Reportes', 'middleware'=>'auth
 
 	Route::post('PlantasAutorizadas', 'RptPlantasController@plantasAutorizadas');
 	Route::post('PlantasMovimientos', 'RptPlantasController@movimientosPlantas');
+	Route::post('PlantasVrsActivos', 'RptPlantasController@plantasVrsActivos');
 
 	Route::post('AusentismosListadoAusentismos', 'RptAusentismosController@listadoAusentismos');
 	Route::post('AusentismosListadoAusentismosProrrogas', 'RptAusentismosController@listadoAusentismosProrrogas');
