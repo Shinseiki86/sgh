@@ -35,7 +35,11 @@ class Controller extends BaseController
 	{
 		$model = $request->input('model');
 		$column = $request->input('column');
-		$arrModel = model_to_array($model, $column);
+		$filter = $request->input('q');
+
+		$arrModel = array_filter( model_to_array($model, $column) , function($item) use ($filter){
+				return preg_match('/'.$filter.'/i', $item);
+			});
 		return response()->json($arrModel);
 	}
 

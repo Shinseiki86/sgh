@@ -153,13 +153,18 @@
 					$('.selectpicker').select2();
 					$('.selectpickerAjax').select2({
 						ajax: {
+							cache: true,
+							delay: 250,
+							//headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+							data: function (params) {
+								return { q: params.term };
+							},
 							processResults: function (data) {
-								data = $.map( data, function( value, index ) {
+								return {results: $.map( data, function( value, index ) {
 									return {id: index, text: value};
-								});
-								return {results: data};
+								})};
 							}
-						}
+						},
 					});
 				})
 				.fail(function( jqXHR, textStatus, errorThrown ) {
