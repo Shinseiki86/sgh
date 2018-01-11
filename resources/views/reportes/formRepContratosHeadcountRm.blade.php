@@ -19,3 +19,9 @@
 		@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaIngresoHasta', 'label'=>'Fecha ingreso hasta' ])
 	</div>
 </div>
+
+<div class="col-xs-6 col-sm-6">
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'diagnostico', 'label'=>'Diagnóstico General', 'ajax'=>['model'=>'DiagnosticoGeneral','column'=>'DIGE_DESCRIPCION']])
+
+		@include('widgets.forms.input', [ 'type'=>'select', 'column'=>6, 'name'=>'prospecto', 'label'=>'Empleado', 'ajax'=>['url'=>'gestion-humana/getArrProspectosRetirados']])
+</div>

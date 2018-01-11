@@ -30,5 +30,9 @@
 	@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaGrabacionHasta', 'label'=>'Fecha grabación hasta' ])
 	</div>
 
+	<div class="col-xs-12 col-sm-12">
+		@include('widgets.forms.input', [ 'type'=>'select', 'column'=>6, 'name'=>'prospecto', 'label'=>'Empleado', 'ajax'=>['url'=>'gestion-humana/getArrProspectosRetirados']])
+	</div>
+
 </div>
 

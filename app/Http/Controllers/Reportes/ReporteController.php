@@ -10,29 +10,49 @@ class ReporteController extends Controller
 	protected $data = null;
 
 	private $reportes = [
-		['id'=>'ContratosActivos', 'title'=>'100 - CONTRATOS ACTIVOS'],
-		['id'=>'ContratosHistorico', 'title'=>'101 - HISTÓRICO DE CONTRATOS'],
-		['id'=>'ContratosIngresosPorFecha', 'title'=>'102 - INGRESOS POR FECHA', 'filterRequired' => true],
-		['id'=>'ContratosRetirosPorFecha', 'title'=>'103 - RETIROS POR FECHA', 'filterRequired' => true],
-		['id'=>'ContratosHistoriaPorCedula', 'title'=>'104 - HISTORIA LABORAL POR CÉDULA', 'filterRequired' => true],
-		['id'=>'ContratosActivosPorPeriodo', 'title'=>'105 - ACTIVOS POR PERIODO', 'filterRequired' => true],
-		['id'=>'ContratosAtributosPorEmpleado', 'title'=>'105 - ATRIBUTOS POR EMPLEADO', 'filterRequired' => true],
-		['id'=>'ContratosProximosTemporalidad', 'title'=>'106 - PRÓXIMOS A TEMPORALIDAD'],
-		['id'=>'ContratosHeadcountRm', 'title'=>'107 - HEADCOUNT DE R.M'],
-		['id'=>'ContratosHistoricoRm', 'title'=>'108 - HISTÓRICO DE R.M'],
-		['id'=>'ContratosNovedadesRm', 'title'=>'109 - NOVEDADES DE SEGUIMIENTO A R.M'],
 
-		['id'=>'ProspectosSinContrato', 'title'=>'200 - HOJAS DE VIDA BÁSICAS'],
-		['id'=>'ProspectosDescartados', 'title'=>'201 - HOJAS DE VIDA DESCARTADAS', 'filterRequired' => true],
+		/*Bloque para reportes de Prospectos*/
+		//==============================================================================================
+		['id'=>'ProspectosSinContrato', 'title'=>'100 - HOJAS DE VIDA BÁSICAS'],
+		['id'=>'ProspectosDescartados', 'title'=>'101 - HOJAS DE VIDA DESCARTADAS'],
+		['id'=>'ProspectosCumpleanios', 'title'=>'102 - LISTADO DE CUMPLEAÑOS', 'filterRequired' => true],
+		//==============================================================================================
 
+		/*Bloque para reportes de Contratos*/
+		//==============================================================================================
+		['id'=>'ContratosActivos', 'title'=>'200 - CONTRATOS ACTIVOS'],
+		['id'=>'ContratosHistorico', 'title'=>'201 - HISTÓRICO DE CONTRATOS'],
+		['id'=>'ContratosIngresosPorFecha', 'title'=>'202 - INGRESOS POR FECHA', 'filterRequired' => true],
+		['id'=>'ContratosRetirosPorFecha', 'title'=>'203 - RETIROS POR FECHA', 'filterRequired' => true],
+		['id'=>'ContratosHistoriaPorCedula', 'title'=>'204 - HISTORIA LABORAL POR CÉDULA', 'filterRequired' => true],
+		['id'=>'ContratosActivosPorPeriodo', 'title'=>'205 - ACTIVOS POR PERIODO', 'filterRequired' => true],
+		['id'=>'ContratosProximosTemporalidad', 'title'=>'206 - PRÓXIMOS A TEMPORALIDAD'],
+		['id'=>'ContratosProximosFinalizar', 'title'=>'207 - CONTRATOS PRÓXIMOS A FINALIZAR', 'filterRequired' => true],
+		['id'=>'ContratosActivosPlantillaNovedades', 'title'=>'208 - ACTIVOS PLANTILLA DE NOVEDADES'],
+		['id'=>'ContratosHeadcountRm', 'title'=>'209 - HEADCOUNT DE R.M'],
+		['id'=>'ContratosHistoricoRm', 'title'=>'210 - HISTÓRICO DE R.M'],
+		['id'=>'ContratosNovedadesRm', 'title'=>'211 - NOVEDADES DE SEGUIMIENTO A R.M'],
+		
+		['id'=>'ContratosAtributosPorEmpleado', 'title'=>'212 - ATRIBUTOS POR EMPLEADO', 'filterRequired' => true],
+		//==============================================================================================
+
+		/*Bloque para reportes de Plantas*/
+		//==============================================================================================
 		['id'=>'PlantasAutorizadas', 'title'=>'300 - PLANTAS DE PERSONAL AUTORIZADAS'],
 		['id'=>'PlantasMovimientos', 'title'=>'301 - MOVIMIENTOS DE PLANTAS DE PERSONAL'],
 		['id'=>'PlantasVrsActivos', 'title'=>'302 - PLANTAS Vr ACTIVOS'],
+		//==============================================================================================
 
-		['id'=>'ticketsPorFecha', 'title'=>'400 - TICKETS POR FECHA Y ESTADO', 'filterRequired' => true],
+		/*Bloque para reportes de Tickets*/
+		//==============================================================================================
+		['id'=>'ticketsPorFecha', 'title'=>'400 - LISTADO DE TICKETS'],
+		//==============================================================================================
 
-		['id'=>'AusentismosListadoAusentismos', 'title'=>'LISTADO DE AUSENTISMOS INICIALES', 'filterRequired' => true],
-		['id'=>'AusentismosListadoAusentismosProrrogas', 'title'=>'LISTADO DE AUSENTISMOS PROROGAS', 'filterRequired' => true],
+		/*Bloque para reportes de Ausentismos*/
+		//==============================================================================================
+		['id'=>'AusentismosListadoAusentismos', 'title'=>'500 - LISTADO DE AUSENTISMOS INICIALES'],
+		['id'=>'AusentismosListadoAusentismosProrrogas', 'title'=>'501 - LISTADO DE AUSENTISMOS PROROGAS'],
+		//==============================================================================================
 	];
 
 	public function __construct()

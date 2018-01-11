@@ -16,6 +16,30 @@ class RptPlantasController extends ReporteController
 
 	private function getQuery()
 	{
+		//Subquery para Postgres para cruzar plantas con movimientos de plantas
+		/*
+		$sqlCantPlanta = '(SELECT SUM("PLA"."PALA_CANTIDAD") FROM "PLANTASLABORALES" AS "PLA"
+		    WHERE "PLA"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
+		    AND "PLA"."GERE_ID" = "GERENCIAS"."GERE_ID"
+		    AND "PLA"."CARG_ID" = "CARGOS"."CARG_ID"
+		    GROUP BY("EMPLEADORES"."EMPL_NOMBRECOMERCIAL")
+		) AS "CANTIDAD_AUTORIZADA"';
+		*/
+
+		//subquery para Postgrest ára obtener la variacion total de una planta laboral
+		$sqlCantVarPlanta = '(SELECT SUM("MOV"."MOPL_CANTIDAD") FROM "PLANTASLABORALES" AS "PLA"
+			LEFT JOIN "MOVIMIENTOS_PLANTAS" AS "MOV"
+				ON "PLA"."PALA_ID" = "MOV"."PALA_ID"
+		    AND "PLA"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
+		    AND "PLA"."GERE_ID" = "GERENCIAS"."GERE_ID"
+		    AND "PLA"."CARG_ID" = "CARGOS"."CARG_ID"
+
+		) AS "TOTAL_VARIACIONES"';
+		//En Mysql, el query no debe tener comillas dobles.
+        if(config('database.default') == 'mysql'){
+    		$sqlCantVarPlanta = str_replace('"', '', $sqlCantVarPlanta);
+        }
+
 		$query = PlantaLaboral::join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'PLANTASLABORALES.EMPL_ID')
 					->join('GERENCIAS', 'GERENCIAS.GERE_ID', '=', 'PLANTASLABORALES.GERE_ID')
 					->join('CARGOS', 'CARGOS.CARG_ID', '=', 'PLANTASLABORALES.CARG_ID')
@@ -23,7 +47,22 @@ class RptPlantasController extends ReporteController
 						'EMPLEADORES.EMPL_NOMBRECOMERCIAL AS EMPRESA',
 						'GERENCIAS.GERE_DESCRIPCION AS GERENCIA',
 						'CARGOS.CARG_DESCRIPCION AS CARGO',
-						'PLANTASLABORALES.PALA_CANTIDAD AS CANTIDAD',
+						'PLANTASLABORALES.PALA_CANTIDAD AS CANTIDAD_AUTORIZADA',
+						\DB::raw($sqlCantVarPlanta)
+					]);
+		return $query;
+	}
+
+	private function getQueryVariaciones()
+	{
+		$query = PlantaLaboral::join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'PLANTASLABORALES.EMPL_ID')
+					->join('GERENCIAS', 'GERENCIAS.GERE_ID', '=', 'PLANTASLABORALES.GERE_ID')
+					->join('CARGOS', 'CARGOS.CARG_ID', '=', 'PLANTASLABORALES.CARG_ID')
+					->select([
+						'EMPLEADORES.EMPL_NOMBRECOMERCIAL AS EMPRESA',
+						'GERENCIAS.GERE_DESCRIPCION AS GERENCIA',
+						'CARGOS.CARG_DESCRIPCION AS CARGO',
+						'PLANTASLABORALES.PALA_CANTIDAD AS CANTIDAD_AUTORIZADA',
 					]);
 		return $query;
 	}
@@ -55,7 +94,7 @@ class RptPlantasController extends ReporteController
 	 */
 	public function movimientosPlantas()
 	{
-		$query = $this->getQuery()
+		$query = $this->getQueryVariaciones()
 			->join('MOVIMIENTOS_PLANTAS', 'MOVIMIENTOS_PLANTAS.PALA_ID', '=','PLANTASLABORALES.PALA_ID')
 			->addSelect([
 				'MOVIMIENTOS_PLANTAS.MOPL_CANTIDAD AS MOVIMIENTO',
