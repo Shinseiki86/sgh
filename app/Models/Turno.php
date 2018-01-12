@@ -32,8 +32,13 @@ class Turno extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'TURN_DESCRIPCION' => ['required', 'max:300', 'unique:TURNOS,TURN_DESCRIPCION,'.$id.',TURN_ID'],
+			'TURN_CODIGO' => ['required','max:10'],
+			'TURN_HORAINICIOPI' => ['required'],
+			'TURN_HORAFINALPI' => ['required'],
+			'TURN_CODIGO' => ['required','max:10'],
+			'TURN_OBSERVACIONES' => ['max:300'],
+			'TURN_TIPOTURNO' => ['max:20'],
 		];
 	}
 

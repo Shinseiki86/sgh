@@ -25,8 +25,8 @@ class Sancion extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'SANC_DESCRIPCION' => ['required', 'max:100', 'unique:SANCIONES,SANC_DESCRIPCION,'.$id.',SANC_ID'],
+			'SANC_OBSERVACIONES' => ['max:300'],
 		];
 	}
 

@@ -5,6 +5,7 @@ use SGH\Http\Controllers\Controller;
 use SGH\Models\PlantaLaboral;
 use SGH\Models\Contrato;
 use SGH\Models\EstadoContrato;
+use SGH\Models\TipoContrato;
 
 class RptPlantasController extends ReporteController
 {
@@ -16,15 +17,6 @@ class RptPlantasController extends ReporteController
 
 	private function getQuery()
 	{
-		//Subquery para Postgres para cruzar plantas con movimientos de plantas
-		/*
-		$sqlCantPlanta = '(SELECT SUM("PLA"."PALA_CANTIDAD") FROM "PLANTASLABORALES" AS "PLA"
-		    WHERE "PLA"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
-		    AND "PLA"."GERE_ID" = "GERENCIAS"."GERE_ID"
-		    AND "PLA"."CARG_ID" = "CARGOS"."CARG_ID"
-		    GROUP BY("EMPLEADORES"."EMPL_NOMBRECOMERCIAL")
-		) AS "CANTIDAD_AUTORIZADA"';
-		*/
 
 		//subquery para Postgrest ára obtener la variacion total de una planta laboral
 		$sqlCantVarPlanta = '(SELECT SUM("MOV"."MOPL_CANTIDAD") FROM "PLANTASLABORALES" AS "PLA"
@@ -136,19 +128,34 @@ class RptPlantasController extends ReporteController
         	
 
        	//Subquery para Postgres para cruzar contratos con Plantas
-		$sqlCantContratos = '(SELECT COUNT(*) FROM "CONTRATOS"
+		$sqlCantContratosDirectos = '(SELECT COUNT(*) FROM "CONTRATOS"
 			WHERE "CONTRATOS"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
 			AND "CONTRATOS"."GERE_ID" = "GERENCIAS"."GERE_ID"
 			AND "CONTRATOS"."CARG_ID" = "CARGOS"."CARG_ID"
 			AND "CONTRATOS"."ESCO_ID" IN ('.EstadoContrato::ACTIVO.','.EstadoContrato::VACACIONES.'.)
-		) AS "CANTIDAD_CONTRATOS"';
+			AND "CONTRATOS"."TICO_ID" = '.TipoContrato::DIRECTO.'.
+		) AS "ACTIVOS_DIRECTOS"';
+
+		//Subquery para Postgres para cruzar contratos con Plantas
+		$sqlCantContratosTemporales = '(SELECT COUNT(*) FROM "CONTRATOS"
+			WHERE "CONTRATOS"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
+			AND "CONTRATOS"."GERE_ID" = "GERENCIAS"."GERE_ID"
+			AND "CONTRATOS"."CARG_ID" = "CARGOS"."CARG_ID"
+			AND "CONTRATOS"."ESCO_ID" IN ('.EstadoContrato::ACTIVO.','.EstadoContrato::VACACIONES.'.)
+			AND "CONTRATOS"."TICO_ID" = '.TipoContrato::INDIRECTO.'.
+		) AS "ACTIVOS_TEMPORALES"';
+
 		//En Mysql, el query no debe tener comillas dobles.
         if(config('database.default') == 'mysql'){
-    		$sqlCantContratos = str_replace('"', '', $sqlCantContratos);
+    		$sqlCantContratosDirectos = str_replace('"', '', $sqlCantContratosDirectos);
+    		$sqlCantContratosTemporales = str_replace('"', '', $sqlCantContratosTemporales);
         }
 
 		$query = $this->getQuery()
-		->addSelect([\DB::raw($sqlCantContratos)]);
+		->addSelect([
+					\DB::raw($sqlCantContratosDirectos),
+					\DB::raw($sqlCantContratosTemporales)
+				   ]);
 
 		if(isset($this->data['empresa']))
 			$query->where('EMPLEADORES.EMPL_ID', '=', $this->data['empresa']);

@@ -40,7 +40,7 @@ class ReporteController extends Controller
 		//==============================================================================================
 		['id'=>'PlantasAutorizadas', 'title'=>'300 - PLANTAS DE PERSONAL AUTORIZADAS'],
 		['id'=>'PlantasMovimientos', 'title'=>'301 - MOVIMIENTOS DE PLANTAS DE PERSONAL'],
-		['id'=>'PlantasVrsActivos', 'title'=>'302 - PLANTAS Vr ACTIVOS'],
+		['id'=>'PlantasVrsActivos', 'title'=>'302 - PLANTAS Vs. ACTIVOS'],
 		//==============================================================================================
 
 		/*Bloque para reportes de Tickets*/

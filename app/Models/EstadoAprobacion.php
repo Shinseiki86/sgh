@@ -25,8 +25,9 @@ class EstadoAprobacion extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'ESAP_DESCRIPCION' => ['required', 'max:100', 'unique:ESTADOSAPROBACIONES,ESAP_DESCRIPCION,'.$id.',ESAP_ID'],
+			'ESAP_COLOR' => ['required', 'max:100'],
+			'ESAP_OBSERVACIONES' => ['max:300'],
 		];
 	}
 

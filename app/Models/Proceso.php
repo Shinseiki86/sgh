@@ -24,7 +24,9 @@ class Proceso extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
+			'PROC_DESCRIPCION' => ['required','max:100','unique:PROCESOS,PROC_DESCRIPCION,'.$id.',PROC_ID'],
+			'PROC_OBSERVACIONES' => ['max:300'],
+			'GERE_ids' => ['array'],
 		
 		];
 	}

@@ -3,7 +3,7 @@
 
 <div class='col-md-10'>
 
-@include('widgets.forms.input', ['type'=>'select', 'column'=>10, 'name'=>'PALA_ID', 'label'=>'Planta Laboral', 'data'=>$arrPlantas])
+@include('widgets.forms.input', ['type'=>'select', 'column'=>10, 'name'=>'PALA_ID', 'label'=>'Planta Laboral', 'data'=>$arrPlantas, 'options'=>['required']])
 </div>
 
 <div class='col-md-10'>
@@ -14,13 +14,13 @@
 
 <div class='col-md-10'>
 
-@include('widgets.forms.input', ['type'=>'select', 'column'=>5, 'name'=>'MOPL_MOTIVO', 'label'=>'Motivo del Movimiento', 'data'=>['INCREMENTO' => 'INCREMENTO', 'DECREMENTO' => 'DECREMENTO']])
+@include('widgets.forms.input', ['type'=>'select', 'column'=>5, 'name'=>'MOPL_MOTIVO', 'label'=>'Motivo del Movimiento', 'data'=>['INCREMENTO' => 'INCREMENTO', 'DECREMENTO' => 'DECREMENTO'], 'options'=>['required']])
 
 </div>
 
 <div class='col-md-10'>
 
-@include('widgets.forms.input', ['type'=>'text', 'column'=>5, 'name'=>'MOPL_CANTIDAD', 'label'=>'Cantidad de Variación', 'options'=>['size' => '99999', 'min' => '-1000' ] ])
+@include('widgets.forms.input', ['type'=>'text', 'column'=>5, 'name'=>'MOPL_CANTIDAD', 'label'=>'Cantidad de Variación', 'options'=>['size' => '99999', 'min' => '-1000' ], 'options'=>['required'] ])
 
 </div>
 

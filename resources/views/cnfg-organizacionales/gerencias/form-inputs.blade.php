@@ -2,7 +2,7 @@
 @include('chosen')
 <div class='col-md-8 col-md-offset-2'>
 
-	@include('widgets.forms.input', ['type'=>'text', 'name'=>'GERE_DESCRIPCION', 'label'=>'Descripción', 'options'=>['maxlength' => '100'] ])
+	@include('widgets.forms.input', ['type'=>'text', 'name'=>'GERE_DESCRIPCION', 'label'=>'Descripción', 'options'=>['maxlength' => '100', 'required'] ])
 
 	@include('widgets.forms.input', ['type'=>'select', 'name'=>'CECO_ids', 'label'=>'Centros de Costos', 'data'=>$arrCentrosCostos, 'multiple'=>true,])
 
