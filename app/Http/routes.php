@@ -47,16 +47,19 @@ Route::group(['prefix'=>'reportes', 'namespace'=>'Reportes', 'middleware'=>'auth
 	Route::post('ContratosRetirosPorFecha', 'RptContratosController@retirosPorFecha');
 	Route::post('ContratosHistoriaPorCedula', 'RptContratosController@historiaPorCedula');
 	Route::post('ContratosProximosTemporalidad', 'RptContratosController@proximosTemporalidad');
+	Route::post('ContratosProximosFinalizar', 'RptContratosController@proximosFinalizar');
 	Route::post('ContratosHeadcountRm', 'RptContratosController@headcountRm');
 	Route::post('ContratosHistoricoRm', 'RptContratosController@historicoRm');
 	Route::post('ContratosNovedadesRm', 'RptContratosController@novedadesRm');
 	Route::post('ContratosActivosPorPeriodo', 'RptContratosController@activosPorPeriodo');
 	Route::post('ContratosAtributosPorEmpleado', 'RptContratosController@atributosPorEmpleado');
+	Route::post('ContratosActivosPlantillaNovedades', 'RptContratosController@activosPlantillaNovedades');
 
 	Route::post('ticketsPorFecha', 'RptTicketsController@ticketsPorFecha');
 
 	Route::post('ProspectosSinContrato', 'RptProspectosController@hojasDeVida');
 	Route::post('ProspectosDescartados', 'RptProspectosController@hojasDeVidaDescartadas');
+	Route::post('ProspectosCumpleanios', 'RptProspectosController@cumpleanios');
 
 	Route::post('PlantasAutorizadas', 'RptPlantasController@plantasAutorizadas');
 	Route::post('PlantasMovimientos', 'RptPlantasController@movimientosPlantas');

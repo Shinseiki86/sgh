@@ -39,7 +39,7 @@
 @include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'CONT_FECHAINGRESO', 'label'=>'Fecha de Ingreso' ])
 </div>
 
-<div class="col-md-13" id="DIVFECHAFIN">
+<div class="col-md-13">
 @include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'CONT_FECHATERMINACION', 'label'=>'Fecha Fin de Contrato' ])
 </div>
 

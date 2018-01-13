@@ -2,7 +2,10 @@
 namespace SGH\Http\Controllers\Reportes;
 use SGH\Http\Controllers\Controller;
 
+use \Carbon\Carbon;
+
 use SGH\Models\Prospecto;
+use SGH\Models\EstadoContrato;
 
 class RptProspectosController extends ReporteController
 {
@@ -63,6 +66,31 @@ class RptProspectosController extends ReporteController
 				'PROSPECTOS.PROS_MARCA as ¿DESCARTADA?',
 				'PROSPECTOS.PROS_MARCAOBSERVACIONES as OBSERVACIONES',
 			]);
+
+		if(isset($this->data['prospecto']))
+			$query->where('PROSPECTOS.PROS_ID', '=', $this->data['prospecto']);
+
+		return $this->buildJson($query);
+	}
+
+	/**
+	 * 
+	 *
+	 * @return Json
+	 */
+	public function cumpleanios()
+	{
+
+		$db_start 	= Carbon::parse($this->data['fchaCumpleDesde']);
+		$db_end		= Carbon::parse($this->data['fchaCumpleHasta']);
+
+		$query = $this->getQuery()
+			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
+			->whereIn('CONTRATOS.ESCO_ID', [EstadoContrato::ACTIVO, EstadoContrato::VACACIONES])
+			->whereMonth('PROSPECTOS.PROS_FECHANACIMIENTO', '>=', $db_start->month)
+			->whereDay('PROSPECTOS.PROS_FECHANACIMIENTO', '>=', $db_start->day)	
+			->whereMonth('PROSPECTOS.PROS_FECHANACIMIENTO', '<=', $db_end->month)
+			->whereDay('PROSPECTOS.PROS_FECHANACIMIENTO', '<=', $db_end->day);	
 
 		if(isset($this->data['prospecto']))
 			$query->where('PROSPECTOS.PROS_ID', '=', $this->data['prospecto']);

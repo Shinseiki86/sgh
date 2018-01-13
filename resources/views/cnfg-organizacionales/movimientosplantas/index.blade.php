@@ -20,6 +20,9 @@
 	<table class="table table-striped" id="tabla">
 		<thead>
 			<tr>
+				<th class="col-md-4">Empresa</th>
+				<th class="col-md-4">Gerencia</th>
+				<th class="col-md-4">Cargo</th>
 				<th class="col-md-4">Fecha de Movimiento</th>
 				<th class="col-md-4">Motivo de Movimiento</th>
 				<th class="col-md-4">Cantidad</th>
@@ -31,6 +34,9 @@
 		<tbody>
 			@foreach($movimientosplantas as $movimientoplanta)
 			<tr>
+				<td>{{ $movimientoplanta -> plantalaboral -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
+				<td>{{ $movimientoplanta -> plantalaboral -> gerencia -> GERE_DESCRIPCION }}</td>
+				<td>{{ $movimientoplanta -> plantalaboral -> cargo -> CARG_DESCRIPCION }}</td>
 				<td>{{ $movimientoplanta -> MOPL_FECHAMOVIMIENTO }}</td>	
 				<td>{{ $movimientoplanta -> MOPL_MOTIVO }}</td>
 				<td>{{ $movimientoplanta -> MOPL_CANTIDAD }}</td>

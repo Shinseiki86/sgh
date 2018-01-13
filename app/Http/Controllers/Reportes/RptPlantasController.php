@@ -5,6 +5,7 @@ use SGH\Http\Controllers\Controller;
 use SGH\Models\PlantaLaboral;
 use SGH\Models\Contrato;
 use SGH\Models\EstadoContrato;
+use SGH\Models\TipoContrato;
 
 class RptPlantasController extends ReporteController
 {
@@ -16,6 +17,21 @@ class RptPlantasController extends ReporteController
 
 	private function getQuery()
 	{
+
+		//subquery para Postgrest ára obtener la variacion total de una planta laboral
+		$sqlCantVarPlanta = '(SELECT SUM("MOV"."MOPL_CANTIDAD") FROM "PLANTASLABORALES" AS "PLA"
+			LEFT JOIN "MOVIMIENTOS_PLANTAS" AS "MOV"
+				ON "PLA"."PALA_ID" = "MOV"."PALA_ID"
+		    AND "PLA"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
+		    AND "PLA"."GERE_ID" = "GERENCIAS"."GERE_ID"
+		    AND "PLA"."CARG_ID" = "CARGOS"."CARG_ID"
+
+		) AS "TOTAL_VARIACIONES"';
+		//En Mysql, el query no debe tener comillas dobles.
+        if(config('database.default') == 'mysql'){
+    		$sqlCantVarPlanta = str_replace('"', '', $sqlCantVarPlanta);
+        }
+
 		$query = PlantaLaboral::join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'PLANTASLABORALES.EMPL_ID')
 					->join('GERENCIAS', 'GERENCIAS.GERE_ID', '=', 'PLANTASLABORALES.GERE_ID')
 					->join('CARGOS', 'CARGOS.CARG_ID', '=', 'PLANTASLABORALES.CARG_ID')
@@ -23,7 +39,22 @@ class RptPlantasController extends ReporteController
 						'EMPLEADORES.EMPL_NOMBRECOMERCIAL AS EMPRESA',
 						'GERENCIAS.GERE_DESCRIPCION AS GERENCIA',
 						'CARGOS.CARG_DESCRIPCION AS CARGO',
-						'PLANTASLABORALES.PALA_CANTIDAD AS CANTIDAD',
+						'PLANTASLABORALES.PALA_CANTIDAD AS CANTIDAD_AUTORIZADA',
+						\DB::raw($sqlCantVarPlanta)
+					]);
+		return $query;
+	}
+
+	private function getQueryVariaciones()
+	{
+		$query = PlantaLaboral::join('EMPLEADORES', 'EMPLEADORES.EMPL_ID', '=', 'PLANTASLABORALES.EMPL_ID')
+					->join('GERENCIAS', 'GERENCIAS.GERE_ID', '=', 'PLANTASLABORALES.GERE_ID')
+					->join('CARGOS', 'CARGOS.CARG_ID', '=', 'PLANTASLABORALES.CARG_ID')
+					->select([
+						'EMPLEADORES.EMPL_NOMBRECOMERCIAL AS EMPRESA',
+						'GERENCIAS.GERE_DESCRIPCION AS GERENCIA',
+						'CARGOS.CARG_DESCRIPCION AS CARGO',
+						'PLANTASLABORALES.PALA_CANTIDAD AS CANTIDAD_AUTORIZADA',
 					]);
 		return $query;
 	}
@@ -55,7 +86,7 @@ class RptPlantasController extends ReporteController
 	 */
 	public function movimientosPlantas()
 	{
-		$query = $this->getQuery()
+		$query = $this->getQueryVariaciones()
 			->join('MOVIMIENTOS_PLANTAS', 'MOVIMIENTOS_PLANTAS.PALA_ID', '=','PLANTASLABORALES.PALA_ID')
 			->addSelect([
 				'MOVIMIENTOS_PLANTAS.MOPL_CANTIDAD AS MOVIMIENTO',
@@ -97,19 +128,34 @@ class RptPlantasController extends ReporteController
         	
 
        	//Subquery para Postgres para cruzar contratos con Plantas
-		$sqlCantContratos = '(SELECT COUNT(*) FROM "CONTRATOS"
+		$sqlCantContratosDirectos = '(SELECT COUNT(*) FROM "CONTRATOS"
 			WHERE "CONTRATOS"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
 			AND "CONTRATOS"."GERE_ID" = "GERENCIAS"."GERE_ID"
 			AND "CONTRATOS"."CARG_ID" = "CARGOS"."CARG_ID"
 			AND "CONTRATOS"."ESCO_ID" IN ('.EstadoContrato::ACTIVO.','.EstadoContrato::VACACIONES.'.)
-		) AS "CANTIDAD_CONTRATOS"';
+			AND "CONTRATOS"."TICO_ID" = '.TipoContrato::DIRECTO.'.
+		) AS "ACTIVOS_DIRECTOS"';
+
+		//Subquery para Postgres para cruzar contratos con Plantas
+		$sqlCantContratosTemporales = '(SELECT COUNT(*) FROM "CONTRATOS"
+			WHERE "CONTRATOS"."EMPL_ID" = "EMPLEADORES"."EMPL_ID"
+			AND "CONTRATOS"."GERE_ID" = "GERENCIAS"."GERE_ID"
+			AND "CONTRATOS"."CARG_ID" = "CARGOS"."CARG_ID"
+			AND "CONTRATOS"."ESCO_ID" IN ('.EstadoContrato::ACTIVO.','.EstadoContrato::VACACIONES.'.)
+			AND "CONTRATOS"."TICO_ID" = '.TipoContrato::INDIRECTO.'.
+		) AS "ACTIVOS_TEMPORALES"';
+
 		//En Mysql, el query no debe tener comillas dobles.
         if(config('database.default') == 'mysql'){
-    		$sqlCantContratos = str_replace('"', '', $sqlCantContratos);
+    		$sqlCantContratosDirectos = str_replace('"', '', $sqlCantContratosDirectos);
+    		$sqlCantContratosTemporales = str_replace('"', '', $sqlCantContratosTemporales);
         }
 
 		$query = $this->getQuery()
-		->addSelect([\DB::raw($sqlCantContratos)]);
+		->addSelect([
+					\DB::raw($sqlCantContratosDirectos),
+					\DB::raw($sqlCantContratosTemporales)
+				   ]);
 
 		if(isset($this->data['empresa']))
 			$query->where('EMPLEADORES.EMPL_ID', '=', $this->data['empresa']);

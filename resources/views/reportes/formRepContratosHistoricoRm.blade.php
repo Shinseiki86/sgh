@@ -15,13 +15,16 @@
 	</div>
 	<div class="col-xs-12 col-sm-6">
 		@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'estadorestriccion', 'label'=>'Estado de Restricción', 'ajax'=>['model'=>'EstadoRestriccion','column'=>'ESRE_DESCRIPCION']])
-		@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'estadorestriccion', 'label'=>'Estado de Restricción', 'ajax'=>['model'=>'EstadoContrato','column'=>'ESCO_DESCRIPCION']])
+		@include('widgets.forms.input', ['type'=>'select', 'column'=>6, 'name'=>'estadocontrato', 'label'=>'Estado de Contrato', 'ajax'=>['model'=>'EstadoContrato','column'=>'ESCO_DESCRIPCION']])
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-xs-12 col-sm-12">
+	<div class="col-xs-6 col-sm-6">
 		@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaIngresoDesde', 'label'=>'Fecha ingreso desde' ])
 		@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaIngresoHasta', 'label'=>'Fecha ingreso hasta' ])
+	</div>
+	<div class="col-xs-6 col-sm-6">
+		@include('widgets.forms.input', [ 'type'=>'select', 'column'=>12, 'name'=>'prospecto', 'label'=>'Empleado', 'ajax'=>['url'=>'gestion-humana/getArrProspectosRetirados']])
 	</div>
 </div>

@@ -14,7 +14,7 @@ use SGH\Models\EstadoTicket;
 
 class EstadoTicketController extends Controller
 {
-	protected $route = 'cnfg-tickets.estados';
+	protected $route = 'cnfg-tickets.estadostickets';
 	protected $class = EstadoTicket::class;
 
 	public function __construct()

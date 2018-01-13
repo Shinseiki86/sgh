@@ -26,9 +26,9 @@ class Temporal extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			'TEMP_RAZONSOCIAL' => ['required', 'max:300'],
-			'TEMP_NOMBRECOMERCIAL' => ['required', 'max:300'],
-			'TEMP_DIRECCION' => ['required', 'max:300'],
+			'TEMP_RAZONSOCIAL' => ['required', 'max:100'],
+			'TEMP_NOMBRECOMERCIAL' => ['required', 'max:100'],
+			'TEMP_DIRECCION' => ['required', 'max:100'],
 			'TEMP_OBSERVACIONES' => ['max:300'],
 			'PROS_ID' => ['required'],
 		];

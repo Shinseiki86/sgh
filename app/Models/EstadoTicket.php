@@ -30,8 +30,9 @@ class EstadoTicket extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'ESTI_DESCRIPCION' => ['required', 'max:100', 'unique:ESTADOSTICKETS,ESTI_DESCRIPCION,'.$id.',ESTI_ID'],
+			'ESTI_COLOR' => ['required', 'max:100'],
+			'ESTI_OBSERVACIONES' => ['max:300'],
 		];
 	}
 

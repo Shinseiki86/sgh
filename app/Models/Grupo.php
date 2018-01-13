@@ -25,8 +25,8 @@ class Grupo extends ModelWithSoftDeletes
 
 	public static function rules($id = 0){
 		return [
-			//'CARG_DESCRIPCION' => 'required|max:100|'.static::unique($id,'CARG_DESCRIPCION'),
-		
+			'GRUP_DESCRIPCION' => ['required', 'max:300', 'unique:GRUPOS,GRUP_DESCRIPCION,'.$id.',GRUP_ID'],
+			'GRUP_OBSERVACIONES' => ['max:300'],
 		];
 	}
 

@@ -28,7 +28,8 @@ class MovimientoPlanta extends ModelWithSoftDeletes
 	public static function rules($id = 0){
 		$rules = [
 			'PALA_ID' => ['numeric', 'required'],
-			'MOPL_MOTIVO' => ['max:300', 'required'],
+			'MOPL_MOTIVO' => ['required'],
+			'MOPL_FECHAMOVIMIENTO' => ['required'],
 			'MOPL_CANTIDAD' => ['numeric', 'required'],
 			'MOPL_OBSERVACIONES' => ['max:300'],
 		];

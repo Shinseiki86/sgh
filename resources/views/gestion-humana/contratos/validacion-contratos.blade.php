@@ -59,7 +59,7 @@
 				//Bloque 3
 				var $clco_id = null;
 
-				$('#DIVFECHAFIN').hide();
+				$('#CONT_FECHATERMINACION').attr('disabled', 'disabled');
 
 				$('#CLCO_ID').change(function() {
 
@@ -67,10 +67,9 @@
 
 					var $val = $('#CLCO_ID').val();
 					if($val!=null && $val==$terminofijo){		
-						$('#DIVFECHAFIN').show();
+						$('#CONT_FECHATERMINACION').removeAttr('disabled');
 					}else{
-						$('#DIVFECHAFIN').hide();
-						$('#CONT_FECHAINGRESO').val('');
+						$('#CONT_FECHATERMINACION').attr('disabled', 'disabled');
 					}
 
 

@@ -22,9 +22,13 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-12 col-sm-12">
+	<div class="col-xs-6 col-sm-6">
 	@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaIngresoDesde', 'label'=>'Fecha ingreso desde' ])
 	@include('widgets.forms.input', ['type'=>'date', 'column'=>6, 'name'=>'fchaIngresoHasta', 'label'=>'Fecha ingreso hasta' ])
+	</div>
+
+	<div class="col-xs-6 col-sm-6">
+		@include('widgets.forms.input', [ 'type'=>'select', 'column'=>12, 'name'=>'prospecto', 'label'=>'Empleado', 'ajax'=>['url'=>'gestion-humana/getArrProspectosRetirados']])
 	</div>
 </div>
 

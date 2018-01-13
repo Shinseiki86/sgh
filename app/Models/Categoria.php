@@ -28,7 +28,7 @@ class Categoria extends ModelWithSoftDeletes
 		$rules = [
 			'CATE_DESCRIPCION' => ['required','max:100'],
 			'CATE_OBSERVACIONES' => ['max:300'],
-			'CATE_ids' => ['array'],
+			'PROC_ID' => ['required'],
 		];
 		return $rules;
 	}

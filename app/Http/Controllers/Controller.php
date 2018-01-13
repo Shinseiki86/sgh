@@ -141,13 +141,11 @@ class Controller extends BaseController
 		$exceptions = (isset($this->route) && $this->route=='app.menu');
 
 		$data = request()->all();
-
 		foreach ($data as $input => $value) {
-			$exceptions = ($exceptions || ($input == '_token') || is_array($value));
 			if($value=='')
 				$data[$input] = null;
 			else {
-				$data[$input] = $exceptions 
+				$data[$input] = ($exceptions || ($input == '_token') || is_array($value))
 					? $value
 					: mb_strtoupper($value);
 			}

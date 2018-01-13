@@ -6,14 +6,19 @@
 {!! Html::script('assets/scripts/angular/ui-bootstrap-tpls-2.5.0.min.js') !!}
 {!! Html::script('assets/scripts/metodosVarios.js') !!}
 <script>
+
 	var fecha = new Fecha();
 	var app = angular.module('app', ['ui.bootstrap'], function($interpolateProvider) {
 		$interpolateProvider.startSymbol('{%');
 		$interpolateProvider.endSymbol('%}');
 	});
-
+	var d = document.getElementById("divAn"); 
+	if ($("#AUSE_ID").val()!="") {		
+		d.setAttribute("ng-init", "mySwitch=false");
+	}else{
+		d.setAttribute("ng-init", "mySwitch=true");
+	}
 	app.controller('buscaAusentismo', function($scope, $http) {
-
 		$scope.cargaAusentismo = function() {
 			if ($("#AUSE_ID").val()=="") {
 				toastr.error(
@@ -64,7 +69,7 @@
 @endpush
 
 @section('section')
-<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" ng-app="app" ng-controller="buscaAusentismo" ng-init="mySwitch=true">
+<div id="divAn" class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" ng-app="app" ng-controller="buscaAusentismo">
 	{{ Form::open(['route' => 'cnfg-ausentismos.prorrogaausentismos.store', 'class' => 'form-horizontal']) }}
 		@include('cnfg-ausentismos.prorrogaausentismos.datosAusentismo')
 		<!-- Elementos del formulario -->
