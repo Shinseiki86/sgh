@@ -48,6 +48,29 @@ if (! function_exists('expression_concat')) {
     }
 }
 
+if (! function_exists('expression_count')) {
+    /**
+     * Crea un array con la llave primaria y una columna a partir de un Model.
+     * Se utiliza para contruir <select> en los views.
+     *
+     * @param  string|Model  $class
+     * @param  string  $column
+     * @param  string  $primaryKey
+     * @return array
+     */
+    function expression_count($table, $alias)
+    {
+        $query = \DB::table($table)
+                    ->select(\DB::raw('COUNT(*)'))
+                    ->toSql();
+
+        if(isset($alias))
+            $alias = 'COUNT_'.$table;
+
+        return \DB::raw("({$query}) as \"".$alias."\"");
+    }
+}
+
 if (! function_exists('model_to_array')) {
     /**
      * Crea un array con la llave primaria y una columna a partir de un Model.
@@ -245,38 +268,17 @@ if (! function_exists('datetime')) {
 }
 
 
-if (! function_exists('nombre_empleado')) {
+if (! function_exists('getLogo')) {
     /**
-     * Implode an array with the key and value pair giving
-     * a glue, a separator between pairs and the array
-     * to implode.
-     * @param string $glue The glue between key and value
-     * @param string $separator Separator between pairs
-     * @param array $array The array to implode
-     * @return string The imploded array
+     * Convierte un Date a String formateado
+     * @param string|Date $date Fecha a convertir.
+     * @return string Fecha formateada
      */
-    function nombre_empleado($PROS_ID) {
-        $prospecto = \SGH\Models\Prospecto::findOrFail($PROS_ID);
-        $nombre = "";
-
-        if($prospecto->PROS_SEGUNDONOMBRE != null && $prospecto->PROS_SEGUNDOAPELLIDO != null){
-            $nombre = $prospecto->PROS_PRIMERNOMBRE . " " . $prospecto->PROS_SEGUNDONOMBRE . " " .
-            $prospecto->PROS_PRIMERAPELLIDO . " " . $prospecto->PROS_SEGUNDOAPELLIDO;
-        }
-        if($prospecto->PROS_SEGUNDONOMBRE != null && $prospecto->PROS_SEGUNDOAPELLIDO == null){
-            $nombre = $prospecto->PROS_PRIMERNOMBRE . " " . $prospecto->PROS_SEGUNDONOMBRE . " " .
-            $prospecto->PROS_PRIMERAPELLIDO;
-        }
-        if($prospecto->PROS_SEGUNDONOMBRE == null && $prospecto->PROS_SEGUNDOAPELLIDO != null){
-            $nombre = $prospecto->PROS_PRIMERNOMBRE . " " .
-            $prospecto->PROS_PRIMERAPELLIDO . " " . $prospecto->PROS_SEGUNDOAPELLIDO;
-        }
-        if($prospecto->PROS_SEGUNDONOMBRE == null && $prospecto->PROS_SEGUNDOAPELLIDO == null){
-            $nombre = $prospecto->PROS_PRIMERNOMBRE . " " . $prospecto->PROS_PRIMERAPELLIDO ;
-        }
-        return strtoupper($nombre);
+    function getLogo($size = null) {
+        return File::exists('assets/images/logo-user.png')
+            ? asset('assets/images/logo-user.png')
+            : asset('assets/images/logo-default.png');
     }
-
 }
 
 

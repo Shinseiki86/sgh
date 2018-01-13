@@ -88,7 +88,7 @@
 			])
 			@include('widgets.list-group-item', [
 				'label'=>'Empleado',
-				'value'=>nombre_empleado($ticket->contrato->PROS_ID)
+				'value'=>$ticket->contrato->prospecto->nombre_completo
 			])
 			@include('widgets.list-group-item', [
 				'label'=>'Estado',

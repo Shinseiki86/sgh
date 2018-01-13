@@ -35,7 +35,7 @@
 				<td>{{ $temporal -> TEMP_RAZONSOCIAL }}</td>
 				<td>{{ $temporal -> TEMP_NOMBRECOMERCIAL }}</td>
 				<td>{{ $temporal -> TEMP_DIRECCION }}</td>
-				<td>{{ isset($temporal ->PROS_ID) ? nombre_empleado($temporal -> PROS_ID) : '' }}</td>
+				<td>{{ isset($temporal ->PROS_ID) ? $temporal -> prospecto -> nombre_completo : '' }}</td>
 				<td>{{ $temporal -> TEMP_CREADOPOR }}</td>
 				<td>
 					<!-- Botón Editar (edit) -->

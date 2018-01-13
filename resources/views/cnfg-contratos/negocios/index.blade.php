@@ -36,7 +36,7 @@
 				<td>{{ $negocio -> NEGO_ID }}</td>
 				<td>{{ $negocio -> NEGO_DESCRIPCION }}</td>
 				<td>{{ $negocio -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
-				<td>{{ nombre_empleado($negocio -> prospecto -> PROS_ID)}}</td>
+				<td>{{ $negocio -> prospecto -> nombre_completo }}</td>
 				<td>{{ $negocio -> NEGO_OBSERVACIONES }}</td>
 				<td>{{ $negocio -> NEGO_CREADOPOR }}</td>
 				<td>

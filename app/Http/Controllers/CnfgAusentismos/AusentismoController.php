@@ -26,7 +26,7 @@ class AusentismoController extends Controller
 	 */
 	public function index()
 	{
-		$ausentismos = findAll("Ausentismo");
+		$ausentismos = findAll("Ausentismo", ['contrato.prospecto']);
 		return view($this->route.'.index', compact('ausentismos'));
 		
 	}

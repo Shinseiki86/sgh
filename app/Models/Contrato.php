@@ -4,6 +4,8 @@ namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
 
+use SGH\Models\EstadoContrato;
+
 class Contrato extends ModelWithSoftDeletes
 {
 	
@@ -86,9 +88,7 @@ class Contrato extends ModelWithSoftDeletes
 
 	public function scopeActivos($query)
 	{
-		$query = $query->whereIn('EMPL_ID',1);
-
-		return $query;
+		return $query->whereIn('ESCO_ID', EstadoContrato::ACTIVO);
 	}
 
 	public function prospecto()

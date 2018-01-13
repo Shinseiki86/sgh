@@ -50,10 +50,4 @@ class Ciudad extends ModelWithSoftDeletes
 		return $this->hasMany(Contrato::class, $foreingKey);
 	}
 
-	public static function ciudades($id){
-    	return Ciudad::where('DEPA_ID','=',$id)
-    	->get();
-    }
-
-
 }

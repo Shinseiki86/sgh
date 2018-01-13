@@ -55,7 +55,13 @@ class EmpleadorController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$empleadores = Empleador::all();
+		$empleadores = Empleador::with([
+							'ciudad_expedicion',
+							'ciudad_domicilio',
+							'prospecto',
+							'gerencias',
+						])->get();
+
 		//Se carga la vista y se pasan los registros
 		return view($this->route.'.index', compact('empleadores'));
 	}
@@ -147,6 +153,17 @@ class EmpleadorController extends Controller
 	public function destroy($EMPL_ID)
 	{
 		parent::destroyModel($EMPL_ID);
+	}
+
+	/**
+	 * Elimina un registro de la base de datos.
+	 *
+	 * @param  int  $EMPL_ID
+	 * @return Response
+	 */
+	public function getSignature($EMPL_ID)
+	{
+		return storage_path('public/signatures/'.$EMPL_ID.'jpg');
 	}
 	
 }

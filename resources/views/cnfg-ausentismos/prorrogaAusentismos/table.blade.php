@@ -14,15 +14,15 @@
     <tbody>
     @foreach($prorrogaAusentismos as $prorrogaAusentismo)
         <tr>
-            <td>{!! nombre_empleado($prorrogaAusentismo->ausentismo->contrato->PROS_ID) !!}</td>
-			<td>{!! $prorrogaAusentismo->diagnostico->DIAG_DESCRIPCION or null!!}</td>
-			<td>{!! $prorrogaAusentismo->conceptoausencia->COAU_DESCRIPCION !!}</td>
-			<td>{!! $prorrogaAusentismo->ausentismo->AUSE_FECHAINICIO !!}</td>
-            <td>{!! $prorrogaAusentismo->PROR_FECHAINICIO !!}</td>
-			<td>{!! $prorrogaAusentismo->PROR_FECHAFINAL !!}</td>
-			<td>{!! $prorrogaAusentismo->PROR_DIAS !!}</td>
-            <td>{!! $prorrogaAusentismo->PROR_PERIODO !!}</td>
-			<td>{!! $prorrogaAusentismo->PROR_OBSERVACIONES !!}</td>
+            <td>{{ $prorrogaAusentismo->ausentismo->contrato->prospecto->nombre_completo }}</td>
+			<td>{{ $prorrogaAusentismo->diagnostico->DIAG_DESCRIPCION or null}}</td>
+			<td>{{ $prorrogaAusentismo->conceptoausencia->COAU_DESCRIPCION }}</td>
+			<td>{{ $prorrogaAusentismo->ausentismo->AUSE_FECHAINICIO }}</td>
+            <td>{{ $prorrogaAusentismo->PROR_FECHAINICIO }}</td>
+			<td>{{ $prorrogaAusentismo->PROR_FECHAFINAL }}</td>
+			<td>{{ $prorrogaAusentismo->PROR_DIAS }}</td>
+            <td>{{ $prorrogaAusentismo->PROR_PERIODO }}</td>
+			<td>{{ $prorrogaAusentismo->PROR_OBSERVACIONES }}</td>
              <td>
                 <!-- Botón Editar (edit) -->
                 <a class="btn btn-small btn-info btn-xs" href="{{ route('cnfg-ausentismos.prorrogaausentismos.edit', [ $prorrogaAusentismo->PROR_ID ] ) }}" data-tooltip="tooltip" title="Editar">

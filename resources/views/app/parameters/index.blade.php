@@ -19,7 +19,7 @@
 			@include('widgets.forms.input', ['type'=>'file', 'name'=>'image_logo', 'label'=>'Logo', 'options'=>['accept'=>'image/*']])
 		</div>
 		<div class="media-left">
-			{{ Html::image( File::exists('assets/images/logo-user.png') ? asset('assets/images/logo-user.png') : asset('assets/images/logo-default.png'), 'Fondo', [
+			{{ Html::image( getLogo(), 'Fondo', [
 				'class'=>'media-object',
 				'width'=>'250px',
 			]) }}

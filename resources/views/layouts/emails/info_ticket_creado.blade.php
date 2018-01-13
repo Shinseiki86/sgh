@@ -32,7 +32,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-lg-4"><strong>Empleado:</strong>
-            {{ nombre_empleado($ticket -> contrato -> PROS_ID) }}
+            {{ $ticket -> contrato -> prospecto -> nombre_completo }}
             </div>
           </div>
         </li>

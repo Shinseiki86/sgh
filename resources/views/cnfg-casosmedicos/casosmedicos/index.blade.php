@@ -51,7 +51,7 @@
 				<td>{{ $casomedico -> contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $casomedico -> contrato -> temporal -> TEMP_NOMBRECOMERCIAL or null }}</td>
 				<td>{{ $casomedico -> contrato -> prospecto -> PROS_CEDULA }}</td>
-				<td>{{ nombre_empleado($casomedico -> contrato -> prospecto -> PROS_ID) }}</td>
+				<td>{{ $casomedico -> contrato -> prospecto -> nombre_completo }}</td>
 				<td>{{ $casomedico -> contrato -> estadocontrato -> ESCO_DESCRIPCION }}</td>
 				<td>{{ $casomedico -> contrato -> cargo -> CARG_DESCRIPCION }}</td>
 				<td>{{ number_format($casomedico -> contrato -> CONT_SALARIO, 0) }}</td>
@@ -80,7 +80,7 @@
 						'data-toggle'=>'modal',
 						'data-id'=> $casomedico->CAME_ID,
 						'data-modelo'=> str_upperspace(class_basename($casomedico)),
-						'data-descripcion'=> nombre_empleado($casomedico -> contrato -> prospecto -> PROS_ID),
+						'data-descripcion'=> $casomedico -> contrato -> prospecto -> nombre_completo,
 						'data-action'=>'casosmedicos/'. $casomedico->CAME_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',

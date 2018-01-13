@@ -31,7 +31,7 @@ class ProrrogaAusentismoController extends Controller
 	 */
 	public function index()
 	{
-		$prorrogaAusentismos = findAll("ProrrogaAusentismo");
+		$prorrogaAusentismos = findAll("ProrrogaAusentismo", ['ausentismo.contrato.prospecto']);
 		return view($this->route.'.index', compact('prorrogaAusentismos'));
 	}
 

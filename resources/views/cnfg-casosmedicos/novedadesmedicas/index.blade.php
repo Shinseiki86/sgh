@@ -39,7 +39,7 @@
 				<td>{{ $novedadmedica -> casomedico -> contrato -> empleador -> EMPL_NOMBRECOMERCIAL }}</td>
 				<td>{{ $novedadmedica -> casomedico -> contrato -> temporal -> TEMP_NOMBRECOMERCIAL or null }}</td>
 				<td>{{ $novedadmedica -> casomedico -> contrato -> prospecto -> PROS_CEDULA }}</td>
-				<td>{{ nombre_empleado($novedadmedica -> casomedico -> contrato -> prospecto -> PROS_ID) }}</td>
+				<td>{{ $novedadmedica -> casomedico -> contrato -> prospecto -> nombre_completo }}</td>
 				<td>{{ $novedadmedica -> NOME_FECHANOVEDAD }}</td>
 				<td>{{ $novedadmedica -> NOME_DESCRIPCION }}</td>
 				<td>{{ $novedadmedica -> NOME_OBSERVACIONES }}</td>
@@ -56,7 +56,7 @@
 						'data-toggle'=>'modal',
 						'data-id'=> $novedadmedica->NOME_ID,
 						'data-modelo'=> str_upperspace(class_basename($novedadmedica)),
-						'data-descripcion'=> nombre_empleado($novedadmedica -> casomedico -> contrato -> prospecto -> PROS_ID),
+						'data-descripcion'=> $novedadmedica -> casomedico -> contrato -> prospecto -> nombre_completo,
 						'data-action'=>'novedadesmedicas/'. $novedadmedica->NOME_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',

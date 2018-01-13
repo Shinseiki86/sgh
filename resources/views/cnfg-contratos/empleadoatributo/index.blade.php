@@ -33,7 +33,7 @@
 		<tbody>
 			@foreach($empleadoatributos as $empleadoatributo)
 			<tr>
-				<td>{{ nombre_empleado($empleadoatributo -> contrato -> prospecto -> PROS_ID) }}</td>
+				<td>{{ $empleadoatributo -> contrato -> prospecto -> nombre_completo }}</td>
 				<td>{{ $empleadoatributo -> atributo -> ATRI_DESCRIPCION }}</td>
 				<td>{{ $empleadoatributo -> EMAT_FECHA }}</td>
 				<td>{{ $empleadoatributo -> EMAT_OBSERVACIONES }}</td>
@@ -50,7 +50,7 @@
 						'data-toggle'=>'modal',
 						'data-id'=> $empleadoatributo->EMAT_ID,
 						'data-modelo'=> str_upperspace(class_basename($empleadoatributo)),
-						'data-descripcion'=> nombre_empleado($empleadoatributo-> contrato -> prospecto -> PROS_ID),
+						'data-descripcion'=> $empleadoatributo-> contrato -> prospecto -> nombre_completo,
 						'data-action'=>'empleadoatributos/'. $empleadoatributo->EMAT_ID,
 						'data-target'=>'#pregModalDelete',
 						'data-tooltip'=>'tooltip',

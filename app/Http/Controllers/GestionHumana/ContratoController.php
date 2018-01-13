@@ -227,13 +227,15 @@ class ContratoController extends Controller
 		$arrMotivosretiro = model_to_array(MotivoRetiro::class, 'MORE_DESCRIPCION');
 		//Se crea un array con las ciudades disponibles
 		$arrCiudades= model_to_array(Ciudad::class, 'CIUD_NOMBRE');
+
 		//Se crea un array con las Entidades EPS
-		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',2]]);
+		$arrEPS = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::EPS]]);
+
 		//Se crea un array con las Entidades ARL
-		$arrARL = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',1]]);
+		$arrARL = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::ARL]]);
 
 		//Se crea un array con las Entidades CCF
-		$arrCCF = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',3]]);
+		$arrCCF = model_to_array(Entidad::class, 'ENTI_RAZONSOCIAL',[['TIEN_ID','=',TipoEntidad::CCF]]);
 
 		//Se crea un array con los jefes activos
 		$primaryKey = 'PROS_ID';
@@ -418,7 +420,7 @@ class ContratoController extends Controller
 	{
 		$entidades_id = [];
 		foreach (['eps','arl','ccf'] as $entidad) {
-			if(request()->get('ENTI_ID_'.$entidad)!=null)
+			if(request()->has('ENTI_ID_'.$entidad))
 				$entidades_id[] = request()->get('ENTI_ID_'.$entidad);
 		}
 
@@ -687,9 +689,8 @@ class ContratoController extends Controller
 
 			flash_alert('Error: La fecha de retiro no puede ser menor que la fecha de ingreso', 'danger' );
 			return redirect()->back()->send();
-
 			
-		}else{
+		} else {
 
 			$contrato->CONT_MOREOBSERVACIONES = request()->get('CONT_MOREOBSERVACIONES');
 			$contrato->ESCO_ID = EstadoContrato::RETIRADO;
@@ -697,26 +698,15 @@ class ContratoController extends Controller
 			$contrato->save();
 
 			if(request()->get('PROS_MARCA') == 'SI'){
-
 				$prospecto = Prospecto::findOrFail($contrato->PROS_ID);
-
 				$prospecto->PROS_MARCA = request()->get('PROS_MARCA');
 				$prospecto->PROS_MARCAOBSERVACIONES = 'HV descartada desde el modulo de retiros.';
-
 				$prospecto->save();
-
 			}
 
 			flash_alert('Contrato retirado exitosamente', 'success' );
 			return redirect()->route($this->route.'.index')->send();
-
 		}
-
-		
-
-
-	}	
-
-
+	}
 
 }

@@ -45,7 +45,7 @@
 				<td>{{ $empleador -> ciudad_expedicion -> CIUD_NOMBRE }}</td>
 				<td>{{ $empleador -> EMPL_DIRECCION }}</td>
 				<td>{{ $empleador -> ciudad_domicilio -> CIUD_NOMBRE }}</td>
-				<td>{{ isset($empleador ->PROS_ID) ? nombre_empleado($empleador -> prospecto -> PROS_ID) : '' }}</td>
+				<td>{{ $empleador -> prospecto -> nombre_completo }}</td>
 				<td>{{ $empleador -> gerencias -> count() }}</td>
 				<td>{{ $empleador -> EMPL_CREADOPOR }}</td>
 				<td>

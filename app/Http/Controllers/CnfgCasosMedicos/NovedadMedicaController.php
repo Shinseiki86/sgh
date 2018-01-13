@@ -32,7 +32,11 @@ class NovedadMedicaController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$novedadesmedicas = NovedadMedica::all();
+		$novedadesmedicas = NovedadMedica::with([
+			'casomedico.contrato.empleador',
+			'casomedico.contrato.temporal',
+			'casomedico.contrato.prospecto',
+		])->get();
 		//Se carga la vista y se pasan los registros
 		return view($this->route.'.index', compact('novedadesmedicas'));
 	}

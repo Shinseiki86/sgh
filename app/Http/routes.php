@@ -81,6 +81,9 @@ Route::group(['prefix'=>'cnfg-contratos', 'namespace'=>'CnfgContratos'], functio
 
 Route::group(['prefix'=>'cnfg-organizacionales', 'namespace'=>'CnfgOrganizacionales'], function() {
 	Route::resource('empleadores', 'EmpleadorController');
+	Route::get('empleadores/{EMPL_ID}/getSignature', 'EmpleadorController@getSignature');
+	Route::get('empleadores/{EMPL_ID}/getLogo', 'EmpleadorController@getLogo');
+
 	Route::resource('gerencias', 'GerenciaController');
 	Route::resource('procesos', 'ProcesoController');
 	Route::resource('centroscostos', 'CentroCostoController');
@@ -92,7 +95,6 @@ Route::group(['prefix'=>'cnfg-organizacionales', 'namespace'=>'CnfgOrganizaciona
 	Route::resource('tipoentidades', 'TipoEntidadController');
 	Route::resource('entidades', 'EntidadController');
 	Route::resource('movimientosplantas', 'MovimientoPlantaController');
-
 });
 
 Route::group(['prefix'=>'cnfg-geograficos', 'namespace'=>'CnfgGeograficos'], function() {
@@ -111,6 +113,7 @@ Route::group(['prefix'=>'gestion-humana', 'namespace'=>'GestionHumana'], functio
 	Route::get('getArrProspectos', 'ProspectoController@getArrProspectos');
 
 	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos'=>'CONT_ID']]);
+	Route::get('contratos/{contrato}/certificado', 'ContratoController@makeCertificado');
 	Route::get('getContratos', 'ContratoController@getData');
 
 	Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');

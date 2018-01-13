@@ -135,4 +135,13 @@ class Prospecto extends ModelWithSoftDeletes
 		return $this->hasMany(Negocio::class, $foreingKey);
 	}
 
+	public function getNombreCompletoAttribute()
+	{
+		$nombreCompleto = $nombre = $this->PROS_PRIMERNOMBRE.' '
+						.(isset($this->PROS_SEGUNDONOMBRE) ? $this->PROS_SEGUNDONOMBRE.' ' : '')
+						. $this->PROS_PRIMERAPELLIDO.' '
+						.(isset($this->PROS_SEGUNDOAPELLIDO) ? $this->PROS_SEGUNDOAPELLIDO.' ' : '');
+		return $nombreCompleto;
+	}
+
 }

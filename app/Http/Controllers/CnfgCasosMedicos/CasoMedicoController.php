@@ -33,7 +33,7 @@ class CasoMedicoController extends Controller
 	public function index()
 	{
 		//Se obtienen todos los registros.
-		$casosmedicos = CasoMedico::all();
+		$casosmedicos = CasoMedico::with('contrato.prospecto')->get();
 		//Se carga la vista y se pasan los registros
 		return view($this->route.'.index', compact('casosmedicos'));
 	}
