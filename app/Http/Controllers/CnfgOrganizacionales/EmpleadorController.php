@@ -11,6 +11,7 @@ use Illuminate\Routing\Redirector;
 use SGH\Http\Controllers\Controller;
 
 use SGH\Models\Empleador;
+use SGH\Models\Prospecto;
 
 class EmpleadorController extends Controller
 {
@@ -58,7 +59,7 @@ class EmpleadorController extends Controller
 		$empleadores = Empleador::with([
 							'ciudad_expedicion',
 							'ciudad_domicilio',
-							'prospecto',
+							'responsable',
 							'gerencias',
 						])->get();
 
@@ -77,13 +78,19 @@ class EmpleadorController extends Controller
 		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
 		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
-		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
-			'PROS_PRIMERNOMBRE',
-			'PROS_SEGUNDONOMBRE',
-			'PROS_PRIMERAPELLIDO',
-			'PROS_SEGUNDOAPELLIDO',
-			'PROS_CEDULA',
-		], 'PROS_NOMBRESAPELLIDOS'));
+
+		$arrProspectos = Prospecto::activos()
+			->select([
+				'PROSPECTOS.PROS_ID',
+				expression_concat([
+						'PROS_PRIMERNOMBRE',
+						'PROS_SEGUNDONOMBRE',
+						'PROS_PRIMERAPELLIDO',
+						'PROS_SEGUNDOAPELLIDO',
+						'PROS_CEDULA',
+				], 'PROS_NOMBRESAPELLIDOS')
+			])->get();
+		$arrProspectos = model_to_array($arrProspectos, 'PROS_NOMBRESAPELLIDOS');
 
 		$GERE_ids = json_encode([]);
 		$TURN_ids = json_encode([]);
@@ -115,13 +122,19 @@ class EmpleadorController extends Controller
 		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
 		$arrTurnos = model_to_array(Turno::class, 'TURN_DESCRIPCION');
 		$arrGrupos = model_to_array(Grupo::class, 'GRUP_DESCRIPCION');
-		$arrProspectos = model_to_array(Prospecto::class, expression_concat([
-			'PROS_PRIMERNOMBRE',
-			'PROS_SEGUNDONOMBRE',
-			'PROS_PRIMERAPELLIDO',
-			'PROS_SEGUNDOAPELLIDO',
-			'PROS_CEDULA',
-		], 'PROS_NOMBRESAPELLIDOS'));
+		
+		$arrProspectos = Prospecto::activos()
+			->select([
+				'PROSPECTOS.PROS_ID',
+				expression_concat([
+						'PROS_PRIMERNOMBRE',
+						'PROS_SEGUNDONOMBRE',
+						'PROS_PRIMERAPELLIDO',
+						'PROS_SEGUNDOAPELLIDO',
+						'PROS_CEDULA',
+				], 'PROS_NOMBRESAPELLIDOS')
+			])->get();
+		$arrProspectos = model_to_array($arrProspectos, 'PROS_NOMBRESAPELLIDOS');
 
 		//JSON con valores preseleccionados para el select múltiple
 		$GERE_ids = $empleador->gerencias->pluck('GERE_ID')->toJson();

@@ -21,6 +21,8 @@ class Empleador extends ModelWithSoftDeletes
 		'EMPL_RAZONSOCIAL',
 		'EMPL_NOMBRECOMERCIAL',
 		'EMPL_DIRECCION',
+		'EMPL_TELEFONO',
+		'EMPL_FAX',
 		'EMPL_OBSERVACIONES',
 		'EMPL_NIT',
 		'EMPL_CORREO',
@@ -62,7 +64,7 @@ class Empleador extends ModelWithSoftDeletes
 		return $this->belongsTo(Ciudad::class, $foreingKey);
 	}
 
-	public function prospecto()
+	public function responsable()
 	{
 		$foreingKey = 'PROS_ID';
 		return $this->belongsTo(Prospecto::class, $foreingKey);

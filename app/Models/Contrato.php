@@ -88,7 +88,7 @@ class Contrato extends ModelWithSoftDeletes
 
 	public function scopeActivos($query)
 	{
-		return $query->whereIn('ESCO_ID', EstadoContrato::ACTIVO);
+		return $query->where('ESCO_ID', '!=', EstadoContrato::RETIRADO);
 	}
 
 	public function prospecto()

@@ -41,7 +41,7 @@ alias gc="git commit -m"
 alias gps="git push"
 alias gp="git pull"
 alias gs="git status"
-alias gl="git log"
+alias gl="git log --stat=100 --stat-graph-width=12"
 alias gdiscard="git clean -df && git checkout -- ."
 
 #Console

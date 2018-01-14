@@ -286,11 +286,24 @@ if (! function_exists('convert_to_date')) {
     /**
      * Convierte una cadena de texto a una fecha
      * @param string $fecha_string fecha en formato de texto
-     * @return a date 
+     * @return Carbon
      */
     function convert_to_date($fecha_string) {
         $date = new Carbon($fecha_string);
         return $date;
+    }
+}
+
+if (! function_exists('number_to_letter')) {
+    /**
+     * Convierte un número a formato basado en reglas de números escritos con palabras
+     * !! NumberFormatter requiere habilitar extensión php_intl.dll en php.ini
+     * @param  int $num
+     * @return string
+     */
+    function number_to_letter($num, $lang = 'es') {
+        $numFormat = new \NumberFormatter($lang, \NumberFormatter::SPELLOUT);
+        return $numFormat->format($num);
     }
 }
 

@@ -14,7 +14,7 @@ class CreateCertificadosContratosTable extends Migration
      */
     public function up()
     {
-        $commentTabla = $nomTabla.': Histórico de certificados generados, utilizado para verificar su validez.';
+        $commentTabla = $this->nomTabla.': Histórico de certificados generados, utilizado para verificar su validez.';
 
         echo '- Creando tabla '.$this->nomTabla.'...' . PHP_EOL;
         Schema::create($this->nomTabla, function (Blueprint $table) {
@@ -24,9 +24,6 @@ class CreateCertificadosContratosTable extends Migration
 
             $table->unsignedInteger('CONT_ID')
                 ->comment('referencia al contrato');
-
-            $table->date('CERT_FECHAGENERADO')
-                ->comment('fecha de generación');
 
             $table->string('CERT_OBSERVACIONES', 300)
                 ->comment('observaciones del registro')->nullable();

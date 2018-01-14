@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CertificadoContrato extends Model
 {
-    use RelationshipsTrait, ModelRulesTrait;
+    //use RelationshipsTrait, ModelRulesTrait;
 
     //Nombre de la tabla en la base de datos   
     protected $table = 'CERTIFICADOSCONTRATOS';
@@ -19,13 +19,13 @@ class CertificadoContrato extends Model
     protected $dates = ['CERT_FECHACREADO','CERT_FECHAMODIFICADO'];
 
     public $fillable = [
-        'CERT_FECHAGENERADO',
+        'CONT_ID',
+        'CERT_CREADOPOR',
     ];
 
 	public static function rules($id = 0){
 		$rules = [
 			'CONT_ID' => 'required',
-			'CERT_FECHAGENERADO' => 'required|date',
 		];
 		return $rules;
 	}

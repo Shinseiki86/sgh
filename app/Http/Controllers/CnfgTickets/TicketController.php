@@ -478,7 +478,7 @@ class TicketController extends Controller
 		}else{
 
 			//id de prospecto responsable de gestión humana del Empleador
-			$prosIdEmpleador = $ticket->contrato->empleador->prospecto->PROS_ID;
+			$prosIdEmpleador = $ticket->contrato->empleador->responsable->PROS_ID;
 			//prospecto responsable de gestión humana del Empleador
 			$prosResponEmple = Prospecto::find($prosIdEmpleador);
 			

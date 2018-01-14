@@ -4,6 +4,8 @@ namespace SGH\Models;
 
 use SGH\Models\ModelWithSoftDeletes;
 
+use SGH\Models\EstadoContrato;
+
 class Prospecto extends ModelWithSoftDeletes
 {
 	
@@ -57,30 +59,24 @@ class Prospecto extends ModelWithSoftDeletes
 
 	public function scopeActivos($query)
 	{
-		$query = $query 
+		return $query
 			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
-			->where('ESCO_ID',1);
-
-		return $query;
+			->where('ESCO_ID','!=', EstadoContrato::RETIRADO);
 	}
 
 	public function scopeCasosMedicos($query)
 	{
-		$query = $query
+		return $query
 			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID')
 			->join('CASOSMEDICOS', 'CASOSMEDICOS.CONT_ID', '=', 'CONTRATOS.CONT_ID');
-
-		return $query;
 	}
 
 	public function scopeRetirados($query)
 	{
 		//se modifica el metodo debido a que no necesariamente el empleado debe estar retirado para ser remplazado
-		$query = $query 
+		return $query
 			->join('CONTRATOS', 'CONTRATOS.PROS_ID', '=', 'PROSPECTOS.PROS_ID');
 			//->where('ESCO_ID',2);
-
-		return $query;
 	}
 
 	public function contratos()

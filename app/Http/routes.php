@@ -116,7 +116,7 @@ Route::group(['prefix'=>'gestion-humana', 'namespace'=>'GestionHumana'], functio
 	Route::get('getArrProspectos', 'ProspectoController@getArrProspectos');
 
 	Route::resource('contratos', 'ContratoController', ['parameters'=>['contratos'=>'CONT_ID']]);
-	Route::get('contratos/{contrato}/certificado', 'ContratoController@makeCertificado');
+	Route::get('contratos/{contrato}/certificado', 'CertificadoController@buildPdf');
 	Route::get('getContratos', 'ContratoController@getData');
 
 	Route::get('getContratosEmpleador', 'ContratoController@getContratosEmpleador');
