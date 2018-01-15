@@ -360,7 +360,7 @@ class MenuTableSeeder extends Seeder
         $orderItem = 0;
         $parent = Menu::create([
             'MENU_LABEL' => 'Ausentismos',
-            'MENU_ICON' => 'fa-bed',
+            'MENU_ICON' => 'fa fa-user-times',
             'MENU_ORDER' => $orderMenuLeft++,
         ]);
             Menu::create([
@@ -390,7 +390,7 @@ class MenuTableSeeder extends Seeder
             Menu::create([
                 'MENU_LABEL' => 'Ausentismo',
                 'MENU_URL' => 'cnfg-ausentismos/ausentismos',
-                'MENU_ICON' => 'fa-wheelchair',
+                'MENU_ICON' => 'fa-bed',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
                 'PERM_ID' => $this->getPermission('ausentismo-index'),
@@ -398,7 +398,7 @@ class MenuTableSeeder extends Seeder
             Menu::create([
                 'MENU_LABEL' => 'Prorroga Ausentismo',
                 'MENU_URL' => 'cnfg-ausentismos/prorrogaausentismos',
-                'MENU_ICON' => 'fa-wheelchair-alt',
+                'MENU_ICON' => 'fa fa-arrow-circle-right',
                 'MENU_PARENT' => $parent->MENU_ID,
                 'MENU_ORDER' => $orderItem++,
                 'PERM_ID' => $this->getPermission('prorrogaausentismo-index'),

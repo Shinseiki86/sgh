@@ -45,7 +45,7 @@ class ReporteController extends Controller
 
 		/*Bloque para reportes de Tickets*/
 		//==============================================================================================
-		['id'=>'ticketsPorFecha', 'title'=>'400 - LISTADO DE TICKETS'],
+		['id'=>'ticketsPorFecha', 'title'=>'400 - LISTADO DE TICKETS', 'columnChart'=>'EMPRESA'],
 		//==============================================================================================
 
 		/*Bloque para reportes de Ausentismos*/
